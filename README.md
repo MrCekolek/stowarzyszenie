@@ -67,11 +67,11 @@ vagrant reload --provision
 
 192.168.10.10 stowarzyszenie.test
 
-1.9. To init vagrant machine type
+1.9. To init vagrant machine type (C:/Windows/System32/~/Homestead)
 
 vagrant up
 
-1.10 To connect with vagrant machine type
+1.10. To connect with vagrant machine type (C:/Windows/System32/~/Homestead)
 
 vagrant ssh
 
