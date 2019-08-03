@@ -67,4 +67,12 @@ vagrant reload --provision
 
 192.168.10.10 stowarzyszenie.test
 
+1.9. To init vagrant machine type
+
+vagrant up
+
+1.10 To connect with vagrant machine type
+
+vagrant ssh
+
 ---
