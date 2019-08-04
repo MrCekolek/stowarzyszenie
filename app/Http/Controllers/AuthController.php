@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\SignUpRequest;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +16,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'signup']]);
     }
 
     /**
@@ -27,10 +29,19 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'email or password doesn\'t exist'], 401);
         }
 
         return $this->respondWithToken($token);
+    }
+
+    public function signup(SignUpRequest $signUpRequest)
+    {
+        $user = User::create($signUpRequest->all());
+
+        // to zmienic pozniej, zeby nie logowalo automatycznie tylko mail
+        // ma wysylac
+        return $this->login($signUpRequest);
     }
 
     /**
