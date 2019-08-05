@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../../../../services/auth/auth.service";
 
 @Component({
   selector: 'app-request-reset',
@@ -7,9 +8,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestResetComponent implements OnInit {
 
-  constructor() { }
+  public form = {
+    email: null
+  }
+
+  public error = [];
+
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
   }
 
+  onSubmit() {
+    this.authService.sendPasswordResetLink(this.form).subscribe(
+      data => this.handleResponse(data),
+      error => this.handleError(error)
+    );
+  }
+
+  handleResponse(res) {
+    console.log(res);
+    this.form.email = null;
+    this.error = [];
+  }
+
+  handleError(error) {
+    this.error = error.error.errors;
+  }
 }
