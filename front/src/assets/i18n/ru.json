@@ -1,0 +1,12 @@
+{
+	"STOWARZYSZENIE": {
+		"LAYOUT": {
+			"NAVBAR": {
+				"TITLE": "NavBar"
+			}
+		},
+		"PROFILE": {
+			"TITLE": "Пример заголовка"
+		}
+	}
+}
