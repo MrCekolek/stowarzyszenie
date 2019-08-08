@@ -7,8 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
-{
+class User extends Authenticatable implements JWTSubject {
     use Notifiable;
 
     /**
@@ -20,6 +19,8 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'email_verified_at',
+        'remember_token'
     ];
 
     /**
@@ -46,8 +47,7 @@ class User extends Authenticatable implements JWTSubject
      *
      * @return mixed
      */
-    public function getJWTIdentifier()
-    {
+    public function getJWTIdentifier() {
         return $this->getKey();
     }
 
@@ -56,8 +56,7 @@ class User extends Authenticatable implements JWTSubject
      *
      * @return array
      */
-    public function getJWTCustomClaims()
-    {
+    public function getJWTCustomClaims() {
         return [];
     }
 
@@ -65,8 +64,15 @@ class User extends Authenticatable implements JWTSubject
         $this->attributes['password'] = bcrypt($value);
     }
 
-    public function scopeEmail($query, $email)
-    {
+    public function scopeEmail($query, $email) {
         return $query->where('email', $email);
+    }
+
+    public function scopeRememberToken($query, $token) {
+        return $query->where('remember_token', $token);
+    }
+
+    public function scopeEmailVerifiedAt($query, $emailVerifiedAt) {
+        return $query->where('email_verified_at', $emailVerifiedAt);
     }
 }
