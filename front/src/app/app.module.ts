@@ -9,8 +9,10 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { RequestResetComponent } from './components/auth/password/request-reset/request-reset.component';
 import { ResponseResetComponent } from './components/auth/password/response-reset/response-reset.component';
 import { ProfileComponent } from './components/app/profile/profile.component';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { AuthService } from "./services/auth/auth.service";
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,16 @@ import { AuthService } from "./services/auth/auth.service";
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [
+          HttpClient
+        ]
+      }
+    })
   ],
   providers: [
     AuthService
@@ -34,3 +45,7 @@ import { AuthService } from "./services/auth/auth.service";
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
