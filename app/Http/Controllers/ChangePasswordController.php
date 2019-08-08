@@ -8,27 +8,23 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class ChangePasswordController extends Controller
-{
-    public function changePassword(ChangePasswordRequest $changePasswordRequest)
-    {
+class ChangePasswordController extends Controller {
+    public function changePassword(ChangePasswordRequest $changePasswordRequest) {
         $input = $changePasswordRequest->all();
 
-        return $this->getPasswordResetsRow($changePasswordRequest)->get()->count() > 0 ? $this->change($input) : $this->rowNotFound();
+        return $this->getPasswordResetsRow($input)->get()->count() > 0 ? $this->change($input) : $this->rowNotFound();
     }
 
-    private function getPasswordResetsRow($changePasswordRequest)
-    {
-        return PasswordReset::email($changePasswordRequest['email'])->token($changePasswordRequest['token']);
+    private function getPasswordResetsRow($input) {
+        return PasswordReset::email($input['email'])->token($input['token']);
     }
 
-    private function change($input)
-    {
+    private function change($input) {
         $email = $input['email'];
         $password = $input['password'];
         $token = $input['token'];
 
-        $user = User::email($email)->update([
+        User::email($email)->update([
             'password' => bcrypt($password)
         ]);
 
@@ -39,8 +35,7 @@ class ChangePasswordController extends Controller
         ], Response::HTTP_CREATED);
     }
 
-    private function rowNotFound()
-    {
+    private function rowNotFound() {
         return response()->json([
            'error' => 'Token or Email is incorrect'
         ], Response::HTTP_UNPROCESSABLE_ENTITY);

@@ -33,8 +33,8 @@ export class SignupComponent implements OnInit {
   }
 
   handleResponse(data) {
-    this.tokenService.handle(data);
-    this.router.navigateByUrl('/profile');
+    // this.tokenService.handle(data);
+    // this.router.navigateByUrl('/profile');
   }
 
   handleError(error) {

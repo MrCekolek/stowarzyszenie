@@ -4,8 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PasswordReset extends Model
-{
+class PasswordReset extends Model {
     protected $primaryKey = 'email';
 
     protected $fillable = [
@@ -16,13 +15,11 @@ class PasswordReset extends Model
 
     public $timestamps = false;
 
-    public function scopeEmail($query, $email)
-    {
+    public function scopeEmail($query, $email) {
         return $query->where('email', $email);
     }
 
-    public function scopeToken($query, $token)
-    {
+    public function scopeToken($query, $token) {
         return $query->where('token', $token);
     }
 }
