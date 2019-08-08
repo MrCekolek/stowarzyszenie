@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\Authentication;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ResetPasswordMail extends Mailable
-{
+class ResetPasswordMail extends Mailable {
     use Queueable, SerializesModels;
 
     public $email, $token;
@@ -18,8 +17,7 @@ class ResetPasswordMail extends Mailable
      *
      * @return void
      */
-    public function __construct($email, $token)
-    {
+    public function __construct($email, $token) {
         $this->email = $email;
         $this->token = $token;
     }
@@ -29,9 +27,8 @@ class ResetPasswordMail extends Mailable
      *
      * @return $this
      */
-    public function build()
-    {
-        return $this->markdown('email.passwordReset')->with([
+    public function build() {
+        return $this->markdown('email.auth.passwordReset')->with([
             'email' => $this->email,
             'token' => $this->token
         ]);
