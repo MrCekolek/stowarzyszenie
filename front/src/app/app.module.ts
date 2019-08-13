@@ -13,6 +13,7 @@ import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { AuthService } from "./services/auth/auth.service";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { CookieService } from "ngx-cookie-service";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
     })
   ],
   providers: [
-    AuthService
+    AuthService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

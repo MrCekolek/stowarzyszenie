@@ -22,4 +22,6 @@ Route::group([
     Route::post('me', 'AuthController@me');
     Route::post('sendPasswordResetLink', 'ResetPasswordController@sendEmail');
     Route::post('changePassword', 'ChangePasswordController@changePassword');
+    Route::post('lang/get', 'PreferenceUserController@getLang');
+    Route::post('lang/set', 'PreferenceUserController@setLang');
 });
