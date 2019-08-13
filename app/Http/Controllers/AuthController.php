@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Auth\ActivateAccountRequest;
 use App\Http\Requests\Auth\SignUpRequest;
 use App\Mail\Authentication\SignUpMail;
+use App\PreferenceUser;
 use App\User;
 use Carbon\Carbon;
-use http\Env\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Response;
@@ -44,18 +42,54 @@ class AuthController extends Controller {
             ], 401);
         }
 
+        $geolocation = $this->getGeolocation();
+
+        if (!empty($geolocation)) {
+            $time_zone = $geolocation['time_zone']['name'];
+        } else {
+            $time_zone = 'UTC';
+        }
+
+        $user = User::email($credentials['email'])->with('preferenceUser')->first();
+
+        $preference_user = PreferenceUser::userId($user['id'])->first();
+
+        if ($preference_user['time_zone'] !== $time_zone) {
+            $preference_user['time_zone'] = $time_zone;
+        }
+
+        $preference_user->save();
+
         return $this->respondWithToken($token);
     }
 
     public function signup(SignUpRequest $signUpRequest) {
         $input = $signUpRequest->all();
-        User::create($input);
+        $geolocation = $this->getGeolocation();
+
+        if (!empty($geolocation)) {
+            $time_zone = $geolocation['time_zone']['name'];
+        } else {
+            $time_zone = 'UTC';
+        }
+
+        $user = User::create($input);
+
+        PreferenceUser::create([
+            'time_zone' => $time_zone,
+            'lang' => $input['lang'],
+            'user_id' => $user['id']
+        ]);
 
         $this->send($input['email']);
 
         return response()->json([
             'message' => 'Authentication Email is send successfully'
         ]);
+    }
+
+    public function getGeolocation() {
+        return PreferenceUserController::getGeolocation();
     }
 
     public function activateAccount(ActivateAccountRequest $activateAccountRequest) {
@@ -115,7 +149,7 @@ class AuthController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function me() {
-        return response()->json(auth()->user());
+        return response()->json(User::id(auth()->user()['id'])->with('preferenceUser')->first());
     }
 
     /**

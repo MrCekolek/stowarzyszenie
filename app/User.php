@@ -75,4 +75,12 @@ class User extends Authenticatable implements JWTSubject {
     public function scopeEmailVerifiedAt($query, $emailVerifiedAt) {
         return $query->where('email_verified_at', $emailVerifiedAt);
     }
+
+    public function scopeId($query, $id) {
+        return $query->where('id', $id);
+    }
+
+    public function preferenceUser() {
+        return $this->hasOne(PreferenceUser::class);
+    }
 }

@@ -5,8 +5,8 @@
     <a class="navbar-brand" href="#" (click)="logout($event)" *ngIf="loggedIn">Logout</a>
     <a class="navbar-brand" routerLink="profile" *ngIf="loggedIn">Profile</a>
 
-    <select #langSelect (change)="translateService.use(langSelect.value)" style="width: 70px">
-      <option *ngFor="let lang of translateService.getLangs()" [value]="lang" [selected]="browserLanguage == lang">
+    <select #langSelect (change)="setLang(langSelect.value)" style="width: 70px">
+      <option *ngFor="let lang of translateService.getLangs()" [value]="lang" [selected]="translateService.currentLang === lang">
         {{ lang }}
       </option>
     </select>
