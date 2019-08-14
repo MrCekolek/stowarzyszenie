@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\PreferenceUser;
+use App\Models\PreferenceUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use JWTAuth;
