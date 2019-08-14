@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\ChangePasswordRequest;
-use App\PasswordReset;
-use App\User;
-use Illuminate\Http\Request;
+use App\Models\PasswordReset;
+use App\Models\User;
 use Illuminate\Http\Response;
 
 class ChangePasswordController extends Controller {
@@ -22,7 +21,6 @@ class ChangePasswordController extends Controller {
     private function change($input) {
         $email = $input['email'];
         $password = $input['password'];
-        $token = $input['token'];
 
         User::email($email)->update([
             'password' => bcrypt($password)

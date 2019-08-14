@@ -37,6 +37,7 @@ export class AuthService {
   }
 
   changePassword(data) {
+    data.lang = this.translateService.currentLang;
     return this.http.post(`${this.baseURL}/changePassword`, data);
   }
 }
