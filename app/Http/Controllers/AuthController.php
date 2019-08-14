@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\ActivateAccountRequest;
 use App\Http\Requests\Auth\SignUpRequest;
+use App\Jobs\ChangeUserTimezoneJob;
+use App\Jobs\SendAuthEmailJob;
 use App\Mail\Authentication\SignUpMail;
-use App\PreferenceUser;
-use App\User;
+use App\Models\PreferenceUser;
+use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Response;
 
@@ -42,23 +43,7 @@ class AuthController extends Controller {
             ], 401);
         }
 
-        $geolocation = $this->getGeolocation();
-
-        if (!empty($geolocation)) {
-            $time_zone = $geolocation['time_zone']['name'];
-        } else {
-            $time_zone = 'UTC';
-        }
-
-        $user = User::email($credentials['email'])->with('preferenceUser')->first();
-
-        $preference_user = PreferenceUser::userId($user['id'])->first();
-
-        if ($preference_user['time_zone'] !== $time_zone) {
-            $preference_user['time_zone'] = $time_zone;
-        }
-
-        $preference_user->save();
+        ChangeUserTimezoneJob::dispatchNow($credentials['email']);
 
         return $this->respondWithToken($token);
     }
@@ -127,7 +112,7 @@ class AuthController extends Controller {
 
     public function send($email) {
         $token = $this->createToken($email);
-        Mail::to($email)->send(new SignUpMail($token));
+        SendAuthEmailJob::dispatch($email, $token);
     }
 
     public function createToken($email) {
