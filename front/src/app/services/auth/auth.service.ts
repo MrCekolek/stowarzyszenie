@@ -25,6 +25,7 @@ export class AuthService {
   }
 
   login(data) {
+    data.lang = this.translateService.currentLang;
     return this.http.post(`${this.baseURL}/login`, data);
   }
 
