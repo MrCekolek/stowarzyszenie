@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "http://stowarzyszenie.test/",
+    "secure": false
+  }
+}

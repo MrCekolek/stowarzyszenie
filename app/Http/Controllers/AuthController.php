@@ -33,7 +33,7 @@ class AuthController extends Controller {
 
         if (!$token = auth()->attempt($credentials)) {
             return response()->json([
-                'error' => 'email or password doesn\'t exist'
+                'error' => __('custom.controllers.auth.login.no_email_or_password')
             ], 401);
         }
 
