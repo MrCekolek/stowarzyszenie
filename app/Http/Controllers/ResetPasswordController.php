@@ -18,7 +18,7 @@ class ResetPasswordController extends Controller {
         $this->send($email);
 
         return response()->json([
-            'message' => 'Reset Email is send successfully'
+            'message' => __('custom.controllers.reset_password.send_email.sent')
         ]);
     }
 
