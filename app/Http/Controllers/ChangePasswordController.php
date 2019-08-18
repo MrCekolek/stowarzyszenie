@@ -29,13 +29,13 @@ class ChangePasswordController extends Controller {
         $this->getPasswordResetsRow($input)->delete();
 
         return response()->json([
-           'data' => 'Password Successfully Changed'
+           'data' => __('custom.controllers.change_password.change.changed')
         ], Response::HTTP_CREATED);
     }
 
     private function rowNotFound() {
         return response()->json([
-           'error' => 'Token or Email is incorrect'
+           'error' =>  __('custom.controllers.change_password.row_not_found.wrong_email_or_token')
         ], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }
