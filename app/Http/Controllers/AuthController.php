@@ -39,7 +39,7 @@ class AuthController extends Controller {
 
         if ($this->getUserRowByEmail(request(['email']))->count() > 0) {
             return response()->json([
-                'error' => 'account not activated'
+                'error' => __('custom.controllers.auth.not_activated')
             ], 401);
         }
 
@@ -69,7 +69,7 @@ class AuthController extends Controller {
         $this->send($input['email']);
 
         return response()->json([
-            'message' => 'Authentication Email is send successfully'
+            'message' => __('custom.controllers.auth.signup.send_activation')
         ]);
     }
 
@@ -100,13 +100,13 @@ class AuthController extends Controller {
         ]);
 
         return redirect('http://localhost:4200/login')->with([
-            'message' => 'Account successfully activated'
+            'message' =>  __('custom.controllers.auth.change.activated')
         ]);
     }
 
     private function rowNotFound() {
         return response()->json([
-            'error' => 'Token is incorrect'
+            'error' => __('custom.controllers.auth.row_not_found.wrong_token')
         ], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
@@ -146,7 +146,7 @@ class AuthController extends Controller {
         auth()->logout();
 
         return response()->json([
-            'message' => 'Successfully logged out'
+            'message' => __('custom.controllers.auth.logout.logged_out')
         ]);
     }
 

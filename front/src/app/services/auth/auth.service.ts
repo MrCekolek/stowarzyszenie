@@ -34,6 +34,7 @@ export class AuthService {
   }
 
   sendPasswordResetLink(data) {
+    data.lang = this.translateService.currentLang;
     return this.http.post(`${this.baseURL}/sendPasswordResetLink`, data);
   }
 
