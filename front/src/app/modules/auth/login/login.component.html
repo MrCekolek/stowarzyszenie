@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
+            <div class="form-container">
+                <h1>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.PAGE_TITLE' | translate }}
+                </h1>
+
+                <div class="alert danger" *ngIf="error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.ALERT_WRONG' | translate }}
+                </div>
+
+                <form>
+                    <!-- email input -->
+                    <mat-form-field class="auth-form-field" appearance="outline">
+                        <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.EMAIL_PLACEHOLDER' | translate }}</mat-label>
+                        <input matInput placeholder="email@domain.com">
+                    </mat-form-field>
+
+                    <!-- password input -->
+                    <mat-form-field class="auth-form-field password-field" appearance="outline">
+                        <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.PASSWORD_PLACEHOLDER' | translate }}</mat-label>
+                        <input matInput placeholder="********" [type]="passwordIsHidden ? 'password' : 'text'">
+                        <mat-icon matSuffix (click)="this.togglePassword()" matTooltip="hey">
+                            <i class="fas fa-eye" *ngIf="this.passwordIsHidden"></i>
+                            <i class="fas fa-eye-slash" *ngIf="!this.passwordIsHidden"></i>
+                        </mat-icon>
+                    </mat-form-field>
+
+                    <mat-checkbox>{{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.REMEMBER_ME' | translate }}</mat-checkbox>
+
+                    <button class="submit-button">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.BUTTON' | translate }}
+                    </button>
+                </form>
+
+                <a [routerLink]="['../reset']"  class="external-link primary">{{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.FORGOT_PASSWORD_LINK' | translate }}</a>
+            </div>
+
+            <a [routerLink]="['../register']"  class="external-link secondary">{{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.REGISTER_LINK' | translate }}</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,136 @@
+<auth-stepper linear [registrationCompleted]="this.registrationCompleted">
+    <!-- step first: account data -->
+    <cdk-step>
+        <h1>
+            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP1_TITLE' | translate }}
+        </h1>
+
+        <!-- email input -->
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.EMAIL_PLACEHOLDER' | translate }}</mat-label>
+            <input matInput placeholder="email@domain.com">
+            <mat-hint>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.EMAIL_HINT' | translate }}</mat-hint>
+            <div class="alert-icon">
+                <i class="fas fa-check"></i>
+            </div>
+        </mat-form-field>
+
+        <!-- password input -->
+        <mat-form-field class="password-field" appearance="outline">
+            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.PASSWORD_PLACEHOLDER' | translate }}</mat-label>
+            <input matInput placeholder="********" [type]="passwordIsHidden ? 'password' : 'text'">
+            <mat-icon matSuffix (click)="this.togglePassword()" matTooltip="Info about the action">
+                <i class="fas fa-eye" *ngIf="this.passwordIsHidden"></i>
+                <i class="fas fa-eye-slash" *ngIf="!this.passwordIsHidden"></i>
+            </mat-icon>
+            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PASSWORD_HINT' | translate }} </mat-hint>
+            <div class="alert-icon longer">
+                <i class="fas fa-times"></i>
+            </div>
+        </mat-form-field>
+
+    </cdk-step>
+
+    <!-- step second: personal data -->
+    <cdk-step>
+        <h1>
+            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP2_TITLE' | translate }}
+        </h1>
+
+        <!-- firstname input -->
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.FIRST_NAME' | translate }}</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <!-- lastname input -->
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.LAST_NAME' | translate }}</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <!-- birthdate input -->
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BIRTHDATE' | translate }}</mat-label>
+            <input matInput>
+            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BIRTHDATE_HINT' | translate }} </mat-hint>
+            <div class="alert-icon">
+                <i class="fas fa-check"></i>
+            </div>
+        </mat-form-field>
+
+        <!-- F - female, M -- male -->
+        <div class="gender">
+            <mat-radio-group>
+                <mat-radio-button value="F">{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.MAN' | translate }}</mat-radio-button>
+                <mat-radio-button value="M">{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.WOMAN' | translate }}</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        
+    </cdk-step>
+
+    <!-- step third: affiliation data -->
+    <cdk-step optional>
+        <h1>
+            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.PAGE_TITLE' | translate }}
+        </h1>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.TITLE' | translate }}</mat-label>
+            <input matInput placeholder="Ph. D">
+            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.TITLE_HINT' | translate }} </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.INSTITUTION' | translate }}</mat-label>
+            <input matInput>
+            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.INSTITUTION_HINT' | translate }} </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.DEPARTMENT' | translate }}</mat-label>
+            <input matInput>
+            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.DEPARTMENT_HINT' | translate }} </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.STREET' | translate }}</mat-label>
+            <input matInput>
+            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.STREET_HINT' | translate }} </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.CITY' | translate }}</mat-label>
+            <input matInput>
+            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.CITY_HINT' | translate }} </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.COUNTRY' | translate }}</mat-label>
+            <input matInput>
+            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.COUNTRY_HINT' | translate }} </mat-hint>
+        </mat-form-field>
+    </cdk-step>
+
+    <!-- step fourth: contact data -->
+    <cdk-step optional>
+        <h1>
+            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_TITLE' | translate }}
+        </h1>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_EMAIL' | translate }}</mat-label>
+            <input matInput>
+            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_EMAIL_HINT' | translate }} </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PHONE' | translate }}</mat-label>
+            <input matInput>
+        </mat-form-field>
+    </cdk-step>
+</auth-stepper>
+
+<a [routerLink]="['../login']"  class="external-link secondary">
+    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.LOGIN_LINK' | translate }}
+</a>

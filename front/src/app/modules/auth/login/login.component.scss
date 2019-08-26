@@ -1,0 +1,47 @@
+@import '../../../../assets/css/colors.scss';
+@import '../../../../assets/css/dimens.scss';
+
+.form-container {
+    position: relative;
+    margin-top: 60px;
+    background: $colorWhite;
+    box-sizing: border-box;
+    box-shadow: 0 3px 10px rgba(12, 10, 10, .16);
+    padding: 40px 60px;
+    border-radius: 2px;
+
+    h1 {
+        color: $colorPrimaryDarkGreen;
+        font-family: 'Rubik', sans-serif;
+        font-weight: 500;
+        font-size: $sizeFontPageTitleXL;
+        margin-bottom: 40px;
+    }
+
+    button {
+        margin-top: 40px;
+    }
+
+    a {
+        text-align: center;
+        margin-top: 40px;
+    }
+}
+
+a.secondary {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.alert {
+    margin-bottom: 40px;
+    color: $colorAlertRed;
+}
+
+mat-form-field {
+
+    i.fas {
+        color: $colorGray;
+        font-size: 20px;
+    }
+}
