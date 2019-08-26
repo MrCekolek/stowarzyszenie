@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-xl-4 col-lg-5 col-md-8 col-sm-10">
+        <div class="stepper-container">
+            <h1>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PAGE_TITLE' | translate }}</h1>
+            <div>
+                <ul class="progressbar" *ngIf="!this.registrationCompleted">
+                    <li *ngFor="let step of _steps; let i = index;" (click)="onClick(i)" 
+                    [ngClass]="{'active': this.selectedIndex === i}">
+                        <div class="icon">
+                            <i [class]="this.icons[i]"></i>
+                        </div>
+                        <span> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP' | translate }} {{ i + 1 }} </span>
+                    </li>
+                </ul>
+
+                <div *ngIf="this.registrationCompleted">
+                    <ul class="progressbar">
+                        <li class="active end">
+                            <div class="icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.SUCCESS_ICON' | translate }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
+            <div class="form-container">
+                <form>
+                    <ng-container [ngTemplateOutlet]="selected.content" *ngIf="!this.registrationCompleted"></ng-container>
+
+                    <div class="formCompleted" *ngIf="this.registrationCompleted">
+                        <h1>
+                            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.PAGE_TITLE' | translate }} <i class="fas fa-paper-plane"></i>
+                            <small>
+                                {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.PAGE_SUBTITLE' | translate}}
+                            </small>
+                        </h1>
+
+                        <p>
+                            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.PAGE_DESC1' | translate }} {{ this.registeredEmail }}.
+                            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.PAGE_DESC2' | translate }}
+                        </p>
+                    </div>
+
+                    <button class="submit-button" type="button" cdkStepperNext *ngIf="this.selectedIndex !== 3 && !this.registrationCompleted">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.GO_TO_STEP' | translate }} {{ this.selectedIndex + 2 }}
+                    </button>
+
+                    <button type="button" class="submit-button" *ngIf="this.selectedIndex === 3 && !this.registrationCompleted" (click)="this.completeRegistration()">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BUTTON_REGISTER' | translate }} 
+                    </button>
+
+                    <button cdkStepperPrevious type="button" class="external-link primary" *ngIf="this.selectedIndex !== 0 && !this.registrationCompleted">
+                            <i class="fas fa-arrow-left"></i> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BACK_TO_STEP' | translate }} {{ this.selectedIndex }}
+                    </button>
+
+                    <button *ngIf="this.registrationCompleted" type="button" class="submit-button">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.SEND_AGAIN' | translate }}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

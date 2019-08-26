@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
+            <div class="form-container">
+                <h1>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.PAGE_TITLE' | translate }}
+                </h1>
+
+                <p>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.PAGE_HINT' | translate }}
+                </p>
+
+                <!-- email input -->
+                <mat-form-field class="auth-form-field" appearance="outline">
+                    <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.EMAIL_PLACEHOLDER' | translate }}</mat-label>
+                    <input matInput placeholder="email@domain.com">
+                    <div class="alert-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </mat-form-field>
+
+                <button class="submit-button" [routerLink]="['../onreset']">
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.BUTTON_SEND' | translate }}
+                </button>
+
+                <a [routerLink]="['../login']"  class="external-link primary"><i class="fas fa-arrow-left"></i> {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.BACK_TO_LOGIN' | translate }}</a>
+            </div>
+        </div>
+    </div>
+</div>

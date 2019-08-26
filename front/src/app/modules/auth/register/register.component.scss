@@ -1,0 +1,31 @@
+@import '../../../../assets/css/colors.scss';
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+h1 {
+    color: $colorPrimaryDarkGreen;
+    font-size: 32px;
+}
+
+mat-form-field {
+    i.fas {
+        color: $colorGray;
+        font-size: 20px;
+    }
+}
+
+div.gender {
+    margin-top: 25px;
+
+    mat-radio-button {
+        display: block;
+        font-family: 'Rubik', sans-serif;
+        margin-bottom: 10px;
+        color: $colorGray;
+    }
+}
