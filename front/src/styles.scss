@@ -1,0 +1,220 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/bootstrap/dist/css/bootstrap-grid.css';
+@import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
+@import './assets/css/colors.scss';
+@import './assets/css/dimens.scss';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import './assets/css/forms.scss';
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: $colorLightGray; 
+    font-family: 'Rubik', sans-serif;
+    overflow-x: hidden;
+}
+
+//************ FORMS *************//
+mat-form-field {
+    width: 100%;
+    font-family: Rubik,"Helvetica Neue",sans-serif;
+}
+
+::ng-deep .mat-form-field-flex {
+    margin-bottom: 15px;
+    border-radius: 2px;
+    border: 1px solid $colorGray;
+    padding-left: 22px;
+    font-family: 'Rubik', sans-serif;
+}
+mat-form-field.password-field .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-suffix {
+    top: auto;
+}
+
+ .mat-form-field-appearance-outline .mat-form-field-outline {
+    border-color: $colorGray;
+ }
+ .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+     color: $colorPrimaryDarkGreen;
+ }
+
+ .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end, .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap, .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start {
+     border-width: 1px;
+ }
+
+ .mat-form-field-appearance-outline .mat-form-field-outline-start {
+     border-radius: 2px 0 0 2px;
+ }
+
+ .mat-form-field-appearance-outline .mat-form-field-outline-end, .mat-form-field-appearance-outline .mat-form-field-outline-start {
+     border-color: $colorGray;
+ }
+
+ mat-form-field.mat-form-field.mat-form-field-appearance-outline > div.mat-form-field-wrapper > div.mat-form-field-flex > div.mat-form-field-infix  { 
+    padding: 0.4em 0px 
+}
+mat-form-field.mat-form-field.mat-form-field-appearance-outline > div.mat-form-field-wrapper > div.mat-form-field-flex > div.mat-form-field-infix > span.mat-form-field-label-wrapper { 
+    top: -1.5em; 
+}
+
+mat-form-field.mat-focused .mat-form-field-flex .mat-form-field-outline,
+mat-form-field.mat-focused .mat-form-field-flex .mat-form-field-infix label {
+    color: $colorPrimaryDarkGreen;
+}
+
+.mat-checkbox-ripple.mat-ripple {
+    display: none;
+}
+
+.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 133.33333%;
+}
+
+ //border radius
+ .mat-form-field-appearance-outline .mat-form-field-outline .mat-form-field-outline-start,
+ .mat-form-field-appearance-outline .mat-form-field-outline .mat-form-field-outline-end {
+    border-radius: 2px 0 0 2px;
+ }
+
+ .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end, .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap, .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start,
+ .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end, .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap, .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start,
+ .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end, .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap, .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start,
+ .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end, .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap, .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start {
+     border-width: 1px;
+ }
+
+.mat-form-field-placeholder{
+    color:$colorGray;
+}
+  
+.mat-focused .mat-form-field-placeholder {
+    color:$colorGray;
+}
+
+ .mat-form-field-label-wrapper .mat-form-field-label {
+    color: $colorGray;
+    // font-size: 18px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 300;
+ }
+
+ .mat-input-element {
+     caret-color: $colorPrimaryDarkGreen;
+ }
+
+ mat-form-field {
+    i.fas {
+        color: $colorGray;
+        font-size: 20px;
+    }
+}
+
+ .submit-button {
+     width: 100%;
+     border: none;
+     display: block;
+     color: $colorWhite;
+     background: $colorPrimaryDarkGreen;
+     height: 55px;
+     box-sizing: border-box;
+     text-transform: uppercase;
+     font-family: 'Rubik', sans-serif;
+     transition: all .3s ease;
+
+     &:hover {
+        cursor: pointer;
+        background: $colorPrimaryLighter;
+     }
+ }
+
+ .external-link {
+     text-decoration: none;
+     font-size: 16px;
+     display: block;
+ }
+
+ .external-link.primary {
+     color: $colorPrimaryDarkGreen;
+ }
+
+ .external-link.secondary {
+     color: $colorAccentRed;
+ }
+
+ .mat-checkbox {
+     font-family: 'Rubik', sans-serif;
+     color: $colorPrimaryLighter;
+ }
+
+ .mat-checkbox-frame {
+    border-color: $colorGray;
+ }
+
+ .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+     background-color: $colorPrimaryDarkGreen;
+ }
+
+ ///rdio buttons
+
+ .mat-radio-container {
+     .mat-radio-ripple.mat-ripple {
+         display: none;
+     }
+
+     .mat-radio-outer-circle {
+         border-color: $colorGray;
+     }
+ }
+
+ .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+     border-color: $colorPrimaryDarkGreen;
+ }
+
+ .mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+     background-color: $colorPrimaryDarkGreen;
+ }
+
+ mat-radio-button .mat-radio-label .mat-radio-label-content {
+    font-size: 16px;
+ }
+
+ .form-container {
+    position: relative;
+    margin-top: 60px;
+    background: $colorWhite;
+    box-sizing: border-box;
+    box-shadow: 0 3px 10px rgba(12, 10, 10, .16);
+    padding: 40px 60px;
+    border-radius: 2px;
+
+    h1 {
+        color: $colorPrimaryDarkGreen;
+        font-family: 'Rubik', sans-serif;
+        font-weight: 500;
+        font-size: $sizeFontPageTitleXL;
+        margin-bottom: 40px;
+        margin-top: 0;
+
+        small {
+            display: block;
+            font-size: 18px;
+            color: gray;
+            font-weight: 200;
+            margin-top: 10px;
+        }
+    }
+
+    h1 + p {
+        color: $colorDarkGray;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+}
+
+h1 {
+    i {
+        font-size: 40px;
+        margin-left: 20px;
+    }
+}
