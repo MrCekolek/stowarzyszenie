@@ -1,136 +1,380 @@
-<auth-stepper linear [registrationCompleted]="this.registrationCompleted">
+<form [formGroup]="registerForm" novalidate>
+  <auth-stepper linear [registerCompleted]="this.registerCompleted">
     <!-- step first: account data -->
     <cdk-step>
-        <h1>
-            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP1_TITLE' | translate }}
-        </h1>
+      <h1>
+        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP1_TITLE' | translate }}
+      </h1>
 
-        <!-- email input -->
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.EMAIL_PLACEHOLDER' | translate }}</mat-label>
-            <input matInput placeholder="email@domain.com">
-            <mat-hint>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.EMAIL_HINT' | translate }}</mat-hint>
-            <div class="alert-icon">
-                <i class="fas fa-check"></i>
+      <!-- email input -->
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.EMAIL_PLACEHOLDER' | translate }}
+        </mat-label>
+
+        <input id="login_email"
+               formControlName="login_email"
+               type="email"
+               placeholder="email@domain.com"
+               matInput
+               required>
+
+        <mat-hint>
+          <div *ngIf="login_email.valid || login_email.untouched; else loginEmailInvalid">
+            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.EMAIL_HINT' | translate }}
+          </div>
+          <ng-template #loginEmailInvalid>
+            <div *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.required">
+              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
             </div>
-        </mat-form-field>
-
-        <!-- password input -->
-        <mat-form-field class="password-field" appearance="outline">
-            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.PASSWORD_PLACEHOLDER' | translate }}</mat-label>
-            <input matInput placeholder="********" [type]="passwordIsHidden ? 'password' : 'text'">
-            <mat-icon matSuffix (click)="this.togglePassword()" matTooltip="Info about the action">
-                <i class="fas fa-eye" *ngIf="this.passwordIsHidden"></i>
-                <i class="fas fa-eye-slash" *ngIf="!this.passwordIsHidden"></i>
-            </mat-icon>
-            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PASSWORD_HINT' | translate }} </mat-hint>
-            <div class="alert-icon longer">
-                <i class="fas fa-times"></i>
+            <div *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.email">
+              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_INCORRECT' | translate }}
             </div>
-        </mat-form-field>
+            <div *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.emailExist">
+              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_EXISTS' | translate }}
+            </div>
+          </ng-template>
+        </mat-hint>
 
+        <div class="alert-icon">
+          <div *ngIf="login_email.valid && !isLoading; else loginEmailIconInvalid">
+            <i class="fas fa-check"></i>
+          </div>
+          <ng-template #loginEmailIconInvalid>
+            <i class="fas fa-times"></i>
+          </ng-template>
+        </div>
+      </mat-form-field>
+
+      <!-- password input -->
+      <mat-form-field class="password-field"
+                      appearance="outline">
+
+        <mat-label>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.PASSWORD_PLACEHOLDER' | translate }}
+        </mat-label>
+
+        <input id="password"
+               formControlName="password"
+               [type]="passwordIsHidden ? 'password' : 'text'"
+               placeholder="********"
+               matInput
+               required>
+
+        <mat-icon matSuffix
+                  (click)="this.togglePassword()"
+                  matTooltip="Info about the action">
+
+          <i class="fas fa-eye" *ngIf="this.passwordIsHidden"></i>
+          <i class="fas fa-eye-slash" *ngIf="!this.passwordIsHidden"></i>
+        </mat-icon>
+
+        <mat-hint>
+          <div *ngIf="password.valid || password.untouched; else passwordInvalid">
+            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PASSWORD_HINT' | translate }}
+          </div>
+          <ng-template #passwordInvalid>
+            <div *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.required">
+              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
+            </div>
+            <div *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.minlength">
+              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.PASSWORD_LENGTH' | translate }}
+            </div>
+          </ng-template>
+        </mat-hint>
+
+        <div class="alert-icon longer">
+          <div *ngIf="password.valid; else passwordIconInvalid">
+            <i class="fas fa-check"></i>
+          </div>
+          <ng-template #passwordIconInvalid>
+            <i class="fas fa-times"></i>
+          </ng-template>
+        </div>
+      </mat-form-field>
     </cdk-step>
 
     <!-- step second: personal data -->
     <cdk-step>
-        <h1>
-            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP2_TITLE' | translate }}
-        </h1>
+      <h1>
+        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP2_TITLE' | translate }}
+      </h1>
 
-        <!-- firstname input -->
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.FIRST_NAME' | translate }}</mat-label>
-            <input matInput>
-        </mat-form-field>
+      <!-- firstname input -->
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.FIRST_NAME' | translate }}
+        </mat-label>
 
-        <!-- lastname input -->
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.LAST_NAME' | translate }}</mat-label>
-            <input matInput>
-        </mat-form-field>
+        <input id="first_name"
+               formControlName="first_name"
+               type="text"
+               matInput
+               required>
 
-        <!-- birthdate input -->
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BIRTHDATE' | translate }}</mat-label>
-            <input matInput>
-            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BIRTHDATE_HINT' | translate }} </mat-hint>
-            <div class="alert-icon">
-                <i class="fas fa-check"></i>
-            </div>
-        </mat-form-field>
+        <mat-hint>
+          <div *ngIf="(first_name.dirty || first_name.touched) && first_name.invalid && first_name.errors.required">
+            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
+          </div>
+        </mat-hint>
 
-        <!-- F - female, M -- male -->
-        <div class="gender">
-            <mat-radio-group>
-                <mat-radio-button value="F">{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.MAN' | translate }}</mat-radio-button>
-                <mat-radio-button value="M">{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.WOMAN' | translate }}</mat-radio-button>
-            </mat-radio-group>
+        <div class="alert-icon">
+          <div *ngIf="first_name.valid; else firstNameIconInvalid">
+            <i class="fas fa-check"></i>
+          </div>
+          <ng-template #firstNameIconInvalid>
+            <i class="fas fa-times"></i>
+          </ng-template>
         </div>
-        
+      </mat-form-field>
+
+      <!-- lastname input -->
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.LAST_NAME' | translate }}
+        </mat-label>
+
+        <input id="last_name"
+               formControlName="last_name"
+               type="text"
+               matInput
+               required>
+
+        <mat-hint>
+          <div *ngIf="(last_name.dirty || last_name.touched) && last_name.invalid && last_name.errors.required">
+            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
+          </div>
+        </mat-hint>
+
+        <div class="alert-icon">
+          <div *ngIf="last_name.valid; else lastNameIconInvalid">
+            <i class="fas fa-check"></i>
+          </div>
+          <ng-template #lastNameIconInvalid>
+            <i class="fas fa-times"></i>
+          </ng-template>
+        </div>
+      </mat-form-field>
+
+      <!-- birthdate input -->
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BIRTHDATE' | translate }}</mat-label>
+
+        <input id="birthdate"
+               formControlName="birthdate"
+               type="text"
+               matInput
+               required>
+
+        <mat-hint>
+          <div *ngIf="birthdate.valid || birthdate.untouched; else birthdayInvalid">
+            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BIRTHDATE_HINT' | translate }}
+          </div>
+          <ng-template #birthdayInvalid>
+            <div *ngIf="(birthdate.dirty || birthdate.touched) && birthdate.invalid && birthdate.errors.required">
+              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
+            </div>
+            <div *ngIf="(birthdate.dirty || birthdate.touched) && birthdate.invalid && birthdate.errors.pattern">
+              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.BIRTHDATE_INCORRECT' | translate }}
+            </div>
+          </ng-template>
+        </mat-hint>
+
+        <div class="alert-icon">
+          <div *ngIf="birthdate.valid; else birthdateIconInvalid">
+            <i class="fas fa-check"></i>
+          </div>
+          <ng-template #birthdateIconInvalid>
+            <i class="fas fa-times"></i>
+          </ng-template>
+        </div>
+      </mat-form-field>
+
+      <!-- F - female, M -- male -->
+      <div class="gender">
+        <mat-radio-group id="gender"
+                         formControlName="gender"
+                         required>
+
+          <mat-radio-button value="F">
+            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.MAN' | translate }}
+          </mat-radio-button>
+          <mat-radio-button value="M">
+            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.WOMAN' | translate }}
+          </mat-radio-button>
+
+          <mat-hint>
+            <span class="alert-icon">
+              <div *ngIf="gender.valid; else genderIconInvalid">
+                <i class="fas fa-check"></i>
+              </div>
+              <ng-template #genderIconInvalid>
+                <i class="fas fa-times"></i>
+              </ng-template>
+            </span>
+
+            <span *ngIf="gender.invalid && gender.errors.required">
+              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
+            </span>
+          </mat-hint>
+        </mat-radio-group>
+      </div>
     </cdk-step>
 
     <!-- step third: affiliation data -->
     <cdk-step optional>
-        <h1>
-            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.PAGE_TITLE' | translate }}
-        </h1>
+      <h1>
+        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.PAGE_TITLE' | translate }}
+      </h1>
 
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.TITLE' | translate }}</mat-label>
-            <input matInput placeholder="Ph. D">
-            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.TITLE_HINT' | translate }} </mat-hint>
-        </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.TITLE' | translate }}
+        </mat-label>
 
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.INSTITUTION' | translate }}</mat-label>
-            <input matInput>
-            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.INSTITUTION_HINT' | translate }} </mat-hint>
-        </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.DEPARTMENT' | translate }}</mat-label>
-            <input matInput>
-            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.DEPARTMENT_HINT' | translate }} </mat-hint>
-        </mat-form-field>
+        <input id="title"
+               formControlName="title"
+               type="text"
+               placeholder="Ph. D"
+               matInput>
 
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.STREET' | translate }}</mat-label>
-            <input matInput>
-            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.STREET_HINT' | translate }} </mat-hint>
-        </mat-form-field>
+        <mat-hint>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.TITLE_HINT' | translate }}
+        </mat-hint>
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.CITY' | translate }}</mat-label>
-            <input matInput>
-            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.CITY_HINT' | translate }} </mat-hint>
-        </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.INSTITUTION' | translate }}
+        </mat-label>
 
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.COUNTRY' | translate }}</mat-label>
-            <input matInput>
-            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.COUNTRY_HINT' | translate }} </mat-hint>
-        </mat-form-field>
+        <input id="institution"
+               formControlName="institution"
+               type="text"
+               matInput>
+
+        <mat-hint>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.INSTITUTION_HINT' | translate }}
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.DEPARTMENT' | translate }}
+        </mat-label>
+
+        <input id="department"
+               formControlName="department"
+               type="text"
+               matInput>
+
+        <mat-hint>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.DEPARTMENT_HINT' | translate }}
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.STREET' | translate }}
+        </mat-label>
+
+        <input id="street"
+               formControlName="street"
+               type="text"
+               matInput>
+
+        <mat-hint>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.STREET_HINT' | translate }}
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.CITY' | translate }}
+        </mat-label>
+
+        <input id="city"
+               formControlName="city"
+               type="text"
+               matInput>
+
+        <mat-hint>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.CITY_HINT' | translate }}
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.COUNTRY' | translate }}
+        </mat-label>
+
+        <input id="country"
+               formControlName="country"
+               type="text"
+               matInput>
+
+        <mat-hint>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.COUNTRY_HINT' | translate }}
+        </mat-hint>
+      </mat-form-field>
     </cdk-step>
 
     <!-- step fourth: contact data -->
     <cdk-step optional>
-        <h1>
-            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_TITLE' | translate }}
-        </h1>
+      <h1>
+        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_TITLE' | translate }}
+      </h1>
 
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_EMAIL' | translate }}</mat-label>
-            <input matInput>
-            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_EMAIL_HINT' | translate }} </mat-hint>
-        </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_EMAIL' | translate }}
+        </mat-label>
 
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PHONE' | translate }}</mat-label>
-            <input matInput>
-        </mat-form-field>
+        <input id="contact_email"
+               formControlName="contact_email"
+               type="email"
+               placeholder="email@domain.com"
+               matInput>
+
+        <mat-hint>
+          <div *ngIf="contact_email.valid || contact_email.untouched; else contactEmailInvalid">
+            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_EMAIL_HINT' | translate }}
+          </div>
+          <ng-template #contactEmailInvalid>
+            <div *ngIf="contact_email.value">
+              <div *ngIf="(contact_email.dirty || contact_email.touched) && contact_email.invalid && contact_email.errors.email">
+                {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_INCORRECT' | translate }}
+              </div>
+            </div>
+          </ng-template>
+        </mat-hint>
+
+        <div class="alert-icon">
+          <div *ngIf="contact_email.valid; else contactEmailIconInvalid">
+            <i class="fas fa-check"></i>
+          </div>
+          <ng-template #contactEmailIconInvalid>
+            <i class="fas fa-times"></i>
+          </ng-template>
+        </div>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PHONE' | translate }}
+        </mat-label>
+
+        <input id="phone_number"
+               formControlName="phone_number"
+               type="text"
+               placeholder="123456789"
+               matInput>
+      </mat-form-field>
     </cdk-step>
-</auth-stepper>
+  </auth-stepper>
+</form>
 
-<a [routerLink]="['../login']"  class="external-link secondary">
-    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.LOGIN_LINK' | translate }}
+<a [routerLink]="['../login']" class="external-link secondary">
+  {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.LOGIN_LINK' | translate }}
 </a>

@@ -3,7 +3,7 @@
 
 Click on the button below to activate account.
 
-@component('mail::button', ['url' => 'http://localhost:8000/api/activateAccount?token=' . $token])
+@component('mail::button', ['url' =>  config('app.back_url') . '/api/activateAccount?token=' . $token])
     Activate Account
 @endcomponent
 
