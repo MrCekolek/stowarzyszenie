@@ -15,7 +15,6 @@ Route::group([
     'middleware' => 'api'
 ], function ($router) {
     Route::post('login', 'AuthController@login');
-    Route::post('signup', 'AuthController@signup');
     Route::get('activateAccount', 'AuthController@activateAccount');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
@@ -24,4 +23,8 @@ Route::group([
     Route::post('changePassword', 'ChangePasswordController@changePassword');
     Route::post('lang/get', 'PreferenceUserController@getLang');
     Route::post('lang/set', 'PreferenceUserController@setLang');
+
+    Route::post('email/exist', 'UserController@emailExist');
+    Route::post('account/register', 'AuthController@accountRegister');
+    Route::post('account/register/resend', 'AuthController@accountResendRegister');
 });

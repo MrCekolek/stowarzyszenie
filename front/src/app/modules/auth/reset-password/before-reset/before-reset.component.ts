@@ -7,8 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BeforeResetComponent implements OnInit {
 
+  private resetSend = false;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  sendReset() {
+    this.resetSend = !this.resetSend;
   }
 }

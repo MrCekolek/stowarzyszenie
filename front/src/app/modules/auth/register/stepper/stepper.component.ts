@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { CdkStepper } from '@angular/cdk/stepper';
 import { Directionality } from '@angular/cdk/bidi';
+import { RegisterComponent } from "../register.component";
 
 @Component({
   selector: 'auth-stepper',
@@ -10,7 +11,7 @@ import { Directionality } from '@angular/cdk/bidi';
 })
 export class StepperComponent extends CdkStepper implements OnInit {
 
-  @Input() registrationCompleted;
+  @Input() registerCompleted;
   private registeredEmail;
 
   private icons = {
@@ -20,10 +21,13 @@ export class StepperComponent extends CdkStepper implements OnInit {
     3: 'fas fa-phone'
   };
 
-  constructor(dir: Directionality, changeDetectorRef: ChangeDetectorRef) {
-    super(dir, changeDetectorRef);
-    this.registrationCompleted = false;
-  }
+  constructor(
+    private dir: Directionality,
+    private changeDetectorRef: ChangeDetectorRef,
+    private registerComponent: RegisterComponent) {
+      super(dir, changeDetectorRef);
+      this.registerCompleted = false;
+    }
 
   ngOnInit() {
   }
@@ -33,6 +37,11 @@ export class StepperComponent extends CdkStepper implements OnInit {
   }
 
   completeRegistration() {
-    this.registrationCompleted = true;
+    this.registerCompleted = true;
+    this.registerComponent.createNewUser(this.registerComponent.registerForm.getRawValue());
+  }
+
+  resendEmailActivation() {
+    this.registerComponent.resendEmailActivation(this.registerComponent.registerForm.getRawValue());
   }
 }
