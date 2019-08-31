@@ -3,8 +3,8 @@
         <div class="stepper-container">
             <h1>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PAGE_TITLE' | translate }}</h1>
             <div>
-                <ul class="progressbar" *ngIf="!this.registrationCompleted">
-                    <li *ngFor="let step of _steps; let i = index;" (click)="onClick(i)" 
+                <ul class="progressbar" *ngIf="!this.registerCompleted">
+                    <li *ngFor="let step of _steps; let i = index;" (click)="onClick(i)"
                     [ngClass]="{'active': this.selectedIndex === i}">
                         <div class="icon">
                             <i [class]="this.icons[i]"></i>
@@ -13,7 +13,7 @@
                     </li>
                 </ul>
 
-                <div *ngIf="this.registrationCompleted">
+                <div *ngIf="this.registerCompleted">
                     <ul class="progressbar">
                         <li class="active end">
                             <div class="icon">
@@ -33,9 +33,9 @@
         <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
             <div class="form-container">
                 <form>
-                    <ng-container [ngTemplateOutlet]="selected.content" *ngIf="!this.registrationCompleted"></ng-container>
+                    <ng-container [ngTemplateOutlet]="selected.content" *ngIf="!this.registerCompleted"></ng-container>
 
-                    <div class="formCompleted" *ngIf="this.registrationCompleted">
+                    <div class="formCompleted" *ngIf="this.registerCompleted">
                         <h1>
                             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.PAGE_TITLE' | translate }} <i class="fas fa-paper-plane"></i>
                             <small>
@@ -49,19 +49,19 @@
                         </p>
                     </div>
 
-                    <button class="submit-button" type="button" cdkStepperNext *ngIf="this.selectedIndex !== 3 && !this.registrationCompleted">
+                    <button class="submit-button" type="button" cdkStepperNext *ngIf="this.selectedIndex !== 3 && !this.registerCompleted">
                         {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.GO_TO_STEP' | translate }} {{ this.selectedIndex + 2 }}
                     </button>
 
-                    <button type="button" class="submit-button" *ngIf="this.selectedIndex === 3 && !this.registrationCompleted" (click)="this.completeRegistration()">
-                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BUTTON_REGISTER' | translate }} 
+                    <button type="button" class="submit-button" *ngIf="this.selectedIndex === 3 && !this.registerCompleted" (click)="this.completeRegistration()">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BUTTON_REGISTER' | translate }}
                     </button>
 
-                    <button cdkStepperPrevious type="button" class="external-link primary" *ngIf="this.selectedIndex !== 0 && !this.registrationCompleted">
+                    <button cdkStepperPrevious type="button" class="external-link primary" *ngIf="this.selectedIndex !== 0 && !this.registerCompleted">
                             <i class="fas fa-arrow-left"></i> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BACK_TO_STEP' | translate }} {{ this.selectedIndex }}
                     </button>
 
-                    <button *ngIf="this.registrationCompleted" type="button" class="submit-button">
+                    <button *ngIf="this.registerCompleted" type="button" class="submit-button" (click)="this.resendEmailActivation()">
                         {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.SEND_AGAIN' | translate }}
                     </button>
                 </form>

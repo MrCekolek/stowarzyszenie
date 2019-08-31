@@ -6,10 +6,11 @@ use App\Http\Requests\Auth\ActivateAccountRequest;
 use App\Http\Requests\Auth\SignUpRequest;
 use App\Jobs\ChangeUserTimezoneJob;
 use App\Jobs\SendAuthEmailJob;
-use App\Mail\Authentication\SignUpMail;
+use App\Models\AffiliationUser;
 use App\Models\PreferenceUser;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Http\Response;
 
@@ -20,7 +21,7 @@ class AuthController extends Controller {
      * @return void
      */
     public function __construct() {
-        $this->middleware('auth:api', ['except' => ['login', 'signup', 'activateAccount']]);
+        $this->middleware('auth:api', ['except' => ['login', 'accountRegister', 'accountResendRegister', 'activateAccount']]);
     }
 
     /**
@@ -48,8 +49,9 @@ class AuthController extends Controller {
         return $this->respondWithToken($token);
     }
 
-    public function signup(SignUpRequest $signUpRequest) {
+    public function accountRegister(SignUpRequest $signUpRequest) {
         $input = $signUpRequest->all();
+
         $geolocation = $this->getGeolocation();
 
         if (!empty($geolocation)) {
@@ -58,7 +60,26 @@ class AuthController extends Controller {
             $time_zone = 'UTC';
         }
 
-        $user = User::create($input);
+        $user = User::create([
+            'login_email' => $input['login_email'],
+            'password' => $input['password'],
+            'first_name' => $input['first_name'],
+            'last_name' => $input['last_name'],
+            'birthdate' => $input['birthdate'],
+            'gender' => $input['gender'],
+            'contact_email' => $input['contact_email'],
+            'phone_number' => $input['phone_number'],
+        ]);
+
+        AffiliationUser::create([
+           'title' => $input['title'],
+           'institution' => $input['institution'],
+           'department' => $input['department'],
+           'street' => $input['street'],
+           'city' => $input['city'],
+           'country' => $input['country'],
+           'user_id' => $user['id']
+        ]);
 
         PreferenceUser::create([
             'time_zone' => $time_zone,
@@ -66,11 +87,13 @@ class AuthController extends Controller {
             'user_id' => $user['id']
         ]);
 
-        $this->send($input['email']);
+        $this->send($input['login_email']);
+    }
 
-        return response()->json([
-            'message' => __('custom.controllers.auth.signup.send_activation')
-        ]);
+    public function accountResendRegister(Request $request) {
+        $input = $request->all();
+
+        $this->send($input['login_email']);
     }
 
     public function getGeolocation() {
@@ -99,7 +122,7 @@ class AuthController extends Controller {
             'email_verified_at' => Carbon::now()
         ]);
 
-        return redirect('http://localhost:4200/login')->with([
+        return redirect(config('app.front_url') . '/auth/login')->with([
             'message' =>  __('custom.controllers.auth.change.activated')
         ]);
     }
@@ -123,7 +146,7 @@ class AuthController extends Controller {
     }
 
     public function saveToken($email, $token) {
-        User::email($email)->update([
+        User::loginEmail($email)->update([
             'remember_token' => $token
         ]);
     }

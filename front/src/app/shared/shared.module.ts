@@ -31,11 +31,13 @@ export function HttpLoaderFactory (http: HttpClient) {
   ],
   providers: [  ]
 })
+
 export class SharedModule {
   constructor(
     public translateService: TranslateService
   ) {
     this.translateService.addLangs(['pl', 'en']);
     this.translateService.setDefaultLang('pl');
+    this.translateService.use('en');
    }
 }

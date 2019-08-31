@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -15,11 +16,15 @@ class User extends Authenticatable implements JWTSubject {
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
+        'login_email',
         'password',
-        'email_verified_at',
-        'remember_token'
+        'first_name',
+        'last_name',
+        'birthdate',
+        'gender',
+        'contact_email',
+        'phone_number',
+        'email_verified_at'
     ];
 
     /**
@@ -63,8 +68,14 @@ class User extends Authenticatable implements JWTSubject {
         $this->attributes['password'] = bcrypt($value);
     }
 
-    public function scopeEmail($query, $email) {
-        return $query->where('email', $email);
+    public function setBirthdate($value) {
+        $birthdateExploded = explode('/', $value);
+
+        $this->attributes['birthdate'] = Carbon::createFromFormat('d-m-Y', $birthdateExploded[0] . '-' . $birthdateExploded[1] . '-' . $birthdateExploded[2]);
+    }
+
+    public function scopeLoginEmail($query, $login_email) {
+        return $query->where('login_email', $login_email);
     }
 
     public function scopeRememberToken($query, $token) {
@@ -81,5 +92,9 @@ class User extends Authenticatable implements JWTSubject {
 
     public function preferenceUser() {
         return $this->hasOne(PreferenceUser::class);
+    }
+
+    public function affilationUser() {
+        return $this->hasOne(AffiliationUser::class);
     }
 }
