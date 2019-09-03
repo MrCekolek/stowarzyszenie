@@ -1,47 +1,86 @@
 <div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
-            <div class="form-container">
-              <div *ngIf="!this.resetSend else sent">
-                <h1>
-                  {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.PAGE_TITLE' | translate }}
-                </h1>
+  <div class="row justify-content-center">
+    <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
+      <div class="form-container">
+        <form [formGroup]="beforeResetForm">
+          <div *ngIf="!this.resetSend else sent">
+            <h1>
+              {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.PAGE_TITLE' | translate }}
+            </h1>
 
-                <p>
-                  {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.PAGE_HINT' | translate }}
-                </p>
+            <p>
+              {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.PAGE_HINT' | translate }}
+            </p>
 
-                <!-- email input -->
-                <mat-form-field class="auth-form-field" appearance="outline">
-                  <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.EMAIL_PLACEHOLDER' | translate }}</mat-label>
-                  <input matInput placeholder="email@domain.com">
-                  <div class="alert-icon">
-                    <i class="fas fa-check"></i>
+            <!-- email input -->
+            <mat-form-field class="auth-form-field" appearance="outline">
+              <mat-label>
+                {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.EMAIL_PLACEHOLDER' | translate }}
+              </mat-label>
+
+              <input id="login_email"
+                     formControlName="login_email"
+                     type="email"
+                     placeholder="email@domain.com"
+                     matInput
+                     required>
+
+              <mat-hint>
+                <div *ngIf="login_email.valid || login_email.untouched; else loginEmailInvalid">
+                  {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.EMAIL_HINT' | translate }}
+                </div>
+                <ng-template #loginEmailInvalid>
+                  <div
+                    *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.required">
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
                   </div>
-                </mat-form-field>
+                  <div
+                    *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.email">
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_INCORRECT' | translate }}
+                  </div>
+                  <div
+                    *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.emailNotExist">
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_NOT_EXISTS' | translate }}
+                  </div>
+                </ng-template>
+              </mat-hint>
 
-                <button class="submit-button" (click)="sendReset()">
-                  {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.BUTTON_SEND' | translate }}
-                </button>
+              <div class="alert-icon">
+                <div *ngIf="login_email.valid && !isLoading; else loginEmailIconInvalid">
+                  <i class="fas fa-check"></i>
+                </div>
+                <ng-template #loginEmailIconInvalid>
+                  <i class="fas fa-times"></i>
+                </ng-template>
               </div>
+            </mat-form-field>
 
-              <ng-template #sent>
-                <h1>
-                  Wysłano email
-                </h1>
+            <button class="submit-button" (click)="sendReset(beforeResetForm.getRawValue())" [disabled]="!login_email.valid || isLoading">
+              {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.BUTTON_SEND' | translate }}
+            </button>
+          </div>
 
-                <p>
-                  Email z linkiem do resetu hasła został wysłany. Sprawdź swoją skrzynkę mailową i podążaj za wysłanymi instrukcjami.
-                </p>
+          <ng-template #sent>
+            <h1>
+              Wysłano email
+            </h1>
 
-                <button class="submit-button" [routerLink]="['../onreset']">
-                  Przejdź do resetu
-                </button>
-              </ng-template>
+            <p>
+              Email z linkiem do resetu hasła został wysłany. Sprawdź swoją skrzynkę mailową i podążaj za wysłanymi
+              instrukcjami.
+            </p>
 
+            <button class="submit-button"(click)="sendReset()">
+              Przejdź do resetu
+            </button>
+          </ng-template>
+        </form>
 
-                <a [routerLink]="['../login']"  class="external-link primary"><i class="fas fa-arrow-left"></i> {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.BACK_TO_LOGIN' | translate }}</a>
-            </div>
-        </div>
+        <a [routerLink]="['../login']" class="external-link primary">
+          <i class="fas fa-arrow-left"></i>
+          {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.BACK_TO_LOGIN' | translate }}
+        </a>
+      </div>
     </div>
+  </div>
 </div>

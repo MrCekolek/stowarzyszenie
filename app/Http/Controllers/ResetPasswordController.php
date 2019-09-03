@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller {
-    public function sendEmail(ResetPasswordRequest $resetPasswordRequest) {
+    public function accountPasswordReset(ResetPasswordRequest $resetPasswordRequest) {
         $input = $resetPasswordRequest->all();
-        $email = $input['email'];
+        $email = $input['login_email'];
 
         $this->send($email);
 
@@ -28,7 +28,7 @@ class ResetPasswordController extends Controller {
     }
 
     public function createToken($email) {
-        $tokenOld = PasswordReset::email($email)->first();
+        $tokenOld = PasswordReset::loginEmail($email)->first();
         if ($tokenOld) {
             return $tokenOld->pluck('token')[0];
         }
@@ -41,7 +41,7 @@ class ResetPasswordController extends Controller {
 
     public function saveToken($email, $token) {
         PasswordReset::create([
-            'email' => $email,
+            'login_email' => $email,
             'token' => $token,
             'created_at' => Carbon::now()
         ]);

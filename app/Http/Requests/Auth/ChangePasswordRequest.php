@@ -21,9 +21,9 @@ class ChangePasswordRequest extends FormRequest {
      */
     public function rules() {
         return [
-            'email' => 'required|email|exists:users',
+            'login_email' => 'required|email|exists:users',
             'token' => 'required|exists:password_resets',
-            'password' => 'required|confirmed'
+            'password' => 'required|min:8'
         ];
     }
 }

@@ -5,6 +5,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
+import { LanguageService } from "./services/user/language.service";
 
 export function HttpLoaderFactory (http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -34,10 +35,17 @@ export function HttpLoaderFactory (http: HttpClient) {
 
 export class SharedModule {
   constructor(
+    private languageService: LanguageService,
     public translateService: TranslateService
   ) {
-    this.translateService.addLangs(['pl', 'en']);
-    this.translateService.setDefaultLang('pl');
-    this.translateService.use('en');
+    this.translateService.addLangs(this.languageService.supportedLangs);
+    this.translateService.setDefaultLang('en');
+    this.languageService.currentLang.subscribe(
+      value => this.translateService.use(this.detectLang(value))
+    );
    }
+
+  detectLang(value) {
+    return this.languageService.supportedLangs.includes(value) ? value : this.translateService.getDefaultLang();
+  }
 }
