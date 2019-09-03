@@ -48,6 +48,7 @@
 						"BIRTHDATE_INCORRECT": "Format daty jest nieprawidłowy. Prawidłowo: 06/08/1980",
 						"EMAIL_EXISTS": "Konto z tym emailem już istnieje",
 						"EMAIL_INCORRECT": "Nieprawidłowy email ",
+						"EMAIL_NOT_EXISTS": "Konto z tym emailem nie istnieje.",
 						"PASSWORD_LENGTH": "Hasło nie może mieć mniej niż 8 znaków",
 						"REQUIRED": "To pole jest wymagane"
 					},
@@ -81,7 +82,25 @@
 					"WOMAN": "Jestem kobietą"
 				}
 			},
+			"NAVIGATION": {
+				"WEBPAGE_TITLE_MEMBERS": "Ciob members",
+				"MEMBERS_PAGE_LINKS": {
+					"HOME": "Strona główna"
+				}
+			},
 			"TITLE": "Przykładowy tytuł"
+		},
+		"SERVER": {
+			"CUSTOM": {
+				"CONTROLLERS": {
+					"AUTH": {
+						"LOGIN": {
+							"NOT_ACTIVATED": "Konto nie zostało aktywowane.",
+							"NO_EMAIL_OR_PASSWORD": "Podany email lub hasło są niepoprawne."
+						}
+					}
+				}
+			}
 		}
 	}
 }

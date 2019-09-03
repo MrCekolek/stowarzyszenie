@@ -1,0 +1,87 @@
+{
+	"STOWARZYSZENIE": {
+		"MODULES": {
+			"AUTH": {
+				"FORGOT": {
+					"BACK_TO_LOGIN": "Return To Login",
+					"BUTTON_SEND": "Send a link",
+					"PAGE_HINT": "Forgot your account password? Reset them by entering the email address to which your account is assigned below (or the contact email if you have provided it). An email with a password reset link will be sent to the provided address.",
+					"PAGE_TITLE": "Reset Password"
+				},
+				"LOGIN": {
+					"ALERT_WRONG": "Invalid login details",
+					"BUTTON": "Sign in",
+					"EMAIL_PLACEHOLDER": "E-mail adress",
+					"FORGOT_PASSWORD_LINK": "Have you forgotten your password? Reset them here",
+					"PAGE_TITLE": "Log in to the CIOB portal",
+					"PASSWORD_PLACEHOLDER": "Password",
+					"REGISTER_LINK": "You dont have an account yet? Register new here!",
+					"REMEMBER_ME": "Don't log me out",
+					"TOOLTIP_HIDE": "Hide password",
+					"TOOLTIP_SHOW": "Show password"
+				},
+				"REGISTER": {
+					"AFFILIATION": {
+						"CITY": "city",
+						"CITY_HINT": "Enter the name of the city in which your institution is located",
+						"COUNTRY": "country",
+						"COUNTRY_HINT": "Select the country of your institution",
+						"DEPARTMENT": "Department",
+						"DEPARTMENT_HINT": "Enter the name of your department",
+						"INSTITUTION": "Institution",
+						"INSTITUTION_HINT": "Enter the name of your institution",
+						"PAGE_TITLE": "Affiliation (optional)",
+						"STREET": "Street",
+						"STREET_HINT": "Enter the street where your institution is located",
+						"TITLE": "academic title",
+						"TITLE_HINT": "Enter your academic title"
+					},
+					"AFTER": {
+						"PAGE_DESC1": "We have sent an activation email to the",
+						"PAGE_DESC2": "Check your e-mail account and follow the instructions in the e-mail sent. If you have not received the e-mail, check the SPAM folder or send the e-mail again using the link below",
+						"PAGE_SUBTITLE": "Your Account has been created",
+						"PAGE_TITLE": "Registration successful",
+						"SEND_AGAIN": "Resend activation email",
+						"SUCCESS_ICON": "Success"
+					},
+					"ALERTS": {
+						"BIRTHDATE_INCORRECT": "The date format is not valid. Correct: 06/08/1980",
+						"EMAIL_EXISTS": "An account with this email already exists",
+						"EMAIL_INCORRECT": "Invalid Email",
+						"PASSWORD_LENGTH": "The password cannot contain less than 8 characters",
+						"REQUIRED": "This field is required"
+					},
+					"BACK_TO_STEP": "Go back to the step",
+					"BIRTHDATE": "Date of Birth",
+					"BIRTHDATE_HINT": "The correct format is 05/04/2014",
+					"BUTTON_REGISTER": "Register Account",
+					"CONTACT_EMAIL": "Contact email",
+					"CONTACT_EMAIL_HINT": "Enter an alternate email address",
+					"CONTACT_TITLE": "Contact details (optional)",
+					"EMAIL_HINT": "The email will be used to log in and receive notifications",
+					"FIRST_NAME": "Name",
+					"GO_TO_STEP": "Go to step",
+					"LAST_NAME": "Last name",
+					"LOGIN_LINK": "Do you already have an account? Log in here!",
+					"MAN": "I'm a man",
+					"PAGE_TITLE": "Register a new account",
+					"PASSWORD_HINT": "The password should be at least 8 characters long",
+					"PHONE": "Phone Number",
+					"RESET": {
+						"BUTTON": "Reset",
+						"LOGIN_LINK": "Go to login",
+						"PAGE_DESC": "Enter the new password for your account in the field below.",
+						"PAGE_TITLE": "Password Reset",
+						"RESETED_DESC": "Your password has been successfully reset. You can login now.",
+						"RESETED_TITLE": "Password has been reset"
+					},
+					"STEP": "Step",
+					"STEP1_TITLE": "account information",
+					"STEP2_TITLE": "Personal data",
+					"WOMAN": "I'm a woman"
+				}
+			},
+			"TITLE": "Example title"
+		}
+	}
+}

@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class PasswordReset extends Model {
-    protected $primaryKey = 'email';
+    protected $primaryKey = 'login_email';
 
     protected $fillable = [
-        'email',
+        'login_email',
         'token',
         'created_at'
     ];
 
     public $timestamps = false;
 
-    public function scopeEmail($query, $email) {
-        return $query->where('email', $email);
+    public function scopeLoginEmail($query, $email) {
+        return $query->where('login_email', $email);
     }
 
     public function scopeToken($query, $token) {

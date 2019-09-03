@@ -6,9 +6,9 @@
           {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.PAGE_TITLE' | translate }}
         </h1>
 
-        <div class="alert danger" *ngIf="error">
+        <div class="alert danger" *ngIf="loginError != ''">
           <i class="fas fa-exclamation-triangle"></i>
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.ALERT_WRONG' | translate }}
+          {{ loginError | translate }}
         </div>
 
         <form [formGroup]="loginForm"
