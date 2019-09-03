@@ -8,23 +8,23 @@ use App\Models\User;
 use Illuminate\Http\Response;
 
 class ChangePasswordController extends Controller {
-    public function changePassword(ChangePasswordRequest $changePasswordRequest) {
+    public function accountPasswordChange(ChangePasswordRequest $changePasswordRequest) {
         $input = $changePasswordRequest->all();
 
         return $this->getPasswordResetsRow($input)->get()->count() > 0 ? $this->change($input) : $this->rowNotFound();
     }
 
     private function getPasswordResetsRow($input) {
-        return PasswordReset::email($input['email'])->token($input['token']);
+        return PasswordReset::loginEmail($input['login_email'])->token($input['token']);
     }
 
     private function change($input) {
-        $email = $input['email'];
+        $email = $input['login_email'];
         $password = $input['password'];
 
-        User::email($email)->update([
-            'password' => bcrypt($password)
-        ]);
+        $user = User::loginEmail($email)->first();
+        $user['password'] = $password;
+        $user->save();
 
         $this->getPasswordResetsRow($input)->delete();
 

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterModel } from "./model/register.model";
 import { FormGroup, FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import { RegisterService } from "./service/register.service";
-import { distinctUntilChanged } from "rxjs/operators";
-import {TranslateService} from "@ngx-translate/core";
+import { delay, distinctUntilChanged } from "rxjs/operators";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-register',
@@ -78,6 +78,7 @@ export class RegisterComponent implements OnInit {
         if (!this.login_email.errors || (this.login_email.errors && this.login_email.errors.emailExist)) {
           this.registerService.verifyEmail(data)
             .pipe(
+              delay(500),
               distinctUntilChanged()
             )
             .subscribe(
@@ -98,14 +99,10 @@ export class RegisterComponent implements OnInit {
   }
 
   emailExistValidator(control: AbstractControl): {[key: string]: any} | null {
-    if (!this.isLoading) {
-      if (this.emailExist) {
-        return {
-          'emailExist': true
-        }
+    if (this.emailExist) {
+      return {
+        'emailExist': true
       }
-
-      return null;
     }
 
     return null;

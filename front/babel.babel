@@ -807,6 +807,27 @@
                                                         </translations>
                                                     </concept_node>
                                                     <concept_node>
+                                                        <name>EMAIL_NOT_EXISTS</name>
+                                                        <definition_loaded>false</definition_loaded>
+                                                        <description></description>
+                                                        <comment></comment>
+                                                        <default_text></default_text>
+                                                        <translations>
+                                                            <translation>
+                                                                <language>en-US</language>
+                                                                <approved>false</approved>
+                                                            </translation>
+                                                            <translation>
+                                                                <language>pl-PL</language>
+                                                                <approved>false</approved>
+                                                            </translation>
+                                                            <translation>
+                                                                <language>ru-RU</language>
+                                                                <approved>false</approved>
+                                                            </translation>
+                                                        </translations>
+                                                    </concept_node>
+                                                    <concept_node>
                                                         <name>PASSWORD_LENGTH</name>
                                                         <definition_loaded>false</definition_loaded>
                                                         <description></description>
@@ -1426,6 +1447,73 @@
                                     </translation>
                                 </translations>
                             </concept_node>
+                        </children>
+                    </folder_node>
+                    <folder_node>
+                        <name>SERVER</name>
+                        <children>
+                            <folder_node>
+                                <name>CUSTOM</name>
+                                <children>
+                                    <folder_node>
+                                        <name>CONTROLLERS</name>
+                                        <children>
+                                            <folder_node>
+                                                <name>AUTH</name>
+                                                <children>
+                                                    <folder_node>
+                                                        <name>LOGIN</name>
+                                                        <children>
+                                                            <concept_node>
+                                                                <name>NOT_ACTIVATED</name>
+                                                                <definition_loaded>false</definition_loaded>
+                                                                <description></description>
+                                                                <comment></comment>
+                                                                <default_text></default_text>
+                                                                <translations>
+                                                                    <translation>
+                                                                        <language>en-US</language>
+                                                                        <approved>false</approved>
+                                                                    </translation>
+                                                                    <translation>
+                                                                        <language>pl-PL</language>
+                                                                        <approved>false</approved>
+                                                                    </translation>
+                                                                    <translation>
+                                                                        <language>ru-RU</language>
+                                                                        <approved>false</approved>
+                                                                    </translation>
+                                                                </translations>
+                                                            </concept_node>
+                                                            <concept_node>
+                                                                <name>NO_EMAIL_OR_PASSWORD</name>
+                                                                <definition_loaded>false</definition_loaded>
+                                                                <description></description>
+                                                                <comment></comment>
+                                                                <default_text></default_text>
+                                                                <translations>
+                                                                    <translation>
+                                                                        <language>en-US</language>
+                                                                        <approved>false</approved>
+                                                                    </translation>
+                                                                    <translation>
+                                                                        <language>pl-PL</language>
+                                                                        <approved>false</approved>
+                                                                    </translation>
+                                                                    <translation>
+                                                                        <language>ru-RU</language>
+                                                                        <approved>false</approved>
+                                                                    </translation>
+                                                                </translations>
+                                                            </concept_node>
+                                                        </children>
+                                                    </folder_node>
+                                                </children>
+                                            </folder_node>
+                                        </children>
+                                    </folder_node>
+                                </children>
+                            </folder_node>
                         </children>
                     </folder_node>
                 </children>

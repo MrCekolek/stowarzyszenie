@@ -48,6 +48,7 @@
 						"BIRTHDATE_INCORRECT": "The date format is not valid. Correct: 06/08/1980",
 						"EMAIL_EXISTS": "An account with this email already exists",
 						"EMAIL_INCORRECT": "Invalid Email",
+						"EMAIL_NOT_EXISTS": "An account with this email does not exist.",
 						"PASSWORD_LENGTH": "The password cannot contain less than 8 characters",
 						"REQUIRED": "This field is required"
 					},
@@ -82,6 +83,18 @@
 				}
 			},
 			"TITLE": "Example title"
+		},
+		"SERVER": {
+			"CUSTOM": {
+				"CONTROLLERS": {
+					"AUTH": {
+						"LOGIN": {
+							"NOT_ACTIVATED": "Account has not been activated.",
+							"NO_EMAIL_OR_PASSWORD": "The email or password you entered is incorrect."
+						}
+					}
+				}
+			}
 		}
 	}
 }
