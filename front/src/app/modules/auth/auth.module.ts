@@ -14,6 +14,7 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { StepperComponent } from './register/stepper/stepper.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [LoginComponent, BeforeResetComponent, AfterResetComponent, RegisterComponent, StepperComponent],
@@ -27,7 +28,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule,
     CdkStepperModule,
     MatRadioModule,
-    MatSelectModule
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }
