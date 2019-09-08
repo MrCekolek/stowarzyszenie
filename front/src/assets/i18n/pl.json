@@ -82,6 +82,14 @@
 					"WOMAN": "Jestem kobietą"
 				}
 			},
+			"NAVIGATION": {
+				"WEBPAGE_TITLE_MEMBERS": "Ciob members",
+				"MEMBERS_PAGE_LINKS": {
+					"HOME": "Strona główna",
+					"REGISTER": "Zarejestruj się",
+					"LOGIN": "Logowanie"
+				}
+			},
 			"TITLE": "Przykładowy tytuł"
 		},
 		"SERVER": {

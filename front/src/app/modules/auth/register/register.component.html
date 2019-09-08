@@ -7,7 +7,7 @@
       </h1>
 
       <!-- email input -->
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="mb-3">
         <mat-label>
           {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.EMAIL_PLACEHOLDER' | translate }}
         </mat-label>
@@ -17,31 +17,31 @@
                type="email"
                placeholder="email@domain.com"
                matInput
-               required>
+               required [ngClass]="{'invalid': login_email.invalid}">
 
         <mat-hint>
-          <div *ngIf="login_email.valid || login_email.untouched; else loginEmailInvalid">
+          <div class="form-text text-muted" *ngIf="login_email.valid || login_email.untouched; else loginEmailInvalid">
             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.EMAIL_HINT' | translate }}
           </div>
           <ng-template #loginEmailInvalid>
-            <div *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.required">
+            <div class="text-danger" *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.required">
               {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
             </div>
-            <div *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.email">
+            <div class="text-danger" *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.email">
               {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_INCORRECT' | translate }}
             </div>
-            <div *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.emailExist">
+            <div class="text-danger" *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.emailExist">
               {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_EXISTS' | translate }}
             </div>
           </ng-template>
         </mat-hint>
 
-        <div class="alert-icon">
+        <div class="alert-icon" *ngIf="!login_email.untouched">
           <div *ngIf="login_email.valid && !isLoading; else loginEmailIconInvalid">
-            <i class="fas fa-check"></i>
+            <i class="fas fa-check ok"></i>
           </div>
           <ng-template #loginEmailIconInvalid>
-            <i class="fas fa-times"></i>
+            <i class="fas fa-times wrong"></i>
           </ng-template>
         </div>
       </mat-form-field>
@@ -70,25 +70,25 @@
         </mat-icon>
 
         <mat-hint>
-          <div *ngIf="password.valid || password.untouched; else passwordInvalid">
+          <div class="form-text text-muted" *ngIf="password.valid || password.untouched; else passwordInvalid">
             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PASSWORD_HINT' | translate }}
           </div>
           <ng-template #passwordInvalid>
-            <div *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.required">
+            <div class="text-danger" *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.required">
               {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
             </div>
-            <div *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.minlength">
+            <div class="text-danger" *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.minlength">
               {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.PASSWORD_LENGTH' | translate }}
             </div>
           </ng-template>
         </mat-hint>
 
-        <div class="alert-icon longer">
+        <div class="alert-icon longer" *ngIf="!password.untouched">
           <div *ngIf="password.valid; else passwordIconInvalid">
-            <i class="fas fa-check"></i>
+            <i class="fas fa-check ok"></i>
           </div>
           <ng-template #passwordIconInvalid>
-            <i class="fas fa-times"></i>
+            <i class="fas fa-times wrong"></i>
           </ng-template>
         </div>
       </mat-form-field>
@@ -109,21 +109,20 @@
         <input id="first_name"
                formControlName="first_name"
                type="text"
-               matInput
-               required>
+               matInput>
 
         <mat-hint>
-          <div *ngIf="(first_name.dirty || first_name.touched) && first_name.invalid && first_name.errors.required">
+          <div class="text-danger" *ngIf="(first_name.dirty || first_name.touched) && first_name.invalid && first_name.errors.required">
             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
           </div>
         </mat-hint>
 
-        <div class="alert-icon">
+        <div class="alert-icon" *ngIf="!first_name.untouched">
           <div *ngIf="first_name.valid; else firstNameIconInvalid">
-            <i class="fas fa-check"></i>
+            <i class="fas fa-check ok"></i>
           </div>
           <ng-template #firstNameIconInvalid>
-            <i class="fas fa-times"></i>
+            <i class="fas fa-times wrong"></i>
           </ng-template>
         </div>
       </mat-form-field>
@@ -141,17 +140,17 @@
                required>
 
         <mat-hint>
-          <div *ngIf="(last_name.dirty || last_name.touched) && last_name.invalid && last_name.errors.required">
+          <div class="text-danger" *ngIf="(last_name.dirty || last_name.touched) && last_name.invalid && last_name.errors.required">
             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
           </div>
         </mat-hint>
 
-        <div class="alert-icon">
+        <div class="alert-icon" *ngIf="!last_name.untouched">
           <div *ngIf="last_name.valid; else lastNameIconInvalid">
-            <i class="fas fa-check"></i>
+            <i class="fas fa-check ok"></i>
           </div>
           <ng-template #lastNameIconInvalid>
-            <i class="fas fa-times"></i>
+            <i class="fas fa-times wrong"></i>
           </ng-template>
         </div>
       </mat-form-field>
@@ -167,25 +166,25 @@
                required>
 
         <mat-hint>
-          <div *ngIf="birthdate.valid || birthdate.untouched; else birthdayInvalid">
+          <div class="form-text text-muted" *ngIf="birthdate.valid || birthdate.untouched; else birthdayInvalid">
             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BIRTHDATE_HINT' | translate }}
           </div>
           <ng-template #birthdayInvalid>
-            <div *ngIf="(birthdate.dirty || birthdate.touched) && birthdate.invalid && birthdate.errors.required">
+            <div class="text-danger" *ngIf="(birthdate.dirty || birthdate.touched) && birthdate.invalid && birthdate.errors.required">
               {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
             </div>
-            <div *ngIf="(birthdate.dirty || birthdate.touched) && birthdate.invalid && birthdate.errors.pattern">
+            <div class="text-danger" *ngIf="(birthdate.dirty || birthdate.touched) && birthdate.invalid && birthdate.errors.pattern">
               {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.BIRTHDATE_INCORRECT' | translate }}
             </div>
           </ng-template>
         </mat-hint>
 
-        <div class="alert-icon">
+        <div class="alert-icon" *ngIf="!birthdate.untouched">
           <div *ngIf="birthdate.valid; else birthdateIconInvalid">
-            <i class="fas fa-check"></i>
+            <i class="fas fa-check ok"></i>
           </div>
           <ng-template #birthdateIconInvalid>
-            <i class="fas fa-times"></i>
+            <i class="fas fa-times wrong"></i>
           </ng-template>
         </div>
       </mat-form-field>
@@ -203,17 +202,14 @@
             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.WOMAN' | translate }}
           </mat-radio-button>
 
-          <mat-hint>
+          <mat-hint *ngIf="!gender.untouched">
             <span class="alert-icon">
-              <div *ngIf="gender.valid; else genderIconInvalid">
-                <i class="fas fa-check"></i>
-              </div>
-              <ng-template #genderIconInvalid>
-                <i class="fas fa-times"></i>
-              </ng-template>
+              <div *ngIf="!gender.valid; else genderIconInvalid">
+                <i class="fas fa-times wrong"></i>
+                </div>
             </span>
 
-            <span *ngIf="gender.invalid && gender.errors.required">
+            <span class="text-danger" *ngIf="gender.invalid && gender.errors.required">
               {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
             </span>
           </mat-hint>
@@ -227,7 +223,7 @@
         {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.PAGE_TITLE' | translate }}
       </h1>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="mb-3">
         <mat-label>
           {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.TITLE' | translate }}
         </mat-label>
@@ -237,14 +233,15 @@
                formControlName="title"
                type="text"
                placeholder="Ph. D"
-               matInput>
+               matInput
+               required>
 
-        <mat-hint>
+        <mat-hint class="form-text text-muted">
           {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.TITLE_HINT' | translate }}
         </mat-hint>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="mb-3">
         <mat-label>
           {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.INSTITUTION' | translate }}
         </mat-label>
@@ -254,12 +251,12 @@
                type="text"
                matInput>
 
-        <mat-hint>
+        <mat-hint class="form-text text-muted">
           {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.INSTITUTION_HINT' | translate }}
         </mat-hint>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="mb-3">
         <mat-label>
           {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.DEPARTMENT' | translate }}
         </mat-label>
@@ -269,12 +266,12 @@
                type="text"
                matInput>
 
-        <mat-hint>
+        <mat-hint class="form-text text-muted">
           {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.DEPARTMENT_HINT' | translate }}
         </mat-hint>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="mb-3">
         <mat-label>
           {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.STREET' | translate }}
         </mat-label>
@@ -284,12 +281,12 @@
                type="text"
                matInput>
 
-        <mat-hint>
+        <mat-hint class="form-text text-muted">
           {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.STREET_HINT' | translate }}
         </mat-hint>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="mb-3">
         <mat-label>
           {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.CITY' | translate }}
         </mat-label>
@@ -299,12 +296,12 @@
                type="text"
                matInput>
 
-        <mat-hint>
+        <mat-hint class="form-text text-muted">
           {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.CITY_HINT' | translate }}
         </mat-hint>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="mb-3">
         <mat-label>
           {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.COUNTRY' | translate }}
         </mat-label>
@@ -314,7 +311,7 @@
                type="text"
                matInput>
 
-        <mat-hint>
+        <mat-hint class="form-text text-muted">
           {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.COUNTRY_HINT' | translate }}
         </mat-hint>
       </mat-form-field>
@@ -326,7 +323,7 @@
         {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_TITLE' | translate }}
       </h1>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="mb-3">
         <mat-label>
           {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_EMAIL' | translate }}
         </mat-label>
@@ -338,24 +335,24 @@
                matInput>
 
         <mat-hint>
-          <div *ngIf="contact_email.valid || contact_email.untouched; else contactEmailInvalid">
+          <div class="form-text text-muted" *ngIf="contact_email.valid || contact_email.untouched; else contactEmailInvalid">
             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_EMAIL_HINT' | translate }}
           </div>
           <ng-template #contactEmailInvalid>
             <div *ngIf="contact_email.value">
-              <div *ngIf="(contact_email.dirty || contact_email.touched) && contact_email.invalid && contact_email.errors.email">
+              <div class="text-danger" *ngIf="(contact_email.dirty || contact_email.touched) && contact_email.invalid && contact_email.errors.email">
                 {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_INCORRECT' | translate }}
               </div>
             </div>
           </ng-template>
         </mat-hint>
 
-        <div class="alert-icon">
+        <div class="alert-icon" *ngIf="contact_email.dirty">
           <div *ngIf="contact_email.valid; else contactEmailIconInvalid">
-            <i class="fas fa-check"></i>
+            <i class="fas fa-check ok"></i>
           </div>
           <ng-template #contactEmailIconInvalid>
-            <i class="fas fa-times"></i>
+            <i class="fas fa-times wrong"></i>
           </ng-template>
         </div>
       </mat-form-field>

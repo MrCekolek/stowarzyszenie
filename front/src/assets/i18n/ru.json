@@ -82,6 +82,14 @@
 					"WOMAN": "Я женщина"
 				}
 			},
+			"NAVIGATION": {
+				"WEBPAGE_TITLE_MEMBERS": "Ciob Члены",
+				"MEMBERS_PAGE_LINKS": {
+					"HOME": "домашняя страница",
+					"REGISTER": "зарегистрироваться",
+					"LOGIN": "Войти"
+				}
+			},
 			"TITLE": "Пример заголовка"
 		},
 		"SERVER": {

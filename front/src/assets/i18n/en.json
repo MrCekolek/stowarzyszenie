@@ -77,9 +77,17 @@
 						"RESETED_TITLE": "Password has been reset"
 					},
 					"STEP": "Step",
-					"STEP1_TITLE": "account information",
+					"STEP1_TITLE": "Account information",
 					"STEP2_TITLE": "Personal data",
 					"WOMAN": "I'm a woman"
+				}
+			},
+			"NAVIGATION": {
+				"WEBPAGE_TITLE_MEMBERS": "Ciob members",
+				"MEMBERS_PAGE_LINKS": {
+					"HOME": "Back to home",
+					"REGISTER": "Register",
+					"LOGIN": "Sign in"
 				}
 			},
 			"TITLE": "Example title"

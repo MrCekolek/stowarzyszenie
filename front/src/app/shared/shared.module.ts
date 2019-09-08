@@ -6,6 +6,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { LanguageService } from "./services/user/language.service";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function HttpLoaderFactory (http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -16,6 +17,7 @@ export function HttpLoaderFactory (http: HttpClient) {
   imports: [
     CommonModule,
     HttpClientModule,
+    NgbModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -28,7 +30,8 @@ export function HttpLoaderFactory (http: HttpClient) {
   ],
   exports: [
     CommonModule,
-    TranslateModule
+    TranslateModule,
+    NgbModule
   ],
   providers: [  ]
 })

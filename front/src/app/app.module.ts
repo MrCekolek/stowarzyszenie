@@ -6,6 +6,9 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from "./shared/services/user/user.service";
 import 'hammerjs';
+import { NavigationModule } from './modules/navigation/navigation.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import bootstrap from "bootstrap";
 
 @NgModule({
   declarations: [
@@ -15,7 +18,9 @@ import 'hammerjs';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NavigationModule,
+    NgbModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
