@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<!-- TO NAV WIDNIEJE NA STRONIE >PRZED< ZALOGOWANIEM, po powrocie do strony głównej etc.  -->
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" *ngIf="!this.logged">
     <a class="navbar-brand text-black-50" style="font-size: 1.3rem;" [routerLink]="['/auth/login']">
         {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.WEBPAGE_TITLE_MEMBERS' | translate }}    
     </a>
@@ -8,7 +9,6 @@
     </button>
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-
         <!-- ngIf: to menu pojawia się, gdy przejdziemy na podstronę Ciob members -->
         <div class="navbar-nav" role="navigation">
             <a class="nav-item nav-link mr-3" [routerLink]="['/']">
@@ -20,9 +20,9 @@
             <button class="btn btn-secondary btn-sm" [routerLink]="['/auth/register']">
                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.REGISTER' | translate }}
             </button>
-        </div>
+        </div> 
 
-        <!--  ngIf: to menu pojawia się, gdy jesteśmy na stronie głównej cioba -->
+         <!-- ngIf: to menu pojawia się, gdy jesteśmy na stronie głównej cioba -->
         <!-- <div class="navbar-nav" role="navigation">
             <a class="nav-item nav-link active mr-3" href="#">
                 {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.HOME' | translate }}
@@ -33,3 +33,56 @@
         </div> -->
     </div>
 </nav>
+
+<!-- TO NAV VIDNIEJE >PO< ZALOGOWANIU I JEST WIDOCZNE TYLKO Z POZIOMU DASHBOARDA UŻYTKOWNIKA ZALOGOWANEGO -->
+<nav class="main-nav" *ngIf="this.logged">
+    <div class="logo-wrapper">
+        <a href="#" class="logo" id="logo">
+            {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.LOGO' | translate }}
+        </a>
+    </div>
+
+    <!-- <div class="search">
+        Wyszukiwarka
+    </div> -->
+
+    <button class="nav-trigger" (click)="this.mainNavOpened = !this.mainNavOpened">
+        <span></span>
+    </button>
+
+    <ul class="nav-list" [ngClass]="{'opened': this.mainNavOpened}">
+        <li class="nav-item">
+            <a href="#">
+                <i class="fas fa-envelope"></i>
+                <span> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.MESSAGES' | translate }}</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="">
+                <i class="fas fa-bell"></i>
+                <span> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.NOTIFICATIONS' | translate }}</span>
+            </a>
+        </li>
+        <li class="nav-account" (click)="this.accountNavOpened = !this.accountNavOpened">
+            <a class="account-link">
+                <!-- avatar -->
+                <img src="../../../../assets/images/avatar-default.jpg" alt="avatar">
+                <span>{{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.ACCOUNT' | translate }}</span>
+            </a>
+
+            <ul class="nav-sublist" [ngClass]="{'opened': this.accountNavOpened}">
+                <li class="subitem">
+                    <a href="#">{{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.MY_ACCOUNT' | translate }}</a>
+                </li>
+                <li class="subitem">
+                    <a href="#">{{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.EDIT_ACCOUNT' | translate }}</a>
+                </li>
+                <li class="subitem">
+                    <a href="#">{{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.LOGOUT' | translate }}</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+<router-outlet></router-outlet>

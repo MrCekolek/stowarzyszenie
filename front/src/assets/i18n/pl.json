@@ -88,6 +88,15 @@
 					"HOME": "Strona główna",
 					"REGISTER": "Zarejestruj się",
 					"LOGIN": "Logowanie"
+				},
+				"LOGGED_NAVBAR": {
+					"LOGO": "CIOB",
+					"MESSAGES": "Wiadomości",
+					"NOTIFICATIONS": "Powiadomienia",
+					"ACCOUNT": "Konto",
+					"MY_ACCOUNT": "Moje konto",
+					"EDIT_ACCOUNT": "Edytuj konto",
+					"LOGOUT": "Wyloguj"
 				}
 			},
 			"TITLE": "Przykładowy tytuł"

@@ -88,6 +88,15 @@
 					"HOME": "домашняя страница",
 					"REGISTER": "зарегистрироваться",
 					"LOGIN": "Войти"
+				},
+				"LOGGED_NAVBAR": {
+					"LOGO": "CIOB",
+					"MESSAGES": "новости",
+					"NOTIFICATIONS": "уведомления",
+					"ACCOUNT": "счет",
+					"MY_ACCOUNT": "мой аккаунт",
+					"EDIT_ACCOUNT": "изменить аккаунт",
+					"LOGOUT": "журнал"
 				}
 			},
 			"TITLE": "Пример заголовка"
