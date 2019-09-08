@@ -17,6 +17,24 @@ mat-form-field {
         color: $colorGray;
         font-size: 20px;
     }
+
+    i.fas.wrong {
+        color: $colorAlertRed;
+    }
+    i.fas.ok {
+        color: $colorAlertGreen;
+    }
+
+    input.ng-invalid {
+        color: $colorAccentRed;
+        border-color: $colorAccentRed;
+        caret-color: $colorAccentRed;
+    }
+
+    .mat-input-element.invalid.ng-invalid {
+        caret-color: $colorAccentRed;
+        border-color: $colorAccentRed;
+    }
 }
 
 div.gender {

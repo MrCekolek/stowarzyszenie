@@ -6,10 +6,10 @@ mat-form-field .alert-icon {
     right: -35px;
 }
 
-.alert-icon.wrong {
+i.fas.wrong {
     color: $colorAlertRed;
 }
-.alert-icon.ok {
+i.fas.ok {
     color: $colorAlertGreen;
 }
 

@@ -11,10 +11,10 @@
 
         <!-- ngIf: to menu pojawia się, gdy przejdziemy na podstronę Ciob members -->
         <div class="navbar-nav" role="navigation">
-            <a class="nav-item nav-link active mr-3" [routerLink]="['/']">
+            <a class="nav-item nav-link mr-3" [routerLink]="['/']">
                 {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.HOME' | translate }}
             </a>
-            <a class="nav-item nav-link active mr-3" [routerLink]="['/auth/login']">
+            <a class="nav-item nav-link mr-3" [routerLink]="['/auth/login']">
                 {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.LOGIN' | translate }}
             </a>
             <button class="btn btn-secondary btn-sm" [routerLink]="['/auth/register']">
