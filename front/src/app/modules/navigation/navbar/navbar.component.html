@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand h1">
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <a class="navbar-brand text-black-50" style="font-size: 1.3rem;" [routerLink]="['/auth/login']">
         {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.WEBPAGE_TITLE_MEMBERS' | translate }}    
     </a>
 
@@ -7,12 +7,29 @@
         <i class="fas fa-bars"></i>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Features</a>
-            <a class="nav-item nav-link" href="#">Pricing</a>
-            <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+
+        <!-- ngIf: to menu pojawia się, gdy przejdziemy na podstronę Ciob members -->
+        <div class="navbar-nav" role="navigation">
+            <a class="nav-item nav-link active mr-3" [routerLink]="['/']">
+                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.HOME' | translate }}
+            </a>
+            <a class="nav-item nav-link active mr-3" [routerLink]="['/auth/login']">
+                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.LOGIN' | translate }}
+            </a>
+            <button class="btn btn-secondary btn-sm" [routerLink]="['/auth/register']">
+                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.REGISTER' | translate }}
+            </button>
         </div>
+
+        <!--  ngIf: to menu pojawia się, gdy jesteśmy na stronie głównej cioba -->
+        <!-- <div class="navbar-nav" role="navigation">
+            <a class="nav-item nav-link active mr-3" href="#">
+                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.HOME' | translate }}
+            </a>
+            <button class="btn btn-secondary btn-sm">
+                Members Login
+            </button>
+        </div> -->
     </div>
 </nav>

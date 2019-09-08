@@ -83,7 +83,12 @@
 				}
 			},
 			"NAVIGATION": {
-				"WEBPAGE_TITLE_MEMBERS": "Ciob members"
+				"WEBPAGE_TITLE_MEMBERS": "Ciob members",
+				"MEMBERS_PAGE_LINKS": {
+					"HOME": "Back to home",
+					"REGISTER": "Register",
+					"LOGIN": "Sign in"
+				}
 			},
 			"TITLE": "Example title"
 		},
