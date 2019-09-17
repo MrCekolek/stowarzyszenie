@@ -83,6 +83,12 @@
 				}
 			},
 			"NAVIGATION": {
+				"LANGUAGES": {
+					"EN": "Angielski",
+					"LABEL": "Język strony",
+					"PL": "Polski",
+					"RU": "Rosyjski"
+				},
 				"LOGGED_NAVBAR": {
 					"ACCOUNT": "Konto",
 					"EDIT_ACCOUNT": "Edytuj konto",

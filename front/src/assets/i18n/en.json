@@ -83,6 +83,12 @@
 				}
 			},
 			"NAVIGATION": {
+				"LANGUAGES": {
+					"EN": "English",
+					"LABEL": "Site language",
+					"PL": "Polish",
+					"RU": "Russian"
+				},
 				"LOGGED_NAVBAR": {
 					"ACCOUNT": "Account",
 					"EDIT_ACCOUNT": "Edit account",

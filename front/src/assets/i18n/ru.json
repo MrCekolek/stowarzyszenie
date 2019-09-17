@@ -83,6 +83,12 @@
 				}
 			},
 			"NAVIGATION": {
+				"LANGUAGES": {
+					"EN": "английский",
+					"LABEL": "Язык сайта",
+					"PL": "полировать",
+					"RU": "русский"
+				},
 				"LOGGED_NAVBAR": {
 					"ACCOUNT": "счет",
 					"EDIT_ACCOUNT": "изменить аккаунт",

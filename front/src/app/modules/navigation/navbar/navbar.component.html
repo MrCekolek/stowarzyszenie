@@ -8,6 +8,40 @@
         <i class="fas fa-bars"></i>
     </button>
 
+    <div class="dropdown language-selector">
+        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}  
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+            <!-- tu powinien byc img z src wybranego jezyka - tymczasowo jest eng -->
+            <img src="../../../../assets/images/united_kingdom.png" alt="en">
+        </a>
+        <ul class="dropdown-menu pull-right">
+            <li>
+                <a>
+                    <img src="../../../../assets/images/united_kingdom.png" alt="en">
+                    <span>
+                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.EN' | translate }}
+                    </span>
+                </a>
+            </li>
+            <li class="active">
+                <a>
+                    <img src="../../../../assets/images/poland.png" alt="en">
+                    <span>
+                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.PL' | translate }}
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a>
+                    <img src="../../../../assets/images/russi.png" alt="en">
+                    <span>
+                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.RU' | translate }}
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
          <!-- ngIf: to menu pojawia się, gdy przejdziemy na podstronę Ciob members -->
         <div class="navbar-nav" role="navigation">
@@ -55,7 +89,42 @@
                 </li>
             </ul>
 
+            <div class="dropdown language-selector">
+                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}  
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                    <!-- tu powinien byc img z src wybranego jezyka - tymczasowo jest eng -->
+                    <img src="../../../../assets/images/united_kingdom.png" alt="en">
+                </a>
+                <ul class="dropdown-menu pull-right">
+                    <li>
+                        <a>
+                            <img src="../../../../assets/images/united_kingdom.png" alt="en">
+                            <span>
+                                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.EN' | translate }}
+                            </span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a>
+                            <img src="../../../../assets/images/poland.png" alt="en">
+                            <span>
+                                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.PL' | translate }}
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <img src="../../../../assets/images/russi.png" alt="en">
+                            <span>
+                                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.RU' | translate }}
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
             <ul class="right-icons">
+
                 <li>
                     <i class="fas fa-bell"></i>
                 </li>
