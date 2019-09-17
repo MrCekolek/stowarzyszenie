@@ -83,12 +83,31 @@
 				}
 			},
 			"NAVIGATION": {
-				"WEBPAGE_TITLE_MEMBERS": "Ciob Члены",
+				"LANGUAGES": {
+					"EN": "английский",
+					"LABEL": "Язык сайта",
+					"PL": "полировать",
+					"RU": "русский"
+				},
+				"LOGGED_NAVBAR": {
+					"ACCOUNT": "счет",
+					"EDIT_ACCOUNT": "изменить аккаунт",
+					"LOGO": "CIOB",
+					"LOGOUT": "журнал",
+					"MESSAGES": "новости",
+					"MY_ACCOUNT": "мой аккаунт",
+					"NOTIFICATIONS": "уведомления"
+				},
 				"MEMBERS_PAGE_LINKS": {
 					"HOME": "домашняя страница",
-					"REGISTER": "зарегистрироваться",
-					"LOGIN": "Войти"
-				}
+					"LOGIN": "Войти",
+					"REGISTER": "зарегистрироваться"
+				},
+				"SIDENAV": {
+					"DASHBOARD": "Индекс",
+					"USERS": "члены"
+				},
+				"WEBPAGE_TITLE_MEMBERS": "Ciob Члены"
 			},
 			"TITLE": "Пример заголовка"
 		},

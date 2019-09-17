@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: './modules/auth/auth.module#AuthModule'
   },
   {
+    path: 'dashboard',
+    loadChildren: './modules/dashboard/dashboard.module#DashboardModule'
+  },
+  {
     path: '',
     redirectTo: 'auth',
     pathMatch: 'full'

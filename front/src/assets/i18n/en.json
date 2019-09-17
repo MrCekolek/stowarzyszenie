@@ -83,12 +83,31 @@
 				}
 			},
 			"NAVIGATION": {
-				"WEBPAGE_TITLE_MEMBERS": "Ciob members",
+				"LANGUAGES": {
+					"EN": "English",
+					"LABEL": "Site language",
+					"PL": "Polish",
+					"RU": "Russian"
+				},
+				"LOGGED_NAVBAR": {
+					"ACCOUNT": "Account",
+					"EDIT_ACCOUNT": "Edit account",
+					"LOGO": "CIOB",
+					"LOGOUT": "Logout",
+					"MESSAGES": "Messages",
+					"MY_ACCOUNT": "My account",
+					"NOTIFICATIONS": "Notifications"
+				},
 				"MEMBERS_PAGE_LINKS": {
 					"HOME": "Back to home",
-					"REGISTER": "Register",
-					"LOGIN": "Sign in"
-				}
+					"LOGIN": "Sign in",
+					"REGISTER": "Register"
+				},
+				"SIDENAV": {
+					"DASHBOARD": "Dashboard",
+					"USERS": "Members"
+				},
+				"WEBPAGE_TITLE_MEMBERS": "Ciob members"
 			},
 			"TITLE": "Example title"
 		},
