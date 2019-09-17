@@ -32,27 +32,7 @@ export class StepperComponent extends CdkStepper implements OnInit {
   ngOnInit() {
   }
 
-  ngAfterViewInit() {
-    console.log(this._steps);
-  }
-
   onClick(index: number): void {
-    switch (index) {
-      case 1: 
-        if (this._steps._results[0].completed )
-          this.selectedIndex = index;
-        break;
-      case 2:
-      case 3: 
-        if (this._steps._results[0].completed && this.steps._results[1].completed)
-          this.selectedIndex = index;
-        break;
-      default:
-        this.selectedIndex = index;
-        break;
-    }
-
-    if (this._steps._results[0].completed )
     this.selectedIndex = index;
   }
 

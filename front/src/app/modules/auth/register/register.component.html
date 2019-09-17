@@ -1,5 +1,5 @@
 <form [formGroup]="registerForm" novalidate>
-  <auth-stepper linear [registerCompleted]="this.registerCompleted">
+  <auth-stepper [linear]="true" [registerCompleted]="this.registerCompleted">
     <!-- step first: account data -->
     <cdk-step>
       <h1>
