@@ -83,21 +83,25 @@
 				}
 			},
 			"NAVIGATION": {
-				"WEBPAGE_TITLE_MEMBERS": "Ciob members",
+				"LOGGED_NAVBAR": {
+					"ACCOUNT": "Konto",
+					"EDIT_ACCOUNT": "Edytuj konto",
+					"LOGO": "CIOB",
+					"LOGOUT": "Wyloguj",
+					"MESSAGES": "Wiadomości",
+					"MY_ACCOUNT": "Moje konto",
+					"NOTIFICATIONS": "Powiadomienia"
+				},
 				"MEMBERS_PAGE_LINKS": {
 					"HOME": "Strona główna",
-					"REGISTER": "Zarejestruj się",
-					"LOGIN": "Logowanie"
+					"LOGIN": "Logowanie",
+					"REGISTER": "Zarejestruj się"
 				},
-				"LOGGED_NAVBAR": {
-					"LOGO": "CIOB",
-					"MESSAGES": "Wiadomości",
-					"NOTIFICATIONS": "Powiadomienia",
-					"ACCOUNT": "Konto",
-					"MY_ACCOUNT": "Moje konto",
-					"EDIT_ACCOUNT": "Edytuj konto",
-					"LOGOUT": "Wyloguj"
-				}
+				"SIDENAV": {
+					"DASHBOARD": "Główna",
+					"USERS": "Użytkownicy"
+				},
+				"WEBPAGE_TITLE_MEMBERS": "Ciob members"
 			},
 			"TITLE": "Przykładowy tytuł"
 		},

@@ -1,4 +1,4 @@
-<!-- TO NAV WIDNIEJE NA STRONIE >PRZED< ZALOGOWANIEM, po powrocie do strony głównej etc.  -->
+<!-- TO NAV WIDNIEJE NA STRONIE >PRZED< ZALOGOWANIEM, po powrocie do strony głównej etc.  --> 
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" *ngIf="!this.logged">
     <a class="navbar-brand text-black-50" style="font-size: 1.3rem;" [routerLink]="['/auth/login']">
         {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.WEBPAGE_TITLE_MEMBERS' | translate }}    
@@ -9,7 +9,7 @@
     </button>
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <!-- ngIf: to menu pojawia się, gdy przejdziemy na podstronę Ciob members -->
+         <!-- ngIf: to menu pojawia się, gdy przejdziemy na podstronę Ciob members -->
         <div class="navbar-nav" role="navigation">
             <a class="nav-item nav-link mr-3" [routerLink]="['/']">
                 {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.HOME' | translate }}
@@ -22,7 +22,8 @@
             </button>
         </div> 
 
-         <!-- ngIf: to menu pojawia się, gdy jesteśmy na stronie głównej cioba -->
+        <!-- ngIf: to menu pojawia się, gdy jesteśmy na stronie głównej cioba (nie wiem czy to w ogole bedzie,
+            mozliwe ze zrobimy tylko portal members) -->
         <!-- <div class="navbar-nav" role="navigation">
             <a class="nav-item nav-link active mr-3" href="#">
                 {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.HOME' | translate }}
@@ -32,7 +33,7 @@
             </button>
         </div> -->
     </div>
-</nav>
+</nav>  
 
 <!-- TO NAV VIDNIEJE >PO< ZALOGOWANIU I JEST WIDOCZNE TYLKO Z POZIOMU DASHBOARDA UŻYTKOWNIKA ZALOGOWANEGO -->
 <nav class="main-nav" *ngIf="this.logged">
@@ -42,45 +43,67 @@
         </a>
     </div>
 
-    <!-- <div class="search">
-        Wyszukiwarka
-    </div> -->
+    <div class="nav-block">
+        <div class="breadcrumbs">
+            <div class="icon">
+                <i class="fas fa-users"></i>
+            </div>
 
-    <button class="nav-trigger" (click)="this.mainNavOpened = !this.mainNavOpened">
-        <span></span>
-    </button>
-
-    <ul class="nav-list" [ngClass]="{'opened': this.mainNavOpened}">
-        <li class="nav-item">
-            <a href="#">
-                <i class="fas fa-envelope"></i>
-                <span> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.MESSAGES' | translate }}</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="">
-                <i class="fas fa-bell"></i>
-                <span> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.NOTIFICATIONS' | translate }}</span>
-            </a>
-        </li>
-        <li class="nav-account" (click)="this.accountNavOpened = !this.accountNavOpened">
-            <a class="account-link">
-                <!-- avatar -->
-                <img src="../../../../assets/images/avatar-default.jpg" alt="avatar">
-                <span>{{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.ACCOUNT' | translate }}</span>
-            </a>
-
-            <ul class="nav-sublist" [ngClass]="{'opened': this.accountNavOpened}">
-                <li class="subitem">
-                    <a href="#">{{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.MY_ACCOUNT' | translate }}</a>
-                </li>
-                <li class="subitem">
-                    <a href="#">{{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.EDIT_ACCOUNT' | translate }}</a>
-                </li>
-                <li class="subitem">
-                    <a href="#">{{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.LOGOUT' | translate }}</a>
+            <ul class="path">
+                <li>
+                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS' | translate }}
                 </li>
             </ul>
+
+            <ul class="right-icons">
+                <li>
+                    <i class="fas fa-bell"></i>
+                </li>
+
+                <li>
+                    <i class="fas fa-envelope"></i>
+                </li>
+
+                <li>
+                    <i class="fas fa-power-off"></i>
+                </li>
+
+                <li class="toggle">
+                    <i class="fas fa-ellipsis-h"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<nav class="dashboard-sidenav" *ngIf="this.logged">
+    <div class="logged-user">
+        <div class="avatar">
+            <img src="../../../../assets/images/avatar-default.jpg" alt="">
+        </div>
+
+        <div class="username">
+            Username
+        </div>
+
+        <div class="user-role">
+            Administrator
+        </div>
+    </div>
+
+    <!-- nav-links -->
+    <ul class="sidenav-links">
+        <li>
+            <i class="fas fa-th-large"></i>
+            <span>
+                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.DASHBOARD' | translate }}
+            </span>
+        </li>
+        <li>
+            <i class="fas fa-users"></i>
+            <span>
+                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS' | translate }}
+            </span>
         </li>
     </ul>
 </nav>
