@@ -1,15 +1,16 @@
-<!-- TO NAV WIDNIEJE NA STRONIE >PRZED< ZALOGOWANIEM, po powrocie do strony głównej etc.  --> 
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" *ngIf="!this.logged">
+<!-- TO NAV WIDNIEJE NA STRONIE >PRZED< ZALOGOWANIEM, po powrocie do strony głównej etc.  -->
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" *ngIf="!this.loggedIn">
     <a class="navbar-brand text-black-50" style="font-size: 1.3rem;" [routerLink]="['/auth/login']">
-        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.WEBPAGE_TITLE_MEMBERS' | translate }}    
+        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.WEBPAGE_TITLE_MEMBERS' | translate }}
     </a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-    </button>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+          aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-bars"></i>
+  </button>
 
     <div class="dropdown language-selector">
-        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}  
+        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
             <!-- tu powinien byc img z src wybranego jezyka - tymczasowo jest eng -->
             <img src="../../../../assets/images/united_kingdom.png" alt="en">
@@ -40,6 +41,12 @@
                 </a>
             </li>
         </ul>
+
+        <select #langSelect (change)="setLang(langSelect.value)" style="width: 70px">
+          <option *ngFor="let lang of translateService.getLangs()" [value]="lang" [selected]="translateService.currentLang === lang">
+            {{ lang }}
+          </option>
+        </select>
     </div>
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -54,7 +61,7 @@
             <button class="btn btn-secondary btn-sm" [routerLink]="['/auth/register']">
                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.REGISTER' | translate }}
             </button>
-        </div> 
+        </div>
 
         <!-- ngIf: to menu pojawia się, gdy jesteśmy na stronie głównej cioba (nie wiem czy to w ogole bedzie,
             mozliwe ze zrobimy tylko portal members) -->
@@ -67,10 +74,10 @@
             </button>
         </div> -->
     </div>
-</nav>  
+</nav>
 
 <!-- TO NAV VIDNIEJE >PO< ZALOGOWANIU I JEST WIDOCZNE TYLKO Z POZIOMU DASHBOARDA UŻYTKOWNIKA ZALOGOWANEGO -->
-<nav class="main-nav" *ngIf="this.logged">
+<nav class="main-nav" *ngIf="this.loggedIn">
     <div class="logo-wrapper">
         <a href="#" class="logo" id="logo">
             {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.LOGO' | translate }}
@@ -90,33 +97,18 @@
             </ul>
 
             <div class="dropdown language-selector">
-                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}  
+                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
-                    <!-- tu powinien byc img z src wybranego jezyka - tymczasowo jest eng -->
-                    <img src="../../../../assets/images/united_kingdom.png" alt="en">
+                    <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]" [alt]="this.languageService.currentLang">
                 </a>
                 <ul class="dropdown-menu pull-right">
-                    <li>
+                    <li *ngFor="let lang of translateService.getLangs(); let i = index"
+                        [ngClass]="{'active': translateService.currentLang === lang}"
+                        (click)="setLang(lang)">
                         <a>
-                            <img src="../../../../assets/images/united_kingdom.png" alt="en">
+                            <img [src]="this.flagsImages[i]" [alt]="this.languageService.currentLang">
                             <span>
-                                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.EN' | translate }}
-                            </span>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a>
-                            <img src="../../../../assets/images/poland.png" alt="en">
-                            <span>
-                                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.PL' | translate }}
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <img src="../../../../assets/images/russi.png" alt="en">
-                            <span>
-                                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.RU' | translate }}
+                                {{ this.translations[i] | translate }}
                             </span>
                         </a>
                     </li>
@@ -134,7 +126,7 @@
                 </li>
 
                 <li>
-                    <i class="fas fa-power-off"></i>
+                    <i class="fas fa-power-off" (click)="logout($event)"></i>
                 </li>
 
                 <li class="toggle">
@@ -145,7 +137,7 @@
     </div>
 </nav>
 
-<nav class="dashboard-sidenav" *ngIf="this.logged">
+<nav class="dashboard-sidenav" *ngIf="this.loggedIn">
     <div class="logged-user">
         <div class="avatar">
             <img src="../../../../assets/images/avatar-default.jpg" alt="">

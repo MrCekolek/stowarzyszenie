@@ -1,7 +1,7 @@
-<form [formGroup]="registerForm" novalidate>
-  <auth-stepper [linear]="true" [registerCompleted]="this.registerCompleted">
-    <!-- step first: account data -->
-    <cdk-step>
+<auth-stepper linear [registerCompleted]="this.registerCompleted">
+  <!-- step first: account data -->
+  <cdk-step [stepControl]="registerFormStep1">
+    <form [formGroup]="registerFormStep1" novalidate>
       <h1>
         {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP1_TITLE' | translate }}
       </h1>
@@ -24,13 +24,16 @@
             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.EMAIL_HINT' | translate }}
           </div>
           <ng-template #loginEmailInvalid>
-            <div class="text-danger" *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.required">
+            <div class="text-danger"
+                 *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.required">
               {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
             </div>
-            <div class="text-danger" *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.email">
+            <div class="text-danger"
+                 *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.email">
               {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_INCORRECT' | translate }}
             </div>
-            <div class="text-danger" *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.emailExist">
+            <div class="text-danger"
+                 *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.emailExist">
               {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_EXISTS' | translate }}
             </div>
           </ng-template>
@@ -74,10 +77,12 @@
             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PASSWORD_HINT' | translate }}
           </div>
           <ng-template #passwordInvalid>
-            <div class="text-danger" *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.required">
+            <div class="text-danger"
+                 *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.required">
               {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
             </div>
-            <div class="text-danger" *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.minlength">
+            <div class="text-danger"
+                 *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.minlength">
               {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.PASSWORD_LENGTH' | translate }}
             </div>
           </ng-template>
@@ -92,10 +97,12 @@
           </ng-template>
         </div>
       </mat-form-field>
-    </cdk-step>
+    </form>
+  </cdk-step>
 
-    <!-- step second: personal data -->
-    <cdk-step>
+  <!-- step second: personal data -->
+  <cdk-step [stepControl]="registerFormStep2">
+    <form [formGroup]="registerFormStep2" novalidate>
       <h1>
         {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP2_TITLE' | translate }}
       </h1>
@@ -112,7 +119,8 @@
                matInput>
 
         <mat-hint>
-          <div class="text-danger" *ngIf="(first_name.dirty || first_name.touched) && first_name.invalid && first_name.errors.required">
+          <div class="text-danger"
+               *ngIf="(first_name.dirty || first_name.touched) && first_name.invalid && first_name.errors.required">
             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
           </div>
         </mat-hint>
@@ -140,7 +148,8 @@
                required>
 
         <mat-hint>
-          <div class="text-danger" *ngIf="(last_name.dirty || last_name.touched) && last_name.invalid && last_name.errors.required">
+          <div class="text-danger"
+               *ngIf="(last_name.dirty || last_name.touched) && last_name.invalid && last_name.errors.required">
             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
           </div>
         </mat-hint>
@@ -170,10 +179,12 @@
             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BIRTHDATE_HINT' | translate }}
           </div>
           <ng-template #birthdayInvalid>
-            <div class="text-danger" *ngIf="(birthdate.dirty || birthdate.touched) && birthdate.invalid && birthdate.errors.required">
+            <div class="text-danger"
+                 *ngIf="(birthdate.dirty || birthdate.touched) && birthdate.invalid && birthdate.errors.required">
               {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
             </div>
-            <div class="text-danger" *ngIf="(birthdate.dirty || birthdate.touched) && birthdate.invalid && birthdate.errors.pattern">
+            <div class="text-danger"
+                 *ngIf="(birthdate.dirty || birthdate.touched) && birthdate.invalid && birthdate.errors.pattern">
               {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.BIRTHDATE_INCORRECT' | translate }}
             </div>
           </ng-template>
@@ -204,7 +215,7 @@
 
           <mat-hint *ngIf="!gender.untouched">
             <span class="alert-icon">
-              <div *ngIf="!gender.valid; else genderIconInvalid">
+              <div *ngIf="!gender.valid">
                 <i class="fas fa-times wrong"></i>
                 </div>
             </span>
@@ -215,10 +226,12 @@
           </mat-hint>
         </mat-radio-group>
       </div>
-    </cdk-step>
+    </form>
+  </cdk-step>
 
-    <!-- step third: affiliation data -->
-    <cdk-step optional>
+  <!-- step third: affiliation data -->
+  <cdk-step optional>
+    <form [formGroup]="registerFormStep3" novalidate>
       <h1>
         {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.PAGE_TITLE' | translate }}
       </h1>
@@ -233,8 +246,7 @@
                formControlName="title"
                type="text"
                placeholder="Ph. D"
-               matInput
-               required>
+               matInput>
 
         <mat-hint class="form-text text-muted">
           {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.TITLE_HINT' | translate }}
@@ -315,10 +327,12 @@
           {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.COUNTRY_HINT' | translate }}
         </mat-hint>
       </mat-form-field>
-    </cdk-step>
+    </form>
+  </cdk-step>
 
-    <!-- step fourth: contact data -->
-    <cdk-step optional>
+  <!-- step fourth: contact data -->
+  <cdk-step optional>
+    <form [formGroup]="registerFormStep4" novalidate>
       <h1>
         {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_TITLE' | translate }}
       </h1>
@@ -335,12 +349,14 @@
                matInput>
 
         <mat-hint>
-          <div class="form-text text-muted" *ngIf="contact_email.valid || contact_email.untouched; else contactEmailInvalid">
+          <div class="form-text text-muted"
+               *ngIf="contact_email.valid || contact_email.untouched; else contactEmailInvalid">
             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_EMAIL_HINT' | translate }}
           </div>
           <ng-template #contactEmailInvalid>
             <div *ngIf="contact_email.value">
-              <div class="text-danger" *ngIf="(contact_email.dirty || contact_email.touched) && contact_email.invalid && contact_email.errors.email">
+              <div class="text-danger"
+                   *ngIf="(contact_email.dirty || contact_email.touched) && contact_email.invalid && contact_email.errors.email">
                 {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_INCORRECT' | translate }}
               </div>
             </div>
@@ -368,9 +384,9 @@
                placeholder="123456789"
                matInput>
       </mat-form-field>
-    </cdk-step>
-  </auth-stepper>
-</form>
+    </form>
+  </cdk-step>
+</auth-stepper>
 
 <a [routerLink]="['../login']" class="external-link secondary">
   {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.LOGIN_LINK' | translate }}

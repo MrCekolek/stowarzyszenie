@@ -8,6 +8,7 @@ import { LanguageService } from "../../../shared/services/user/language.service"
 import { SharedModule } from "../../../shared/shared.module";
 import { UserService } from "../../../shared/services/user/user.service";
 import { UserModel } from "../../../shared/models/user.model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit {
     private translateService: TranslateService,
     private languageService: LanguageService,
     private sharedModule: SharedModule,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {
     this.passwordIsHidden = true;
     this.createForm();
@@ -62,7 +64,7 @@ export class LoginComponent implements OnInit {
     this.userService.changeLoginStatus(true);
     this.userService.changeUser(new UserModel(response['user']['original']));
     this.languageService.setLang(this.sharedModule.detectLang(response['user']['original']['preference_user']['lang']));
-  //  przekierowac na odpowiedni route !!!!!!!
+    this.router.navigateByUrl('/dashboard');
   }
 
   handleError(error) {
