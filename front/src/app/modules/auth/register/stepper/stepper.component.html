@@ -5,7 +5,7 @@
             <div>
                 <ul class="progressbar" *ngIf="!this.registerCompleted">
                     <li *ngFor="let step of _steps; let i = index;" (click)="onClick(i)"
-                    [ngClass]="{'active': this.selectedIndex === i, 
+                    [ngClass]="{'active': this.selectedIndex === i,
                     'completed': step.completed && this.selectedIndex >= i}">
                         <!-- <div class="icon">
                             <i [class]="this.icons[i]"></i>
@@ -47,7 +47,7 @@
                         </p>
                     </div>
 
-                    <button class="submit-button" type="button" cdkStepperNext *ngIf="this.selectedIndex !== 3 && !this.registerCompleted">
+                    <button class="submit-button" type="button" cdkStepperNext *ngIf="this.selectedIndex !== 3 && !this.registerCompleted" [disabled]="this.registerComponent.isLoading">
                         {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.GO_TO_STEP' | translate }} {{ this.selectedIndex + 2 }}
                     </button>
 
