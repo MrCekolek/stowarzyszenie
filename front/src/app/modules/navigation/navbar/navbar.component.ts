@@ -14,9 +14,9 @@ import { LanguageService } from "../../../shared/services/user/language.service"
 export class NavbarComponent implements OnInit {
   private loggedIn: boolean;
   private flagsImages = [
-    "../../../../assets/images/united_kingdom.png",
-    "../../../../assets/images/poland.png",
-    "../../../../assets/images/russi.png"
+    "../../../../assets/images/uk_flag.png",
+    "../../../../assets/images/pl_flag.png",
+    "../../../../assets/images/ru_flag.png"
   ];
   private translations = [
     'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.EN',
@@ -40,6 +40,40 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    $(document).ready(() => {
+      // $('[data-toggle="tooltip"]').tooltip();
+
+      ////////// CLICK FUNCTIONS /////////////
+
+      $('.hamburger').click(function() {
+        $('.sidebar-wrapper').toggleClass('collapsed');
+      });
+
+      $('.sidebar-overlay').click(function() {
+        $('.sidebar-wrapper').toggleClass('collapsed');
+      });
+
+      $('.header-menu').click(function() {
+        $('.header-right').toggleClass('opened');
+      });
+
+      $('.header-right-overlay').click(function() {
+        $('.header-right').toggleClass('opened');
+      });
+
+      $('.title').click(function(event){
+        $( event.target ).closest( 'ul.submenu' ).css('background', '#000');
+        console.log($( event.target ).closest( '.submenu' ));
+      });
+
+      $('#search-icon').click(function() {
+        $('.search-sidenav').toggleClass('opened');
+      });
+
+      $('.search-overlay').click(function() {
+        $('.search-sidenav').toggleClass('opened');
+      });
+    });
   }
 
   logout(event: MouseEvent) {
