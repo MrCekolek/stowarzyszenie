@@ -3,32 +3,13 @@
 .stepper-container {
     h1 {
         color: $colorPrimaryDarkGreen;
-        font-size: 30px;
-        font-weight: 500 !important;
-    }
-
-    .icon {
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
+        font-size: 1.3rem;
         text-align: center;
-        color: $colorWhite;
-        background: $colorGray;
-        font-size: 15px;
-        margin-bottom: 6px;
-        border-radius: 2px;
+        font-weight: 500 !important;
     }
 
     .progressbar {
         padding: 0;
-
-        ul {
-            z-index: 0;
-
-            li {
-                z-index: 100;
-            }
-        }
 
         li {
             list-style-type: none;
@@ -37,11 +18,61 @@
             text-transform: uppercase;
             font-size: 16px;
             color: $colorGray;
-            z-index: 5;
-            display: inline-block;
+            float: left;
+
+            span {
+                margin: 0 auto;
+                display: block;
+                text-align: center;
+                font-size: .9rem;
+            }
 
             &:hover {
                 cursor: pointer;
+            }
+
+            &::before {
+                text-align: center;
+                width: 30px;
+                line-height: 30px;
+                display: block;
+                margin: 0 auto;
+                font-size: 15px;
+                background: $colorGray;
+                color: $colorWhite;
+                border-radius: 2px;
+            }
+        }
+
+        li:nth-child(1) {
+            &::before {
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                content: '\f023';
+            }
+        }
+
+        li:nth-child(2) {
+            &::before {
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                content: '\f007';
+            }
+        }
+
+        li:nth-child(3) {
+            &::before {
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                content: '\f19c';
+            }
+        }
+
+        li:nth-child(4) {
+            &::before {
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                content: '\f095';
             }
         }
 
@@ -54,25 +85,45 @@
             height: 2px;
             content: '';
             position: absolute;
-            background-color: $colorGray;
-            top: 15px;
+            background: $colorGray;
             left: -50%;
+            top: 15px;
             z-index: -1;
-            transform: translate(-50%);
         }
 
         li.active,
         li.completed {
-            .icon {
+            color: $colorPrimaryDarkGreen;
+
+            &::before {
                 background: $colorPrimaryDarkGreen;
             }
-            
-            color: $colorPrimaryDarkGreen;
         }
 
         li.active::after,
         li.completed::after {
             background-color: $colorPrimaryDarkGreen;
+        }
+
+        li.end {
+            margin: 0 auto;
+            display: block;
+            width: 100%;
+            
+            &::before {
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                content: '\f00c';
+                text-align: center;
+                width: 30px;
+                line-height: 30px;
+                display: block;
+                margin: 0 auto;
+                font-size: 15px;
+                background: $colorPrimaryDarkGreen;
+                color: $colorWhite;
+                border-radius: 2px;
+            }
         }
     }
 }
@@ -89,6 +140,11 @@
 
 .submit-button {
     margin-top: 40px;
+
+    &:disabled {
+        cursor: default;
+        background: $colorGray;
+    }
 }
 
 .external-link {

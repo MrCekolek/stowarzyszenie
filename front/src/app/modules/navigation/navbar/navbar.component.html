@@ -1,0 +1,172 @@
+<!-- TO NAV WIDNIEJE NA STRONIE >PRZED< ZALOGOWANIEM, po powrocie do strony głównej etc.  -->
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" *ngIf="!this.loggedIn">
+    <a class="navbar-brand text-black-50" style="font-size: 1.3rem;" [routerLink]="['/auth/login']">
+        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.WEBPAGE_TITLE_MEMBERS' | translate }}
+    </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+          aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-bars"></i>
+  </button>
+
+    <div class="dropdown language-selector">
+        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+            <!-- tu powinien byc img z src wybranego jezyka - tymczasowo jest eng -->
+            <img src="../../../../assets/images/united_kingdom.png" alt="en">
+        </a>
+        <ul class="dropdown-menu pull-right">
+            <li>
+                <a>
+                    <img src="../../../../assets/images/united_kingdom.png" alt="en">
+                    <span>
+                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.EN' | translate }}
+                    </span>
+                </a>
+            </li>
+            <li class="active">
+                <a>
+                    <img src="../../../../assets/images/poland.png" alt="en">
+                    <span>
+                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.PL' | translate }}
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a>
+                    <img src="../../../../assets/images/russi.png" alt="en">
+                    <span>
+                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.RU' | translate }}
+                    </span>
+                </a>
+            </li>
+        </ul>
+
+        <select #langSelect (change)="setLang(langSelect.value)" style="width: 70px">
+          <option *ngFor="let lang of translateService.getLangs()" [value]="lang" [selected]="translateService.currentLang === lang">
+            {{ lang }}
+          </option>
+        </select>
+    </div>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+         <!-- ngIf: to menu pojawia się, gdy przejdziemy na podstronę Ciob members -->
+        <div class="navbar-nav" role="navigation">
+            <a class="nav-item nav-link mr-3" [routerLink]="['/']">
+                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.HOME' | translate }}
+            </a>
+            <a class="nav-item nav-link mr-3" [routerLink]="['/auth/login']">
+                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.LOGIN' | translate }}
+            </a>
+            <button class="btn btn-secondary btn-sm" [routerLink]="['/auth/register']">
+                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.REGISTER' | translate }}
+            </button>
+        </div>
+
+        <!-- ngIf: to menu pojawia się, gdy jesteśmy na stronie głównej cioba (nie wiem czy to w ogole bedzie,
+            mozliwe ze zrobimy tylko portal members) -->
+        <!-- <div class="navbar-nav" role="navigation">
+            <a class="nav-item nav-link active mr-3" href="#">
+                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.HOME' | translate }}
+            </a>
+            <button class="btn btn-secondary btn-sm">
+                Members Login
+            </button>
+        </div> -->
+    </div>
+</nav>
+
+<!-- TO NAV VIDNIEJE >PO< ZALOGOWANIU I JEST WIDOCZNE TYLKO Z POZIOMU DASHBOARDA UŻYTKOWNIKA ZALOGOWANEGO -->
+<nav class="main-nav" *ngIf="this.loggedIn">
+    <div class="logo-wrapper">
+        <a href="#" class="logo" id="logo">
+            {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.LOGO' | translate }}
+        </a>
+    </div>
+
+    <div class="nav-block">
+        <div class="breadcrumbs">
+            <div class="icon">
+                <i class="fas fa-users"></i>
+            </div>
+
+            <ul class="path">
+                <li>
+                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS' | translate }}
+                </li>
+            </ul>
+
+            <div class="dropdown language-selector">
+                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                    <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]" [alt]="this.languageService.currentLang">
+                </a>
+                <ul class="dropdown-menu pull-right">
+                    <li *ngFor="let lang of translateService.getLangs(); let i = index"
+                        [ngClass]="{'active': translateService.currentLang === lang}"
+                        (click)="setLang(lang)">
+                        <a>
+                            <img [src]="this.flagsImages[i]" [alt]="this.languageService.currentLang">
+                            <span>
+                                {{ this.translations[i] | translate }}
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="right-icons">
+
+                <li>
+                    <i class="fas fa-bell"></i>
+                </li>
+
+                <li>
+                    <i class="fas fa-envelope"></i>
+                </li>
+
+                <li>
+                    <i class="fas fa-power-off" (click)="logout($event)"></i>
+                </li>
+
+                <li class="toggle">
+                    <i class="fas fa-ellipsis-h"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<nav class="dashboard-sidenav" *ngIf="this.loggedIn">
+    <div class="logged-user">
+        <div class="avatar">
+            <img src="../../../../assets/images/avatar-default.jpg" alt="">
+        </div>
+
+        <div class="username">
+            Username
+        </div>
+
+        <div class="user-role">
+            Administrator
+        </div>
+    </div>
+
+    <!-- nav-links -->
+    <ul class="sidenav-links">
+        <li>
+            <i class="fas fa-th-large"></i>
+            <span>
+                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.DASHBOARD' | translate }}
+            </span>
+        </li>
+        <li>
+            <i class="fas fa-users"></i>
+            <span>
+                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS' | translate }}
+            </span>
+        </li>
+    </ul>
+</nav>
+
+<router-outlet></router-outlet>

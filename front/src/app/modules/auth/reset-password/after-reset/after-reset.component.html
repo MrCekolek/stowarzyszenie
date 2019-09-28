@@ -2,41 +2,77 @@
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
                 <div class="form-container">
+                  <form [formGroup]="afterResetForm">
                     <div *ngIf="!this.reseted">
                         <h1>
                             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.PAGE_TITLE' | translate }}
                         </h1>
-        
+
                         <p>
                             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.PAGE_DESC' | translate }}
                         </p>
-        
+
                         <!-- password input -->
                         <mat-form-field class="password-field" appearance="outline">
-                            <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.PASSWORD_PLACEHOLDER' | translate }}</mat-label>
-                            <input matInput placeholder="********" [type]="passwordIsHidden ? 'password' : 'text'">
-                            <mat-icon matSuffix (click)="this.togglePassword()" matTooltip="Info about the action">
+                            <mat-label>
+                              {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.PASSWORD_PLACEHOLDER' | translate }}
+                            </mat-label>
+
+                          <input id="password"
+                                 formControlName="password"
+                                 [type]="passwordIsHidden ? 'password' : 'text'"
+                                 placeholder="********"
+                                 matInput
+                                 required>
+
+                            <mat-icon matSuffix (click)="this.togglePassword()"
+                                      matTooltip="Info about the action">
+
                                 <i class="fas fa-eye" *ngIf="this.passwordIsHidden"></i>
                                 <i class="fas fa-eye-slash" *ngIf="!this.passwordIsHidden"></i>
                             </mat-icon>
-                            <mat-hint> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PASSWORD_HINT' | translate }} </mat-hint>
-                            <div class="alert-icon longer">
-                                <i class="fas fa-times"></i>
+
+                          <mat-hint>
+                            <div *ngIf="password.valid || password.untouched; else passwordInvalid">
+                              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PASSWORD_HINT' | translate }}
                             </div>
+                            <ng-template #passwordInvalid>
+                              <div *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.required">
+                                {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
+                              </div>
+                              <div *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.minlength">
+                                {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.PASSWORD_LENGTH' | translate }}
+                              </div>
+                            </ng-template>
+                          </mat-hint>
+
+                          <div class="alert-icon longer">
+                            <div *ngIf="password.valid; else passwordIconInvalid">
+                              <i class="fas fa-check"></i>
+                            </div>
+                            <ng-template #passwordIconInvalid>
+                              <i class="fas fa-times"></i>
+                            </ng-template>
+                          </div>
                         </mat-form-field>
-        
-                        <button class="submit-button" (click)="resetPassword()">
+
+                        <button class="submit-button"
+                                (click)="changePassword(afterResetForm.getRawValue())"
+                                [disabled]="!afterResetForm.valid">
                             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.BUTTON' | translate }}
                         </button>
-        
-                        <a [routerLink]="['../login']"  class="external-link primary"><i class="fas fa-arrow-left"></i> {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.BACK_TO_LOGIN' | translate }}</a>
+
+                        <a [routerLink]="['../login']"  class="external-link primary">
+                          <i class="fas fa-arrow-left"></i>
+                          {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.BACK_TO_LOGIN' | translate }}
+                        </a>
                     </div>
 
                     <div *ngIf="this.reseted">
                         <h1>
                             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.RESETED_TITLE' | translate }} <i class="fas fa-check"></i>
                         </h1>
-        
+
                         <p>
                             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.RESETED_DESC' | translate }}
                         </p>
@@ -45,9 +81,8 @@
                             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.LOGIN_LINK' | translate }}
                         </button>
                     </div>
-                   
+                  </form>
                 </div>
             </div>
         </div>
     </div>
-    

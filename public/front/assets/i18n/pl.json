@@ -1,0 +1,87 @@
+{
+	"STOWARZYSZENIE": {
+		"MODULES": {
+			"AUTH": {
+				"FORGOT": {
+					"BACK_TO_LOGIN": "Wróć do logowania",
+					"BUTTON_SEND": "Wyślij link ",
+					"PAGE_HINT": "Zapomniałeś hasła do swojego konta? Zresetuj je podając niżej email, do którego jest przypisane Twoje konto (bądź email kontaktowy, jeżeli go podałeś). Na podany adres zostanie wysłany email z linkiem do resetowania hasła.",
+					"PAGE_TITLE": "Zresetuj hasło "
+				},
+				"LOGIN": {
+					"ALERT_WRONG": "Nieprawidłowe dane logowania",
+					"BUTTON": "Zaloguj się",
+					"EMAIL_PLACEHOLDER": "Adres email",
+					"FORGOT_PASSWORD_LINK": "Zapomniałeś hasła? Zresetuj je tutaj",
+					"PAGE_TITLE": "Zaloguj się do portalu CIOB",
+					"PASSWORD_PLACEHOLDER": "Hasło",
+					"REGISTER_LINK": "Nie masz jeszcze konta? Zarejestruj nowe tutaj!",
+					"REMEMBER_ME": "Nie wylogowuj mnie",
+					"TOOLTIP_HIDE": "Ukryj hasło",
+					"TOOLTIP_SHOW": "Pokaż hasło"
+				},
+				"REGISTER": {
+					"AFFILIATION": {
+						"CITY": "Miasto",
+						"CITY_HINT": "Podaj nazwę miasta, w którym znajduje się Twoja instytucja",
+						"COUNTRY": "Kraj",
+						"COUNTRY_HINT": "Wybierz kraj Twojej instytucji",
+						"DEPARTMENT": "Wydział",
+						"DEPARTMENT_HINT": "Wpisz nazwę swojego wydziału / zakładu",
+						"INSTITUTION": "Instytucja",
+						"INSTITUTION_HINT": "Wpisz nazwę swojej instytucji",
+						"PAGE_TITLE": "Afiliacja (opcjonalne)",
+						"STREET": "Ulica",
+						"STREET_HINT": "Podaj ulicę, na której znajduje się Twoja instytucja",
+						"TITLE": "Tytuł naukowy",
+						"TITLE_HINT": "Wpisz swój tytuł naukowy"
+					},
+					"AFTER": {
+						"PAGE_DESC1": "Wysłaliśmy email aktywacyjny na adres",
+						"PAGE_DESC2": "Sprawdź swoją skrzynkę mailową i podążaj za instrukcjami zawartymi w wysłanym mailu. Jeżeli nie otrzymałeś maila, sprawdź folder SPAM lub wyślij mail ponownie za pomocą poniższego linku",
+						"PAGE_SUBTITLE": "Twoje konto zostało utworzone",
+						"PAGE_TITLE": "Rejestracja pomyślna",
+						"SEND_AGAIN": "Wyślij email aktywacyjny ponownie",
+						"SUCCESS_ICON": "Sukces"
+					},
+					"ALERTS": {
+						"BIRTHDATE_INCORRECT": "Format daty jest nieprawidłowy. Prawidłowo: 06/08/1980",
+						"EMAIL_EXISTS": "Konto z tym emailem już istnieje",
+						"EMAIL_INCORRECT": "Nieprawidłowy email ",
+						"PASSWORD_LENGTH": "Hasło nie może mieć mniej niż 8 znaków",
+						"REQUIRED": "To pole jest wymagane"
+					},
+					"BACK_TO_STEP": "Cofnij do kroku ",
+					"BIRTHDATE": "Data urodzenia",
+					"BIRTHDATE_HINT": "Prawidłowy format: 05/04/2014",
+					"BUTTON_REGISTER": "Rejestruj konto",
+					"CONTACT_EMAIL": "Email kontaktowy",
+					"CONTACT_EMAIL_HINT": "Podaj alternatywny adres email",
+					"CONTACT_TITLE": "Dane kontaktowe (opcjonalne)",
+					"EMAIL_HINT": "Email będzie używany do logowania oraz otrzymywania powiadomień",
+					"FIRST_NAME": "Imię",
+					"GO_TO_STEP": "Przejdź do kroku",
+					"LAST_NAME": "Nazwisko",
+					"LOGIN_LINK": "Masz już konto? Zaloguj się tutaj!",
+					"MAN": "Jestem mężczyzną",
+					"PAGE_TITLE": "Zarejestruj nowe konto",
+					"PASSWORD_HINT": "Hasło powinno mieć długość co najmniej 8 znaków",
+					"PHONE": "Numer telefonu",
+					"RESET": {
+						"BUTTON": "Resetuj",
+						"LOGIN_LINK": "Przejdź do logowania",
+						"PAGE_DESC": "Podaj nowe hasło do swojego konta w polu poniżej.",
+						"PAGE_TITLE": "Resetowanie hasła",
+						"RESETED_DESC": "Twoje hasło zostało pomyślnie zresetowane. Możesz teraz się zalogować.",
+						"RESETED_TITLE": "Zresetowano hasło"
+					},
+					"STEP": "Krok",
+					"STEP1_TITLE": "Dane konta",
+					"STEP2_TITLE": "Dane personalne",
+					"WOMAN": "Jestem kobietą"
+				}
+			},
+			"TITLE": "Przykładowy tytuł"
+		}
+	}
+}

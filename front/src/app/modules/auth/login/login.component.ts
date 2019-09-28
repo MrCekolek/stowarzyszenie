@@ -2,6 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { LoginService } from "./service/login.service";
+import { LoginModel } from "./model/login.model";
+import { TokenService } from "./service/token.service";
+import { LanguageService } from "../../../shared/services/user/language.service";
+import { SharedModule } from "../../../shared/shared.module";
+import { UserService } from "../../../shared/services/user/user.service";
+import { UserModel } from "../../../shared/models/user.model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -11,16 +18,22 @@ import { LoginService } from "./service/login.service";
 export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
-  error = false;
-  passwordIsHidden = true;
+  private loginError: string = '';
+  private passwordIsHidden: boolean = true;
+  private loginModel: LoginModel;
 
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
-    private translateService: TranslateService
+    private tokenService: TokenService,
+    private translateService: TranslateService,
+    private languageService: LanguageService,
+    private sharedModule: SharedModule,
+    private userService: UserService,
+    private router: Router
   ) {
-      this.passwordIsHidden = true;
-      this.createForm();
+    this.passwordIsHidden = true;
+    this.createForm();
   }
 
   createForm() {
@@ -37,7 +50,25 @@ export class LoginComponent implements OnInit {
   }
 
   login(loginForm: FormGroup) {
-    console.log(loginForm);
+    this.loginModel = new LoginModel(loginForm, this.translateService.currentLang);
+
+    this.loginService.login(this.loginModel).subscribe(
+      next => this.handleResponse(next),
+      error => this.handleError(error)
+    )
+  }
+
+  handleResponse(response) {
+    this.loginError = '';
+    this.tokenService.handle(response.access_token);
+    this.userService.changeLoginStatus(true);
+    this.userService.changeUser(new UserModel(response['user']['original']));
+    this.languageService.setLang(this.sharedModule.detectLang(response['user']['original']['preference_user']['lang']));
+    this.router.navigateByUrl('/dashboard');
+  }
+
+  handleError(error) {
+    this.loginError = error.error.error;
   }
 
   ngOnInit() {

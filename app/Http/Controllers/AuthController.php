@@ -21,7 +21,7 @@ class AuthController extends Controller {
      * @return void
      */
     public function __construct() {
-        $this->middleware('auth:api', ['except' => ['login', 'accountRegister', 'accountResendRegister', 'activateAccount']]);
+        $this->middleware('auth:api', ['except' => ['accountLogin', 'accountRegister', 'accountResendRegister', 'accountActivate']]);
     }
 
     /**
@@ -29,22 +29,22 @@ class AuthController extends Controller {
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login() {
-        $credentials = request(['email', 'password']);
+    public function accountLogin() {
+        $credentials = request(['login_email', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
             return response()->json([
-                'error' => __('custom.controllers.auth.login.no_email_or_password')
-            ], 401);
+                'error' => 'STOWARZYSZENIE.SERVER.CUSTOM.CONTROLLERS.AUTH.LOGIN.NO_EMAIL_OR_PASSWORD'
+            ], Response::HTTP_UNAUTHORIZED);
         }
 
-        if ($this->getUserRowByEmail(request(['email']))->count() > 0) {
+        if ($this->getUserRowByEmail(request(['login_email']))->count() > 0) {
             return response()->json([
-                'error' => __('custom.controllers.auth.not_activated')
-            ], 401);
+                'error' => 'STOWARZYSZENIE.SERVER.CUSTOM.CONTROLLERS.AUTH.LOGIN.NOT_ACTIVATED'
+            ], Response::HTTP_UNAUTHORIZED);
         }
 
-        ChangeUserTimezoneJob::dispatchNow($credentials['email']);
+        ChangeUserTimezoneJob::dispatchNow($credentials['login_email']);
 
         return $this->respondWithToken($token);
     }
@@ -100,7 +100,7 @@ class AuthController extends Controller {
         return PreferenceUserController::getGeolocation();
     }
 
-    public function activateAccount(ActivateAccountRequest $activateAccountRequest) {
+    public function accountActivate(ActivateAccountRequest $activateAccountRequest) {
         $input = $activateAccountRequest->all();
 
         return $this->getUserRowByToken($input)->get()->count() > 0 ? $this->change($input) : $this->rowNotFound();
@@ -111,7 +111,7 @@ class AuthController extends Controller {
     }
 
     private function getUserRowByEmail($input) {
-        return User::email($input['email'])->emailVerifiedAt(null)->get();
+        return User::loginEmail($input['login_email'])->emailVerifiedAt(null)->get();
     }
 
     private function change($input) {
@@ -157,7 +157,7 @@ class AuthController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function me() {
-        return response()->json(User::id(auth()->user()['id'])->with('preferenceUser')->first());
+        return response()->json(User::id(auth()->user()['id'])->with(['preferenceUser', 'affilationUser'])->first());
     }
 
     /**

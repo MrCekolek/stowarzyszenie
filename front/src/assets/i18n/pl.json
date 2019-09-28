@@ -48,6 +48,7 @@
 						"BIRTHDATE_INCORRECT": "Format daty jest nieprawidłowy. Prawidłowo: 06/08/1980",
 						"EMAIL_EXISTS": "Konto z tym emailem już istnieje",
 						"EMAIL_INCORRECT": "Nieprawidłowy email ",
+						"EMAIL_NOT_EXISTS": "Konto z tym emailem nie istnieje.",
 						"PASSWORD_LENGTH": "Hasło nie może mieć mniej niż 8 znaków",
 						"REQUIRED": "To pole jest wymagane"
 					},
@@ -81,7 +82,46 @@
 					"WOMAN": "Jestem kobietą"
 				}
 			},
+			"NAVIGATION": {
+				"LANGUAGES": {
+					"EN": "Angielski",
+					"LABEL": "Język strony",
+					"PL": "Polski",
+					"RU": "Rosyjski"
+				},
+				"LOGGED_NAVBAR": {
+					"ACCOUNT": "Konto",
+					"EDIT_ACCOUNT": "Edytuj konto",
+					"LOGO": "CIOB",
+					"LOGOUT": "Wyloguj",
+					"MESSAGES": "Wiadomości",
+					"MY_ACCOUNT": "Moje konto",
+					"NOTIFICATIONS": "Powiadomienia"
+				},
+				"MEMBERS_PAGE_LINKS": {
+					"HOME": "Strona główna",
+					"LOGIN": "Logowanie",
+					"REGISTER": "Zarejestruj się"
+				},
+				"SIDENAV": {
+					"DASHBOARD": "Główna",
+					"USERS": "Użytkownicy"
+				},
+				"WEBPAGE_TITLE_MEMBERS": "Ciob members"
+			},
 			"TITLE": "Przykładowy tytuł"
+		},
+		"SERVER": {
+			"CUSTOM": {
+				"CONTROLLERS": {
+					"AUTH": {
+						"LOGIN": {
+							"NOT_ACTIVATED": "Konto nie zostało aktywowane.",
+							"NO_EMAIL_OR_PASSWORD": "Podany email lub hasło są niepoprawne."
+						}
+					}
+				}
+			}
 		}
 	}
 }

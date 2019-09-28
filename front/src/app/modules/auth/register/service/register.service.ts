@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { RegisterModel } from "../model/register.model";
 import { TranslateService } from "@ngx-translate/core";
-import {stringify} from "querystring";
 
 @Injectable({
   providedIn: 'root'

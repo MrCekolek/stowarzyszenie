@@ -68,7 +68,7 @@ class User extends Authenticatable implements JWTSubject {
         $this->attributes['password'] = bcrypt($value);
     }
 
-    public function setBirthdate($value) {
+    public function setBirthdateAttribute($value) {
         $birthdateExploded = explode('/', $value);
 
         $this->attributes['birthdate'] = Carbon::createFromFormat('d-m-Y', $birthdateExploded[0] . '-' . $birthdateExploded[1] . '-' . $birthdateExploded[2]);

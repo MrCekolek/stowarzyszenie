@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterModel } from "./model/register.model";
 import { FormGroup, FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import { RegisterService } from "./service/register.service";
-import { distinctUntilChanged } from "rxjs/operators";
-import {TranslateService} from "@ngx-translate/core";
+import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs/operators";
 
 @Component({
   selector: 'app-register',
@@ -11,18 +10,20 @@ import {TranslateService} from "@ngx-translate/core";
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  public registerForm: FormGroup;
+  public registerFormStep1: FormGroup;
+  public registerFormStep2: FormGroup;
+  public registerFormStep3: FormGroup;
+  public registerFormStep4: FormGroup;
+
   private passwordIsHidden: boolean;
   private registerCompleted: boolean = false;
-  private isLoading: boolean = false;
+  public isLoading: boolean = false;
   private emailExist: boolean = false;
-  private newUser: RegisterModel;
-  private errors: string;
+  private valueChangesSubscription;
 
   constructor(
     private formBuilder: FormBuilder,
-    private registerService: RegisterService,
-    private translateService: TranslateService
+    private registerService: RegisterService
   ) {
     this.passwordIsHidden = true;
     this.createForm();
@@ -30,7 +31,7 @@ export class RegisterComponent implements OnInit {
   }
 
   createForm() {
-    this.registerForm = this.formBuilder.group({
+    this.registerFormStep1 = this.formBuilder.group({
       'login_email': ['', [
         Validators.required,
         Validators.email,
@@ -39,7 +40,10 @@ export class RegisterComponent implements OnInit {
       'password': ['', [
         Validators.required,
         Validators.minLength(8)
-      ]],
+      ]]
+    });
+
+    this.registerFormStep2 = this.formBuilder.group({
       'first_name': ['', [
         Validators.required
       ]],
@@ -54,7 +58,10 @@ export class RegisterComponent implements OnInit {
       ]],
       'gender': ['', [
         Validators.required
-      ]],
+      ]]
+    });
+
+    this.registerFormStep3 = this.formBuilder.group({
       'title': ['', [
         Validators.required
       ]],
@@ -62,62 +69,63 @@ export class RegisterComponent implements OnInit {
       'department': [],
       'street': [],
       'city': [],
-      'country': [],
+      'country': []
+    });
+
+    this.registerFormStep4 = this.formBuilder.group({
       'contact_email': ['', [
         Validators.email
       ]],
-      'phone_number': [],
+      'phone_number': []
     });
   }
 
   registerFormValuesChanged() {
-    this.isLoading = true;
-
-    this.login_email.valueChanges.subscribe(
-      data => {
-        if (!this.login_email.errors || (this.login_email.errors && this.login_email.errors.emailExist)) {
-          this.registerService.verifyEmail(data)
-            .pipe(
-              distinctUntilChanged()
-            )
-            .subscribe(
-            dataRegister => {
-              if (dataRegister['success']) {
-                this.emailExist = false;
-              } else {
-                this.emailExist = true;
-              }
-
-              this.isLoading = false;
-              this.login_email.updateValueAndValidity({ emitEvent: false });
-            }
-          )
+    this.valueChangesSubscription = this.login_email.valueChanges
+      .pipe(
+        map(
+          email => {
+            this.isLoading = true;
+            return email;
+          }
+        ),
+        distinctUntilChanged(),
+        debounceTime(1500),
+        switchMap(
+          email => {
+            return this.registerService.verifyEmail(email);
+          }
+        ),
+      )
+      .subscribe(
+        exist => {
+          this.emailExist = !exist['success'];
+          this.login_email.updateValueAndValidity({ emitEvent: false });
+          this.isLoading = false;
         }
-      }
-    );
+      );
   }
 
   emailExistValidator(control: AbstractControl): {[key: string]: any} | null {
-    if (!this.isLoading) {
-      if (this.emailExist) {
-        return {
-          'emailExist': true
-        }
+    if (this.emailExist) {
+      return {
+        'emailExist': true
       }
-
-      return null;
     }
 
     return null;
   }
 
   createNewUser(registerModel: Object) {
-    this.newUser = new RegisterModel(registerModel);
-    this.registerService.registerAccount(this.newUser).subscribe();
+    return new RegisterModel(registerModel);
   }
 
-  resendEmailActivation(registerModel: RegisterModel) {
-    this.registerService.resendEmailActivation(registerModel).subscribe();
+  resendEmailActivation(registerModel: Object) {
+    this.registerService.resendEmailActivation(this.createNewUser(registerModel)).subscribe();
+  }
+
+  registerAccount(registerModel: Object) {
+    this.registerService.registerAccount(this.createNewUser(registerModel)).subscribe();
   }
 
   ngOnInit() {
@@ -128,31 +136,59 @@ export class RegisterComponent implements OnInit {
   }
 
   get login_email() {
-    return this.registerForm.get('login_email');
+    return this.registerFormStep1.get('login_email');
   }
 
   get password() {
-    return this.registerForm.get('password');
+    return this.registerFormStep1.get('password');
   }
 
   get first_name() {
-    return this.registerForm.get('first_name');
+    return this.registerFormStep2.get('first_name');
   }
 
   get last_name() {
-    return this.registerForm.get('last_name');
+    return this.registerFormStep2.get('last_name');
   }
 
   get birthdate() {
-    return this.registerForm.get('birthdate');
+    return this.registerFormStep2.get('birthdate');
   }
 
   get gender() {
-    return this.registerForm.get('gender');
+    return this.registerFormStep2.get('gender');
+  }
+
+  get title() {
+    return this.registerFormStep3.get('title');
+  }
+
+  get institution() {
+    return this.registerFormStep3.get('institution');
+  }
+
+  get department() {
+    return this.registerFormStep3.get('department');
+  }
+
+  get street() {
+    return this.registerFormStep3.get('street');
+  }
+
+  get city() {
+    return this.registerFormStep3.get('city');
+  }
+
+  get country() {
+    return this.registerFormStep3.get('country');
   }
 
   get contact_email() {
-    return this.registerForm.get('contact_email');
+    return this.registerFormStep4.get('contact_email');
+  }
+
+  get phone_number() {
+    return this.registerFormStep4.get('phone_number');
   }
 }
 
