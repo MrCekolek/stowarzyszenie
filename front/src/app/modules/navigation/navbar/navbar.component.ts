@@ -14,9 +14,9 @@ import { LanguageService } from "../../../shared/services/user/language.service"
 export class NavbarComponent implements OnInit {
   private loggedIn: boolean;
   private flagsImages = [
-    "../../../../assets/images/uk_flag.png",
-    "../../../../assets/images/pl_flag.png",
-    "../../../../assets/images/ru_flag.png"
+    '../../../assets/images/uk_flag.png',
+    '../../../assets/images/pl_flag.png',
+    '../../../assets/images/ru_flag.png'
   ];
   private translations = [
     'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.EN',
@@ -41,7 +41,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     $(document).ready(() => {
-      // $('[data-toggle="tooltip"]').tooltip();
+      $('[data-toggle="tooltip"]').hover(function(){
+          $(this).tooltip('show');
+      }, function(){
+          $(this).tooltip('hide');
+      });
 
       ////////// CLICK FUNCTIONS /////////////
 
