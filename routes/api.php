@@ -18,14 +18,30 @@ Route::group([
 //    Route::post('me', 'AuthController@me');
 //    Route::post('refresh', 'AuthController@refresh');
 
+    Route::prefix('lang')->group(function () {
+        Route::post('get', 'PreferenceUserController@getLang');
+        Route::post('set', 'PreferenceUserController@setLang');
+    });
+
     Route::post('email/exist', 'UserController@emailExist');
-    Route::get('account/activate', 'AuthController@accountActivate');
-    Route::post('account/login', 'AuthController@accountLogin');
-    Route::post('account/register', 'AuthController@accountRegister');
-    Route::post('account/register/resend', 'AuthController@accountResendRegister');
-    Route::post('account/password/reset', 'ResetPasswordController@accountPasswordReset');
-    Route::post('account/password/change', 'ChangePasswordController@accountPasswordChange');
     Route::post('logout', 'AuthController@logout');
-    Route::post('lang/get', 'PreferenceUserController@getLang');
-    Route::post('lang/set', 'PreferenceUserController@setLang');
+
+    Route::prefix('account')->group(function () {
+        Route::post('login', 'AuthController@accountLogin');
+        Route::get('activate', 'AuthController@accountActivate');
+
+        Route::prefix('register')->group(function () {
+            Route::post('', 'AuthController@accountRegister');
+            Route::post('resend', 'AuthController@accountResendRegister');
+        });
+
+        Route::prefix('password')->group(function () {
+            Route::post('reset', 'ResetPasswordController@accountPasswordReset');
+            Route::post('change', 'ChangePasswordController@accountPasswordChange');
+        });
+    });
+
+    Route::prefix('user')->group(function () {
+        Route::post('get', 'UserController@index');
+    });
 });

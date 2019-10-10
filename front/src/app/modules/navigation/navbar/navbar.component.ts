@@ -5,6 +5,10 @@ import * as $ from 'jquery';
 import { TokenService } from "../../auth/login/service/token.service";
 import { Router } from "@angular/router";
 import { LanguageService } from "../../../shared/services/user/language.service";
+import { SearchService } from "./service/search.service";
+import { FormGroup, FormBuilder } from "@angular/forms";
+import {debounceTime, distinctUntilChanged, map, switchMap} from "rxjs/operators";
+
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +16,10 @@ import { LanguageService } from "../../../shared/services/user/language.service"
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  public searchInputForm: FormGroup;
+  private searchInputSubscription;
   private loggedIn: boolean;
+  private isLoading: boolean = false;
   private flagsImages = [
     '../../../assets/images/uk_flag.png',
     '../../../assets/images/pl_flag.png',
@@ -28,26 +35,41 @@ export class NavbarComponent implements OnInit {
     'pl': 1,
     'ru': 2,
   };
+  private foundedUsers = [];
+  private searchTyped = 'elo';
 
   constructor(
     private translateService: TranslateService,
     private userService: UserService,
     private tokenService: TokenService,
+    private searchService: SearchService,
+    private formBuilder: FormBuilder,
     private router: Router,
     private languageService: LanguageService
   ) {
     this.userService.loginStatus.subscribe(value => this.loggedIn = value );
+    this.createForm();
+    this.registerFormValuesChanged();
   }
 
   ngOnInit() {
     $(document).ready(() => {
-      $('[data-toggle="tooltip"]').hover(function(){
-          $(this).tooltip('show');
-      }, function(){
-          $(this).tooltip('hide');
-      });
+      // $('[data-toggle="tooltip"]').hover(function(){
+      //     $(this).tooltip('show');
+      // }, function(){
+      //     $(this).tooltip('hide');
+      // });
 
       ////////// CLICK FUNCTIONS /////////////
+
+      const searchService = this.searchService;
+      const self = this;
+
+      searchService.getUsers(self.searchTyped).subscribe(
+        data => {
+          self.foundedUsers = data['users']
+        }
+      );
 
       $('.hamburger').click(function() {
         $('.sidebar-wrapper').toggleClass('collapsed');
@@ -71,6 +93,10 @@ export class NavbarComponent implements OnInit {
       });
 
       $('#search-icon').click(function() {
+        searchService.getUsers(self.searchTyped).subscribe(
+          data => self.foundedUsers = data['users']
+        );
+
         $('.search-sidenav').toggleClass('opened');
       });
 
@@ -78,6 +104,37 @@ export class NavbarComponent implements OnInit {
         $('.search-sidenav').toggleClass('opened');
       });
     });
+  }
+
+  createForm() {
+    this.searchInputForm = this.formBuilder.group({
+      'search_input': [this.searchTyped, []]
+    });
+  }
+
+  registerFormValuesChanged() {
+    this.searchInputSubscription = this.search_input.valueChanges
+      .pipe(
+        map(
+          data => {
+            this.isLoading = true;
+            return data;
+          }
+        ),
+        distinctUntilChanged(),
+        debounceTime(1),
+        switchMap(
+          data  => {
+            return this.searchService.getUsers(data);
+          }
+        ),
+      )
+      .subscribe(
+        data => {
+          this.foundedUsers = data['users'];
+          this.isLoading = false;
+        }
+      );
   }
 
   logout(event: MouseEvent) {
@@ -89,5 +146,9 @@ export class NavbarComponent implements OnInit {
 
   setLang(lang) {
     this.languageService.setLang(lang);
+  }
+
+  get search_input() {
+    return this.searchInputForm.get('search_input');
   }
 }

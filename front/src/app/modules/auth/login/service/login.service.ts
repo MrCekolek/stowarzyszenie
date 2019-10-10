@@ -1,6 +1,6 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { TranslateService } from "@ngx-translate/core";
 import { LoginModel } from "../model/login.model";
 
 @Injectable({
@@ -11,8 +11,6 @@ export class LoginService {
 
   constructor(
     private http: HttpClient,
-    // private tokenService: TokenService,
-    private translateService: TranslateService
   ) { }
 
   login(loginModel: LoginModel) {
