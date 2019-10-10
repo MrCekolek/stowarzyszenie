@@ -2,7 +2,6 @@
     position: fixed;
     display: flex;
     width: 100%;
-
     .logo-wrapper {
         display: block;
         position: relative;
@@ -11,7 +10,6 @@
         width: 250px;
         line-height: 60px;
         box-sizing: border-box;
-
         a {
             color: #660014;
             text-transform: uppercase;
@@ -20,7 +18,6 @@
             font-weight: 500;
         }
     }
-
     .nav-block {
         position: relative;
         top: 2rem;
@@ -33,84 +30,73 @@
         line-height: 60px;
         box-shadow: 0 0 10px rgba(101, 97, 97, .1);
         font-size: 1.2rem;
-
         .breadcrumbs {
             display: flex;
-
             .icon {
                 margin-left: 30px;
                 color: #BBBBBB;
             }
-
             .path {
                 list-style: none;
                 color: #BBBBBB;
                 padding: 0;
                 margin-left: 10px;
-
                 li {
                     cursor: pointer;
                 }
-
                 li.active {
                     color: #660014;
-
                     &::before {
                         color: #BBBBBB;
                     }
                 }
-
                 li::before {
                     content: '>';
                     position: relative;
                     margin: 0 10px;
                     font-size: 1rem;
                 }
-
                 li:first-child::before {
                     display: none;
                 }
             }
-
             .right-icons {
                 padding: 0;
                 list-style: none;
                 display: flex;
                 margin-left: auto;
                 color: #BBBBBB;
-
                 li {
                     margin-right: 30px;
                     cursor: pointer;
                     transition: all .2s ease;
-
                     &:hover {
                         color: #660014;
                     }
                 }
-
                 li.toggle {
                     display: none;
                 }
             }
         }
-
         @media screen and (max-width: 700px) {
             .right-icons {
                 li {
                     display: none;
                 }
-
                 li.toggle {
                     display: inline-block !important;
                 }
             }
-
             .breadcrumbs {
                 display: none;
             }
         }
     }
+}
+
+table.table td {
+    vertical-align: middle;
 }
 
 .dashboard-sidenav {
@@ -119,57 +105,47 @@
     background: #F9F9F9;
     top: 7rem;
     position: fixed;
-
     .logged-user {
         width: 100%;
         cursor: pointer;
-
         .avatar {
             width: 100%;
             text-align: center;
-
             img {
                 width: 30%;
                 border-radius: 50%;
                 border: 3px solid #fff;
             }
         }
-
         .username {
             text-align: center;
             color: #636363;
             font-weight: 500;
             font-size: 1.2rem;
         }
-
         .user-role {
             text-align: center;
             color: #A19F9F;
             font-size: .8rem;
         }
     }
-
     .sidenav-links {
         margin-top: 2rem;
         list-style: none;
         padding: 0;
-
         li {
             text-align: center;
             color: #BBBBBB;
             transition: all .2s ease;
             margin-bottom: 20px;
-
             i {
                 display: block;
                 font-size: 1.5rem;
             }
-
             span {
                 font-size: .8rem;
             }
         }
-
         li.active {
             color: #660014;
         }
@@ -181,5 +157,3 @@
         height: 20px;
     }
 }
-
-
