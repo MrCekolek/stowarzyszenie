@@ -1,60 +1,65 @@
 <!-- TO NAV WIDNIEJE NA STRONIE >PRZED< ZALOGOWANIEM, po powrocie do strony głównej etc.  -->
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" *ngIf="!this.loggedIn">
-    <a class="navbar-brand text-black-50" style="font-size: 1.3rem;" [routerLink]="['/auth/login']">
+  <a class="navbar-brand text-black-50" style="font-size: 1.3rem;" [routerLink]="['/auth/login']">
     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.WEBPAGE_TITLE_MEMBERS' | translate }}
   </a>
 
-    <!--  *****************************8 language -->
-    <div class="dropdown">
-        <div class="dropdown-header d-flex align-items-center dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <div class="flag-icon mr-2">
-                <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]" [alt]="this.languageService.currentLang">
-            </div>
-            <div class="chosen-language" class="mr-2">
-                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}
-            </div>
-        </div>
-
-        <div class="dropdown-menu dropdown-menu-right language-dropdown">
-            <div class="dropdown-item d-flex align-items-center" *ngFor="let lang of translateService.getLangs(); let i = index" [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
-                <img [src]="this.flagsImages[i]" [alt]="this.languageService.currentLang">
-                <span>
-          {{ this.translations[i] | translate }}
-      </span>
-            </div>
-        </div>
+  <!--  *****************************8 language -->
+  <div class="dropdown">
+    <div class="dropdown-header d-flex align-items-center dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+         aria-expanded="false">
+      <div class="flag-icon mr-2">
+        <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]"
+             [alt]="this.languageService.currentLang">
+      </div>
+      <div class="chosen-language" class="mr-2">
+        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}
+      </div>
     </div>
 
+    <div class="dropdown-menu dropdown-menu-right language-dropdown">
+      <div class="dropdown-item d-flex align-items-center"
+           *ngFor="let lang of translateService.getLangs(); let i = index"
+           [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
+        <img [src]="this.flagsImages[i]" [alt]="this.languageService.currentLang">
+        <span>
+          {{ this.translations[i] | translate }}
+      </span>
+      </div>
+    </div>
+  </div>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+          aria-expanded="false" aria-label="Toggle navigation">
     <i class="fas fa-bars"></i>
   </button>
 
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <!-- ngIf: to menu pojawia się, gdy przejdziemy na podstronę Ciob members -->
-        <div class="navbar-nav" role="navigation">
-            <a class="nav-item nav-link mr-3" [routerLink]="['/']">
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <!-- ngIf: to menu pojawia się, gdy przejdziemy na podstronę Ciob members -->
+    <div class="navbar-nav" role="navigation">
+      <a class="nav-item nav-link mr-3" [routerLink]="['/']">
         {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.HOME' | translate }}
       </a>
-            <a class="nav-item nav-link mr-3" [routerLink]="['/auth/login']">
+      <a class="nav-item nav-link mr-3" [routerLink]="['/auth/login']">
         {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.LOGIN' | translate }}
       </a>
-            <button class="btn btn-secondary btn-sm" [routerLink]="['/auth/register']">
+      <button class="btn btn-secondary btn-sm" [routerLink]="['/auth/register']">
         {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.REGISTER' | translate }}
       </button>
-        </div>
     </div>
+  </div>
 
-    <!-- ngIf: to menu pojawia się, gdy jesteśmy na stronie głównej cioba (nie wiem czy to w ogole bedzie,
-      mozliwe ze zrobimy tylko portal members) -->
-    <!-- <div class="navbar-nav" role="navigation">
-      <a class="nav-item nav-link active mr-3" href="#">
-          {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.HOME' | translate }}
-      </a>
-      <button class="btn btn-secondary btn-sm">
-          Members Login
-      </button>
-  </div> -->
+  <!-- ngIf: to menu pojawia się, gdy jesteśmy na stronie głównej cioba (nie wiem czy to w ogole bedzie,
+    mozliwe ze zrobimy tylko portal members) -->
+  <!-- <div class="navbar-nav" role="navigation">
+    <a class="nav-item nav-link active mr-3" href="#">
+        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.HOME' | translate }}
+    </a>
+    <button class="btn btn-secondary btn-sm">
+        Members Login
+    </button>
+</div> -->
 </nav>
 
 <router-outlet *ngIf="!this.loggedIn"></router-outlet>
@@ -155,322 +160,258 @@
 <!-------------------------------------- NAWIGACJA PO ZALOGOWANIU ------------------------- -->
 
 <div class="app-container" *ngIf="this.loggedIn">
-    <div class="app-main">
-        <!-- menu boczne -->
-        <div class="sidebar-wrapper">
-            <div class="sidebar">
-                <div class="header-logo">
-                    <div class="logo">
-                        ciob
-                    </div>
+  <div class="app-main">
+    <!-- menu boczne -->
+    <div class="sidebar-wrapper">
+      <div class="sidebar">
+        <div class="header-logo">
+          <div class="logo">
+            ciob
+          </div>
 
-                    <button type="button" class="hamburger mobile-toggle-nav">
+          <button type="button" class="hamburger mobile-toggle-nav">
                             <span class="hamburger-box">
                                 <span class="hamburger-inner"></span>
                             </span>
           </button>
-                </div>
+        </div>
 
-                <div class="scrollbar">
-                    <div class="inner">
-                        <ul class="vertical-menu">
-                            <li class="menu-heading">
-                                Menu
-                            </li>
+        <div class="scrollbar">
+          <div class="inner">
+            <ul class="vertical-menu">
+              <li class="menu-heading">
+                Menu
+              </li>
 
-                            <li class="menu-tile">
-                                <div class="title">
-                                    <i class="fas fa-th-large" data-toggle="tooltip" data-placement="right" title="Dashboard"></i>
-                                    <span>
+              <li class="menu-tile">
+                <div class="title">
+                  <i class="fas fa-th-large" data-toggle="tooltip" data-placement="right" title="Dashboard"></i>
+                  <span>
                                         Dashboard
                                     </span>
-                                </div>
-                            </li>
-                            <li class="menu-tile">
-                                <div class="title">
-                                    <i class="fas fa-user" data-toggle="tooltip" data-placement="right" title="Users"></i>
-                                    <span>
+                </div>
+              </li>
+              <li class="menu-tile">
+                <div class="title">
+                  <i class="fas fa-user" data-toggle="tooltip" data-placement="right" title="Users"></i>
+                  <span>
                     Users
                   </span>
-                                    <i class="fas fa-angle-down"></i>
-                                </div>
+                  <i class="fas fa-angle-down"></i>
+                </div>
 
-                                <ul class="submenu">
-                                    <li>
-                                        <a href="index.html" class="active">
+                <ul class="submenu">
+                  <li>
+                    <a href="index.html" class="active">
                       Users list
                     </a>
-                                    </li>
-                                    <li>
-                                        <a href="roles.html">
+                  </li>
+                  <li>
+                    <a href="roles.html">
                       Roles & permissions
                     </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-tile">
-                                <div class="title">
-                                    <i class="fas fa-th-large"></i>
-                                    <span>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-tile">
+                <div class="title">
+                  <i class="fas fa-th-large"></i>
+                  <span>
                                             Dashboard
                                         </span>
-                                </div>
-                            </li>
+                </div>
+              </li>
 
-                            <li class="menu-heading">
-                                Menu
-                            </li>
+              <li class="menu-heading">
+                Menu
+              </li>
 
-                            <li class="menu-tile">
-                                <div class="title">
-                                    <i class="fas fa-th-large"></i>
-                                    <span>
+              <li class="menu-tile">
+                <div class="title">
+                  <i class="fas fa-th-large"></i>
+                  <span>
                                         Dashboard
                                     </span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="slider"></div>
                 </div>
-            </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="slider"></div>
         </div>
-        <div class="sidebar-overlay"></div>
-        <!-- koniec menu bocznego -->
+      </div>
+    </div>
+    <div class="sidebar-overlay"></div>
+    <!-- koniec menu bocznego -->
 
-        <!-- wyszukiwarka uzytkownikow boczna  -->
-        <div class="search-sidenav">
-            <div class="search-container">
-                <div class="search-content">
-                    <div class="search-header">
-                        Użytkownicy
-                    </div>
+    <!-- wyszukiwarka uzytkownikow boczna  -->
+    <div class="search-sidenav">
+      <div class="search-container">
+        <div class="search-content">
+          <div class="search-header">
+            Użytkownicy
+          </div>
 
-                    <div class="searchbox">
-                        <i class="fas fa-search search-icon"></i>
-                        <input type="text" placeholder="Search user...">
-                    </div>
+          <div class="searchbox">
+            <i class="fas fa-search search-icon"></i>
+            <form [formGroup]="searchInputForm" novalidate>
+              <input id="search_input"
+                     formControlName="search_input"
+                     type="text"
+                     placeholder="Search user..."
+                     matInput>
+            </form>
+          </div>
 
-                    <!-- users list -->
-                    <!-- <ul class="list-group list-group-flush">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Morbi leo risus</li>
-              <li class="list-group-item">Porta ac consectetur ac</li>
-              <li class="list-group-item">Vestibulum at eros</li>
-          </ul> -->
+          <!-- users list -->
+          <!-- <ul class="list-group list-group-flush">
+    <li class="list-group-item">Cras justo odio</li>
+    <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Morbi leo risus</li>
+    <li class="list-group-item">Porta ac consectetur ac</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+</ul> -->
 
-                    <table class="table table-borderless users-table">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <img src="../../../../assets/images/avatars/face1.jpg" alt="">
-                                </td>
-                                <td>
-                                    Eryk Kowalski
-                                </td>
-                                <td class="text-align-right">
-                                    <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="See profile">
-                  <i class="fas fa-address-card"></i>
-                </button>
-                                    <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="Send message">
-                  <i class="fas fa-envelope"></i>
-                </button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <img src="../../../../assets/images/avatars/face2.jpg" alt="">
-                                </td>
-                                <td>
-                                    Alicja Nowak
-                                </td>
-                                <td>
-                                    <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="See profile">
-                  <i class="fas fa-address-card"></i>
-                </button>
-                                    <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="Send message">
-                  <i class="fas fa-envelope"></i>
-                </button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <img src="../../../../assets/images/avatars/face3.jpg" alt="">
-                                </td>
-                                <td>
-                                    Adam Lis
-                                </td>
-                                <td>
-                                    <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="See profile">
-                  <i class="fas fa-address-card"></i>
-                </button>
-                                    <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="Send message">
-                  <i class="fas fa-envelope"></i>
-                </button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <img src="../../../../assets/images/avatars/face4.jpg" alt="">
-                                </td>
-                                <td>
-                                    Marcin Ryż
-                                </td>
-                                <td>
-                                    <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="See profile">
-                  <i class="fas fa-address-card"></i>
-                </button>
-                                    <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="Send message">
-                  <i class="fas fa-envelope"></i>
-                </button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <img src="../../../../assets/images/avatars/face5.jpg" alt="">
-                                </td>
-                                <td>
-                                    Kim Lee
-                                </td>
-                                <td>
-                                    <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="See profile">
-                  <i class="fas fa-address-card"></i>
-                </button>
-                                    <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="Send message">
-                  <i class="fas fa-envelope"></i>
-                </button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <img src="../../../../assets/images/avatars/face6.jpg" alt="">
-                                </td>
-                                <td>
-                                    Henryk Garncarz
-                                </td>
-                                <td>
-                                    <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="See profile">
-                  <i class="fas fa-address-card"></i>
-                </button>
-                                    <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="Send message">
-                  <i class="fas fa-envelope"></i>
-                </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+          <table class="table table-borderless users-table">
+            <tbody *ngIf="!this.isLoading else isLoadingElse">
+              <tr *ngFor="let user of this.foundedUsers">
+                <td>
+                  <img src="../../../../assets/images/default_man.png" alt="">
+                </td>
+                <td>
+                  {{ user.first_name }}
+                  {{ user.last_name }}
+                </td>
+                <td class="text-align-right">
+                  <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom"
+                          title="See profile">
+                    <i class="fas fa-address-card"></i>
+                  </button>
+                  <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom"
+                          title="Send message">
+                    <i class="fas fa-envelope"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <ng-template #isLoadingElse>
+              <tr>
+                <!-- TODO daj tu jakis fajny spinnerek -->
+                Loading ...
+              </tr>
+            </ng-template>
+          </table>
         </div>
-        <div class="search-overlay"></div>
-        <!-- koniec wyszukiwarki -->
+      </div>
+    </div>
+    <div class="search-overlay"></div>
+    <!-- koniec wyszukiwarki -->
 
-        <!-- glowny kontent strony -->
-        <div class="app-main-outer">
-            <div class="app-main-inner">
-                <!-- mobilna nawigacja -->
-                <div class="header-mobile-wrapper">
-                    <div class="header-logo">
-                        <div class="logo">
-                            ciob
-                        </div>
+    <!-- glowny kontent strony -->
+    <div class="app-main-outer">
+      <div class="app-main-inner">
+        <!-- mobilna nawigacja -->
+        <div class="header-mobile-wrapper">
+          <div class="header-logo">
+            <div class="logo">
+              ciob
+            </div>
 
-                        <button class="hamburger">
-                                <span class="hamburger-box">
-                                    <span class="hamburger-inner"></span>
-                                </span>
+            <button class="hamburger">
+              <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+              </span>
             </button>
 
-                        <div class="header-menu">
-                            <i class="fas fa-ellipsis-v"></i>
-                        </div>
-                    </div>
+            <div class="header-menu">
+              <i class="fas fa-ellipsis-v"></i>
+            </div>
+          </div>
+        </div>
+        <!-- koniec mobilnej nawigacji -->
+
+        <!-- naglowek strony -->
+        <div class="app-header">
+          <div class="page-heading">
+            <span>
+              Users list
+            </span>
+            <div class="breadcrumbs">
+              <ul>
+                <li>
+                  Users
+                </li>
+                <li class="active">
+                  Roles & permissions
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="header-right">
+            <div class="header-btn search">
+              <i class="fas fa-search" id="search-icon" data-toggle="tooltip" data-placement="bottom"
+                 title="Search users"></i>
+            </div>
+            <div class="header-btn">
+              <i class="fas fa-bell" data-toggle="tooltip" data-placement="bottom" title="Notifications"></i>
+              <i class="fas fa-envelope" data-toggle="tooltip" data-placement="bottom" title="Messages"></i>
+            </div>
+            <div class="header-btn">
+              <div class="dropdown-header d-flex align-items-center dropdown-toggle" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                <div class="flag-icon mr-2">
+                  <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]"
+                       [alt]="this.languageService.currentLang">
                 </div>
-                <!-- koniec mobilnej nawigacji -->
+                <div class="chosen-language" class="mr-2">
+                  {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}
+                </div>
+              </div>
 
-                <!-- naglowek strony -->
-                <div class="app-header">
-                    <div class="page-heading">
-                        <span>
-                                Users list
-                            </span>
-                        <div class="breadcrumbs">
-                            <ul>
-                                <li>
-                                    Users
-                                </li>
-                                <li class="active">
-                                    Roles & permissions
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="header-right">
-                        <div class="header-btn search">
-                            <i class="fas fa-search" id="search-icon" data-toggle="tooltip" data-placement="bottom" title="Search users"></i>
-                        </div>
-                        <div class="header-btn">
-                            <i class="fas fa-bell" data-toggle="tooltip" data-placement="bottom" title="Notifications"></i>
-                            <i class="fas fa-envelope" data-toggle="tooltip" data-placement="bottom" title="Messages"></i>
-                        </div>
-                        <div class="header-btn">
-                            <div class="dropdown-header d-flex align-items-center dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="flag-icon mr-2">
-                                    <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]" [alt]="this.languageService.currentLang">
-                                </div>
-                                <div class="chosen-language" class="mr-2">
-                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}
-                                </div>
-                            </div>
-
-                            <div class="dropdown-menu dropdown-menu-right language-dropdown">
-                                <div class="dropdown-item d-flex align-items-center" *ngFor="let lang of translateService.getLangs(); let i = index" [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
-                                    <img [src]="this.flagsImages[i]" [alt]="this.languageService.currentLang">
-                                    <span>
+              <div class="dropdown-menu dropdown-menu-right language-dropdown">
+                <div class="dropdown-item d-flex align-items-center"
+                     *ngFor="let lang of translateService.getLangs(); let i = index"
+                     [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
+                  <img [src]="this.flagsImages[i]" [alt]="this.languageService.currentLang">
+                  <span>
                             {{ this.translations[i] | translate }}
                         </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="header-btn">
-                            <div class="dropdown-header d-flex align-items-center dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="avatar" data-toggle="tooltip" data-placement="bottom" title="Logged user"></div>
-                            </div>
-
-                            <div class="dropdown-menu dropdown-menu-right user-dropdown">
-                                <div class="dropdown-item d-flex align-items-center">
-                                    <span>My profile</span>
-                                </div>
-                                <div class="dropdown-item d-flex align-items-center">
-                                    <span>Edit preferences</span>
-                                </div>
-                                <div class="dropdown-item d-flex align-items-center">
-                                    <i class="fas fa-power-off mr-2"></i>
-                                    <span>Logout</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="header-right-overlay"></div>
                 </div>
-                <!-- koniec naglowka -->
-
-                <!-- kontent strony -->
-                <div class="app-inner-content">
-                    <router-outlet></router-outlet>
-                </div>
-                <!-- koniec kontentu strony -->
+              </div>
             </div>
+            <div class="header-btn">
+              <div class="dropdown-header d-flex align-items-center dropdown-toggle" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                <div class="avatar" data-toggle="tooltip" data-placement="bottom" title="Logged user"></div>
+              </div>
+
+              <div class="dropdown-menu dropdown-menu-right user-dropdown">
+                <div class="dropdown-item d-flex align-items-center">
+                  <span>My profile</span>
+                </div>
+                <div class="dropdown-item d-flex align-items-center">
+                  <span>Edit preferences</span>
+                </div>
+                <div class="dropdown-item d-flex align-items-center">
+                  <i class="fas fa-power-off mr-2"></i>
+                  <span>Logout</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="header-right-overlay"></div>
         </div>
-        <!-- koniec glownego kontentu strony -->
+        <!-- koniec naglowka -->
+
+        <!-- kontent strony -->
+        <div class="app-inner-content">
+          <router-outlet></router-outlet>
+        </div>
+        <!-- koniec kontentu strony -->
+      </div>
     </div>
+    <!-- koniec glownego kontentu strony -->
+  </div>
 </div>
