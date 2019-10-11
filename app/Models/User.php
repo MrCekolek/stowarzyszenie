@@ -74,6 +74,12 @@ class User extends Authenticatable implements JWTSubject {
         $this->attributes['birthdate'] = Carbon::createFromFormat('d-m-Y', $birthdateExploded[0] . '-' . $birthdateExploded[1] . '-' . $birthdateExploded[2]);
     }
 
+    public function scopeFirstLastName($query, $searchTyped) {
+        return $query
+            ->where('first_name', 'ILIKE', '%' . $searchTyped . '%')
+            ->orWhere('last_name', 'ILIKE', '%' . $searchTyped . '%');
+    }
+
     public function scopeLoginEmail($query, $login_email) {
         return $query->where('login_email', $login_email);
     }
