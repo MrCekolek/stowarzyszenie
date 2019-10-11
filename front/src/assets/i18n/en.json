@@ -103,13 +103,32 @@
 					"LOGIN": "Sign in",
 					"REGISTER": "Register"
 				},
+				"SEARCHBAR": {
+					"TITLE": "Members"
+				},
 				"SIDENAV": {
 					"DASHBOARD": "Dashboard",
-					"USERS": "Members"
+					"MENU_HEADINGS": {
+						"MENU": "Menu"
+					},
+					"USERS": {
+						"MAIN": "Members",
+						"ROLES_PREFERENCES": "Roles and Permissions",
+						"USERS_LIST": "User List"
+					}
 				},
 				"WEBPAGE_TITLE_MEMBERS": "Ciob members"
 			},
-			"TITLE": "Example title"
+			"TITLE": "Example title",
+			"USERS": {
+				"ENTRIES": "Show",
+				"SEARCH": "Search for user",
+				"USERS_LIST_TITLE": "User List"
+			}
+		},
+		"PAGINATION": {
+			"NEXT": "Next",
+			"PREVIOUS": "Previous"
 		},
 		"SERVER": {
 			"CUSTOM": {
