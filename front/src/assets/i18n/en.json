@@ -1,5 +1,21 @@
 {
 	"STOWARZYSZENIE": {
+		"LABELS": {
+			"AVATAR": "Avatar",
+			"BIRTHDATE": "Date of Birth",
+			"CONTACT_EMAIL": "Contact email",
+			"FIRST_NAME": "First name",
+			"ID": "Id",
+			"ITEMS_PER_PAGE": "items per page",
+			"LAST_NAME": "Last name",
+			"LOADING_DATA": "Loading data ...",
+			"LOGIN_EMAIL": "Login email",
+			"NEXT_PAGE": "Next page",
+			"NO_DATA": "No data.",
+			"PHONE_NUMBER": "Phone Number",
+			"PREVIOUS_PAGE": "Previous page",
+			"RANGE": "of"
+		},
 		"MODULES": {
 			"AUTH": {
 				"FORGOT": {

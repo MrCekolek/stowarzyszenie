@@ -15,6 +15,7 @@ class CreatePreferenceUsersTable extends Migration
     {
         Schema::create('preference_users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('avatar');
             $table->string('time_zone');
             $table->string('lang');
             $table->unsignedBigInteger('user_id');

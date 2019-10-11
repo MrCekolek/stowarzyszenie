@@ -1,5 +1,21 @@
 {
 	"STOWARZYSZENIE": {
+		"LABELS": {
+			"AVATAR": "Аватар",
+			"BIRTHDATE": "Дата рождения",
+			"CONTACT_EMAIL": "Контактный адрес электронной почты",
+			"FIRST_NAME": "имя",
+			"ID": "Id",
+			"ITEMS_PER_PAGE": "Элементов на странице",
+			"LAST_NAME": "имя",
+			"LOADING_DATA": "Загрузка данных ...",
+			"LOGIN_EMAIL": "Адрес электронной почты для входа",
+			"NEXT_PAGE": "Следующая страница",
+			"NO_DATA": "Нет доступных данных.",
+			"PHONE_NUMBER": "Номер телефона",
+			"PREVIOUS_PAGE": "Предыдущая страница",
+			"RANGE": "с"
+		},
 		"MODULES": {
 			"AUTH": {
 				"FORGOT": {
