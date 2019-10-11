@@ -1,0 +1,78 @@
+<div class="tab-content">
+    <div class="container-fluid">
+        <div class="mb-3 card">
+            <div class="card-header">
+                <div class="card-title">
+                    <i class="fas fa-user"></i> {{ 'STOWARZYSZENIE.MODULES.USERS.USERS_LIST_TITLE' | translate }}
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-around">
+                    <div class="entries d-flex">
+                        <div>{{ 'STOWARZYSZENIE.MODULES.USERS.ENTRIES' | translate }}</div>
+
+                        <!-- liczba uzytkownikow wyswietlana na jedna strone -->
+                        <select class="custom-select">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+
+                    <!-- wyszukiwarka -->
+                    <div class="searchbox d-flex">
+                        <div class="ml-3">{{ 'STOWARZYSZENIE.MODULES.USERS.SEARCH' | translate }}</div>
+                        <i class="fas fa-search search-icon"></i>
+                        <form>
+                            <input type="text" placeholder="Search user...">
+                        </form>
+                    </div>
+                </div>
+
+                <!-- lista uzytkownikow  -->
+                <table class="table users-table">
+                    <!-- tu jak chcesz w naglowkach mozesz zrobic filtry, nwm czy o to chodzilo jak nie to 
+                        wywal ten thead -->
+                    <thead>
+                        <td>Filtr?</td>
+                        <td>Filtr?</td>
+                        <td>Filtr?</td>
+                        <td>Filtr?</td>
+                    </thead>
+
+                    <tbody>
+                        <!-- <app-user-tile *ngFor="let item of list" [user]="item"></app-user-tile> -->
+                    </tbody>
+                </table>
+
+                <!-- TODO paginacja - w zaleznosci od ilosci pozycji wybranych wyzej dzieli 
+                    na strony zawierajace po iles tam wynikow -->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        <!-- przycisk 'poprzednie' -->
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">
+                                {{ 'STOWARZYSZENIE.PAGINATION.PREVIOUS' | translate }}
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">3</a>
+                        </li>
+                        <!-- przycisk 'nastepne' -->
+                        <li class="page-item">
+                            <a class="page-link" href="#">
+                            {{ 'STOWARZYSZENIE.PAGINATION.NEXT' | translate }}
+                        </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

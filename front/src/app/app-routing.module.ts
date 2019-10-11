@@ -19,6 +19,13 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'users',
+    loadChildren: './modules/users/users.module#UsersModule',
+    canActivateChild: [
+      LoggedGuard
+    ]
+  },
+  {
     path: '',
     redirectTo: 'auth',
     pathMatch: 'full'

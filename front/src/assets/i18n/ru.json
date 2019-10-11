@@ -103,13 +103,32 @@
 					"LOGIN": "Войти",
 					"REGISTER": "зарегистрироваться"
 				},
+				"SEARCHBAR": {
+					"TITLE": "члены"
+				},
 				"SIDENAV": {
 					"DASHBOARD": "Индекс",
-					"USERS": "члены"
+					"MENU_HEADINGS": {
+						"MENU": "меню"
+					},
+					"USERS": {
+						"MAIN": "члены",
+						"ROLES_PREFERENCES": "Роли и разрешения",
+						"USERS_LIST": "Список пользователей"
+					}
 				},
 				"WEBPAGE_TITLE_MEMBERS": "Ciob Члены"
 			},
-			"TITLE": "Пример заголовка"
+			"TITLE": "Пример заголовка",
+			"USERS": {
+				"ENTRIES": "Шоу",
+				"SEARCH": "Поиск пользователя",
+				"USERS_LIST_TITLE": "Список пользователей"
+			}
+		},
+		"PAGINATION": {
+			"NEXT": "следующий",
+			"PREVIOUS": "предыдущий"
 		},
 		"SERVER": {
 			"CUSTOM": {

@@ -87,9 +87,8 @@ export class NavbarComponent implements OnInit {
         $('.header-right').toggleClass('opened');
       });
 
-      $('.title').click(function(event){
-        $( event.target ).closest( 'ul.submenu' ).css('background', '#000');
-        console.log($( event.target ).closest( '.submenu' ));
+      $('.with-submenu').click(function(event){
+        $(this).find('.submenu').slideToggle(200);
       });
 
       $('#search-icon').click(function() {
