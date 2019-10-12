@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from "../../../shared/services/user/user.service";
 import * as $ from 'jquery';
 import { TokenService } from "../../auth/login/service/token.service";
 import { Router } from "@angular/router";
 import { LanguageService } from "../../../shared/services/user/language.service";
-import { SearchService } from "./service/search.service";
+import { SearchService } from "../../../shared/services/user/search.service";
 import { FormGroup, FormBuilder } from "@angular/forms";
-import {debounceTime, distinctUntilChanged, map, switchMap} from "rxjs/operators";
+import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs/operators";
+import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
+import {pipe} from "rxjs";
 
 
 @Component({
@@ -16,8 +18,16 @@ import {debounceTime, distinctUntilChanged, map, switchMap} from "rxjs/operators
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  public searchInputForm: FormGroup;
-  private searchInputSubscription;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+
+  private searchInputForm: FormGroup;
+  private listData: MatTableDataSource<any>;
+  private displayedColumns: string[] = [
+    'avatar',
+    'name',
+    'actions'
+  ];
   private loggedIn: boolean;
   private isLoading: boolean = false;
   private flagsImages = [
@@ -35,8 +45,6 @@ export class NavbarComponent implements OnInit {
     'pl': 1,
     'ru': 2,
   };
-  private foundedUsers = [];
-  private searchTyped = 'elo';
 
   constructor(
     private translateService: TranslateService,
@@ -49,10 +57,29 @@ export class NavbarComponent implements OnInit {
   ) {
     this.userService.loginStatus.subscribe(value => this.loggedIn = value );
     this.createForm();
-    this.registerFormValuesChanged();
   }
 
   ngOnInit() {
+    this.searchService.getUsers()
+      .pipe(
+        map(
+          data => {
+            this.isLoading = true;
+
+            return data;
+          }
+        )
+      )
+      .subscribe(
+        data => {
+          this.listData = new MatTableDataSource(data['users']);
+          this.listData.sort = this.sort;
+          this.listData.paginator = this.paginator;
+
+          this.isLoading = false;
+        }
+      )
+
     $(document).ready(() => {
       // $('[data-toggle="tooltip"]').hover(function(){
       //     $(this).tooltip('show');
@@ -64,12 +91,6 @@ export class NavbarComponent implements OnInit {
 
       const searchService = this.searchService;
       const self = this;
-
-      searchService.getUsers(self.searchTyped).subscribe(
-        data => {
-          self.foundedUsers = data['users']
-        }
-      );
 
       $('.hamburger').click(function() {
         $('.sidebar-wrapper').toggleClass('collapsed');
@@ -92,10 +113,6 @@ export class NavbarComponent implements OnInit {
       });
 
       $('#search-icon').click(function() {
-        searchService.getUsers(self.searchTyped).subscribe(
-          data => self.foundedUsers = data['users']
-        );
-
         $('.search-sidenav').toggleClass('opened');
       });
 
@@ -107,33 +124,8 @@ export class NavbarComponent implements OnInit {
 
   createForm() {
     this.searchInputForm = this.formBuilder.group({
-      'search_input': [this.searchTyped, []]
+      'search_input': ['', []]
     });
-  }
-
-  registerFormValuesChanged() {
-    this.searchInputSubscription = this.search_input.valueChanges
-      .pipe(
-        map(
-          data => {
-            this.isLoading = true;
-            return data;
-          }
-        ),
-        distinctUntilChanged(),
-        debounceTime(1),
-        switchMap(
-          data  => {
-            return this.searchService.getUsers(data);
-          }
-        ),
-      )
-      .subscribe(
-        data => {
-          this.foundedUsers = data['users'];
-          this.isLoading = false;
-        }
-      );
   }
 
   logout(event: MouseEvent) {
@@ -145,6 +137,10 @@ export class NavbarComponent implements OnInit {
 
   setLang(lang) {
     this.languageService.setLang(lang);
+  }
+
+  searchUsers() {
+    this.listData.filter = this.search_input.value.trim().toLowerCase();
   }
 
   get search_input() {

@@ -42,6 +42,6 @@ Route::group([
     });
 
     Route::prefix('user')->group(function () {
-        Route::post('get', 'UserController@index');
+        Route::get('get', 'UserController@index');
     });
 });

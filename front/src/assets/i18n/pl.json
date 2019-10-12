@@ -1,5 +1,21 @@
 {
 	"STOWARZYSZENIE": {
+		"LABELS": {
+			"AVATAR": "Avatar",
+			"BIRTHDATE": "Data urodzenia",
+			"CONTACT_EMAIL": "Email kontaktowy",
+			"FIRST_NAME": "Imie",
+			"ID": "Id",
+			"ITEMS_PER_PAGE": "Rzeczy na stronę",
+			"LAST_NAME": "Nazwisko",
+			"LOADING_DATA": "Ładowanie danych...",
+			"LOGIN_EMAIL": "Email do logowania",
+			"NEXT_PAGE": "Następna strona",
+			"NO_DATA": "Brak danych.",
+			"PHONE_NUMBER": "Numer telefonu",
+			"PREVIOUS_PAGE": "Poprzednia strona",
+			"RANGE": "Z"
+		},
 		"MODULES": {
 			"AUTH": {
 				"FORGOT": {

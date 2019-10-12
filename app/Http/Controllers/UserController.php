@@ -6,10 +6,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller {
-    public function index(Request $request) {
-        $inputs = $request->all();
-
-        $users = User::firstLastName($inputs['searchTyped'])->get();
+    public function index() {
+        $users = User::all()->each(function ($user) {
+            $user['name'] = $user->getName();
+        });
 
         return response()->json([
             'users' => $users
@@ -26,3 +26,4 @@ class UserController extends Controller {
         ]);
     }
 }
+

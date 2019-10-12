@@ -64,6 +64,11 @@ class User extends Authenticatable implements JWTSubject {
         return [];
     }
 
+    public function getName()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
     public function setPasswordAttribute($value) {
         $this->attributes['password'] = bcrypt($value);
     }
@@ -72,12 +77,6 @@ class User extends Authenticatable implements JWTSubject {
         $birthdateExploded = explode('/', $value);
 
         $this->attributes['birthdate'] = Carbon::createFromFormat('d-m-Y', $birthdateExploded[0] . '-' . $birthdateExploded[1] . '-' . $birthdateExploded[2]);
-    }
-
-    public function scopeFirstLastName($query, $searchTyped) {
-        return $query
-            ->where('first_name', 'ILIKE', '%' . $searchTyped . '%')
-            ->orWhere('last_name', 'ILIKE', '%' . $searchTyped . '%');
     }
 
     public function scopeLoginEmail($query, $login_email) {

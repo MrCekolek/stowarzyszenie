@@ -5,6 +5,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from '../../app-routing.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {MatInputModule} from "@angular/material";
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -14,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     AppRoutingModule,
     MatSidenavModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatInputModule
   ],
   exports: [NavbarComponent],
   providers: []
