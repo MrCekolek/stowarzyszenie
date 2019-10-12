@@ -55,5 +55,6 @@ export class LanguageService {
         this.setLang(data['lang'])
       }
     );
+
   }
 }

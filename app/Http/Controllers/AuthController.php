@@ -82,6 +82,7 @@ class AuthController extends Controller {
         ]);
 
         PreferenceUser::create([
+            'avatar' => $input['avatar'],
             'time_zone' => $time_zone,
             'lang' => $input['lang'],
             'user_id' => $user['id']

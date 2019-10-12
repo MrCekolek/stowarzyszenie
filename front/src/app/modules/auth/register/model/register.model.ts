@@ -14,6 +14,7 @@ export class RegisterModel {
   contact_email?: string;
   phone_number?: string;
   lang: string;
+  avatar: string;
 
   constructor(registerModel: Object) {
     this.login_email = registerModel['login_email'];
@@ -30,6 +31,7 @@ export class RegisterModel {
     this.country = registerModel['country'];
     this.contact_email = registerModel['contact_email'];
     this.phone_number = registerModel['phone_number'];
+    this.avatar = this.gender === 0 ? '../../../../assets/images/default_man.png' : '../../../../assets/images/default_woman.png';
   }
 
   setLang(lang: string) {

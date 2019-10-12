@@ -1113,3 +1113,12 @@ button:active {
 .users-table tr button {
     color: #495057;
 }
+
+.hide {
+  display: none;
+}
+
+mat-footer-row mat-footer-cell {
+  justify-content: center;
+  font-style: italic;
+}

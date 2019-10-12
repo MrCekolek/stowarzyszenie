@@ -43,11 +43,13 @@ class ChangeUserTimezoneJob implements ShouldQueue {
 
         $preference_user = PreferenceUser::userId($user['id'])->first();
 
-        if ($preference_user['time_zone'] !== $time_zone) {
-            $preference_user['time_zone'] = $time_zone;
-        }
+        if (! empty($preference_user)) {
+            if ($preference_user['time_zone'] !== $time_zone) {
+                $preference_user['time_zone'] = $time_zone;
+            }
 
-        $preference_user->save();
+            $preference_user->save();
+        }
     }
 
     public function getGeolocation() {
