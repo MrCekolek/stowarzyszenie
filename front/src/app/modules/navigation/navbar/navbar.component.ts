@@ -72,7 +72,7 @@ export class NavbarComponent implements OnInit {
       )
       .subscribe(
         data => {
-          this.listData = new MatTableDataSource(data['users']);
+          this.listData = new MatTableDataSource(data['users'].slice(-5));
           this.listData.sort = this.sort;
           this.listData.paginator = this.paginator;
 
