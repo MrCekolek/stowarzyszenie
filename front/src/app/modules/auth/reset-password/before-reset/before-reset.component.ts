@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { BeforeResetService } from "./service/before-reset.service";
-import { RegisterService } from "../../register/service/register.service";
+import { BeforeResetService } from "../../../../core/http/before-reset.service";
+import { RegisterService } from "../../../../core/http/register.service";
 import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs/operators";
 
 @Component({
