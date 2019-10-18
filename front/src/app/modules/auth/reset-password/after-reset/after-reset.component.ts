@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { AfterResetService } from "./service/after-reset.service";
+import { AfterResetService } from "../../../../core/http/after-reset.service";
 
 @Component({
   selector: 'app-after-reset',

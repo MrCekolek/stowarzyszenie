@@ -1115,34 +1115,40 @@ button:active {
 }
 
 .hide {
-  display: none;
+    display: none;
 }
 
 mat-footer-row mat-footer-cell {
-  justify-content: center;
-  font-style: italic;
+    justify-content: center;
+    font-style: italic;
 }
 
-app-users-list {
-  width: 100%;
+app-users-list,
+app-roles-list {
+    width: 100%;
 }
 
 .mat-header-cell {
-  padding-left: 10px;
+    padding-left: 10px;
 }
 
-.mat-cell, .mat-footer-cell {
-  padding-left: 10px;
+.mat-cell,
+.mat-footer-cell {
+    padding-left: 10px;
 }
 
-.mat-row mat-cell:first-of-type, mat-footer-cell:first-of-type, mat-header-cell:first-of-type,
-.mat-header-row mat-cell:first-of-type, mat-footer-cell:first-of-type, mat-header-cell:first-of-type {
-  padding: 0;
-  padding-left: 10px;
+.mat-row mat-cell:first-of-type,
+mat-footer-cell:first-of-type,
+mat-header-cell:first-of-type,
+.mat-header-row mat-cell:first-of-type,
+mat-footer-cell:first-of-type,
+mat-header-cell:first-of-type {
+    padding: 0;
+    padding-left: 10px;
 }
 
 .mat-cell {
-  img {
-    max-height: 30px;
-  }
+    img {
+        max-height: 30px;
+    }
 }

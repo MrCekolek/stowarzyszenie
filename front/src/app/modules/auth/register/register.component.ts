@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterModel } from "./model/register.model";
+import { RegisterModel } from "../../../shared/models/register.model";
 import { FormGroup, FormBuilder, Validators, AbstractControl } from "@angular/forms";
-import { RegisterService } from "./service/register.service";
+import { RegisterService } from "../../../core/http/register.service";
 import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs/operators";
 
 @Component({

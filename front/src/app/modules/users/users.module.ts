@@ -5,7 +5,7 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UserTileComponent } from './user-tile/user-tile.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatInputModule} from "@angular/material";
+import { MatInputModule } from "@angular/material";
 
 @NgModule({
   declarations: [UserTileComponent, UsersListComponent],
