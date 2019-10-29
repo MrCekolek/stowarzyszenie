@@ -135,6 +135,15 @@
 				},
 				"WEBPAGE_TITLE_MEMBERS": "Ciob members"
 			},
+			"ROLES": {
+				"CHOOSE_ROLE": "Select a role from the list to edit the permissions",
+				"COLLAPSE_ALL": "Collapse all groups",
+				"EXPAND_ALL": "Expand all groups",
+				"LIST_TITLE": "Roles and Permissions",
+				"SELECT_ALL": "Select all permissions",
+				"SELECT_DESC": "Choose roles",
+				"UNSELECT_ALL": "Deselect all permissions"
+			},
 			"TITLE": "Example title",
 			"USERS": {
 				"ENTRIES": "Show",

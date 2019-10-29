@@ -1,0 +1,28 @@
+<ul class="permission-group">
+    <li class="permission-group-heading">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1" [id]="this.permissionGroupObj.id" [(ngModel)]="this.permissionGroupObj.isSelected" name="list_name" value="{{ this.permissionGroupObj.id }}" (ngModelChange)="parentClick(this.permissionGroupObj)">
+            <label class="custom-control-label" [for]="this.permissionGroupObj.id">
+                {{ this.permissionGroupObj.value }} 
+            </label>
+            <span (click)="expandCollapse(this.permissionGroupObj)" class="ml-3">
+                <i class="fas fa-angle-up" *ngIf="!this.permissionGroupObj.isClosed; else isCollapsed"></i>
+                <ng-template #isCollapsed><i class="fas fa-angle-down"></i></ng-template>
+            </span>
+        </div>
+    </li>
+
+
+    <ul>
+        <div class="permissions-list" [hidden]="this.permissionGroupObj.isClosed">
+            <li *ngFor="let child of this.permissionGroupObj.childList">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" [(ngModel)]="child.isSelected" class="custom-control-input" name="list_name_child" value="{{ child.id }}" (ngModelChange)="childClick(this.permissionGroupObj, child)" [id]="'child' + child.id" />
+                    <label class="custom-control-label" [for]="'child' + child.id">
+                            {{ child.value }}
+                        </label>
+                </div>
+            </li>
+        </div>
+    </ul>
+</ul>

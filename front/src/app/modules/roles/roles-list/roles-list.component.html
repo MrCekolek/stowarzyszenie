@@ -1,0 +1,55 @@
+<div class="tab-content">
+    <div class="container-fluid">
+        <div class="mb-3 card">
+            <div class="card-header">
+                <div class="card-title">
+                    <i class="fas fa-user-tag"></i> {{ 'STOWARZYSZENIE.MODULES.ROLES.LIST_TITLE' | translate }}
+                </div>
+            </div>
+            <div class="card-body example-container">
+                <div class="d-flex mt-1 mb-5">
+                    <div>
+                        {{ 'STOWARZYSZENIE.MODULES.ROLES.CHOOSE_ROLE' | translate }}
+                    </div>
+
+                    <!-- roles select -->
+                    <select class="custom-select">
+                        <option selected>
+                            {{ 'STOWARZYSZENIE.MODULES.ROLES.SELECT_DESC' | translate }}
+                        </option>
+                        <option value="author">User/author</option>
+                        <option value="chair">Conference chair</option>
+                        <option value="reviewer">Reviewer</option>
+                    </select>
+                </div>
+
+                <div class="permissions">
+                    <div class="select-all mb-3">
+                        <button class="btn btn-sm btn-info" (click)="selectUnselectAll(roles)">
+                            <span *ngIf="roles.isAllSelected; else noneSelected">
+                                {{ 'STOWARZYSZENIE.MODULES.ROLES.UNSELECT_ALL' | translate }}
+                            </span>
+                            <ng-template #noneSelected>
+                                {{ 'STOWARZYSZENIE.MODULES.ROLES.SELECT_ALL' | translate }}
+                            </ng-template>
+                        </button>
+
+                        <button class="btn btn-sm btn-info ml-3" (click)="expandCollapseAll(roles)">
+                            <span *ngIf="roles.isAllCollapsed; else isCollapsed">
+                                {{ 'STOWARZYSZENIE.MODULES.ROLES.EXPAND_ALL' | translate }} 
+                                <i class="fas fa-angle-double-down ml-2"></i>
+                            </span>
+                            <ng-template #isCollapsed>
+                                {{ 'STOWARZYSZENIE.MODULES.ROLES.COLLAPSE_ALL' | translate }} 
+                                <i class="fas fa-angle-double-up ml-2"></i>
+                            </ng-template>
+                        </button>
+                    </div>
+
+                    <app-permission-group *ngFor="let group of this.roles.parentChildChecklist" [permissionGroupObj]="group">
+                    </app-permission-group>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

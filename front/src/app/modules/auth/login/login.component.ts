@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
-import { LoginService } from "./service/login.service";
-import { LoginModel } from "./model/login.model";
+import { LoginService } from "../../../core/http/login.service";
+import { LoginModel } from "../../../shared/models/login.model";
 import { TokenService } from "./service/token.service";
 import { LanguageService } from "../../../shared/services/user/language.service";
 import { SharedModule } from "../../../shared/shared.module";
