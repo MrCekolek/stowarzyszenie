@@ -19,9 +19,9 @@ export class UsersListComponent implements OnInit {
     'login_email',
     'first_name',
     'last_name',
-    'birthdate',
-    'contact_email',
-    'phone_number'
+    'actions'
+    // 'contact_email',
+    // 'phone_number'
   ];
 
   constructor(

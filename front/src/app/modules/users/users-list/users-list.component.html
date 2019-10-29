@@ -6,7 +6,7 @@
           <i class="fas fa-user"></i> {{ 'STOWARZYSZENIE.MODULES.USERS.USERS_LIST_TITLE' | translate }}
         </div>
       </div>
-      <div class="card-body">
+      <div class="card-body example-container">
         <div class="d-flex justify-content-around">
           <!-- wyszukiwarka -->
           <div class="searchbox d-flex">
@@ -19,7 +19,7 @@
                        formControlName="search_input"
                        placeholder="Search user..."
                        autocomplete="off"
-                       (keyup)="searchUsers()" />
+                       (keyup)="searchUsers()"/>
               </mat-form-field>
             </form>
           </div>
@@ -33,6 +33,11 @@
               }}
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
+                <span class="mobile-label">
+                  {{
+                    'STOWARZYSZENIE.LABELS.ID' | translate
+                  }}:
+               </span>
               {{ element.id }}
             </mat-cell>
           </ng-container>
@@ -44,6 +49,11 @@
               }}
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
+                <span class="mobile-label">
+                  {{
+                    'STOWARZYSZENIE.LABELS.LOGIN_EMAIL' | translate
+                  }}:
+                </span>
               {{ element.login_email }}
             </mat-cell>
           </ng-container>
@@ -55,6 +65,11 @@
               }}
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
+                <span class="mobile-label">
+                  {{
+                    'STOWARZYSZENIE.LABELS.FIRST_NAME' | translate
+                  }}:
+                </span>
               {{ element.first_name }}
             </mat-cell>
           </ng-container>
@@ -66,6 +81,11 @@
               }}
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
+                <span class="mobile-label">
+                  {{
+                    'STOWARZYSZENIE.LABELS.LAST_NAME' | translate
+                  }}:
+                </span>
               {{ element.last_name }}
             </mat-cell>
           </ng-container>
@@ -77,6 +97,11 @@
               }}
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
+                <span class="mobile-label">
+                  {{
+                    'STOWARZYSZENIE.LABELS.BIRTHDATE' | translate
+                  }}:
+                </span>
               {{ element.birthdate }}
             </mat-cell>
           </ng-container>
@@ -88,6 +113,11 @@
               }}
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
+                <span class="mobile-label">
+                  {{
+                    'STOWARZYSZENIE.LABELS.CONTACT_EMAIL' | translate
+                  }}:
+                </span>
               {{ element.contact_email }}
             </mat-cell>
           </ng-container>
@@ -99,7 +129,21 @@
               }}
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
+                <span class="mobile-label">
+                  {{
+                    'STOWARZYSZENIE.LABELS.PHONE_NUMBER' | translate
+                  }}:
+                </span>
               {{ element.phone_number }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <button class="btn btn-default">
+                <i class="fas fa-address-card"></i>
+              </button>
             </mat-cell>
           </ng-container>
 
@@ -115,10 +159,6 @@
               {{ 'STOWARZYSZENIE.LABELS.NO_DATA' | translate }}
             </mat-footer-cell>
           </ng-container>
-
-          <!--          TODO ZAPEWNE BEDZIESZ CHCIALA JAKIES BUTTONY DODAC TO TUTEJ W TYM NG CONTAINERZE LECISZ !-->
-          <!--                  <ng-container matColumnDef="actions">-->
-          <!--                  </ng-container>-->
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
