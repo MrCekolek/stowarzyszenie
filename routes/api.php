@@ -44,4 +44,9 @@ Route::group([
     Route::prefix('user')->group(function () {
         Route::get('get', 'UserController@index');
     });
+
+    Route::prefix('role')->group(function () {
+       Route::get('get', 'RoleController@index');
+       Route::get('{role}/permission/get', 'PermissionParentController@rolePermissions');
+    });
 });

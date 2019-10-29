@@ -98,12 +98,12 @@
 
                 <ul class="submenu">
                   <li>
-                    <a [routerLink]="['/users']" class="active">
+                    <a [routerLink]="['/users']" routerLinkActive="active">
                       {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.USERS_LIST' | translate }}
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a [routerLink]="['/roles']" routerLinkActive="active">
                       {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.ROLES_PREFERENCES' | translate }}
                     </a>
                   </li>

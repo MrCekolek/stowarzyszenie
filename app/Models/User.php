@@ -102,4 +102,23 @@ class User extends Authenticatable implements JWTSubject {
     public function affilationUser() {
         return $this->hasOne(AffiliationUser::class);
     }
+
+    public function roles() {
+        return $this->belongsToMany(Role::class)
+            ->withTimestamps();
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user) {
+            factory(RoleUser::class)->create([
+                'role_id' => $user->id === 1 ?
+                    Role::whereName('admin')->first()->id :
+                    Role::whereName('user')->first()->id,
+                'user_id' => $user->id
+            ]);
+        });
+    }
 }
