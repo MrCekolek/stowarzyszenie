@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAffiliationUsersTable extends Migration
+class CreateRoleUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,15 @@ class CreateAffiliationUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('affiliation_users', function (Blueprint $table) {
+        Schema::create('role_user', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title')->nullable();
-            $table->string('institution')->nullable();
-            $table->string('department')->nullable();
-            $table->string('street')->nullable();
-            $table->string('city')->nullable();
-            $table->string('country')->nullable();
+            $table->unsignedBigInteger('role_id');
+            $table->foreign('role_id')->references('id')->on('roles');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
+
+            $table->unique(['role_id', 'user_id']);
         });
     }
 
@@ -34,6 +32,6 @@ class CreateAffiliationUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('affiliation_users');
+        Schema::dropIfExists('role_user');
     }
 }

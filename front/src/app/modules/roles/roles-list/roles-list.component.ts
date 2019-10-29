@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PermissionRoleService } from "../../../core/http/permission-role.service";
 
 @Component({
   selector: 'app-roles-list',
@@ -9,14 +10,16 @@ export class RolesListComponent implements OnInit {
 
   roles: any;
 
-  constructor() { 
+  constructor(
+    private permissionRoleService: PermissionRoleService
+  ) {
     this.roles = {};
     this.roles.isAllSelected = false;
     this.roles.isAllCollapsed = false;
 
     this.roles.parentChildChecklist = [
       {
-        id: 1, value: 'Permission 1', isSelected: false, isClosed: false,
+        id: 1, value: 'PermissionParent 1', isSelected: false, isClosed: false,
         childList: [
           {
             id: 1, parent_id: 1, value: 'child 1', isSelected: false
@@ -51,7 +54,11 @@ export class RolesListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // TODO: pobieranie listy rol systemowych
+    this.permissionRoleService.getRoleWithPermissions(1).subscribe(
+      roles => {
+        console.log(roles);
+      }
+    )
   }
 
   // click event on check/uncheck all
