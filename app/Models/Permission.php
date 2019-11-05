@@ -9,7 +9,7 @@ class Permission extends Model
     protected $fillable = [
         'name',
         'translation_key',
-        'permission_id'
+        'permission_parent_id'
     ];
 
     public function permissionParent() {
@@ -18,7 +18,7 @@ class Permission extends Model
 
     public function roles() {
         return $this->belongsToMany(Role::class)
-            ->withPivot('selected')
+            ->withPivot(['id', 'selected'])
             ->withTimestamps();
     }
 }

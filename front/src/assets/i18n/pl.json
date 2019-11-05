@@ -164,6 +164,22 @@
 							"NO_EMAIL_OR_PASSWORD": "Podany email lub hasło są niepoprawne."
 						}
 					}
+				},
+				"DATABASE": {
+					"PERMISSIONS": {
+						"CRUD": {
+							"CREATE": "Tworzenie",
+							"DELETE": "Usuwanie",
+							"EDIT": "Modyfikacja",
+							"INDEX": "Odczytanie"
+						},
+						"ROLES": {
+							"ROLES": "Role"
+						},
+						"USERS": {
+							"USERS": "Użytkownicy"
+						}
+					}
 				}
 			}
 		}

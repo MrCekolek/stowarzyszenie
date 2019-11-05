@@ -17,8 +17,8 @@ class CreatePermissionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('translation_key')->nullable();
-            $table->unsignedBigInteger('parent_id');
-            $table->foreign('parent_id')->references('id')->on('permission_parents');
+            $table->unsignedBigInteger('permission_parent_id');
+            $table->foreign('permission_parent_id')->references('id')->on('permission_parents');
             $table->timestamps();
         });
     }
