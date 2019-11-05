@@ -54,7 +54,7 @@ export class RolesListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.permissionRoleService.getRoleWithPermissions(1).subscribe(
+    this.permissionRoleService.getRoleWithPermissions(2).subscribe(
       roles => {
         console.log(roles);
       }

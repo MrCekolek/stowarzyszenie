@@ -164,6 +164,22 @@
 							"NO_EMAIL_OR_PASSWORD": "The email or password you entered is incorrect."
 						}
 					}
+				},
+				"DATABASE": {
+					"PERMISSIONS": {
+						"CRUD": {
+							"CREATE": "Creation",
+							"DELETE": "Removal",
+							"EDIT": "Modification",
+							"INDEX": "reading"
+						},
+						"ROLES": {
+							"ROLES": "Roles"
+						},
+						"USERS": {
+							"USERS": "Members"
+						}
+					}
 				}
 			}
 		}
