@@ -47,6 +47,8 @@ Route::group([
 
     Route::prefix('role')->group(function () {
        Route::get('get', 'RoleController@index');
+       Route::post('create', 'RoleController@create');
        Route::get('{role}/permission/get', 'PermissionParentController@rolePermissions');
+       Route::post('{role}/permission/update', 'PermissionParentController@updateRolePermissions');
     });
 });

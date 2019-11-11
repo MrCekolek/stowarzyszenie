@@ -12,8 +12,8 @@ export class NewRoleModalComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<NewRoleModalComponent>,
-    @Inject(MAT_DIALOG_DATA) data 
-  ) { 
+    @Inject(MAT_DIALOG_DATA) data
+  ) {
     this.modal_type = data.modal_type;
   }
 
@@ -21,7 +21,11 @@ export class NewRoleModalComponent implements OnInit {
   }
 
   sendRoleName(roleName) {
-    this.dialogRef.close(roleName);
+    const role = {
+      'name': roleName
+    };
+
+    this.dialogRef.close(role);
   }
 
   dismiss() {

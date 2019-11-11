@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { PermissionRoleApiService } from "../../../core/http/permission-role-api.service";
-import { NewRoleModalComponent } from '../new-role-modal/new-role-modal.component';
-import { MatDialog, MatDialogConfig } from "@angular/material";
+import {Component, OnInit} from '@angular/core';
+import {PermissionRoleApiService} from "../../../core/http/permission-role-api.service";
+import {NewRoleModalComponent} from '../new-role-modal/new-role-modal.component';
+import {MatDialog, MatDialogConfig} from "@angular/material";
 
 @Component({
   selector: 'app-roles-list',
@@ -17,7 +17,8 @@ export class RolesListComponent implements OnInit {
   constructor(
     private permissionRoleApiService: PermissionRoleApiService,
     private dialog: MatDialog
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.permissionRoleApiService.getRoleWithPermissions(1).subscribe(item => console.log(item));
@@ -41,7 +42,7 @@ export class RolesListComponent implements OnInit {
   }
 
   // collapse all event
-  expandCollapseAll(obj){
+  expandCollapseAll(obj) {
     for (let i = 0; i < obj.parentChildChecklist.length; i++) {
       obj.parentChildChecklist[i].isClosed = !obj.isAllCollapsed;
     }
@@ -77,8 +78,12 @@ export class RolesListComponent implements OnInit {
     const dialogRef = this.dialog.open(NewRoleModalComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-        data => console.log("Dialog output:", data)
-    ); 
+      data => {
+        console.log("Dialog output:", data);
+
+        this.permissionRoleApiService.addNewRole(data);
+      }
+    );
   }
 
   openEditRoleModal(roleName) {
@@ -94,7 +99,11 @@ export class RolesListComponent implements OnInit {
     const dialogRef = this.dialog.open(NewRoleModalComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-        data => console.log("Dialog output:", data)
-    ); 
+      data => console.log("Dialog output:", data)
+    );
+  }
+
+  saveRole(roleId) {
+    this.permissionRoleApiService.updateRole(roleId, this.selectedRole);
   }
 }
