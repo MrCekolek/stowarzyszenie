@@ -1,5 +1,8 @@
 {
 	"STOWARZYSZENIE": {
+		"CRUD_BUTTONS": {
+			"SAVE": "Save changes"
+		},
 		"LABELS": {
 			"AVATAR": "Avatar",
 			"BIRTHDATE": "Date of Birth",
@@ -15,6 +18,17 @@
 			"PHONE_NUMBER": "Phone Number",
 			"PREVIOUS_PAGE": "Previous page",
 			"RANGE": "of"
+		},
+		"MODALS": {
+			"BUTTON_CANCEL": "Cancel",
+			"NEW_ROLE": {
+				"BUTTON_ADD": "Add",
+				"INPUT_FIELD": "New role name",
+				"INPUT_FIELD_ERROR": "Enter a name for the new role",
+				"TITLE_EDIT_ROLE": "Edit role name",
+				"TITLE_NEW_ROLE": "Add a new role",
+				"TRIGGER_BUTTON": "Add a role"
+			}
 		},
 		"MODULES": {
 			"AUTH": {
@@ -130,14 +144,16 @@
 					"USERS": {
 						"MAIN": "Members",
 						"ROLES_PREFERENCES": "Roles and Permissions",
-						"USERS_LIST": "User List"
+						"USERS_LIST": "Users List"
 					}
 				},
 				"WEBPAGE_TITLE_MEMBERS": "Ciob members"
 			},
 			"ROLES": {
+				"ARE_EDITING": "You are editing role:",
 				"CHOOSE_ROLE": "Select a role from the list to edit the permissions",
 				"COLLAPSE_ALL": "Collapse all groups",
+				"EDIT_NAME": "Edit role name",
 				"EXPAND_ALL": "Expand all groups",
 				"LIST_TITLE": "Roles and Permissions",
 				"SELECT_ALL": "Select all permissions",
@@ -148,7 +164,7 @@
 			"USERS": {
 				"ENTRIES": "Show",
 				"SEARCH": "Search for user",
-				"USERS_LIST_TITLE": "User List"
+				"USERS_LIST_TITLE": "Users List"
 			}
 		},
 		"PAGINATION": {
@@ -177,6 +193,9 @@
 							"ROLES": "Roles"
 						},
 						"USERS": {
+							"ADD": "Adding new users",
+							"CHANGE_ROLE": "Change user roles",
+							"DELETE": "Deleting users",
 							"USERS": "Members"
 						}
 					}

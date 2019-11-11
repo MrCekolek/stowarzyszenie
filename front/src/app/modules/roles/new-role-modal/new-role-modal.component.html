@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>
+    <span *ngIf="this.modal_type == 'new_role'">
+        {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.TITLE_NEW_ROLE' | translate }}
+    </span>
+
+    <span *ngIf="this.modal_type == 'edit_role'">
+        {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.TITLE_EDIT_ROLE' | translate }}
+    </span>
+</h2>
+
+<mat-dialog-content>
+    <mat-form-field class="auth-form-field" appearance="outline">
+        <mat-label>
+            {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.INPUT_FIELD' | translate }}
+        </mat-label>
+
+        <input #role_name id="role_name" matInput required>
+
+        <mat-hint>
+            <div *ngIf="(role_name.dirty || role_name.touched) && password.invalid && password.errors.required">
+                {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.INPUT_FIELD_ERROR' | translate }}
+            </div>
+        </mat-hint>
+
+        <!-- <div class="alert-icon longer">
+            <div *ngIf="role_name.valid; else passwordIconInvalid">
+                <i class="fas fa-check"></i>
+            </div>
+            <ng-template #passwordIconInvalid>
+                <i class="fas fa-times"></i>
+            </ng-template>
+        </div> -->
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button type="button" class="btn btn-sm btn-secondary" (click)="sendRoleName(role_name.value)" [disabled]="role_name.value == ''">
+        {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.BUTTON_ADD' | translate }}
+    </button>
+    <button type="button" class="btn btn-sm btn-link" (click)="dismiss()">
+        {{ 'STOWARZYSZENIE.MODALS.BUTTON_CANCEL' | translate }}
+    </button>
+</mat-dialog-actions>

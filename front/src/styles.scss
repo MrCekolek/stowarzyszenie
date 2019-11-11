@@ -488,7 +488,9 @@ button:active {
     cursor: pointer;
 }
 
-.vertical-menu .menu-tile.active {}
+.vertical-menu .menu-tile.active {
+    color: #660014;
+}
 
 .vertical-menu .menu-tile.active i:last-child {
     transform: rotate(180deg);
@@ -504,7 +506,6 @@ button:active {
     opacity: .7;
 }
 
-.vertical-menu .menu-tile.active .title,
 .vertical-menu .menu-tile .title {
     display: block;
     line-height: 2.5rem;
@@ -556,7 +557,7 @@ button:active {
     // height: 2.2rem;
     line-height: 2.2rem;
     padding: 0 2.25rem 0;
-    border-radius: 50px;
+    border-radius: 5px;
     margin: 0;
     text-decoration: none;
     position: relative;
@@ -577,7 +578,7 @@ button:active {
     width: 4px;
     height: 4px;
     left: 20px;
-    top: 50%;
+    top: 17px;
     margin-top: -2px;
     content: '';
     background: #660014;

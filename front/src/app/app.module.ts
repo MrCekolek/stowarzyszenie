@@ -8,7 +8,7 @@ import { UserService } from "./shared/services/user/user.service";
 import 'hammerjs';
 import { NavigationModule } from './modules/navigation/navigation.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import bootstrap from "bootstrap";
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -16,11 +16,12 @@ import bootstrap from "bootstrap";
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,
     NavigationModule,
-    NgbModule
+    NgbModule,
+    AppRoutingModule,
+    DashboardModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

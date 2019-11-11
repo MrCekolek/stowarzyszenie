@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { BeforeResetService } from "../../../../core/http/before-reset.service";
-import { RegisterService } from "../../../../core/http/register.service";
+import { BeforeResetApiService } from "../../../../core/http/before-reset-api.service";
+import { RegisterApiService } from "../../../../core/http/register-api.service";
 import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs/operators";
 
 @Component({
@@ -19,8 +19,8 @@ export class BeforeResetComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private beforeResetService: BeforeResetService,
-    private registerService: RegisterService
+    private beforeResetApiService: BeforeResetApiService,
+    private registerApiService: RegisterApiService
   ) {
     this.createForm();
     this.registerFormValuesChanged();
@@ -49,7 +49,7 @@ export class BeforeResetComponent implements OnInit {
         debounceTime(1500),
         switchMap(
           email => {
-            return this.registerService.verifyEmail(email);
+            return this.registerApiService.verifyEmail(email);
           }
         ),
       )
@@ -78,7 +78,7 @@ export class BeforeResetComponent implements OnInit {
   sendReset(beforeResendForm) {
     this.resetSend = !this.resetSend;
 
-    this.beforeResetService.sendReset(beforeResendForm).subscribe()
+    this.beforeResetApiService.sendReset(beforeResendForm).subscribe()
   }
 
   get login_email() {

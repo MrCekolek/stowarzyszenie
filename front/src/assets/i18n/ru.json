@@ -1,5 +1,8 @@
 {
 	"STOWARZYSZENIE": {
+		"CRUD_BUTTONS": {
+			"SAVE": "Сохранить изменения"
+		},
 		"LABELS": {
 			"AVATAR": "Аватар",
 			"BIRTHDATE": "Дата рождения",
@@ -15,6 +18,17 @@
 			"PHONE_NUMBER": "Номер телефона",
 			"PREVIOUS_PAGE": "Предыдущая страница",
 			"RANGE": "с"
+		},
+		"MODALS": {
+			"BUTTON_CANCEL": "отменить",
+			"NEW_ROLE": {
+				"BUTTON_ADD": "добавлять",
+				"INPUT_FIELD": "Название новой роли",
+				"INPUT_FIELD_ERROR": "Введите имя для новой роли",
+				"TITLE_EDIT_ROLE": "Изменить имя роли",
+				"TITLE_NEW_ROLE": "Добавить новую роль",
+				"TRIGGER_BUTTON": "Добавить роль"
+			}
 		},
 		"MODULES": {
 			"AUTH": {
@@ -136,8 +150,10 @@
 				"WEBPAGE_TITLE_MEMBERS": "Ciob Члены"
 			},
 			"ROLES": {
+				"ARE_EDITING": "Роль редактора:",
 				"CHOOSE_ROLE": "Выберите роль из списка, чтобы редактировать разрешения",
 				"COLLAPSE_ALL": "Свернуть все группы",
+				"EDIT_NAME": "Изменить имя роли",
 				"EXPAND_ALL": "Развернуть все группы",
 				"LIST_TITLE": "Роли и разрешения",
 				"SELECT_ALL": "Выберите все разрешения",
@@ -177,6 +193,9 @@
 							"ROLES": "роли"
 						},
 						"USERS": {
+							"ADD": "Добавление новых пользователей",
+							"CHANGE_ROLE": "Изменить роли пользователя",
+							"DELETE": "Удаление пользователей",
 							"USERS": "члены"
 						}
 					}

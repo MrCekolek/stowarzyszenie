@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterModel } from "../../../shared/models/register.model";
 import { FormGroup, FormBuilder, Validators, AbstractControl } from "@angular/forms";
-import { RegisterService } from "../../../core/http/register.service";
+import { RegisterApiService } from "../../../core/http/register-api.service";
 import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs/operators";
 
 @Component({
@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private registerService: RegisterService
+    private registerApiService: RegisterApiService
   ) {
     this.passwordIsHidden = true;
     this.createForm();
@@ -93,7 +93,7 @@ export class RegisterComponent implements OnInit {
         debounceTime(1500),
         switchMap(
           email => {
-            return this.registerService.verifyEmail(email);
+            return this.registerApiService.verifyEmail(email);
           }
         ),
       )
@@ -121,11 +121,11 @@ export class RegisterComponent implements OnInit {
   }
 
   resendEmailActivation(registerModel: Object) {
-    this.registerService.resendEmailActivation(this.createNewUser(registerModel)).subscribe();
+    this.registerApiService.resendEmailActivation(this.createNewUser(registerModel)).subscribe();
   }
 
   registerAccount(registerModel: Object) {
-    this.registerService.registerAccount(this.createNewUser(registerModel)).subscribe();
+    this.registerApiService.registerAccount(this.createNewUser(registerModel)).subscribe();
   }
 
   ngOnInit() {

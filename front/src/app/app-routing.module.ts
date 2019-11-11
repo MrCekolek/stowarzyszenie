@@ -5,6 +5,11 @@ import { NotLoggedGuard } from "./shared/guards/not-logged.guard.guard";
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'auth',
+    pathMatch: 'full'
+  },
+  {
     path: 'auth',
     loadChildren: './modules/auth/auth.module#AuthModule',
     canActivateChild: [
@@ -26,16 +31,8 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'roles',
-    loadChildren: './modules/roles/roles.module#RolesModule',
-    canActivateChild: [
-      LoggedGuard
-    ]
-  },
-  {
-    path: '',
-    redirectTo: 'auth',
-    pathMatch: 'full'
+    path: '**',
+    redirectTo: ''
   }
 ];
 

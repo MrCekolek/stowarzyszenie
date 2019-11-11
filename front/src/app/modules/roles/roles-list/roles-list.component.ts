@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PermissionRoleService } from "../../../core/http/permission-role.service";
+import { PermissionRoleApiService } from "../../../core/http/permission-role-api.service";
+import { NewRoleModalComponent } from '../new-role-modal/new-role-modal.component';
+import { MatDialog, MatDialogConfig } from "@angular/material";
 
 @Component({
   selector: 'app-roles-list',
@@ -8,57 +10,23 @@ import { PermissionRoleService } from "../../../core/http/permission-role.servic
 })
 export class RolesListComponent implements OnInit {
 
-  roles: any;
+  private rolesNames: any = [];
+  private roles: any = {};
+  private selectedRole: any = {};
 
   constructor(
-    private permissionRoleService: PermissionRoleService
-  ) {
-    this.roles = {};
-    this.roles.isAllSelected = false;
-    this.roles.isAllCollapsed = false;
-
-    this.roles.parentChildChecklist = [
-      {
-        id: 1, value: 'PermissionParent 1', isSelected: false, isClosed: false,
-        childList: [
-          {
-            id: 1, parent_id: 1, value: 'child 1', isSelected: false
-          },
-          {
-            id: 2, parent_id: 1, value: 'child 2', isSelected: false
-          }
-        ]
-      },
-      {
-        id: 2,value: 'Caden Kunze',isSelected: false,isClosed:false,childList: [
-          {
-            id: 1,parent_id: 1,value: 'child 1',isSelected: false
-          },
-          {
-            id: 2,parent_id: 1,value: 'child 2',isSelected: false
-          }
-        ]
-      },
-      {
-        id: 3,value: 'Ms. Hortense Zulauf',isSelected: false,isClosed:false,
-        childList: [
-          {
-            id: 1,parent_id: 1,value: 'child 1',isSelected: false
-          },
-          {
-            id: 2,parent_id: 1,value: 'child 2',isSelected: false
-          }
-        ]
-      }
-    ];
-  }
+    private permissionRoleApiService: PermissionRoleApiService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
-    this.permissionRoleService.getRoleWithPermissions(2).subscribe(
+    this.permissionRoleApiService.getRoleWithPermissions(1).subscribe(item => console.log(item));
+    this.permissionRoleApiService.getRoles().subscribe(
       roles => {
-        console.log(roles);
+        this.rolesNames = roles.roles;
+        console.log(this.rolesNames);
       }
-    )
+    );
   }
 
   // click event on check/uncheck all
@@ -66,8 +34,8 @@ export class RolesListComponent implements OnInit {
     obj.isAllSelected = !obj.isAllSelected;
     for (let i = 0; i < obj.parentChildChecklist.length; i++) {
       obj.parentChildChecklist[i].isSelected = obj.isAllSelected;
-      for (let j = 0; j < obj.parentChildChecklist[i].childList.length; j++) {
-        obj.parentChildChecklist[i].childList[j].isSelected = obj.isAllSelected;
+      for (let j = 0; j < obj.parentChildChecklist[i].permissions.length; j++) {
+        obj.parentChildChecklist[i].permissions[j].selected = obj.isAllSelected;
       }
     }
   }
@@ -83,5 +51,50 @@ export class RolesListComponent implements OnInit {
   // show updated JSON
   stringify(obj) {
     return JSON.stringify(obj);
+  }
+
+  selectRole(id) {
+    this.permissionRoleApiService.getRoleWithPermissions(id).subscribe(role => {
+      console.log(role);
+      this.selectedRole = role;
+      this.selectedRole.isSelected = false;
+      this.selectedRole.isClosed = false;
+      this.roles.parentChildChecklist = this.selectedRole.permissions;
+      this.roles.isAllSelected = false;
+      this.roles.isAllCollapsed = false;
+    });
+  }
+
+  openNewRoleModal() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      modal_type: 'new_role'
+    };
+
+    const dialogRef = this.dialog.open(NewRoleModalComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+        data => console.log("Dialog output:", data)
+    ); 
+  }
+
+  openEditRoleModal(roleName) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      modal_type: 'edit_role',
+      role_name: roleName
+    };
+
+    const dialogRef = this.dialog.open(NewRoleModalComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+        data => console.log("Dialog output:", data)
+    ); 
   }
 }

@@ -23,5 +23,9 @@ class PermissionParentController extends Controller {
         return response()->json([
             'permissions' => $permissionParents
         ]);
+        
+        $rolePermission = PermissionParent::with(['permissions.roles' => function($roles) use ($role) {
+            $roles->whereId($role->id);
+        }])->get();
     }
 }

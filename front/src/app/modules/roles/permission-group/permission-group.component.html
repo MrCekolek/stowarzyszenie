@@ -3,7 +3,7 @@
         <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="customCheck1" [id]="this.permissionGroupObj.id" [(ngModel)]="this.permissionGroupObj.isSelected" name="list_name" value="{{ this.permissionGroupObj.id }}" (ngModelChange)="parentClick(this.permissionGroupObj)">
             <label class="custom-control-label" [for]="this.permissionGroupObj.id">
-                {{ this.permissionGroupObj.value }} 
+                {{ 'STOWARZYSZENIE.SERVER.CUSTOM.DATABASE.PERMISSIONS.' + this.permissionGroupObj.translation_key.toString() | translate }} 
             </label>
             <span (click)="expandCollapse(this.permissionGroupObj)" class="ml-3">
                 <i class="fas fa-angle-up" *ngIf="!this.permissionGroupObj.isClosed; else isCollapsed"></i>
@@ -15,12 +15,12 @@
 
     <ul>
         <div class="permissions-list" [hidden]="this.permissionGroupObj.isClosed">
-            <li *ngFor="let child of this.permissionGroupObj.childList">
+            <li *ngFor="let child of this.permissionGroupObj.permissions">
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" [(ngModel)]="child.isSelected" class="custom-control-input" name="list_name_child" value="{{ child.id }}" (ngModelChange)="childClick(this.permissionGroupObj, child)" [id]="'child' + child.id" />
+                    <input type="checkbox" [(ngModel)]="child.selected" class="custom-control-input" name="list_name_child" value="{{ child.id }}" (ngModelChange)="childClick(this.permissionGroupObj, child)" [id]="'child' + child.id" />
                     <label class="custom-control-label" [for]="'child' + child.id">
-                            {{ child.value }}
-                        </label>
+                        {{ 'STOWARZYSZENIE.SERVER.CUSTOM.DATABASE.PERMISSIONS.' + child.translation_key.toString() | translate }}
+                    </label>
                 </div>
             </li>
         </div>
