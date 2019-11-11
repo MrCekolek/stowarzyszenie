@@ -3,13 +3,13 @@ import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
 import { UserService } from "./user.service";
+import { ApiService } from "../../../core/http/api.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LanguageService {
   public loggedIn: boolean;
-  private baseURL = 'http://localhost:8000/api';
   public supportedLangs = [
     'en',
     'pl',
@@ -21,7 +21,8 @@ export class LanguageService {
   constructor(
     private http: HttpClient,
     private translateService: TranslateService,
-    private userService: UserService
+    private userService: UserService,
+    private api: ApiService
   ) {
     this.userService.loginStatus.subscribe(value => this.loggedIn = value);
 
@@ -32,12 +33,11 @@ export class LanguageService {
 
   setLang(lang) {
     if (this.supportedLangs.includes(lang)) {
-      var data = {
-        'token': localStorage.getItem('token'),
-        'lang': lang
+      let data = {
+        lang: lang
       };
 
-      return this.http.post(`${this.baseURL}/lang/set`, data).subscribe(
+      return this.api.post('lang/set', data).subscribe(
         data => {
           this.lang.next(data['lang']);
         }
@@ -46,15 +46,10 @@ export class LanguageService {
   }
 
   getLang() {
-    var data = {
-      'token': localStorage.getItem('token')
-    }
-
-    return this.http.post(`${this.baseURL}/lang/get`, data).subscribe(
+    return this.api.post('lang/get').subscribe(
       data => {
         this.setLang(data['lang'])
       }
     );
-
   }
 }

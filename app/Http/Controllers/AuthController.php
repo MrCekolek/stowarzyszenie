@@ -10,6 +10,7 @@ use App\Models\AffiliationUser;
 use App\Models\PreferenceUser;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Http\Response;
@@ -27,7 +28,7 @@ class AuthController extends Controller {
     /**
      * Get a JWT via given credentials.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function accountLogin() {
         $credentials = request(['login_email', 'password']);
@@ -155,16 +156,20 @@ class AuthController extends Controller {
     /**
      * Get the authenticated User.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function me() {
-        return response()->json(User::id(auth()->user()['id'])->with(['preferenceUser', 'affilationUser'])->first());
+        return response()->json(
+            User::id(auth()->user()['id'])
+                ->with(['preferenceUser', 'affilationUser', 'roles'])
+                ->first()
+        );
     }
 
     /**
      * Log the user out (Invalidate the token).
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function logout() {
         auth()->logout();
@@ -177,7 +182,7 @@ class AuthController extends Controller {
     /**
      * Refresh a token.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function refresh() {
         return $this->respondWithToken(auth()->refresh());
@@ -188,7 +193,7 @@ class AuthController extends Controller {
      *
      * @param  string $token
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     protected function respondWithToken($token) {
         return response()->json([
