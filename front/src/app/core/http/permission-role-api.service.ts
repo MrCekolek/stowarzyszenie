@@ -10,11 +10,11 @@ export class PermissionRoleApiService {
   ) { }
 
   getRoles() {
-    return this.api.get('role/get');
+    return this.api.post('role/get');
   }
 
   getRoleWithPermissions(roleId: number) {
-    return this.api.get('role/' + roleId + '/permission/get');
+    return this.api.post('role/' + roleId + '/permission/get');
   }
 
   addNewRole(role: object) {

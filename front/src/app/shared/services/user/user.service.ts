@@ -3,6 +3,7 @@ import { BehaviorSubject } from "rxjs";
 import { TokenService } from "../../../modules/auth/login/service/token.service";
 import { HttpClient } from "@angular/common/http";
 import { UserModel } from "../../models/user.model";
+import { ApiService } from "../../../core/http/api.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private api: ApiService
   ) { }
 
   changeLoginStatus(value: boolean) {
@@ -27,5 +29,9 @@ export class UserService {
 
   getUser() {
     return this.user;
+  }
+
+  me() {
+    return this.api.post('account/me');
   }
 }

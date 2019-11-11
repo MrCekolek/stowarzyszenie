@@ -7,6 +7,10 @@ use App\Models\Role;
 use Illuminate\Http\JsonResponse;
 
 class RoleController extends Controller {
+    public function __construct() {
+        $this->middleware('auth:api');
+    }
+
     public function index() {
         return response()->json([
            'roles' => Role::all()

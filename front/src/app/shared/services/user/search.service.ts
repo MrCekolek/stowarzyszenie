@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { ApiService } from "../../../core/http/api.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
-  private baseURL: string = 'http://localhost:8000/api';
-
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private api: ApiService
   ) { }
 
   getUsers() {
-    return this.http.get(`${this.baseURL}/user/get`);
+    return this.api.post('user/get');
   }
 }

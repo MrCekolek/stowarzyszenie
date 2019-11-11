@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET } from "@angular/router";
-import { filter } from 'rxjs/operators';
+import { Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET, NavigationStart } from "@angular/router";
+import { UserService } from "../../../shared/services/user/user.service";
+import { UserModel } from "../../../shared/models/user.model";
 
 interface IBreadcrumb {
   label: string;
@@ -19,7 +20,8 @@ export class BreadcrumbComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {
     this.breadcrumbs = [];
   }
@@ -30,10 +32,21 @@ export class BreadcrumbComponent implements OnInit {
     let events: any = this.router.events;
 
     this.router.events.subscribe(event => {
-      //set breadcrumbs
+      // set breadcrumbs
       if (event instanceof NavigationEnd) {
         let root: ActivatedRoute = this.activatedRoute.root;
         this.breadcrumbs = this.getBreadcrumbs(root);
+      }
+
+      // update user model
+      if (event instanceof NavigationStart) {
+        this.userService.me().subscribe(
+          response => {
+            this.userService.changeUser(new UserModel(response));
+
+            console.log(this.userService.getUser());
+          }
+        );
       }
     });
   }
