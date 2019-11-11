@@ -161,7 +161,7 @@ class AuthController extends Controller {
     public function me() {
         return response()->json(
             User::id(auth()->user()['id'])
-                ->with(['preferenceUser', 'affilationUser', 'roles'])
+                ->with(['preferenceUser', 'affilationUser', 'roles.permissions'])
                 ->first()
         );
     }
