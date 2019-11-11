@@ -51,11 +51,11 @@
 
                         <button class="btn btn-sm btn-info ml-3" (click)="expandCollapseAll(roles)">
                             <span *ngIf="roles.isAllCollapsed; else isCollapsed">
-                                {{ 'STOWARZYSZENIE.MODULES.ROLES.EXPAND_ALL' | translate }} 
+                                {{ 'STOWARZYSZENIE.MODULES.ROLES.EXPAND_ALL' | translate }}
                                 <i class="fas fa-angle-double-down ml-2"></i>
                             </span>
                             <ng-template #isCollapsed>
-                                {{ 'STOWARZYSZENIE.MODULES.ROLES.COLLAPSE_ALL' | translate }} 
+                                {{ 'STOWARZYSZENIE.MODULES.ROLES.COLLAPSE_ALL' | translate }}
                                 <i class="fas fa-angle-double-up ml-2"></i>
                             </ng-template>
                         </button>
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="action">
-                    <button class="btn btn-success">
+                    <button class="btn btn-success" (click)="saveRole(roleSelect.value)">
                         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE' | translate }}
                     </button>
                 </div>

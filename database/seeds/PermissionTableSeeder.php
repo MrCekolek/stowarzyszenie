@@ -16,44 +16,37 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         // zdefiniowanie operacji CRUD
-        $CRUD = [
-            'CREATE',
-            'INDEX',
-            'EDIT',
-            'DELETE'
-        ];
+        $CRUD = Permission::CRUD();
 
-        // tworzenie kategorii uprawnień
-        $parents[] = factory(PermissionParent::class)->create([
-            'name' => 'Users',
-            'translation_key' => 'USERS.USERS'
-        ]);
-        $parents[] = factory(PermissionParent::class)->create([
-            'name' => 'Roles',
-            'translation_key' => 'ROLES.ROLES'
-        ]);
+        // zdefiniowanie reszty operacji
+        $permissions = Permission::permissions();
 
-        // tworzenie podkategorii uprawnień - CRUD
-        foreach ($parents as $parent) {
-            for ($i = 0; $i < 4; $i++) {
-                $usersPermissions[$parent->id][] = factory(Permission::class)->create([
-                    'name' => ucfirst(strtolower($CRUD[$i])),
-                    'translation_key' => 'CRUD' . '.' . $CRUD[$i],
-                    'permission_parent_id' => $parent->id
+        // zdefiniowanie kategorii uprawnien
+        $permissionParents = PermissionParent::permissionParents();
+
+        // dodanie kategorii uprawnien i operacji CRUD
+        foreach ($permissionParents as $permissionParent) {
+            $parents[] = factory(PermissionParent::class)->create([
+                'name' => $permissionParent['name'],
+                'translation_key' => $permissionParent['translation_key']
+            ]);
+
+            // dodanie operacji crud do kategorii
+            foreach ($CRUD as $permission) {
+                $allPermissions[] = factory(Permission::class)->create([
+                    'name' => ucfirst(strtolower($permission)),
+                    'translation_key' => 'CRUD' . '.' . $permission,
+                    'permission_parent_id' => last($parents)
                 ]);
             }
-        }
 
-        // tworzenie uprawnień dla wszystkich ról
-        $roles = Role::all();
-
-        foreach ($roles as $role) {
-            foreach ($usersPermissions as $userPermission) {
-                foreach ($userPermission as $permission) {
-                    factory(PermissionRole::class)->create([
-                        'permission_id' => $permission->id,
-                        'role_id' => $role->id,
-                        'selected' => 1
+            // sprawdzenie i dodanie reszty uprawnien do kategorii
+            if (isset(Permission::permissions()[last($parents)['name']])) {
+                foreach (Permission::permissions()[last($parents)['name']] as $permission) {
+                    $allPermissions[] = factory(Permission::class)->create([
+                        'name' => ucfirst(strtolower($permission[0]['name'])),
+                        'translation_key' => $permission[0]['translation_key'],
+                        'permission_parent_id' => $permission[0]['permission_parent_id']
                     ]);
                 }
             }
