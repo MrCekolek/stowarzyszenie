@@ -9,7 +9,7 @@ export class UserModel {
   affilation_user?: object;
   preference_user?: object;
   lang: string;
-  role: Array<Role>;
+  roles: Array<Role>;
 
   constructor(userModel: Object) {
     this.login_email = userModel['login_email'];
@@ -19,7 +19,7 @@ export class UserModel {
     this.gender = userModel['gender'];
     this.affilation_user = userModel['affilation_user'];
     this.preference_user = userModel['preference_user'];
-    this.role = userModel['role'];
+    this.roles = userModel['roles'];
   }
 
   setLang(lang: string) {

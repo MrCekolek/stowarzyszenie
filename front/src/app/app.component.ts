@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'front';
 
   constructor(
-    public translateService: TranslateService
+    public translateService: TranslateService,
   ) {
     this.translateService.addLangs(['pl', 'en']);
     this.translateService.setDefaultLang('pl');

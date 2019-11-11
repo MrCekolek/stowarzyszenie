@@ -15,8 +15,6 @@ Route::group([
     'middleware' => 'api'
 ], function ($router) {
 //    Route::post('login', 'AuthController@login');
-//    Route::post('me', 'AuthController@me');
-//    Route::post('refresh', 'AuthController@refresh');
 
     Route::prefix('lang')->group(function () {
         Route::post('get', 'PreferenceUserController@getLang');
@@ -27,8 +25,10 @@ Route::group([
     Route::post('logout', 'AuthController@logout');
 
     Route::prefix('account')->group(function () {
+        Route::post('me', 'AuthController@me');
+        Route::post('refresh', 'AuthController@refresh');
         Route::post('login', 'AuthController@accountLogin');
-        Route::get('activate', 'AuthController@accountActivate');
+        Route::post('activate', 'AuthController@accountActivate');
 
         Route::prefix('register')->group(function () {
             Route::post('', 'AuthController@accountRegister');
@@ -42,13 +42,13 @@ Route::group([
     });
 
     Route::prefix('user')->group(function () {
-        Route::get('get', 'UserController@index');
+        Route::post('get', 'UserController@index');
     });
 
     Route::prefix('role')->group(function () {
-       Route::get('get', 'RoleController@index');
+       Route::post('get', 'RoleController@index');
        Route::post('create', 'RoleController@create');
-       Route::get('{role}/permission/get', 'PermissionParentController@rolePermissions');
+       Route::post('{role}/permission/get', 'PermissionParentController@rolePermissions');
        Route::post('{role}/permission/update', 'PermissionParentController@updateRolePermissions');
     });
 });

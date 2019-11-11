@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -10,7 +10,9 @@ export class ApiService {
 
   baseURL: string = 'http://localhost:8000/api/';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   private formatErrors(error: any) {
     return throwError(error.error);
@@ -24,6 +26,8 @@ export class ApiService {
   }
 
   post(path: string, body: Object = {}): Observable<any> {
+    body['token'] = localStorage.getItem('token');
+
     return this.http.post(
       `${this.baseURL}${path}`,
       body
