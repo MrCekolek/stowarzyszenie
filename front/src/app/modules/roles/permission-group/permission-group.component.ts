@@ -23,9 +23,8 @@ export class PermissionGroupComponent implements OnInit {
 
   // click event on child checkbox
   childClick(parentObj, childObj) {
-    childObj.selected = true;
     parentObj.isSelected = parentObj.permissions.every(function (itemChild: any) {
-      return itemChild.isSelected == true;
+      return itemChild.selected == true;
     })
   }
 

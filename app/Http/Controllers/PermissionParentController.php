@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\PermissionParent;
+use App\Models\PermissionRole;
 use App\Models\Role;
-use phpDocumentor\Reflection\Types\Boolean;
+use Illuminate\Support\Facades\Request;
 
 class PermissionParentController extends Controller {
     public function rolePermissions(Role $role) {
@@ -23,9 +24,33 @@ class PermissionParentController extends Controller {
         return response()->json([
             'permissions' => $permissionParents
         ]);
-        
+
         $rolePermission = PermissionParent::with(['permissions.roles' => function($roles) use ($role) {
             $roles->whereId($role->id);
         }])->get();
+    }
+
+    public function updateRolePermissions(Role $role) {
+        $input = request()->all();
+        $success = true;
+
+        foreach ($input['permissions'] as $permissionParent) {
+            foreach ($permissionParent['permissions'] as $permissions) {
+                foreach ($permissions['roles'] as $permissionRole) {
+                    $saved = PermissionRole::whereId($permissionRole['pivot']['id'])
+                        ->update([
+                            'selected' => $permissions['selected']
+                        ]);
+
+                    if ($saved === 0) {
+                        $success = false;
+                    }
+                }
+            }
+        }
+
+        return response()->json([
+           'success' => $success
+        ]);
     }
 }
