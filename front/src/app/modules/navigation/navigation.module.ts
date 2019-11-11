@@ -6,9 +6,10 @@ import { AppRoutingModule } from '../../app-routing.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {MatInputModule} from "@angular/material";
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, BreadcrumbComponent],
   imports: [
     CommonModule,
     SharedModule,

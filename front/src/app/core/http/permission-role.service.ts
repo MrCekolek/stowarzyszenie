@@ -16,8 +16,6 @@ export class PermissionRoleService {
   }
 
   getRoleWithPermissions(role: number) {
-    console.log('role/' + role + '/permission/get');
-
     return this.api.get('role/' + role + '/permission/get');
   }
 }

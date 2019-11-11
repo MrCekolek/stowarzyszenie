@@ -4,13 +4,13 @@ import { ApiService } from './api.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AfterResetService {
+export class BeforeResetApiService {
 
   constructor(
     private api: ApiService
   ) { }
 
-  changePassword(afterResetForm: Object) {
-    return this.api.post('/account/password/change', afterResetForm);
+  sendReset(beforeResendForm: Object) {
+    return this.api.post('account/password/reset', beforeResendForm);
   }
 }

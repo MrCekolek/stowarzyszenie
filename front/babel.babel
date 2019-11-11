@@ -9,6 +9,32 @@
                 <name>STOWARZYSZENIE</name>
                 <children>
                     <folder_node>
+                        <name>CRUD_BUTTONS</name>
+                        <children>
+                            <concept_node>
+                                <name>SAVE</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>false</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>pl-PL</language>
+                                        <approved>false</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>ru-RU</language>
+                                        <approved>false</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                        </children>
+                    </folder_node>
+                    <folder_node>
                         <name>LABELS</name>
                         <children>
                             <concept_node>
@@ -305,6 +331,163 @@
                                     </translation>
                                 </translations>
                             </concept_node>
+                        </children>
+                    </folder_node>
+                    <folder_node>
+                        <name>MODALS</name>
+                        <children>
+                            <concept_node>
+                                <name>BUTTON_CANCEL</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>false</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>pl-PL</language>
+                                        <approved>false</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>ru-RU</language>
+                                        <approved>false</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <folder_node>
+                                <name>NEW_ROLE</name>
+                                <children>
+                                    <concept_node>
+                                        <name>BUTTON_ADD</name>
+                                        <definition_loaded>false</definition_loaded>
+                                        <description></description>
+                                        <comment></comment>
+                                        <default_text></default_text>
+                                        <translations>
+                                            <translation>
+                                                <language>en-US</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>pl-PL</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>ru-RU</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                        </translations>
+                                    </concept_node>
+                                    <concept_node>
+                                        <name>INPUT_FIELD</name>
+                                        <definition_loaded>false</definition_loaded>
+                                        <description></description>
+                                        <comment></comment>
+                                        <default_text></default_text>
+                                        <translations>
+                                            <translation>
+                                                <language>en-US</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>pl-PL</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>ru-RU</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                        </translations>
+                                    </concept_node>
+                                    <concept_node>
+                                        <name>INPUT_FIELD_ERROR</name>
+                                        <definition_loaded>false</definition_loaded>
+                                        <description></description>
+                                        <comment></comment>
+                                        <default_text></default_text>
+                                        <translations>
+                                            <translation>
+                                                <language>en-US</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>pl-PL</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>ru-RU</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                        </translations>
+                                    </concept_node>
+                                    <concept_node>
+                                        <name>TITLE_EDIT_ROLE</name>
+                                        <definition_loaded>false</definition_loaded>
+                                        <description></description>
+                                        <comment></comment>
+                                        <default_text></default_text>
+                                        <translations>
+                                            <translation>
+                                                <language>en-US</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>pl-PL</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>ru-RU</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                        </translations>
+                                    </concept_node>
+                                    <concept_node>
+                                        <name>TITLE_NEW_ROLE</name>
+                                        <definition_loaded>false</definition_loaded>
+                                        <description></description>
+                                        <comment></comment>
+                                        <default_text></default_text>
+                                        <translations>
+                                            <translation>
+                                                <language>en-US</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>pl-PL</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>ru-RU</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                        </translations>
+                                    </concept_node>
+                                    <concept_node>
+                                        <name>TRIGGER_BUTTON</name>
+                                        <definition_loaded>false</definition_loaded>
+                                        <description></description>
+                                        <comment></comment>
+                                        <default_text></default_text>
+                                        <translations>
+                                            <translation>
+                                                <language>en-US</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>pl-PL</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>ru-RU</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                        </translations>
+                                    </concept_node>
+                                </children>
+                            </folder_node>
                         </children>
                     </folder_node>
                     <folder_node>
@@ -2200,6 +2383,27 @@
                                 <name>ROLES</name>
                                 <children>
                                     <concept_node>
+                                        <name>ARE_EDITING</name>
+                                        <definition_loaded>false</definition_loaded>
+                                        <description></description>
+                                        <comment></comment>
+                                        <default_text></default_text>
+                                        <translations>
+                                            <translation>
+                                                <language>en-US</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>pl-PL</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>ru-RU</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                        </translations>
+                                    </concept_node>
+                                    <concept_node>
                                         <name>CHOOSE_ROLE</name>
                                         <definition_loaded>false</definition_loaded>
                                         <description></description>
@@ -2222,6 +2426,27 @@
                                     </concept_node>
                                     <concept_node>
                                         <name>COLLAPSE_ALL</name>
+                                        <definition_loaded>false</definition_loaded>
+                                        <description></description>
+                                        <comment></comment>
+                                        <default_text></default_text>
+                                        <translations>
+                                            <translation>
+                                                <language>en-US</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>pl-PL</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>ru-RU</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                        </translations>
+                                    </concept_node>
+                                    <concept_node>
+                                        <name>EDIT_NAME</name>
                                         <definition_loaded>false</definition_loaded>
                                         <description></description>
                                         <comment></comment>
@@ -2673,6 +2898,69 @@
                                                     <folder_node>
                                                         <name>USERS</name>
                                                         <children>
+                                                            <concept_node>
+                                                                <name>ADD</name>
+                                                                <definition_loaded>false</definition_loaded>
+                                                                <description></description>
+                                                                <comment></comment>
+                                                                <default_text></default_text>
+                                                                <translations>
+                                                                    <translation>
+                                                                        <language>en-US</language>
+                                                                        <approved>false</approved>
+                                                                    </translation>
+                                                                    <translation>
+                                                                        <language>pl-PL</language>
+                                                                        <approved>false</approved>
+                                                                    </translation>
+                                                                    <translation>
+                                                                        <language>ru-RU</language>
+                                                                        <approved>false</approved>
+                                                                    </translation>
+                                                                </translations>
+                                                            </concept_node>
+                                                            <concept_node>
+                                                                <name>CHANGE_ROLE</name>
+                                                                <definition_loaded>false</definition_loaded>
+                                                                <description></description>
+                                                                <comment></comment>
+                                                                <default_text></default_text>
+                                                                <translations>
+                                                                    <translation>
+                                                                        <language>en-US</language>
+                                                                        <approved>false</approved>
+                                                                    </translation>
+                                                                    <translation>
+                                                                        <language>pl-PL</language>
+                                                                        <approved>false</approved>
+                                                                    </translation>
+                                                                    <translation>
+                                                                        <language>ru-RU</language>
+                                                                        <approved>false</approved>
+                                                                    </translation>
+                                                                </translations>
+                                                            </concept_node>
+                                                            <concept_node>
+                                                                <name>DELETE</name>
+                                                                <definition_loaded>false</definition_loaded>
+                                                                <description></description>
+                                                                <comment></comment>
+                                                                <default_text></default_text>
+                                                                <translations>
+                                                                    <translation>
+                                                                        <language>en-US</language>
+                                                                        <approved>false</approved>
+                                                                    </translation>
+                                                                    <translation>
+                                                                        <language>pl-PL</language>
+                                                                        <approved>false</approved>
+                                                                    </translation>
+                                                                    <translation>
+                                                                        <language>ru-RU</language>
+                                                                        <approved>false</approved>
+                                                                    </translation>
+                                                                </translations>
+                                                            </concept_node>
                                                             <concept_node>
                                                                 <name>USERS</name>
                                                                 <definition_loaded>false</definition_loaded>

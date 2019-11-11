@@ -7,7 +7,7 @@ import { ApiService } from './api.service';
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterService {
+export class RegisterApiService {
 
   constructor(
     private api: ApiService,

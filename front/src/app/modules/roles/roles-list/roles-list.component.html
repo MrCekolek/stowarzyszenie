@@ -1,10 +1,14 @@
 <div class="tab-content">
     <div class="container-fluid">
         <div class="mb-3 card">
-            <div class="card-header">
+            <div class="card-header justify-content-between">
                 <div class="card-title">
                     <i class="fas fa-user-tag"></i> {{ 'STOWARZYSZENIE.MODULES.ROLES.LIST_TITLE' | translate }}
                 </div>
+                <button class="btn btn-secondary btn-sm" (click)="openNewRoleModal()">
+                    <i class="fas fa-plus mr-2"></i>
+                    {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.TRIGGER_BUTTON' | translate }}
+                </button>
             </div>
             <div class="card-body example-container">
                 <div class="d-flex mt-1 mb-5">
@@ -13,17 +17,28 @@
                     </div>
 
                     <!-- roles select -->
-                    <select class="custom-select">
-                        <option selected>
+                    <select class="custom-select" #roleSelect (change)="selectRole(roleSelect.value)">
+                        <option value="0" selected>
                             {{ 'STOWARZYSZENIE.MODULES.ROLES.SELECT_DESC' | translate }}
                         </option>
-                        <option value="author">User/author</option>
-                        <option value="chair">Conference chair</option>
-                        <option value="reviewer">Reviewer</option>
+
+                        <option *ngFor="let role of this.rolesNames" [value]="role.id">
+                            {{ role.name }}
+                        </option>
                     </select>
                 </div>
 
-                <div class="permissions">
+                <div class="d-flex mb-3" *ngIf="this.selectedRole.permissions">
+                    {{ 'STOWARZYSZENIE.MODULES.ROLES.ARE_EDITING' | translate }}
+                    <span>
+                        {{ this.selectedRole.name }}
+                    </span>
+                    <button class="btn btn-link" (click)="openEditRoleModal(this.selectedRole.name)">
+                        {{ 'STOWARZYSZENIE.MODULES.ROLES.EDIT_NAME' | translate }}
+                    </button>
+                </div>
+
+                <div class="permissions" *ngIf="this.selectedRole.permissions">
                     <div class="select-all mb-3">
                         <button class="btn btn-sm btn-info" (click)="selectUnselectAll(roles)">
                             <span *ngIf="roles.isAllSelected; else noneSelected">
@@ -48,6 +63,12 @@
 
                     <app-permission-group *ngFor="let group of this.roles.parentChildChecklist" [permissionGroupObj]="group">
                     </app-permission-group>
+                </div>
+
+                <div class="action">
+                    <button class="btn btn-success">
+                        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE' | translate }}
+                    </button>
                 </div>
             </div>
         </div>

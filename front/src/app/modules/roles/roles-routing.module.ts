@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RolesListComponent } from './roles-list/roles-list.component';
 
-
 const routes: Routes = [
   {
       path: '',
@@ -10,13 +9,16 @@ const routes: Routes = [
           {
               path: '',
               pathMatch: 'full',
-              redirectTo: 'roles-list'
+              redirectTo: 'roles-list',
           },
           {
               path: 'roles-list',
-              component: RolesListComponent
+              component: RolesListComponent,
+              data: {
+                breadcrumb: 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.ROLES_PREFERENCES'
+              }
           },
-      ]
+      ],
   }
 ];
 

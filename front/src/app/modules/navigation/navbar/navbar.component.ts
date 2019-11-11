@@ -1,16 +1,15 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from "../../../shared/services/user/user.service";
-import * as $ from 'jquery';
 import { TokenService } from "../../auth/login/service/token.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { LanguageService } from "../../../shared/services/user/language.service";
 import { SearchService } from "../../../shared/services/user/search.service";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs/operators";
-import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
-import {pipe} from "rxjs";
+import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
 
+declare const $: any;
 
 @Component({
   selector: 'app-navbar',
@@ -18,6 +17,7 @@ import {pipe} from "rxjs";
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
@@ -53,7 +53,8 @@ export class NavbarComponent implements OnInit {
     private searchService: SearchService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private activatedRoute: ActivatedRoute
   ) {
     this.userService.loginStatus.subscribe(value => this.loggedIn = value );
     this.createForm();
@@ -108,8 +109,8 @@ export class NavbarComponent implements OnInit {
         $('.header-right').toggleClass('opened');
       });
 
-      $('.with-submenu').click(function(event){
-        $(this).find('.submenu').slideToggle(200);
+      $('.with-submenu .title').click(function(event){
+        $(this).parent().find('.submenu').slideToggle(200);
       });
 
       $('#search-icon').click(function() {
@@ -119,6 +120,10 @@ export class NavbarComponent implements OnInit {
       $('.search-overlay').click(function() {
         $('.search-sidenav').toggleClass('opened');
       });
+
+      $('.scrollbar').mCustomScrollbar({
+        theme: "minimal"
+      });;
     });
   }
 
@@ -128,8 +133,7 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  logout(event: MouseEvent) {
-    event.preventDefault();
+  logout() {
     this.tokenService.remove();
     this.userService.changeLoginStatus(false);
     this.router.navigateByUrl('/auth/login');

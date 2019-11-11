@@ -16,18 +16,17 @@ export class PermissionGroupComponent implements OnInit {
 
   // click event on parent checkbox
   parentClick(parentObj) {
-    for (let i = 0; i < parentObj.childList.length; i++) {
-      parentObj.childList[i].isSelected = parentObj.isSelected;
+    for (let i = 0; i < parentObj.permissions.length; i++) {
+      parentObj.permissions[i].selected = parentObj.isSelected;
     }
   }
 
   // click event on child checkbox
   childClick(parentObj, childObj) {
-    parentObj.isSelected = parentObj.childList.every(function (itemChild: any) {
+    childObj.selected = true;
+    parentObj.isSelected = parentObj.permissions.every(function (itemChild: any) {
       return itemChild.isSelected == true;
     })
-
-    
   }
 
   // collapse event on parent

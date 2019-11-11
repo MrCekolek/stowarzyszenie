@@ -1,0 +1,17 @@
+<div class="page-heading" *ngIf="this.breadcrumbs.length > 0">
+    <span>
+        {{ breadcrumbs[breadcrumbs.length - 1].label | translate }}
+    </span>
+    <div class="breadcrumbs">
+        <ul>
+            <li><a routerLink="/auth">Home</a></li>
+            <li *ngFor="let breadcrumb of breadcrumbs">
+                <a [routerLink]="breadcrumb.url" [queryParams]="breadcrumb.params">
+                    <span>
+                        {{ breadcrumb.label | translate }}
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

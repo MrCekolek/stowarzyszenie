@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
-import { LoginService } from "../../../core/http/login.service";
+import { LoginApiService } from "../../../core/http/login-api.service";
 import { LoginModel } from "../../../shared/models/login.model";
 import { TokenService } from "./service/token.service";
 import { LanguageService } from "../../../shared/services/user/language.service";
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private loginService: LoginService,
+    private loginApiService: LoginApiService,
     private tokenService: TokenService,
     private translateService: TranslateService,
     private languageService: LanguageService,
@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
   login(loginForm: FormGroup) {
     this.loginModel = new LoginModel(loginForm, this.translateService.currentLang);
 
-    this.loginService.login(this.loginModel).subscribe(
+    this.loginApiService.login(this.loginModel).subscribe(
       next => this.handleResponse(next),
       error => this.handleError(error)
     )
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
     this.userService.changeLoginStatus(true);
     this.userService.changeUser(new UserModel(response['user']['original']));
     this.languageService.setLang(this.sharedModule.detectLang(response['user']['original']['preference_user']['lang']));
-    this.router.navigateByUrl('/dashboard');
+    this.router.navigateByUrl('dashboard');
   }
 
   handleError(error) {

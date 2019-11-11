@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule, MatIconModule, MatPaginatorModule, MatSortModule } from "@angular/material";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from "@angular/material";
 
 export function HttpLoaderFactory (http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -36,7 +37,8 @@ export function HttpLoaderFactory (http: HttpClient) {
     MatSortModule,
     MatFormFieldModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   exports: [
     CommonModule,
@@ -52,6 +54,7 @@ export function HttpLoaderFactory (http: HttpClient) {
 })
 
 export class SharedModule {
+
   constructor(
     private languageService: LanguageService,
     public translateService: TranslateService

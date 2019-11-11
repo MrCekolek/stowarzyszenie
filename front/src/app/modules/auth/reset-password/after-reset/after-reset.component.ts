@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { AfterResetService } from "../../../../core/http/after-reset.service";
+import { AfterResetApiService } from "../../../../core/http/after-reset-api.service";
 
 @Component({
   selector: 'app-after-reset',
@@ -20,7 +20,7 @@ export class AfterResetComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private afterResetService: AfterResetService
+    private afterResetApiService: AfterResetApiService
   ) {
     this.reseted = false;
     this.passwordIsHidden = true;
@@ -53,7 +53,7 @@ export class AfterResetComponent implements OnInit {
   changePassword(afterResetForm: Object) {
     this.reseted = true;
 
-    this.afterResetService.changePassword(afterResetForm).subscribe()
+    this.afterResetApiService.changePassword(afterResetForm).subscribe()
   }
 
   togglePassword() {
