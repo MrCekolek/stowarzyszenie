@@ -42,6 +42,19 @@ body .app-container {
     margin: 0;
 }
 
+i.ok {
+    color: $colorAlertGreen;
+}
+
+i.wrong {
+    color: $colorAlertRed;
+}
+
+button:disabled {
+    opacity: .6;
+    cursor: default;
+}
+
 //************ FORMS *************//
 mat-form-field {
     width: 100%;
@@ -1152,4 +1165,8 @@ mat-header-cell:first-of-type {
     img {
         max-height: 30px;
     }
+}
+
+.mat-placeholder-required {
+    display: none;
 }

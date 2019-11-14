@@ -11,13 +11,14 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule, MatIconModule, MatPaginatorModule, MatSortModule } from "@angular/material";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from "@angular/material";
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 export function HttpLoaderFactory (http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [],
+  declarations: [SpinnerComponent],
   imports: [
     CommonModule,
     HttpClientModule,

@@ -9,7 +9,7 @@ const routes: Routes = [
           {
               path: '',
               pathMatch: 'full',
-              redirectTo: 'roles-list',
+              redirectTo: 'roles-list'
           },
           {
               path: 'roles-list',
