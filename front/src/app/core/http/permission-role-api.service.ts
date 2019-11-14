@@ -35,4 +35,8 @@ export class PermissionRoleApiService {
     // TODO: tutaj poprosze link do api gdzie wysylac nowa nazwe roli pod jakie id
     // TODO: no i zrobic tutaj this.api.put z nowa nazwa roli na dane ID roli
   }
+
+  deleteRole(roleId: number) {
+    return this.api.post('role/delete/' + roleId);
+  }
 }
