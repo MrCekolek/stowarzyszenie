@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RoleRequest;
 use App\Models\Role;
+use Exception;
 use Illuminate\Http\JsonResponse;
 
 class RoleController extends Controller {
@@ -33,5 +34,17 @@ class RoleController extends Controller {
             'success' => $role->exists(),
             'role' => $role
         ]);
+    }
+
+
+    /**
+     * Metoda usuwająca rolę
+     *
+     * @throws Exception
+     *
+     * @param Role $role
+     */
+    public function destroy(Role $role) {
+        Role::destroy($role->id);
     }
 }

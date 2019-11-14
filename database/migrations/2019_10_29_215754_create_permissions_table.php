@@ -18,8 +18,12 @@ class CreatePermissionsTable extends Migration
             $table->string('name');
             $table->string('translation_key')->nullable();
             $table->unsignedBigInteger('permission_parent_id');
-            $table->foreign('permission_parent_id')->references('id')->on('permission_parents');
             $table->timestamps();
+
+            $table->foreign('permission_parent_id')
+                ->references('id')
+                ->on('permission_parents')
+                ->onDelete('cascade');
         });
     }
 

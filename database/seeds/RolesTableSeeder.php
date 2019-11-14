@@ -21,5 +21,10 @@ class RolesTableSeeder extends Seeder
         factory(Role::class)->create([
            'name' => 'user'
         ]);
+
+        // generowanie roli w systemie - test
+        factory(Role::class)->create([
+            'name' => 'test'
+        ]);
     }
 }
