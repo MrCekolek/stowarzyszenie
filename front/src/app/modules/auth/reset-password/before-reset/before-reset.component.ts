@@ -76,9 +76,10 @@ export class BeforeResetComponent implements OnInit {
   }
 
   sendReset(beforeResendForm) {
+    this.isLoading = true;
     this.resetSend = !this.resetSend;
 
-    this.beforeResetApiService.sendReset(beforeResendForm).subscribe()
+    this.beforeResetApiService.sendReset(beforeResendForm).subscribe();
   }
 
   get login_email() {

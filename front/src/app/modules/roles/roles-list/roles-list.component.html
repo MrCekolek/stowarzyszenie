@@ -22,6 +22,14 @@
                             {{ 'STOWARZYSZENIE.MODULES.ROLES.SELECT_DESC' | translate }}
                         </option>
 
+                        <option value="spinner" *ngIf="rolesAreLoading">
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        </option>
+
                         <option *ngFor="let role of this.rolesNames" [value]="role.id">
                             {{ role.name }}
                         </option>
