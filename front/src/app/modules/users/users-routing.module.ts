@@ -23,15 +23,14 @@ const routes: Routes = [{
                 ],
                 data: {
                   breadcrumb: 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.USERS_LIST'
-                },
+                }
             },
             {
               path: 'roles',
               loadChildren: '../roles/roles.module#RolesModule',
               canActivateChild: [
                 LoggedGuard
-              ]
-            }
+              ]            }
         ]
 }];
 

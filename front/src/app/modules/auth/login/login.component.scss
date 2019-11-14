@@ -1,6 +1,5 @@
 @import '../../../../assets/css/colors.scss';
 @import '../../../../assets/css/dimens.scss';
-
 .form-container {
     position: relative;
     margin-top: 60px;
@@ -9,7 +8,6 @@
     box-shadow: 0 3px 10px rgba(12, 10, 10, .16);
     padding: 40px 60px;
     border-radius: 2px;
-
     h1 {
         color: $colorPrimaryDarkGreen;
         font-family: 'Rubik', sans-serif;
@@ -17,14 +15,19 @@
         font-size: $sizeFontPageTitleXL;
         margin-bottom: 40px;
     }
-
     button {
         margin-top: 40px;
     }
-
     a {
         text-align: center;
         margin-top: 40px;
+    }
+    .submit-button[disabled] {
+        opacity: .6;
+        cursor: default;
+    }
+    .alert.danger {
+        padding: 0 !important;
     }
 }
 
@@ -38,8 +41,15 @@ a.secondary {
     color: $colorAlertRed;
 }
 
-mat-form-field {
+.ok {
+    color: $colorAlertGreen !important;
+}
 
+.wrong {
+    color: $colorAlertRed !important;
+}
+
+mat-form-field {
     i.fas {
         color: $colorGray;
         font-size: 20px;

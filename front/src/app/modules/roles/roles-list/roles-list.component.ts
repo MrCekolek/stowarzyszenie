@@ -13,6 +13,7 @@ export class RolesListComponent implements OnInit {
   private rolesNames: any = [];
   private roles: any = {};
   private selectedRole: any = {};
+  private rolesAreLoading;
 
   constructor(
     private permissionRoleApiService: PermissionRoleApiService,
@@ -21,11 +22,15 @@ export class RolesListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.rolesAreLoading = true;
     this.permissionRoleApiService.getRoleWithPermissions(1).subscribe(item => console.log(item));
     this.permissionRoleApiService.getRoles().subscribe(
       roles => {
         this.rolesNames = roles.roles;
-        console.log(this.rolesNames);
+        
+        if (this.rolesNames.length > 0) {
+          this.rolesAreLoading = false;
+        }
       }
     );
   }

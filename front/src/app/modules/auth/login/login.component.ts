@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   private loginError: string = '';
   private passwordIsHidden: boolean = true;
   private loginModel: LoginModel;
+  private isLoading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,11 +51,18 @@ export class LoginComponent implements OnInit {
   }
 
   login(loginForm: FormGroup) {
+    this.isLoading = true;
     this.loginModel = new LoginModel(loginForm, this.translateService.currentLang);
 
     this.loginApiService.login(this.loginModel).subscribe(
-      next => this.handleResponse(next),
-      error => this.handleError(error)
+      next => {
+        this.handleResponse(next);
+        this.isLoading = false;
+      },
+      error => {
+        this.handleError(error);
+        this.isLoading = false;
+      }
     )
   }
 
@@ -68,10 +76,11 @@ export class LoginComponent implements OnInit {
   }
 
   handleError(error) {
-    this.loginError = error.error.error;
+    this.loginError = error.error;
   }
 
   ngOnInit() {
+    this.isLoading = false;
   }
 
   togglePassword() {
