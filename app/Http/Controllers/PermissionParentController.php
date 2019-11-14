@@ -22,12 +22,9 @@ class PermissionParentController extends Controller {
         }
 
         return response()->json([
+            'role' => $role->name,
             'permissions' => $permissionParents
         ]);
-
-        $rolePermission = PermissionParent::with(['permissions.roles' => function($roles) use ($role) {
-            $roles->whereId($role->id);
-        }])->get();
     }
 
     public function updateRolePermissions(Role $role) {

@@ -22,8 +22,12 @@ class CreateAffiliationUsersTable extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

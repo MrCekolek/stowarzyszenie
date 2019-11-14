@@ -56,6 +56,7 @@ export class RolesListComponent implements OnInit {
 
   selectRole(id) {
     this.permissionRoleApiService.getRoleWithPermissions(id).subscribe(role => {
+      console.log('role');
       console.log(role);
       this.selectedRole = role;
       this.selectedRole.isSelected = false;
