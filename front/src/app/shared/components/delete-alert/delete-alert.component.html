@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>
+    <span>
+        {{ 'STOWARZYSZENIE.MODALS.DELETE_ALERT.TITLE' | translate }}
+    </span>
+</h2>
+<mat-dialog-content>
+    <div>
+        {{ 'STOWARZYSZENIE.MODALS.DELETE_ALERT.ARE_U_SURE' | translate }}
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button type="button" class="btn btn-sm btn-secondary" (click)="sendOK()">
+        <span>
+            {{ 'STOWARZYSZENIE.MODALS.DELETE_ALERT.TITLE' | translate }}
+        </span>
+    </button>
+    <button type="button" class="btn btn-sm btn-link" (click)="dismiss()">
+        {{ 'STOWARZYSZENIE.MODALS.BUTTON_CANCEL' | translate }}
+    </button>
+</mat-dialog-actions>

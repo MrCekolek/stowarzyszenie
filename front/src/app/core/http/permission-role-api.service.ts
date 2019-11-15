@@ -28,9 +28,7 @@ export class PermissionRoleApiService {
   }
 
   updateRole(roleID: number, roleConfig: any) {
-    return this.api.post('role/' + roleID + '/permission/update', roleConfig).subscribe(
-      data => console.log(data)
-    );
+    return this.api.post('role/' + roleID + '/permission/update', roleConfig);
 
     // TODO: tutaj poprosze link do api gdzie wysylac nowa nazwe roli pod jakie id
     // TODO: no i zrobic tutaj this.api.put z nowa nazwa roli na dane ID roli
