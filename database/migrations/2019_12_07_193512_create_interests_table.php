@@ -4,21 +4,18 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePermissionsTable extends Migration {
+class CreateInterestsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('permissions', function (Blueprint $table) {
+        Schema::create('interests', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('translation_key')->nullable();
-            $table->unsignedBigInteger('permission_parent_id');
             $table->timestamps();
-
-            $table->foreign('permission_parent_id')->references('id')->on('permission_parents')->onDelete('cascade');
         });
     }
 
@@ -28,6 +25,6 @@ class CreatePermissionsTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('permissions');
+        Schema::dropIfExists('interests');
     }
 }

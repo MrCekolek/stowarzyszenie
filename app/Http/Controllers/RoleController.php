@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RoleRequest;
 use App\Models\Role;
-use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class RoleController extends Controller {
     public function __construct() {
@@ -19,12 +19,16 @@ class RoleController extends Controller {
     }
 
     /**
-     * @param RoleRequest $roleRequest
-     *
+     * @param Request $request
      * @return JsonResponse
      */
-    public function create(RoleRequest $roleRequest) {
-        $input = $roleRequest->all();
+    public function create(Request $request) {
+        $input = $request->all();
+        $validation = new RoleRequest($input, 'create');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
 
         $role = Role::create([
             'name' => $input['name']
@@ -36,15 +40,17 @@ class RoleController extends Controller {
         ]);
     }
 
-
     /**
-     * Metoda usuwająca rolę
-     *
-     * @throws Exception
-     *
      * @param Role $role
+     * @return JsonResponse
      */
     public function destroy(Role $role) {
+        $validation = new RoleRequest($role->toArray(), 'destroy');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
         Role::destroy($role->id);
     }
 }

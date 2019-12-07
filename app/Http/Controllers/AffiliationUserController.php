@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-class AffiliationUserController extends Controller
-{
+class AffiliationUserController extends Controller {
     //
 }

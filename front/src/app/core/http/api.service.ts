@@ -26,7 +26,9 @@ export class ApiService {
   }
 
   post(path: string, body: Object = {}): Observable<any> {
-    body['token'] = localStorage.getItem('token');
+    if (typeof body['token'] === 'undefined') {
+      body['token'] = localStorage.getItem('token');
+    }
 
     return this.http.post(
       `${this.baseURL}${path}`,
