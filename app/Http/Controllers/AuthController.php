@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Auth\ActivateAccountRequest;
-use App\Http\Requests\Auth\SignUpRequest;
+use App\Http\Requests\AuthRequest;
 use App\Jobs\ChangeUserTimezoneJob;
 use App\Jobs\SendAuthEmailJob;
 use App\Models\AffiliationUser;
@@ -28,10 +27,11 @@ class AuthController extends Controller {
     /**
      * Get a JWT via given credentials.
      *
+     * @param Request $request
      * @return JsonResponse
      */
-    public function accountLogin() {
-        $credentials = request(['login_email', 'password']);
+    public function accountLogin(Request $request) {
+        $credentials = $request->all(['login_email', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
             return response()->json([
@@ -50,8 +50,14 @@ class AuthController extends Controller {
         return $this->respondWithToken($token);
     }
 
-    public function accountRegister(SignUpRequest $signUpRequest) {
-        $input = $signUpRequest->all();
+    public function accountRegister(Request $request) {
+        $input = $request->all();
+
+        $validation = new AuthRequest($input, 'accountRegister');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
 
         $geolocation = $this->getGeolocation();
 
@@ -102,8 +108,14 @@ class AuthController extends Controller {
         return PreferenceUserController::getGeolocation();
     }
 
-    public function accountActivate(ActivateAccountRequest $activateAccountRequest) {
-        $input = $activateAccountRequest->all();
+    public function accountActivate(Request $request) {
+        $input = $request->all();
+
+        $validation = new AuthRequest($input, 'accountActivate');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
 
         return $this->getUserRowByToken($input)->get()->count() > 0 ? $this->change($input) : $this->rowNotFound();
     }

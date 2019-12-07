@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AffiliationUser extends Model
-{
+class AffiliationUser extends Model {
     protected $fillable = [
         'title',
         'institution',

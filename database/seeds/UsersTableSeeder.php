@@ -6,22 +6,20 @@ use App\Models\PreferenceUser;
 use Illuminate\Database\Seeder;
 
 
-class UsersTableSeeder extends Seeder
-{
+class UsersTableSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         // generowanie admina
         factory(User::class)->create([
             'login_email' => 'admin@admin.pl',
             'password' => 'admin123'
         ])->each(function ($user) {
             factory(PreferenceUser::class)->create([
-               'user_id' => $user->id
+                'user_id' => $user->id
             ]);
 
             factory(AffiliationUser::class)->create([

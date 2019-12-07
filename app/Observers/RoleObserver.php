@@ -6,16 +6,14 @@ use App\Models\Permission;
 use App\Models\PermissionRole;
 use App\Models\Role;
 
-class RoleObserver
-{
+class RoleObserver {
     /**
      * Handle the role "created" event.
      *
      * @param Role $role
      * @return void
      */
-    public function created(Role $role)
-    {
+    public function created(Role $role) {
         foreach (Permission::all() as $permission) {
             factory(PermissionRole::class)->create([
                 'permission_id' => $permission->id,
@@ -31,8 +29,7 @@ class RoleObserver
      * @param Role $role
      * @return void
      */
-    public function updated(Role $role)
-    {
+    public function updated(Role $role) {
         //
     }
 
@@ -42,8 +39,7 @@ class RoleObserver
      * @param Role $role
      * @return void
      */
-    public function deleted(Role $role)
-    {
+    public function deleted(Role $role) {
         //
     }
 
@@ -53,8 +49,7 @@ class RoleObserver
      * @param Role $role
      * @return void
      */
-    public function restored(Role $role)
-    {
+    public function restored(Role $role) {
         //
     }
 
@@ -64,8 +59,7 @@ class RoleObserver
      * @param Role $role
      * @return void
      */
-    public function forceDeleted(Role $role)
-    {
+    public function forceDeleted(Role $role) {
         //
     }
 }

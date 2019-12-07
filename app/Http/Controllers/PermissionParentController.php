@@ -2,16 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PermissionParentRequest;
 use App\Models\PermissionParent;
 use App\Models\PermissionRole;
 use App\Models\Role;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class PermissionParentController extends Controller {
+    public function __construct() {
+        $this->middleware('auth:api');
+    }
+
     public function rolePermissions(Role $role) {
-        $permissionParents = PermissionParent::with(['permissions.roles' => function ($roles) use ($role) {
-            return $roles->where('roles.id', $role->id);
-        }])->get()->toArray();
+        $validation = new PermissionParentRequest($role->toArray(), 'rolePermissions');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        $permissionParents = PermissionParent::with([
+            'permissions.roles' => function ($roles) use ($role) {
+                return $roles->where('roles.id', $role->id);
+            }])->get()->toArray();
 
         foreach ($permissionParents as &$permissionParent) {
             foreach ($permissionParent['permissions'] as &$permission) {
@@ -27,8 +39,15 @@ class PermissionParentController extends Controller {
         ]);
     }
 
-    public function updateRolePermissions(Role $role) {
-        $input = request()->all();
+    public function updateRolePermissions(Request $request, Role $role) {
+        $input = $request->all();
+
+        $validation = new PermissionParentRequest($role->toArray(), 'rolePermissions');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
         $success = true;
 
         foreach ($input['permissions'] as $permissionParent) {

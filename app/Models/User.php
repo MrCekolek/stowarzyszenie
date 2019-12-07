@@ -64,8 +64,7 @@ class User extends Authenticatable implements JWTSubject {
         return [];
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->first_name . ' ' . $this->last_name;
     }
 
@@ -108,8 +107,7 @@ class User extends Authenticatable implements JWTSubject {
             ->withTimestamps();
     }
 
-    protected static function boot()
-    {
+    protected static function boot() {
         parent::boot();
 
         static::created(function ($user) {
