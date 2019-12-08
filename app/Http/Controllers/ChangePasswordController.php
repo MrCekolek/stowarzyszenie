@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AuthRequest;
 use App\Models\PasswordReset;
 use App\Models\User;
+use App\Services\ErrorService;
+use App\Services\LogService;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class ChangePasswordController extends Controller {
     public function accountPasswordChange(Request $request) {
@@ -38,14 +39,10 @@ class ChangePasswordController extends Controller {
         $this->getPasswordResetsRow($input)
             ->delete();
 
-        return response()->json([
-           'data' => __('custom.controllers.change_password.change.changed')
-        ], Response::HTTP_CREATED);
+        return LogService::changePassword();
     }
 
     private function rowNotFound() {
-        return response()->json([
-           'error' =>  __('custom.controllers.change_password.row_not_found.wrong_email_or_token')
-        ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        return ErrorService::wrongEmailOrToken();
     }
 }

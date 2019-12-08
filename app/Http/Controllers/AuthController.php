@@ -8,13 +8,17 @@ use App\Jobs\SendAuthEmailJob;
 use App\Models\AffiliationUser;
 use App\Models\PreferenceUser;
 use App\Models\User;
+use App\Services\ErrorService;
+use App\Services\LogService;
+use App\Traits\Translatable;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Http\Response;
 
 class AuthController extends Controller {
+    use Translatable;
+
     /**
      * Create a new AuthController instance.
      *
@@ -34,15 +38,11 @@ class AuthController extends Controller {
         $credentials = $request->all(['login_email', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json([
-                'error' => 'STOWARZYSZENIE.SERVER.CUSTOM.CONTROLLERS.AUTH.LOGIN.NO_EMAIL_OR_PASSWORD'
-            ], Response::HTTP_UNAUTHORIZED);
+            return ErrorService::noEmailOrPassword();
         }
 
         if ($this->getUserRowByEmail(request(['login_email']))->count() > 0) {
-            return response()->json([
-                'error' => 'STOWARZYSZENIE.SERVER.CUSTOM.CONTROLLERS.AUTH.LOGIN.NOT_ACTIVATED'
-            ], Response::HTTP_UNAUTHORIZED);
+            return ErrorService::notActivated();
         }
 
         ChangeUserTimezoneJob::dispatchNow($credentials['login_email']);
@@ -142,13 +142,12 @@ class AuthController extends Controller {
     }
 
     private function rowNotFound() {
-        return response()->json([
-            'error' => __('custom.controllers.auth.row_not_found.wrong_token')
-        ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        return ErrorService::wrongToken();
     }
 
     public function send($email) {
         $token = $this->createToken($email);
+
         SendAuthEmailJob::dispatch($email, $token);
     }
 
@@ -171,8 +170,15 @@ class AuthController extends Controller {
      * @return JsonResponse
      */
     public function me() {
+//        $this->translate(
+//            'pl',
+//            'Witam Gosie, jak tam dzionek mija?',
+//            (new Interest()),
+//            'name'
+//        );
+
         return response()->json(
-            User::id(auth()->user()['id'])
+            User::id(auth()->user()->id)
                 ->with(['preferenceUser', 'affilationUser', 'roles.permissions'])
                 ->first()
         );
@@ -186,9 +192,7 @@ class AuthController extends Controller {
     public function logout() {
         auth()->logout();
 
-        return response()->json([
-            'message' => __('custom.controllers.auth.logout.logged_out')
-        ]);
+        return LogService::logout();
     }
 
     /**

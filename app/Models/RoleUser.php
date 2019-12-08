@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class RoleUser extends Model {
+class RoleUser extends BasePivot {
     protected $table = 'role_user';
 
     protected $fillable = [

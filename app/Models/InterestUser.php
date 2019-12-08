@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class InterestUser extends Model {
+class InterestUser extends BasePivot {
     protected $table = 'interest_users';
 
     protected $fillable = [
