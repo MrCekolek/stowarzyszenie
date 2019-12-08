@@ -2,21 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Role extends Model {
+class Role extends BaseModel {
     protected $fillable = [
         'name'
     ];
 
     public function users() {
         return $this->belongsToMany(User::class)
-            ->withTimestamps();
+            ->using(RoleUser::class);
     }
 
     public function permissions() {
         return $this->belongsToMany(Permission::class)
             ->withPivot('selected')
-            ->withTimestamps();
+            ->using(PermissionRole::class);
     }
 }
