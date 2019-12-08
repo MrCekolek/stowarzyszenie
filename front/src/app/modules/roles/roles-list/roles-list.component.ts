@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PermissionRoleApiService} from "../../../core/http/permission-role-api.service";
 import {NewRoleModalComponent} from '../new-role-modal/new-role-modal.component';
 import {MatDialog, MatDialogConfig} from "@angular/material";
+import { DeleteAlertComponent } from 'src/app/shared/components/delete-alert/delete-alert.component';
 
 @Component({
   selector: 'app-roles-list',
@@ -14,6 +15,11 @@ export class RolesListComponent implements OnInit {
   private roles: any = {};
   private selectedRole: any = {};
   private rolesAreLoading;
+  private alertMessage: string = '';
+  private alertClass: string = '';
+  private isSaving: boolean = false;
+
+  private newRoleSuccessMess = 'STOWARZYSZENIE.MODALS.NEW_ROLE.DIALOG_MESSAGE_SUCCESS';
 
   constructor(
     private permissionRoleApiService: PermissionRoleApiService,
@@ -22,8 +28,11 @@ export class RolesListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getRoles();
+  }
+
+  getRoles() {
     this.rolesAreLoading = true;
-    this.permissionRoleApiService.getRoleWithPermissions(1).subscribe(item => console.log(item));
     this.permissionRoleApiService.getRoles().subscribe(
       roles => {
         this.rolesNames = roles.roles;
@@ -61,8 +70,6 @@ export class RolesListComponent implements OnInit {
 
   selectRole(id) {
     this.permissionRoleApiService.getRoleWithPermissions(id).subscribe(role => {
-      console.log('role');
-      console.log(role);
       this.selectedRole = role;
       this.selectedRole.isSelected = false;
       this.selectedRole.isClosed = false;
@@ -85,9 +92,10 @@ export class RolesListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       data => {
-        console.log("Dialog output:", data);
-
         this.permissionRoleApiService.addNewRole(data);
+        this.alertClass = 'success';
+        this.alertMessage = 'STOWARZYSZENIE.MODALS.NEW_ROLE.ALERTS.NEW_ROLE_SUCCESS';
+        this.getRoles();
       }
     );
   }
@@ -105,11 +113,44 @@ export class RolesListComponent implements OnInit {
     const dialogRef = this.dialog.open(NewRoleModalComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-      data => console.log("Dialog output:", data)
+      data => { 
+        this.selectedRole.role = data.name;
+        this.getRoles();
+      }
     );
   }
 
   saveRole(roleId) {
-    this.permissionRoleApiService.updateRole(roleId, this.selectedRole);
+    this.isSaving = true;
+    this.permissionRoleApiService.updateRole(roleId, this.selectedRole).subscribe(data => {
+      if (data.success) {
+        this.isSaving = false;
+        this.getRoles();
+        this.alertMessage= 'STOWARZYSZENIE.MODULES.ROLES.UPDATED_MESSAGE';
+        this.alertClass = 'success';
+      }
+    });
+  }
+
+  deleteRole(RoleId) {
+    const dialogConfig = new MatDialogConfig();
+
+    const dialogRef = this.dialog.open(DeleteAlertComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => { 
+        if (data) {
+          this.isSaving = true;
+          this.permissionRoleApiService.deleteRole(RoleId).subscribe(message => {
+            console.log(message);
+            this.getRoles();
+            this.alertMessage= 'STOWARZYSZENIE.MODALS.DELETE_ALERT.DELETED_MESSAGE';
+            this.alertClass = 'success';
+            this.isSaving = false;
+            this.selectedRole = {};
+          });
+        }
+      }
+    );
   }
 }

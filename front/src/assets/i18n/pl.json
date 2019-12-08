@@ -21,9 +21,18 @@
 		},
 		"MODALS": {
 			"BUTTON_CANCEL": "Anuluj",
+			"DELETE_ALERT": {
+				"ARE_U_SURE": "Na pewno usunąć?",
+				"DELETED_MESSAGE": "Usunięto",
+				"TITLE": "Delete"
+			},
 			"NEW_ROLE": {
+				"ALERTS": {
+					"NEW_ROLE_SUCCESS": "Dodano nową rolę"
+				},
 				"BUTTON_ADD": "Dodaj",
 				"INPUT_FIELD": "Nazwa nowej roli",
+				"INPUT_FIELD_EDIT": "Nazwa roli",
 				"INPUT_FIELD_ERROR": "Podaj nazwę nowej roli",
 				"TITLE_EDIT_ROLE": "Edytuj nazwę roli",
 				"TITLE_NEW_ROLE": "Dodaj nową rolę",
@@ -153,12 +162,14 @@
 				"ARE_EDITING": "Edytujesz rolę:",
 				"CHOOSE_ROLE": "Wybierz rolę z listy, aby edytować uprawnienia",
 				"COLLAPSE_ALL": "Zwiń wszystkie grupy",
+				"DELETE_ROLE": "Usuń rolę",
 				"EDIT_NAME": "Edytuj nazwę roli",
 				"EXPAND_ALL": "Rozwiń wszystkie grupy",
 				"LIST_TITLE": "Role i uprawnienia",
 				"SELECT_ALL": "Zaznacz wszystkie uprawnienia",
 				"SELECT_DESC": "Wybierz rolę",
-				"UNSELECT_ALL": "Odznacz wszystkie uprawnienia"
+				"UNSELECT_ALL": "Odznacz wszystkie uprawnienia",
+				"UPDATED_MESSAGE": "Zaktualizowano rolę"
 			},
 			"TITLE": "Przykładowy tytuł",
 			"USERS": {

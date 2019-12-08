@@ -21,9 +21,18 @@
 		},
 		"MODALS": {
 			"BUTTON_CANCEL": "отменить",
+			"DELETE_ALERT": {
+				"ARE_U_SURE": "Вы уверены, что хотите удалить?",
+				"DELETED_MESSAGE": "Удален",
+				"TITLE": "Удалить"
+			},
 			"NEW_ROLE": {
+				"ALERTS": {
+					"NEW_ROLE_SUCCESS": "Добавлена новая роль"
+				},
 				"BUTTON_ADD": "добавлять",
 				"INPUT_FIELD": "Название новой роли",
+				"INPUT_FIELD_EDIT": "Название роли",
 				"INPUT_FIELD_ERROR": "Введите имя для новой роли",
 				"TITLE_EDIT_ROLE": "Изменить имя роли",
 				"TITLE_NEW_ROLE": "Добавить новую роль",
@@ -153,12 +162,14 @@
 				"ARE_EDITING": "Роль редактора:",
 				"CHOOSE_ROLE": "Выберите роль из списка, чтобы редактировать разрешения",
 				"COLLAPSE_ALL": "Свернуть все группы",
+				"DELETE_ROLE": "Удалить роль",
 				"EDIT_NAME": "Изменить имя роли",
 				"EXPAND_ALL": "Развернуть все группы",
 				"LIST_TITLE": "Роли и разрешения",
 				"SELECT_ALL": "Выберите все разрешения",
 				"SELECT_DESC": "Выберите роль",
-				"UNSELECT_ALL": "Отмените выбор всех разрешений"
+				"UNSELECT_ALL": "Отмените выбор всех разрешений",
+				"UPDATED_MESSAGE": "Роль обновлена"
 			},
 			"TITLE": "Пример заголовка",
 			"USERS": {

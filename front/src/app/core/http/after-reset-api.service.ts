@@ -11,6 +11,6 @@ export class AfterResetApiService {
   ) { }
 
   changePassword(afterResetForm: Object) {
-    return this.api.post('/account/password/change', afterResetForm);
+    return this.api.post('account/password/change', afterResetForm);
   }
 }

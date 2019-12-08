@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Auth\ResetPasswordRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Jobs\SendPasswordResetEmailJob;
-use App\Mail\Authentication\ResetPasswordMail;
 use App\Models\PasswordReset;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller {
-    public function accountPasswordReset(ResetPasswordRequest $resetPasswordRequest) {
-        $input = $resetPasswordRequest->all();
-        $email = $input['login_email'];
+    public function accountPasswordReset(Request $request) {
+        $input = $request->all();
 
-        $this->send($email);
+        $validation = new ResetPasswordRequest($input, 'accountPasswordReset');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        $this->send($input['login_email']);
 
         return response()->json([
             'message' => __('custom.controllers.reset_password.send_email.sent')
@@ -24,11 +28,13 @@ class ResetPasswordController extends Controller {
 
     public function send($email) {
         $token = $this->createToken($email);
+
         SendPasswordResetEmailJob::dispatch($email, $token);
     }
 
     public function createToken($email) {
         $tokenOld = PasswordReset::loginEmail($email)->first();
+
         if ($tokenOld) {
             return $tokenOld->pluck('token')[0];
         }

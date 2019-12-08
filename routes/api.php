@@ -28,7 +28,7 @@ Route::group([
         Route::post('me', 'AuthController@me');
         Route::post('refresh', 'AuthController@refresh');
         Route::post('login', 'AuthController@accountLogin');
-        Route::post('activate', 'AuthController@accountActivate');
+        Route::get('activate', 'AuthController@accountActivate');
 
         Route::prefix('register')->group(function () {
             Route::post('', 'AuthController@accountRegister');

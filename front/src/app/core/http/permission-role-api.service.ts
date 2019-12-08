@@ -21,19 +21,10 @@ export class PermissionRoleApiService {
     return this.api.post('role/create', role).subscribe(
       data => console.log(data)
     );
-
-    // TODO: tutaj poprosze link do api gdzie wysylac nazwe nowej roli
-    // TODO: no i zrobic tutaj this.api.post (post na dodwanie? czy put?)
-    // TODO wszystko na POST co zmienia dane, wszystko co pobiera dane to GET
   }
 
   updateRole(roleID: number, roleConfig: any) {
-    return this.api.post('role/' + roleID + '/permission/update', roleConfig).subscribe(
-      data => console.log(data)
-    );
-
-    // TODO: tutaj poprosze link do api gdzie wysylac nowa nazwe roli pod jakie id
-    // TODO: no i zrobic tutaj this.api.put z nowa nazwa roli na dane ID roli
+    return this.api.post('role/' + roleID + '/permission/update', roleConfig);
   }
 
   deleteRole(roleId: number) {
