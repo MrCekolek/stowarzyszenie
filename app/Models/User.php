@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\Locable;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject {
-    use Notifiable;
+    use Notifiable, Locable;
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +28,18 @@ class User extends Authenticatable implements JWTSubject {
         'email_verified_at'
     ];
 
+    public function getCreatedAtAttribute($value) {
+        return $this->localize($value)->toDateTimeString();
+    }
+
+    public function getUpdatedAtAttribute($value) {
+        return $this->localize($value)->toDateTimeString();
+    }
+
+    public function getEmailVerifiedAtAttribute($value) {
+        return $this->localize($value)->toDateTimeString();
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -43,7 +56,7 @@ class User extends Authenticatable implements JWTSubject {
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'birthdate' => 'date:Y-m-d'
     ];
 
     /**
@@ -104,7 +117,7 @@ class User extends Authenticatable implements JWTSubject {
 
     public function roles() {
         return $this->belongsToMany(Role::class)
-            ->withTimestamps();
+            ->using(RoleUser::class);
     }
 
     protected static function boot() {

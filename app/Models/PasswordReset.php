@@ -2,15 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class PasswordReset extends Model {
+class PasswordReset extends BaseModel {
     protected $primaryKey = 'login_email';
 
     protected $fillable = [
         'login_email',
-        'token',
-        'created_at'
+        'token'
     ];
 
     public $timestamps = false;

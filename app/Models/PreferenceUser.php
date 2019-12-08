@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class PreferenceUser extends Model {
+class PreferenceUser extends BaseModel {
     protected $fillable = [
         'avatar',
         'time_zone',

@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class PermissionParent extends Model {
+class PermissionParent extends BaseModel {
     protected $fillable = [
         'name',
         'translation_key'

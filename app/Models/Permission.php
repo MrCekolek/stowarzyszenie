@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Permission extends Model {
+class Permission extends BaseModel {
     protected $fillable = [
         'name',
         'translation_key',
@@ -55,8 +53,7 @@ class Permission extends Model {
 
     public function roles() {
         return $this->belongsToMany(Role::class)
-            ->withPivot(['id', 'selected'])
-            ->withTimestamps();
+            ->withPivot(['id', 'selected']);
     }
 
     private static function definePermission($name, $translationKey, $permissionParentId) {
