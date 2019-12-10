@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder {
         });
 
         // generowanie reszty uzytkownikow
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             factory(User::class)->create([
                 'password' => '12345678'
             ])->each(function ($user) {

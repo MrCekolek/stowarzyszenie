@@ -28,18 +28,6 @@ class User extends Authenticatable implements JWTSubject {
         'email_verified_at'
     ];
 
-    public function getCreatedAtAttribute($value) {
-        return $this->localize($value)->toDateTimeString();
-    }
-
-    public function getUpdatedAtAttribute($value) {
-        return $this->localize($value)->toDateTimeString();
-    }
-
-    public function getEmailVerifiedAtAttribute($value) {
-        return $this->localize($value)->toDateTimeString();
-    }
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -77,6 +65,18 @@ class User extends Authenticatable implements JWTSubject {
         return [];
     }
 
+    public function getCreatedAtAttribute($value) {
+        return $this->localize($value)->toDateTimeString();
+    }
+
+    public function getUpdatedAtAttribute($value) {
+        return $this->localize($value)->toDateTimeString();
+    }
+
+    public function getEmailVerifiedAtAttribute($value) {
+        return $this->localize($value)->toDateTimeString();
+    }
+
     public function getName() {
         return $this->first_name . ' ' . $this->last_name;
     }
@@ -89,6 +89,23 @@ class User extends Authenticatable implements JWTSubject {
         $birthdateExploded = explode('/', $value);
 
         $this->attributes['birthdate'] = Carbon::createFromFormat('d-m-Y', $birthdateExploded[0] . '-' . $birthdateExploded[1] . '-' . $birthdateExploded[2]);
+    }
+
+    public function preferenceUser() {
+        return $this->hasOne(PreferenceUser::class);
+    }
+
+    public function affilationUser() {
+        return $this->hasOne(AffiliationUser::class);
+    }
+
+    public function roles() {
+        return $this->belongsToMany(Role::class)
+            ->using(RoleUser::class);
+    }
+
+    public function portoflio() {
+        return $this->hasOne(Portfolio::class);
     }
 
     public function scopeLoginEmail($query, $login_email) {
@@ -105,31 +122,5 @@ class User extends Authenticatable implements JWTSubject {
 
     public function scopeId($query, $id) {
         return $query->where('id', $id);
-    }
-
-    public function preferenceUser() {
-        return $this->hasOne(PreferenceUser::class);
-    }
-
-    public function affilationUser() {
-        return $this->hasOne(AffiliationUser::class);
-    }
-
-    public function roles() {
-        return $this->belongsToMany(Role::class)
-            ->using(RoleUser::class);
-    }
-
-    protected static function boot() {
-        parent::boot();
-
-        static::created(function ($user) {
-            factory(RoleUser::class)->create([
-                'role_id' => $user->id === 1 ?
-                    Role::whereName('admin')->first()->id :
-                    Role::whereName('user')->first()->id,
-                'user_id' => $user->id
-            ]);
-        });
     }
 }
