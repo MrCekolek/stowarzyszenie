@@ -4,28 +4,25 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePermissionRolesTable extends Migration {
+class CreateContentsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('permission_role', function (Blueprint $table) {
+        Schema::create('contents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('permission_id');
-            $table->unsignedBigInteger('role_id');
+            $table->text('value')->nullable();
             $table->boolean('selected')->default(0);
+            $table->boolean('admin_visibility')->default(1);
+            $table->boolean('user_visibility')->default(1);
+            $table->unsignedBigInteger('tile_content_id');
             $table->timestamps();
 
-            $table->unique(['permission_id', 'role_id']);
-            $table->foreign('permission_id')
+            $table->foreign('tile_content_id')
                 ->references('id')
-                ->on('permissions')
-                ->onDelete('cascade');
-            $table->foreign('role_id')
-                ->references('id')
-                ->on('roles')
+                ->on('tile_contents')
                 ->onDelete('cascade');
         });
     }
@@ -36,6 +33,6 @@ class CreatePermissionRolesTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('permission_role');
+        Schema::dropIfExists('contents');
     }
 }
