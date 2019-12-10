@@ -14,7 +14,7 @@ class CreatePermissionParentsTable extends Migration {
         Schema::create('permission_parents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('translation_key')->nullable();
+            $table->string('translation_key');
             $table->timestamps();
         });
     }

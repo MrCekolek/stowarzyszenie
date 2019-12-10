@@ -14,11 +14,14 @@ class CreatePermissionsTable extends Migration {
         Schema::create('permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('translation_key')->nullable();
+            $table->string('translation_key');
             $table->unsignedBigInteger('permission_parent_id');
             $table->timestamps();
 
-            $table->foreign('permission_parent_id')->references('id')->on('permission_parents')->onDelete('cascade');
+            $table->foreign('permission_parent_id')
+                ->references('id')
+                ->on('permission_parents')
+                ->onDelete('cascade');
         });
     }
 
