@@ -16,5 +16,19 @@ return [
             "row_not_found" => ["wrong_email_or_token" => "Token lub Email są niepoprawne."]
         ],
         "reset_password" => ["send_email" => ["sent" => "Email do zmiany hasła został wysłany pomyślnie."]]
+    ],
+    "crud" => [
+        "fail" => [
+            "create" => "Błąd dodawania danych.",
+            "delete" => "Błąd usuwania danych.",
+            "read" => "Błąd pobierania danych.",
+            "update" => "Błąd modyfikacji danych."
+        ],
+        "success" => [
+            "create" => "Pomyślnie dodano dane.",
+            "delete" => "Pomyślnie usunięto dane.",
+            "read" => "Pomyślnie odczytano dane.",
+            "update" => "Pomyślnie zmodyfikowano dane."
+        ]
     ]
 ];
