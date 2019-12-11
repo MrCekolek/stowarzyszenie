@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-class InterestUserController extends Controller
-{
+class InterestUserController extends Controller {
     //
 }

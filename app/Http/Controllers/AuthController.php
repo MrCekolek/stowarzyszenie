@@ -50,6 +50,37 @@ class AuthController extends Controller {
         return $this->respondWithToken($token);
     }
 
+    private function getUserRowByEmail($input) {
+        return User::loginEmail($input['login_email'])->emailVerifiedAt(null)->get();
+    }
+
+    /**
+     * Get the token array structure.
+     *
+     * @param string $token
+     *
+     * @return JsonResponse
+     */
+    protected function respondWithToken($token) {
+        return response()->json(['access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user' => $this->me()]);
+    }
+
+    /**
+     * Get the authenticated User.
+     *
+     * @return JsonResponse
+     */
+    public function me() {
+        return LogService::read(true, [
+            'user' => User::id(auth()->user()->id)
+                ->with(['preferenceUser', 'affilationUser', 'roles.permissions'])
+                ->first()->toArray()
+        ]);
+    }
+
     public function accountRegister(Request $request) {
         $input = $request->all();
 
@@ -67,45 +98,56 @@ class AuthController extends Controller {
             $time_zone = 'UTC';
         }
 
-        $user = User::create([
-            'login_email' => $input['login_email'],
+        $user = User::create(['login_email' => $input['login_email'],
             'password' => $input['password'],
             'first_name' => $input['first_name'],
             'last_name' => $input['last_name'],
             'birthdate' => $input['birthdate'],
             'gender' => $input['gender'],
             'contact_email' => $input['contact_email'],
-            'phone_number' => $input['phone_number'],
-        ]);
+            'phone_number' => $input['phone_number'],]);
 
-        AffiliationUser::create([
-           'title' => $input['title'],
-           'institution' => $input['institution'],
-           'department' => $input['department'],
-           'street' => $input['street'],
-           'city' => $input['city'],
-           'country' => $input['country'],
-           'user_id' => $user['id']
-        ]);
+        AffiliationUser::create(['title' => $input['title'],
+            'institution' => $input['institution'],
+            'department' => $input['department'],
+            'street' => $input['street'],
+            'city' => $input['city'],
+            'country' => $input['country'],
+            'user_id' => $user['id']]);
 
-        PreferenceUser::create([
-            'avatar' => $input['avatar'],
+        PreferenceUser::create(['avatar' => $input['avatar'],
             'time_zone' => $time_zone,
             'lang' => $input['lang'],
-            'user_id' => $user['id']
-        ]);
-
-        $this->send($input['login_email']);
-    }
-
-    public function accountResendRegister(Request $request) {
-        $input = $request->all();
+            'user_id' => $user['id']]);
 
         $this->send($input['login_email']);
     }
 
     public function getGeolocation() {
         return PreferenceUserController::getGeolocation();
+    }
+
+    public function send($email) {
+        $token = $this->createToken($email);
+
+        SendAuthEmailJob::dispatch($email, $token);
+    }
+
+    public function createToken($email) {
+        $token = Str::random(60);
+        $this->saveToken($email, $token);
+
+        return $token;
+    }
+
+    public function saveToken($email, $token) {
+        User::loginEmail($email)->update(['remember_token' => $token]);
+    }
+
+    public function accountResendRegister(Request $request) {
+        $input = $request->all();
+
+        $this->send($input['login_email']);
     }
 
     public function accountActivate(Request $request) {
@@ -124,10 +166,6 @@ class AuthController extends Controller {
         return User::rememberToken($input['token']);
     }
 
-    private function getUserRowByEmail($input) {
-        return User::loginEmail($input['login_email'])->emailVerifiedAt(null)->get();
-    }
-
     private function change($input) {
         $token = $input['token'];
 
@@ -136,52 +174,11 @@ class AuthController extends Controller {
             'email_verified_at' => Carbon::now()
         ]);
 
-        return redirect(config('app.front_url') . '/auth/login')->with([
-            'message' =>  __('custom.controllers.auth.change.activated')
-        ]);
+        return redirect(config('app.front_url') . '/auth/login')->with(['message' => __('custom.controllers.auth.change.activated')]);
     }
 
     private function rowNotFound() {
         return ErrorService::wrongToken();
-    }
-
-    public function send($email) {
-        $token = $this->createToken($email);
-
-        SendAuthEmailJob::dispatch($email, $token);
-    }
-
-    public function createToken($email) {
-        $token = Str::random(60);
-        $this->saveToken($email, $token);
-
-        return $token;
-    }
-
-    public function saveToken($email, $token) {
-        User::loginEmail($email)->update([
-            'remember_token' => $token
-        ]);
-    }
-
-    /**
-     * Get the authenticated User.
-     *
-     * @return JsonResponse
-     */
-    public function me() {
-//        $this->translate(
-//            'pl',
-//            'Witam Gosie, jak tam dzionek mija?',
-//            (new Interest()),
-//            'name'
-//        );
-
-        return response()->json(
-            User::id(auth()->user()->id)
-                ->with(['preferenceUser', 'affilationUser', 'roles.permissions'])
-                ->first()
-        );
     }
 
     /**
@@ -202,21 +199,5 @@ class AuthController extends Controller {
      */
     public function refresh() {
         return $this->respondWithToken(auth()->refresh());
-    }
-
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return JsonResponse
-     */
-    protected function respondWithToken($token) {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => $this->me()
-        ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\LogService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller {
@@ -11,8 +12,8 @@ class UserController extends Controller {
             $user['name'] = $user->getName();
         });
 
-        return response()->json([
-            'users' => $users
+        return LogService::read(true, [
+            'users' => $users->toArray()
         ]);
     }
 
