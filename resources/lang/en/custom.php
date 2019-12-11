@@ -18,5 +18,19 @@ return [
         "reset_password" => [
             "send_email" => ["sent" => "Email to change password has been sent successfully."]
         ]
+    ],
+    "crud" => [
+        "fail" => [
+            "create" => "Error adding data.",
+            "delete" => "Data delete error.",
+            "read" => "Data download error.",
+            "update" => "Data modification error."
+        ],
+        "success" => [
+            "create" => "Data added successfully.",
+            "delete" => "Successfully deleted data.",
+            "read" => "Data read successfully.",
+            "update" => "The data has been successfully modified."
+        ]
     ]
 ];

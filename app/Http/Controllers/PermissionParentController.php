@@ -6,6 +6,7 @@ use App\Http\Requests\PermissionParentRequest;
 use App\Models\PermissionParent;
 use App\Models\PermissionRole;
 use App\Models\Role;
+use App\Services\LogService;
 use Illuminate\Http\Request;
 
 class PermissionParentController extends Controller {
@@ -33,7 +34,7 @@ class PermissionParentController extends Controller {
             }
         }
 
-        return response()->json([
+        return LogService::read(true, [
             'role' => $role->name,
             'permissions' => $permissionParents
         ]);
@@ -65,8 +66,6 @@ class PermissionParentController extends Controller {
             }
         }
 
-        return response()->json([
-           'success' => $success
-        ]);
+        return LogService::update($success);
     }
 }

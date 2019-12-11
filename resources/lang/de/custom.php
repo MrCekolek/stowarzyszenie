@@ -18,5 +18,19 @@ return [
         "reset_password" => [
             "send_email" => ["sent" => "E-Mail zum Ändern des Passworts wurde erfolgreich gesendet."]
         ]
+    ],
+    "crud" => [
+        "fail" => [
+            "create" => "Fehler beim Hinzufügen der Daten.",
+            "delete" => "Fehler beim Löschen der Daten.",
+            "read" => "Fehler beim Herunterladen der Daten.",
+            "update" => "Datenänderungsfehler."
+        ],
+        "success" => [
+            "create" => "Daten erfolgreich hinzugefügt.",
+            "delete" => "Daten erfolgreich gelöscht.",
+            "read" => "Daten erfolgreich gelesen.",
+            "update" => "Die Daten wurden erfolgreich geändert."
+        ]
     ]
 ];

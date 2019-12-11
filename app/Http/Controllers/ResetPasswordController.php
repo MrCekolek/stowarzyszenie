@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Jobs\SendPasswordResetEmailJob;
 use App\Models\PasswordReset;
+use App\Services\LogService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -21,9 +22,7 @@ class ResetPasswordController extends Controller {
 
         $this->send($input['login_email']);
 
-        return response()->json([
-            'message' => __('custom.controllers.reset_password.send_email.sent')
-        ]);
+        return LogService::accountPasswordReset();
     }
 
     public function send($email) {

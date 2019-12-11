@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RoleRequest;
 use App\Models\Role;
+use App\Services\LogService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -13,8 +14,8 @@ class RoleController extends Controller {
     }
 
     public function index() {
-        return response()->json([
-           'roles' => Role::all()
+        return LogService::read(true, [
+            'roles' => Role::all()->toArray()
         ]);
     }
 
@@ -34,9 +35,8 @@ class RoleController extends Controller {
             'name' => $input['name']
         ]);
 
-        return response()->json([
-            'success' => $role->exists(),
-            'role' => $role
+        return LogService::create($role->exists(), [
+            'role' => $role->toArray()
         ]);
     }
 
@@ -51,6 +51,8 @@ class RoleController extends Controller {
             return $validation->failResponse();
         }
 
-        Role::destroy($role->id);
+        $success = Role::destroy($role->id);
+
+        return LogService::delete($success);
     }
 }
