@@ -16,6 +16,7 @@ class CreateTilesTable extends Migration {
             $table->string('name_en')->nullable();
             $table->string('name_pl')->nullable();
             $table->string('name_ru')->nullable();
+            $table->number('position')->default(0);
             $table->boolean('admin_visibility')->default(1);
             $table->boolean('user_visibility')->default(1);
             $table->unsignedBigInteger('portfolio_tab_id');

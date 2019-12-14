@@ -35,6 +35,7 @@ class TileController extends Controller {
             auth()->user()->portfolio()->preference_user()->lang,
             $input['name'],
             $tile = Tile::create([
+                'position' => Tile::max('position'),
                 'portfolio_tab_id' => $input['portfolio_tab_id']
             ]),
             'name'
@@ -56,7 +57,10 @@ class TileController extends Controller {
         $this->translate(
             auth()->user()->portfolio()->preference_user()->lang,
             $input['name'],
-            Tile::whereId($tile->id),
+            Tile::whereId($tile->id)
+                ->update([
+                    'position' => $input['position']
+                ]),
             'name'
         );
 
@@ -71,7 +75,7 @@ class TileController extends Controller {
             return $validation->failResponse();
         }
 
-        $success = PortfolioTab::destroy($tile->id);
+        $success = Tile::destroy($tile->id);
 
         return LogService::delete($success);
     }

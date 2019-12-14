@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class PortfolioTabRequest extends FormRequest {
+class ContentRequest extends FormRequest {
     protected $rules = [];
 
     public function __construct(array $input, $filter) {
@@ -28,21 +28,17 @@ class PortfolioTabRequest extends FormRequest {
 
     public function checkCreate() {
         $this->rules = [
-            'name' => 'required',
-            'portfolio_id' => 'required|exists:portfolio_tabs',
+            'tile_content_id' => 'required|exists:contents',
         ];
     }
 
     public function checkUpdate() {
-        $this->rules = [
-            'name' => 'required',
-            'position' => 'required'
-        ];
+        $this->checkCreate();
     }
 
     public function checkDestroy() {
         $this->rules = [
-            'id' => 'required|exists:portfolio_tabs'
+            'id' => 'required|exists:contents'
         ];
     }
 }
