@@ -9,6 +9,7 @@ class Tile extends Model {
         'name_en',
         'name_pl',
         'name_ru',
+        'position',
         'admin_visibility',
         'user_visibility',
         'portfolio_tab_id'

@@ -34,7 +34,10 @@ class TileRequest extends FormRequest {
     }
 
     public function checkUpdate() {
-        $this->checkCreate();
+        $this->rules = [
+            'name' => 'required',
+            'position' => 'required'
+        ];
     }
 
     public function checkDestroy() {

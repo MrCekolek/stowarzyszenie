@@ -13,7 +13,9 @@ class CreateContentsTable extends Migration {
     public function up() {
         Schema::create('contents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('value')->nullable();
+            $table->text('value_en')->nullable();
+            $table->text('value_pl')->nullable();
+            $table->text('value_ru')->nullable();
             $table->boolean('selected')->default(0);
             $table->boolean('admin_visibility')->default(1);
             $table->boolean('user_visibility')->default(1);

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PortfolioTabRequest;
+use App\Models\Portfolio;
 use App\Models\PortfolioTab;
-use App\Models\User;
 use App\Services\LogService;
 use App\Traits\Translatable;
 use Illuminate\Http\Request;
@@ -16,8 +16,8 @@ class PortfolioTabController extends Controller {
         $this->middleware('auth:api', ['except' => ['index']]);
     }
 
-    public function index(User $user) {
-        $portfolioTabs = PortfolioTab::where('portfolio_id', $user->portfolio->id)
+    public function index(Portfolio $portfolio) {
+        $portfolioTabs = PortfolioTab::where('portfolio_id', $portfolio->id)
             ->toArray();
 
         return LogService::read(true, $portfolioTabs);
@@ -35,6 +35,7 @@ class PortfolioTabController extends Controller {
             auth()->user()->portfolio()->preference_user()->lang,
             $input['name'],
             $portfolioTab = PortfolioTab::create([
+                'position' => PortfolioTab::max('position') + 1,
                 'portfolio_id' => $input['portfolio_id']
             ]),
             'name'
@@ -56,7 +57,10 @@ class PortfolioTabController extends Controller {
         $this->translate(
             auth()->user()->portfolio()->preference_user()->lang,
             $input['name'],
-            PortfolioTab::whereId($portfolioTab->id),
+            PortfolioTab::whereId($portfolioTab->id)
+                ->update([
+                    'position' => $input['position']
+                ]),
             'name'
         );
 
