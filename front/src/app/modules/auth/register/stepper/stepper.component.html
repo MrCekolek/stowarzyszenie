@@ -1,37 +1,46 @@
 <div class="row justify-content-center">
-    <div class="col-xl-4 col-lg-5 col-md-8 col-sm-10">
-        <div class="stepper-container mt-5">
-            <h1>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PAGE_TITLE' | translate }}</h1>
-            <div>
-                <ul class="progressbar" *ngIf="!this.registerCompleted">
-                    <li *ngFor="let step of _steps; let i = index;" (click)="onClick(i)"
-                    [ngClass]="{'active': this.selectedIndex === i,
-                    'completed': step.completed && this.selectedIndex >= i}">
-                        <!-- <div class="icon">
-                            <i [class]="this.icons[i]"></i>
-                        </div> -->
-                        <span> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP' | translate }} {{ i + 1 }} </span>
-                    </li>
-                </ul>
-
-                <div *ngIf="this.registerCompleted">
-                    <ul class="progressbar">
-                        <li class="active end">
-                            <span> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.SUCCESS_ICON' | translate }}</span>
-                        </li>
-                    </ul>
+    <div class="col-12 col-lg-8">
+        <div class=" wizard-steps" *ngIf="!this.registerCompleted ">
+            <div class="wizard-step" style="cursor: pointer;" *ngFor="let step of _steps; let i=index; " (click)="onClick(i) " [ngClass]="{ 'wizard-step-active': this.selectedIndex===i , 'completed': step.completed && this.selectedIndex>= i}">
+                <div class="wizard-step-icon">
+                    <i [class]="this.icons[i]"></i>
+                </div>
+                <div class="wizard-step-label">
+                    {{ stepTitles[i] | translate }}
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="section-body">
     <div class="row justify-content-center">
         <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
-            <div class="form-container">
-                <form>
+            <div class="card">
+                <div class="card-body">
+                    <p class="text-muted">
+                        <!-- paragraph to describe this page -->
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PAGE_PARAGRAPH' | translate }}
+                    </p>
+
                     <ng-container [ngTemplateOutlet]="selected.content" *ngIf="!this.registerCompleted"></ng-container>
+                    <button class="btn btn-primary btn-block" type="button" cdkStepperNext *ngIf="this.selectedIndex !== 3 && !this.registerCompleted">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.GO_TO_STEP' | translate }} {{ this.selectedIndex + 2 }}
+                    </button>
+
+                    <button cdkStepperPrevious type="button" class="btn text-primary btn-block" *ngIf="this.selectedIndex !== 0 && !this.registerCompleted">
+                        <i class="fas fa-arrow-left"></i> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BACK_TO_STEP' | translate }} {{ this.selectedIndex }}
+                    </button>
+                </div>
+            </div>
+
+            <a [routerLink]="['../login']" class="external-link secondary mb-5">
+                {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.LOGIN_LINK' | translate }}
+            </a>
+        </div>
+    </div>
+</div>
+<!--
 
                     <div class="formCompleted" *ngIf="this.registerCompleted">
                         <h1>
@@ -42,21 +51,12 @@
                         </h1>
 
                         <p>
-                            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.PAGE_DESC1' | translate }} {{ this.registeredEmail }}.
-                            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.PAGE_DESC2' | translate }}
+                            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.PAGE_DESC1' | translate }} {{ this.registeredEmail }}. {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.PAGE_DESC2' | translate }}
                         </p>
                     </div>
 
-                    <button class="submit-button" type="button" cdkStepperNext *ngIf="this.selectedIndex !== 3 && !this.registerCompleted" [disabled]="this.registerComponent.isLoading">
-                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.GO_TO_STEP' | translate }} {{ this.selectedIndex + 2 }}
-                    </button>
-
                     <button type="button" class="submit-button" *ngIf="this.selectedIndex === 3 && !this.registerCompleted" (click)="this.completeRegistration()">
                         {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BUTTON_REGISTER' | translate }}
-                    </button>
-
-                    <button cdkStepperPrevious type="button" class="external-link primary" *ngIf="this.selectedIndex !== 0 && !this.registerCompleted">
-                        <i class="fas fa-arrow-left"></i> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BACK_TO_STEP' | translate }} {{ this.selectedIndex }}
                     </button>
 
                     <button *ngIf="this.registerCompleted" type="button" class="submit-button" (click)="this.resendEmailActivation()">
@@ -66,4 +66,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

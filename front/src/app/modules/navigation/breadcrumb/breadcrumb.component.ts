@@ -37,17 +37,6 @@ export class BreadcrumbComponent implements OnInit {
         let root: ActivatedRoute = this.activatedRoute.root;
         this.breadcrumbs = this.getBreadcrumbs(root);
       }
-
-      // update user model
-      if (event instanceof NavigationStart) {
-        this.userService.me().subscribe(
-          response => {
-            this.userService.changeUser(new UserModel(response));
-
-            console.log(this.userService.getUser());
-          }
-        );
-      }
     });
   }
 

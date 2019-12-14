@@ -9,7 +9,7 @@ import { ApiService } from "../../../core/http/api.service";
   providedIn: 'root'
 })
 export class UserService {
-  private user: UserModel;
+  public user: UserModel;
   private loggedIn: BehaviorSubject <boolean> = new BehaviorSubject <boolean> (this.tokenService.loggedIn());
   loginStatus = this.loggedIn.asObservable();
 

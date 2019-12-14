@@ -1,393 +1,276 @@
 <auth-stepper linear [registerCompleted]="this.registerCompleted">
-  <!-- step first: account data -->
-  <cdk-step [stepControl]="registerFormStep1">
-    <form [formGroup]="registerFormStep1" novalidate>
-      <h1>
-        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP1_TITLE' | translate }}
-      </h1>
+    <!-- step first: account data -->
+    <cdk-step [stepControl]="registerFormStep1">
+        <form [formGroup]="registerFormStep1" novalidate>
+            <h2 class="mb-3 mt-4">
+                {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP1_TITLE' | translate }}
+            </h2>
 
-      <!-- email input -->
-      <mat-form-field appearance="outline" class="mb-3">
-        <mat-label>
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.EMAIL_PLACEHOLDER' | translate }}
-        </mat-label>
-
-        <input id="login_email"
-               formControlName="login_email"
-               type="email"
-               placeholder="email@domain.com"
-               matInput
-               required [ngClass]="{'invalid': login_email.invalid}">
-
-        <mat-hint>
-          <div class="form-text text-muted" *ngIf="login_email.valid || login_email.untouched; else loginEmailInvalid">
-            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.EMAIL_HINT' | translate }}
-          </div>
-          <ng-template #loginEmailInvalid>
-            <div class="text-danger"
-                 *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.required">
-              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
-            </div>
-            <div class="text-danger"
-                 *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.email">
-              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_INCORRECT' | translate }}
-            </div>
-            <div class="text-danger"
-                 *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.emailExist">
-              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_EXISTS' | translate }}
-            </div>
-          </ng-template>
-        </mat-hint>
-
-        <div class="alert-icon" *ngIf="!login_email.untouched">
-          <div *ngIf="login_email.valid && !isLoading; else loginEmailIconInvalid">
-            <i class="fas fa-check ok"></i>
-          </div>
-          <ng-template #loginEmailIconInvalid>
-            <i class="fas fa-times wrong"></i>
-          </ng-template>
-        </div>
-      </mat-form-field>
-
-      <!-- password input -->
-      <mat-form-field class="password-field"
-                      appearance="outline">
-
-        <mat-label>
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.PASSWORD_PLACEHOLDER' | translate }}
-        </mat-label>
-
-        <input id="password"
-               formControlName="password"
-               [type]="passwordIsHidden ? 'password' : 'text'"
-               placeholder="********"
-               matInput
-               required>
-
-        <mat-icon matSuffix
-                  (click)="this.togglePassword()"
-                  matTooltip="Info about the action">
-
-          <i class="fas fa-eye" *ngIf="this.passwordIsHidden"></i>
-          <i class="fas fa-eye-slash" *ngIf="!this.passwordIsHidden"></i>
-        </mat-icon>
-
-        <mat-hint>
-          <div class="form-text text-muted" *ngIf="password.valid || password.untouched; else passwordInvalid">
-            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PASSWORD_HINT' | translate }}
-          </div>
-          <ng-template #passwordInvalid>
-            <div class="text-danger"
-                 *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.required">
-              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
-            </div>
-            <div class="text-danger"
-                 *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.minlength">
-              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.PASSWORD_LENGTH' | translate }}
-            </div>
-          </ng-template>
-        </mat-hint>
-
-        <div class="alert-icon longer" *ngIf="!password.untouched">
-          <div *ngIf="password.valid; else passwordIconInvalid">
-            <i class="fas fa-check ok"></i>
-          </div>
-          <ng-template #passwordIconInvalid>
-            <i class="fas fa-times wrong"></i>
-          </ng-template>
-        </div>
-      </mat-form-field>
-    </form>
-  </cdk-step>
-
-  <!-- step second: personal data -->
-  <cdk-step [stepControl]="registerFormStep2">
-    <form [formGroup]="registerFormStep2" novalidate>
-      <h1>
-        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP2_TITLE' | translate }}
-      </h1>
-
-      <!-- firstname input -->
-      <mat-form-field appearance="outline">
-        <mat-label>
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.FIRST_NAME' | translate }}
-        </mat-label>
-
-        <input id="first_name"
-               formControlName="first_name"
-               type="text"
-               matInput>
-
-        <mat-hint>
-          <div class="text-danger"
-               *ngIf="(first_name.dirty || first_name.touched) && first_name.invalid && first_name.errors.required">
-            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
-          </div>
-        </mat-hint>
-
-        <div class="alert-icon" *ngIf="!first_name.untouched">
-          <div *ngIf="first_name.valid; else firstNameIconInvalid">
-            <i class="fas fa-check ok"></i>
-          </div>
-          <ng-template #firstNameIconInvalid>
-            <i class="fas fa-times wrong"></i>
-          </ng-template>
-        </div>
-      </mat-form-field>
-
-      <!-- lastname input -->
-      <mat-form-field appearance="outline">
-        <mat-label>
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.LAST_NAME' | translate }}
-        </mat-label>
-
-        <input id="last_name"
-               formControlName="last_name"
-               type="text"
-               matInput
-               required>
-
-        <mat-hint>
-          <div class="text-danger"
-               *ngIf="(last_name.dirty || last_name.touched) && last_name.invalid && last_name.errors.required">
-            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
-          </div>
-        </mat-hint>
-
-        <div class="alert-icon" *ngIf="!last_name.untouched">
-          <div *ngIf="last_name.valid; else lastNameIconInvalid">
-            <i class="fas fa-check ok"></i>
-          </div>
-          <ng-template #lastNameIconInvalid>
-            <i class="fas fa-times wrong"></i>
-          </ng-template>
-        </div>
-      </mat-form-field>
-
-      <!-- birthdate input -->
-      <mat-form-field appearance="outline">
-        <mat-label>{{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BIRTHDATE' | translate }}</mat-label>
-
-        <input id="birthdate"
-               formControlName="birthdate"
-               type="text"
-               matInput
-               required>
-
-        <mat-hint>
-          <div class="form-text text-muted" *ngIf="birthdate.valid || birthdate.untouched; else birthdayInvalid">
-            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BIRTHDATE_HINT' | translate }}
-          </div>
-          <ng-template #birthdayInvalid>
-            <div class="text-danger"
-                 *ngIf="(birthdate.dirty || birthdate.touched) && birthdate.invalid && birthdate.errors.required">
-              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
-            </div>
-            <div class="text-danger"
-                 *ngIf="(birthdate.dirty || birthdate.touched) && birthdate.invalid && birthdate.errors.pattern">
-              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.BIRTHDATE_INCORRECT' | translate }}
-            </div>
-          </ng-template>
-        </mat-hint>
-
-        <div class="alert-icon" *ngIf="!birthdate.untouched">
-          <div *ngIf="birthdate.valid; else birthdateIconInvalid">
-            <i class="fas fa-check ok"></i>
-          </div>
-          <ng-template #birthdateIconInvalid>
-            <i class="fas fa-times wrong"></i>
-          </ng-template>
-        </div>
-      </mat-form-field>
-
-      <!-- F - female, M -- male -->
-      <div class="gender">
-        <mat-radio-group id="gender"
-                         formControlName="gender"
-                         required>
-
-          <mat-radio-button value="F">
-            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.MAN' | translate }}
-          </mat-radio-button>
-          <mat-radio-button value="M">
-            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.WOMAN' | translate }}
-          </mat-radio-button>
-
-          <mat-hint *ngIf="!gender.untouched">
-            <span class="alert-icon">
-              <div *ngIf="!gender.valid">
-                <i class="fas fa-times wrong"></i>
+            <!-- email input -->
+            <div class="form-group">
+                <label>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.EMAIL_PLACEHOLDER' | translate }} *
+                </label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-at"></i>
+                        </div>
+                    </div>
+                    <!-- input for email -->
+                    <input class="form-control" id="login_email" formControlName="login_email" type="email" placeholder="your.email@domain.com" required [ngClass]="{'is-valid': (login_email.dirty || login_email.touched) && login_email.valid, 
+                        'is-invalid': (login_email.dirty || login_email.touched) && login_email.invalid}">
+                    <!-- feedback divs -->
+                    <div class="valid-feedback text-muted" style="display: block;" *ngIf="login_email.valid || login_email.untouched">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.EMAIL_HINT' | translate }}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.required">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.email">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_INCORRECT' | translate }}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.emailExist">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_EXISTS' | translate }}
+                    </div>
+                    <div class="valid-feedback" *ngIf="login_email.valid">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.ALERT.GOOD' | translate }}
+                    </div>
                 </div>
-            </span>
-
-            <span class="text-danger" *ngIf="gender.invalid && gender.errors.required">
-              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
-            </span>
-          </mat-hint>
-        </mat-radio-group>
-      </div>
-    </form>
-  </cdk-step>
-
-  <!-- step third: affiliation data -->
-  <cdk-step optional>
-    <form [formGroup]="registerFormStep3" novalidate>
-      <h1>
-        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.PAGE_TITLE' | translate }}
-      </h1>
-
-      <mat-form-field appearance="outline" class="mb-3">
-        <mat-label>
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.TITLE' | translate }}
-        </mat-label>
-
-
-        <input id="title"
-               formControlName="title"
-               type="text"
-               placeholder="Ph. D"
-               matInput>
-
-        <mat-hint class="form-text text-muted">
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.TITLE_HINT' | translate }}
-        </mat-hint>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="mb-3">
-        <mat-label>
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.INSTITUTION' | translate }}
-        </mat-label>
-
-        <input id="institution"
-               formControlName="institution"
-               type="text"
-               matInput>
-
-        <mat-hint class="form-text text-muted">
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.INSTITUTION_HINT' | translate }}
-        </mat-hint>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="mb-3">
-        <mat-label>
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.DEPARTMENT' | translate }}
-        </mat-label>
-
-        <input id="department"
-               formControlName="department"
-               type="text"
-               matInput>
-
-        <mat-hint class="form-text text-muted">
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.DEPARTMENT_HINT' | translate }}
-        </mat-hint>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="mb-3">
-        <mat-label>
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.STREET' | translate }}
-        </mat-label>
-
-        <input id="street"
-               formControlName="street"
-               type="text"
-               matInput>
-
-        <mat-hint class="form-text text-muted">
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.STREET_HINT' | translate }}
-        </mat-hint>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="mb-3">
-        <mat-label>
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.CITY' | translate }}
-        </mat-label>
-
-        <input id="city"
-               formControlName="city"
-               type="text"
-               matInput>
-
-        <mat-hint class="form-text text-muted">
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.CITY_HINT' | translate }}
-        </mat-hint>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="mb-3">
-        <mat-label>
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.COUNTRY' | translate }}
-        </mat-label>
-
-        <input id="country"
-               formControlName="country"
-               type="text"
-               matInput>
-
-        <mat-hint class="form-text text-muted">
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.COUNTRY_HINT' | translate }}
-        </mat-hint>
-      </mat-form-field>
-    </form>
-  </cdk-step>
-
-  <!-- step fourth: contact data -->
-  <cdk-step optional>
-    <form [formGroup]="registerFormStep4" novalidate>
-      <h1>
-        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_TITLE' | translate }}
-      </h1>
-
-      <mat-form-field appearance="outline" class="mb-3">
-        <mat-label>
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_EMAIL' | translate }}
-        </mat-label>
-
-        <input id="contact_email"
-               formControlName="contact_email"
-               type="email"
-               placeholder="email@domain.com"
-               matInput>
-
-        <mat-hint>
-          <div class="form-text text-muted"
-               *ngIf="contact_email.valid || contact_email.untouched; else contactEmailInvalid">
-            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_EMAIL_HINT' | translate }}
-          </div>
-          <ng-template #contactEmailInvalid>
-            <div *ngIf="contact_email.value">
-              <div class="text-danger"
-                   *ngIf="(contact_email.dirty || contact_email.touched) && contact_email.invalid && contact_email.errors.email">
-                {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_INCORRECT' | translate }}
-              </div>
             </div>
-          </ng-template>
-        </mat-hint>
 
-        <div class="alert-icon" *ngIf="contact_email.dirty">
-          <div *ngIf="contact_email.valid; else contactEmailIconInvalid">
-            <i class="fas fa-check ok"></i>
-          </div>
-          <ng-template #contactEmailIconInvalid>
-            <i class="fas fa-times wrong"></i>
-          </ng-template>
-        </div>
-      </mat-form-field>
+            <div class="form-group">
+                <label>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.PASSWORD_PLACEHOLDER' | translate }} *
+                </label>
 
-      <mat-form-field appearance="outline">
-        <mat-label>
-          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PHONE' | translate }}
-        </mat-label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                    <!-- input for password -->
+                    <input class="form-control" id="password" formControlName="password" [type]="passwordIsHidden ? 'password' : 'text'" placeholder="********" required [ngClass]="{'is-valid': (password.dirty || password.touched) && password.valid, 
+                    'is-invalid': (password.dirty || password.touched) && password.invalid}">
 
-        <input id="phone_number"
-               formControlName="phone_number"
-               type="text"
-               placeholder="123456789"
-               matInput>
-      </mat-form-field>
-    </form>
-  </cdk-step>
+                    <!-- feedback divs -->
+                    <div class="valid-feedback text-muted" style="display: block;" *ngIf="password.valid || password.untouched">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PASSWORD_HINT' | translate }}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.required">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.minlength">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.PASSWORD_LENGTH' | translate }}
+                    </div>
+                    <div class="valid-feedback" *ngIf="password.valid">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.ALERT.GOOD' | translate }}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </cdk-step>
+
+    <!-- step second: personal data -->
+    <cdk-step [stepControl]="registerFormStep2">
+        <form [formGroup]="registerFormStep2" novalidate>
+            <h2 class="mb-3 mt-4">
+                {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP2_TITLE' | translate }}
+            </h2>
+
+            <!-- name -->
+            <div class="form-group">
+                <label>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.FIRST_NAME' | translate }} *
+                </label>
+
+                <input id="first_name" formControlName="first_name" type="text" class="form-control" required [ngClass]="{'is-valid': (first_name.dirty || first_name.touched) && first_name.valid, 
+                'is-invalid': (first_name.dirty || first_name.touched) && first_name.invalid}">
+                <div class="invalid-feedback" *ngIf="(first_name.dirty || first_name.touched) && first_name.invalid && first_name.errors.required">
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
+                </div>
+            </div>
+
+            <!-- lastname -->
+            <div class="form-group">
+                <label>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.LAST_NAME' | translate }} *
+                </label>
+
+                <input id="last_name" formControlName="last_name" type="text" class="form-control" required [ngClass]="{'is-valid': (last_name.dirty || last_name.touched) && last_name.valid, 
+                'is-invalid': (last_name.dirty || last_name.touched) && last_name.invalid}">
+                <div class="invalid-feedback" *ngIf="(last_name.dirty || last_name.touched) && last_name.invalid && last_name.errors.required">
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
+                </div>
+            </div>
+
+            <!-- birthdate-->
+            <div class="form-group">
+                <label>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BIRTHDATE' | translate }} *
+                </label>
+
+                <!-- birthdate picker -->
+                <input type="text" class="form-control datemask" id="birthdate" formControlName="birthdate" #datepicker placeholder="YYYY/MM/DD">
+
+                <!-- feedback -->
+                <div class="invalid-feedback" *ngIf="(birthdate.dirty || birthdate.touched) && birthdate.invalid && birthdate.errors.required">
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
+                </div>
+                <div class="invalid-feedback" *ngIf="(birthdate.dirty || birthdate.touched) && birthdate.invalid && birthdate.errors.pattern">
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.BIRTHDATE_INCORRECT' | translate }}
+                </div>
+            </div>
+
+            <!-- gender choose -->
+            <div class="form-group">
+                <label>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.GENDER_LABEL' | translate }} *
+                </label>
+                <div class="custom-control custom-radio">
+                    <input value="M" type="radio" id="customRadio1" name="gender" formControlName="gender" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio1">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.MAN' | translate }}
+                    </label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input value="F" type="radio" id="customRadio2" name="gender" formControlName="gender" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.WOMAN' | translate }}
+                    </label>
+                </div>
+                <div class="invalid-feedback" *ngIf="(gender.dirty || gender.touched) && gender.invalid && gender.errors.required">
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
+                </div>
+            </div>
+
+            <div class="mb-5"></div>
+        </form>
+    </cdk-step>
+
+    <!-- step third: affiliation data -->
+    <cdk-step optional>
+        <form [formGroup]="registerFormStep3" novalidate>
+            <h2 class="mb-3 mt-4">
+                {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.PAGE_TITLE' | translate }}
+            </h2>
+
+            <!-- academic title -->
+            <div class="form-group">
+                <label>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.TITLE' | translate }} *
+                </label>
+
+                <input id="title" formControlName="title" type="text" class="form-control" required>
+                <div class="valid-feedback text-muted">
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.TITLE_HINT' | translate }}
+                </div>
+            </div>
+
+            <!-- institution -->
+            <div class="form-group">
+                <label>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.INSTITUTION' | translate }}
+                </label>
+
+                <input id="institution" formControlName="institution" type="text" class="form-control" required>
+                <div class="valid-feedback text-muted">
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.INSTITUTION_HINT' | translate }}
+                </div>
+            </div>
+
+            <!-- department -->
+            <div class="form-group">
+                <label>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.DEPARTMENT' | translate }}
+                </label>
+
+                <input id="department" formControlName="department" type="text" class="form-control" required>
+                <div class="valid-feedback text-muted">
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.DEPARTMENT_HINT' | translate }}
+                </div>
+            </div>
+
+            <!-- street -->
+            <div class="form-group">
+                <label>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.STREET' | translate }}
+                </label>
+
+                <input id="street" formControlName="street" type="text" class="form-control" required>
+                <div class="valid-feedback text-muted">
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.STREET_HINT' | translate }}
+                </div>
+            </div>
+
+            <!-- city -->
+            <div class="form-group">
+                <label>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.CITY' | translate }}
+                </label>
+
+                <input id="city" formControlName="city" type="text" class="form-control" required>
+                <div class="valid-feedback text-muted">
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.CITY_HINT' | translate }}
+                </div>
+            </div>
+
+            <!-- country -->
+            <div class="form-group">
+                <label>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.COUNTRY' | translate }}
+                </label>
+
+                <input id="country" formControlName="country" type="text" class="form-control" required>
+                <div class="valid-feedback text-muted">
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.COUNTRY_HINT' | translate }}
+                </div>
+            </div>
+        </form>
+    </cdk-step>
+
+    <!-- step fourth: contact data -->
+    <cdk-step optional>
+        <form [formGroup]="registerFormStep4" novalidate>
+            <h2 class="mb-3 mt-4">
+                {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_TITLE' | translate }}
+            </h2>
+
+            <!-- email input -->
+            <div class="form-group">
+                <label>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_EMAIL' | translate }}
+                </label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-at"></i>
+                        </div>
+                    </div>
+                    <!-- input for email -->
+                    <input class="form-control" id="contact_email" formControlName="contact_email" type="email" placeholder="your.email@domain.com" required [ngClass]="{'is-valid': (login_email.dirty || login_email.touched) && login_email.valid, 
+                        'is-invalid': (login_email.dirty || login_email.touched) && login_email.invalid}">
+                    <!-- feedback divs -->
+                    <div class="valid-feedback text-muted" style="display: block;" *ngIf="contact_email.valid || contact_email.untouched; else contactEmailInvalid ">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_EMAIL_HINT' | translate }}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="(contact_email.dirty || contact_email.touched) && contact_email.invalid && contact_email.errors.email ">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_INCORRECT' | translate }}
+                    </div>
+                    <div class="valid-feedback" *ngIf="contact_email.valid">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.ALERT.GOOD' | translate }}
+                    </div>
+                </div>
+            </div>
+
+            <mat-form-field appearance="outline ">
+                <mat-label>
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PHONE' | translate }}
+                </mat-label>
+
+                <input id="phone_number" formControlName="phone_number" type="text " placeholder="123456789 " matInput>
+            </mat-form-field>
+        </form>
+    </cdk-step>
 </auth-stepper>
-
-<a [routerLink]="['../login']" class="external-link secondary">
-  {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.LOGIN_LINK' | translate }}
-</a>

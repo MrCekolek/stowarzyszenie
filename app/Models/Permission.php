@@ -25,24 +25,42 @@ class Permission extends BaseModel {
             PermissionParent::permissionParents()['Users']['name'] => [
                 [
                     self::definePermission(
-                        'Import',
-                        'USERS.IMPORT',
+                        'Add',
+                        'USERS.ADD',
+                        PermissionParent::permissionParents()['Users']['id'])
+                    ],
+                [
+                    self::definePermission(
+                        'Change role',
+                        'USERS.CHANGE_ROLE',
+                        PermissionParent::permissionParents()['Users']['id'])
+                ],
+                [
+                    self::definePermission(
+                        'Delete',
+                        'USERS.DELETE',
                         PermissionParent::permissionParents()['Users']['id'])
                 ]
             ],
             PermissionParent::permissionParents()['Roles']['name'] => [
                 [
                     self::definePermission(
-                        'Export',
-                        'ROLES.EXPORT',
+                        'Add',
+                        'ROLES.ADD',
+                        PermissionParent::permissionParents()['Roles']['id'])
+                    ],
+                [
+                    self::definePermission(
+                        'Change permissions',
+                        'ROLES.CHANGE_PERMISSIONS',
                         PermissionParent::permissionParents()['Roles']['id'])
                 ],
                 [
                     self::definePermission(
-                        'Import',
-                        'ROLES.IMPORT',
+                        'Delete',
+                        'ROLES.DELETE',
                         PermissionParent::permissionParents()['Roles']['id'])
-                ]
+                ],
             ]
         ];
     }

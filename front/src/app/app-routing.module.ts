@@ -31,6 +31,13 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'portfolio',
+    loadChildren: './modules/portfolio/portfolio.module#PortfolioModule',
+    canActivateChild: [
+      LoggedGuard
+    ]
+  },
+  {
     path: '**',
     redirectTo: ''
   }

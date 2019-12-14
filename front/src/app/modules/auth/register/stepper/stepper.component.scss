@@ -1,5 +1,4 @@
 @import '../../../../../assets/css/colors.scss';
-
 .stepper-container {
     h1 {
         color: $colorPrimaryDarkGreen;
@@ -7,10 +6,8 @@
         text-align: center;
         font-weight: 500 !important;
     }
-
     .progressbar {
         padding: 0;
-
         li {
             list-style-type: none;
             width: 25%;
@@ -19,18 +16,15 @@
             font-size: 16px;
             color: $colorGray;
             float: left;
-
             span {
                 margin: 0 auto;
                 display: block;
                 text-align: center;
                 font-size: .9rem;
             }
-
             &:hover {
                 cursor: pointer;
             }
-
             &::before {
                 text-align: center;
                 width: 30px;
@@ -43,7 +37,6 @@
                 border-radius: 2px;
             }
         }
-
         li:nth-child(1) {
             &::before {
                 font-family: "Font Awesome 5 Free";
@@ -51,7 +44,6 @@
                 content: '\f023';
             }
         }
-
         li:nth-child(2) {
             &::before {
                 font-family: "Font Awesome 5 Free";
@@ -59,7 +51,6 @@
                 content: '\f007';
             }
         }
-
         li:nth-child(3) {
             &::before {
                 font-family: "Font Awesome 5 Free";
@@ -67,7 +58,6 @@
                 content: '\f19c';
             }
         }
-
         li:nth-child(4) {
             &::before {
                 font-family: "Font Awesome 5 Free";
@@ -75,11 +65,9 @@
                 content: '\f095';
             }
         }
-
         li:first-child::after {
             content: none;
         }
-
         li::after {
             width: 100%;
             height: 2px;
@@ -90,26 +78,21 @@
             top: 15px;
             z-index: -1;
         }
-
         li.active,
         li.completed {
             color: $colorPrimaryDarkGreen;
-
             &::before {
                 background: $colorPrimaryDarkGreen;
             }
         }
-
         li.active::after,
         li.completed::after {
             background-color: $colorPrimaryDarkGreen;
         }
-
         li.end {
             margin: 0 auto;
             display: block;
             width: 100%;
-            
             &::before {
                 font-family: "Font Awesome 5 Free";
                 font-weight: 900;
@@ -140,7 +123,6 @@
 
 .submit-button {
     margin-top: 40px;
-
     &:disabled {
         cursor: default;
         background: $colorGray;
@@ -158,7 +140,6 @@
     display: block;
     text-align: center;
     width: 100%;
-
     &:hover {
         cursor: pointer;
     }

@@ -1,13 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from "../../../shared/services/user/user.service";
 import { TokenService } from "../../auth/login/service/token.service";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { LanguageService } from "../../../shared/services/user/language.service";
 import { SearchService } from "../../../shared/services/user/search.service";
 import { FormGroup, FormBuilder } from "@angular/forms";
-import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
+import { NavigationStart } from "@angular/router";
+import { UserModel } from '../../../shared/models/user.model';
 
 declare const $: any;
 
@@ -30,6 +32,8 @@ export class NavbarComponent implements OnInit {
   ];
   private loggedIn: boolean;
   private isLoading: boolean = false;
+  @Output() isPageLoading = new EventEmitter<boolean>();
+
   private flagsImages = [
     '../../../assets/images/uk_flag.png',
     '../../../assets/images/pl_flag.png',
@@ -61,70 +65,48 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.searchService.getUsers()
-      .pipe(
-        map(
-          data => {
-            this.isLoading = true;
+    this.emitPageLoadingValue(true);
+    let events: any = this.router.events;
 
-            return data;
+    if (this.loggedIn) {
+      this.router.events.subscribe(event => {
+        // update user model
+        if (event instanceof NavigationStart) {
+          this.userService.me().subscribe(
+            response => {
+              this.userService.changeUser(new UserModel(response));
+              console.log(new UserModel(response));
+              this.emitPageLoadingValue(false);
+            }
+          );
+        }
+      });
+  
+      this.searchService.getUsers()
+        .pipe(
+          map(
+            data => {
+              this.isLoading = true;
+  
+              return data;
+            }
+          )
+        )
+        .subscribe(
+          data => {
+            this.listData = new MatTableDataSource(data['users'].slice(-5));
+            this.listData.sort = this.sort;
+            this.listData.paginator = this.paginator;
+  
+            this.isLoading = false;
           }
         )
-      )
-      .subscribe(
-        data => {
-          this.listData = new MatTableDataSource(data['users'].slice(-5));
-          this.listData.sort = this.sort;
-          this.listData.paginator = this.paginator;
-
-          this.isLoading = false;
-        }
-      )
-
-    $(document).ready(() => {
-      // $('[data-toggle="tooltip"]').hover(function(){
-      //     $(this).tooltip('show');
-      // }, function(){
-      //     $(this).tooltip('hide');
-      // });
-
-      ////////// CLICK FUNCTIONS /////////////
-
-      const searchService = this.searchService;
-      const self = this;
-
-      $('.hamburger').click(function() {
-        $('.sidebar-wrapper').toggleClass('collapsed');
-      });
-
-      $('.sidebar-overlay').click(function() {
-        $('.sidebar-wrapper').toggleClass('collapsed');
-      });
-
-      $('.header-menu').click(function() {
-        $('.header-right').toggleClass('opened');
-      });
-
-      $('.header-right-overlay').click(function() {
-        $('.header-right').toggleClass('opened');
-      });
-
-      $('.with-submenu .title').click(function(event){
-        $(this).parent().find('.submenu').slideToggle(200);
-      });
-
-      $('#search-icon').click(function() {
-        $('.search-sidenav').toggleClass('opened');
-      });
-
-      $('.search-overlay').click(function() {
-        $('.search-sidenav').toggleClass('opened');
-      });
-
-      $('.scrollbar').mCustomScrollbar({
-        theme: "minimal"
-      });;
-    });
+  
+        const searchService = this.searchService;
+        const self = this;
+    } else {
+      this.emitPageLoadingValue(false);
+    }
   }
 
   createForm() {
@@ -149,5 +131,9 @@ export class NavbarComponent implements OnInit {
 
   get search_input() {
     return this.searchInputForm.get('search_input');
+  }
+
+  emitPageLoadingValue(value) {
+    this.isPageLoading.emit(value);
   }
 }

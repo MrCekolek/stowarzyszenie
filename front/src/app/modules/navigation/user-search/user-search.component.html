@@ -1,0 +1,58 @@
+<input class="form-control" type="search" placeholder="{{'STOWARZYSZENIE.HELPERS.SEARCH_PLACEHOLDER' | translate}}" aria-label="Search" data-width="250" style="width: 250px;">
+<button class="btn" type="submit"><i class="fas fa-search"></i></button>
+<div class="search-backdrop"></div>
+<div class="search-result">
+    <div class="search-header">
+        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.MAIN' | translate }}
+    </div>
+    <mat-table [dataSource]="listData" matSort>
+        <ng-container matColumnDef="avatar">
+            <mat-header-cell *matHeaderCellDef>
+                {{ 'STOWARZYSZENIE.LABELS.AVATAR' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <img src="../../../../assets/images/default_man.png" alt="" class="avatar avatar-sm">
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>
+                {{ 'STOWARZYSZENIE.LABELS.FIRST_NAME' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{ element.name }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+                <!--                      TODO Spinnerek ? :) -->
+                {{ 'STOWARZYSZENIE.LABELS.LOADING_DATA' | translate }}
+            </mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+                {{ 'STOWARZYSZENIE.LABELS.NO_DATA' | translate }}
+            </mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <td class="text-align-right">
+                    <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="See profile">
+        <i class="fas fa-address-card"></i>
+      </button>
+                    <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="Send message">
+        <i class="fas fa-envelope"></i>
+      </button>
+                </td>
+            </mat-cell>
+        </ng-container>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide': listData != null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide': !(listData != null && listData?.filteredData.length == 0)}"></mat-footer-row>
+    </mat-table>
+</div>

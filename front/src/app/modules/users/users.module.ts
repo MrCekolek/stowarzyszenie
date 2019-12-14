@@ -6,6 +6,8 @@ import { UserTileComponent } from './user-tile/user-tile.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material";
+import { PortfolioModule } from '../portfolio/portfolio.module';
+import { InterestsModule } from '../interests/interests.module';
 
 @NgModule({
   declarations: [UserTileComponent, UsersListComponent],
@@ -15,7 +17,9 @@ import { MatInputModule } from "@angular/material";
     UsersRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    PortfolioModule,
+    InterestsModule
   ]
 })
 export class UsersModule { }

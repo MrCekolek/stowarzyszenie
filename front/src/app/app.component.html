@@ -1,5 +1,15 @@
-<app-navbar></app-navbar>
-
 <!-- Custom modal setup -->
 <div id="modal-container" class="hidden"></div>
 <div id="overlay" (click)="removeModal()" class="hidden"></div>
+
+<!-- page loader -->
+<app-page-loader *ngIf="this.isPageLoading"></app-page-loader>
+
+<div id="app">
+    <div class="navbar-bg"></div>
+    <app-navbar (isPageLoading)="this.togglePageLoading($event)">
+    </app-navbar>
+    <div class="section">
+
+    </div>
+</div>
