@@ -16,6 +16,7 @@ class CreatePortfolioTabsTable extends Migration {
             $table->string('name_en')->nullable();
             $table->string('name_pl')->nullable();
             $table->string('name_ru')->nullable();
+            $table->integer('position')->default(0);
             $table->boolean('admin_visibility')->default(1);
             $table->boolean('user_visibility')->default(1);
             $table->unsignedBigInteger('portfolio_id');

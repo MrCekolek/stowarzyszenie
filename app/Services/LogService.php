@@ -4,19 +4,21 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class LogService {
-    private const createSuccess = 'custom.crud.success.create';
-    private const readSuccess = 'custom.crud.success.read';
-    private const updateSuccess = 'custom.crud.success.update';
-    private const deleteSuccess = 'custom.crud.success.delete';
+    private const basicPath = 'STOWARZYSZENIE.SERVER.CUSTOM.';
 
-    private const createFail = 'custom.crud.fail.create';
-    private const readFail = 'custom.crud.fail.read';
-    private const updateFail = 'custom.crud.fail.update';
-    private const deleteFail = 'custom.crud.fail.delete';
+    private const createSuccess = self::basicPath . 'CRUD.SUCCESS.CREATE';
+    private const readSuccess = self::basicPath . 'CRUD.SUCCESS.READ';
+    private const updateSuccess = self::basicPath . 'CRUD.SUCCESS.UPDATE';
+    private const deleteSuccess = self::basicPath . 'CRUD.SUCCESS.DELETE';
 
-    private const loggedOut = 'custom.controllers.auth.logout.logged_out';
-    private const changePassword = 'custom.controllers.change_password.change.changed';
-    private const accountPasswordReset = 'custom.controllers.reset_password.send_email.sent';
+    private const createFail = self::basicPath . 'CRUD.FAIL.CREATE';
+    private const readFail = self::basicPath . 'CRUD.FAIL.READ';
+    private const updateFail = self::basicPath . 'CRUD.FAIL.UPDATE';
+    private const deleteFail = self::basicPath . 'CRUD.FAIL.DELETE';
+
+    private const loggedOut = self::basicPath . 'CONTROLLERS.AUTH.LOGOUT.LOGGED_OUT';
+    private const changePassword = self::basicPath . 'CONTROLLERS.CHANGE_PASSWORD.CHANGE.CHANGED';
+    private const accountPasswordReset = self::basicPath . 'CONTROLLERS.RESET_PASSWORD.SEND_EMAIL.SENT';
 
     /**
      * @param $success
@@ -41,7 +43,7 @@ class LogService {
     public static function logout($success = true, $data = []) {
         return self::logResponse(
             $success,
-            __(self::loggedOut),
+           self::loggedOut,
             $data
         );
     }
@@ -54,7 +56,7 @@ class LogService {
     public static function changePassword($success = true, $data = []) {
         return self::logResponse(
             $success,
-            __(self::changePassword),
+            self::changePassword,
             $data
         );
     }
@@ -67,7 +69,7 @@ class LogService {
     public static function accountPasswordReset($success = true, $data = []) {
         return self::logResponse(
             $success,
-            __(self::accountPasswordReset),
+            self::accountPasswordReset,
             $data
         );
     }
@@ -80,7 +82,7 @@ class LogService {
     public static function create($success = true, $data = []) {
         return self::logResponse(
             $success,
-            $success ? __(self::createSuccess) : __(self::createFail),
+            $success ? self::createSuccess : self::createFail,
             $data
         );
     }
@@ -93,7 +95,7 @@ class LogService {
     public static function read($success = true, $data = []) {
         return self::logResponse(
             $success,
-            $success ? __(self::readSuccess) : __(self::readFail),
+            $success ? self::readSuccess : self::readFail,
             $data
         );
     }
@@ -106,7 +108,7 @@ class LogService {
     public static function update($success = true, $data = []) {
         return self::logResponse(
             $success,
-            $success ? __(self::updateSuccess) : __(self::updateFail),
+            $success ? self::updateSuccess : self::updateFail,
             $data
         );
     }
@@ -119,7 +121,7 @@ class LogService {
     public static function delete($success = true, $data = []) {
         return self::logResponse(
             $success,
-            $success ? __(self::deleteSuccess) : __(self::deleteFail),
+            $success ? self::deleteSuccess : self::deleteFail,
             $data
         );
     }
