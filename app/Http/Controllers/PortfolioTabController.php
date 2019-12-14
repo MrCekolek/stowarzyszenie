@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PortfolioTabRequest;
 use App\Models\PortfolioTab;
+use App\Models\User;
 use App\Services\LogService;
 use App\Traits\Translatable;
 use Illuminate\Http\Request;

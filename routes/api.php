@@ -54,9 +54,18 @@ Route::group([
     });
 
     Route::prefix('portfolio')->group(function () {
-        Route::post('/tabs/{portfolio}/get', 'PortfolioTabController@index');
-        Route::post('/tabs/{portfolio}/create', 'PortfolioTabController@create');
-        Route::post('/tabs/{portfolio}/update', 'PortfolioTabController@update');
-        Route::post('/tabs/{portfolio}/destroy', 'PortfolioTabController@destroy');
+        Route::prefix('tabs')->group(function () {
+            Route::post('/{user}/get', 'PortfolioTabController@index');
+            Route::post('/create', 'PortfolioTabController@create');
+            Route::post('/{portfolioTab}/update', 'PortfolioTabController@update');
+            Route::post('/{portfolioTab}/destroy', 'PortfolioTabController@destroy');
+        });
+
+        Route::prefix('tiles')->group(function () {
+            Route::post('/{portfolioTab}/get', 'TileController@index');
+            Route::post('/create', 'TileController@create');
+            Route::post('/{tile}/update', 'TileController@update');
+            Route::post('/{tile}/destroy', 'TileController@destroy');
+        });
     });
 });
