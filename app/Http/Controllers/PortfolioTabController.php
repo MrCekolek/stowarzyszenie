@@ -21,7 +21,9 @@ class PortfolioTabController extends Controller {
             ->get()
             ->toArray();
 
-        return LogService::read(true, $portfolioTabs);
+        return LogService::read(true, [
+            'portfolioTabs' => $portfolioTabs
+        ]);
     }
 
     public function create(Request $request) {
