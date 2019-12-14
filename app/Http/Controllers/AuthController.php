@@ -76,7 +76,7 @@ class AuthController extends Controller {
     public function me() {
         return LogService::read(true, [
             'user' => User::id(auth()->user()->id)
-                ->with(['preferenceUser', 'affilationUser', 'roles.permissions', 'portfolio'])
+                ->with(['preferenceUser', 'affilationUser', 'roles.permissions'])
                 ->first()->toArray()
         ]);
     }

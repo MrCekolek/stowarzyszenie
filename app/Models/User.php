@@ -104,7 +104,7 @@ class User extends Authenticatable implements JWTSubject {
             ->using(RoleUser::class);
     }
 
-    public function portoflio() {
+    public function portfolio() {
         return $this->hasOne(Portfolio::class);
     }
 
