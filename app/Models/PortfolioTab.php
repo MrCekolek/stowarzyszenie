@@ -9,6 +9,7 @@ class PortfolioTab extends Model {
         'name_en',
         'name_pl',
         'name_ru',
+        'position',
         'admin_visibility',
         'user_visibility',
         'portfolio_id'
@@ -18,10 +19,12 @@ class PortfolioTab extends Model {
         return [
             'Profile' => [
                 'id' => 1,
+                'position' => 0,
                 'name' => 'Profile'
             ],
             'Interests' => [
                 'id' => 2,
+                'position' => 1,
                 'name' => 'Interests'
             ]
         ];

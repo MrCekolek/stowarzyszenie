@@ -52,4 +52,11 @@ Route::group([
         Route::post('{role}/permission/get', 'PermissionParentController@rolePermissions');
         Route::post('{role}/permission/update', 'PermissionParentController@updateRolePermissions');
     });
+
+    Route::prefix('portfolio')->group(function () {
+        Route::post('/tabs/{portfolio}/get', 'PortfolioTabController@index');
+        Route::post('/tabs/{portfolio}/create', 'PortfolioTabController@create');
+        Route::post('/tabs/{portfolio}/update', 'PortfolioTabController@update');
+        Route::post('/tabs/{portfolio}/destroy', 'PortfolioTabController@destroy');
+    });
 });
