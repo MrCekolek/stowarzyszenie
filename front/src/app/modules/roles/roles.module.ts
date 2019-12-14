@@ -7,7 +7,7 @@ import { PermissionGroupComponent } from './permission-group/permission-group.co
 import { SharedModule } from '../../shared/shared.module';
 import { NewRoleModalComponent } from './new-role-modal/new-role-modal.component';
 import { MatFormFieldModule, MatInputModule, MatDialogModule } from '@angular/material';
-import { DeleteAlertComponent } from 'src/app/shared/components/delete-alert/delete-alert.component';
+import { DeleteAlertComponent } from '../../shared/components/delete-alert/delete-alert.component';
 
 @NgModule({
   declarations: [RolesListComponent, PermissionGroupComponent, NewRoleModalComponent],

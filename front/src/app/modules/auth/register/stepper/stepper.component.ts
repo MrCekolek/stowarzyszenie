@@ -21,6 +21,13 @@ export class StepperComponent extends CdkStepper implements OnInit {
     3: 'fas fa-phone'
   };
 
+  private stepTitles = {
+    0: 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP1_TITLE',
+    1: 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP2_TITLE',
+    2: 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP3_TITLE',
+    3: 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.STEP4_TITLE'
+  };
+
   constructor(
     private dir: Directionality,
     private changeDetectorRef: ChangeDetectorRef,

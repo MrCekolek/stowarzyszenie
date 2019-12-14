@@ -7,23 +7,26 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from "./shared/services/user/user.service";
 import 'hammerjs';
 import { NavigationModule } from './modules/navigation/navigation.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { NbSecurityModule } from '@nebular/security';
+import { PageLoaderComponent } from './shared/components/page-loader/page-loader.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PageLoaderComponent
   ],
   imports: [
     BrowserModule,
     SharedModule,
     BrowserAnimationsModule,
     NavigationModule,
-    NgbModule,
     AppRoutingModule,
-    DashboardModule
+    DashboardModule,
+    NbSecurityModule,
+    NbSecurityModule.forRoot(),
   ],
-  providers: [UserService],
+  providers: [UserService, Document],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

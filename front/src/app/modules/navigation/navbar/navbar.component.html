@@ -1,278 +1,250 @@
 <!-- TO NAV WIDNIEJE NA STRONIE >PRZED< ZALOGOWANIEM, po powrocie do strony głównej etc.  -->
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" *ngIf="!this.loggedIn">
-    <a class="navbar-brand text-black-50" style="font-size: 1.3rem;" [routerLink]="['/auth/login']">
-    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.WEBPAGE_TITLE_MEMBERS' | translate }}
-  </a>
-
-    <!--  *****************************8 language -->
-    <div class="dropdown">
-        <div class="dropdown-header d-flex align-items-center dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <div class="flag-icon mr-2">
-                <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]" [alt]="this.languageService.currentLang">
+<div *ngIf="!this.loggedIn">
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
+        <a [routerLink]="['/']" class="navbar-brand sidebar-gone-hide">
+            <strong>    
+                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.WEBPAGE_TITLE_MEMBERS' | translate }}
+            </strong>
+        </a>
+        <div class="nav-collapse">
+            <div class="dropdown d-inline">
+                <button class="btn bg-white dropdown-toggle" type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]" [alt]="this.languageService.currentLang" class="mr-2" style="height: 22px;">
+                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}
+                </button>
+                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <a class="dropdown-item has-icon" href="#" *ngFor="let lang of translateService.getLangs(); let i = index" [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
+                        <img [src]="this.flagsImages[i]" [alt]="this.languageService.currentLang" class="mr-2" style="height: 22px;"> {{ this.translations[i] | translate }}
+                    </a>
+                </div>
             </div>
-            <div class="chosen-language" class="mr-2">
-                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}
-            </div>
+            <a class="sidebar-gone-show nav-collapse-toggle nav-link" href="#">
+                <i class="fas fa-ellipsis-v"></i>
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item" [routerLink]="['/']">
+                    <a class="nav-link">
+                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.HOME' | translate }}
+                    </a>
+                </li>
+                <li class="nav-item" [routerLink]="['/auth/login']" routerLinkActive="active">
+                    <a class="nav-link">
+                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.LOGIN' | translate }}
+                    </a>
+                </li>
+                <li class="nav-item" [routerLink]="['/auth/register']" routerLinkActive="active">
+                    <a class="nav-link">
+                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.REGISTER' | translate }}
+                    </a>
+                </li>
+            </ul>
         </div>
+    </nav>
 
-        <div class="dropdown-menu dropdown-menu-right language-dropdown">
-            <div class="dropdown-item d-flex align-items-center" *ngFor="let lang of translateService.getLangs(); let i = index" [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
-                <img [src]="this.flagsImages[i]" [alt]="this.languageService.currentLang">
-                <span>
-          {{ this.translations[i] | translate }}
-      </span>
-            </div>
+    <div class="main-content" style="padding-top: 80px;">
+        <div class="section container">
+            <router-outlet></router-outlet>
         </div>
     </div>
 
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <i class="fas fa-bars"></i>
-  </button>
-
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <!-- ngIf: to menu pojawia się, gdy przejdziemy na podstronę Ciob members -->
-        <div class="navbar-nav" role="navigation">
-            <a class="nav-item nav-link mr-3" [routerLink]="['/']">
-        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.HOME' | translate }}
-      </a>
-            <a class="nav-item nav-link mr-3" [routerLink]="['/auth/login']">
-        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.LOGIN' | translate }}
-      </a>
-            <button class="btn btn-secondary btn-sm" [routerLink]="['/auth/register']">
-        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.REGISTER' | translate }}
-      </button>
-        </div>
-    </div>
-</nav>
-
-<router-outlet *ngIf="!this.loggedIn"></router-outlet>
+</div>
 
 <!-------------------------------------- NAWIGACJA PO ZALOGOWANIU ------------------------- -->
 
-<div class="app-container" *ngIf="this.loggedIn">
-    <div class="app-main">
-        <!-- menu boczne -->
-        <div class="sidebar-wrapper">
-            <div class="sidebar">
-                <div class="header-logo">
-                    <div class="logo">
-                        ciob
+<div id="app" *ngIf="this.loggedIn">
+    <div class="main-wrapper main-wrapper-1">
+        <div class="navbar-bg"></div>
+        <nav class="navbar navbar-expand-lg main-navbar">
+            <form class="form-inline mr-auto">
+                <ul class="navbar-nav mr-3">
+                    <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+                    <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+                </ul>
+                <div class="search-element">
+
+                    <!-- <form [formGroup]="searchInputForm" novalidate>
+                        <input class="form-control" id="search_input" formControlName="search_input" type="search" placeholder="Search users" aria-label="Search" data-width="250" style="width: 250px;" (keyup)="searchUsers()">
+                        <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                    </form> -->
+
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250" style="width: 250px;">
+                    <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                    <div class="search-backdrop"></div>
+                    <div class="search-result">
+                        <div class="search-header">
+                            {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.MAIN' | translate }}
+                        </div>
+                        <mat-table [dataSource]="listData" matSort>
+                            <ng-container matColumnDef="avatar">
+                                <mat-header-cell *matHeaderCellDef>
+                                    {{ 'STOWARZYSZENIE.LABELS.AVATAR' | translate }}
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                    <img src="../../../../assets/images/default_man.png" alt="" class="avatar avatar-sm">
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="name">
+                                <mat-header-cell *matHeaderCellDef>
+                                    {{ 'STOWARZYSZENIE.LABELS.FIRST_NAME' | translate }}
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                    {{ element.name }}
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="loading">
+                                <mat-footer-cell *matFooterCellDef colspan="6">
+                                    <!--                      TODO Spinnerek ? :) -->
+                                    {{ 'STOWARZYSZENIE.LABELS.LOADING_DATA' | translate }}
+                                </mat-footer-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="noData">
+                                <mat-footer-cell *matFooterCellDef colspan="6">
+                                    {{ 'STOWARZYSZENIE.LABELS.NO_DATA' | translate }}
+                                </mat-footer-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="actions">
+                                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                                <mat-cell *matCellDef="let row">
+                                    <td class="text-align-right">
+                                        <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="See profile">
+                            <i class="fas fa-address-card"></i>
+                          </button>
+                                        <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="Send message">
+                            <i class="fas fa-envelope"></i>
+                          </button>
+                                    </td>
+                                </mat-cell>
+                            </ng-container>
+
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                            <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide': listData != null}"></mat-footer-row>
+                            <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide': !(listData != null && listData?.filteredData.length == 0)}"></mat-footer-row>
+                        </mat-table>
                     </div>
-
-                    <button type="button" class="hamburger mobile-toggle-nav">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-          </button>
                 </div>
+            </form>
+            <ul class="navbar-nav navbar-right">
+                <!-- language choosing -->
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                        <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]" [alt]="this.languageService.currentLang" class="rounded-circle mr-1">
 
-                <div class="scrollbar">
-                    <div class="inner">
-                        <ul class="vertical-menu">
-                            <li class="menu-heading">
-                                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.MENU_HEADINGS.MENU' | translate }}
-                            </li>
-
-                            <li class="menu-tile" [routerLink]="['/dashboard']" routerLinkActive="active">
-                                <div class="title" [routerLink]="['/dashboard/main']" routerLinkActive="active">
-                                    <i class="fas fa-th-large" data-toggle="tooltip" data-placement="right" title="Dashboard"></i>
-                                    <span>
-                                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.DASHBOARD' | translate }}
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="menu-tile with-submenu">
-                                <div class="title">
-                                    <i class="fas fa-user" data-toggle="tooltip" data-placement="right" title="Users"></i>
-                                    <span>
-                                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.MAIN' | translate }}
-                                    </span>
-                                    <i class="fas fa-angle-down"></i>
-                                </div>
-
-                                <ul class="submenu">
-                                    <li>
-                                        <a [routerLink]="['users/users-list']" routerLinkActive="active">
-                      {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.USERS_LIST' | translate }}
+                        <div class="d-sm-none d-lg-inline-block">
+                            <span>
+                                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}
+                            </span>
+                        </div>
                     </a>
-                                    </li>
-                                    <li>
-                                        <a [routerLink]="['users/roles']" routerLinkActive="active">
-                      {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.ROLES_PREFERENCES' | translate }}
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="#" class="dropdown-item has-icon" *ngFor="let lang of translateService.getLangs(); let i = index" [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
+                            <img [src]="this.flagsImages[i]" [alt]="this.languageService.currentLang"> {{ this.translations[i] | translate }}
+                        </a>
+                    </div>
+                </li>
+
+                <!-- user dropdown -->
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                        <img alt="image" [src]="this.userService.user?.preference_user.avatar" class="rounded-circle mr-1" *ngIf="this.userService.user?.preference_user">
+                        <div class="d-sm-none d-lg-inline-block">
+                            <span *ngIf="this.userService.user">
+                                {{ this.userService.user?.first_name + ' ' + this.userService.user?.last_name }}
+                            </span>
+                        </div>
                     </a>
-                                    </li>
-                                </ul>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <div class="dropdown-title">
+                            <span *ngIf="this.userService.user?.login_email">
+                                {{ this.userService.user?.login_email }}
+                            </span>
+                        </div>
+                        <a href="features-profile.html" class="dropdown-item has-icon">
+                            <i class="far fa-user"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.MY_ACCOUNT' | translate }}
+                        </a>
+                        <a href="features-settings.html" class="dropdown-item has-icon">
+                            <i class="fas fa-cog"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.EDIT_ACCOUNT' | translate }}
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item has-icon text-danger" (click)="logout()">
+                            <i class="fas fa-sign-out-alt"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.LOGOUT' | translate }}
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div class="main-sidebar sidebar-style-2" tabindex="1" style="overflow: hidden; outline: none;">
+            <aside id="sidebar-wrapper">
+                <div class="sidebar-brand">
+                    <a href="index.html">
+                        <span class="text-danger">ciob</span>
+                        <span class="text-primary">members</span>
+                    </a>
+                </div>
+                <div class="sidebar-brand sidebar-brand-sm">
+                    <a [routerLink]="['/dashboard']">CM</a>
+                </div>
+                <ul class="sidebar-menu">
+                    <li class="menu-header">
+                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.MENU_HEADINGS.MENU' | translate }}
+                    </li>
+                    <li [routerLink]="['/dashboard']" routerLinkActive="active">
+                        <a class="nav-link">
+                            <i class="fas fa-fire"></i>
+                            <span>
+                                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.DASHBOARD' | translate }}
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-header">
+                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.MENU_HEADINGS.USERS' | translate }}
+                    </li>
+                    <li class="dropdown">
+                        <a class="nav-link has-dropdown">
+                            <i class="fas fa-user"></i>
+                            <span>
+                                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.MAIN' | translate }}
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['users/users-list']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.USERS_LIST' | translate }}
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['users/roles']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.ROLES_PREFERENCES' | translate }}
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['users/portfolio-settings']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.PORTFOLIO' | translate }}
+                                </a>
                             </li>
                         </ul>
-                    </div>
-
-                    <div class="slider"></div>
-                </div>
-            </div>
+                    </li>
+                </ul>
+            </aside>
         </div>
-        <div class="sidebar-overlay"></div>
-        <!-- koniec menu bocznego -->
 
-        <!-- wyszukiwarka uzytkownikow boczna  -->
-        <div class="search-sidenav">
-            <div class="search-container">
-                <div class="search-content">
-                    <div class="search-header">
-                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SEARCHBAR.TITLE' | translate }}
-                    </div>
-
-                    <div class="searchbox">
-                        <i class="fas fa-search search-icon"></i>
-
-                        <form [formGroup]="searchInputForm" novalidate>
-                            <mat-form-field class="search-form-field" floatLabel="never" appearance="outline">
-                                <input matInput id="search_input" formControlName="search_input" placeholder="Search user..." autocomplete="off" (keyup)="searchUsers()" />
-                            </mat-form-field>
-                        </form>
-                    </div>
-
-                    <mat-table [dataSource]="listData" matSort>
-                        <ng-container matColumnDef="avatar">
-                            <mat-header-cell *matHeaderCellDef>
-                                {{ 'STOWARZYSZENIE.LABELS.AVATAR' | translate }}
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
-                                <img src="../../../../assets/images/default_man.png" alt="">
-                            </mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="name">
-                            <mat-header-cell *matHeaderCellDef>
-                                {{ 'STOWARZYSZENIE.LABELS.FIRST_NAME' | translate }}
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
-                                {{ element.name }}
-                            </mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="loading">
-                            <mat-footer-cell *matFooterCellDef colspan="6">
-                                <!--                      TODO Spinnerek ? :) -->
-                                {{ 'STOWARZYSZENIE.LABELS.LOADING_DATA' | translate }}
-                            </mat-footer-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="noData">
-                            <mat-footer-cell *matFooterCellDef colspan="6">
-                                {{ 'STOWARZYSZENIE.LABELS.NO_DATA' | translate }}
-                            </mat-footer-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="actions">
-                            <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                            <mat-cell *matCellDef="let row">
-                                <td class="text-align-right">
-                                    <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="See profile">
-                    <i class="fas fa-address-card"></i>
-                  </button>
-                                    <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="Send message">
-                    <i class="fas fa-envelope"></i>
-                  </button>
-                                </td>
-                            </mat-cell>
-                        </ng-container>
-
-                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide': listData != null}"></mat-footer-row>
-                        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide': !(listData != null && listData?.filteredData.length == 0)}"></mat-footer-row>
-                    </mat-table>
-                </div>
-            </div>
+        <!-- Main Content -->
+        <div class="main-content" style="min-height: 523px;">
+            <section class="section">
+                <router-outlet *ngIf="this.loggedIn"></router-outlet>
+            </section>
         </div>
-        <div class="search-overlay"></div>
-        <!-- koniec wyszukiwarki -->
-
-        <!-- glowny kontent strony -->
-        <div class="app-main-outer">
-            <div class="app-main-inner">
-                <!-- mobilna nawigacja -->
-                <div class="header-mobile-wrapper">
-                    <div class="header-logo">
-                        <div class="logo">
-                            ciob
-                        </div>
-
-                        <button class="hamburger">
-              <span class="hamburger-box">
-                  <span class="hamburger-inner"></span>
-              </span>
-            </button>
-
-                        <div class="header-menu">
-                            <i class="fas fa-ellipsis-v"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- koniec mobilnej nawigacji -->
-
-                <!-- naglowek strony -->
-                <div class="app-header">
-                    <app-breadcrumb></app-breadcrumb>
-
-                    <div class="header-right">
-                        <div class="header-btn search">
-                            <i class="fas fa-search" id="search-icon" data-toggle="tooltip" data-placement="bottom" title="Search users"></i>
-                        </div>
-                        <div class="header-btn">
-                            <i class="fas fa-bell" data-toggle="tooltip" data-placement="bottom" title="Notifications"></i>
-                            <i class="fas fa-envelope" data-toggle="tooltip" data-placement="bottom" title="Messages"></i>
-                        </div>
-                        <div class="header-btn">
-                            <div class="dropdown-header d-flex align-items-center dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="flag-icon mr-2">
-                                    <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]" [alt]="this.languageService.currentLang">
-                                </div>
-                                <div class="chosen-language" class="mr-2">
-                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}
-                                </div>
-                            </div>
-
-                            <div class="dropdown-menu dropdown-menu-right language-dropdown">
-                                <div class="dropdown-item d-flex align-items-center" *ngFor="let lang of translateService.getLangs(); let i = index" [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
-                                    <img [src]="this.flagsImages[i]" [alt]="this.languageService.currentLang">
-                                    <span>
-                            {{ this.translations[i] | translate }}
-                        </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="header-btn">
-                            <div class="dropdown-header d-flex align-items-center dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="avatar" data-toggle="tooltip" data-placement="bottom" title="Logged user"></div>
-                            </div>
-
-                            <div class="dropdown-menu dropdown-menu-right user-dropdown">
-                                <div class="dropdown-item d-flex align-items-center">
-                                    <span>My profile</span>
-                                </div>
-                                <div class="dropdown-item d-flex align-items-center">
-                                    <span>Edit preferences</span>
-                                </div>
-                                <div class="dropdown-item d-flex align-items-center" (click)="logout()">
-                                    <i class="fas fa-power-off mr-2"></i>
-                                    <span>Logout</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="header-right-overlay"></div>
-                </div>
-                <!-- koniec naglowka -->
-
-                <!-- kontent strony -->
-                <div class="app-inner-content">
-                    <router-outlet *ngIf="this.loggedIn"></router-outlet>
-                </div>
-                <!-- koniec kontentu strony -->
+        <footer class="main-footer">
+            <div class="footer-left">
+                Copyright © 2019
+                <div class="bullet"></div> Stowarzyszenie CIOB
             </div>
-        </div>
-        <!-- koniec glownego kontentu strony -->
+            <div class="footer-right">
+
+            </div>
+        </footer>
     </div>
 </div>

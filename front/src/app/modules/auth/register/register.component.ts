@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RegisterModel } from "../../../shared/models/register.model";
 import { FormGroup, FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import { RegisterApiService } from "../../../core/http/register-api.service";
 import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs/operators";
+import { daterangepicker } from "daterangepicker";
 
 @Component({
   selector: 'app-register',
@@ -21,6 +22,8 @@ export class RegisterComponent implements OnInit {
   private emailExist: boolean = false;
   private valueChangesSubscription;
 
+  @ViewChild('datepicker', {static: false}) datepicker: daterangepicker; 
+
   constructor(
     private formBuilder: FormBuilder,
     private registerApiService: RegisterApiService
@@ -28,6 +31,15 @@ export class RegisterComponent implements OnInit {
     this.passwordIsHidden = true;
     this.createForm();
     this.registerFormValuesChanged();
+  }
+
+  ngOnInit() {
+
+  }
+
+  ngAfterViewInit() {
+    console.log(this.datepicker.nativeElement);
+    this.datepicker.nativeElement.daterangepicker();
   }
 
   createForm() {
@@ -126,9 +138,6 @@ export class RegisterComponent implements OnInit {
 
   registerAccount(registerModel: Object) {
     this.registerApiService.registerAccount(this.createNewUser(registerModel)).subscribe();
-  }
-
-  ngOnInit() {
   }
 
   togglePassword() {

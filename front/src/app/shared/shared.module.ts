@@ -6,7 +6,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { LanguageService } from "./services/user/language.service";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule, MatIconModule, MatPaginatorModule, MatSortModule } from "@angular/material";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,7 +22,6 @@ export function HttpLoaderFactory (http: HttpClient) {
   imports: [
     CommonModule,
     HttpClientModule,
-    NgbModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -45,7 +43,6 @@ export function HttpLoaderFactory (http: HttpClient) {
   exports: [
     CommonModule,
     TranslateModule,
-    NgbModule,
     MatTableModule,
     MatIconModule,
     MatPaginatorModule,

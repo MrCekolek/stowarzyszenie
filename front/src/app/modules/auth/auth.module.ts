@@ -36,7 +36,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatRadioModule,
     MatSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class AuthModule { }

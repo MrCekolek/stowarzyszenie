@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UsersListComponent } from "./users-list/users-list.component";
 import { LoggedGuard } from 'src/app/shared/guards/logged.guard.guard';
+import { WholePortfolioComponent } from '../portfolio/whole-portfolio/whole-portfolio.component';
+import { InterestsListComponent } from '../interests/interests-list/interests-list.component';
 
 const routes: Routes = [{
   path: '',
@@ -30,7 +32,20 @@ const routes: Routes = [{
               loadChildren: '../roles/roles.module#RolesModule',
               canActivateChild: [
                 LoggedGuard
-              ]            }
+              ]            
+            },
+            {
+              path: 'portfolio-settings',
+              component: WholePortfolioComponent,
+              canActivateChild: [
+                LoggedGuard
+              ]   
+            },
+            {
+              path: 'interests',
+              component: InterestsListComponent
+            }
+
         ]
 }];
 
