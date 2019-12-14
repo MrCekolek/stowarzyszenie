@@ -3,7 +3,12 @@
 		"CRUD_BUTTONS": {
 			"SAVE": "Save changes"
 		},
-		"LABELS": {
+		"HELPERS": {
+			"HELPER_BUTTON_TEXT": "Help",
+			"LOADING_TEXT": "Landing",
+			"SEARCH_PLACEHOLDER": "Search"
+		},
+		"LABELS_TABLES": {
 			"AVATAR": "Avatar",
 			"BIRTHDATE": "Date of Birth",
 			"CONTACT_EMAIL": "Contact email",
@@ -48,10 +53,15 @@
 					"PAGE_TITLE": "Reset Password"
 				},
 				"LOGIN": {
+					"ALERT": {
+						"GOOD": "Looks good!",
+						"TITLE": "Error!"
+					},
 					"ALERT_WRONG": "Invalid login details",
 					"BUTTON": "Sign in",
 					"EMAIL_PLACEHOLDER": "E-mail adress",
 					"FORGOT_PASSWORD_LINK": "Have you forgotten your password? Reset them here",
+					"PAGE_PARAGRAPH": "Fill out the form with your login details to access the Ciob Members portal",
 					"PAGE_TITLE": "Log in to the CIOB portal",
 					"PASSWORD_PLACEHOLDER": "Password",
 					"REGISTER_LINK": "You dont have an account yet? Register new here!",
@@ -100,10 +110,12 @@
 					"CONTACT_TITLE": "Contact details (optional)",
 					"EMAIL_HINT": "The email will be used to log in and receive notifications",
 					"FIRST_NAME": "Name",
+					"GENDER_LABEL": "Choose your Gender",
 					"GO_TO_STEP": "Go to step",
 					"LAST_NAME": "Last name",
 					"LOGIN_LINK": "Do you already have an account? Log in here!",
 					"MAN": "I'm a man",
+					"PAGE_PARAGRAPH": "Required fields are marked in the form with an asterisk: * (which is next to the field name). Fill out the data in steps to create a new account in the system.",
 					"PAGE_TITLE": "Register a new account",
 					"PASSWORD_HINT": "The password should be at least 8 characters long",
 					"PHONE": "Phone Number",
@@ -118,6 +130,8 @@
 					"STEP": "Step",
 					"STEP1_TITLE": "Account information",
 					"STEP2_TITLE": "Personal data",
+					"STEP3_TITLE": "Affiliation",
+					"STEP4_TITLE": "Contact Details",
 					"WOMAN": "I'm a woman"
 				}
 			},
@@ -135,7 +149,8 @@
 					"LOGOUT": "Logout",
 					"MESSAGES": "Messages",
 					"MY_ACCOUNT": "My account",
-					"NOTIFICATIONS": "Notifications"
+					"NOTIFICATIONS": "Notifications",
+					"USER_DROPDOWN_TITLE": "User options"
 				},
 				"MEMBERS_PAGE_LINKS": {
 					"HOME": "Back to home",
@@ -148,15 +163,29 @@
 				"SIDENAV": {
 					"DASHBOARD": "Dashboard",
 					"MENU_HEADINGS": {
-						"MENU": "Menu"
+						"MENU": "Menu",
+						"USERS": "Users"
 					},
 					"USERS": {
-						"MAIN": "Members",
+						"MAIN": "Users",
+						"PORTFOLIO": "Portfolio settings",
 						"ROLES_PREFERENCES": "Roles and Permissions",
 						"USERS_LIST": "Users List"
 					}
 				},
 				"WEBPAGE_TITLE_MEMBERS": "Ciob members"
+			},
+			"PORTFOLIO": {
+				"ADMIN": {
+					"FIRSTNAME_LASTNAME": "First name Last Name",
+					"USER_DESC": "Description added by the user",
+					"USER_ROLE": "User role",
+					"USER_TITLE": "title"
+				},
+				"CHECK_OTHERS": "Check how others see your portfolio",
+				"PAGE_TITLE": "Portfolio settings",
+				"SECTION_DESC1": "Customize your users portfolio - decide what data they can fill and divide the data into tabs.",
+				"SECTION_TITLE": "Settings"
 			},
 			"ROLES": {
 				"ARE_EDITING": "You are editing role:",
@@ -190,6 +219,20 @@
 							"NOT_ACTIVATED": "Account has not been activated.",
 							"NO_EMAIL_OR_PASSWORD": "The email or password you entered is incorrect."
 						}
+					},
+					"CRUD": {
+						"FAIL": {
+							"CREATE": "Error adding data",
+							"DELETE": "Data delete error",
+							"READ": "Data reading error",
+							"UPDATE": "Data modification error"
+						},
+						"SUCCESS": {
+							"CREATE": "Data added successfully",
+							"DELETE": "Successfully deleted data",
+							"READ": "Successful data reading",
+							"UPDATE": ""
+						}
 					}
 				},
 				"DATABASE": {
@@ -201,6 +244,9 @@
 							"INDEX": "reading"
 						},
 						"ROLES": {
+							"ADD": "Adding new roles to the system",
+							"CHANGE_PERMISSIONS": "Change role permissions",
+							"DELETE": "Removing roles from the system",
 							"ROLES": "Roles"
 						},
 						"USERS": {

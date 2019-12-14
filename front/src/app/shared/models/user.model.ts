@@ -1,7 +1,9 @@
 import { Role } from './role.model';
 
 export class UserModel {
+  id: number;
   login_email: string;
+  contact_email?: string;
   first_name: string;
   last_name: string;
   birthdate: string;
@@ -10,16 +12,17 @@ export class UserModel {
   preference_user?: object;
   lang: string;
   roles: Array<Role>;
+  phone_number?: string; 
 
   constructor(userModel: Object) {
-    this.login_email = userModel['login_email'];
-    this.first_name = userModel['first_name'];
-    this.last_name = userModel['last_name'];
-    this.birthdate = userModel['birthdate'];
-    this.gender = userModel['gender'];
-    this.affilation_user = userModel['affilation_user'];
-    this.preference_user = userModel['preference_user'];
-    this.roles = userModel['roles'];
+    this.login_email = userModel['user']['login_email'];
+    this.first_name = userModel['user']['first_name'];
+    this.last_name = userModel['user']['last_name'];
+    this.birthdate = userModel['user']['birthdate'];
+    this.gender = userModel['user']['gender'];
+    this.affilation_user = userModel['user']['affilation_user'];
+    this.preference_user = userModel['user']['preference_user'];
+    this.roles = userModel['user']['roles'];
   }
 
   setLang(lang: string) {
