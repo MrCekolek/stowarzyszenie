@@ -17,4 +17,12 @@ export class InterestsApiService {
   addInterest(name: Object) {
     return this.api.post('interest/create', name);
   }
+
+  deleteInterest(id: any) {
+    return this.api.post(`interest/${id.id}/destroy`, id);
+  }
+
+  update(interest) {
+    return this.api.post(`interest/${interest.id}/update`, interest);
+  }
 }

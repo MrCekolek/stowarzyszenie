@@ -220,6 +220,15 @@
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.ROLES_PREFERENCES' | translate }}
                                 </a>
                             </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="nav-link has-dropdown">
+                            <i class="fas fa-id-card"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.PORTFOLIO_MENU' | translate }}
+                        </a>
+
+                        <ul class="dropdown-menu">
                             <li routerLinkActive="active">
                                 <a [routerLink]="['users/portfolio-settings']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.PORTFOLIO' | translate }}

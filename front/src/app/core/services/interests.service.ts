@@ -15,9 +15,24 @@ export class InterestsService {
   }
 
   addNewInterest(name: string) {
-    const object = {
+    const obj = {
       name: name
     };
-    return this.interestsApiService.addInterest(object);
+    return this.interestsApiService.addInterest(obj);
+  }
+
+  deleteInterest(interestID: number) {
+    const obj = {
+      id: interestID
+    };
+    return this.interestsApiService.deleteInterest(obj);
+  }
+
+  updateInterest(interestID, new_name) {
+    const obj = {
+      id: interestID,
+      name: new_name
+    };
+    return this.interestsApiService.update(obj);
   }
 }

@@ -6,7 +6,6 @@ import { InterestsListComponent } from './interests-list/interests-list.componen
 import { InterestTileComponent } from './interest-tile/interest-tile.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
 @NgModule({
   declarations: [InterestsListComponent, InterestTileComponent],
   imports: [
