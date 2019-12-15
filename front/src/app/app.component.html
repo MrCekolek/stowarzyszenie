@@ -5,9 +5,10 @@
 <!-- page loader -->
 <app-page-loader *ngIf="this.isPageLoading"></app-page-loader>
 
+<div class="cdk-overlay-pane"></div>
 <div id="app">
     <div class="navbar-bg"></div>
-    <app-navbar (isPageLoading)="this.togglePageLoading($event)">
+    <app-navbar>
     </app-navbar>
     <div class="section">
 

@@ -34,4 +34,8 @@ export class UserService {
   me() {
     return this.api.post('account/me');
   }
+
+  // checkPermission() {
+  //   return this.user.roles[0].permissions[""0""].pivot.selected;
+  // }
 }

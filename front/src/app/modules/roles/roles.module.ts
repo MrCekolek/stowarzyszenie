@@ -17,8 +17,7 @@ import { DeleteAlertComponent } from '../../shared/components/delete-alert/delet
     RolesRoutingModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule,
-    MatDialogModule
+    MatInputModule
   ],
   entryComponents: [NewRoleModalComponent, DeleteAlertComponent],
   providers: []
