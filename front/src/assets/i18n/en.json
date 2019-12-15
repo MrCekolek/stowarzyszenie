@@ -1,6 +1,8 @@
 {
 	"STOWARZYSZENIE": {
 		"CRUD_BUTTONS": {
+			"ADD": "Add",
+			"DELETE": "Delete",
 			"SAVE": "Save changes"
 		},
 		"HELPERS": {
@@ -167,6 +169,7 @@
 						"USERS": "Users"
 					},
 					"USERS": {
+						"INTEREST": "Areas of research",
 						"MAIN": "Users",
 						"PORTFOLIO": "Portfolio settings",
 						"ROLES_PREFERENCES": "Roles and Permissions",
@@ -178,11 +181,18 @@
 			"PORTFOLIO": {
 				"ADMIN": {
 					"FIRSTNAME_LASTNAME": "First name Last Name",
+					"INTERESTS": {
+						"ADD_NEW_LABEL": "Add a new research area to the list",
+						"ADD_NEW_PLACEHOLDER": "Enter the name of the new research area"
+					},
 					"USER_DESC": "Description added by the user",
 					"USER_ROLE": "User role",
 					"USER_TITLE": "title"
 				},
+				"ADMIN_INTERESTS_DESC1": "Manage a list of user research areas. Add and remove names of areas that users can select on their profiles.",
 				"CHECK_OTHERS": "Check how others see your portfolio",
+				"INTERESTS_ADMIN": "Test area settings",
+				"INTERESTS_ADMIN_TITLE": "List of areas",
 				"PAGE_TITLE": "Portfolio settings",
 				"SECTION_DESC1": "Customize your users portfolio - decide what data they can fill and divide the data into tabs.",
 				"SECTION_TITLE": "Settings"

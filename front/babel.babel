@@ -12,6 +12,48 @@
                         <name>CRUD_BUTTONS</name>
                         <children>
                             <concept_node>
+                                <name>ADD</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>false</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>pl-PL</language>
+                                        <approved>false</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>ru-RU</language>
+                                        <approved>false</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <concept_node>
+                                <name>DELETE</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description></description>
+                                <comment></comment>
+                                <default_text></default_text>
+                                <translations>
+                                    <translation>
+                                        <language>en-US</language>
+                                        <approved>false</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>pl-PL</language>
+                                        <approved>false</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>ru-RU</language>
+                                        <approved>false</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <concept_node>
                                 <name>SAVE</name>
                                 <definition_loaded>false</definition_loaded>
                                 <description></description>
@@ -2667,6 +2709,27 @@
                                                 <name>USERS</name>
                                                 <children>
                                                     <concept_node>
+                                                        <name>INTEREST</name>
+                                                        <definition_loaded>false</definition_loaded>
+                                                        <description></description>
+                                                        <comment></comment>
+                                                        <default_text></default_text>
+                                                        <translations>
+                                                            <translation>
+                                                                <language>en-US</language>
+                                                                <approved>false</approved>
+                                                            </translation>
+                                                            <translation>
+                                                                <language>pl-PL</language>
+                                                                <approved>false</approved>
+                                                            </translation>
+                                                            <translation>
+                                                                <language>ru-RU</language>
+                                                                <approved>false</approved>
+                                                            </translation>
+                                                        </translations>
+                                                    </concept_node>
+                                                    <concept_node>
                                                         <name>MAIN</name>
                                                         <definition_loaded>false</definition_loaded>
                                                         <description></description>
@@ -2804,6 +2867,53 @@
                                                     </translation>
                                                 </translations>
                                             </concept_node>
+                                            <folder_node>
+                                                <name>INTERESTS</name>
+                                                <children>
+                                                    <concept_node>
+                                                        <name>ADD_NEW_LABEL</name>
+                                                        <definition_loaded>false</definition_loaded>
+                                                        <description></description>
+                                                        <comment></comment>
+                                                        <default_text></default_text>
+                                                        <translations>
+                                                            <translation>
+                                                                <language>en-US</language>
+                                                                <approved>false</approved>
+                                                            </translation>
+                                                            <translation>
+                                                                <language>pl-PL</language>
+                                                                <approved>false</approved>
+                                                            </translation>
+                                                            <translation>
+                                                                <language>ru-RU</language>
+                                                                <approved>false</approved>
+                                                            </translation>
+                                                        </translations>
+                                                    </concept_node>
+                                                    <concept_node>
+                                                        <name>ADD_NEW_PLACEHOLDER</name>
+                                                        <definition_loaded>false</definition_loaded>
+                                                        <description></description>
+                                                        <comment></comment>
+                                                        <default_text></default_text>
+                                                        <translations>
+                                                            <translation>
+                                                                <language>en-US</language>
+                                                                <approved>false</approved>
+                                                            </translation>
+                                                            <translation>
+                                                                <language>pl-PL</language>
+                                                                <approved>false</approved>
+                                                            </translation>
+                                                            <translation>
+                                                                <language>ru-RU</language>
+                                                                <approved>false</approved>
+                                                            </translation>
+                                                        </translations>
+                                                    </concept_node>
+                                                </children>
+                                            </folder_node>
                                             <concept_node>
                                                 <name>USER_DESC</name>
                                                 <definition_loaded>false</definition_loaded>
@@ -2870,7 +2980,70 @@
                                         </children>
                                     </folder_node>
                                     <concept_node>
+                                        <name>ADMIN_INTERESTS_DESC1</name>
+                                        <definition_loaded>false</definition_loaded>
+                                        <description></description>
+                                        <comment></comment>
+                                        <default_text></default_text>
+                                        <translations>
+                                            <translation>
+                                                <language>en-US</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>pl-PL</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>ru-RU</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                        </translations>
+                                    </concept_node>
+                                    <concept_node>
                                         <name>CHECK_OTHERS</name>
+                                        <definition_loaded>false</definition_loaded>
+                                        <description></description>
+                                        <comment></comment>
+                                        <default_text></default_text>
+                                        <translations>
+                                            <translation>
+                                                <language>en-US</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>pl-PL</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>ru-RU</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                        </translations>
+                                    </concept_node>
+                                    <concept_node>
+                                        <name>INTERESTS_ADMIN</name>
+                                        <definition_loaded>false</definition_loaded>
+                                        <description></description>
+                                        <comment></comment>
+                                        <default_text></default_text>
+                                        <translations>
+                                            <translation>
+                                                <language>en-US</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>pl-PL</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                            <translation>
+                                                <language>ru-RU</language>
+                                                <approved>false</approved>
+                                            </translation>
+                                        </translations>
+                                    </concept_node>
+                                    <concept_node>
+                                        <name>INTERESTS_ADMIN_TITLE</name>
                                         <definition_loaded>false</definition_loaded>
                                         <description></description>
                                         <comment></comment>

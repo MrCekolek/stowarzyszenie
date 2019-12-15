@@ -1,1 +1,15 @@
-<p>portfolio-tabs works!</p>
+<div class="col-12">
+    <ul class="nav nav-pills" id="protfolio-tabs" role="tablist">
+        <li class="nav-item" *ngFor="let tab of tabs" (click)="selectActiveTab(tab.id)">
+            <a class="nav-link" id="home-tab3" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab" aria-controls="home">
+                {{ tab['name_' + lang] }}
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content" id="tbs-content">
+        <div class="tab-pane fade" [id]="'tab_' + this.activeTab" role="tabpanel">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        </div>
+    </div>
+</div>
