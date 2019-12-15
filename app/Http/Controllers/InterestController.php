@@ -55,7 +55,7 @@ class InterestController extends Controller {
         $this->translate(
             auth()->user()->preferenceUser()->first()->lang,
             $input['name'],
-            Interest::whereId($interest->id),
+            Interest::whereId($interest->id)->first(),
             'name'
         );
 

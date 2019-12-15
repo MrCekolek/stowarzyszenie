@@ -15,6 +15,8 @@ class UsersTableSeeder extends Seeder {
     public function run() {
         // generowanie admina
         factory(User::class)->create([
+            'first_name' => 'Admin',
+            'last_name' => '',
             'login_email' => 'admin@admin.pl',
             'password' => 'admin123'
         ])->each(function ($user) {
