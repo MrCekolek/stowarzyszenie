@@ -3,9 +3,14 @@
 		"CRUD_BUTTONS": {
 			"ADD": "Dodaj",
 			"DELETE": "Usuń",
+			"EDIT": "Edytuj",
 			"SAVE": "Zapisz zmiany"
 		},
 		"HELPERS": {
+			"ALERT": {
+				"SUCCESS": "Sukces!"
+			},
+			"ALERT_FAIL": "Błąd!",
 			"HELPER_BUTTON_TEXT": "Pomoc",
 			"LOADING_TEXT": "Ładowanie",
 			"SEARCH_PLACEHOLDER": "Wyszukaj"
@@ -172,6 +177,7 @@
 						"INTEREST": "Obszary badań",
 						"MAIN": "Użytkownicy",
 						"PORTFOLIO": "Ustawienia portfolio",
+						"PORTFOLIO_MENU": "Portfolio",
 						"ROLES_PREFERENCES": "Role i uprawnienia",
 						"USERS_LIST": "Lista użytkowników"
 					}
@@ -243,6 +249,20 @@
 							"READ": "Pomyślny odczyt danych",
 							"UPDATE": "Pomyślnie zmodyfikowano dane"
 						}
+					}
+				},
+				"CRUD": {
+					"FAIL": {
+						"CREATE": "Błąd dodawania",
+						"DELETE": "Błąd usuwania",
+						"READ": "Błąd odczytu",
+						"UPDATE": "Błąd modyfikacji"
+					},
+					"SUCCESS": {
+						"CREATE": "Pomyślnie dodano.",
+						"DELETE": "Pomyślnie usunięto",
+						"READ": "Pomyślnie odczytano",
+						"UPDATE": "Pomyślnie zmodyfikowano"
 					}
 				},
 				"DATABASE": {

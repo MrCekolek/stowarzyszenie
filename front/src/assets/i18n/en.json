@@ -3,9 +3,14 @@
 		"CRUD_BUTTONS": {
 			"ADD": "Add",
 			"DELETE": "Delete",
+			"EDIT": "Edit",
 			"SAVE": "Save changes"
 		},
 		"HELPERS": {
+			"ALERT": {
+				"SUCCESS": "Success!"
+			},
+			"ALERT_FAIL": "Error!",
 			"HELPER_BUTTON_TEXT": "Help",
 			"LOADING_TEXT": "Landing",
 			"SEARCH_PLACEHOLDER": "Search"
@@ -172,6 +177,7 @@
 						"INTEREST": "Areas of research",
 						"MAIN": "Users",
 						"PORTFOLIO": "Portfolio settings",
+						"PORTFOLIO_MENU": "Portfolio",
 						"ROLES_PREFERENCES": "Roles and Permissions",
 						"USERS_LIST": "Users List"
 					}
@@ -243,6 +249,20 @@
 							"READ": "Successful data reading",
 							"UPDATE": ""
 						}
+					}
+				},
+				"CRUD": {
+					"FAIL": {
+						"CREATE": "Add error",
+						"DELETE": "Delete error",
+						"READ": "read error",
+						"UPDATE": "Modification Error"
+					},
+					"SUCCESS": {
+						"CREATE": "Successfully added.",
+						"DELETE": "Successfully deleted",
+						"READ": "Successfully read",
+						"UPDATE": "Modified successfully"
 					}
 				},
 				"DATABASE": {

@@ -12,13 +12,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from "@angular/material";
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { DeleteAlertComponent } from './components/delete-alert/delete-alert.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 export function HttpLoaderFactory (http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [SpinnerComponent, DeleteAlertComponent],
+  declarations: [SpinnerComponent, DeleteAlertComponent, AlertComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -47,7 +48,8 @@ export function HttpLoaderFactory (http: HttpClient) {
     MatIconModule,
     MatPaginatorModule,
     MatSortModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    AlertComponent
   ],
   providers: [ ]
 })

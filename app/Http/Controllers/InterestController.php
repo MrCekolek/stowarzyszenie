@@ -55,11 +55,13 @@ class InterestController extends Controller {
         $this->translate(
             auth()->user()->preferenceUser()->first()->lang,
             $input['name'],
-            Interest::whereId($interest->id),
+            Interest::whereId($interest->id)->first(),
             'name'
         );
 
-        return LogService::update();
+        return LogService::update(true, [
+            'interest' => $interest
+        ]);
     }
 
     public function destroy(Request $request, Interest $interest) {
