@@ -20,7 +20,9 @@ class TileContentController extends Controller {
         $tileContents = TileContent::where('tile_id', $tile->id)
             ->toArray();
 
-        return LogService::read(true, $tileContents);
+        return LogService::read(true, [
+            'tileContents' => $tileContents
+        ]);
     }
 
     public function create(Request $request) {
@@ -32,7 +34,7 @@ class TileContentController extends Controller {
         }
 
         $this->translate(
-            auth()->user()->portfolio()->preference_user()->lang,
+            auth()->user()->preferenceUser()->first()->lang,
             $input['name'],
             $tileContent = TileContent::create([
                 'type' => $input['type'],
@@ -56,7 +58,7 @@ class TileContentController extends Controller {
         }
 
         $this->translate(
-            auth()->user()->portfolio()->preference_user()->lang,
+            auth()->user()->preferenceUser()->first()->lang,
             $input['name'],
             TileContent::whereId($tileContent->id)
                 ->update([

@@ -20,7 +20,9 @@ class TileController extends Controller {
         $tiles = Tile::where('portfolio_tab_id', $portfolioTab->id)
             ->toArray();
 
-        return LogService::read(true, $tiles);
+        return LogService::read(true, [
+            'tiles' => $tiles
+        ]);
     }
 
     public function create(Request $request) {
@@ -32,7 +34,7 @@ class TileController extends Controller {
         }
 
         $this->translate(
-            auth()->user()->portfolio()->preference_user()->lang,
+            auth()->user()->preferenceUser()->first()->lang,
             $input['name'],
             $tile = Tile::create([
                 'position' => Tile::max('position'),
@@ -55,7 +57,7 @@ class TileController extends Controller {
         }
 
         $this->translate(
-            auth()->user()->portfolio()->preference_user()->lang,
+            auth()->user()->preferenceUser()->first()->lang,
             $input['name'],
             Tile::whereId($tile->id)
                 ->update([

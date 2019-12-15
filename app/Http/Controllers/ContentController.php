@@ -20,7 +20,9 @@ class ContentController extends Controller {
         $tiles = Content::where('tile_content_id', $tileContent->id)
             ->toArray();
 
-        return LogService::read(true, $tiles);
+        return LogService::read(true, [
+            'tiles' => $tiles
+        ]);
     }
 
     public function create(Request $request) {
@@ -32,7 +34,7 @@ class ContentController extends Controller {
         }
 
         $this->translate(
-            auth()->user()->portfolio()->preference_user()->lang,
+            auth()->user()->preferenceUser()->first()->lang,
             $input['name'],
             $content = Content::create([
                 'value' => $input['value'],
@@ -55,7 +57,7 @@ class ContentController extends Controller {
         }
 
         $this->translate(
-            auth()->user()->portfolio()->preference_user()->lang,
+            auth()->user()->preferenceUser()->first()->lang,
             $input['value'],
             Content::whereId($content->id),
             'value'
