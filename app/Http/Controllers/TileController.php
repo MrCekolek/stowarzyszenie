@@ -59,14 +59,15 @@ class TileController extends Controller {
         $this->translate(
             auth()->user()->preferenceUser()->first()->lang,
             $input['name'],
-            Tile::whereId($tile->id)
-                ->update([
-                    'position' => $input['position']
-                ]),
+            $tile->update([
+                'position' => $input['position']
+            ]),
             'name'
         );
 
-        return LogService::update();
+        return LogService::update(true, [
+            'tile' => $tile->toArray()
+        ]);
     }
 
     public function destroy(Request $request, Tile $tile) {

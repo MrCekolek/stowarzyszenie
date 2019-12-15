@@ -60,16 +60,17 @@ class TileContentController extends Controller {
         $this->translate(
             auth()->user()->preferenceUser()->first()->lang,
             $input['name'],
-            TileContent::whereId($tileContent->id)
-                ->update([
-                    'type' => $input['type'],
-                    'translation_key' => TileContent::translations()[$input['type']],
-                    'tile_id' => $input['tile_id']
-                ]),
+            $tileContent->update([
+                'type' => $input['type'],
+                'translation_key' => TileContent::translations()[$input['type']],
+                'tile_id' => $input['tile_id']
+            ]),
             'name'
         );
 
-        return LogService::update();
+        return LogService::update(true, [
+            'tileContent' => $tileContent->toArray()
+        ]);
     }
 
     public function destroy(Request $request, TileContent $tileContent) {
