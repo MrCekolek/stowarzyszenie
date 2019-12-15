@@ -1,0 +1,24 @@
+<div [ngSwitch]="alertType">
+    <div *ngSwitchCase="'danger'">
+        <div class="alert alert-danger alert-has-icon">
+            <div class="alert-icon"><i class="fas fa-exclamation-mark"></i></div>
+            <div class="alert-body">
+                <div class="alert-title">
+                    {{ 'STOWARZYSZENIE.HELPERS.ALERT_FAIL' | translate }}
+                </div>
+                {{ message | translate }}
+            </div>
+        </div>
+    </div>
+    <div *ngSwitchCase="'success'">
+        <div class="alert alert-success alert-has-icon">
+            <div class="alert-icon"><i class="fas fa-check"></i></div>
+            <div class="alert-body">
+                <div class="alert-title">
+                    {{ 'STOWARZYSZENIE.HELPERS.ALERT.SUCCESS' | translate }}
+                </div>
+                {{ message | translate}}
+            </div>
+        </div>
+    </div>
+</div>
