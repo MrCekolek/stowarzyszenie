@@ -13,6 +13,7 @@ class CreatePortfoliosTable extends Migration {
     public function up() {
         Schema::create('portfolios', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->text('description')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
