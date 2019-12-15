@@ -55,31 +55,42 @@ Route::group([
 
     Route::prefix('portfolio')->group(function () {
         Route::prefix('tabs')->group(function () {
-            Route::post('/{portfolio}/get', 'PortfolioTabController@index');
-            Route::post('/create', 'PortfolioTabController@create');
-            Route::post('/{portfolioTab}/update', 'PortfolioTabController@update');
-            Route::post('/{portfolioTab}/destroy', 'PortfolioTabController@destroy');
+            Route::post('{portfolio}/get', 'PortfolioTabController@index');
+            Route::post('create', 'PortfolioTabController@create');
+            Route::post('{portfolioTab}/update', 'PortfolioTabController@update');
+            Route::post('{portfolioTab}/destroy', 'PortfolioTabController@destroy');
         });
 
-        Route::prefix('tiles')->group(function () {
-            Route::post('/{portfolioTab}/get', 'TileController@index');
-            Route::post('/create', 'TileController@create');
-            Route::post('/{tile}/update', 'TileController@update');
-            Route::post('/{tile}/destroy', 'TileController@destroy');
+        Route::prefix('tile')->group(function () {
+            Route::post('{portfolioTab}/get', 'TileController@index');
+            Route::post('create', 'TileController@create');
+            Route::post('{tile}/update', 'TileController@update');
+            Route::post('{tile}/destroy', 'TileController@destroy');
 
-            Route::prefix('contents')->group(function () {
-                Route::post('/{tile}/get', 'TileContentController@index');
-                Route::post('/create', 'TileContentController@create');
-                Route::post('/{tileContent}/update', 'TileContentController@update');
-                Route::post('/{tileContent}/destroy', 'TileContentController@destroy');
+            Route::prefix('content')->group(function () {
+                Route::post('{tile}/get', 'TileContentController@index');
+                Route::post('create', 'TileContentController@create');
+                Route::post('{tileContent}/update', 'TileContentController@update');
+                Route::post('{tileContent}/destroy', 'TileContentController@destroy');
 
-                Route::prefix('contents')->group(function () {
-                    Route::post('/{tileContent}/get', 'ContentController@index');
-                    Route::post('/create', 'ContentController@create');
-                    Route::post('/{content}/update', 'ContentController@update');
-                    Route::post('/{content}/destroy', 'ContentController@destroy');
+                Route::prefix('content')->group(function () {
+                    Route::post('{tileContent}/get', 'ContentController@index');
+                    Route::post('create', 'ContentController@create');
+                    Route::post('{content}/update', 'ContentController@update');
+                    Route::post('{content}/destroy', 'ContentController@destroy');
                 });
             });
+        });
+    });
+
+    Route::prefix('interest')->group(function () {
+        Route::post('get', 'InterestController@index');
+        Route::post('create', 'InterestController@create');
+        Route::post('{interest}/update', 'InterestController@update');
+        Route::post('{interest}/destroy', 'InterestController@destroy');
+
+        Route::prefix('user')->group(function () {
+            Route::post('{user/get}', 'InterestUserController@index');
         });
     });
 });
