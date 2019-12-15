@@ -60,14 +60,15 @@ class PortfolioTabController extends Controller {
         $this->translate(
             auth()->user()->preferenceUser()->first()->lang,
             $input['name'],
-            PortfolioTab::whereId($portfolioTab->id)
-                ->update([
-                    'position' => $input['position']
-                ]),
+            $portfolioTab->update([
+                'position' => $input['position']
+            ]),
             'name'
         );
 
-        return LogService::update();
+        return LogService::update(true, [
+            'portfolioTab' => $portfolioTab->toArray()
+        ]);
     }
 
     public function destroy(Request $request, PortfolioTab $portfolioTab) {

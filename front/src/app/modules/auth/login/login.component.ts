@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
     this.tokenService.handle(response.access_token);
     this.userService.changeLoginStatus(true);
     this.userService.changeUser(new UserModel(response['user']['original']));
-    this.languageService.setLang(this.sharedModule.detectLang(response['user']['original']['preference_user']['lang']));
+    this.languageService.setLang(this.sharedModule.detectLang(response['user']['original']['user']['preference_user']['lang']));
     this.router.navigateByUrl('dashboard');
   }
 
