@@ -11,6 +11,7 @@ import { DeleteAlertComponent } from 'src/app/shared/components/delete-alert/del
 })
 export class RolesListComponent implements OnInit {
 
+  private selectedChooseRoles: boolean;
   private rolesNames: any = [];
   private roles: any = {};
   private selectedRole: any = {};
@@ -28,6 +29,8 @@ export class RolesListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.selectedChooseRoles = true;
+
     this.getRoles();
   }
 
@@ -69,14 +72,20 @@ export class RolesListComponent implements OnInit {
   }
 
   selectRole(id) {
-    this.permissionRoleApiService.getRoleWithPermissions(id).subscribe(role => {
-      this.selectedRole = role;
-      this.selectedRole.isSelected = false;
-      this.selectedRole.isClosed = false;
-      this.roles.parentChildChecklist = this.selectedRole.permissions;
-      this.roles.isAllSelected = false;
-      this.roles.isAllCollapsed = false;
-    });
+    if (id != 0) {
+      this.selectedChooseRoles = false;
+
+      this.permissionRoleApiService.getRoleWithPermissions(id).subscribe(role => {
+        this.selectedRole = role;
+        this.selectedRole.isSelected = false;
+        this.selectedRole.isClosed = false;
+        this.roles.parentChildChecklist = this.selectedRole.permissions;
+        this.roles.isAllSelected = false;
+        this.roles.isAllCollapsed = false;
+      });
+    } else {
+      this.selectedChooseRoles = true;
+    }
   }
 
   openNewRoleModal() {
@@ -125,7 +134,6 @@ export class RolesListComponent implements OnInit {
     this.permissionRoleApiService.updateRole(roleId, this.selectedRole).subscribe(data => {
       if (data.success) {
         this.isSaving = false;
-        this.getRoles();
         this.alertMessage= 'STOWARZYSZENIE.MODULES.ROLES.UPDATED_MESSAGE';
         this.alertClass = 'success';
       }
