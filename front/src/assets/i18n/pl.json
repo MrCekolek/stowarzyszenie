@@ -1,6 +1,8 @@
 {
 	"STOWARZYSZENIE": {
 		"CRUD_BUTTONS": {
+			"ADD": "Dodaj",
+			"DELETE": "Usuń",
 			"SAVE": "Zapisz zmiany"
 		},
 		"HELPERS": {
@@ -167,6 +169,7 @@
 						"USERS": "Użytkownicy"
 					},
 					"USERS": {
+						"INTEREST": "Obszary badań",
 						"MAIN": "Użytkownicy",
 						"PORTFOLIO": "Ustawienia portfolio",
 						"ROLES_PREFERENCES": "Role i uprawnienia",
@@ -178,11 +181,18 @@
 			"PORTFOLIO": {
 				"ADMIN": {
 					"FIRSTNAME_LASTNAME": "Imię Nazwisko",
+					"INTERESTS": {
+						"ADD_NEW_LABEL": "Dodaj nowy obszar badań do listy",
+						"ADD_NEW_PLACEHOLDER": "Wpisz nazwę nowego obszaru badań"
+					},
 					"USER_DESC": "Opis dodany przez użytkownika",
 					"USER_ROLE": "Rola użytkownika",
 					"USER_TITLE": "Tytuł"
 				},
-				"CHECK_OTHERS": "Sprawdź jak inni widzą toje portfolio",
+				"ADMIN_INTERESTS_DESC1": "Zarządzaj listą obszarów badań użytkowników. Dodawaj i usuwaj nazwy obszarów, które użytkownicy mogą wybierać na swoich profilach.",
+				"CHECK_OTHERS": "Sprawdź jak inni widzą twoje portfolio",
+				"INTERESTS_ADMIN": "Ustawienia obszarów badań",
+				"INTERESTS_ADMIN_TITLE": "Lista obszarów",
 				"PAGE_TITLE": "Ustawienia portfolio",
 				"SECTION_DESC1": "Dostosuj portfolio użytkowników - decyduj, jakie dane mogą oni wypełniać i dziel dane na zakładki.",
 				"SECTION_TITLE": "Ustawienia"
