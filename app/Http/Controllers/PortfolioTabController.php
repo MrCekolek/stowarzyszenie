@@ -35,7 +35,7 @@ class PortfolioTabController extends Controller {
         }
 
         $this->translate(
-            auth()->user()->portfolio()->preference_user()->lang,
+            auth()->user()->preferenceUser()->first()->lang,
             $input['name'],
             $portfolioTab = PortfolioTab::create([
                 'position' => PortfolioTab::max('position') + 1,
@@ -58,7 +58,7 @@ class PortfolioTabController extends Controller {
         }
 
         $this->translate(
-            auth()->user()->portfolio()->preference_user()->lang,
+            auth()->user()->preferenceUser()->first()->lang,
             $input['name'],
             PortfolioTab::whereId($portfolioTab->id)
                 ->update([

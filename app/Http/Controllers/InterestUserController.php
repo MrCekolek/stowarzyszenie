@@ -30,8 +30,6 @@ class InterestUserController extends Controller {
             return $validation->failResponse();
         }
 
-        dd($request);
-
         return LogService::update();
     }
 }
