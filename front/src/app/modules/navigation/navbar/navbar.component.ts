@@ -65,24 +65,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.emitPageLoadingValue(true);
-    let events: any = this.router.events;
-
-    if (this.loggedIn) {
-      this.router.events.subscribe(event => {
-        // update user model
-        if (event instanceof NavigationStart) {
-          this.userService.me().subscribe(
-            response => {
-              this.userService.changeUser(new UserModel(response));
-              console.log(new UserModel(response));
-              this.emitPageLoadingValue(false);
-            }
-          );
-        }
-      });
-  
-      this.searchService.getUsers()
+    this.searchService.getUsers()
         .pipe(
           map(
             data => {
@@ -104,9 +87,6 @@ export class NavbarComponent implements OnInit {
   
         const searchService = this.searchService;
         const self = this;
-    } else {
-      this.emitPageLoadingValue(false);
-    }
   }
 
   createForm() {

@@ -14,4 +14,8 @@ export class PortfolioService {
   getAllTabs() {
     return this.portfolioApiService.getTabs(1);
   }
+
+  getTabCards(tabID) {
+     return this.portfolioApiService.getTabCards(tabID);
+  }
 }

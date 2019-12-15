@@ -8,13 +8,13 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AlertComponent implements OnInit {
 
   //danger, success, warning, info
-  @Input() alertType: AlertTypes;
+  @Input() alertType: string;
   @Input() message;
 
   constructor() { }
 
   ngOnInit() {
-    
+
   }
 
 }

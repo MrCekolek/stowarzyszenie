@@ -1,0 +1,8 @@
+.card-add-new {
+    opacity: 0.6;
+    transition: .3s ease;
+    cursor: pointer;
+    &:hover {
+        opacity: 1;
+    }
+}

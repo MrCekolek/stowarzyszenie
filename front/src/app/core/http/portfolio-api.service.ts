@@ -15,4 +15,8 @@ export class PortfolioApiService {
   getTabs(userID) {
     return this.apiService.post(`portfolio/tabs/${userID}/get`);
   }
+
+  getTabCards(tabID: number) {
+    return this.apiService.post(`portfolio/tile/${tabID}/get`);
+  }
 }

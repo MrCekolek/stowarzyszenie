@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PortfolioTab } from 'src/app/shared/models/portfolio-tab.model';
+import { PortfolioService } from 'src/app/core/services/portfolio.service';
 
 @Component({
   selector: 'app-portfolio-tabs',
@@ -11,19 +12,27 @@ export class PortfolioTabsComponent implements OnInit {
   @Input() lang: any;
   @Input() tabs;
 
-  activeTab: number;
+  activeTab: PortfolioTab;
 
-  constructor() { }
+  constructor(
+    private portfolioService: PortfolioService
+  ) { }
 
   ngOnInit() {
-    this.activeTab = 1;
+  }
+
+  ngAfterViewInit() {
+    this.selectActiveTab(this.tabs[0]);
   }
 
   addTab(tab: PortfolioTab) {
     this.tabs.push(tab);
   }
 
-  selectActiveTab(id: number) {
-    this.activeTab = id;
+  selectActiveTab(tab) {
+    this.activeTab = tab;
+    console.log(this.portfolioService.getTabCards(tab.id).subscribe(cards => {
+      console.log(cards);
+    }));
   }
 }
