@@ -33,7 +33,7 @@ class InterestController extends Controller {
         }
 
         $this->translate(
-            auth()->user()->portfolio()->preference_user()->lang,
+            auth()->user()->preferenceUser()->first()->lang,
             $input['name'],
             $interest = Interest::create(),
             'name'
@@ -53,7 +53,7 @@ class InterestController extends Controller {
         }
 
         $this->translate(
-            auth()->user()->portfolio()->preference_user()->lang,
+            auth()->user()->preferenceUser()->first()->lang,
             $input['name'],
             Interest::whereId($interest->id),
             'name'
