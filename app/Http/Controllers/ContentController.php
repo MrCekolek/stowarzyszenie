@@ -59,11 +59,13 @@ class ContentController extends Controller {
         $this->translate(
             auth()->user()->preferenceUser()->first()->lang,
             $input['value'],
-            Content::whereId($content->id),
+            $content,
             'value'
         );
 
-        return LogService::update();
+        return LogService::update(true, [
+            'content' => $content->toArray()
+        ]);
     }
 
     public function destroy(Request $request, Content $content) {
