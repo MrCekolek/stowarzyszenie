@@ -11,6 +11,10 @@
 				"SUCCESS": "Успех!"
 			},
 			"ALERT_FAIL": "Ошибка!",
+			"EMPTY_STATE": {
+				"DESC": "Данные не найдены в базе данных. Пожалуйста, попробуйте позже.",
+				"TITLE": "Ничего не найдено"
+			},
 			"HELPER_BUTTON_TEXT": "помощь",
 			"LOADING_TEXT": "погрузка",
 			"SEARCH_PLACEHOLDER": "Поиск"

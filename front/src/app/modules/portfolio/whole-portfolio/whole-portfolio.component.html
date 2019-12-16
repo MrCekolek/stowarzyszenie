@@ -11,8 +11,8 @@
         {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.SECTION_DESC1' | translate }}
     </p>
 
-    <div class="row justify-content-center">
-        <div class="col-sm-12">
+    <div class="row justify-content-start">
+        <div class="col-sm-12" style="padding-left: 0;">
             <div class="card author-box card-primary">
                 <div class="card-body">
                     <div class="row">
@@ -46,14 +46,13 @@
                 </div>
             </div>
         </div>
-
-        <!-- zakladki -->
-        <div class="row">
-            <div class="col-sm-12">
-                <app-portfolio-tabs [tabs]="this.allTabs" [lang]="this.lang">
-                    <p>Some random HTML with some random content</p>
-                </app-portfolio-tabs>
-                <ng-template></ng-template>
-            </div>
-        </div>
     </div>
+
+    <!-- zakladki -->
+    <div class="row" *ngIf="this.allTabs">
+        <app-portfolio-tabs [tabs]="this.allTabs" [lang]="this.lang">
+            <p>Some random HTML with some random content</p>
+        </app-portfolio-tabs>
+        <ng-template></ng-template>
+    </div>
+</div>

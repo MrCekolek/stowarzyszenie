@@ -1,14 +1,14 @@
-<div class="col-12">
+<div class="col-sm-12">
     <ul class="nav" id="protfolio-tabs" role="tablist" *ngIf="this.tabs.length > 0">
         <li class="nav-item mr-2" *ngFor="let tab of tabs" (click)="selectActiveTab(tab)">
             <!-- <a class="nav-link" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab" aria-controls="home">
-                {{ tab['name_' + lang] }} 
-            </a> -->
+                    {{ tab['name_' + lang] }} 
+                </a> -->
 
             <div class="btn-group">
                 <a type="button" class="btn btn-primary text-white" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab">
-                    {{ tab['name_' + lang] }} 
-                </a>
+                        {{ tab['name_' + lang] }} 
+                    </a>
                 <a type="button" class="btn btn-primary text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
                     <span class="sr-only">Toggle Dropdown</span>
                 </a>
@@ -22,25 +22,30 @@
                 </div>
             </div>
         </li>
-
     </ul>
-    <div class="tab-content mt-5" id="tbs-content" *ngIf="this.activeTab">
-        <div class="tab-pane fade" [id]="'tab_' + this.activeTab.id" role="tabpanel">
+</div>
 
-            <div class="col-md-6 col-sm-12 mt-3">
+<div class="tab-content mt-5" id="tbs-content" *ngIf="this.activeTab">
+    <div class="tab-pane fade" [id]="'tab_' + this.activeTab.id" role="tabpanel">
 
+        <div *ngIf="activeTabsCards">
+            <div class="col-md-6 col-sm-12 mt-3" *ngFor="let cart of activeTabsCards">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>
+                            {{ cart.name_en }}
+                        </h4>
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
             </div>
-
-            <!-- tabs from selected tab -->
-            <div *ngIf="this.activeTabsCards.length > 0">
-                <app-one-tab [cards]="this.activeTabsCards"></app-one-tab>
-            </div>
-
 
             <!-- static card to adding new cards -->
             <!-- TODO: only for editing preferences -->
             <div class="col-md-6 col-sm-12 mt-3">
-                <div class="card card-add-new">
+                <div class="card card-add-new" (click)="this.addCard('Card Header')">
                     <div class="card-body">
                         <div class="empty-state" data-height="300" style="height: 300px;">
                             <div class="empty-state-icon bg-warning">
@@ -61,4 +66,3 @@
             </div>
         </div>
     </div>
-</div>

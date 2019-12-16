@@ -11,6 +11,10 @@
 				"SUCCESS": "Success!"
 			},
 			"ALERT_FAIL": "Error!",
+			"EMPTY_STATE": {
+				"DESC": "No data found in the database. Please try again later.",
+				"TITLE": "Nothing Found"
+			},
 			"HELPER_BUTTON_TEXT": "Help",
 			"LOADING_TEXT": "Landing",
 			"SEARCH_PLACEHOLDER": "Search"
