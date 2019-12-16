@@ -29,7 +29,7 @@ class TileRequest extends FormRequest {
     public function checkCreate() {
         $this->rules = [
             'name' => 'required',
-            'portfolio_tab_id' => 'required|exists:tiles',
+            'portfolio_tab_id' => 'required',
         ];
     }
 

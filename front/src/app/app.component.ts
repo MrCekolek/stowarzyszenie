@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, Renderer2 } from '@angular/core';
+import { Component, Inject, OnDestroy, Renderer2, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from './shared/services/user/user.service';
 import { Router, NavigationStart } from '@angular/router';

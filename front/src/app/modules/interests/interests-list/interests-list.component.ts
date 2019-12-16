@@ -35,10 +35,8 @@ export class InterestsListComponent implements OnInit {
         }
       };
 
-      if (this.allInterests.length > 0) {
-        this.loading = false;
-      }
       console.log(this.allInterests);
+      this.loading = false;
     });
 
     this.languageService.currentLang.subscribe(lang => {
