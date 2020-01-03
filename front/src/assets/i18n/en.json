@@ -1,302 +1,318 @@
 {
-	"STOWARZYSZENIE": {
-		"CRUD_BUTTONS": {
-			"ADD": "Add",
-			"DELETE": "Delete",
-			"EDIT": "Edit",
-			"SAVE": "Save changes"
-		},
-		"HELPERS": {
-			"ALERT": {
-				"SUCCESS": "Success!"
-			},
-			"ALERT_FAIL": "Error!",
-			"EMPTY_STATE": {
-				"DESC": "No data found in the database. Please try again later.",
-				"TITLE": "Nothing Found"
-			},
-			"HELPER_BUTTON_TEXT": "Help",
-			"LOADING_TEXT": "Landing",
-			"SEARCH_PLACEHOLDER": "Search"
-		},
-		"LABELS_TABLES": {
-			"AVATAR": "Avatar",
-			"BIRTHDATE": "Date of Birth",
-			"CONTACT_EMAIL": "Contact email",
-			"FIRST_NAME": "First name",
-			"ID": "Id",
-			"ITEMS_PER_PAGE": "items per page",
-			"LAST_NAME": "Last name",
-			"LOADING_DATA": "Loading data ...",
-			"LOGIN_EMAIL": "Login email",
-			"NEXT_PAGE": "Next page",
-			"NO_DATA": "No data.",
-			"PHONE_NUMBER": "Phone Number",
-			"PREVIOUS_PAGE": "Previous page",
-			"RANGE": "of"
-		},
-		"MODALS": {
-			"BUTTON_CANCEL": "Cancel",
-			"DELETE_ALERT": {
-				"ARE_U_SURE": "Are you sure you want to delete?",
-				"DELETED_MESSAGE": "Removed",
-				"TITLE": "Delete"
-			},
-			"NEW_ROLE": {
-				"ALERTS": {
-					"NEW_ROLE_SUCCESS": "New role added"
-				},
-				"BUTTON_ADD": "Add",
-				"INPUT_FIELD": "New role name",
-				"INPUT_FIELD_EDIT": "The role's name",
-				"INPUT_FIELD_ERROR": "Enter a name for the new role",
-				"TITLE_EDIT_ROLE": "Edit role name",
-				"TITLE_NEW_ROLE": "Add a new role",
-				"TRIGGER_BUTTON": "Add a role"
-			}
-		},
-		"MODULES": {
-			"AUTH": {
-				"FORGOT": {
-					"BACK_TO_LOGIN": "Return To Login",
-					"BUTTON_SEND": "Send a link",
-					"PAGE_HINT": "Forgot your account password? Reset them by entering the email address to which your account is assigned below (or the contact email if you have provided it). An email with a password reset link will be sent to the provided address.",
-					"PAGE_TITLE": "Reset Password"
-				},
-				"LOGIN": {
-					"ALERT": {
-						"GOOD": "Looks good!",
-						"TITLE": "Error!"
-					},
-					"ALERT_WRONG": "Invalid login details",
-					"BUTTON": "Sign in",
-					"EMAIL_PLACEHOLDER": "E-mail adress",
-					"FORGOT_PASSWORD_LINK": "Have you forgotten your password? Reset them here",
-					"PAGE_PARAGRAPH": "Fill out the form with your login details to access the Ciob Members portal",
-					"PAGE_TITLE": "Log in to the CIOB portal",
-					"PASSWORD_PLACEHOLDER": "Password",
-					"REGISTER_LINK": "You dont have an account yet? Register new here!",
-					"REMEMBER_ME": "Don't log me out",
-					"TOOLTIP_HIDE": "Hide password",
-					"TOOLTIP_SHOW": "Show password"
-				},
-				"REGISTER": {
-					"AFFILIATION": {
-						"CITY": "city",
-						"CITY_HINT": "Enter the name of the city in which your institution is located",
-						"COUNTRY": "country",
-						"COUNTRY_HINT": "Select the country of your institution",
-						"DEPARTMENT": "Department",
-						"DEPARTMENT_HINT": "Enter the name of your department",
-						"INSTITUTION": "Institution",
-						"INSTITUTION_HINT": "Enter the name of your institution",
-						"PAGE_TITLE": "Affiliation (optional)",
-						"STREET": "Street",
-						"STREET_HINT": "Enter the street where your institution is located",
-						"TITLE": "academic title",
-						"TITLE_HINT": "Enter your academic title"
-					},
-					"AFTER": {
-						"PAGE_DESC1": "We have sent an activation email to the",
-						"PAGE_DESC2": "Check your e-mail account and follow the instructions in the e-mail sent. If you have not received the e-mail, check the SPAM folder or send the e-mail again using the link below",
-						"PAGE_SUBTITLE": "Your Account has been created",
-						"PAGE_TITLE": "Registration successful",
-						"SEND_AGAIN": "Resend activation email",
-						"SUCCESS_ICON": "Success"
-					},
-					"ALERTS": {
-						"BIRTHDATE_INCORRECT": "The date format is not valid. Correct: 06/08/1980",
-						"EMAIL_EXISTS": "An account with this email already exists",
-						"EMAIL_INCORRECT": "Invalid Email",
-						"EMAIL_NOT_EXISTS": "An account with this email does not exist.",
-						"PASSWORD_LENGTH": "The password cannot contain less than 8 characters",
-						"REQUIRED": "This field is required"
-					},
-					"BACK_TO_STEP": "Go back to the step",
-					"BIRTHDATE": "Date of Birth",
-					"BIRTHDATE_HINT": "The correct format is 05/04/2014",
-					"BUTTON_REGISTER": "Register Account",
-					"CONTACT_EMAIL": "Contact email",
-					"CONTACT_EMAIL_HINT": "Enter an alternate email address",
-					"CONTACT_TITLE": "Contact details (optional)",
-					"EMAIL_HINT": "The email will be used to log in and receive notifications",
-					"FIRST_NAME": "Name",
-					"GENDER_LABEL": "Choose your Gender",
-					"GO_TO_STEP": "Go to step",
-					"LAST_NAME": "Last name",
-					"LOGIN_LINK": "Do you already have an account? Log in here!",
-					"MAN": "I'm a man",
-					"PAGE_PARAGRAPH": "Required fields are marked in the form with an asterisk: * (which is next to the field name). Fill out the data in steps to create a new account in the system.",
-					"PAGE_TITLE": "Register a new account",
-					"PASSWORD_HINT": "The password should be at least 8 characters long",
-					"PHONE": "Phone Number",
-					"RESET": {
-						"BUTTON": "Reset",
-						"LOGIN_LINK": "Go to login",
-						"PAGE_DESC": "Enter the new password for your account in the field below.",
-						"PAGE_TITLE": "Password Reset",
-						"RESETED_DESC": "Your password has been successfully reset. You can login now.",
-						"RESETED_TITLE": "Password has been reset"
-					},
-					"STEP": "Step",
-					"STEP1_TITLE": "Account information",
-					"STEP2_TITLE": "Personal data",
-					"STEP3_TITLE": "Affiliation",
-					"STEP4_TITLE": "Contact Details",
-					"WOMAN": "I'm a woman"
-				}
-			},
-			"NAVIGATION": {
-				"LANGUAGES": {
-					"EN": "English",
-					"LABEL": "Site language",
-					"PL": "Polish",
-					"RU": "Russian"
-				},
-				"LOGGED_NAVBAR": {
-					"ACCOUNT": "Account",
-					"EDIT_ACCOUNT": "Edit account",
-					"LOGO": "CIOB",
-					"LOGOUT": "Logout",
-					"MESSAGES": "Messages",
-					"MY_ACCOUNT": "My account",
-					"NOTIFICATIONS": "Notifications",
-					"USER_DROPDOWN_TITLE": "User options"
-				},
-				"MEMBERS_PAGE_LINKS": {
-					"HOME": "Back to home",
-					"LOGIN": "Sign in",
-					"REGISTER": "Register"
-				},
-				"SEARCHBAR": {
-					"TITLE": "Members"
-				},
-				"SIDENAV": {
-					"DASHBOARD": "Dashboard",
-					"MENU_HEADINGS": {
-						"MENU": "Menu",
-						"USERS": "Users"
-					},
-					"USERS": {
-						"INTEREST": "Areas of research",
-						"MAIN": "Users",
-						"PORTFOLIO": "Portfolio settings",
-						"PORTFOLIO_MENU": "Portfolio",
-						"ROLES_PREFERENCES": "Roles and Permissions",
-						"USERS_LIST": "Users List"
-					}
-				},
-				"WEBPAGE_TITLE_MEMBERS": "Ciob members"
-			},
-			"PORTFOLIO": {
-				"ADMIN": {
-					"ADD_CARD": "Add a new card",
-					"ADD_CARD_DESC": "Click here to add a new card to the bookmark in the portfolio",
-					"FIRSTNAME_LASTNAME": "First name Last Name",
-					"INTERESTS": {
-						"ADD_NEW_LABEL": "Add a new research area to the list",
-						"ADD_NEW_PLACEHOLDER": "Enter the name of the new research area"
-					},
-					"USER_DESC": "Description added by the user",
-					"USER_ROLE": "User role",
-					"USER_TITLE": "title"
-				},
-				"ADMIN_INTERESTS_DESC1": "Manage a list of user research areas. Add and remove names of areas that users can select on their profiles.",
-				"CHECK_OTHERS": "Check how others see your portfolio",
-				"INTERESTS_ADMIN": "Test area settings",
-				"INTERESTS_ADMIN_TITLE": "List of areas",
-				"PAGE_TITLE": "Portfolio settings",
-				"SECTION_DESC1": "Customize your users portfolio - decide what data they can fill and divide the data into tabs.",
-				"SECTION_TITLE": "Settings"
-			},
-			"ROLES": {
-				"ARE_EDITING": "You are editing role:",
-				"CHOOSE_ROLE": "Select a role from the list to edit the permissions",
-				"COLLAPSE_ALL": "Collapse all groups",
-				"DELETE_ROLE": "Delete role",
-				"EDIT_NAME": "Edit role name",
-				"EXPAND_ALL": "Expand all groups",
-				"LIST_TITLE": "Roles and Permissions",
-				"PAGE_DESC1": "Manage user roles in the system and give each role its own privileges.",
-				"SECTION_TITLE": "Role and permission settings",
-				"SELECT_ALL": "Select all permissions",
-				"SELECT_DESC": "Choose roles",
-				"UNSELECT_ALL": "Deselect all permissions",
-				"UPDATED_MESSAGE": "Role updated"
-			},
-			"TITLE": "Example title",
-			"USERS": {
-				"ENTRIES": "Show",
-				"SEARCH": "Search for user",
-				"USERS_LIST_TITLE": "Users List"
-			}
-		},
-		"PAGINATION": {
-			"NEXT": "Next",
-			"PREVIOUS": "Previous"
-		},
-		"SERVER": {
-			"CUSTOM": {
-				"CONTROLLERS": {
-					"AUTH": {
-						"LOGIN": {
-							"NOT_ACTIVATED": "Account has not been activated.",
-							"NO_EMAIL_OR_PASSWORD": "The email or password you entered is incorrect."
-						}
-					},
-					"CRUD": {
-						"FAIL": {
-							"CREATE": "Error adding data",
-							"DELETE": "Data delete error",
-							"READ": "Data reading error",
-							"UPDATE": "Data modification error"
-						},
-						"SUCCESS": {
-							"CREATE": "Data added successfully",
-							"DELETE": "Successfully deleted data",
-							"READ": "Successful data reading",
-							"UPDATE": ""
-						}
-					}
-				},
-				"CRUD": {
-					"FAIL": {
-						"CREATE": "Add error",
-						"DELETE": "Delete error",
-						"READ": "read error",
-						"UPDATE": "Modification Error"
-					},
-					"SUCCESS": {
-						"CREATE": "Successfully added.",
-						"DELETE": "Successfully deleted",
-						"READ": "Successfully read",
-						"UPDATE": "Modified successfully"
-					}
-				},
-				"DATABASE": {
-					"PERMISSIONS": {
-						"CRUD": {
-							"CREATE": "Creation",
-							"DELETE": "Removal",
-							"EDIT": "Modification",
-							"INDEX": "reading"
-						},
-						"ROLES": {
-							"ADD": "Adding new roles to the system",
-							"CHANGE_PERMISSIONS": "Change role permissions",
-							"DELETE": "Removing roles from the system",
-							"ROLES": "Roles"
-						},
-						"USERS": {
-							"ACCESS": "Access to the user list",
-							"ADD": "Adding new users",
-							"CHANGE_ROLE": "Change user roles",
-							"DELETE": "Deleting users",
-							"USERS": "Members"
-						}
-					}
-				}
-			}
-		}
-	}
+    "STOWARZYSZENIE": {
+        "CRUD_BUTTONS": {
+            "ADD": "Add",
+            "DELETE": "Delete",
+            "EDIT": "Edit",
+            "SAVE": "Save changes",
+            "SAVE_SHORT": "Save",
+            "BACK": "Return"
+        },
+        "HELPERS": {
+            "ALERT": {
+                "SUCCESS": "Success!"
+            },
+            "ALERT_FAIL": "Error!",
+            "EMPTY_STATE": {
+                "DESC": "No data found in the database. Please try again later.",
+                "TITLE": "Nothing Found"
+            },
+            "HELPER_BUTTON_TEXT": "Help",
+            "LOADING_TEXT": "Landing",
+            "SEARCH_PLACEHOLDER": "Search"
+        },
+        "LABELS_TABLES": {
+            "AVATAR": "Avatar",
+            "BIRTHDATE": "Date of Birth",
+            "CONTACT_EMAIL": "Contact email",
+            "FIRST_NAME": "First name",
+            "ID": "Id",
+            "ITEMS_PER_PAGE": "items per page",
+            "LAST_NAME": "Last name",
+            "LOADING_DATA": "Loading data ...",
+            "LOGIN_EMAIL": "Login email",
+            "NEXT_PAGE": "Next page",
+            "NO_DATA": "No data.",
+            "PHONE_NUMBER": "Phone Number",
+            "PREVIOUS_PAGE": "Previous page",
+            "RANGE": "of"
+        },
+        "MODALS": {
+            "BUTTON_CANCEL": "Cancel",
+            "DELETE_ALERT": {
+                "ARE_U_SURE": "Are you sure you want to delete?",
+                "DELETED_MESSAGE": "Removed",
+                "TITLE": "Delete"
+            },
+            "NEW_ROLE": {
+                "ALERTS": {
+                    "NEW_ROLE_SUCCESS": "New role added"
+                },
+                "BUTTON_ADD": "Add",
+                "INPUT_FIELD": "New role name",
+                "INPUT_FIELD_EDIT": "The role's name",
+                "INPUT_FIELD_ERROR": "Enter a name for the new role",
+                "TITLE_EDIT_ROLE": "Edit role name",
+                "TITLE_NEW_ROLE": "Add a new role",
+                "TRIGGER_BUTTON": "Add a role"
+            }
+        },
+        "MODULES": {
+            "AUTH": {
+                "FORGOT": {
+                    "BACK_TO_LOGIN": "Return To Login",
+                    "BUTTON_SEND": "Send a link",
+                    "PAGE_HINT": "Forgot your account password? Reset them by entering the email address to which your account is assigned below (or the contact email if you have provided it). An email with a password reset link will be sent to the provided address.",
+                    "PAGE_TITLE": "Reset Password"
+                },
+                "LOGIN": {
+                    "ALERT": {
+                        "GOOD": "Looks good!",
+                        "TITLE": "Error!"
+                    },
+                    "ALERT_WRONG": "Invalid login details",
+                    "BUTTON": "Sign in",
+                    "EMAIL_PLACEHOLDER": "E-mail adress",
+                    "FORGOT_PASSWORD_LINK": "Have you forgotten your password? Reset them here",
+                    "PAGE_PARAGRAPH": "Fill out the form with your login details to access the Ciob Members portal",
+                    "PAGE_TITLE": "Log in to the CIOB portal",
+                    "PASSWORD_PLACEHOLDER": "Password",
+                    "REGISTER_LINK": "You dont have an account yet? Register new here!",
+                    "REMEMBER_ME": "Don't log me out",
+                    "TOOLTIP_HIDE": "Hide password",
+                    "TOOLTIP_SHOW": "Show password"
+                },
+                "REGISTER": {
+                    "AFFILIATION": {
+                        "CITY": "city",
+                        "CITY_HINT": "Enter the name of the city in which your institution is located",
+                        "COUNTRY": "country",
+                        "COUNTRY_HINT": "Select the country of your institution",
+                        "DEPARTMENT": "Department",
+                        "DEPARTMENT_HINT": "Enter the name of your department",
+                        "INSTITUTION": "Institution",
+                        "INSTITUTION_HINT": "Enter the name of your institution",
+                        "PAGE_TITLE": "Affiliation (optional)",
+                        "STREET": "Street",
+                        "STREET_HINT": "Enter the street where your institution is located",
+                        "TITLE": "academic title",
+                        "TITLE_HINT": "Enter your academic title"
+                    },
+                    "AFTER": {
+                        "PAGE_DESC1": "We have sent an activation email to the",
+                        "PAGE_DESC2": "Check your e-mail account and follow the instructions in the e-mail sent. If you have not received the e-mail, check the SPAM folder or send the e-mail again using the link below",
+                        "PAGE_SUBTITLE": "Your Account has been created",
+                        "PAGE_TITLE": "Registration successful",
+                        "SEND_AGAIN": "Resend activation email",
+                        "SUCCESS_ICON": "Success"
+                    },
+                    "ALERTS": {
+                        "BIRTHDATE_INCORRECT": "The date format is not valid. Correct: 06/08/1980",
+                        "EMAIL_EXISTS": "An account with this email already exists",
+                        "EMAIL_INCORRECT": "Invalid Email",
+                        "EMAIL_NOT_EXISTS": "An account with this email does not exist.",
+                        "PASSWORD_LENGTH": "The password cannot contain less than 8 characters",
+                        "REQUIRED": "This field is required"
+                    },
+                    "BACK_TO_STEP": "Go back to the step",
+                    "BIRTHDATE": "Date of Birth",
+                    "BIRTHDATE_HINT": "The correct format is 05/04/2014",
+                    "BUTTON_REGISTER": "Register Account",
+                    "CONTACT_EMAIL": "Contact email",
+                    "CONTACT_EMAIL_HINT": "Enter an alternate email address",
+                    "CONTACT_TITLE": "Contact details (optional)",
+                    "EMAIL_HINT": "The email will be used to log in and receive notifications",
+                    "FIRST_NAME": "Name",
+                    "GENDER_LABEL": "Choose your Gender",
+                    "GO_TO_STEP": "Go to step",
+                    "LAST_NAME": "Last name",
+                    "LOGIN_LINK": "Do you already have an account? Log in here!",
+                    "MAN": "I'm a man",
+                    "PAGE_PARAGRAPH": "Required fields are marked in the form with an asterisk: * (which is next to the field name). Fill out the data in steps to create a new account in the system.",
+                    "PAGE_TITLE": "Register a new account",
+                    "PASSWORD_HINT": "The password should be at least 8 characters long",
+                    "PHONE": "Phone Number",
+                    "RESET": {
+                        "BUTTON": "Reset",
+                        "LOGIN_LINK": "Go to login",
+                        "PAGE_DESC": "Enter the new password for your account in the field below.",
+                        "PAGE_TITLE": "Password Reset",
+                        "RESETED_DESC": "Your password has been successfully reset. You can login now.",
+                        "RESETED_TITLE": "Password has been reset"
+                    },
+                    "STEP": "Step",
+                    "STEP1_TITLE": "Account information",
+                    "STEP2_TITLE": "Personal data",
+                    "STEP3_TITLE": "Affiliation",
+                    "STEP4_TITLE": "Contact Details",
+                    "WOMAN": "I'm a woman"
+                }
+            },
+            "NAVIGATION": {
+                "LANGUAGES": {
+                    "EN": "English",
+                    "LABEL": "Site language",
+                    "PL": "Polish",
+                    "RU": "Russian"
+                },
+                "LOGGED_NAVBAR": {
+                    "ACCOUNT": "Account",
+                    "EDIT_ACCOUNT": "Edit account",
+                    "LOGO": "CIOB",
+                    "LOGOUT": "Logout",
+                    "MESSAGES": "Messages",
+                    "MY_ACCOUNT": "My account",
+                    "NOTIFICATIONS": "Notifications",
+                    "USER_DROPDOWN_TITLE": "User options"
+                },
+                "MEMBERS_PAGE_LINKS": {
+                    "HOME": "Back to home",
+                    "LOGIN": "Sign in",
+                    "REGISTER": "Register"
+                },
+                "SEARCHBAR": {
+                    "TITLE": "Members"
+                },
+                "SIDENAV": {
+                    "DASHBOARD": "Dashboard",
+                    "MENU_HEADINGS": {
+                        "MENU": "Menu",
+                        "USERS": "Users"
+                    },
+                    "USERS": {
+                        "INTEREST": "Areas of research",
+                        "MAIN": "Users",
+                        "PORTFOLIO": "Portfolio settings",
+                        "PORTFOLIO_MENU": "Portfolio",
+                        "ROLES_PREFERENCES": "Roles and Permissions",
+                        "USERS_LIST": "Users List"
+                    }
+                },
+                "WEBPAGE_TITLE_MEMBERS": "Ciob members"
+            },
+            "PORTFOLIO": {
+                "ADMIN": {
+                    "ADD_CARD": "Add a new card",
+                    "ADD_CARD_DESC": "Click here to add a new card to the bookmark in the portfolio",
+                    "FIRSTNAME_LASTNAME": "First name Last Name",
+                    "INTERESTS": {
+                        "ADD_NEW_LABEL": "Add a new research area to the list",
+                        "ADD_NEW_PLACEHOLDER": "Enter the name of the new research area",
+                        "MODAL": {
+                            "TITLE_NEW": "Add a new research area",
+                            "TITLE_EDIT": "Edit Research Area",
+                            "INPUT_LABEL_NEW": "Enter the name of the new research area",
+                            "TRANSLATIONS": "Translations",
+                            "INPUT_HINT": "Click the text box to edit"
+                        }
+                    },
+                    "USER_DESC": "Description added by the user",
+                    "USER_ROLE": "User role",
+                    "USER_TITLE": "title"
+                },
+                "ADMIN_INTERESTS_DESC1": "Manage a list of user research areas. Add and remove names of areas that users can select on their profiles.",
+                "CHECK_OTHERS": "Check how others see your portfolio",
+                "INTERESTS_ADMIN": "Test area settings",
+                "INTERESTS_ADMIN_TITLE": "List of areas",
+                "PAGE_TITLE": "Portfolio settings",
+                "SECTION_DESC1": "Customize your users portfolio - decide what data they can fill and divide the data into tabs.",
+                "SECTION_TITLE": "Settings",
+                "PROFILE": {
+                    "TITLE_OWNER": "your profile",
+                    "TITLE_UNOWNER": "User Profile",
+                    "SECTION_TITLE_OWNER": "Profile",
+                    "SECTION_LEAD_OWNER": "Here you can view your profile and edit the information it contains. You can also choose which sections to show or not."
+                }
+            },
+            "ROLES": {
+                "ARE_EDITING": "You are editing role:",
+                "CHOOSE_ROLE": "Select a role from the list to edit the permissions",
+                "COLLAPSE_ALL": "Collapse all groups",
+                "DELETE_ROLE": "Delete role",
+                "EDIT_NAME": "Edit role name",
+                "EXPAND_ALL": "Expand all groups",
+                "LIST_TITLE": "Roles and Permissions",
+                "PAGE_DESC1": "Manage user roles in the system and give each role its own privileges.",
+                "SECTION_TITLE": "Role and permission settings",
+                "SELECT_ALL": "Select all permissions",
+                "SELECT_DESC": "Choose roles",
+                "UNSELECT_ALL": "Deselect all permissions",
+                "UPDATED_MESSAGE": "Role updated"
+            },
+            "TITLE": "Example title",
+            "USERS": {
+                "ENTRIES": "Show",
+                "SEARCH": "Search for user",
+                "USERS_LIST_TITLE": "Users List"
+            }
+        },
+        "PAGINATION": {
+            "NEXT": "Next",
+            "PREVIOUS": "Previous"
+        },
+        "SERVER": {
+            "CUSTOM": {
+                "CONTROLLERS": {
+                    "AUTH": {
+                        "LOGIN": {
+                            "NOT_ACTIVATED": "Account has not been activated.",
+                            "NO_EMAIL_OR_PASSWORD": "The email or password you entered is incorrect."
+                        }
+                    },
+                    "CRUD": {
+                        "FAIL": {
+                            "CREATE": "Error adding data",
+                            "DELETE": "Data delete error",
+                            "READ": "Data reading error",
+                            "UPDATE": "Data modification error"
+                        },
+                        "SUCCESS": {
+                            "CREATE": "Data added successfully",
+                            "DELETE": "Successfully deleted data",
+                            "READ": "Successful data reading",
+                            "UPDATE": ""
+                        }
+                    }
+                },
+                "CRUD": {
+                    "FAIL": {
+                        "CREATE": "Add error",
+                        "DELETE": "Delete error",
+                        "READ": "read error",
+                        "UPDATE": "Modification Error"
+                    },
+                    "SUCCESS": {
+                        "CREATE": "Successfully added.",
+                        "DELETE": "Successfully deleted",
+                        "READ": "Successfully read",
+                        "UPDATE": "Modified successfully"
+                    }
+                },
+                "DATABASE": {
+                    "PERMISSIONS": {
+                        "CRUD": {
+                            "CREATE": "Creation",
+                            "DELETE": "Removal",
+                            "EDIT": "Modification",
+                            "INDEX": "reading"
+                        },
+                        "ROLES": {
+                            "ADD": "Adding new roles to the system",
+                            "CHANGE_PERMISSIONS": "Change role permissions",
+                            "DELETE": "Removing roles from the system",
+                            "ROLES": "Roles"
+                        },
+                        "USERS": {
+                            "ACCESS": "Access to the user list",
+                            "ADD": "Adding new users",
+                            "CHANGE_ROLE": "Change user roles",
+                            "DELETE": "Deleting users",
+                            "USERS": "Members"
+                        }
+                    }
+                }
+            }
+        },
+        "zzzz": "Card header"
+    }
 }

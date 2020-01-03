@@ -31,11 +31,13 @@ class RoleController extends Controller {
             return $validation->failResponse();
         }
 
-        $role = Role::create([
-            'name' => $input['name']
-        ]);
+        $role = new Role();
+        $role->name_pl = $input['name_pl'];
+        $role->name_en = $input['name_en'];
+        $role->name_ru = $input['name_ru'];
+        $saved = $role->save();
 
-        return LogService::create($role->exists(), [
+        return LogService::create($saved, [
             'role' => $role->toArray()
         ]);
     }

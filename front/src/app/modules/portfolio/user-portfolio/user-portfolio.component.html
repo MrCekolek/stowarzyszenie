@@ -1,1 +1,16 @@
-<p>user-portfolio works!</p>
+<div class="section-header">
+    <h1 *ngIf="isOwner">
+        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.PROFILE.TITLE_OWNER' | translate }}
+    </h1>
+    <h1 *ngIf="!isOwner">
+        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.PROFILE.TITLE_UNOWNER' | translate }}
+    </h1>
+</div>
+<div class="section-body">
+    <h2 class="section-title" *ngIf="isOwner">
+        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.PROFILE.SECTION_TITLE_OWNER' | translate }}
+    </h2>
+    <p class="section-lead" *ngIf="isOwner">
+        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.PROFILE.SECTION_LEAD_OWNER' | translate }}
+    </p>
+</div>

@@ -1,0 +1,60 @@
+<h2 mat-dialog-title>
+    <span *ngIf="this.modal_type == 'new'">
+        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.INTERESTS.MODAL.TITLE_NEW' | translate }}
+    </span>
+
+    <span *ngIf="this.modal_type == 'edit'">
+        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.INTERESTS.MODAL.TITLE_EDIT' | translate }}
+    </span>
+</h2>
+
+<mat-dialog-content>
+
+    <div class="from-group mb-4" *ngIf="this.modal_type == 'new'">
+        <label class="text-primary" style="font-weight: 600;">
+            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.INTERESTS.MODAL.INPUT_LABEL_NEW' | translate }}
+        </label>
+
+        <div class="input-group">
+            <input type="text" class="form-control" #new aria-label="" [value]="interest['name_' + this.lang]">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getInterestTranslations(new.value)" *ngIf="this.modal_type == 'new'">
+                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.ADD' | translate }}
+                </button>
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="updateInterest(edit)" *ngIf="this.modal_type == 'edit'">
+                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <h5 *ngIf="this.translations.length > 0">
+        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.INTERESTS.MODAL.TRANSLATIONS' | translate }}
+    </h5>
+
+    <form #translationsForm="ngForm">
+        <ul class="list-unstyled">
+            <li *ngFor="let text of this.translations; let i = index; trackBy: trackByFn">
+                <div class="form-group row">
+                    <label [for]="'text' + i" class="col-sm-3 col-form-label h4">
+                        {{ this.languageService.supportedLangs[i] }}
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" [name]="this.translations[i]" [id]="'text' + i" [value]="text" data-toggle="tooltip" data-placement="top" [title]="'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.INTERESTS.MODAL.INPUT_HINT' | translate" [(ngModel)]="this.translations[i]">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button type="button" class="btn btn-primary" (click)="addInterest()" *ngIf="modal_type === 'new'">
+        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
+    </button>
+    <button type="button" [class.btn-progress]="this.isSaving" class="btn btn-primary" *ngIf="modal_type === 'edit'" (click)="updateInterest()">
+        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
+    </button>
+    <button type="button " class="btn btn-link" (click)="dismiss()">
+        {{ 'STOWARZYSZENIE.MODALS.BUTTON_CANCEL' | translate }}
+    </button>
+</mat-dialog-actions>

@@ -34,17 +34,15 @@ class TileController extends Controller {
             return $validation->failResponse();
         }
 
-        $this->translate(
-            auth()->user()->preferenceUser()->first()->lang,
-            $input['name'],
-            $tile = Tile::create([
-                'position' => Tile::max('position') + 1,
-                'portfolio_tab_id' => $input['portfolio_tab_id']
-            ]),
-            'name'
-        );
+        $tile = new Tile();
+        $tile->name_pl = $input['name_pl'];
+        $tile->name_en = $input['name_en'];
+        $tile->name_ru = $input['name_ru'];
+        $tile->position = Tile::max('position') + 1;
+        $tile->portfolio_tab_id = $input['portfolio_tab_id'];
+        $saved = $tile->save();
 
-        return LogService::create($tile->exists(), [
+        return LogService::create($saved, [
             'tile' => $tile->toArray()
         ]);
     }
@@ -57,14 +55,12 @@ class TileController extends Controller {
             return $validation->failResponse();
         }
 
-        $this->translate(
-            auth()->user()->preferenceUser()->first()->lang,
-            $input['name'],
-            $tile->update([
-                'position' => $input['position']
-            ]),
-            'name'
-        );
+        $tile->update([
+            'name_pl' => $input['name_pl'],
+            'name_en' => $input['name_en'],
+            'name_ru' => $input['name_ru'],
+            'position' => $input['position']
+        ]);
 
         return LogService::update(true, [
             'tile' => $tile->toArray()

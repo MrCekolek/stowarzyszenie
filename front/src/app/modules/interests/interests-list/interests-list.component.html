@@ -17,7 +17,14 @@
 
         <div class="card">
             <div class="card-body">
-                <div class="from-group mb-4">
+                <div class="d-flex justify-content-center mb-5 mt-3">
+                    <div class="btn btn-info" (click)="openNewInterestModal('new')">
+                        <i class="fas fa-plus"></i> Add new interest
+                    </div>
+                </div>
+
+
+                <!-- <div class="from-group mb-4">
                     <label class="text-primary" style="font-weight: 600;">
                         {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.INTERESTS.ADD_NEW_LABEL' | translate }}:
                     </label>
@@ -30,50 +37,48 @@
                             </button>
                         </div>
                     </div>
+                </div> -->
+
+                <div *ngIf="this.loading; else content">
+                    <div class="d-flex justifycontent-center text-align-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div *ngIf="this.loading">
-                    {{ 'STOWARZYSZENIE.HELPERS.LOADING_TEXT' | translate }}...
-                </div>
-                <ul class="list-group list-group-flush" *ngIf="allInterests.length > 0; else nocontent">
-                    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let interest of this.allInterests">
-                        <span *ngIf="!interest.editing">
-                            {{ interest['name_' + lang] }}
-                        </span>
+                <ng-template #content>
+                    <ul class="list-group list-group-flush" *ngIf="allInterests.length > 0; else nocontent">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let interest of this.allInterests">
+                            <span *ngIf="!interest.editing">
+                                {{ interest['name_' + lang] }}
+                            </span>
 
-                        <div class="input-group col-7" *ngIf="interest.editing" style="padding: 0;">
-                            <input type="text" #edit [value]="interest['name_' + lang]" class="form-control">
-                            <div class="input-group-append">
-                                <button class="btn btn-success" type="button" [class.btn-progress]="interest.editing_loading" (click)="updateInterest(edit.value, interest)">
-                                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE' | translate }}
+                            <div>
+                                <button type="button" class="btn btn-icon icon-left btn-info mr-2" (click)="openNewInterestModal('edit', interest)">
+                                    <i class="fas fa-pencil-alt"></i>
+                                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
+                                </button>
+                                <button type="button" class="btn btn-icon icon-left btn-danger" [class.btn-progress]="interest.deleteLoading" (click)="deleteInterest(interest.id)">
+                                    <i class="fas fa-times"></i>
+                                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
                                 </button>
                             </div>
+                        </li>
+                    </ul>
+                    <ng-template #nocontent>
+                        <div class="empty-state" data-height="400" style="height: 400px;">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-question"></i>
+                            </div>
+                            <h2>
+                                {{ 'STOWARZYSZENIE.HELPERS.EMPTY_STATE.TITLE' | translate }}
+                            </h2>
+                            <p class="lead">
+                                {{ 'STOWARZYSZENIE.HELPERS.EMPTY_STATE.DESC' | translate }}
+                            </p>
                         </div>
-
-                        <div>
-                            <button type="button" class="btn btn-icon icon-left btn-info mr-2" (click)="enableEditing(interest)">
-                                <i class="fas fa-pencil-alt"></i>
-                                {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
-                            </button>
-                            <button type="button" class="btn btn-icon icon-left btn-danger" [class.btn-progress]="interest.deleteLoading" (click)="deleteInterest(interest.id)">
-                                <i class="fas fa-times"></i>
-                                {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-                <ng-template #nocontent>
-                    <div class="empty-state" data-height="400" style="height: 400px;">
-                        <div class="empty-state-icon">
-                            <i class="fas fa-question"></i>
-                        </div>
-                        <h2>
-                            {{ 'STOWARZYSZENIE.HELPERS.EMPTY_STATE.TITLE' | translate }}
-                        </h2>
-                        <p class="lead">
-                            {{ 'STOWARZYSZENIE.HELPERS.EMPTY_STATE.DESC' | translate }}
-                        </p>
-                    </div>
+                    </ng-template>
                 </ng-template>
             </div>
         </div>

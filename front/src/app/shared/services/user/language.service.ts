@@ -11,8 +11,8 @@ import { ApiService } from "../../../core/http/api.service";
 export class LanguageService {
   public loggedIn: boolean;
   public supportedLangs = [
-    'en',
     'pl',
+    'en',
     'ru',
   ];
   private lang = new BehaviorSubject <string> (this.translateService.getBrowserLang());

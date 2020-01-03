@@ -3,6 +3,8 @@ import { InterestsService } from 'src/app/core/services/interests.service';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 import { Interest } from 'src/app/shared/models/interest.model';
 import { AlertModel } from 'src/app/shared/models/alert.model';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { InterestModalComponent } from '../interest-modal/interest-modal.component';
 
 @Component({
   selector: 'app-interests-list',
@@ -19,11 +21,14 @@ export class InterestsListComponent implements OnInit {
   private alert: AlertModel
 
   private loading: boolean;
-  private addLoading = false;
+
+  private alertMessage: string = '';
+  private alertClass: string = '';
 
   constructor(
     private interestsService: InterestsService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -47,20 +52,6 @@ export class InterestsListComponent implements OnInit {
   ngOnDestroy() {
   }
 
-  addNewInterest(newInterestName: string) {
-    this.addLoading = true;
-     this.interestsService.addNewInterest(newInterestName).subscribe(response => {
-       if (response.success) {
-        this.alert = new AlertModel('success', response.message);
-        this.allInterests.push(response.interest);
-        this.newInterest.value = '';
-        this.addLoading = false;
-       } else {
-        this.alert = new AlertModel('danger', response.message);
-       }
-     });
-  }
-
   deleteInterest(id: number) {
     console.log(id);
     this.allInterests.find(i => i.id === id).deleteLoading = true;
@@ -79,22 +70,35 @@ export class InterestsListComponent implements OnInit {
     interest.editing = true;
   }
 
-  updateInterest(new_name: string, interest) {
-    this.allInterests.find(i => i.id === interest.id).editing = true;
-    this.allInterests.find(i => i.id === interest.id).editing_loading = true;
-    this.interestsService.updateInterest(interest.id, new_name).subscribe(response => {
-      console.log(response);
-      if (response.success) {
-        this.alert = new AlertModel('success', response.message);
-        this.allInterests.find(i => i.id === interest.id).name_pl = response.interest.name_pl;
-        this.allInterests.find(i => i.id === interest.id).name_en = response.interest.name_en;
-        this.allInterests.find(i => i.id === interest.id).name_ru = response.interest.name_ru;
-      } else {
-        this.alert = new AlertModel('danger', response.message);
-      }
+  openNewInterestModal(type: string, interest?) {
+    const dialogConfig = new MatDialogConfig();
 
-      this.allInterests.find(i => i.id === interest.id).editing_loading = false;
-      this.allInterests.find(i => i.id === interest.id).editing = false;
-    });
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      modal_type: type,
+      interest: interest
+    };
+
+    const dialogRef = this.dialog.open(InterestModalComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      (data) => {
+        if (data) {
+          if (data.success) {
+            if (type === 'new') {
+              this.interestsService.addNewInterest(data.interest);
+              this.allInterests.push(data.interest);
+              this.alert = new AlertModel('success', data.message);
+            } else if (type === 'edit') {
+              const index = this.allInterests.findIndex(item => item.id === data.interest.id);
+              this.allInterests[index] = data.interest;
+            }
+          } else {
+            this.alert = new AlertModel('danger', data.message);
+          }
+        }
+      }
+    );
   }
 }
