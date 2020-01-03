@@ -23,4 +23,6 @@ export class PortfolioApiService {
   addCard(tab: Object) {
     return this.apiService.post('portfolio/tile/create', tab);
   }
+
+  
 }

@@ -14,11 +14,8 @@ export class InterestsService {
     return this.interestsApiService.getAllInterests();
   }
 
-  addNewInterest(name: string) {
-    const obj = {
-      name: name
-    };
-    return this.interestsApiService.addInterest(obj);
+  addNewInterest(interest: Object) {
+    return this.interestsApiService.addInterest(interest);
   }
 
   deleteInterest(interestID: number) {
@@ -28,11 +25,7 @@ export class InterestsService {
     return this.interestsApiService.deleteInterest(obj);
   }
 
-  updateInterest(interestID, new_name) {
-    const obj = {
-      id: interestID,
-      name: new_name
-    };
-    return this.interestsApiService.update(obj);
+  updateInterest(interest) {
+    return this.interestsApiService.update(interest);
   }
 }
