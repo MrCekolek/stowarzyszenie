@@ -15,7 +15,10 @@ class PreferenceUserController extends Controller {
 
     public static function getGeolocation() {
         try {
-            $regionAPI = json_decode(file_get_contents(config('api.geo_app_url') . '?apiKey=' . config('api.geo_app_key')), true);
+            $regionAPI = json_decode(
+                file_get_contents(
+                    config('api.geo_app_url') . '?apiKey=' . config('api.geo_app_key')
+                ), true);
 
             return $regionAPI;
         } catch (\Exception $e) {

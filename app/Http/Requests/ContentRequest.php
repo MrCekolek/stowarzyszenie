@@ -28,12 +28,21 @@ class ContentRequest extends FormRequest {
 
     public function checkCreate() {
         $this->rules = [
+            'value_pl' => 'required',
+            'value_en' => 'required',
+            'value_ru' => 'required',
             'tile_content_id' => 'required|exists:contents',
         ];
     }
 
     public function checkUpdate() {
-        $this->checkCreate();
+        $this->rules = [
+            'id' => 'required|exists:contents',
+            'value_pl' => 'required',
+            'value_en' => 'required',
+            'value_ru' => 'required',
+            'tile_content_id' => 'required|exists:contents',
+        ];
     }
 
     public function checkDestroy() {

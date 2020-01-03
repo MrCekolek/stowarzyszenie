@@ -32,19 +32,16 @@ class TileContentController extends Controller {
         if ($validation->fails()) {
             return $validation->failResponse();
         }
+        $tileContent = new TileContent();
+        $tileContent->name_pl = $input['name_pl'];
+        $tileContent->name_en = $input['name_en'];
+        $tileContent->name_ru = $input['name_ru'];
+        $tileContent->type = $input['type'];
+        $tileContent->translation_key = TileContent::translations()[$input['type']];
+        $tileContent->tile_id = $input['tile_id'];
+        $saved = $tileContent->save();
 
-        $this->translate(
-            auth()->user()->preferenceUser()->first()->lang,
-            $input['name'],
-            $tileContent = TileContent::create([
-                'type' => $input['type'],
-                'translation_key' => TileContent::translations()[$input['type']],
-                'tile_id' => $input['tile_id']
-            ]),
-            'name'
-        );
-
-        return LogService::create($tileContent->exists(), [
+        return LogService::create($saved, [
             'tileContent' => $tileContent->toArray()
         ]);
     }
@@ -57,16 +54,14 @@ class TileContentController extends Controller {
             return $validation->failResponse();
         }
 
-        $this->translate(
-            auth()->user()->preferenceUser()->first()->lang,
-            $input['name'],
-            $tileContent->update([
-                'type' => $input['type'],
-                'translation_key' => TileContent::translations()[$input['type']],
-                'tile_id' => $input['tile_id']
-            ]),
-            'name'
-        );
+        $tileContent->update([
+            'name_pl' => $input['name_pl'],
+            'name_en' => $input['name_en'],
+            'name_ru' => $input['name_ru'],
+            'type' => $input['type'],
+            'translation_key' => TileContent::translations()[$input['type']],
+            'tile_id' => $input['tile_id']
+        ]);
 
         return LogService::update(true, [
             'tileContent' => $tileContent->toArray()

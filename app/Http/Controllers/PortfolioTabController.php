@@ -34,17 +34,15 @@ class PortfolioTabController extends Controller {
             return $validation->failResponse();
         }
 
-        $this->translate(
-            auth()->user()->preferenceUser()->first()->lang,
-            $input['name'],
-            $portfolioTab = PortfolioTab::create([
-                'position' => PortfolioTab::max('position') + 1,
-                'portfolio_id' => $input['portfolio_id']
-            ]),
-            'name'
-        );
+        $portfolioTab = new PortfolioTab();
+        $portfolioTab->name_pl = $input['name_pl'];
+        $portfolioTab->name_en = $input['name_en'];
+        $portfolioTab->name_ru = $input['name_ru'];
+        $portfolioTab->position = PortfolioTab::max('position') + 1;
+        $portfolioTab->portfolio_id = $input['portfolio_id'];
+        $saved = $portfolioTab->save();
 
-        return LogService::create($portfolioTab->exists(), [
+        return LogService::create($saved, [
             'portfolioTab' => $portfolioTab->toArray()
         ]);
     }
@@ -57,14 +55,12 @@ class PortfolioTabController extends Controller {
             return $validation->failResponse();
         }
 
-        $this->translate(
-            auth()->user()->preferenceUser()->first()->lang,
-            $input['name'],
-            $portfolioTab->update([
-                'position' => $input['position']
-            ]),
-            'name'
-        );
+        $portfolioTab->update([
+            'name_pl' => $input['name_pl'],
+            'name_en' => $input['name_en'],
+            'name_ru' => $input['name_ru'],
+            'position' => $input['position']
+        ]);
 
         return LogService::update(true, [
             'portfolioTab' => $portfolioTab->toArray()
