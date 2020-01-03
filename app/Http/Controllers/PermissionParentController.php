@@ -54,7 +54,7 @@ class PermissionParentController extends Controller {
         foreach ($input['permissions'] as $permissionParent) {
             foreach ($permissionParent['permissions'] as $permissions) {
                 foreach ($permissions['roles'] as $permissionRole) {
-                    $saved = PermissionRole::whereId($permissionRole['pivot']['id'])
+                    $saved = PermissionRole::where('id', $permissionRole['pivot']['id'])
                         ->update([
                             'selected' => $permissions['selected']
                         ]);

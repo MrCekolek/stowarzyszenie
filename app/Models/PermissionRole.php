@@ -7,6 +7,6 @@ class PermissionRole extends BasePivot {
 
     protected $fillable = [
       'permission_id',
-      'role_id',
+      'role_id'
     ];
 }

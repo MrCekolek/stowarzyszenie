@@ -16,10 +16,8 @@ class UserController extends Controller {
     public function emailExist(Request $request) {
         $input = $request->all();
 
-        $success = empty(User::loginEmail($input['email'])->first());
-
         return response()->json([
-            'success' => $success
+            'success' => empty(User::where('login_email', $input['email'])->first())
         ]);
     }
 }

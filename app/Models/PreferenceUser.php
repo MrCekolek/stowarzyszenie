@@ -13,8 +13,4 @@ class PreferenceUser extends BaseModel {
     public function user() {
         return $this->belongsTo(User::class);
     }
-
-    public function scopeUserId($query, $userId) {
-        return $query->where('user_id', $userId);
-    }
 }

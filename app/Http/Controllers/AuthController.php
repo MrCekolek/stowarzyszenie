@@ -53,7 +53,9 @@ class AuthController extends Controller {
     }
 
     private function getUserRowByEmail($input) {
-        return User::loginEmail($input['login_email'])->emailVerifiedAt(null)->get();
+        return User::where('login_email', $input['login_email'])
+            ->where('email_verified_at', null)
+            ->get();
     }
 
     /**
@@ -79,9 +81,14 @@ class AuthController extends Controller {
      */
     public function me() {
         return LogService::read(true, [
-            'user' => User::id(auth()->user()->id)
-                ->with(['preferenceUser', 'affilationUser', 'roles.permissions'])
-                ->first()->toArray()
+            'user' => User::where('id', auth()->user()->id)
+                ->with([
+                    'preferenceUser',
+                    'affilationUser',
+                    'roles.permissions'
+                ])
+                ->first()
+                ->toArray()
         ]);
     }
 
@@ -151,7 +158,7 @@ class AuthController extends Controller {
     }
 
     public function saveToken($email, $token) {
-        User::loginEmail($email)->update([
+        User::where('login_email', $email)->update([
             'remember_token' => $token
         ]);
     }
@@ -175,13 +182,13 @@ class AuthController extends Controller {
     }
 
     private function getUserRowByToken($input) {
-        return User::rememberToken($input['token']);
+        return User::where('remember_token', $input['token']);
     }
 
     private function change($input) {
         $token = $input['token'];
 
-        User::rememberToken($token)->update([
+        User::where('remember_token', $token)->update([
             'remember_token' => null,
             'email_verified_at' => Carbon::now()
         ]);

@@ -8,6 +8,6 @@ class InterestUser extends BasePivot {
     protected $fillable = [
         'selected',
         'interest_id',
-        'user_id',
+        'user_id'
     ];
 }
