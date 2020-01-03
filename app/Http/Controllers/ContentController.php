@@ -33,17 +33,14 @@ class ContentController extends Controller {
             return $validation->failResponse();
         }
 
-        $this->translate(
-            auth()->user()->preferenceUser()->first()->lang,
-            $input['name'],
-            $content = Content::create([
-                'value' => $input['value'],
-                'tile_content_id' => $input['tile_content_id']
-            ]),
-            'name'
-        );
+        $content = new Content();
+        $content->value_pl = $input['value_pl'];
+        $content->value_en = $input['value_en'];
+        $content->value_ru = $input['value_ru'];
+        $content->tile_content_id = $input['tile_content_id'];
+        $saved = $content->save();
 
-        return LogService::create($content->exists(), [
+        return LogService::create($saved, [
             'content' => $content->toArray()
         ]);
     }
@@ -56,13 +53,12 @@ class ContentController extends Controller {
             return $validation->failResponse();
         }
 
-        $this->translate(
-            auth()->user()->preferenceUser()->first()->lang,
-            $input['value'],
-            $content,
-            'value'
-        );
-
+        $content->update([
+            'value_pl' => $input['value_pl'],
+            'value_en' => $input['value_en'],
+            'value_ru' => $input['value_ru']
+        ]);
+        
         return LogService::update(true, [
             'content' => $content->toArray()
         ]);

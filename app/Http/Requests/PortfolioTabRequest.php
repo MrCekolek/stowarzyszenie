@@ -28,14 +28,19 @@ class PortfolioTabRequest extends FormRequest {
 
     public function checkCreate() {
         $this->rules = [
-            'name' => 'required',
-            'portfolio_id' => 'required|exists:portfolio_tabs',
+            'name_pl' => 'required',
+            'name_en' => 'required',
+            'name_ru' => 'required',
+            'portfolio_id' => 'required|exists:portfolio_tabs'
         ];
     }
 
     public function checkUpdate() {
         $this->rules = [
-            'name' => 'required',
+            'id' => 'required|exists:portfolio_tabs',
+            'name_pl' => 'required',
+            'name_en' => 'required',
+            'name_ru' => 'required',
             'position' => 'required'
         ];
     }

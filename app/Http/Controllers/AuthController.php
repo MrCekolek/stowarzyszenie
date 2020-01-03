@@ -35,7 +35,9 @@ class AuthController extends Controller {
      * @return JsonResponse
      */
     public function accountLogin(Request $request) {
-        $credentials = $request->all(['login_email', 'password']);
+        $credentials = $request->all([
+            'login_email', 'password'
+        ]);
 
         if (!$token = auth()->attempt($credentials)) {
             return ErrorService::noEmailOrPassword();
@@ -62,10 +64,12 @@ class AuthController extends Controller {
      * @return JsonResponse
      */
     protected function respondWithToken($token) {
-        return response()->json(['access_token' => $token,
+        return response()->json([
+            'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => $this->me()]);
+            'user' => $this->me()
+        ]);
     }
 
     /**
@@ -98,27 +102,33 @@ class AuthController extends Controller {
             $time_zone = 'UTC';
         }
 
-        $user = User::create(['login_email' => $input['login_email'],
+        $user = User::create([
+            'login_email' => $input['login_email'],
             'password' => $input['password'],
             'first_name' => $input['first_name'],
             'last_name' => $input['last_name'],
             'birthdate' => $input['birthdate'],
             'gender' => $input['gender'],
             'contact_email' => $input['contact_email'],
-            'phone_number' => $input['phone_number'],]);
+            'phone_number' => $input['phone_number']
+        ]);
 
-        AffiliationUser::create(['title' => $input['title'],
+        AffiliationUser::create([
+            'title' => $input['title'],
             'institution' => $input['institution'],
             'department' => $input['department'],
             'street' => $input['street'],
             'city' => $input['city'],
             'country' => $input['country'],
-            'user_id' => $user['id']]);
+            'user_id' => $user['id']
+        ]);
 
-        PreferenceUser::create(['avatar' => $input['avatar'],
+        PreferenceUser::create([
+            'avatar' => $input['avatar'],
             'time_zone' => $time_zone,
             'lang' => $input['lang'],
-            'user_id' => $user['id']]);
+            'user_id' => $user['id']
+        ]);
 
         $this->send($input['login_email']);
     }
@@ -141,7 +151,9 @@ class AuthController extends Controller {
     }
 
     public function saveToken($email, $token) {
-        User::loginEmail($email)->update(['remember_token' => $token]);
+        User::loginEmail($email)->update([
+            'remember_token' => $token
+        ]);
     }
 
     public function accountResendRegister(Request $request) {
@@ -174,7 +186,9 @@ class AuthController extends Controller {
             'email_verified_at' => Carbon::now()
         ]);
 
-        return redirect(config('app.front_url') . '/auth/login')->with(['message' => __('custom.controllers.auth.change.activated')]);
+        return redirect(config('app.front_url') . '/auth/login')->with([
+            'message' => __('custom.controllers.auth.change.activated')
+        ]);
     }
 
     private function rowNotFound() {

@@ -47,6 +47,10 @@ class User extends Authenticatable implements JWTSubject {
         'birthdate' => 'date:Y-m-d'
     ];
 
+    protected $appends = [
+        'fullName'
+    ];
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -77,7 +81,7 @@ class User extends Authenticatable implements JWTSubject {
         return $this->localize($value)->toDateTimeString();
     }
 
-    public function getName() {
+    public function getFullNameAttribute() {
         return $this->first_name . ' ' . $this->last_name;
     }
 

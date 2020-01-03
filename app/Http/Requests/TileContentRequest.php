@@ -28,14 +28,23 @@ class TileContentRequest extends FormRequest {
 
     public function checkCreate() {
         $this->rules = [
-            'name' => 'required',
+            'name_pl' => 'required',
+            'name_en' => 'required',
+            'name_ru' => 'required',
             'type' => 'required',
-            'tile_id' => 'required|exists:tile_contents',
+            'tile_id' => 'required|exists:tile_contents'
         ];
     }
 
     public function checkUpdate() {
-        $this->checkCreate();
+        $this->rules = [
+            'id' => 'required|exists:tile_contents',
+            'name_pl' => 'required',
+            'name_en' => 'required',
+            'name_ru' => 'required',
+            'type' => 'required',
+            'tile_id' => 'required|exists:tile_contents'
+        ];
     }
 
     public function checkDestroy() {
