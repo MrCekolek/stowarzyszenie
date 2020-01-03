@@ -10,14 +10,16 @@ class BasePivot extends Pivot {
 
     protected $appends = [
         'created_at',
-        'updated_at',
+        'updated_at'
     ];
 
     public function getCreatedAtAttribute($value) {
-        return $this->localize($value)->toDateTimeString();
+        return $this->localize($value)
+            ->toDateTimeString();
     }
 
     public function getUpdatedAtAttribute($value) {
-        return $this->localize($value)->toDateTimeString();
+        return $this->localize($value)
+            ->toDateTimeString();
     }
 }

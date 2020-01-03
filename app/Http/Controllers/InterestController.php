@@ -16,11 +16,8 @@ class InterestController extends Controller {
     }
 
     public function index() {
-        $interests = Interest::all()
-            ->toArray();
-
         return LogService::read(true, [
-            'interests' => $interests
+            'interests' => Interest::all()->toArray()
         ]);
     }
 

@@ -36,7 +36,7 @@ class PreferenceUserController extends Controller {
         }
 
         if ($user = JWTAuth::user()) {
-            PreferenceUser::UserId($user['id'])->update([
+            PreferenceUser::where('user_id', $user['id'])->update([
                 'lang' => $input['lang']
             ]);
         }
@@ -48,7 +48,7 @@ class PreferenceUserController extends Controller {
 
     public function getLang(Request $request) {
         if ($user = JWTAuth::user()) {
-            $preference = PreferenceUser::userId($user['id'])
+            $preference = PreferenceUser::where('user_id', $user['id'])
                 ->first()
                 ->toArray();
 

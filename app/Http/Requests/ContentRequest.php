@@ -31,18 +31,15 @@ class ContentRequest extends FormRequest {
             'value_pl' => 'required',
             'value_en' => 'required',
             'value_ru' => 'required',
-            'tile_content_id' => 'required|exists:contents',
+            'tile_content_id' => 'required|exists:contents'
         ];
     }
 
     public function checkUpdate() {
-        $this->rules = [
-            'id' => 'required|exists:contents',
-            'value_pl' => 'required',
-            'value_en' => 'required',
-            'value_ru' => 'required',
-            'tile_content_id' => 'required|exists:contents',
-        ];
+        $this->checkCreate();
+        $this->rules = array_merge($this->rules, [
+            'id' => 'required|exists:contents'
+        ]);
     }
 
     public function checkDestroy() {

@@ -4,7 +4,9 @@ namespace App\Models;
 
 class Role extends BaseModel {
     protected $fillable = [
-        'name'
+        'name_pl',
+        'name_en',
+        'name_ru'
     ];
 
     public function users() {

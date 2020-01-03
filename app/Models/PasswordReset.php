@@ -11,12 +11,4 @@ class PasswordReset extends BaseModel {
     ];
 
     public $timestamps = false;
-
-    public function scopeLoginEmail($query, $email) {
-        return $query->where('login_email', $email);
-    }
-
-    public function scopeToken($query, $token) {
-        return $query->where('token', $token);
-    }
 }

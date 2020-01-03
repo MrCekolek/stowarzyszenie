@@ -30,13 +30,7 @@ class Permission extends BaseModel {
                         'Delete',
                         'USERS.DELETE',
                         PermissionParent::permissionParents()['Users']['id'])
-                    ],
-                // [
-                //     self::definePermission(
-                //         'Access',
-                //         'USERS.ACCESS',
-                //         PermissionParent::permissionParents()['Users']['id'])
-                // ]
+                ]
             ],
             PermissionParent::permissionParents()['Roles']['name'] => [
                 [
@@ -56,7 +50,7 @@ class Permission extends BaseModel {
                         'Delete',
                         'ROLES.DELETE',
                         PermissionParent::permissionParents()['Roles']['id'])
-                ],
+                ]
             ]
         ];
     }
@@ -67,7 +61,10 @@ class Permission extends BaseModel {
 
     public function roles() {
         return $this->belongsToMany(Role::class)
-            ->withPivot(['id', 'selected']);
+            ->withPivot([
+                'id',
+                'selected'
+            ]);
     }
 
     private static function definePermission($name, $translationKey, $permissionParentId) {

@@ -23,15 +23,15 @@ class ChangePasswordController extends Controller {
     }
 
     private function getPasswordResetsRow($input) {
-        return PasswordReset::loginEmail($input['login_email'])
-            ->token($input['token']);
+        return PasswordReset::where('login_email', $input['login_email'])
+            ->where('token', $input['token']);
     }
 
     private function change($input) {
         $email = $input['login_email'];
         $password = $input['password'];
 
-        $user = User::loginEmail($email)
+        $user = User::where('login_email', $email)
             ->first();
         $user['password'] = $password;
         $user->save();

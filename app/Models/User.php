@@ -48,7 +48,7 @@ class User extends Authenticatable implements JWTSubject {
     ];
 
     protected $appends = [
-        'fullName'
+        'name'
     ];
 
     /**
@@ -81,8 +81,8 @@ class User extends Authenticatable implements JWTSubject {
         return $this->localize($value)->toDateTimeString();
     }
 
-    public function getFullNameAttribute() {
-        return $this->first_name . ' ' . $this->last_name;
+    public function getNameAttribute() {
+        return $this['first_name'] . ' ' . $this['last_name'];
     }
 
     public function setPasswordAttribute($value) {
@@ -110,21 +110,5 @@ class User extends Authenticatable implements JWTSubject {
 
     public function portfolio() {
         return $this->hasOne(Portfolio::class);
-    }
-
-    public function scopeLoginEmail($query, $login_email) {
-        return $query->where('login_email', $login_email);
-    }
-
-    public function scopeRememberToken($query, $token) {
-        return $query->where('remember_token', $token);
-    }
-
-    public function scopeEmailVerifiedAt($query, $emailVerifiedAt) {
-        return $query->where('email_verified_at', $emailVerifiedAt);
-    }
-
-    public function scopeId($query, $id) {
-        return $query->where('id', $id);
     }
 }

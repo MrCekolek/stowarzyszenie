@@ -32,7 +32,7 @@ class ResetPasswordController extends Controller {
     }
 
     public function createToken($email) {
-        $tokenOld = PasswordReset::loginEmail($email)->first();
+        $tokenOld = PasswordReset::where('login_email', $email)->first();
 
         if ($tokenOld) {
             return $tokenOld->pluck('token')[0];
