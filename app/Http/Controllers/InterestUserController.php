@@ -14,11 +14,8 @@ class InterestUserController extends Controller {
     }
 
     public function index(User $user) {
-        $interestUsers = InterestUser::whereUserId($user->id)
-            ->toArray();
-
         return LogService::read(true, [
-            'interestUsers' => $interestUsers
+            'interestUsers' => InterestUser::where('user_id', $user->id)->toArray()
         ]);
     }
 

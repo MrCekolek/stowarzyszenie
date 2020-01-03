@@ -23,9 +23,9 @@ class RoleRequest extends FormRequest {
 
     protected function checkCreate() {
         $this->rules = [
-            'name_pl' => 'required|unique:roles,name_pl',
-            'name_en' => 'required|unique:roles,name_en',
-            'name_ru' => 'required|unique:roles,name_ru',
+            'name_pl' => 'required|unique:roles',
+            'name_en' => 'required|unique:roles',
+            'name_ru' => 'required|unique:roles',
         ];
     }
 

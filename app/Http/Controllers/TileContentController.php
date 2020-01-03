@@ -17,11 +17,8 @@ class TileContentController extends Controller {
     }
 
     public function index(Tile $tile) {
-        $tileContents = TileContent::where('tile_id', $tile->id)
-            ->toArray();
-
         return LogService::read(true, [
-            'tileContents' => $tileContents
+            'tileContents' => TileContent::where('tile_id', $tile->id)->toArray()
         ]);
     }
 

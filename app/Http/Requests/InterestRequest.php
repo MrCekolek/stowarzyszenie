@@ -35,12 +35,10 @@ class InterestRequest extends FormRequest {
     }
 
     public function checkUpdate() {
-        $this->rules = [
-            'id' => 'required|exists:interests',
-            'name_pl' => 'required',
-            'name_en' => 'required',
-            'name_ru' => 'required'
-        ];
+        $this->checkCreate();
+        $this->rules = array_merge($this->rules, [
+            'id' => 'required|exists:interests'
+        ]);
     }
 
     public function checkDestroy() {
