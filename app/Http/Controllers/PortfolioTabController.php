@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PortfolioTabRequest;
+use App\Jobs\CreatePortfolioTabsJob;
 use App\Models\Portfolio;
 use App\Models\PortfolioTab;
 use App\Services\LogService;
@@ -30,13 +31,24 @@ class PortfolioTabController extends Controller {
             return $validation->failResponse();
         }
 
+        $position = PortfolioTab::max('position') + 1;
+        $userPortfolioId = auth()->user()->portfolio()->first()->id;
+
         $portfolioTab = new PortfolioTab();
         $portfolioTab->name_pl = $input['name_pl'];
         $portfolioTab->name_en = $input['name_en'];
         $portfolioTab->name_ru = $input['name_ru'];
-        $portfolioTab->position = PortfolioTab::max('position') + 1;
-        $portfolioTab->portfolio_id = $input['portfolio_id'];
+        $portfolioTab->position = $position;
+        $portfolioTab->portfolio_id = $userPortfolioId;
         $saved = $portfolioTab->save();
+
+        CreatePortfolioTabsJob::dispatch(
+            $portfolioTab->name_pl,
+            $portfolioTab->name_en,
+            $portfolioTab->name_ru,
+            $position,
+            $userPortfolioId
+        );
 
         return LogService::create($saved, [
             'portfolioTab' => $portfolioTab->toArray()

@@ -4,14 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RoleRequest;
 use App\Models\Role;
-use App\Models\User;
 use App\Services\LogService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller {
-    private $rules = [];
-
     public function __construct() {
         $this->middleware('auth:api');
     }
