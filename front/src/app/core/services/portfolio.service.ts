@@ -8,10 +8,23 @@ export class PortfolioService {
 
 
   constructor(
-    private portfolioApiService: PortfolioApiService
+    private portfolioApiService: PortfolioApiService,
+    private portfolioService: PortfolioService
   ) { }
 
   getAllTabs() {
     return this.portfolioApiService.getTabs(1);
+  }
+
+  getTabCards(tabID) {
+     return this.portfolioApiService.getTabCards(tabID);
+  }
+
+  addCardToTab(name: string, tabID: number) {
+    const obj = {
+      name: name,
+      portfolio_tab_id: tabID
+    };
+    return this.portfolioApiService.addCard(obj);
   }
 }

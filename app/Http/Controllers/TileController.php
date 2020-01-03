@@ -18,6 +18,7 @@ class TileController extends Controller {
 
     public function index(PortfolioTab $portfolioTab) {
         $tiles = Tile::where('portfolio_tab_id', $portfolioTab->id)
+            ->get()
             ->toArray();
 
         return LogService::read(true, [
@@ -37,7 +38,7 @@ class TileController extends Controller {
             auth()->user()->preferenceUser()->first()->lang,
             $input['name'],
             $tile = Tile::create([
-                'position' => Tile::max('position'),
+                'position' => Tile::max('position') + 1,
                 'portfolio_tab_id' => $input['portfolio_tab_id']
             ]),
             'name'

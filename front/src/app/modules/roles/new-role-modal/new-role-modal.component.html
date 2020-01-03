@@ -1,55 +1,30 @@
-<div class="modal-dialog m-0" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">
-                <span *ngIf="this.modal_type == 'new_role'">
-                {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.TITLE_NEW_ROLE' | translate }}
-            </span>
+<h2 mat-dialog-title>
+    <span *ngIf="this.modal_type == 'new_role'">
+        {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.TITLE_NEW_ROLE' | translate }}
+    </span>
 
-                <span *ngIf="this.modal_type == 'edit_role'">
-                {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.TITLE_EDIT_ROLE' | translate }}
-            </span>
-            </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
-                <label>
-                    <span>
-                        {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.INPUT_FIELD' | translate }}
-                    </span>
-                </label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <i class="fas fa-at"></i>
-                        </div>
-                    </div>
+    <span *ngIf="this.modal_type == 'edit_role'">
+        {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.TITLE_EDIT_ROLE' | translate }}
+    </span>
+</h2>
 
-                    <input class="form-control" #role_name id="role_name" type="email" placeholder="your.email@domain.com" required [ngClass]="{'is-valid': (login_email.dirty || login_email.touched) && login_email.valid, 
-                        'is-invalid': (login_email.dirty || login_email.touched) && login_email.invalid}" [value]="roleName">
-                    <!-- feedback divs -->
-                    <div class="invalid-feedback" *ngIf="(role_name.dirty || role_name.touched) && password.invalid && password.errors.required">
-                        {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.INPUT_FIELD_ERROR' | translate }}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary" (click)="sendRoleName(role_name.value)" [disabled]="role_name.value == ''">
-                <span *ngIf="this.modal_type == 'new_role'" >
-                    {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.BUTTON_ADD' | translate }}
-                </span>
-        
-                <span *ngIf="this.modal_type == 'edit_role'">
-                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE' | translate }}
-                </span>
-            </button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="dismiss()">
-                {{ 'STOWARZYSZENIE.MODALS.BUTTON_CANCEL' | translate }}
-            </button>
+<mat-dialog-content>
+    <div class="form-group">
+        <label>
+            {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.INPUT_FIELD' | translate }}
+        </label>
+
+        <input #role_name matInput type="text" class="form-control" required>
+        <div class="invalid-feedback" *ngIf="(role_name.dirty || role_name.touched) && role_name.invalid">
+            {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.INPUT_FIELD_ERROR' | translate }}
         </div>
     </div>
-</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button type=" button " class="btn btn-sm btn-secondary " (click)="sendRoleName(role_name.value) " [disabled]="role_name.value=='' ">
+        {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.BUTTON_ADD' | translate }}
+    </button>
+    <button type="button " class="btn btn-sm btn-link " (click)="dismiss() ">
+        {{ 'STOWARZYSZENIE.MODALS.BUTTON_CANCEL' | translate }}
+    </button>
+</mat-dialog-actions>

@@ -11,6 +11,10 @@
 				"SUCCESS": "Success!"
 			},
 			"ALERT_FAIL": "Error!",
+			"EMPTY_STATE": {
+				"DESC": "No data found in the database. Please try again later.",
+				"TITLE": "Nothing Found"
+			},
 			"HELPER_BUTTON_TEXT": "Help",
 			"LOADING_TEXT": "Landing",
 			"SEARCH_PLACEHOLDER": "Search"
@@ -186,6 +190,8 @@
 			},
 			"PORTFOLIO": {
 				"ADMIN": {
+					"ADD_CARD": "Add a new card",
+					"ADD_CARD_DESC": "Click here to add a new card to the bookmark in the portfolio",
 					"FIRSTNAME_LASTNAME": "First name Last Name",
 					"INTERESTS": {
 						"ADD_NEW_LABEL": "Add a new research area to the list",
@@ -211,6 +217,8 @@
 				"EDIT_NAME": "Edit role name",
 				"EXPAND_ALL": "Expand all groups",
 				"LIST_TITLE": "Roles and Permissions",
+				"PAGE_DESC1": "Manage user roles in the system and give each role its own privileges.",
+				"SECTION_TITLE": "Role and permission settings",
 				"SELECT_ALL": "Select all permissions",
 				"SELECT_DESC": "Choose roles",
 				"UNSELECT_ALL": "Deselect all permissions",
@@ -280,6 +288,7 @@
 							"ROLES": "Roles"
 						},
 						"USERS": {
+							"ACCESS": "Access to the user list",
 							"ADD": "Adding new users",
 							"CHANGE_ROLE": "Change user roles",
 							"DELETE": "Deleting users",

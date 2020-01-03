@@ -1,3 +1,11 @@
-<div>
-    <ng-content></ng-content>
+<div class="col-md-6 col-sm-12 mt-3" *ngFor="let card of cards">
+    <div class="card">
+        <div class="card-header">
+            <h3>
+                {{ card.name_en }}
+            </h3>
+        </div>
+        <div class="card-body">
+        </div>
+    </div>
 </div>

@@ -11,8 +11,6 @@ class PermissionTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        // zdefiniowanie operacji CRUD
-        $CRUD = Permission::CRUD();
 
         // zdefiniowanie kategorii uprawnien
         $permissionParents = PermissionParent::permissionParents();
@@ -23,15 +21,6 @@ class PermissionTableSeeder extends Seeder {
                 'name' => $permissionParent['name'],
                 'translation_key' => $permissionParent['translation_key']
             ]);
-
-            // dodanie operacji crud do kategorii
-            foreach ($CRUD as $permission) {
-                factory(Permission::class)->create([
-                    'name' => ucfirst(strtolower($permission)),
-                    'translation_key' => 'CRUD' . '.' . $permission,
-                    'permission_parent_id' => $parent->id
-                ]);
-            }
 
             // sprawdzenie i dodanie reszty uprawnien do kategorii
             if (isset(Permission::permissions()[$parent->name])) {

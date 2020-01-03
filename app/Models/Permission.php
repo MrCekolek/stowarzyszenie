@@ -9,16 +9,6 @@ class Permission extends BaseModel {
         'permission_parent_id'
     ];
 
-    // operacje CRUD
-    public static function CRUD() {
-        return [
-            'CREATE',
-            'INDEX',
-            'EDIT',
-            'DELETE'
-        ];
-    }
-
     // dodatkowe uprawnienia
     public static function permissions() {
         return [
@@ -40,7 +30,13 @@ class Permission extends BaseModel {
                         'Delete',
                         'USERS.DELETE',
                         PermissionParent::permissionParents()['Users']['id'])
-                ]
+                    ],
+                // [
+                //     self::definePermission(
+                //         'Access',
+                //         'USERS.ACCESS',
+                //         PermissionParent::permissionParents()['Users']['id'])
+                // ]
             ],
             PermissionParent::permissionParents()['Roles']['name'] => [
                 [

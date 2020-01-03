@@ -7,12 +7,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { LanguageService } from "./services/user/language.service";
 import { MatTableModule } from '@angular/material/table';
-import { MatFormFieldModule, MatIconModule, MatPaginatorModule, MatSortModule } from "@angular/material";
+import { MatFormFieldModule, MatIconModule, MatPaginatorModule, MatSortModule, MATERIAL_SANITY_CHECKS } from "@angular/material";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from "@angular/material";
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { DeleteAlertComponent } from './components/delete-alert/delete-alert.component';
-import { AlertComponent } from './components/alert/alert.component';
+import { AlertComponent } from './components/alert/alert.component'; 
+import { OverlayModule } from '@angular/cdk/overlay';
 
 export function HttpLoaderFactory (http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,7 +40,8 @@ export function HttpLoaderFactory (http: HttpClient) {
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    OverlayModule
   ],
   exports: [
     CommonModule,
@@ -49,9 +51,16 @@ export function HttpLoaderFactory (http: HttpClient) {
     MatPaginatorModule,
     MatSortModule,
     MatFormFieldModule,
-    AlertComponent
+    AlertComponent,
+    MatDialogModule,
+    OverlayModule
   ],
-  providers: [ ]
+  providers: [
+    {
+      provide: MATERIAL_SANITY_CHECKS,
+      useValue: false
+    }
+  ]
 })
 
 export class SharedModule {

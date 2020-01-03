@@ -1,15 +1,68 @@
-<div class="col-12">
-    <ul class="nav nav-pills" id="protfolio-tabs" role="tablist">
-        <li class="nav-item" *ngFor="let tab of tabs" (click)="selectActiveTab(tab.id)">
-            <a class="nav-link" id="home-tab3" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab" aria-controls="home">
-                {{ tab['name_' + lang] }}
-            </a>
+<div class="col-sm-12">
+    <ul class="nav" id="protfolio-tabs" role="tablist" *ngIf="this.tabs.length > 0">
+        <li class="nav-item mr-2" *ngFor="let tab of tabs" (click)="selectActiveTab(tab)">
+            <!-- <a class="nav-link" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab" aria-controls="home">
+                    {{ tab['name_' + lang] }} 
+                </a> -->
+
+            <div class="btn-group">
+                <a type="button" class="btn btn-primary text-white" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab">
+                        {{ tab['name_' + lang] }} 
+                    </a>
+                <a type="button" class="btn btn-primary text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item">
+                        <i class="fas fa-pencil-alt"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
+                    </a>
+                    <a class="dropdown-item">
+                        <i class="fas fa-times"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
+                    </a>
+                </div>
+            </div>
         </li>
     </ul>
-    <div class="tab-content" id="tbs-content">
-        <div class="tab-pane fade" [id]="'tab_' + this.activeTab" role="tabpanel">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+</div>
+
+<div class="tab-content mt-5" id="tbs-content" *ngIf="this.activeTab">
+    <div class="tab-pane fade" [id]="'tab_' + this.activeTab.id" role="tabpanel">
+
+        <div *ngIf="activeTabsCards">
+            <div class="col-md-6 col-sm-12 mt-3" *ngFor="let cart of activeTabsCards">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>
+                            {{ cart.name_en }}
+                        </h4>
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- static card to adding new cards -->
+            <!-- TODO: only for editing preferences -->
+            <div class="col-md-6 col-sm-12 mt-3">
+                <div class="card card-add-new" (click)="this.addCard('Card Header')">
+                    <div class="card-body">
+                        <div class="empty-state" data-height="300" style="height: 300px;">
+                            <div class="empty-state-icon bg-warning">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <h2>
+                                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.ADD_CARD' | translate }}
+                            </h2>
+                            <p class="lead">
+                                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.ADD_CARD_DESC' | translate }}
+                            </p>
+                            <a class="btn btn-warning text-white mt-4">
+                                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.ADD_CARD' | translate }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>

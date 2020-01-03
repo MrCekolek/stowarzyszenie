@@ -11,6 +11,10 @@
 				"SUCCESS": "Sukces!"
 			},
 			"ALERT_FAIL": "Błąd!",
+			"EMPTY_STATE": {
+				"DESC": "Nie znaleziono żadnych danych w bazie danych. Proszę spróbować później.",
+				"TITLE": "Nic nie znaleziono"
+			},
 			"HELPER_BUTTON_TEXT": "Pomoc",
 			"LOADING_TEXT": "Ładowanie",
 			"SEARCH_PLACEHOLDER": "Wyszukaj"
@@ -186,6 +190,8 @@
 			},
 			"PORTFOLIO": {
 				"ADMIN": {
+					"ADD_CARD": "Dodaj nową kartę",
+					"ADD_CARD_DESC": "Kliknij tutaj aby dodać nową kartę do zakładki w portfolio",
 					"FIRSTNAME_LASTNAME": "Imię Nazwisko",
 					"INTERESTS": {
 						"ADD_NEW_LABEL": "Dodaj nowy obszar badań do listy",
@@ -211,6 +217,8 @@
 				"EDIT_NAME": "Edytuj nazwę roli",
 				"EXPAND_ALL": "Rozwiń wszystkie grupy",
 				"LIST_TITLE": "Role i uprawnienia",
+				"PAGE_DESC1": "Zarządzaj rolami użytkowników w systemie i nadawaj każdej roli jej własne uprawnienia.",
+				"SECTION_TITLE": "Ustawienia ról i uprawnień",
 				"SELECT_ALL": "Zaznacz wszystkie uprawnienia",
 				"SELECT_DESC": "Wybierz rolę",
 				"UNSELECT_ALL": "Odznacz wszystkie uprawnienia",
@@ -280,6 +288,7 @@
 							"ROLES": "Role"
 						},
 						"USERS": {
+							"ACCESS": "Dostęp do listy użytkowników",
 							"ADD": "Dodawanie nowych użytkowników",
 							"CHANGE_ROLE": "Zmiana ról użytkowników",
 							"DELETE": "Usuwanie użytkowników",
