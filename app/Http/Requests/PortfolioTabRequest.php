@@ -30,8 +30,7 @@ class PortfolioTabRequest extends FormRequest {
         $this->rules = [
             'name_pl' => 'required',
             'name_en' => 'required',
-            'name_ru' => 'required',
-            'portfolio_id' => 'required|exists:portfolio_tabs'
+            'name_ru' => 'required'
         ];
     }
 
