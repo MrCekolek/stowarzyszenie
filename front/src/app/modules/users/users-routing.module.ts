@@ -4,6 +4,7 @@ import { UsersListComponent } from "./users-list/users-list.component";
 import { LoggedGuard } from 'src/app/shared/guards/logged.guard.guard';
 import { WholePortfolioComponent } from '../portfolio/whole-portfolio/whole-portfolio.component';
 import { InterestsListComponent } from '../interests/interests-list/interests-list.component';
+import { UserPortfolioComponent } from '../portfolio/user-portfolio/user-portfolio.component';
 
 const routes: Routes = [{
   path: '',
@@ -43,9 +44,18 @@ const routes: Routes = [{
             },
             {
               path: 'interests',
-              component: InterestsListComponent
+              component: InterestsListComponent,
+              canActivateChild: [
+                LoggedGuard
+              ]  
+            },
+            {
+              path: 'profile/:id',
+              component: UserPortfolioComponent,
+              canActivateChild: [
+                LoggedGuard
+              ]  
             }
-
         ]
 }];
 

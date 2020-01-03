@@ -15,6 +15,7 @@ export class UserModel {
   phone_number?: string; 
 
   constructor(userModel: Object) {
+    this.id = userModel['user']['id'];
     this.login_email = userModel['user']['login_email'];
     this.first_name = userModel['user']['first_name'];
     this.last_name = userModel['user']['last_name'];

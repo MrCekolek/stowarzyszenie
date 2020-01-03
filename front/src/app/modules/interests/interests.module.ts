@@ -5,13 +5,17 @@ import { InterestsRoutingModule } from './interests-routing.module';
 import { InterestsListComponent } from './interests-list/interests-list.component';
 import { InterestTileComponent } from './interest-tile/interest-tile.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { InterestModalComponent } from './interest-modal/interest-modal.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [InterestsListComponent, InterestTileComponent],
+  declarations: [InterestsListComponent, InterestTileComponent, InterestModalComponent],
   imports: [
     CommonModule,
     SharedModule,
-    InterestsRoutingModule
-  ]
+    InterestsRoutingModule,
+    FormsModule
+  ],
+  entryComponents: [InterestModalComponent]
 })
 export class InterestsModule { }

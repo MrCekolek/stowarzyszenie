@@ -1,302 +1,318 @@
 {
-	"STOWARZYSZENIE": {
-		"CRUD_BUTTONS": {
-			"ADD": "Dodaj",
-			"DELETE": "Usuń",
-			"EDIT": "Edytuj",
-			"SAVE": "Zapisz zmiany"
-		},
-		"HELPERS": {
-			"ALERT": {
-				"SUCCESS": "Sukces!"
-			},
-			"ALERT_FAIL": "Błąd!",
-			"EMPTY_STATE": {
-				"DESC": "Nie znaleziono żadnych danych w bazie danych. Proszę spróbować później.",
-				"TITLE": "Nic nie znaleziono"
-			},
-			"HELPER_BUTTON_TEXT": "Pomoc",
-			"LOADING_TEXT": "Ładowanie",
-			"SEARCH_PLACEHOLDER": "Wyszukaj"
-		},
-		"LABELS_TABLES": {
-			"AVATAR": "Avatar",
-			"BIRTHDATE": "Data urodzenia",
-			"CONTACT_EMAIL": "Email kontaktowy",
-			"FIRST_NAME": "Imie",
-			"ID": "Id",
-			"ITEMS_PER_PAGE": "Rzeczy na stronę",
-			"LAST_NAME": "Nazwisko",
-			"LOADING_DATA": "Ładowanie danych...",
-			"LOGIN_EMAIL": "Email do logowania",
-			"NEXT_PAGE": "Następna strona",
-			"NO_DATA": "Brak danych.",
-			"PHONE_NUMBER": "Numer telefonu",
-			"PREVIOUS_PAGE": "Poprzednia strona",
-			"RANGE": "Z"
-		},
-		"MODALS": {
-			"BUTTON_CANCEL": "Anuluj",
-			"DELETE_ALERT": {
-				"ARE_U_SURE": "Na pewno usunąć?",
-				"DELETED_MESSAGE": "Usunięto",
-				"TITLE": "Delete"
-			},
-			"NEW_ROLE": {
-				"ALERTS": {
-					"NEW_ROLE_SUCCESS": "Dodano nową rolę"
-				},
-				"BUTTON_ADD": "Dodaj",
-				"INPUT_FIELD": "Nazwa nowej roli",
-				"INPUT_FIELD_EDIT": "Nazwa roli",
-				"INPUT_FIELD_ERROR": "Podaj nazwę nowej roli",
-				"TITLE_EDIT_ROLE": "Edytuj nazwę roli",
-				"TITLE_NEW_ROLE": "Dodaj nową rolę",
-				"TRIGGER_BUTTON": "Dodaj rolę"
-			}
-		},
-		"MODULES": {
-			"AUTH": {
-				"FORGOT": {
-					"BACK_TO_LOGIN": "Wróć do logowania",
-					"BUTTON_SEND": "Wyślij link ",
-					"PAGE_HINT": "Zapomniałeś hasła do swojego konta? Zresetuj je podając niżej email, do którego jest przypisane Twoje konto (bądź email kontaktowy, jeżeli go podałeś). Na podany adres zostanie wysłany email z linkiem do resetowania hasła.",
-					"PAGE_TITLE": "Zresetuj hasło "
-				},
-				"LOGIN": {
-					"ALERT": {
-						"GOOD": "Wygląda dobrze!",
-						"TITLE": "Błąd!"
-					},
-					"ALERT_WRONG": "Nieprawidłowe dane logowania",
-					"BUTTON": "Zaloguj się",
-					"EMAIL_PLACEHOLDER": "Adres email",
-					"FORGOT_PASSWORD_LINK": "Zapomniałeś hasła? Zresetuj je tutaj",
-					"PAGE_PARAGRAPH": "Wypełnij formularz swoimi danymi logowania, aby uzyskać dostęp do portalu Ciob Members",
-					"PAGE_TITLE": "Zaloguj się do portalu CIOB",
-					"PASSWORD_PLACEHOLDER": "Hasło",
-					"REGISTER_LINK": "Nie masz jeszcze konta? Zarejestruj nowe tutaj!",
-					"REMEMBER_ME": "Nie wylogowuj mnie",
-					"TOOLTIP_HIDE": "Ukryj hasło",
-					"TOOLTIP_SHOW": "Pokaż hasło"
-				},
-				"REGISTER": {
-					"AFFILIATION": {
-						"CITY": "Miasto",
-						"CITY_HINT": "Podaj nazwę miasta, w którym znajduje się Twoja instytucja",
-						"COUNTRY": "Kraj",
-						"COUNTRY_HINT": "Wybierz kraj Twojej instytucji",
-						"DEPARTMENT": "Wydział",
-						"DEPARTMENT_HINT": "Wpisz nazwę swojego wydziału / zakładu",
-						"INSTITUTION": "Instytucja",
-						"INSTITUTION_HINT": "Wpisz nazwę swojej instytucji",
-						"PAGE_TITLE": "Afiliacja (opcjonalne)",
-						"STREET": "Ulica",
-						"STREET_HINT": "Podaj ulicę, na której znajduje się Twoja instytucja",
-						"TITLE": "Tytuł naukowy",
-						"TITLE_HINT": "Wpisz swój tytuł naukowy"
-					},
-					"AFTER": {
-						"PAGE_DESC1": "Wysłaliśmy email aktywacyjny na adres",
-						"PAGE_DESC2": "Sprawdź swoją skrzynkę mailową i podążaj za instrukcjami zawartymi w wysłanym mailu. Jeżeli nie otrzymałeś maila, sprawdź folder SPAM lub wyślij mail ponownie za pomocą poniższego linku",
-						"PAGE_SUBTITLE": "Twoje konto zostało utworzone",
-						"PAGE_TITLE": "Rejestracja pomyślna",
-						"SEND_AGAIN": "Wyślij email aktywacyjny ponownie",
-						"SUCCESS_ICON": "Sukces"
-					},
-					"ALERTS": {
-						"BIRTHDATE_INCORRECT": "Format daty jest nieprawidłowy. Prawidłowo: 06/08/1980",
-						"EMAIL_EXISTS": "Konto z tym emailem już istnieje",
-						"EMAIL_INCORRECT": "Nieprawidłowy email ",
-						"EMAIL_NOT_EXISTS": "Konto z tym emailem nie istnieje.",
-						"PASSWORD_LENGTH": "Hasło nie może mieć mniej niż 8 znaków",
-						"REQUIRED": "To pole jest wymagane"
-					},
-					"BACK_TO_STEP": "Cofnij do kroku ",
-					"BIRTHDATE": "Data urodzenia",
-					"BIRTHDATE_HINT": "Prawidłowy format: 05/04/2014",
-					"BUTTON_REGISTER": "Rejestruj konto",
-					"CONTACT_EMAIL": "Email kontaktowy",
-					"CONTACT_EMAIL_HINT": "Podaj alternatywny adres email",
-					"CONTACT_TITLE": "Dane kontaktowe (opcjonalne)",
-					"EMAIL_HINT": "Email będzie używany do logowania oraz otrzymywania powiadomień",
-					"FIRST_NAME": "Imię",
-					"GENDER_LABEL": "Wybierz swoją płeć",
-					"GO_TO_STEP": "Przejdź do kroku",
-					"LAST_NAME": "Nazwisko",
-					"LOGIN_LINK": "Masz już konto? Zaloguj się tutaj!",
-					"MAN": "Jestem mężczyzną",
-					"PAGE_PARAGRAPH": "Pola wymagane są oznaczone w formularzu znakiem gwiazdki: * (która znajduje się przy nazwie pola). Wypełnij dane w krokach aby założyć nowe konto w systemie.",
-					"PAGE_TITLE": "Zarejestruj nowe konto",
-					"PASSWORD_HINT": "Hasło powinno mieć długość co najmniej 8 znaków",
-					"PHONE": "Numer telefonu",
-					"RESET": {
-						"BUTTON": "Resetuj",
-						"LOGIN_LINK": "Przejdź do logowania",
-						"PAGE_DESC": "Podaj nowe hasło do swojego konta w polu poniżej.",
-						"PAGE_TITLE": "Resetowanie hasła",
-						"RESETED_DESC": "Twoje hasło zostało pomyślnie zresetowane. Możesz teraz się zalogować.",
-						"RESETED_TITLE": "Zresetowano hasło"
-					},
-					"STEP": "Krok",
-					"STEP1_TITLE": "Dane konta",
-					"STEP2_TITLE": "Dane personalne",
-					"STEP3_TITLE": "Afiliacja",
-					"STEP4_TITLE": "Dane kontaktowe",
-					"WOMAN": "Jestem kobietą"
-				}
-			},
-			"NAVIGATION": {
-				"LANGUAGES": {
-					"EN": "Angielski",
-					"LABEL": "Język strony",
-					"PL": "Polski",
-					"RU": "Rosyjski"
-				},
-				"LOGGED_NAVBAR": {
-					"ACCOUNT": "Konto",
-					"EDIT_ACCOUNT": "Edytuj konto",
-					"LOGO": "CIOB",
-					"LOGOUT": "Wyloguj",
-					"MESSAGES": "Wiadomości",
-					"MY_ACCOUNT": "Moje konto",
-					"NOTIFICATIONS": "Powiadomienia",
-					"USER_DROPDOWN_TITLE": "Opcje użytkownika"
-				},
-				"MEMBERS_PAGE_LINKS": {
-					"HOME": "Strona główna",
-					"LOGIN": "Logowanie",
-					"REGISTER": "Zarejestruj się"
-				},
-				"SEARCHBAR": {
-					"TITLE": "Użytkownicy"
-				},
-				"SIDENAV": {
-					"DASHBOARD": "Główna",
-					"MENU_HEADINGS": {
-						"MENU": "Menu",
-						"USERS": "Użytkownicy"
-					},
-					"USERS": {
-						"INTEREST": "Obszary badań",
-						"MAIN": "Użytkownicy",
-						"PORTFOLIO": "Ustawienia portfolio",
-						"PORTFOLIO_MENU": "Portfolio",
-						"ROLES_PREFERENCES": "Role i uprawnienia",
-						"USERS_LIST": "Lista użytkowników"
-					}
-				},
-				"WEBPAGE_TITLE_MEMBERS": "Ciob members"
-			},
-			"PORTFOLIO": {
-				"ADMIN": {
-					"ADD_CARD": "Dodaj nową kartę",
-					"ADD_CARD_DESC": "Kliknij tutaj aby dodać nową kartę do zakładki w portfolio",
-					"FIRSTNAME_LASTNAME": "Imię Nazwisko",
-					"INTERESTS": {
-						"ADD_NEW_LABEL": "Dodaj nowy obszar badań do listy",
-						"ADD_NEW_PLACEHOLDER": "Wpisz nazwę nowego obszaru badań"
-					},
-					"USER_DESC": "Opis dodany przez użytkownika",
-					"USER_ROLE": "Rola użytkownika",
-					"USER_TITLE": "Tytuł"
-				},
-				"ADMIN_INTERESTS_DESC1": "Zarządzaj listą obszarów badań użytkowników. Dodawaj i usuwaj nazwy obszarów, które użytkownicy mogą wybierać na swoich profilach.",
-				"CHECK_OTHERS": "Sprawdź jak inni widzą twoje portfolio",
-				"INTERESTS_ADMIN": "Ustawienia obszarów badań",
-				"INTERESTS_ADMIN_TITLE": "Lista obszarów",
-				"PAGE_TITLE": "Ustawienia portfolio",
-				"SECTION_DESC1": "Dostosuj portfolio użytkowników - decyduj, jakie dane mogą oni wypełniać i dziel dane na zakładki.",
-				"SECTION_TITLE": "Ustawienia"
-			},
-			"ROLES": {
-				"ARE_EDITING": "Edytujesz rolę:",
-				"CHOOSE_ROLE": "Wybierz rolę z listy, aby edytować uprawnienia",
-				"COLLAPSE_ALL": "Zwiń wszystkie grupy",
-				"DELETE_ROLE": "Usuń rolę",
-				"EDIT_NAME": "Edytuj nazwę roli",
-				"EXPAND_ALL": "Rozwiń wszystkie grupy",
-				"LIST_TITLE": "Role i uprawnienia",
-				"PAGE_DESC1": "Zarządzaj rolami użytkowników w systemie i nadawaj każdej roli jej własne uprawnienia.",
-				"SECTION_TITLE": "Ustawienia ról i uprawnień",
-				"SELECT_ALL": "Zaznacz wszystkie uprawnienia",
-				"SELECT_DESC": "Wybierz rolę",
-				"UNSELECT_ALL": "Odznacz wszystkie uprawnienia",
-				"UPDATED_MESSAGE": "Zaktualizowano rolę"
-			},
-			"TITLE": "Przykładowy tytuł",
-			"USERS": {
-				"ENTRIES": "Pokazuj",
-				"SEARCH": "Wyszukaj użytkownika",
-				"USERS_LIST_TITLE": "Lista użytkowników"
-			}
-		},
-		"PAGINATION": {
-			"NEXT": "Następne",
-			"PREVIOUS": "Poprzednie"
-		},
-		"SERVER": {
-			"CUSTOM": {
-				"CONTROLLERS": {
-					"AUTH": {
-						"LOGIN": {
-							"NOT_ACTIVATED": "Konto nie zostało aktywowane.",
-							"NO_EMAIL_OR_PASSWORD": "Podany email lub hasło są niepoprawne."
-						}
-					},
-					"CRUD": {
-						"FAIL": {
-							"CREATE": "Błąd dodawania danych",
-							"DELETE": "Błąd usuwania danych",
-							"READ": "Błąd odczytu danych",
-							"UPDATE": "Błąd modyfikacji danych"
-						},
-						"SUCCESS": {
-							"CREATE": "Pomyślnie dodano dane",
-							"DELETE": "Pomyślnie usunięto dane",
-							"READ": "Pomyślny odczyt danych",
-							"UPDATE": "Pomyślnie zmodyfikowano dane"
-						}
-					}
-				},
-				"CRUD": {
-					"FAIL": {
-						"CREATE": "Błąd dodawania",
-						"DELETE": "Błąd usuwania",
-						"READ": "Błąd odczytu",
-						"UPDATE": "Błąd modyfikacji"
-					},
-					"SUCCESS": {
-						"CREATE": "Pomyślnie dodano.",
-						"DELETE": "Pomyślnie usunięto",
-						"READ": "Pomyślnie odczytano",
-						"UPDATE": "Pomyślnie zmodyfikowano"
-					}
-				},
-				"DATABASE": {
-					"PERMISSIONS": {
-						"CRUD": {
-							"CREATE": "Tworzenie",
-							"DELETE": "Usuwanie",
-							"EDIT": "Modyfikacja",
-							"INDEX": "Odczytanie"
-						},
-						"ROLES": {
-							"ADD": "Dodawanie nowych ról do systemu",
-							"CHANGE_PERMISSIONS": "Zmiana uprawnień ról",
-							"DELETE": "Usuwanie ról z systemu",
-							"ROLES": "Role"
-						},
-						"USERS": {
-							"ACCESS": "Dostęp do listy użytkowników",
-							"ADD": "Dodawanie nowych użytkowników",
-							"CHANGE_ROLE": "Zmiana ról użytkowników",
-							"DELETE": "Usuwanie użytkowników",
-							"USERS": "Użytkownicy"
-						}
-					}
-				}
-			}
-		}
-	}
+    "STOWARZYSZENIE": {
+        "CRUD_BUTTONS": {
+            "ADD": "Dodaj",
+            "DELETE": "Usuń",
+            "EDIT": "Edytuj",
+            "SAVE": "Zapisz zmiany",
+            "SAVE_SHORT": "Zapisz",
+            "BACK": "Powrót"
+        },
+        "HELPERS": {
+            "ALERT": {
+                "SUCCESS": "Sukces!"
+            },
+            "ALERT_FAIL": "Błąd!",
+            "EMPTY_STATE": {
+                "DESC": "Nie znaleziono żadnych danych w bazie danych. Proszę spróbować później.",
+                "TITLE": "Nic nie znaleziono"
+            },
+            "HELPER_BUTTON_TEXT": "Pomoc",
+            "LOADING_TEXT": "Ładowanie",
+            "SEARCH_PLACEHOLDER": "Wyszukaj"
+        },
+        "LABELS_TABLES": {
+            "AVATAR": "Avatar",
+            "BIRTHDATE": "Data urodzenia",
+            "CONTACT_EMAIL": "Email kontaktowy",
+            "FIRST_NAME": "Imie",
+            "ID": "Id",
+            "ITEMS_PER_PAGE": "Rzeczy na stronę",
+            "LAST_NAME": "Nazwisko",
+            "LOADING_DATA": "Ładowanie danych...",
+            "LOGIN_EMAIL": "Email do logowania",
+            "NEXT_PAGE": "Następna strona",
+            "NO_DATA": "Brak danych.",
+            "PHONE_NUMBER": "Numer telefonu",
+            "PREVIOUS_PAGE": "Poprzednia strona",
+            "RANGE": "Z"
+        },
+        "MODALS": {
+            "BUTTON_CANCEL": "Anuluj",
+            "DELETE_ALERT": {
+                "ARE_U_SURE": "Na pewno usunąć?",
+                "DELETED_MESSAGE": "Usunięto",
+                "TITLE": "Delete"
+            },
+            "NEW_ROLE": {
+                "ALERTS": {
+                    "NEW_ROLE_SUCCESS": "Dodano nową rolę"
+                },
+                "BUTTON_ADD": "Dodaj",
+                "INPUT_FIELD": "Nazwa nowej roli",
+                "INPUT_FIELD_EDIT": "Nazwa roli",
+                "INPUT_FIELD_ERROR": "Podaj nazwę nowej roli",
+                "TITLE_EDIT_ROLE": "Edytuj nazwę roli",
+                "TITLE_NEW_ROLE": "Dodaj nową rolę",
+                "TRIGGER_BUTTON": "Dodaj rolę"
+            }
+        },
+        "MODULES": {
+            "AUTH": {
+                "FORGOT": {
+                    "BACK_TO_LOGIN": "Wróć do logowania",
+                    "BUTTON_SEND": "Wyślij link ",
+                    "PAGE_HINT": "Zapomniałeś hasła do swojego konta? Zresetuj je podając niżej email, do którego jest przypisane Twoje konto (bądź email kontaktowy, jeżeli go podałeś). Na podany adres zostanie wysłany email z linkiem do resetowania hasła.",
+                    "PAGE_TITLE": "Zresetuj hasło "
+                },
+                "LOGIN": {
+                    "ALERT": {
+                        "GOOD": "Wygląda dobrze!",
+                        "TITLE": "Błąd!"
+                    },
+                    "ALERT_WRONG": "Nieprawidłowe dane logowania",
+                    "BUTTON": "Zaloguj się",
+                    "EMAIL_PLACEHOLDER": "Adres email",
+                    "FORGOT_PASSWORD_LINK": "Zapomniałeś hasła? Zresetuj je tutaj",
+                    "PAGE_PARAGRAPH": "Wypełnij formularz swoimi danymi logowania, aby uzyskać dostęp do portalu Ciob Members",
+                    "PAGE_TITLE": "Zaloguj się do portalu CIOB",
+                    "PASSWORD_PLACEHOLDER": "Hasło",
+                    "REGISTER_LINK": "Nie masz jeszcze konta? Zarejestruj nowe tutaj!",
+                    "REMEMBER_ME": "Nie wylogowuj mnie",
+                    "TOOLTIP_HIDE": "Ukryj hasło",
+                    "TOOLTIP_SHOW": "Pokaż hasło"
+                },
+                "REGISTER": {
+                    "AFFILIATION": {
+                        "CITY": "Miasto",
+                        "CITY_HINT": "Podaj nazwę miasta, w którym znajduje się Twoja instytucja",
+                        "COUNTRY": "Kraj",
+                        "COUNTRY_HINT": "Wybierz kraj Twojej instytucji",
+                        "DEPARTMENT": "Wydział",
+                        "DEPARTMENT_HINT": "Wpisz nazwę swojego wydziału / zakładu",
+                        "INSTITUTION": "Instytucja",
+                        "INSTITUTION_HINT": "Wpisz nazwę swojej instytucji",
+                        "PAGE_TITLE": "Afiliacja (opcjonalne)",
+                        "STREET": "Ulica",
+                        "STREET_HINT": "Podaj ulicę, na której znajduje się Twoja instytucja",
+                        "TITLE": "Tytuł naukowy",
+                        "TITLE_HINT": "Wpisz swój tytuł naukowy"
+                    },
+                    "AFTER": {
+                        "PAGE_DESC1": "Wysłaliśmy email aktywacyjny na adres",
+                        "PAGE_DESC2": "Sprawdź swoją skrzynkę mailową i podążaj za instrukcjami zawartymi w wysłanym mailu. Jeżeli nie otrzymałeś maila, sprawdź folder SPAM lub wyślij mail ponownie za pomocą poniższego linku",
+                        "PAGE_SUBTITLE": "Twoje konto zostało utworzone",
+                        "PAGE_TITLE": "Rejestracja pomyślna",
+                        "SEND_AGAIN": "Wyślij email aktywacyjny ponownie",
+                        "SUCCESS_ICON": "Sukces"
+                    },
+                    "ALERTS": {
+                        "BIRTHDATE_INCORRECT": "Format daty jest nieprawidłowy. Prawidłowo: 06/08/1980",
+                        "EMAIL_EXISTS": "Konto z tym emailem już istnieje",
+                        "EMAIL_INCORRECT": "Nieprawidłowy email ",
+                        "EMAIL_NOT_EXISTS": "Konto z tym emailem nie istnieje.",
+                        "PASSWORD_LENGTH": "Hasło nie może mieć mniej niż 8 znaków",
+                        "REQUIRED": "To pole jest wymagane"
+                    },
+                    "BACK_TO_STEP": "Cofnij do kroku ",
+                    "BIRTHDATE": "Data urodzenia",
+                    "BIRTHDATE_HINT": "Prawidłowy format: 05/04/2014",
+                    "BUTTON_REGISTER": "Rejestruj konto",
+                    "CONTACT_EMAIL": "Email kontaktowy",
+                    "CONTACT_EMAIL_HINT": "Podaj alternatywny adres email",
+                    "CONTACT_TITLE": "Dane kontaktowe (opcjonalne)",
+                    "EMAIL_HINT": "Email będzie używany do logowania oraz otrzymywania powiadomień",
+                    "FIRST_NAME": "Imię",
+                    "GENDER_LABEL": "Wybierz swoją płeć",
+                    "GO_TO_STEP": "Przejdź do kroku",
+                    "LAST_NAME": "Nazwisko",
+                    "LOGIN_LINK": "Masz już konto? Zaloguj się tutaj!",
+                    "MAN": "Jestem mężczyzną",
+                    "PAGE_PARAGRAPH": "Pola wymagane są oznaczone w formularzu znakiem gwiazdki: * (która znajduje się przy nazwie pola). Wypełnij dane w krokach aby założyć nowe konto w systemie.",
+                    "PAGE_TITLE": "Zarejestruj nowe konto",
+                    "PASSWORD_HINT": "Hasło powinno mieć długość co najmniej 8 znaków",
+                    "PHONE": "Numer telefonu",
+                    "RESET": {
+                        "BUTTON": "Resetuj",
+                        "LOGIN_LINK": "Przejdź do logowania",
+                        "PAGE_DESC": "Podaj nowe hasło do swojego konta w polu poniżej.",
+                        "PAGE_TITLE": "Resetowanie hasła",
+                        "RESETED_DESC": "Twoje hasło zostało pomyślnie zresetowane. Możesz teraz się zalogować.",
+                        "RESETED_TITLE": "Zresetowano hasło"
+                    },
+                    "STEP": "Krok",
+                    "STEP1_TITLE": "Dane konta",
+                    "STEP2_TITLE": "Dane personalne",
+                    "STEP3_TITLE": "Afiliacja",
+                    "STEP4_TITLE": "Dane kontaktowe",
+                    "WOMAN": "Jestem kobietą"
+                }
+            },
+            "NAVIGATION": {
+                "LANGUAGES": {
+                    "EN": "Angielski",
+                    "LABEL": "Język strony",
+                    "PL": "Polski",
+                    "RU": "Rosyjski"
+                },
+                "LOGGED_NAVBAR": {
+                    "ACCOUNT": "Konto",
+                    "EDIT_ACCOUNT": "Edytuj konto",
+                    "LOGO": "CIOB",
+                    "LOGOUT": "Wyloguj",
+                    "MESSAGES": "Wiadomości",
+                    "MY_ACCOUNT": "Moje konto",
+                    "NOTIFICATIONS": "Powiadomienia",
+                    "USER_DROPDOWN_TITLE": "Opcje użytkownika"
+                },
+                "MEMBERS_PAGE_LINKS": {
+                    "HOME": "Strona główna",
+                    "LOGIN": "Logowanie",
+                    "REGISTER": "Zarejestruj się"
+                },
+                "SEARCHBAR": {
+                    "TITLE": "Użytkownicy"
+                },
+                "SIDENAV": {
+                    "DASHBOARD": "Główna",
+                    "MENU_HEADINGS": {
+                        "MENU": "Menu",
+                        "USERS": "Użytkownicy"
+                    },
+                    "USERS": {
+                        "INTEREST": "Obszary badań",
+                        "MAIN": "Użytkownicy",
+                        "PORTFOLIO": "Ustawienia portfolio",
+                        "PORTFOLIO_MENU": "Portfolio",
+                        "ROLES_PREFERENCES": "Role i uprawnienia",
+                        "USERS_LIST": "Lista użytkowników"
+                    }
+                },
+                "WEBPAGE_TITLE_MEMBERS": "Ciob members"
+            },
+            "PORTFOLIO": {
+                "ADMIN": {
+                    "ADD_CARD": "Dodaj nową kartę",
+                    "ADD_CARD_DESC": "Kliknij tutaj aby dodać nową kartę do zakładki w portfolio",
+                    "FIRSTNAME_LASTNAME": "Imię Nazwisko",
+                    "INTERESTS": {
+                        "ADD_NEW_LABEL": "Dodaj nowy obszar badań do listy",
+                        "ADD_NEW_PLACEHOLDER": "Wpisz nazwę nowego obszaru badań",
+                        "MODAL": {
+                            "TITLE_NEW": "Dodaj nowy obszar badań",
+                            "TITLE_EDIT": "Edytuj obszar badań",
+                            "INPUT_LABEL_NEW": "Wpisz nazwę nowego obszaru badań",
+                            "TRANSLATIONS": "Tłumaczenia",
+                            "INPUT_HINT": "Kliknij pole tekstowe aby edytować"
+                        }
+                    },
+                    "USER_DESC": "Opis dodany przez użytkownika",
+                    "USER_ROLE": "Rola użytkownika",
+                    "USER_TITLE": "Tytuł"
+                },
+                "ADMIN_INTERESTS_DESC1": "Zarządzaj listą obszarów badań użytkowników. Dodawaj i usuwaj nazwy obszarów, które użytkownicy mogą wybierać na swoich profilach.",
+                "CHECK_OTHERS": "Sprawdź jak inni widzą twoje portfolio",
+                "INTERESTS_ADMIN": "Ustawienia obszarów badań",
+                "INTERESTS_ADMIN_TITLE": "Lista obszarów",
+                "PAGE_TITLE": "Ustawienia portfolio",
+                "SECTION_DESC1": "Dostosuj portfolio użytkowników - decyduj, jakie dane mogą oni wypełniać i dziel dane na zakładki.",
+                "SECTION_TITLE": "Ustawienia",
+                "PROFILE": {
+                    "TITLE_OWNER": "Twój profil",
+                    "TITLE_UNOWNER": "Profil użytkownika",
+                    "SECTION_TITLE_OWNER": "Profil",
+                    "SECTION_LEAD_OWNER": "Tutaj możesz obejrzeć swój profil i edytować informacje na nim zawarte. Możesz też wybierać, które sekcje mają być widoczne lub nie."
+                }
+            },
+            "ROLES": {
+                "ARE_EDITING": "Edytujesz rolę:",
+                "CHOOSE_ROLE": "Wybierz rolę z listy, aby edytować uprawnienia",
+                "COLLAPSE_ALL": "Zwiń wszystkie grupy",
+                "DELETE_ROLE": "Usuń rolę",
+                "EDIT_NAME": "Edytuj nazwę roli",
+                "EXPAND_ALL": "Rozwiń wszystkie grupy",
+                "LIST_TITLE": "Role i uprawnienia",
+                "PAGE_DESC1": "Zarządzaj rolami użytkowników w systemie i nadawaj każdej roli jej własne uprawnienia.",
+                "SECTION_TITLE": "Ustawienia ról i uprawnień",
+                "SELECT_ALL": "Zaznacz wszystkie uprawnienia",
+                "SELECT_DESC": "Wybierz rolę",
+                "UNSELECT_ALL": "Odznacz wszystkie uprawnienia",
+                "UPDATED_MESSAGE": "Zaktualizowano rolę"
+            },
+            "TITLE": "Przykładowy tytuł",
+            "USERS": {
+                "ENTRIES": "Pokazuj",
+                "SEARCH": "Wyszukaj użytkownika",
+                "USERS_LIST_TITLE": "Lista użytkowników"
+            }
+        },
+        "PAGINATION": {
+            "NEXT": "Następne",
+            "PREVIOUS": "Poprzednie"
+        },
+        "SERVER": {
+            "CUSTOM": {
+                "CONTROLLERS": {
+                    "AUTH": {
+                        "LOGIN": {
+                            "NOT_ACTIVATED": "Konto nie zostało aktywowane.",
+                            "NO_EMAIL_OR_PASSWORD": "Podany email lub hasło są niepoprawne."
+                        }
+                    },
+                    "CRUD": {
+                        "FAIL": {
+                            "CREATE": "Błąd dodawania danych",
+                            "DELETE": "Błąd usuwania danych",
+                            "READ": "Błąd odczytu danych",
+                            "UPDATE": "Błąd modyfikacji danych"
+                        },
+                        "SUCCESS": {
+                            "CREATE": "Pomyślnie dodano dane",
+                            "DELETE": "Pomyślnie usunięto dane",
+                            "READ": "Pomyślny odczyt danych",
+                            "UPDATE": "Pomyślnie zmodyfikowano dane"
+                        }
+                    }
+                },
+                "CRUD": {
+                    "FAIL": {
+                        "CREATE": "Błąd dodawania",
+                        "DELETE": "Błąd usuwania",
+                        "READ": "Błąd odczytu",
+                        "UPDATE": "Błąd modyfikacji"
+                    },
+                    "SUCCESS": {
+                        "CREATE": "Pomyślnie dodano.",
+                        "DELETE": "Pomyślnie usunięto",
+                        "READ": "Pomyślnie odczytano",
+                        "UPDATE": "Pomyślnie zmodyfikowano"
+                    }
+                },
+                "DATABASE": {
+                    "PERMISSIONS": {
+                        "CRUD": {
+                            "CREATE": "Tworzenie",
+                            "DELETE": "Usuwanie",
+                            "EDIT": "Modyfikacja",
+                            "INDEX": "Odczytanie"
+                        },
+                        "ROLES": {
+                            "ADD": "Dodawanie nowych ról do systemu",
+                            "CHANGE_PERMISSIONS": "Zmiana uprawnień ról",
+                            "DELETE": "Usuwanie ról z systemu",
+                            "ROLES": "Role"
+                        },
+                        "USERS": {
+                            "ACCESS": "Dostęp do listy użytkowników",
+                            "ADD": "Dodawanie nowych użytkowników",
+                            "CHANGE_ROLE": "Zmiana ról użytkowników",
+                            "DELETE": "Usuwanie użytkowników",
+                            "USERS": "Użytkownicy"
+                        }
+                    }
+                }
+            }
+        },
+        "zzzz": "Nagłówek karty"
+    }
 }
