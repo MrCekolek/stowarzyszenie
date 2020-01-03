@@ -32,14 +32,13 @@ class InterestController extends Controller {
             return $validation->failResponse();
         }
 
-        $this->translate(
-            auth()->user()->preferenceUser()->first()->lang,
-            $input['name'],
-            $interest = Interest::create(),
-            'name'
-        );
+        $interest = new Interest();
+        $interest->name_pl = $input['name_pl'];
+        $interest->name_en = $input['name_en'];
+        $interest->name_ru = $input['name_ru'];
+        $saved = $interest->save();
 
-        return LogService::create($interest->exists(), [
+        return LogService::create($saved, [
             'interest' => $interest->toArray()
         ]);
     }
@@ -52,12 +51,11 @@ class InterestController extends Controller {
             return $validation->failResponse();
         }
 
-        $this->translate(
-            auth()->user()->preferenceUser()->first()->lang,
-            $input['name'],
-            $interest,
-            'name'
-        );
+        $interest->update([
+            'name_pl' => $input['name_pl'],
+            'name_en' => $input['name_en'],
+            'name_ru' => $input['name_ru']
+        ]);
 
         return LogService::update(true, [
             'interest' => $interest->toArray()

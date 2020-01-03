@@ -28,12 +28,19 @@ class InterestRequest extends FormRequest {
 
     public function checkCreate() {
         $this->rules = [
-            'name' => 'required'
+            'name_pl' => 'required',
+            'name_en' => 'required',
+            'name_ru' => 'required'
         ];
     }
 
     public function checkUpdate() {
-        $this->checkCreate();
+        $this->rules = [
+            'id' => 'required|exists:interests',
+            'name_pl' => 'required',
+            'name_en' => 'required',
+            'name_ru' => 'required'
+        ];
     }
 
     public function checkDestroy() {

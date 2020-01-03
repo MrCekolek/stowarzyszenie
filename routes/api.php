@@ -21,6 +21,10 @@ Route::group([
         Route::post('set', 'PreferenceUserController@setLang');
     });
 
+    Route::prefix('translation')->group(function () {
+        Route::post('get', 'TranslationController@getTranslation');
+    });
+
     Route::post('email/exist', 'UserController@emailExist');
     Route::post('logout', 'AuthController@logout');
 
