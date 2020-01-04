@@ -48,9 +48,9 @@ class CreatePortfolioTabsJob implements ShouldQueue
      */
     public function handle()
     {
-        foreach (Portfolio::where('id', '!=', $this->userPortfolioId) as $portfolio) {
+        foreach (Portfolio::where('id', '!=', $this->userPortfolioId)->get() as $portfolio) {
             PortfolioTab::create([
-                'shared_it' => $this->shared_id,
+                'shared_id' => $this->shared_id,
                 'name_pl' => $this->name_pl,
                 'name_en' => $this->name_en,
                 'name_ru' => $this->name_ru,
