@@ -2,6 +2,8 @@ import { PermissionGroup } from './permission-group.model';
 
 export interface Role {
     id: number;
-    name: string;
+    name_pl: string;
+    name_en: string;
+    name_ru: string;
     permissions: Array<PermissionGroup>;
 }

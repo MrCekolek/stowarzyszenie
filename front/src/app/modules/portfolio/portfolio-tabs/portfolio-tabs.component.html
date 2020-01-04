@@ -1,28 +1,81 @@
 <div class="col-sm-12">
-    <ul class="nav" id="protfolio-tabs" role="tablist" *ngIf="this.tabs.length > 0">
-        <li class="nav-item mr-2" *ngFor="let tab of tabs" (click)="selectActiveTab(tab)">
-            <!-- <a class="nav-link" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab" aria-controls="home">
-                    {{ tab['name_' + lang] }} 
-                </a> -->
+    <div class="container testimonial-group">
+        <div class="row">
+            <ul class="nav" id="protfolio-tabs" role="tablist" *ngIf="this.tabs.length > 0">
+                <li class="nav-item mr-2" *ngFor="let tab of tabs">
+                    <!-- <a class="nav-link" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab" aria-controls="home">
+                            {{ tab['name_' + lang] }} 
+                        </a> -->
+                    <ng-container [ngTemplateOutlet]="tab.editing ? editing : noediting" [ngTemplateOutletContext]="{tab:tab}">
+                    </ng-container>
 
-            <div class="btn-group">
-                <a type="button" class="btn btn-primary text-white" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab">
-                        {{ tab['name_' + lang] }} 
-                    </a>
-                <a type="button" class="btn btn-primary text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item">
-                        <i class="fas fa-pencil-alt"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
-                    </a>
-                    <a class="dropdown-item">
-                        <i class="fas fa-times"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
-                    </a>
-                </div>
-            </div>
-        </li>
-    </ul>
+                    <ng-template #noediting let-tab='tab'>
+                        <div class="btn-group">
+                            <a type="button" (click)="selectActiveTab(tab)" class="btn btn-primary text-white" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab">
+                                    {{ tab['name_' + lang] }} 
+                                </a>
+                            <a type="button" class="btn btn-primary text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item text-success" (click)="editTab(tab)">
+                                    <i class="fas fa-pencil-alt mr-2"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
+                                </a>
+                                <a class="dropdown-item text-danger" (click)="deleteTab(tab)">
+                                    <i class="fas fa-times mr-2"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
+                                </a>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                    <ng-template #editing let-tab='tab'>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" #editTemplate autofocus class="form-control form-control-sm" placeholder="" aria-label="" [value]="tab['name_' + lang]">
+                                <div class="input-group-append">
+                                    <button class="btn btn-success btn-sm px-2" [class.btn-progress]="tab.loading" type="button" (click)="updateTab(tab, editTemplate.value)">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                </div>
+                                <div class="input-group-append">
+                                    <button class="btn btn-danger btn-sm px-2" type="button" (click)="cancelEditing(tab)">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </li>
+
+                <!-- template edycji i dodawania nowych tabs po kliknieciu 'add'-->
+                <li class="nav-item mr-2" *ngIf="this.editMode">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" #addTemplate autofocus class="form-control form-control-sm" placeholder="" aria-label="">
+                            <div class="input-group-append">
+                                <button class="btn btn-success btn-sm px-2" [class.btn-progress]="load" type="button" (click)="addTab(addTemplate.value)">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-danger btn-sm px-2" type="button" (click)="this.editMode = false">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- button dodania nowego taba -->
+                <!-- TODO: permission -->
+                <li class="nav-item mr-2">
+                    <div class="btn btn-warning" (click)="appendTile()">
+                        <i class="fas fa-plus"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.ADD' | translate }}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 <div class="tab-content mt-5" id="tbs-content" *ngIf="this.activeTab">

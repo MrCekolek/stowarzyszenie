@@ -49,8 +49,8 @@
     </div>
 
     <!-- zakladki -->
-    <div class="row" *ngIf="this.allTabs">
-        <app-portfolio-tabs [tabs]="this.allTabs" [lang]="this.lang">
+    <div class="row">
+        <app-portfolio-tabs *ngIf="this.allTabs.length > 0" [tabs]="this.allTabs" [lang]="this.lang">
             <p>Some random HTML with some random content</p>
         </app-portfolio-tabs>
         <ng-template></ng-template>

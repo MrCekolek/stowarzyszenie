@@ -13,6 +13,7 @@ export class UserModel {
   lang: string;
   roles: Array<Role>;
   phone_number?: string; 
+  fullName: string;
 
   constructor(userModel: Object) {
     this.id = userModel['user']['id'];
@@ -24,6 +25,7 @@ export class UserModel {
     this.affilation_user = userModel['user']['affilation_user'];
     this.preference_user = userModel['user']['preference_user'];
     this.roles = userModel['user']['roles'];
+    this.fullName = userModel['user']['fullName'];
   }
 
   setLang(lang: string) {

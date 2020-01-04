@@ -39,9 +39,9 @@ class ChangeUserTimezoneJob implements ShouldQueue {
             $time_zone = 'UTC';
         }
 
-        $user = User::loginEmail($this->email)->with('preferenceUser')->first();
+        $user = User::where('login_email', $this->email)->with('preferenceUser')->first();
 
-        $preference_user = PreferenceUser::userId($user['id'])->first();
+        $preference_user = PreferenceUser::where('user_id', $user['id'])->first();
 
         if (! empty($preference_user)) {
             if ($preference_user['time_zone'] !== $time_zone) {
