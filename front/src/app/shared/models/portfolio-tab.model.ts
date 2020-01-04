@@ -1,5 +1,6 @@
 export class PortfolioTab {
     id: number;
+    shared_id: number;
     name_en?: string;
     name_pl?: string;
     name_ru?: string;
@@ -10,6 +11,7 @@ export class PortfolioTab {
 
     constructor(portfolioTab: Object) {
         this.id = portfolioTab['portfolioTab']['id'];
+        this.shared_id = portfolioTab['portfolioTab']['shared_id'];
         this.name_en = portfolioTab['portfolioTab']['name_en'];
         this.name_pl = portfolioTab['portfolioTab']['name_pl'];
         this.name_ru = portfolioTab['portfolioTab']['name_ru'];

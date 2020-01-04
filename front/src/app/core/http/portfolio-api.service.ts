@@ -24,5 +24,15 @@ export class PortfolioApiService {
     return this.apiService.post('portfolio/tile/create', tab);
   }
 
-  
+  addTab(tab) {
+    return this.apiService.post('portfolio/tabs/create', tab);
+  }
+
+  updateTab(tab) {
+    return this.apiService.post('portfolio/tabs/update', tab);
+  }
+
+  deleteTab(tab) {
+    return this.apiService.post('portfolio/tabs/destroy', tab);
+  }
 }
