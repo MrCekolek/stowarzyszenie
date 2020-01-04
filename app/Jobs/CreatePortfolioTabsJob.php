@@ -14,7 +14,8 @@ class CreatePortfolioTabsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $name_pl,
+    private $shared_id,
+            $name_pl,
             $name_en,
             $name_ru,
             $position,
@@ -23,14 +24,16 @@ class CreatePortfolioTabsJob implements ShouldQueue
     /**
      * Create a new job instance.
      *
+     * @param $shared_id
      * @param $name_pl
      * @param $name_en
      * @param $name_ru
      * @param $position
      * @param $userPortfolioId
      */
-    public function __construct($name_pl, $name_en, $name_ru, $position, $userPortfolioId)
+    public function __construct($shared_id, $name_pl, $name_en, $name_ru, $position, $userPortfolioId)
     {
+        $this->shared_id = $shared_id;
         $this->name_pl = $name_pl;
         $this->name_en = $name_en;
         $this->name_ru = $name_ru;
@@ -47,6 +50,7 @@ class CreatePortfolioTabsJob implements ShouldQueue
     {
         foreach (Portfolio::where('id', '!=', $this->userPortfolioId) as $portfolio) {
             PortfolioTab::create([
+                'shared_it' => $this->shared_id,
                 'name_pl' => $this->name_pl,
                 'name_en' => $this->name_en,
                 'name_ru' => $this->name_ru,

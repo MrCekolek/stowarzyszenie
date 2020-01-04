@@ -17,8 +17,8 @@ class UserObserver {
     public function created(User $user) {
         factory(RoleUser::class)->create([
             'role_id' => $user->id === 1 ?
-                Role::whereName('admin')->first()->id :
-                Role::whereName('user')->first()->id,
+                Role::where('name_pl', 'Administrator')->first()->id :
+                Role::where('name_pl', 'Użytkownik')->first()->id,
             'user_id' => $user->id
         ]);
 

@@ -1,9 +1,12 @@
 <?php
 
 use App\Models\Role;
+use App\Traits\Translatable;
 use Illuminate\Database\Seeder;
 
 class RolesTableSeeder extends Seeder {
+    use Translatable;
+
     /**
      * Run the database seeds.
      *
@@ -11,18 +14,25 @@ class RolesTableSeeder extends Seeder {
      */
     public function run() {
         // generowanie roli w systemie - admin
-        factory(Role::class)->create([
-            'name' => 'admin'
-        ]);
+        $this->translate(
+            'pl',
+            'Administrator',
+            (new Role()),
+            'name'
+        );
 
-        // generowanie roli w systemie - user
-        factory(Role::class)->create([
-            'name' => 'user'
-        ]);
+        $this->translate(
+            'pl',
+            'Użytkownik',
+            (new Role()),
+            'name'
+        );
 
-        // generowanie roli w systemie - test
-        factory(Role::class)->create([
-            'name' => 'test'
-        ]);
+        $this->translate(
+            'pl',
+            'Test',
+            (new Role()),
+            'name'
+        );
     }
 }

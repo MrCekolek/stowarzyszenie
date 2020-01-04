@@ -36,7 +36,7 @@ class PortfolioTabRequest extends FormRequest {
 
     public function checkUpdate() {
         $this->rules = [
-            'id' => 'required|exists:portfolio_tabs',
+            'shared_id' => 'required|exists:portfolio_tabs',
             'name_pl' => 'required',
             'name_en' => 'required',
             'name_ru' => 'required',
@@ -46,7 +46,7 @@ class PortfolioTabRequest extends FormRequest {
 
     public function checkDestroy() {
         $this->rules = [
-            'id' => 'required|exists:portfolio_tabs'
+            'shared_id' => 'required|exists:portfolio_tabs'
         ];
     }
 }
