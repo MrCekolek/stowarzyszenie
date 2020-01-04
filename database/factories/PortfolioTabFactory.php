@@ -8,6 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(PortfolioTab::class, function (Faker $faker, $params) {
     return [
+        'shared_id' => $params['shared_id'] ?? $faker->randomNumber(3),
         'name_en' => $params['name_en'] ?? $faker->sentence(1),
         'name_pl' => $params['name_pl'] ?? $faker->sentence(1),
         'name_ru' => $params['name_ru'] ?? $faker->sentence(1),

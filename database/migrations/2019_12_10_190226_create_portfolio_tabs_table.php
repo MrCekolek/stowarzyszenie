@@ -13,6 +13,7 @@ class CreatePortfolioTabsTable extends Migration {
     public function up() {
         Schema::create('portfolio_tabs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('shared_id');
             $table->string('name_en')->nullable();
             $table->string('name_pl')->nullable();
             $table->string('name_ru')->nullable();
