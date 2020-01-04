@@ -31,10 +31,12 @@ class PortfolioTabController extends Controller {
             return $validation->failResponse();
         }
 
+        $shared_id = PortfolioTab::max('shared_id') + 1;
         $position = PortfolioTab::max('position') + 1;
         $userPortfolioId = auth()->user()->portfolio()->first()->id;
 
         $portfolioTab = new PortfolioTab();
+        $portfolioTab->shared_id = $shared_id;
         $portfolioTab->name_pl = $input['name_pl'];
         $portfolioTab->name_en = $input['name_en'];
         $portfolioTab->name_ru = $input['name_ru'];
@@ -43,6 +45,7 @@ class PortfolioTabController extends Controller {
         $saved = $portfolioTab->save();
 
         CreatePortfolioTabsJob::dispatch(
+            $portfolioTab->shared_id,
             $portfolioTab->name_pl,
             $portfolioTab->name_en,
             $portfolioTab->name_ru,
@@ -55,7 +58,7 @@ class PortfolioTabController extends Controller {
         ]);
     }
 
-    public function update(Request $request, PortfolioTab $portfolioTab) {
+    public function update(Request $request) {
         $input = $request->all();
         $validation = new PortfolioTabRequest($input, 'update');
 
@@ -63,19 +66,24 @@ class PortfolioTabController extends Controller {
             return $validation->failResponse();
         }
 
-        $portfolioTab->update([
-            'name_pl' => $input['name_pl'],
-            'name_en' => $input['name_en'],
-            'name_ru' => $input['name_ru'],
-            'position' => $input['position']
-        ]);
+        PortfolioTab::where('shared_id', $input['shared_id'])
+            ->update([
+                'name_pl' => $input['name_pl'],
+                'name_en' => $input['name_en'],
+                'name_ru' => $input['name_ru'],
+                'position' => $input['position']
+            ]);
+
+        $portfolioTab = PortfolioTab::where('shared_id', $input['shared_id'])
+            ->where('portfolio_id', auth()->user()->portfolio()->first()->id)
+            ->first();
 
         return LogService::update(true, [
             'portfolioTab' => $portfolioTab->toArray()
         ]);
     }
 
-    public function destroy(Request $request, PortfolioTab $portfolioTab) {
+    public function destroy(Request $request) {
         $input = $request->all();
         $validation = new PortfolioTabRequest($input, 'destroy');
 
@@ -83,7 +91,8 @@ class PortfolioTabController extends Controller {
             return $validation->failResponse();
         }
 
-        $success = PortfolioTab::destroy($portfolioTab->id);
+        $success = PortfolioTab::where('shared_id', $input['shared_id'])
+            ->delete();
 
         return LogService::delete($success);
     }

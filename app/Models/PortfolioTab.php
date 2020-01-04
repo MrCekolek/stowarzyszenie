@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PortfolioTab extends Model {
     protected $fillable = [
+        'shared_id',
         'name_en',
         'name_pl',
         'name_ru',
@@ -19,11 +20,13 @@ class PortfolioTab extends Model {
         return [
             'Profile' => [
                 'id' => 1,
+                'shared_id' => 1,
                 'position' => 0,
                 'name' => 'Profile'
             ],
             'Interests' => [
                 'id' => 2,
+                'shared_id' => 2,
                 'position' => 1,
                 'name' => 'Interests'
             ]

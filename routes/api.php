@@ -61,8 +61,8 @@ Route::group([
         Route::prefix('tabs')->group(function () {
             Route::post('{portfolio}/get', 'PortfolioTabController@index');
             Route::post('create', 'PortfolioTabController@create');
-            Route::post('{portfolioTab}/update', 'PortfolioTabController@update');
-            Route::post('{portfolioTab}/destroy', 'PortfolioTabController@destroy');
+            Route::post('update', 'PortfolioTabController@update');
+            Route::post('destroy', 'PortfolioTabController@destroy');
         });
 
         Route::prefix('tile')->group(function () {

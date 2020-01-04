@@ -20,6 +20,7 @@ class PortfolioTabsSeeder extends Seeder {
                     'en',
                     $portfolioTab['name'],
                     factory(PortfolioTab::class)->create([
+                        'shared_id' => $portfolioTab['shared_id'],
                         'position' => $portfolioTab['position'],
                         'portfolio_id' => $portfolio->id
                     ]),
