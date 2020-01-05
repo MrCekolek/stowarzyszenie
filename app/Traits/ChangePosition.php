@@ -18,4 +18,17 @@ trait ChangePosition {
 
         $object->position = $position;
     }
+
+    public function reindexPositions($model, $groupBy = 'shared_id') {
+        $position = 1;
+
+        foreach ($model::all()->sortBy('position')->groupBy($groupBy) as $items) {
+            foreach ($items as $item) {
+                $item->position = $position;
+                $item->save();
+            }
+
+            ++$position;
+        }
+    }
 }
