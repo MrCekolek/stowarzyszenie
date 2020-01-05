@@ -103,6 +103,8 @@ class TileContentController extends Controller {
         $success = TileContent::where('shared_id', $input['shared_id'])
             ->delete();
 
+        $this->reindexPositions(TileContent::class);
+
         return LogService::delete($success > 0);
     }
 }

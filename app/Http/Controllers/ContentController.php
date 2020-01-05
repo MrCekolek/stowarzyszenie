@@ -98,6 +98,8 @@ class ContentController extends Controller {
         $success = Content::where('shared_id', $input['shared_id'])
             ->delete();
 
+        $this->reindexPositions(Content::class);
+
         return LogService::delete($success > 0);
     }
 }
