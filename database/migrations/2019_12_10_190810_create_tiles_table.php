@@ -13,13 +13,15 @@ class CreateTilesTable extends Migration {
     public function up() {
         Schema::create('tiles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name_en')->nullable();
+            $table->unsignedBigInteger('shared_id');
             $table->string('name_pl')->nullable();
+            $table->string('name_en')->nullable();
             $table->string('name_ru')->nullable();
             $table->integer('position')->default(0);
             $table->boolean('admin_visibility')->default(1);
             $table->boolean('user_visibility')->default(1);
             $table->unsignedBigInteger('portfolio_tab_id');
+            $table->unsignedBigInteger('portfolio_tab_shared_id');
             $table->timestamps();
 
             $table->foreign('portfolio_tab_id')

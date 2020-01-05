@@ -63,6 +63,8 @@ Route::group([
             Route::post('create', 'PortfolioTabController@create');
             Route::post('update', 'PortfolioTabController@update');
             Route::post('destroy', 'PortfolioTabController@destroy');
+            Route::post('visibility/admin', 'PortfolioTabController@changeAdminVisibility');
+            Route::post('visibility/user', 'PortfolioTabController@changeUserVisibility');
         });
 
         Route::prefix('tile')->group(function () {
