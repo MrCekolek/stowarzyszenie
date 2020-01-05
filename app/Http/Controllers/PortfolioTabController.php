@@ -95,6 +95,8 @@ class PortfolioTabController extends Controller {
         $success = PortfolioTab::where('shared_id', $input['shared_id'])
             ->delete();
 
+        $this->reindexPositions(PortfolioTab::class);
+
         return LogService::delete($success > 0);
     }
 }

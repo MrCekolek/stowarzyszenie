@@ -21,13 +21,13 @@ class PortfolioTab extends Model {
             'Profile' => [
                 'id' => 1,
                 'shared_id' => 1,
-                'position' => 0,
+                'position' => 1,
                 'name' => 'Profile'
             ],
             'Interests' => [
                 'id' => 2,
                 'shared_id' => 2,
-                'position' => 1,
+                'position' => 2,
                 'name' => 'Interests'
             ]
         ];
