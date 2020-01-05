@@ -2,24 +2,25 @@
 
 namespace App\Jobs;
 
-use App\Models\Portfolio;
 use App\Models\PortfolioTab;
+use App\Models\Tile;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-class CreatePortfolioTabsJob implements ShouldQueue
+class CreateTileJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $shared_id,
-            $name_pl,
-            $name_en,
-            $name_ru,
-            $position,
-            $portfolioId;
+        $name_pl,
+        $name_en,
+        $name_ru,
+        $position,
+        $portfolioTabId,
+        $portfolioTabSharedId;
 
     /**
      * Create a new job instance.
@@ -29,16 +30,18 @@ class CreatePortfolioTabsJob implements ShouldQueue
      * @param $name_en
      * @param $name_ru
      * @param $position
-     * @param $portfolioId
+     * @param $portfolioTabId
+     * @param $portfolioTabSharedId
      */
-    public function __construct($shared_id, $name_pl, $name_en, $name_ru, $position, $portfolioId)
+    public function __construct($shared_id, $name_pl, $name_en, $name_ru, $position, $portfolioTabId, $portfolioTabSharedId)
     {
         $this->shared_id = $shared_id;
         $this->name_pl = $name_pl;
         $this->name_en = $name_en;
         $this->name_ru = $name_ru;
         $this->position = $position;
-        $this->portfolioId = $portfolioId;
+        $this->portfolioTabId = $portfolioTabId;
+        $this->portfolioTabSharedId = $portfolioTabSharedId;
     }
 
     /**
@@ -48,14 +51,17 @@ class CreatePortfolioTabsJob implements ShouldQueue
      */
     public function handle()
     {
-        foreach (Portfolio::where('id', '!=', $this->portfolioId)->get() as $portfolio) {
-            PortfolioTab::create([
+        foreach (PortfolioTab::where('shared_id', $this->portfolioTabSharedId)
+                     ->where('id', '!=', $this->portfolioTabId)
+                     ->get() as $portfolioTab) {
+            Tile::create([
                 'shared_id' => $this->shared_id,
                 'name_pl' => $this->name_pl,
                 'name_en' => $this->name_en,
                 'name_ru' => $this->name_ru,
                 'position' => $this->position,
-                'portfolio_id' => $portfolio->id
+                'portfolio_tab_id' => $portfolioTab->id,
+                'portfolio_tab_shared_id' => $portfolioTab->shared_id
             ]);
         }
     }

@@ -2,24 +2,25 @@
 
 namespace App\Jobs;
 
-use App\Models\Portfolio;
-use App\Models\PortfolioTab;
+use App\Models\Content;
+use App\Models\TileContent;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-class CreatePortfolioTabsJob implements ShouldQueue
+class CreateContentJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $shared_id,
-            $name_pl,
-            $name_en,
-            $name_ru,
-            $position,
-            $portfolioId;
+        $name_pl,
+        $name_en,
+        $name_ru,
+        $position,
+        $tileContentId,
+        $tileContentSharedId;
 
     /**
      * Create a new job instance.
@@ -29,16 +30,18 @@ class CreatePortfolioTabsJob implements ShouldQueue
      * @param $name_en
      * @param $name_ru
      * @param $position
-     * @param $portfolioId
+     * @param $tileContentId
+     * @param $tileContentSharedId
      */
-    public function __construct($shared_id, $name_pl, $name_en, $name_ru, $position, $portfolioId)
+    public function __construct($shared_id, $name_pl, $name_en, $name_ru, $position, $tileContentId, $tileContentSharedId)
     {
         $this->shared_id = $shared_id;
         $this->name_pl = $name_pl;
         $this->name_en = $name_en;
         $this->name_ru = $name_ru;
         $this->position = $position;
-        $this->portfolioId = $portfolioId;
+        $this->tileContentId = $tileContentId;
+        $this->tileContentSharedId = $tileContentSharedId;
     }
 
     /**
@@ -48,14 +51,17 @@ class CreatePortfolioTabsJob implements ShouldQueue
      */
     public function handle()
     {
-        foreach (Portfolio::where('id', '!=', $this->portfolioId)->get() as $portfolio) {
-            PortfolioTab::create([
+        foreach (TileContent::where('shared_id', $this->tileContentSharedId)
+                     ->where('id', '!=', $this->tileContentId)
+                     ->get() as $tileContent) {
+            Content::create([
                 'shared_id' => $this->shared_id,
                 'name_pl' => $this->name_pl,
                 'name_en' => $this->name_en,
                 'name_ru' => $this->name_ru,
                 'position' => $this->position,
-                'portfolio_id' => $portfolio->id
+                'tile_content_id' => $tileContent->id,
+                'tile_content_shared_id' => $tileContent->shared_id
             ]);
         }
     }

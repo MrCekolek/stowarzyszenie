@@ -7,11 +7,13 @@ use App\Jobs\CreatePortfolioTabsJob;
 use App\Models\Portfolio;
 use App\Models\PortfolioTab;
 use App\Services\LogService;
+use App\Traits\ChangePosition;
 use App\Traits\Translatable;
 use Illuminate\Http\Request;
 
 class PortfolioTabController extends Controller {
-    use Translatable;
+    use Translatable,
+        ChangePosition;
 
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['index']]);
@@ -31,34 +33,31 @@ class PortfolioTabController extends Controller {
             return $validation->failResponse();
         }
 
-        $shared_id = PortfolioTab::max('shared_id') + 1;
-        $position = PortfolioTab::max('position') + 1;
-        $userPortfolioId = auth()->user()->portfolio()->first()->id;
-
         $portfolioTab = new PortfolioTab();
-        $portfolioTab->shared_id = $shared_id;
+        $portfolioTab->shared_id = PortfolioTab::max('shared_id') + 1;
         $portfolioTab->name_pl = $input['name_pl'];
         $portfolioTab->name_en = $input['name_en'];
         $portfolioTab->name_ru = $input['name_ru'];
-        $portfolioTab->position = $position;
-        $portfolioTab->portfolio_id = $userPortfolioId;
-        $saved = $portfolioTab->save();
+        $portfolioTab->position = PortfolioTab::max('position') + 1;
+        $portfolioTab->portfolio_id = $input['portfolio_id'];
+        $success = $portfolioTab->save();
 
         CreatePortfolioTabsJob::dispatch(
             $portfolioTab->shared_id,
             $portfolioTab->name_pl,
             $portfolioTab->name_en,
             $portfolioTab->name_ru,
-            $position,
-            $userPortfolioId
+            $portfolioTab->position,
+            $input['portfolio_id']
         );
 
-        return LogService::create($saved, [
+        return LogService::create($success, [
             'portfolioTab' => $portfolioTab->toArray()
         ]);
     }
 
     public function update(Request $request) {
+        $success = true;
         $input = $request->all();
         $validation = new PortfolioTabRequest($input, 'update');
 
@@ -66,20 +65,22 @@ class PortfolioTabController extends Controller {
             return $validation->failResponse();
         }
 
-        PortfolioTab::where('shared_id', $input['shared_id'])
-            ->update([
-                'name_pl' => $input['name_pl'],
-                'name_en' => $input['name_en'],
-                'name_ru' => $input['name_ru'],
-                'position' => $input['position']
-            ]);
+        foreach (PortfolioTab::where('shared_id', $input['shared_id'])->get() as $portfolioTab) {
+            $portfolioTab->name_pl = $input['name_pl'];
+            $portfolioTab->name_en = $input['name_en'];
+            $portfolioTab->name_ru = $input['name_ru'];
 
-        $portfolioTab = PortfolioTab::where('shared_id', $input['shared_id'])
-            ->where('portfolio_id', auth()->user()->portfolio()->first()->id)
-            ->first();
+            if ($portfolioTab->isDity('position')) {
+                $this->changePosition(PortfolioTab::class, $portfolioTab, $input['position']);
+            }
 
-        return LogService::update(true, [
-            'portfolioTab' => $portfolioTab->toArray()
+            $portfolioTab->admin_visibility = $input['admin_visibility'];
+            $portfolioTab->user_visibility = $input['user_visibility'];
+            $success &= $portfolioTab->save();
+        }
+
+        return LogService::update($success, [
+            'portfolioTab' => PortfolioTab::where('id', $input['id'])->first()->toArray()
         ]);
     }
 
@@ -94,6 +95,6 @@ class PortfolioTabController extends Controller {
         $success = PortfolioTab::where('shared_id', $input['shared_id'])
             ->delete();
 
-        return LogService::delete($success);
+        return LogService::delete($success > 0);
     }
 }

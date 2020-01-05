@@ -25,7 +25,7 @@ class RoleRequest extends FormRequest {
         $this->rules = [
             'name_pl' => 'required|unique:roles',
             'name_en' => 'required|unique:roles',
-            'name_ru' => 'required|unique:roles',
+            'name_ru' => 'required|unique:roles'
         ];
     }
 

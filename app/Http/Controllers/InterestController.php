@@ -33,9 +33,9 @@ class InterestController extends Controller {
         $interest->name_pl = $input['name_pl'];
         $interest->name_en = $input['name_en'];
         $interest->name_ru = $input['name_ru'];
-        $saved = $interest->save();
+        $success = $interest->save();
 
-        return LogService::create($saved, [
+        return LogService::create($success, [
             'interest' => $interest->toArray()
         ]);
     }
@@ -48,13 +48,13 @@ class InterestController extends Controller {
             return $validation->failResponse();
         }
 
-        $interest->update([
+        $success = $interest->update([
             'name_pl' => $input['name_pl'],
             'name_en' => $input['name_en'],
             'name_ru' => $input['name_ru']
         ]);
 
-        return LogService::update(true, [
+        return LogService::update($success > 0, [
             'interest' => $interest->toArray()
         ]);
     }
@@ -69,6 +69,6 @@ class InterestController extends Controller {
 
         $success = Interest::destroy($interest->id);
 
-        return LogService::delete($success);
+        return LogService::delete($success > 0);
     }
 }

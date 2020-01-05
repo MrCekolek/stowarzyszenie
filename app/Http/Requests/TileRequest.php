@@ -31,23 +31,27 @@ class TileRequest extends FormRequest {
             'name_pl' => 'required',
             'name_en' => 'required',
             'name_ru' => 'required',
-            'portfolio_tab_id' => 'required'
+            'portfolio_tab_id' => 'required|exists:portfolio_tabs,id',
+            'portfolio_tab_shared_id' => 'required|exists:portfolio_tabs,shared_id'
         ];
     }
 
     public function checkUpdate() {
         $this->rules = [
             'id' => 'required|exists:tiles',
+            'shared_id' => 'required|exists:tiles',
             'name_pl' => 'required',
             'name_en' => 'required',
             'name_ru' => 'required',
-            'position' => 'required'
+            'position' => 'required',
+            'admin_visibility' => 'required|in:true,false',
+            'user_visibility' => 'required|in:true,false'
         ];
     }
 
     public function checkDestroy() {
         $this->rules = [
-            'id' => 'required|exists:tiles'
+            'shared_id' => 'required|exists:tiles'
         ];
     }
 }
