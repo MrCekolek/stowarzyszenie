@@ -35,13 +35,15 @@ class PortfolioTabRequest extends FormRequest {
     }
 
     public function checkUpdate() {
-        $this->rules = [
-            'shared_id' => 'required|exists:portfolio_tabs',
-            'name_pl' => 'required',
-            'name_en' => 'required',
-            'name_ru' => 'required',
-            'position' => 'required'
-        ];
+        $this->checkCreate();
+        $this->rules = array_merge($this->rules, [
+                'id' => 'required|exists:portfolio_tabs',
+                'shared_id' => 'required|exists:portfolio_tabs',
+                'position' => 'required',
+                'admin_visibility' => 'required|in:true,false',
+                'user_visibility' => 'required|in:true,false'
+            ]
+        );
     }
 
     public function checkDestroy() {

@@ -13,13 +13,16 @@ class CreateContentsTable extends Migration {
     public function up() {
         Schema::create('contents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('value_en')->nullable();
+            $table->unsignedBigInteger('shared_id');
             $table->text('value_pl')->nullable();
+            $table->text('value_en')->nullable();
             $table->text('value_ru')->nullable();
             $table->boolean('selected')->default(0);
+            $table->integer('position')->default(0);
             $table->boolean('admin_visibility')->default(1);
             $table->boolean('user_visibility')->default(1);
             $table->unsignedBigInteger('tile_content_id');
+            $table->unsignedBigInteger('tile_content_shared_id');
             $table->timestamps();
 
             $table->foreign('tile_content_id')

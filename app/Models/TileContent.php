@@ -6,14 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class TileContent extends Model {
     protected $fillable = [
+        'shared_id',
         'name_en',
         'name_pl',
         'name_ru',
         'type',
         'translation_key',
+        'position',
         'admin_visibility',
         'user_visibility',
-        'tile_id'
+        'tile_id',
+        'tile_shared_id'
     ];
 
     public static function translations() {

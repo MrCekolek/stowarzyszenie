@@ -31,20 +31,27 @@ class ContentRequest extends FormRequest {
             'value_pl' => 'required',
             'value_en' => 'required',
             'value_ru' => 'required',
-            'tile_content_id' => 'required|exists:contents'
+            'tile_content_id' => 'required|exists:tile_contents,id',
+            'tile_content_shared_id' => 'required|exists:tile_contents,shared_id'
         ];
     }
 
     public function checkUpdate() {
         $this->checkCreate();
         $this->rules = array_merge($this->rules, [
-            'id' => 'required|exists:contents'
+            'id' => 'required|exists:contents',
+            'shared_id' => 'required|exists:contents',
+            'selected' => 'required',
+            'position' => 'required',
+            'admin_visibility' => 'required|in:true,false',
+            'user_visibility' => 'required|in:true,false',
         ]);
     }
 
     public function checkDestroy() {
         $this->rules = [
-            'id' => 'required|exists:contents'
+            'id' => 'required|exists:contents',
+            'shared_id' => 'required|exists:contents',
         ];
     }
 }
