@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class PortfolioTab extends Model {
+class PortfolioTab extends BaseModel {
     protected $fillable = [
         'shared_id',
         'name_en',

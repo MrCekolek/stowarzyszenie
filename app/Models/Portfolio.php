@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Portfolio extends Model {
+class Portfolio extends BaseModel {
     protected $fillable = [
         'description',
         'user_id'
