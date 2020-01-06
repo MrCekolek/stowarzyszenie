@@ -1,0 +1,18 @@
+<h5>
+    {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.INTERESTS.MODAL.TRANSLATIONS' | translate }}
+</h5>
+
+<form #translationsForm="ngForm">
+    <ul class="list-unstyled">
+        <li *ngFor="let text of this.translations; let i = index; trackBy: trackByFn">
+            <div class="form-group row">
+                <label [for]="'text' + i" class="col-sm-3 col-form-label h4">
+                    {{ this.languageService.supportedLangs[i] }}
+                </label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control" [name]="this.translations[i]" [id]="'text' + i" [value]="text" data-toggle="tooltip" data-placement="top" [title]="'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.INTERESTS.MODAL.INPUT_HINT' | translate" [(ngModel)]="this.translations[i]">
+                </div>
+            </div>
+        </li>
+    </ul>
+</form>

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { InterestsRoutingModule } from './interests-routing.module';
 import { InterestsListComponent } from './interests-list/interests-list.component';
 import { InterestTileComponent } from './interest-tile/interest-tile.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { InterestModalComponent } from './interest-modal/interest-modal.component';
 import { FormsModule } from '@angular/forms';
 
@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
     InterestsRoutingModule,
     FormsModule
   ],
-  entryComponents: [InterestModalComponent]
+  entryComponents: [InterestModalComponent],
+  providers: []
 })
 export class InterestsModule { }

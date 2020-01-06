@@ -6,7 +6,8 @@
             "EDIT": "Edit",
             "SAVE": "Save changes",
             "SAVE_SHORT": "Save",
-            "BACK": "Return"
+            "BACK": "Return",
+            "TRANSLATE": "translate"
         },
         "HELPERS": {
             "ALERT": {
@@ -203,7 +204,8 @@
                             "TITLE_EDIT": "Edit Research Area",
                             "INPUT_LABEL_NEW": "Enter the name of the new research area",
                             "TRANSLATIONS": "Translations",
-                            "INPUT_HINT": "Click the text box to edit"
+                            "INPUT_HINT": "Click the text box to edit",
+                            "INPUT_LABEL_EDIT": "Change the name in the current language to translate or edit the translation fields below"
                         }
                     },
                     "USER_DESC": "Description added by the user",

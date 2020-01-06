@@ -50,12 +50,15 @@ export class AppComponent {
             response => {
               this.userService.changeUser(new UserModel(response));
               console.log(new UserModel(response));
-              this.isPageLoading = false;
             }
           );
         }
       });
     }
+  }
+
+  ngAfterViewInit() {
+    this.togglePageLoading(false);
   }
 
   togglePageLoading(value: boolean) {

@@ -15,13 +15,15 @@ import { DeleteAlertComponent } from './components/delete-alert/delete-alert.com
 import { AlertComponent } from './components/alert/alert.component'; 
 import { OverlayModule } from '@angular/cdk/overlay';
 import { LangPipe } from './pipes/lang.pipe';
+import { TranslationsListComponent } from './components/translations-list/translations-list.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 export function HttpLoaderFactory (http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [SpinnerComponent, DeleteAlertComponent, AlertComponent, LangPipe],
+  declarations: [SpinnerComponent, DeleteAlertComponent, AlertComponent, LangPipe, TranslationsListComponent, ConfirmationDialogComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -54,7 +56,8 @@ export function HttpLoaderFactory (http: HttpClient) {
     MatFormFieldModule,
     AlertComponent,
     MatDialogModule,
-    OverlayModule
+    OverlayModule,
+    TranslationsListComponent
   ],
   providers: [
     {

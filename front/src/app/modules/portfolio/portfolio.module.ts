@@ -8,13 +8,15 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { UserPortfolioComponent } from './user-portfolio/user-portfolio.component';
 import { AddTabTemplateComponent } from './add-tab-template/add-tab-template.component';
 import { AddCardTemplateComponent } from './add-card-template/add-card-template.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [WholePortfolioComponent, PortfolioTabsComponent, OneTabComponent, UserPortfolioComponent, AddTabTemplateComponent, AddCardTemplateComponent],
   imports: [
     CommonModule,
     SharedModule,
-    MatTabsModule
+    MatTabsModule,
+    DragDropModule
   ]
 })
 export class PortfolioModule { }

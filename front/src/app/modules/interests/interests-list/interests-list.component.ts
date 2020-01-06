@@ -3,8 +3,9 @@ import { InterestsService } from 'src/app/core/services/interests.service';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 import { Interest } from 'src/app/shared/models/interest.model';
 import { AlertModel } from 'src/app/shared/models/alert.model';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { InterestModalComponent } from '../interest-modal/interest-modal.component';
+import { ModalService } from '../../../shared/services/modal.service';
 
 @Component({
   selector: 'app-interests-list',
@@ -84,6 +85,7 @@ export class InterestsListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       (data) => {
+        console.log(data);
         if (data) {
           if (data.success) {
             if (type === 'new') {
