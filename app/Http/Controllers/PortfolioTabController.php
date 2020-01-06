@@ -97,6 +97,8 @@ class PortfolioTabController extends Controller {
 
         $this->reindexPositions(PortfolioTab::class);
 
-        return LogService::delete($success > 0);
+        return LogService::delete($success > 0, [
+            'portfolioTabs' => PortfolioTab::where('portfolio_id', $input['portfolio_id'])->get()->toArray()
+        ]);
     }
 }

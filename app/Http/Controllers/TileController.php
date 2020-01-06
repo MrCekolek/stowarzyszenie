@@ -99,6 +99,8 @@ class TileController extends Controller {
 
         $this->reindexPositions(Tile::class);
 
-        return LogService::delete($success > 0);
+        return LogService::delete($success > 0, [
+            'tiles' => Tile::where('portfolio_tab_id', $input['portfolio_tab_id'])->get()->toArray()
+        ]);
     }
 }
