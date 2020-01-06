@@ -11,7 +11,13 @@
         },
         "HELPERS": {
             "ALERT": {
-                "SUCCESS": "Sukces!"
+                "SUCCESS": "Sukces!",
+                "DELETE": {
+                    "INTERESTS": {
+                        "TITLE": "Usuwanie obszaru badań",
+                        "TEXT": "Czy na pewno chcesz usunąć obszar badań"
+                    }
+                }
             },
             "ALERT_FAIL": "Błąd!",
             "EMPTY_STATE": {

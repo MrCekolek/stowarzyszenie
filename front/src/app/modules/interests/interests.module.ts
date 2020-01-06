@@ -7,6 +7,7 @@ import { InterestTileComponent } from './interest-tile/interest-tile.component';
 import { SharedModule } from '../../shared/shared.module';
 import { InterestModalComponent } from './interest-modal/interest-modal.component';
 import { FormsModule } from '@angular/forms';
+import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [InterestsListComponent, InterestTileComponent, InterestModalComponent],
@@ -16,7 +17,7 @@ import { FormsModule } from '@angular/forms';
     InterestsRoutingModule,
     FormsModule
   ],
-  entryComponents: [InterestModalComponent],
+  entryComponents: [InterestModalComponent, ConfirmationDialogComponent],
   providers: []
 })
 export class InterestsModule { }

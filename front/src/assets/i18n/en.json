@@ -11,7 +11,13 @@
         },
         "HELPERS": {
             "ALERT": {
-                "SUCCESS": "Success!"
+                "SUCCESS": "Success!",
+                "DELETE": {
+                    "INTERESTS": {
+                        "TITLE": "Removing the research area",
+                        "TEXT": "Are you sure you want to delete the research area"
+                    }
+                }
             },
             "ALERT_FAIL": "Error!",
             "EMPTY_STATE": {
