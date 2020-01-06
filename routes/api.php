@@ -68,20 +68,20 @@ Route::group([
         Route::prefix('tile')->group(function () {
             Route::post('{portfolioTab}/get', 'TileController@index');
             Route::post('create', 'TileController@create');
-            Route::post('{tile}/update', 'TileController@update');
-            Route::post('{tile}/destroy', 'TileController@destroy');
+            Route::post('update', 'TileController@update');
+            Route::post('destroy', 'TileController@destroy');
 
             Route::prefix('content')->group(function () {
                 Route::post('{tile}/get', 'TileContentController@index');
                 Route::post('create', 'TileContentController@create');
-                Route::post('{tileContent}/update', 'TileContentController@update');
-                Route::post('{tileContent}/destroy', 'TileContentController@destroy');
+                Route::post('update', 'TileContentController@update');
+                Route::post('destroy', 'TileContentController@destroy');
 
                 Route::prefix('content')->group(function () {
                     Route::post('{tileContent}/get', 'ContentController@index');
                     Route::post('create', 'ContentController@create');
-                    Route::post('{content}/update', 'ContentController@update');
-                    Route::post('{content}/destroy', 'ContentController@destroy');
+                    Route::post('update', 'ContentController@update');
+                    Route::post('destroy', 'ContentController@destroy');
                 });
             });
         });

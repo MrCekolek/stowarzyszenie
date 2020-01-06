@@ -3,8 +3,6 @@
 namespace App\Http\Requests;
 
 class TileContentRequest extends FormRequest {
-    protected $rules = [];
-
     public function __construct(array $input, $filter) {
         switch ($filter) {
             case 'create':
@@ -32,20 +30,25 @@ class TileContentRequest extends FormRequest {
             'name_en' => 'required',
             'name_ru' => 'required',
             'type' => 'required',
-            'tile_id' => 'required|exists:tile_contents'
+            'tile_id' => 'required|exists:tiles,id',
+            'tile_shared_id' => 'required|exists:tiles,shared_id'
         ];
     }
 
     public function checkUpdate() {
         $this->checkCreate();
         $this->rules = array_merge($this->rules, [
-            'id' => 'required|exists:tile_contents'
+            'id' => 'required|exists:tile_contents',
+            'shared_id' => 'required|exists:tile_contents',
+            'position' => 'required',
+            'admin_visibility' => 'required|in:true,false',
+            'user_visibility' => 'required|in:true,false'
         ]);
     }
 
     public function checkDestroy() {
         $this->rules = [
-            'id' => 'required|exists:tile_contents'
+            'shared_id' => 'required|exists:tile_contents'
         ];
     }
 }

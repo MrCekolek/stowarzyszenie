@@ -14,12 +14,12 @@ class PermissionParent extends BaseModel {
             'Users' => [
                 'id' => 1,
                 'name' => 'Users',
-                'translation_key' => 'USERS.USERS',
+                'translation_key' => 'USERS.USERS'
             ],
             'Roles' => [
                 'id' => 2,
                 'name' => 'Roles',
-                'translation_key' => 'ROLES.ROLES',
+                'translation_key' => 'ROLES.ROLES'
             ]
         ];
     }
