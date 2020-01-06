@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Conference extends Model
+class Conference extends BaseModel
 {
     protected $fillable = [
         'name_pl',

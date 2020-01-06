@@ -18,7 +18,7 @@ class RoleObserver {
             factory(PermissionRole::class)->create([
                 'permission_id' => $permission->id,
                 'role_id' => $role->id,
-                'selected' => $role->name === 'admin' ? 1 : 0
+                'selected' => $role->name_pl === 'Administrator' ? 1 : 0
             ]);
         }
     }

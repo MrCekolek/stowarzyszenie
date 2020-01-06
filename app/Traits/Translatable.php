@@ -8,8 +8,8 @@ use JWTAuth;
 trait Translatable {
     protected static function languages() {
         return [
-            'en',
             'pl',
+            'en',
             'ru'
         ];
     }
