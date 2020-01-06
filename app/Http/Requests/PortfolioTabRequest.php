@@ -48,7 +48,8 @@ class PortfolioTabRequest extends FormRequest {
 
     public function checkDestroy() {
         $this->rules = [
-            'shared_id' => 'required|exists:portfolio_tabs'
+            'shared_id' => 'required|exists:portfolio_tabs',
+            'portfolio_id' => 'required|exists:portfolios,id'
         ];
     }
 }

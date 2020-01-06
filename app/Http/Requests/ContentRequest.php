@@ -44,7 +44,7 @@ class ContentRequest extends FormRequest {
             'selected' => 'required',
             'position' => 'required',
             'admin_visibility' => 'required|in:true,false',
-            'user_visibility' => 'required|in:true,false',
+            'user_visibility' => 'required|in:true,false'
         ]);
     }
 
@@ -52,6 +52,7 @@ class ContentRequest extends FormRequest {
         $this->rules = [
             'id' => 'required|exists:contents',
             'shared_id' => 'required|exists:contents',
+            'tile_content_id' => 'required|exists:tile_contents,id'
         ];
     }
 }

@@ -105,6 +105,8 @@ class TileContentController extends Controller {
 
         $this->reindexPositions(TileContent::class);
 
-        return LogService::delete($success > 0);
+        return LogService::delete($success > 0, [
+            'tileContents' => TileContent::where('tile_id', $input['tile_id'])->get()->toArray()
+        ]);
     }
 }

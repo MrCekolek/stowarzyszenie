@@ -100,6 +100,8 @@ class ContentController extends Controller {
 
         $this->reindexPositions(Content::class);
 
-        return LogService::delete($success > 0);
+        return LogService::delete($success > 0, [
+            'contents' => Content::where('tile_content_id', $input['tile_content_id'])->get()->toArray()
+        ]);
     }
 }
