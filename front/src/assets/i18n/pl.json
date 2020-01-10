@@ -6,11 +6,18 @@
             "EDIT": "Edytuj",
             "SAVE": "Zapisz zmiany",
             "SAVE_SHORT": "Zapisz",
-            "BACK": "Powrót"
+            "BACK": "Powrót",
+            "TRANSLATE": "Przetłumacz"
         },
         "HELPERS": {
             "ALERT": {
-                "SUCCESS": "Sukces!"
+                "SUCCESS": "Sukces!",
+                "DELETE": {
+                    "INTERESTS": {
+                        "TITLE": "Usuwanie obszaru badań",
+                        "TEXT": "Czy na pewno chcesz usunąć obszar badań"
+                    }
+                }
             },
             "ALERT_FAIL": "Błąd!",
             "EMPTY_STATE": {
@@ -203,7 +210,8 @@
                             "TITLE_EDIT": "Edytuj obszar badań",
                             "INPUT_LABEL_NEW": "Wpisz nazwę nowego obszaru badań",
                             "TRANSLATIONS": "Tłumaczenia",
-                            "INPUT_HINT": "Kliknij pole tekstowe aby edytować"
+                            "INPUT_HINT": "Kliknij pole tekstowe aby edytować",
+                            "INPUT_LABEL_EDIT": "Zmień nazwę w aktualnym języku, aby przetłumaczyć lub edytuj pola tłumaczeń niżej"
                         }
                     },
                     "USER_DESC": "Opis dodany przez użytkownika",

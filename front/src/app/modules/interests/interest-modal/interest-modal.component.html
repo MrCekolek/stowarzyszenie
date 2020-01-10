@@ -28,31 +28,29 @@
         </div>
     </div>
 
-    <h5 *ngIf="this.translations.length > 0">
-        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.INTERESTS.MODAL.TRANSLATIONS' | translate }}
-    </h5>
+    <div class="from-group mb-4" *ngIf="this.modal_type == 'edit'">
+        <label class="text-primary" style="font-weight: 600;">
+            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.INTERESTS.MODAL.INPUT_LABEL_EDIT' | translate }}
+        </label>
 
-    <form #translationsForm="ngForm">
-        <ul class="list-unstyled">
-            <li *ngFor="let text of this.translations; let i = index; trackBy: trackByFn">
-                <div class="form-group row">
-                    <label [for]="'text' + i" class="col-sm-3 col-form-label h4">
-                        {{ this.languageService.supportedLangs[i] }}
-                    </label>
-                    <div class="col-sm-9">
-                        <input type="email" class="form-control" [name]="this.translations[i]" [id]="'text' + i" [value]="text" data-toggle="tooltip" data-placement="top" [title]="'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.INTERESTS.MODAL.INPUT_HINT' | translate" [(ngModel)]="this.translations[i]">
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </form>
+        <div class="input-group">
+            <input type="text" class="form-control" #translate aria-label="" [value]="interest['name_' + this.lang]">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getInterestTranslations(translate.value)" *ngIf="this.modal_type == 'edit'">
+                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <app-translations-list [translations]="this.translations"></app-translations-list>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button type="button" class="btn btn-primary" (click)="addInterest()" *ngIf="modal_type === 'new'">
+    <button type="button" class="btn btn-primary" [class.btn-progress]="isSaving" (click)="addInterest()" *ngIf="modal_type === 'new'">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
     </button>
     <button type="button" [class.btn-progress]="this.isSaving" class="btn btn-primary" *ngIf="modal_type === 'edit'" (click)="updateInterest()">
-        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
+        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE' | translate }}
     </button>
     <button type="button " class="btn btn-link" (click)="dismiss()">
         {{ 'STOWARZYSZENIE.MODALS.BUTTON_CANCEL' | translate }}

@@ -83,11 +83,11 @@ export class InterestModalComponent implements OnInit {
   }
 
   addInterest() {
+    this.isSaving = true;
     this.interestsService.addNewInterest(this.interest).subscribe(response => {
-      console.log(response);
+      this.isSaving = false;
+      this.dialogRef.close(response);
     });
-
-    // this.dialogRef.close(this.response);
   }
 
   updateInterest() {
@@ -99,9 +99,5 @@ export class InterestModalComponent implements OnInit {
       this.isSaving = false;
       this.dialogRef.close(data);
     });
-  }
-
-  trackByFn(index: any, item: any) {
-    return index;
   }
 }

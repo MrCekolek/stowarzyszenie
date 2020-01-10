@@ -4,6 +4,7 @@ import { PortfolioService } from 'src/app/core/services/portfolio.service';
 import { PortfolioCard } from 'src/app/shared/models/portfollio-card.model';
 import { ApiService } from '../../../core/http/api.service';
 import { PortfolioApiService } from '../../../core/http/portfolio-api.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-portfolio-tabs',
@@ -126,5 +127,9 @@ export class PortfolioTabsComponent implements OnInit {
       tab.deleting = false;
       console.log(response);
     });
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.tabs, event.previousIndex, event.currentIndex);
   }
 }

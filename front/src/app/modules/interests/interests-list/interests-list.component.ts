@@ -3,8 +3,10 @@ import { InterestsService } from 'src/app/core/services/interests.service';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 import { Interest } from 'src/app/shared/models/interest.model';
 import { AlertModel } from 'src/app/shared/models/alert.model';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { InterestModalComponent } from '../interest-modal/interest-modal.component';
+import { ModalService } from '../../../shared/services/modal.service';
+import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-interests-list',
@@ -52,20 +54,6 @@ export class InterestsListComponent implements OnInit {
   ngOnDestroy() {
   }
 
-  deleteInterest(id: number) {
-    console.log(id);
-    this.allInterests.find(i => i.id === id).deleteLoading = true;
-    this.interestsService.deleteInterest(id).subscribe(response => {
-      if (response.success) {
-        this.alert = new AlertModel('success', response.message);
-        this.allInterests.find(i => i.id === id).deleteLoading = false;
-        this.allInterests.splice(this.allInterests.findIndex(item => item.id === id), 1);
-      } else {
-        this.alert = new AlertModel('danger', response.message);
-      }
-    });
-  }
-
   enableEditing(interest) {
     interest.editing = true;
   }
@@ -84,7 +72,6 @@ export class InterestsListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       (data) => {
-        if (data) {
           if (data.success) {
             if (type === 'new') {
               this.interestsService.addNewInterest(data.interest);
@@ -93,10 +80,37 @@ export class InterestsListComponent implements OnInit {
             } else if (type === 'edit') {
               const index = this.allInterests.findIndex(item => item.id === data.interest.id);
               this.allInterests[index] = data.interest;
+              this.alert = new AlertModel('success', data.message);
             }
           } else {
             this.alert = new AlertModel('danger', data.message);
           }
+      }
+    );
+  }
+
+  openDeleteDialog(interest) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      title: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.INTERESTS.TITLE',
+      text: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.INTERESTS.TEXT',
+      element: interest,
+      apiToDelete: `interest/${interest.id}/destroy`
+    };
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
+    
+    dialogRef.afterClosed().subscribe(
+      (data) => {
+        if (data.success) {
+          const index = this.allInterests.indexOf(interest);
+          this.allInterests.splice(index, 1);
+          this.alert = new AlertModel('success', data.message);
+        } else {
+          this.alert = new AlertModel('danger', data.message);
         }
       }
     );

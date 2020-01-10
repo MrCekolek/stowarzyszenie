@@ -1,8 +1,8 @@
 <div class="col-sm-12">
     <div class="container testimonial-group">
         <div class="row">
-            <ul class="nav" id="protfolio-tabs" role="tablist" *ngIf="this.tabs.length > 0">
-                <li class="nav-item mr-2" *ngFor="let tab of tabs">
+            <ul class="nav" cdkDropList cdkDropListOrientation="horizontal" id="protfolio-tabs" role="tablist" *ngIf="this.tabs.length > 0" (cdkDropListDropped)="drop($event)">
+                <li class="nav-item mr-2" *ngFor="let tab of tabs" cdkDrag>
                     <!-- <a class="nav-link" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab" aria-controls="home">
                             {{ tab['name_' + lang] }} 
                         </a> -->
