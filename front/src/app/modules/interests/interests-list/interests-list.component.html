@@ -59,7 +59,7 @@
                                     <i class="fas fa-pencil-alt"></i>
                                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
                                 </button>
-                                <button type="button" class="btn btn-icon icon-left btn-danger" [class.btn-progress]="interest.deleteLoading" (click)="deleteInterest(interest.id)">
+                                <button type="button" class="btn btn-icon icon-left btn-danger" [class.btn-progress]="interest.deleteLoading" (click)="openDeleteDialog(interest)">
                                     <i class="fas fa-times"></i>
                                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
                                 </button>
