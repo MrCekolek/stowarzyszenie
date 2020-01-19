@@ -14,8 +14,8 @@ class CreateTileContentsTable extends Migration {
         Schema::create('tile_contents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('shared_id');
-            $table->string('name_en')->nullable();
             $table->string('name_pl')->nullable();
+            $table->string('name_en')->nullable();
             $table->string('name_ru')->nullable();
             $table->string('type');
             $table->string('translation_key');
