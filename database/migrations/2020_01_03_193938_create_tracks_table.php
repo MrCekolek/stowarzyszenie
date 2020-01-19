@@ -15,7 +15,13 @@ class CreateTracksTable extends Migration
     {
         Schema::create('tracks', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('conference_id');
             $table->timestamps();
+
+            $table->foreign('conference_id')
+                ->references('id')
+                ->on('conferences')
+                ->onDelete('cascade');
         });
     }
 

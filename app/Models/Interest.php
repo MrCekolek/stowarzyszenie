@@ -8,4 +8,9 @@ class Interest extends BaseModel {
         'name_pl',
         'name_ru'
     ];
+
+    public function users() {
+        return $this->belongsToMany(User::class)
+            ->using(InterestUser::class);
+    }
 }

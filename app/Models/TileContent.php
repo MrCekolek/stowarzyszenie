@@ -5,8 +5,8 @@ namespace App\Models;
 class TileContent extends BaseModel {
     protected $fillable = [
         'shared_id',
-        'name_en',
         'name_pl',
+        'name_en',
         'name_ru',
         'type',
         'translation_key',

@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Content extends Model {
+class Content extends BaseModel {
     protected $fillable = [
         'shared_id',
-        'value',
+        'value_pl',
+        'value_en',
+        'value_ru',
         'selected',
         'position',
         'admin_visibility',

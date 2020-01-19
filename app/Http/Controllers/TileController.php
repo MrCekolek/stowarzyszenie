@@ -21,7 +21,10 @@ class TileController extends Controller {
 
     public function index(PortfolioTab $portfolioTab) {
         return LogService::read(true, [
-            'tiles' => Tile::where('portfolio_tab_id', $portfolioTab->id)->get()->toArray()
+            'tiles' => Tile::with('tileContents.contents')
+                ->where('portfolio_tab_id', $portfolioTab->id)
+                ->get()
+                ->toArray()
         ]);
     }
 
