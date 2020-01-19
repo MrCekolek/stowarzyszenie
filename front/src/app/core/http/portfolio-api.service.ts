@@ -59,4 +59,8 @@ export class PortfolioApiService {
   getCardContent(cardID: number) {
     return this.apiService.post(`portfolio/tile/content/${cardID}/get`);
   }
+
+  addContentToCardContent(content) {
+    return this.apiService.post('portfolio/tile/content/content/create', content);
+  }
 }

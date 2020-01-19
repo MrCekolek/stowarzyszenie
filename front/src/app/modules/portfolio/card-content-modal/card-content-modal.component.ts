@@ -43,9 +43,12 @@ export class CardContentModalComponent implements OnInit {
     tile_shared_id: 0
   };
 
+  titleLoading = false;
   translateLoading = false;
   addLoading = false;
-  translations = [];
+  titleTranslations = [];
+  newOptionTranslations = [];
+  contents = [];
 
   constructor(
     private dialogRef: MatDialogRef<CardContentModalComponent>,
@@ -65,7 +68,8 @@ export class CardContentModalComponent implements OnInit {
   }
 
   dismiss() {
-    this.translations = [];
+    this.titleTranslations = [];
+    this.newOptionTranslations = [];
     this.selectedType = '';
     this.dialogRef.close();
   }
@@ -76,9 +80,9 @@ export class CardContentModalComponent implements OnInit {
     this.newContent = {
       id: 0,
       shared_id: 0,
-      name_pl: this.translations[0],
-      name_en: this.translations[1],
-      name_ru: this.translations[2],
+      name_pl: this.titleTranslations[0],
+      name_en: this.titleTranslations[1],
+      name_ru: this.titleTranslations[2],
       type: this.selectedType,
       tile_id: this.card.id,  
       tile_shared_id: this.card.shared_id
@@ -92,20 +96,49 @@ export class CardContentModalComponent implements OnInit {
     });
   }
 
-  translate(input) {
+  translate(input, type) {
     const obj = {
       name: input
     };
 
-    this.translateLoading = true;
+    if (type === 'title') {
+      this.titleLoading = true;
+    } else if (type === 'option') {
+      this.translateLoading = true;
+    }
+
     this.apiService.post('translation/get', obj).subscribe(response => {
       console.log(response);
-      this.translations[0] = response.translation.name_pl;
-      this.translations[1] = response.translation.name_en;
-      this.translations[2] = response.translation.name_ru;
 
-      this.translateLoading = false;
+      if (type === 'title') {
+        this.titleTranslations[0] = response.translation.name_pl;
+        this.titleTranslations[1] = response.translation.name_en;
+        this.titleTranslations[2] = response.translation.name_ru;
+
+        this.titleLoading = false;
+      } else if (type === 'option') {
+        this.newOptionTranslations[0] = response.translation.name_pl;
+        this.newOptionTranslations[1] = response.translation.name_en;
+        this.newOptionTranslations[2] = response.translation.name_ru;
+
+        const obj = {
+          id: 0,
+          shared_id: 0,
+          value_pl: this.newOptionTranslations[0],
+          value_en: this.newOptionTranslations[1],
+          value_ru: this.newOptionTranslations[2],
+          selected: false,
+          position: 0,
+          admin_visibility: true,
+          user_visibility: true,
+          tile_content_id: 0,
+          tile_content_shared_id: 0
+        };
+
+        this.contents.push();
+
+        this.translateLoading = false;
+      }
     });
   }
-
 }
