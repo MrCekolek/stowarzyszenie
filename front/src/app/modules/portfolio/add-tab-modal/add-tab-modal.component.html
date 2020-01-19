@@ -1,0 +1,60 @@
+<h2 mat-dialog-title>
+    <span *ngIf="this.modal_type == 'new'">
+        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADD_MODAL.TITLE' | translate }}
+    </span>
+
+    <span *ngIf="this.modal_type == 'edit'">
+        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADD_MODAL.TITLE_EDIT' | translate }}
+    </span>
+</h2>
+
+<mat-dialog-content>
+
+    <div class="from-group mb-4" *ngIf="this.modal_type == 'new'">
+        <label class="text-primary" style="font-weight: 600;">
+            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADD_MODAL.NEW_INPUT' | translate }}
+        </label>
+
+        <div class="input-group">
+            <input type="text" class="form-control" #new aria-label="" [value]="tab['name_' + this.lang]">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getTabTranslations(new.value)" *ngIf="this.modal_type == 'new'">
+                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                </button>
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="updateTab()" *ngIf="this.modal_type == 'edit'">
+                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="from-group mb-4" *ngIf="this.modal_type == 'edit'">
+        <label class="text-primary" style="font-weight: 600;">
+            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADD_MODAL.EDIT_INPUT' | translate }}
+        </label>
+
+        <div class="input-group">
+            <input type="text" class="form-control" #translate aria-label="" [value]="tab['name_' + this.lang]">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getTabTranslations(translate.value)" *ngIf="this.modal_type == 'edit'">
+                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <app-translations-list *ngIf="this.translations.length != 0" [translations]="this.translations"></app-translations-list>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button #addbtn type="button" [class.disabled]="this.translations.length === 0" [disabled]="this.translations.length === 0" matTooltip="'You must fill all fields to add'" [matTooltipDisabled]="this.translations.length != 0" class="btn btn-primary" [class.btn-progress]="isSaving"
+        (click)="addTab()" *ngIf="modal_type === 'new'">
+        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
+    </button>
+    <button #editbtn [class.disabled]="this.translations.length === 0" [disabled]="this.translations.length === 0" matTooltip="'You must fill all fields to add'" type="button" [matTooltipDisabled]="this.translations.length != 0" [class.btn-progress]="this.isSaving"
+        class="btn btn-primary" *ngIf="modal_type === 'edit'" (click)="updateTab()">
+        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE' | translate }}
+    </button>
+    <button type="button" class="btn btn-link" (click)="dismiss()">
+        {{ 'STOWARZYSZENIE.MODALS.BUTTON_CANCEL' | translate }}
+    </button>
+</mat-dialog-actions>

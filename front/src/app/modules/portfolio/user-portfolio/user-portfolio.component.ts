@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/shared/services/user/user.service';
+import { UserService } from '../../../shared/services/user/user.service';
+import { LanguageService } from '../../../shared/services/user/language.service';
+
 
 @Component({
   selector: 'app-user-portfolio',
@@ -14,18 +16,13 @@ export class UserPortfolioComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private languageService: LanguageService
   ) { }
 
   ngOnInit() {
-    if (!this.userID) {
-      this.userID = this.route.snapshot.params['id'];
-    }
-
-    // TODO: odkryc czemu user is undefined
-    this.userID === this.userService.user.id ? 
-    this.isOwner = true : this.isOwner = false;
-
-    console.log('s');
+    this.userID = this.route.snapshot.params['id'];
+    
+    this.isOwner = this.userID == this.languageService.getUser().id;
   }
 }

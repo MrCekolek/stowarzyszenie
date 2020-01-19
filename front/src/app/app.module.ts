@@ -1,15 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UserService } from "./shared/services/user/user.service";
 import 'hammerjs';
 import { NavigationModule } from './modules/navigation/navigation.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
-import { NbSecurityModule } from '@nebular/security';
 import { PageLoaderComponent } from './shared/components/page-loader/page-loader.component';
+import { UserProviderService } from './shared/services/user/user-provider.service';
+import { userProviderFactory } from './shared/functions/userProviderFactory';
 
 @NgModule({
   declarations: [
@@ -22,11 +22,12 @@ import { PageLoaderComponent } from './shared/components/page-loader/page-loader
     BrowserAnimationsModule,
     NavigationModule,
     AppRoutingModule,
-    DashboardModule,
-    NbSecurityModule,
-    NbSecurityModule.forRoot(),
+    DashboardModule
   ],
-  providers: [UserService, Document],
+  providers: [Document, UserProviderService, {
+    provide: APP_INITIALIZER,
+    useFactory: userProviderFactory, deps: [UserProviderService], multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,14 +12,18 @@ export class WholePortfolioComponent implements OnInit {
   allTabs: any = [];
   lang: string = '';
 
+  private loading = true;
+
   constructor(
     private portfolioService: PortfolioService,
     private languageService: LanguageService
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.portfolioService.getAllTabs().subscribe(value => {
       this.allTabs = value.portfolioTabs;
+      this.loading = false;
     });
 
     this.languageService.currentLang.subscribe( lg => {

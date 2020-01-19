@@ -83,8 +83,9 @@ class AuthController extends Controller {
         return LogService::read(true, [
             'user' => User::where('id', auth()->user()->id)
                 ->with([
-                    'preferenceUser',
                     'affilationUser',
+                    'portfolio',
+                    'preferenceUser',
                     'roles.permissions'
                 ])
                 ->first()

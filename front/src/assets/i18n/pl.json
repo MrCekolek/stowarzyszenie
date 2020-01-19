@@ -16,6 +16,14 @@
                     "INTERESTS": {
                         "TITLE": "Usuwanie obszaru badań",
                         "TEXT": "Czy na pewno chcesz usunąć obszar badań"
+                    },
+                    "PORTFOLIO_TAB": {
+                        "TITLE": "Usuwanie zakładki",
+                        "TEXT": "Czy na pewno chcesz usunąć zakładkę"
+                    },
+                    "PORTFOLIO": {
+                        "CARD": "Czy na pewno chcesz usunąć kartę",
+                        "CARD_TITLE": "Usuwanie karty"
                     }
                 }
             },
@@ -26,7 +34,9 @@
             },
             "HELPER_BUTTON_TEXT": "Pomoc",
             "LOADING_TEXT": "Ładowanie",
-            "SEARCH_PLACEHOLDER": "Wyszukaj"
+            "SEARCH_PLACEHOLDER": "Wyszukaj",
+            "HELP": "Pomoc",
+            "OPTIONS": "Opcje"
         },
         "LABELS_TABLES": {
             "AVATAR": "Avatar",
@@ -211,7 +221,8 @@
                             "INPUT_LABEL_NEW": "Wpisz nazwę nowego obszaru badań",
                             "TRANSLATIONS": "Tłumaczenia",
                             "INPUT_HINT": "Kliknij pole tekstowe aby edytować",
-                            "INPUT_LABEL_EDIT": "Zmień nazwę w aktualnym języku, aby przetłumaczyć lub edytuj pola tłumaczeń niżej"
+                            "INPUT_LABEL_EDIT": "Zmień nazwę w aktualnym języku, aby przetłumaczyć lub edytuj pola tłumaczeń niżej",
+                            "TRANSLATIONS_DESC": "Poniżej wyświetlone są tłumaczenia dodanego kontentu na wszystkie dostępne w systemie języki. Kliknij pole tekstowe, aby edytować wybrane tłumaczenie."
                         }
                     },
                     "USER_DESC": "Opis dodany przez użytkownika",
@@ -230,6 +241,43 @@
                     "TITLE_UNOWNER": "Profil użytkownika",
                     "SECTION_TITLE_OWNER": "Profil",
                     "SECTION_LEAD_OWNER": "Tutaj możesz obejrzeć swój profil i edytować informacje na nim zawarte. Możesz też wybierać, które sekcje mają być widoczne lub nie."
+                },
+                "ADD_MODAL": {
+                    "TITLE": "Dodaj nową zakładkę",
+                    "TITLE_EDIT": "Edytuj zakładkę",
+                    "NEW_INPUT": "Podaj nazwę nowej zakładki",
+                    "EDIT_INPUT": "Edytuj nazwę w aktualnym języku, aby przetłumaczyć"
+                },
+                "CONTENT": {
+                    "MODAL_TITLE": {
+                        "NEW": "Dodaj nową zawartość do karty",
+                        "EDIT": "Edytuj zawartość karty"
+                    },
+                    "EMPTY_CARD": "W tej karcie nic nie ma. Dodaj nową zawartość, którą użytkownicy będą mogli uzupełniać.",
+                    "EMPTY_CARD_BUTTON": "Dodaj nową zawartość",
+                    "MODAL_INPUT_LABEL": "Wybierz rodzaj nowej zawartości w tej karcie:",
+                    "MODAL": {
+                        "INPUT_DESC": "Krótkie pole tekstowe, które użytkownicy będą mogli wypełnić własnym tekstem.",
+                        "TEXTAREA_DESC": "Długie pole tekstowe, które użytkownicy mogą wypełnić własnym tekstem",
+                        "CHECKBOX_DESC": "Lista opcji do wyboru - możesz dodać dowolną ilość opcji, wśród których użytkownicy mogą wybierać",
+                        "SELECT_DESC": "Lista opcji do wyboru w formie rozwijanej listy - możesz dodać dowolną ilość opcji, które użytkownicy mogą wybierać",
+                        "RADIO_DESC": "Kilka opcji do wyboru, z których użytkownicy mogą wybrać tylko jedną",
+                        "CONTENT_NAME_LABEL": "Podaj nazwę nowej zawartości",
+                        "HELP_TEXT_2": "Aby dodać nową zawartość do karty, wybierz rodzaj zawartości z dostępnej listy wyboru, następnie podaj nazwę, np. \"Znajomość języków\" -",
+                        "HELP_TEXT_3": "aby użytkownicy mogli dodawać informacje o językach, którymi się posługują. To jaki rodzaj zawartości wybierzesz, zależy od Ciebie - może to być lista wyboru, gdzie będą zdefiniowane tylko języki do wyboru, lub opcja wpisania własnego tekstu.",
+                        "HELP_TEXT_1": "Karty widoczne na profilach użytkowników posiadają zawartość, którą mogą oni wypełniać. Decydujesz, jaki rodzaj zawartości jest dla nich dostępny do wypełniania.",
+                        "CHECKBOX_CONTENT_PLACEHOLDER": "Wpisz nazwę nowej opcji..."
+                    },
+                    "TYPE_DESC": {
+                        "INPUT": "Krótkie pole tekstowe",
+                        "TEXTAREA": "Długie pole tekstowe",
+                        "CHECKBOX": "Lista oznaczanych opcji"
+                    },
+                    "ADMIN_CONTENT_PLACEHOLDER": "Tekst użytkownika"
+                },
+                "EDIT_CARD": {
+                    "TITLE": "Edytuj kartę",
+                    "INPUT_LABEL": "Edytuj tytuł karty"
                 }
             },
             "ROLES": {

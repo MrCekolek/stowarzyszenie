@@ -21,11 +21,7 @@ export class PortfolioService {
      return this.portfolioApiService.getTabCards(tabID);
   }
 
-  addCardToTab(name: string, tabID: number) {
-    const obj = {
-      name: name,
-      portfolio_tab_id: tabID
-    };
-    return this.portfolioApiService.addCard(obj);
+  addCardToTab(card: Object) {
+    return this.portfolioApiService.addCard(card);
   }
 }

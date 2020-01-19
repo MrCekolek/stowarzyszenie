@@ -5,7 +5,6 @@ import { Interest } from 'src/app/shared/models/interest.model';
 import { AlertModel } from 'src/app/shared/models/alert.model';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { InterestModalComponent } from '../interest-modal/interest-modal.component';
-import { ModalService } from '../../../shared/services/modal.service';
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -22,7 +21,7 @@ export class InterestsListComponent implements OnInit {
 
   private alert: AlertModel
 
-  private loading: boolean;
+  private loading: boolean = false;
 
   private alertMessage: string = '';
   private alertClass: string = '';
@@ -72,6 +71,7 @@ export class InterestsListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       (data) => {
+        if (data) {
           if (data.success) {
             if (type === 'new') {
               this.interestsService.addNewInterest(data.interest);
@@ -85,6 +85,7 @@ export class InterestsListComponent implements OnInit {
           } else {
             this.alert = new AlertModel('danger', data.message);
           }
+        }
       }
     );
   }
@@ -105,12 +106,14 @@ export class InterestsListComponent implements OnInit {
     
     dialogRef.afterClosed().subscribe(
       (data) => {
-        if (data.success) {
-          const index = this.allInterests.indexOf(interest);
-          this.allInterests.splice(index, 1);
-          this.alert = new AlertModel('success', data.message);
-        } else {
-          this.alert = new AlertModel('danger', data.message);
+        if (data) {
+          if (data.success) {
+            const index = this.allInterests.indexOf(interest);
+            this.allInterests.splice(index, 1);
+            this.alert = new AlertModel('success', data.message);
+          } else {
+            this.alert = new AlertModel('danger', data.message);
+          }
         }
       }
     );

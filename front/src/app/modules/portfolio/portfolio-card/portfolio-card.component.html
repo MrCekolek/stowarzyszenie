@@ -1,0 +1,100 @@
+<div class="card">
+    <div class="card-header">
+        <h4>
+            {{ card['name_' + this.lang] }}
+        </h4>
+        <div class="card-header-action">
+            <div class="dropdown">
+                <a data-toggle="dropdown" class="btn btn-success text-white dropdown-toggle" aria-expanded="false">
+                    {{ 'STOWARZYSZENIE.HELPERS.OPTIONS' | translate }}
+                </a>
+                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 26px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <a class="dropdown-item has-icon" (click)="emitEditEvent()">
+                        <i class="far fa-edit"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
+                    </a>
+                    <a class="dropdown-item has-icon text-danger" (click)="deleteCard()">
+                        <i class="far fa-trash-alt"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="d-flex justify-content-center">
+            <div *ngIf="this.isLoading; else content" class="spinner-border text-primary " role="status" style="width: 2rem; height: 2rem;">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+
+        <ng-template #content>
+            <div *ngIf="this.contents.length === 0">
+                <div class="empty-state" data-height="400" style="height: 400px;">
+                    <div class="empty-state-icon">
+                        <i class="fas fa-question"></i>
+                    </div>
+                    <p class="lead">
+                        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.EMPTY_CARD' | translate }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="contents" *ngIf="this.contents.length > 0">
+                <div *ngFor="let content of contents; let i = index">
+                    <div [ngSwitch]="content.type">
+                        <div *ngSwitchCase="'input'">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">
+                                    {{ content['name_' + lang] }}
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly [placeholder]="'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.ADMIN_CONTENT_PLACEHOLDER' | translate">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngSwitchCase="'textarea'">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">
+                                    {{ content['name_' + lang] }}
+                                </label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" rows="4" cols="5" value="{{'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.ADMIN_CONTENT_PLACEHOLDER' | translate}}">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngSwitchCase="'checkbox'">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">
+                                    {{ content['name_' + lang] }}
+                                </label>
+                                <div class="col-sm-9">
+                                    <ul class="list-unstyled">
+                                        <li *ngFor="let item of content.contents">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck1" diabled>
+                                                <label class="custom-control-label" for="customCheck1">
+                                                    {{ item['name_' + lang] }}
+                                                </label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngSwitchDefault>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+
+        <a class="btn btn-primary text-white mt-4" (click)="openNewContentModal('new')">
+            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.EMPTY_CARD_BUTTON' | translate }}
+        </a>
+    </div>
+</div>

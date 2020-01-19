@@ -9,11 +9,12 @@ export class UserModel {
   birthdate: string;
   gender: number;
   affilation_user?: object;
+  portfolio: object;
   preference_user?: object;
   lang: string;
   roles: Array<Role>;
   phone_number?: string; 
-  fullName: string;
+  name: string;
 
   constructor(userModel: Object) {
     this.id = userModel['user']['id'];
@@ -23,9 +24,10 @@ export class UserModel {
     this.birthdate = userModel['user']['birthdate'];
     this.gender = userModel['user']['gender'];
     this.affilation_user = userModel['user']['affilation_user'];
+    this.portfolio = userModel['user']['portfolio'];
     this.preference_user = userModel['user']['preference_user'];
     this.roles = userModel['user']['roles'];
-    this.fullName = userModel['user']['fullName'];
+    this.name = userModel['user']['name'];
   }
 
   setLang(lang: string) {

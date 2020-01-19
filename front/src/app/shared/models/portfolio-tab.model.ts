@@ -5,8 +5,8 @@ export class PortfolioTab {
     name_pl?: string;
     name_ru?: string;
     position: number;
-    admin_visibility: boolean;
-    user_visibility: boolean;
+    admin_visibility: number;
+    user_visibility: number;
     portfolio_id: number;
 
     constructor(portfolioTab: Object) {

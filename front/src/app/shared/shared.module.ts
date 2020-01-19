@@ -17,6 +17,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { LangPipe } from './pipes/lang.pipe';
 import { TranslationsListComponent } from './components/translations-list/translations-list.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { UserService } from './services/user/user.service';
 
 export function HttpLoaderFactory (http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -71,6 +72,7 @@ export class SharedModule {
 
   constructor(
     private languageService: LanguageService,
+    private userService: UserService,
     public translateService: TranslateService
   ) {
     this.translateService.addLangs(this.languageService.supportedLangs);
