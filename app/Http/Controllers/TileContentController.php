@@ -46,6 +46,16 @@ class TileContentController extends Controller {
         $tileContent->tile_shared_id = $input['tile_shared_id'];
         $success = $tileContent->save();
 
+        $content = new Content();
+        $content->shared_id = Content::max('shared_id') + 1;
+        $content->value_pl = '';
+        $content->value_en = '';
+        $content->value_ru = '';
+        $content->position = Content::max('position') + 1;
+        $content->tile_content_id = $tileContent->id;
+        $content->tile_content_shared_id = $tileContent->shared_id;
+        $content->save();
+
         CreateTileContentJob::dispatch(
             $tileContent->shared_id,
             $tileContent->name_pl,
@@ -55,28 +65,13 @@ class TileContentController extends Controller {
             $tileContent->translation_key,
             $tileContent->position,
             $input['tile_id'],
-            $input['tile_shared_id']
+            $input['tile_shared_id'],
+            $content
         );
 
         return LogService::create($success, [
             'tileContent' => $tileContent->toArray()
         ]);
-    }
-
-    private function setType(&$tileContent, $type, $tileId, $tileSharedId) {
-        switch ($type) {
-            case 'input' && 'textarea':
-                $content = new Content();
-                $content->value_pl = '';
-                $content->value_en = '';
-                $content->value_ru = '';
-                $content->tile_content_id = $tileId;
-                $content->tile_content_shared_id = $tileSharedId;
-                $content->save();
-
-                break;
-        }
-
     }
 
     public function update(Request $request) {
@@ -105,7 +100,10 @@ class TileContentController extends Controller {
         }
 
         return LogService::update($success, [
-            'tileContent' => TileContent::where('id', $input['id'])->first()->toArray
+            'tileContent' => TileContent::with('contents')
+                ->where('id', $input['id'])
+                ->first()
+                ->toArray()
         ]);
     }
 
