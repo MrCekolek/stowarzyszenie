@@ -30,7 +30,6 @@ export class InterestModalComponent implements OnInit {
   private translations = [];
 
   private lang;
-  private response;
 
   constructor(
     private dialogRef: MatDialogRef<InterestModalComponent>,

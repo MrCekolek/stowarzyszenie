@@ -127,10 +127,11 @@
                     </div>
                 </div>
             </form>
+
             <ul class="navbar-nav navbar-right">
                 <!-- language choosing -->
                 <li class="dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                         <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]" [alt]="this.languageService.currentLang" class="rounded-circle mr-1">
 
                         <div class="d-sm-none d-lg-inline-block">
@@ -140,7 +141,7 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#" class="dropdown-item has-icon" *ngFor="let lang of translateService.getLangs(); let i = index" [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
+                        <a class="dropdown-item has-icon" *ngFor="let lang of translateService.getLangs(); let i = index" [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
                             <img [src]="this.flagsImages[i]" [alt]="this.languageService.currentLang"> {{ this.translations[i] | translate }}
                         </a>
                     </div>
@@ -148,7 +149,7 @@
 
                 <!-- user dropdown -->
                 <li class="dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                         <img alt="image" [src]="this.userService.user?.preference_user.avatar" class="rounded-circle mr-1" *ngIf="this.userService.user?.preference_user">
                         <div class="d-sm-none d-lg-inline-block">
                             <span *ngIf="this.userService.user">
@@ -162,14 +163,14 @@
                                 {{ this.userService.user?.login_email }}
                             </span>
                         </div>
-                        <a href="features-profile.html" class="dropdown-item has-icon">
+                        <a [routerLink]="['/users/profile', this.userService.user?.id]" class="dropdown-item has-icon">
                             <i class="far fa-user"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.MY_ACCOUNT' | translate }}
                         </a>
-                        <a href="features-settings.html" class="dropdown-item has-icon">
+                        <a class="dropdown-item has-icon">
                             <i class="fas fa-cog"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.EDIT_ACCOUNT' | translate }}
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item has-icon text-danger" (click)="logout()">
+                        <a class="dropdown-item has-icon text-danger" (click)="logout()">
                             <i class="fas fa-sign-out-alt"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.LOGOUT' | translate }}
                         </a>
                     </div>
@@ -202,6 +203,7 @@
                     <li class="menu-header">
                         {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.MENU_HEADINGS.USERS' | translate }}
                     </li>
+
                     <li class="dropdown">
                         <a class="nav-link has-dropdown">
                             <i class="fas fa-user"></i>

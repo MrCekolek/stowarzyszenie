@@ -5,6 +5,7 @@ import { Router, NavigationStart } from '@angular/router';
 import { UserModel } from './shared/models/user.model';
 import { SearchService } from './shared/services/user/search.service';
 import { map } from 'rxjs/operators';
+import { UserProviderService } from './shared/services/user/user-provider.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ import { map } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'front';
-  private isPageLoading;
+  private isPageLoading: boolean = true;
   private loggedIn: boolean;
 
   constructor(
@@ -22,14 +23,34 @@ export class AppComponent {
     @Inject(Document) private document: Document,
     private renderer: Renderer2,
     private router: Router,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private userProvider: UserProviderService
   ) {
     this.translateService.addLangs(['pl', 'en']);
     this.translateService.setDefaultLang('pl');
+
+    this.userService.changeUser(this.userProvider.getUser());
   }
 
   ngOnInit() {
-    this.togglePageLoading(true);
+    this.isPageLoading = true;
+    
+    let events: any = this.router.events;
+
+    if (this.loggedIn) {
+      this.router.events.subscribe(event => {
+        // update user model
+        if (event instanceof NavigationStart) {
+          this.userService.me().subscribe(
+            response => {
+              this.userService.changeUser(new UserModel(response));
+              console.log(this.userService.getUser());
+            }
+          );
+        }
+      });
+    }
+
     this.userService.loginStatus.subscribe(value => {
       this.loggedIn = value;
 
@@ -40,29 +61,7 @@ export class AppComponent {
       }
     });
 
-    let events: any = this.router.events;
-
-    if (this.loggedIn) {
-      this.router.events.subscribe(event => {
-        // update user model
-        if (event instanceof NavigationStart) {
-          this.userService.me().subscribe(
-            response => {
-              this.userService.changeUser(new UserModel(response));
-              console.log(new UserModel(response));
-            }
-          );
-        }
-      });
-    }
-  }
-
-  ngAfterViewInit() {
-    this.togglePageLoading(false);
-  }
-
-  togglePageLoading(value: boolean) {
-    this.isPageLoading = value;
+    this.isPageLoading = false;
   }
 
   ngOnDestroy() {

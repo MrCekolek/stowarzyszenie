@@ -1,0 +1,120 @@
+<h2 mat-dialog-title>
+    <span *ngIf="this.modal_type === 'new'">
+        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL_TITLE.NEW' | translate }}
+    </span>
+
+    <span *ngIf="this.modal_type === 'edit'">
+        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL_TITLE.EDIT' | translate }}
+    </span>
+</h2>
+
+<mat-dialog-content>
+    <!-- opis po co w ogole jest ten modal -->
+    <div class="alert alert-light alert-has-icon">
+        <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+        <div class="alert-body">
+            <div class="alert-title">
+                {{ 'STOWARZYSZENIE.HELPERS.HELP' | translate }}
+            </div>
+            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.HELP_TEXT_1' | translate }} {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.HELP_TEXT_2' | translate }} {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.HELP_TEXT_3' | translate }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>
+            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL_INPUT_LABEL' | translate }}
+        </label>
+        <select class="form-control" [(ngModel)]="selectedType">
+            <option value="{{ option.label }}" *ngFor="let option of types">
+                {{ option.key | translate }}
+            </option>
+        </select>
+    </div>
+
+    <div [ngSwitch]="selectedType" *ngIf="selectedType">
+
+        <div *ngSwitchCase="'input'">
+            <p>
+                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.INPUT_DESC' | translate }}
+            </p>
+
+            <div class="form-group mb-4">
+                <label class="text-primary" style="font-weight: 600;">
+                    {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.CONTENT_NAME_LABEL' | translate }}
+                </label>
+
+                <div class="input-group">
+                    <input type="text" class="form-control" #translateInput aria-label="">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" [class.btn-progress]="this.translateLoading" (click)="translate(translateInput.value)">
+                            {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <app-translations-list *ngIf="this.translations.length != 0" [translations]="this.translations"></app-translations-list>
+        </div>
+
+        <div *ngSwitchCase="'textarea'">
+            <p>
+                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.TEXTAREA_DESC' | translate }}
+            </p>
+
+            <div class="form-group mb-4">
+                <label class="text-primary" style="font-weight: 600;">
+                    {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.CONTENT_NAME_LABEL' | translate }}
+                </label>
+
+                <div class="input-group">
+                    <input type="text" class="form-control" #translateTextArea aria-label="">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" [class.btn-progress]="this.translateLoading" (click)="translate(translateTextArea.value)">
+                            {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <app-translations-list *ngIf="this.translations.length != 0" [translations]="this.translations"></app-translations-list>
+        </div>
+        <!-- 
+        <div *ngSwitchCase="'checkbox'">
+            <p>
+                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.CHECKBOX_DESC' | translate }}
+            </p>
+    
+         <app-translations-list *ngIf="this.translations.length != 0" [translations]="this.translations"></app-translations-list> -->
+        <!-- <app-checkbox [lang]="lang"></app-checkbox>
+    </div>
+    
+    <div *ngSwitchCase="'select'">
+        <p>
+            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.SELECT_DESC' | translate }}
+        </p>
+    
+    </div>
+    
+    <div *ngSwitchCase="'radio'">
+        <p>
+            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.RADIO_DESC' | translate }}
+        </p>
+    
+    </div> -->
+
+
+        <div *ngSwitchDefault></div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button type="button" class="btn btn-primary" [class.btn-progress]="isSaving" *ngIf="modal_type === 'new'" (click)="addNewContent()">
+        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
+    </button>
+    <button type="button" [class.btn-progress]="this.isSaving" class="btn btn-primary" *ngIf="modal_type === 'edit'" (click)="updateContent()">
+        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE' | translate }}
+    </button>
+    <button type="button " class="btn btn-link" (click)="dismiss()">
+        {{ 'STOWARZYSZENIE.MODALS.BUTTON_CANCEL' | translate }}
+    </button>
+</mat-dialog-actions>

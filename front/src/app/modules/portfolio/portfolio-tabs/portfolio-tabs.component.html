@@ -1,121 +1,78 @@
-<div class="col-sm-12">
-    <div class="container testimonial-group">
-        <div class="row">
-            <ul class="nav" cdkDropList cdkDropListOrientation="horizontal" id="protfolio-tabs" role="tablist" *ngIf="this.tabs.length > 0" (cdkDropListDropped)="drop($event)">
-                <li class="nav-item mr-2" *ngFor="let tab of tabs" cdkDrag>
-                    <!-- <a class="nav-link" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab" aria-controls="home">
+<div class="container testimonial-group">
+    <ul class="nav" cdkDropList cdkDropListOrientation="horizontal" id="protfolio-tabs" role="tablist" *ngIf="this.tabs.length > 0" (cdkDropListDropped)="drop($event)">
+        <li class="nav-item mr-2" *ngFor="let tab of tabs" cdkDrag>
+            <!-- <a class="nav-link" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab" aria-controls="home">
                             {{ tab['name_' + lang] }} 
                         </a> -->
-                    <ng-container [ngTemplateOutlet]="tab.editing ? editing : noediting" [ngTemplateOutletContext]="{tab:tab}">
-                    </ng-container>
 
-                    <ng-template #noediting let-tab='tab'>
-                        <div class="btn-group">
-                            <a type="button" (click)="selectActiveTab(tab)" class="btn btn-primary text-white" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab">
-                                    {{ tab['name_' + lang] }} 
-                                </a>
-                            <a type="button" class="btn btn-primary text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
-                                <span class="sr-only">Toggle Dropdown</span>
+            <div class="btn-group">
+                <a type="button" (click)="selectActiveTab(tab)" class="btn btn-primary text-white" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab">
+                                {{ tab['name_' + lang] }} 
                             </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item text-success" (click)="editTab(tab)">
-                                    <i class="fas fa-pencil-alt mr-2"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
-                                </a>
-                                <a class="dropdown-item text-danger" (click)="deleteTab(tab)">
-                                    <i class="fas fa-times mr-2"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
-                                </a>
-                            </div>
-                        </div>
-                    </ng-template>
+                <a type="button" class="btn btn-primary text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item text-success" (click)="openTabModal('edit', tab)">
+                        <i class="fas fa-pencil-alt mr-2"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
+                    </a>
+                    <a class="dropdown-item text-danger" (click)="openDeleteDialog(tab)">
+                        <i class="fas fa-times mr-2"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
+                    </a>
+                </div>
+            </div>
+        </li>
 
-                    <ng-template #editing let-tab='tab'>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input type="text" #editTemplate autofocus class="form-control form-control-sm" placeholder="" aria-label="" [value]="tab['name_' + lang]">
-                                <div class="input-group-append">
-                                    <button class="btn btn-success btn-sm px-2" [class.btn-progress]="tab.loading" type="button" (click)="updateTab(tab, editTemplate.value)">
-                                            <i class="fas fa-check"></i>
-                                        </button>
-                                </div>
-                                <div class="input-group-append">
-                                    <button class="btn btn-danger btn-sm px-2" type="button" (click)="cancelEditing(tab)">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                </li>
-
-                <!-- template edycji i dodawania nowych tabs po kliknieciu 'add'-->
-                <li class="nav-item mr-2" *ngIf="this.editMode">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="text" #addTemplate autofocus class="form-control form-control-sm" placeholder="" aria-label="">
-                            <div class="input-group-append">
-                                <button class="btn btn-success btn-sm px-2" [class.btn-progress]="load" type="button" (click)="addTab(addTemplate.value)">
-                                    <i class="fas fa-check"></i>
-                                </button>
-                            </div>
-                            <div class="input-group-append">
-                                <button class="btn btn-danger btn-sm px-2" type="button" (click)="this.editMode = false">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- button dodania nowego taba -->
-                <!-- TODO: permission -->
-                <li class="nav-item mr-2">
-                    <div class="btn btn-warning" (click)="appendTile()">
-                        <i class="fas fa-plus"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.ADD' | translate }}
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
+        <!-- button dodania nowego taba -->
+        <!-- TODO: permission -->
+        <li class="nav-item mr-2">
+            <div class="btn btn-warning" (click)="openTabModal('new')">
+                <i class="fas fa-plus"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.ADD' | translate }}
+            </div>
+        </li>
+    </ul>
 </div>
+
 
 <div class="tab-content mt-5" id="tbs-content" *ngIf="this.activeTab">
     <div class="tab-pane fade" [id]="'tab_' + this.activeTab.id" role="tabpanel">
 
-        <div *ngIf="activeTabsCards">
-            <div class="col-md-6 col-sm-12 mt-3" *ngFor="let cart of activeTabsCards">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>
-                            {{ cart.name_en }}
-                        </h4>
-                    </div>
-                    <div class="card-body">
-
-                    </div>
+        <div class="container">
+            <div class="row" *ngIf="activeTabsCards">
+                <div class="col-sm-12 col-md-6 col-lg-6" *ngFor="let cart of activeTabsCards">
+                    <app-portfolio-card (editCardEv)="editCard($event)" (delCardEv)="deleteCard($event)" [card]="cart"></app-portfolio-card>
                 </div>
-            </div>
 
-            <!-- static card to adding new cards -->
-            <!-- TODO: only for editing preferences -->
-            <div class="col-md-6 col-sm-12 mt-3">
-                <div class="card card-add-new" (click)="this.addCard('Card Header')">
-                    <div class="card-body">
-                        <div class="empty-state" data-height="300" style="height: 300px;">
-                            <div class="empty-state-icon bg-warning">
-                                <i class="fas fa-plus"></i>
+                <!-- static card to adding new cards -->
+                <!-- TODO: only for editing preferences -->
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="card card-add-new" (click)="this.addCard('Card Header')">
+                        <div class="card-body">
+                            <div class="empty-state" data-height="300" style="height: 300px;">
+                                <div class="empty-state-icon bg-warning">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                                <div class="overlay-loader" *ngIf="this.cardAddingLoad">
+                                    <div class="loader">
+                                        <div class="spinner-border text-warning" role="status" style="width: 3rem; height: 3rem;">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h2>
+                                    {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.ADD_CARD' | translate }}
+                                </h2>
+                                <p class="lead">
+                                    {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.ADD_CARD_DESC' | translate }}
+                                </p>
+                                <a class="btn btn-warning text-white mt-4">
+                            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.ADD_CARD' | translate }}
+                        </a>
                             </div>
-                            <h2>
-                                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.ADD_CARD' | translate }}
-                            </h2>
-                            <p class="lead">
-                                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.ADD_CARD_DESC' | translate }}
-                            </p>
-                            <a class="btn btn-warning text-white mt-4">
-                                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.ADD_CARD' | translate }}
-                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

@@ -24,6 +24,14 @@ export class PortfolioApiService {
     return this.apiService.post('portfolio/tile/create', tab);
   }
 
+  updateCard(card: Object) {
+    return this.apiService.post('portfolio/tile/update', card);
+  }
+
+  deleteCard(card) {
+    return this.apiService.post('portfolio/tile/destroy', card);
+  }
+
   addTab(tab) {
     return this.apiService.post('portfolio/tabs/create', tab);
   }
@@ -34,5 +42,21 @@ export class PortfolioApiService {
 
   deleteTab(tab) {
     return this.apiService.post('portfolio/tabs/destroy', tab);
+  }
+
+  addNewContentToCard(content: Object) {
+    return this.apiService.post('portfolio/tile/content/create', content);
+  }
+
+  deleteContentFromCard(content: Object) {
+    return this.apiService.post('portfolio/tile/content/destroy', content);
+  }
+
+  updateContentInCard(content: Object) {
+    return this.apiService.post('portfolio/tile/content/update', content);
+  }
+
+  getCardContent(cardID: number) {
+    return this.apiService.post(`portfolio/tile/content/${cardID}/get`);
   }
 }

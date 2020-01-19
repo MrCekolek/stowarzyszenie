@@ -3,7 +3,7 @@
 </h2>
 
 <mat-dialog-content>
-    {{ text | translate }} {{ elToDelete['name_' + lang] }}
+    {{ text | translate }} {{ elToDelete['name_' + lang] + '?' }}
 </mat-dialog-content>
 <mat-dialog-actions>
     <button type="button" [class.btn-progress]="this.loading" class="btn btn-danger" (click)="accept()">

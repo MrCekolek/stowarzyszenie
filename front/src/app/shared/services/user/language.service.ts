@@ -52,4 +52,8 @@ export class LanguageService {
       }
     );
   }
+
+  getUser() {
+    return this.userService.getUser();
+  }
 }
