@@ -266,7 +266,9 @@
                         "HELP_TEXT_2": "To add new content to the card, select the type of content from the available selection list, then enter the name, e.g. \"Language skills\" -",
                         "HELP_TEXT_3": "so that users can add information about the languages ​​they speak. It depends on you what kind of content you choose - it can be a selection list, where only the languages ​​to choose from will be defined, or the option of entering your own text.",
                         "HELP_TEXT_1": "The tabs visible on user profiles have content that they can fill out. You decide what type of content is available for them to fill.",
-                        "CHECKBOX_CONTENT_PLACEHOLDER": "Enter a name for the new option ..."
+                        "CHECKBOX_CONTENT_PLACEHOLDER": "Enter a name for the new option ...",
+                        "CHECKBOX_ADD_OPTION_LABEL": "Manage the list of options",
+                        "CHECKBOX_OPEN_TRANSLTIONS": "See translations"
                     },
                     "TYPE_DESC": {
                         "INPUT": "Short text field",
