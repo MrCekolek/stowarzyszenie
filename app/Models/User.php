@@ -111,4 +111,14 @@ class User extends Authenticatable implements JWTSubject {
     public function portfolio() {
         return $this->hasOne(Portfolio::class);
     }
+
+    public function interests() {
+        return $this->belongsToMany(Interest::class)
+            ->using(InterestUser::class);
+    }
+
+    public function conferences() {
+        return $this->belongsToMany(Conference::class)
+            ->using(ConferenceUser::class);
+    }
 }

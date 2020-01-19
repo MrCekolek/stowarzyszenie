@@ -19,6 +19,7 @@ class CreateInterestUsersTable extends Migration {
             $table->timestamps();
 
             $table->unique(['interest_id', 'user_id']);
+
             $table->foreign('interest_id')
                 ->references('id')
                 ->on('interests')

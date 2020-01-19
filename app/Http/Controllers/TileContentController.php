@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TileContentRequest;
 use App\Jobs\CreateTileContentJob;
+use App\Models\Content;
 use App\Models\Tile;
 use App\Models\TileContent;
 use App\Services\LogService;
@@ -60,6 +61,22 @@ class TileContentController extends Controller {
         return LogService::create($success, [
             'tileContent' => $tileContent->toArray()
         ]);
+    }
+
+    private function setType(&$tileContent, $type, $tileId, $tileSharedId) {
+        switch ($type) {
+            case 'input' && 'textarea':
+                $content = new Content();
+                $content->value_pl = '';
+                $content->value_en = '';
+                $content->value_ru = '';
+                $content->tile_content_id = $tileId;
+                $content->tile_content_shared_id = $tileSharedId;
+                $content->save();
+
+                break;
+        }
+
     }
 
     public function update(Request $request) {
