@@ -49,10 +49,18 @@
     </div>
 
     <!-- zakladki -->
-    <div class="row">
+    <div class="row" *ngIf="!this.loading; else loader">
         <app-portfolio-tabs *ngIf="this.allTabs.length > 0" [tabs]="this.allTabs" [lang]="this.lang">
             <p>Some random HTML with some random content</p>
         </app-portfolio-tabs>
         <ng-template></ng-template>
     </div>
+
+    <ng-template #loader>
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </ng-template>
 </div>

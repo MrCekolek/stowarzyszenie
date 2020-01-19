@@ -1,0 +1,74 @@
+<div [ngSwitch]="selectedContent" *ngIf="selectedContent">
+
+    <div *ngSwitchCase="'input'">
+        <p>
+            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.INPUT_DESC' | translate }}
+        </p>
+
+        <div class="form-group mb-4">
+            <label class="text-primary" style="font-weight: 600;">
+                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.CONTENT_NAME_LABEL' | translate }}
+            </label>
+
+            <div class="input-group">
+                <input type="text" class="form-control" #translateInput aria-label="">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" [class.btn-progress]="this.translateLoading" (click)="getTitleTranslations(translateInput.value)">
+                        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <app-translations-list *ngIf="this.translations.length != 0" [translations]="this.translations"></app-translations-list>
+    </div>
+
+    <div *ngSwitchCase="'textarea'">
+        <p>
+            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.TEXTAREA_DESC' | translate }}
+        </p>
+
+        <div class="form-group mb-4">
+            <label class="text-primary" style="font-weight: 600;">
+                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.CONTENT_NAME_LABEL' | translate }}
+            </label>
+
+            <div class="input-group">
+                <input type="text" class="form-control" #translateTextArea aria-label="">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" [class.btn-progress]="this.translateLoading" (click)="getTitleTranslations(translateTextArea.value)">
+                        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <app-translations-list *ngIf="this.translations.length != 0" [translations]="this.translations"></app-translations-list>
+    </div>
+    <!-- 
+    <div *ngSwitchCase="'checkbox'">
+        <p>
+            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.CHECKBOX_DESC' | translate }}
+        </p>
+
+     <app-translations-list *ngIf="this.translations.length != 0" [translations]="this.translations"></app-translations-list> -->
+    <!-- <app-checkbox [lang]="lang"></app-checkbox>
+</div>
+
+<div *ngSwitchCase="'select'">
+    <p>
+        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.SELECT_DESC' | translate }}
+    </p>
+
+</div>
+
+<div *ngSwitchCase="'radio'">
+    <p>
+        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.RADIO_DESC' | translate }}
+    </p>
+
+</div> -->
+
+
+    <div *ngSwitchDefault></div>
+</div>

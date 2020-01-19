@@ -19,7 +19,7 @@
             <input type="text" class="form-control" #new aria-label="" [value]="interest['name_' + this.lang]">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getInterestTranslations(new.value)" *ngIf="this.modal_type == 'new'">
-                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.ADD' | translate }}
+                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
                 </button>
                 <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="updateInterest(edit)" *ngIf="this.modal_type == 'edit'">
                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
@@ -43,13 +43,13 @@
         </div>
     </div>
 
-    <app-translations-list [translations]="this.translations"></app-translations-list>
+    <app-translations-list *ngIf="this.translations.length != 0" [translations]="this.translations"></app-translations-list>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button type="button" class="btn btn-primary" [class.btn-progress]="isSaving" (click)="addInterest()" *ngIf="modal_type === 'new'">
+    <button type="button" [disabled]="translations.length === 0" class="btn btn-primary" [class.btn-progress]="isSaving" (click)="addInterest()" *ngIf="modal_type === 'new'">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
     </button>
-    <button type="button" [class.btn-progress]="this.isSaving" class="btn btn-primary" *ngIf="modal_type === 'edit'" (click)="updateInterest()">
+    <button type="button" [disabled]="translations.length === 0" [class.btn-progress]="this.isSaving" class="btn btn-primary" *ngIf="modal_type === 'edit'" (click)="updateInterest()">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE' | translate }}
     </button>
     <button type="button " class="btn btn-link" (click)="dismiss()">

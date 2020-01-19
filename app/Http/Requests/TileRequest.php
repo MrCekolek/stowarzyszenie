@@ -44,8 +44,8 @@ class TileRequest extends FormRequest {
             'name_en' => 'required',
             'name_ru' => 'required',
             'position' => 'required',
-            'admin_visibility' => 'required|in:true,false',
-            'user_visibility' => 'required|in:true,false'
+            'admin_visibility' => 'required',
+            'user_visibility' => 'required'
         ];
     }
 

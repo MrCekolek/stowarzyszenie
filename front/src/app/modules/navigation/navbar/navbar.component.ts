@@ -35,18 +35,18 @@ export class NavbarComponent implements OnInit {
   @Output() isPageLoading = new EventEmitter<boolean>();
 
   private flagsImages = [
-    '../../../assets/images/uk_flag.png',
     '../../../assets/images/pl_flag.png',
+    '../../../assets/images/uk_flag.png',
     '../../../assets/images/ru_flag.png'
   ];
   private translations = [
-    'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.EN',
     'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.PL',
+    'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.EN',
     'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.RU'
   ];
   private languageIndex = {
-    'en': 0,
-    'pl': 1,
+    'pl': 0,
+    'en': 1,
     'ru': 2,
   };
 
@@ -60,11 +60,20 @@ export class NavbarComponent implements OnInit {
     private languageService: LanguageService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.userService.loginStatus.subscribe(value => this.loggedIn = value );
+    this.userService.loginStatus.subscribe(value => this.loggedIn = value);
     this.createForm();
   }
 
-  ngOnInit() {
+  ngOnInit() {    
+    // $(document).ready(() => {
+    //   $('li.dropdown').unbind('click');
+
+    //   $('li.dropdown').click(() => {
+    //     console.log( $(this).closest('ul.dropdown-menu'));
+    //     $(this).closest('ul.dropdown-menu').slideToggle();
+    //   });
+    // });
+
     this.searchService.getUsers()
         .pipe(
           map(

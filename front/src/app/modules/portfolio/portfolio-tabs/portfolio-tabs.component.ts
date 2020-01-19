@@ -1,10 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PortfolioTab } from 'src/app/shared/models/portfolio-tab.model';
-import { PortfolioService } from 'src/app/core/services/portfolio.service';
-import { PortfolioCard } from 'src/app/shared/models/portfollio-card.model';
+import { PortfolioTab } from '../../../shared/models/portfolio-tab.model';
+import { PortfolioService } from '../../../core/services/portfolio.service';
+import { PortfolioCard } from '../../../shared/models/portfollio-card.model';
 import { ApiService } from '../../../core/http/api.service';
 import { PortfolioApiService } from '../../../core/http/portfolio-api.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { AddTabModalComponent } from '../add-tab-modal/add-tab-modal.component';
+import { AlertModel } from '../../../shared/models/alert.model';
+import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { LanguageService } from '../../../shared/services/user/language.service';
+import { EditCardModalComponent } from '../edit-card-modal/edit-card-modal.component';
 
 @Component({
   selector: 'app-portfolio-tabs',
@@ -17,14 +23,29 @@ export class PortfolioTabsComponent implements OnInit {
   @Input() tabs: any;
   editMode = false;
   private load = false;
+  private cardAddingLoad = false;
 
-  private activeTab: PortfolioTab;
+  private activeTab: PortfolioTab = {
+    id: 1,
+    shared_id: 0,
+    name_en: '',
+    name_pl: '',
+    name_ru: '',
+    position: 0,
+    admin_visibility: 1,
+    user_visibility: 1,
+    portfolio_id: 0
+  };
   private activeTabsCards: any = [];
+
+  private alert: AlertModel;
 
   constructor(
     private portfolioService: PortfolioService,
     private apiService: ApiService,
-    private portfolioApiService: PortfolioApiService
+    private portfolioApiService: PortfolioApiService,
+    private dialog: MatDialog,
+    private languageService: LanguageService
   ) { }
 
   ngOnInit() {
@@ -32,41 +53,6 @@ export class PortfolioTabsComponent implements OnInit {
 
   ngAfterViewInit() {
     this.selectActiveTab(this.tabs[0]);
-  }
-
-  appendTile(edit_input) {
-    this.editMode = true;
-  }
-
-  addTab(name: string) {
-    if (!name) {
-      return;
-    }
-
-    this.load = true;
-    const obj = {
-      name: name
-    };
-    let tab = {};
-
-    this.apiService.post('translation/get', obj).subscribe(response => {
-      if (response.success) {
-        tab = {
-          name_pl: response.translation.name_pl,
-          name_en: response.translation.name_en,
-          name_ru: response.translation.name_ru,
-        };
-
-        this.portfolioApiService.addTab(tab).subscribe(response => {
-          if (response.success) {
-            this.tabs.push(response.portfolioTab);
-            this.load = false;
-            this.editMode = false;
-          }
-        });
-      }
-    });
-
   }
 
   selectActiveTab(tab) {
@@ -78,8 +64,21 @@ export class PortfolioTabsComponent implements OnInit {
   }
 
   addCard(name: string) {
-    this.portfolioService.addCardToTab(name, this.activeTab.id).subscribe(response => {
-      console.log(response);
+    this.cardAddingLoad = true;
+    const newCard = {
+      id: 1,
+      shared_id: 0,
+      name_en: 'Card header',
+      name_pl: 'Nagłówek karty',
+      name_ru: 'заголовок карты',
+      position: 0,
+      admin_visibility: 1,
+      user_visibility: 1,
+      portfolio_tab_id: this.activeTab.id,
+      portfolio_tab_shared_id: this.languageService.getUser().id
+    };
+
+    this.portfolioService.addCardToTab(newCard).subscribe(response => {
       if (response.success) {
         this.activeTabsCards.push(new PortfolioCard(
           response.tile
@@ -87,46 +86,125 @@ export class PortfolioTabsComponent implements OnInit {
       } else {
         console.log("nie udalo sie dodac");
       }
+      this.cardAddingLoad = false;
     });
   }
 
-  editTab(tab) {
-    tab.editing = true;
-  }
+  openTabModal(type: string, tab?: any) {
+    const dialogConfig = new MatDialogConfig();
 
-  cancelEditing(tab) {
-    tab.editing = false;
-  }
+    dialogConfig.autoFocus = true;
 
-  updateTab(tab, name) {
-    console.log(tab);
-    tab.loading = true;
-    const obj = {
-      name: name
+    dialogConfig.data = {
+      modal_type: type,
+      tab: tab
     };
 
-    this.apiService.post('translation/get', obj).subscribe(response => {
-      if (response.success) {
-        tab.name_pl = response.translation.name_pl;
-        tab.name_en = response.translation.name_en;
-        tab.name_ru = response.translation.name_ru;
+    const dialogRef = this.dialog.open(AddTabModalComponent, dialogConfig);
 
-        this.portfolioApiService.updateTab(tab).subscribe(response => {
-          console.log(response);
-          tab.loading = false;
-          tab.editing = false;
-        });
+    dialogRef.afterClosed().subscribe(
+      (data) => {
+        if (data) {
+          if (data.success) {
+            if (type === 'new') {
+              this.tabs.push(data.portfolioTab);
+              this.alert = new AlertModel('success', data.message);
+            } else if (type === 'edit') {
+              const index = this.tabs.findIndex(item => item.id === data.portfolioTab.id);
+              this.tabs[index] = data.tab;
+              this.alert = new AlertModel('success', data.message);
+            }
+          } else {
+            this.alert = new AlertModel('danger', data.message);
+          }
+        }
       }
-    });
+    );
   }
 
-  deleteTab(tab) {
-    tab.deleting = true;
+  openDeleteDialog(tab) {
+    const dialogConfig = new MatDialogConfig();
 
-    this.portfolioApiService.deleteTab(tab).subscribe(response => {
-      tab.deleting = false;
-      console.log(response);
-    });
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      title: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.PORTFOLIO_TAB.TITLE',
+      text: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.PORTFOLIO_TAB.TEXT',
+      element: tab,
+      apiToDelete: 'portfolio/tabs/destroy'
+    };
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
+    
+    dialogRef.afterClosed().subscribe(
+      (data) => {
+        if (data) {
+          if (data.success) {
+            const index = this.tabs.indexOf(tab);
+            this.tabs.splice(index, 1);
+            this.alert = new AlertModel('success', data.message);
+          } else {
+            this.alert = new AlertModel('danger', data.message);
+          }
+        }
+      }
+    );
+  }
+
+  deleteCard(card) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      title: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.PORTFOLIO.CARD_TITLE',
+      text: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.PORTFOLIO.CARD',
+      element: card,
+      apiToDelete: `portfolio/tile/destroy`
+    };
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
+    
+    dialogRef.afterClosed().subscribe(
+      (data) => {
+        if (data) {
+          if (data.success) {
+            const index = this.activeTabsCards.indexOf(card);
+            this.activeTabsCards.splice(index, 1);
+            this.alert = new AlertModel('success', data.message);
+          } else {
+            this.alert = new AlertModel('danger', data.message);
+          }
+        }
+      }
+    );
+  }
+
+  editCard(card) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      card: card
+    };
+
+    const dialogRef = this.dialog.open(EditCardModalComponent, dialogConfig);
+    
+    dialogRef.afterClosed().subscribe(
+      (data) => {
+        if (data) {
+          console.log(data);
+          // if (data.success) {
+          //   const index = this.activeTabsCards.indexOf(card);
+          //   this.activeTabsCards[index] = data.card;
+          //   this.alert = new AlertModel('success', data.message);
+          // } else {
+          //   this.alert = new AlertModel('danger', data.message);
+          // }
+        }
+      }
+    );
   }
 
   drop(event: CdkDragDrop<string[]>) {

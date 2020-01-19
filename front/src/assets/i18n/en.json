@@ -16,6 +16,14 @@
                     "INTERESTS": {
                         "TITLE": "Removing the research area",
                         "TEXT": "Are you sure you want to delete the research area"
+                    },
+                    "PORTFOLIO_TAB": {
+                        "TITLE": "Delete tab",
+                        "TEXT": "Are you sure you want to delete the bookmark"
+                    },
+                    "PORTFOLIO": {
+                        "CARD": "Are you sure you want to delete the card?",
+                        "CARD_TITLE": "Delete card"
                     }
                 }
             },
@@ -26,7 +34,9 @@
             },
             "HELPER_BUTTON_TEXT": "Help",
             "LOADING_TEXT": "Landing",
-            "SEARCH_PLACEHOLDER": "Search"
+            "SEARCH_PLACEHOLDER": "Search",
+            "HELP": "Help",
+            "OPTIONS": "Options"
         },
         "LABELS_TABLES": {
             "AVATAR": "Avatar",
@@ -211,7 +221,8 @@
                             "INPUT_LABEL_NEW": "Enter the name of the new research area",
                             "TRANSLATIONS": "Translations",
                             "INPUT_HINT": "Click the text box to edit",
-                            "INPUT_LABEL_EDIT": "Change the name in the current language to translate or edit the translation fields below"
+                            "INPUT_LABEL_EDIT": "Change the name in the current language to translate or edit the translation fields below",
+                            "TRANSLATIONS_DESC": "Below are translations of the added content into all languages ​​available in the system. Click the text box to edit the selected translation."
                         }
                     },
                     "USER_DESC": "Description added by the user",
@@ -230,6 +241,43 @@
                     "TITLE_UNOWNER": "User Profile",
                     "SECTION_TITLE_OWNER": "Profile",
                     "SECTION_LEAD_OWNER": "Here you can view your profile and edit the information it contains. You can also choose which sections to show or not."
+                },
+                "ADD_MODAL": {
+                    "TITLE": "Add a new tab",
+                    "TITLE_EDIT": "Edit tab",
+                    "NEW_INPUT": "Enter a name for the new tab",
+                    "EDIT_INPUT": "Edit the name in the current language to translate"
+                },
+                "CONTENT": {
+                    "MODAL_TITLE": {
+                        "NEW": "Add new content to the card",
+                        "EDIT": "Edit the content of the card"
+                    },
+                    "EMPTY_CARD": "There is nothing in this card. Add new content that users can complete.",
+                    "EMPTY_CARD_BUTTON": "Add new content",
+                    "MODAL_INPUT_LABEL": "Select the type of new content in this tab:",
+                    "MODAL": {
+                        "INPUT_DESC": "A short text box that users can fill in with their own text.",
+                        "TEXTAREA_DESC": "A long text field that users can fill in with their own text",
+                        "CHECKBOX_DESC": "List of options to choose from - you can add any number of options among which users can choose",
+                        "SELECT_DESC": "A list of options to choose from in the form of a drop-down list - you can add any number of options that users can choose",
+                        "RADIO_DESC": "Several options to choose from which users can only choose one",
+                        "CONTENT_NAME_LABEL": "Enter a name for the new content",
+                        "HELP_TEXT_2": "To add new content to the card, select the type of content from the available selection list, then enter the name, e.g. \"Language skills\" -",
+                        "HELP_TEXT_3": "so that users can add information about the languages ​​they speak. It depends on you what kind of content you choose - it can be a selection list, where only the languages ​​to choose from will be defined, or the option of entering your own text.",
+                        "HELP_TEXT_1": "The tabs visible on user profiles have content that they can fill out. You decide what type of content is available for them to fill.",
+                        "CHECKBOX_CONTENT_PLACEHOLDER": "Enter a name for the new option ..."
+                    },
+                    "TYPE_DESC": {
+                        "INPUT": "Short text field",
+                        "TEXTAREA": "Long text field",
+                        "CHECKBOX": "List of marked options"
+                    },
+                    "ADMIN_CONTENT_PLACEHOLDER": "Users text"
+                },
+                "EDIT_CARD": {
+                    "TITLE": "Edit card",
+                    "INPUT_LABEL": "Edit card title"
                 }
             },
             "ROLES": {
