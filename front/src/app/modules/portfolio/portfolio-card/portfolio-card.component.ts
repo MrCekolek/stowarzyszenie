@@ -37,6 +37,8 @@ export class PortfolioCardComponent implements OnInit {
     this.languageService.currentLang.subscribe(lang => {
       this.lang = lang;
     });
+
+    console.log(this.card);
   }
 
   openNewContentModal(modal_type) {

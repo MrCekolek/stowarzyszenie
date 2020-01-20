@@ -9,6 +9,7 @@ export class CardContent {
     type: ContentTypes;
     tile_id: number;
     tile_shared_id: number;
+    contents?: Array<any>;
 
     constructor(content: Object) {
         this.id = content['id'];
@@ -18,5 +19,6 @@ export class CardContent {
         this.name_ru = content['name_ru'];
         this.tile_id = content['tile_id'];
         this.tile_shared_id = content['tile_shared_id'];
+        this.contents = content['contents'];
     }
 }

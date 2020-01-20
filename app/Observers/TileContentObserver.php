@@ -13,7 +13,10 @@ class TileContentObserver {
      * @return void
      */
     public function created(TileContent $tileContent) {
+        
+
         $content = new Content();
+        $content->shared_id = Content::max('shared_id') + 1;
         $content->value_pl = '';
         $content->value_en = '';
         $content->value_ru = '';

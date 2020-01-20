@@ -53,7 +53,7 @@
                 </div>
             </div>
 
-            <app-translations-list *ngIf="this.translations.length != 0" [translations]="this.translations"></app-translations-list>
+            <app-translations-list *ngIf="this.titleTranslations.length != 0" [translations]="this.titleTranslations"></app-translations-list>
         </div>
 
         <div *ngSwitchCase="'textarea'">
@@ -76,31 +76,68 @@
                 </div>
             </div>
 
-            <app-translations-list *ngIf="this.translations.length != 0" [translations]="this.translations"></app-translations-list>
+            <app-translations-list *ngIf="this.titleTranslations.length != 0" [translations]="this.titleTranslations"></app-translations-list>
         </div>
-        <!-- 
+
         <div *ngSwitchCase="'checkbox'">
             <p>
                 {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.CHECKBOX_DESC' | translate }}
             </p>
-    
-         <app-translations-list *ngIf="this.translations.length != 0" [translations]="this.translations"></app-translations-list> -->
-        <!-- <app-checkbox [lang]="lang"></app-checkbox>
-    </div>
-    
-    <div *ngSwitchCase="'select'">
-        <p>
-            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.SELECT_DESC' | translate }}
-        </p>
-    
-    </div>
-    
-    <div *ngSwitchCase="'radio'">
-        <p>
-            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.RADIO_DESC' | translate }}
-        </p>
-    
-    </div> -->
+
+            <div class="form-group mb-4">
+                <label class="text-primary" style="font-weight: 600;">
+                    {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.CONTENT_NAME_LABEL' | translate }}
+                </label>
+
+                <div class="input-group">
+                    <input type="text" class="form-control" #translateChck aria-label="">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" [class.btn-progress]="this.translateLoading" (click)="translate(translateChck.value, 'title')">
+                            {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <app-translations-list *ngIf="this.titleTranslations.length != 0" [translations]="this.titleTranslations"></app-translations-list>
+
+            <h5>
+                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.CHECKBOX_ADD_OPTION_LABEL' | translate }}
+            </h5>
+
+            <ul class="list-unstyled">
+                <li *ngFor="let option of contents; let i = index">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" [id]="'option' + i" diabled>
+                        <label class="custom-control-label" [for]="'option' + i">
+                            {{ option['name_' + lang] }}
+                        </label>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="input-group">
+                        <input type="text" class="form-control" #translateOption [placeholder]="'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.CHECKBOX_CONTENT_PLACEHOLDER' | translate">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" [class.btn-progress]="this.translateLoading" (click)="translate(translateOption.value, 'option')">
+                                {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <app-translations-list *ngIf="this.newOptionTranslations.length > 0" [translations]="newOptionTranslations"></app-translations-list>
+
+                    <a class="btn btn-link collapsed" data-toggle="collapse" [href]="'#translations' + i" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.CHECKBOX_OPEN_TRANSLTIONS' | translate }}
+                    </a>
+                    <div class="collapse" [id]="'#translations' + i">
+                        <p>
+
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
 
 
         <div *ngSwitchDefault></div>
