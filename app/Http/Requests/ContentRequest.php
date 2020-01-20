@@ -52,7 +52,8 @@ class ContentRequest extends FormRequest {
         $this->rules = [
             'id' => 'required|exists:contents',
             'shared_id' => 'required|exists:contents',
-            'tile_content_id' => 'required|exists:tile_contents,id'
+            'tile_content_id' => 'required|exists:tile_contents,id',
+            'tile_content_shared_id' => 'required|exists:tile_contents,shared_id'
         ];
     }
 }

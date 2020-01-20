@@ -14,34 +14,19 @@ class CreateTileJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $shared_id,
-        $name_pl,
-        $name_en,
-        $name_ru,
-        $position,
-        $portfolioTabId,
-        $portfolioTabSharedId;
+    private $tile,
+            $input;
 
     /**
      * Create a new job instance.
      *
-     * @param $shared_id
-     * @param $name_pl
-     * @param $name_en
-     * @param $name_ru
-     * @param $position
-     * @param $portfolioTabId
-     * @param $portfolioTabSharedId
+     * @param $tile
+     * @param $input
      */
-    public function __construct($shared_id, $name_pl, $name_en, $name_ru, $position, $portfolioTabId, $portfolioTabSharedId)
+    public function __construct($tile, $input)
     {
-        $this->shared_id = $shared_id;
-        $this->name_pl = $name_pl;
-        $this->name_en = $name_en;
-        $this->name_ru = $name_ru;
-        $this->position = $position;
-        $this->portfolioTabId = $portfolioTabId;
-        $this->portfolioTabSharedId = $portfolioTabSharedId;
+        $this->tile = $tile;
+        $this->input = $input;
     }
 
     /**
@@ -51,18 +36,18 @@ class CreateTileJob implements ShouldQueue
      */
     public function handle()
     {
-        foreach (PortfolioTab::where('shared_id', $this->portfolioTabSharedId)
-                     ->where('id', '!=', $this->portfolioTabId)
+        foreach (PortfolioTab::where('shared_id', $this->input['portfolio_tab_shared_id'])
+                     ->where('id', '!=', $this->input['portfolio_tab_id'])
                      ->get() as $portfolioTab) {
-            Tile::create([
-                'shared_id' => $this->shared_id,
-                'name_pl' => $this->name_pl,
-                'name_en' => $this->name_en,
-                'name_ru' => $this->name_ru,
-                'position' => $this->position,
-                'portfolio_tab_id' => $portfolioTab->id,
-                'portfolio_tab_shared_id' => $portfolioTab->shared_id
-            ]);
+            $tile = new Tile();
+            $tile->shared_id = $this->tile->shared_id;
+            $tile->name_pl = $this->tile->name_pl;
+            $tile->name_en = $this->tile->name_en;
+            $tile->name_ru = $this->tile->name_ru;
+            $tile->position = $this->tile->position;
+            $tile->portfolio_tab_id = $portfolioTab->id;
+            $tile->portfolio_tab_shared_id = $portfolioTab->shared_id;
+            $tile->save();
         }
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TileContentRequest;
 use App\Jobs\CreateTileContentJob;
-use App\Models\Content;
 use App\Models\Tile;
 use App\Models\TileContent;
 use App\Services\LogService;
@@ -34,19 +33,11 @@ class TileContentController extends Controller {
             return $validation->failResponse();
         }
 
-        $tileContent = new TileContent();
-        $tileContent->shared_id = TileContent::max('shared_id') + 1;
-        $tileContent->name_pl = $input['name_pl'];
-        $tileContent->name_en = $input['name_en'];
-        $tileContent->name_ru = $input['name_ru'];
-        $tileContent->type = $input['type'];
-        $tileContent->translation_key = TileContent::translations()[$input['type']];
-        $tileContent->position = TileContent::max('position') + 1;
-        $tileContent->tile_id = $input['tile_id'];
-        $tileContent->tile_shared_id = $input['tile_shared_id'];
-        $success = $tileContent->save();
+        $tileContent = TileContent::addTileContent($input, $success);
 
-        $contents = TileContent::addContent($tileContent, $input['options']);
+        if ($success) {
+            $contents = TileContent::addContent($tileContent, $input['options']);
+        }
 
         CreateTileContentJob::dispatch(
             $tileContent,
@@ -68,20 +59,10 @@ class TileContentController extends Controller {
             return $validation->failResponse();
         }
 
-        foreach (TileContent::where('shared_id', $input['shared_id'])->get() as $tileContent) {
-            $tileContent->name_pl = $input['name_pl'];
-            $tileContent->name_en = $input['name_en'];
-            $tileContent->name_ru = $input['name_ru'];
-            $tileContent->type = $input['type'];
-            $tileContent->translation_key = TileContent::translations()[$input['type']];
-
-            if ($tileContent->isDirty('position')) {
-                $this->changePosition(TileContent::class, $tileContent, $input['position']);
-            }
-
-            $tileContent->admin_visibility = $input['admin_visibility'];
-            $tileContent->user_visibility = $input['user_visibility'];
-            $success &= $tileContent->save();
+        foreach (TileContent::where('tile_shared_id', $input['tile_shared_id'])
+                     ->where('shared_id', $input['shared_id'])
+                     ->get() as $tileContent) {
+            TileContent::updateTileContent($tileContent, $input, $success);
         }
 
         return LogService::update($success, [
@@ -100,10 +81,11 @@ class TileContentController extends Controller {
             return $validation->failResponse();
         }
 
-        $success = TileContent::where('shared_id', $input['shared_id'])
+        $success = TileContent::where('tile_shared_id', $input['tile_shared_id'])
+            ->where('shared_id', $input['shared_id'])
             ->delete();
 
-        $this->reindexPositions(TileContent::class);
+        self::reindexPositions(TileContent::class);
 
         return LogService::delete($success > 0, [
             'tileContents' => TileContent::where('tile_id', $input['tile_id'])->get()->toArray()

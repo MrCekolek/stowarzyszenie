@@ -14,31 +14,19 @@ class CreatePortfolioTabsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $shared_id,
-            $name_pl,
-            $name_en,
-            $name_ru,
-            $position,
-            $portfolioId;
+    private $portfolioTab,
+            $input;
 
     /**
      * Create a new job instance.
      *
-     * @param $shared_id
-     * @param $name_pl
-     * @param $name_en
-     * @param $name_ru
-     * @param $position
-     * @param $portfolioId
+     * @param $portfolioTab
+     * @param $input
      */
-    public function __construct($shared_id, $name_pl, $name_en, $name_ru, $position, $portfolioId)
+    public function __construct($portfolioTab, $input)
     {
-        $this->shared_id = $shared_id;
-        $this->name_pl = $name_pl;
-        $this->name_en = $name_en;
-        $this->name_ru = $name_ru;
-        $this->position = $position;
-        $this->portfolioId = $portfolioId;
+        $this->portfolioTab = $portfolioTab;
+        $this->input = $input;
     }
 
     /**
@@ -48,13 +36,13 @@ class CreatePortfolioTabsJob implements ShouldQueue
      */
     public function handle()
     {
-        foreach (Portfolio::where('id', '!=', $this->portfolioId)->get() as $portfolio) {
+        foreach (Portfolio::where('id', '!=', $this->input['portfolio_id'])->get() as $portfolio) {
             PortfolioTab::create([
-                'shared_id' => $this->shared_id,
-                'name_pl' => $this->name_pl,
-                'name_en' => $this->name_en,
-                'name_ru' => $this->name_ru,
-                'position' => $this->position,
+                'shared_id' => $this->portfolioTab->shared_id,
+                'name_pl' => $this->portfolioTab->name_pl,
+                'name_en' => $this->portfolioTab->name_en,
+                'name_ru' => $this->portfolioTab->name_ru,
+                'position' => $this->portfolioTab->position,
                 'portfolio_id' => $portfolio->id
             ]);
         }
