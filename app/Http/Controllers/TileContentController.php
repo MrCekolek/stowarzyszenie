@@ -46,27 +46,12 @@ class TileContentController extends Controller {
         $tileContent->tile_shared_id = $input['tile_shared_id'];
         $success = $tileContent->save();
 
-        $content = new Content();
-        $content->shared_id = Content::max('shared_id') + 1;
-        $content->value_pl = '';
-        $content->value_en = '';
-        $content->value_ru = '';
-        $content->position = Content::max('position') + 1;
-        $content->tile_content_id = $tileContent->id;
-        $content->tile_content_shared_id = $tileContent->shared_id;
-        $content->save();
+        $contents = TileContent::addContent($tileContent, $input['options']);
 
         CreateTileContentJob::dispatch(
-            $tileContent->shared_id,
-            $tileContent->name_pl,
-            $tileContent->name_en,
-            $tileContent->name_ru,
-            $tileContent->type,
-            $tileContent->translation_key,
-            $tileContent->position,
-            $input['tile_id'],
-            $input['tile_shared_id'],
-            $content
+            $tileContent,
+            $input,
+            $contents
         );
 
         return LogService::create($success, [

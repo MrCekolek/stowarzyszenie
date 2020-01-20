@@ -15,43 +15,22 @@ class CreateTileContentJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $shared_id,
-        $name_pl,
-        $name_en,
-        $name_ru,
-        $type,
-        $translationKey,
-        $position,
-        $tileId,
-        $tileSharedId,
-        $content;
+    private $tileContent,
+        $input,
+        $contents;
 
     /**
      * Create a new job instance.
      *
-     * @param $shared_id
-     * @param $name_pl
-     * @param $name_en
-     * @param $name_ru
-     * @param $type
-     * @param $translationKey
-     * @param $position
-     * @param $tileId
-     * @param $tileSharedId
-     * @param $content
+     * @param $tileContent
+     * @param $input
+     * @param $contents
      */
-    public function __construct($shared_id, $name_pl, $name_en, $name_ru, $type, $translationKey, $position, $tileId, $tileSharedId, $content)
+    public function __construct($tileContent, $input, $contents)
     {
-        $this->shared_id = $shared_id;
-        $this->name_pl = $name_pl;
-        $this->name_en = $name_en;
-        $this->name_ru = $name_ru;
-        $this->type = $type;
-        $this->translationKey = $translationKey;
-        $this->position = $position;
-        $this->tileId = $tileId;
-        $this->tileSharedId = $tileSharedId;
-        $this->content = $content;
+        $this->tileContent = $tileContent;
+        $this->input = $input;
+        $this->contents = $contents;
     }
 
     /**
@@ -61,31 +40,45 @@ class CreateTileContentJob implements ShouldQueue
      */
     public function handle()
     {
-        foreach (Tile::where('shared_id', $this->tileSharedId)
-                     ->where('id', '!=', $this->tileId)
+        foreach (Tile::where('shared_id', $this->input['tile_shared_id'])
+                     ->where('id', '!=', $this->input['tile_id'])
                      ->get() as $tile) {
             $tileContent = new TileContent();
-            $tileContent->shared_id = $this->shared_id;
-            $tileContent->name_pl = $this->name_pl;
-            $tileContent->name_en = $this->name_en;
-            $tileContent->name_ru = $this->name_ru;
-            $tileContent->type = $this->type;
-            $tileContent->translation_key = $this->translationKey;
-            $tileContent->position = $this->position;
+            $tileContent->shared_id = $this->tileContent->shared_id;
+            $tileContent->name_pl = $this->tileContent->name_pl;
+            $tileContent->name_en = $this->tileContent->name_en;
+            $tileContent->name_ru = $this->tileContent->name_ru;
+            $tileContent->type = $this->tileContent->type;
+            $tileContent->translation_key = $this->tileContent->translationKey;
+            $tileContent->position = $this->tileContent->position;
             $tileContent->tile_id = $tile->id;
             $tileContent->tile_shared_id = $tile->shared_id;
             $success = $tileContent->save();
 
             if ($success) {
-                $content = new Content();
-                $content->shared_id = $this->content->shared_id;
-                $content->value_pl = '';
-                $content->value_en = '';
-                $content->value_ru = '';
-                $content->position = $this->content->position;
-                $content->tile_content_id = $tileContent->id;
-                $content->tile_content_shared_id = $tileContent->shared_id;
-                $content->save();
+                if (is_array($this->contents)) {
+                    foreach ($this->contents as $contentLoop) {
+                        $content = new Content();
+                        $content->shared_id = $contentLoop['shared_id'];
+                        $content->value_pl = $contentLoop['value_pl'];
+                        $content->value_en = $contentLoop['value_en'];
+                        $content->value_ru = $contentLoop['value_ru'];
+                        $content->position = $contentLoop['position'];
+                        $content->tile_content_id = $tileContent->id;
+                        $content->tile_content_shared_id = $tileContent->shared_id;
+                        $content->save();
+                    }
+                } else {
+                    $content = new Content();
+                    $content->shared_id = $this->contents->shared_id;
+                    $content->value_pl = '';
+                    $content->value_en = '';
+                    $content->value_ru = '';
+                    $content->position = $this->contents->position;
+                    $content->tile_content_id = $tileContent->id;
+                    $content->tile_content_shared_id = $tileContent->shared_id;
+                    $content->save();
+                }
             }
         }
     }
