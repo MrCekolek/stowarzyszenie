@@ -33,22 +33,9 @@ class PortfolioTabController extends Controller {
             return $validation->failResponse();
         }
 
-        $portfolioTab = new PortfolioTab();
-        $portfolioTab->shared_id = PortfolioTab::max('shared_id') + 1;
-        $portfolioTab->name_pl = $input['name_pl'];
-        $portfolioTab->name_en = $input['name_en'];
-        $portfolioTab->name_ru = $input['name_ru'];
-        $portfolioTab->position = PortfolioTab::max('position') + 1;
-        $portfolioTab->portfolio_id = $input['portfolio_id'];
-        $success = $portfolioTab->save();
-
         CreatePortfolioTabsJob::dispatch(
-            $portfolioTab->shared_id,
-            $portfolioTab->name_pl,
-            $portfolioTab->name_en,
-            $portfolioTab->name_ru,
-            $portfolioTab->position,
-            $input['portfolio_id']
+            $portfolioTab = PortfolioTab::addPortfolioTab($input, $success),
+            $input
         );
 
         return LogService::create($success, [
@@ -66,17 +53,7 @@ class PortfolioTabController extends Controller {
         }
 
         foreach (PortfolioTab::where('shared_id', $input['shared_id'])->get() as $portfolioTab) {
-            $portfolioTab->name_pl = $input['name_pl'];
-            $portfolioTab->name_en = $input['name_en'];
-            $portfolioTab->name_ru = $input['name_ru'];
-
-            if ($portfolioTab->isDity('position')) {
-                $this->changePosition(PortfolioTab::class, $portfolioTab, $input['position']);
-            }
-
-            $portfolioTab->admin_visibility = $input['admin_visibility'];
-            $portfolioTab->user_visibility = $input['user_visibility'];
-            $success &= $portfolioTab->save();
+            PortfolioTab::updatePortfolioTab($portfolioTab, $input, $success);
         }
 
         return LogService::update($success, [
@@ -95,7 +72,7 @@ class PortfolioTabController extends Controller {
         $success = PortfolioTab::where('shared_id', $input['shared_id'])
             ->delete();
 
-        $this->reindexPositions(PortfolioTab::class);
+        self::reindexPositions(PortfolioTab::class);
 
         return LogService::delete($success > 0, [
             'portfolioTabs' => PortfolioTab::where('portfolio_id', $input['portfolio_id'])->get()->toArray()

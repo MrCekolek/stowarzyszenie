@@ -49,7 +49,8 @@ class TileContentRequest extends FormRequest {
     public function checkDestroy() {
         $this->rules = [
             'shared_id' => 'required|exists:tile_contents',
-            'tile_id' => 'required|exists:tiles,id'
+            'tile_id' => 'required|exists:tiles,id',
+            'tile_shared_id' => 'required|exists:tiles,shared_id'
         ];
     }
 }

@@ -14,34 +14,19 @@ class CreateContentJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $shared_id,
-        $name_pl,
-        $name_en,
-        $name_ru,
-        $position,
-        $tileContentId,
-        $tileContentSharedId;
+    private $content,
+            $input;
 
     /**
      * Create a new job instance.
      *
-     * @param $shared_id
-     * @param $name_pl
-     * @param $name_en
-     * @param $name_ru
-     * @param $position
-     * @param $tileContentId
-     * @param $tileContentSharedId
+     * @param $content
+     * @param $input
      */
-    public function __construct($shared_id, $name_pl, $name_en, $name_ru, $position, $tileContentId, $tileContentSharedId)
+    public function __construct($content, $input)
     {
-        $this->shared_id = $shared_id;
-        $this->name_pl = $name_pl;
-        $this->name_en = $name_en;
-        $this->name_ru = $name_ru;
-        $this->position = $position;
-        $this->tileContentId = $tileContentId;
-        $this->tileContentSharedId = $tileContentSharedId;
+        $this->content = $content;
+        $this->input = $input;
     }
 
     /**
@@ -51,15 +36,15 @@ class CreateContentJob implements ShouldQueue
      */
     public function handle()
     {
-        foreach (TileContent::where('shared_id', $this->tileContentSharedId)
-                     ->where('id', '!=', $this->tileContentId)
+        foreach (TileContent::where('shared_id', $this->input['tile_content_shared_id'])
+                     ->where('id', '!=', $this->input['tile_content_id'])
                      ->get() as $tileContent) {
             Content::create([
-                'shared_id' => $this->shared_id,
-                'name_pl' => $this->name_pl,
-                'name_en' => $this->name_en,
-                'name_ru' => $this->name_ru,
-                'position' => $this->position,
+                'shared_id' => $this->content->shared_id,
+                'name_pl' => $this->content->name_pl,
+                'name_en' => $this->content->name_en,
+                'name_ru' => $this->content->name_ru,
+                'position' => $this->content->position,
                 'tile_content_id' => $tileContent->id,
                 'tile_content_shared_id' => $tileContent->shared_id
             ]);
