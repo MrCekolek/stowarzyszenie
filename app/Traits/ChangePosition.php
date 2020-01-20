@@ -3,7 +3,7 @@
 namespace App\Traits;
 
 trait ChangePosition {
-    public function changePosition($model, &$object, $position) {
+    public static function changePosition($model, &$object, $position) {
         if ($object->position > $position) {
             foreach ($model::where('position', '>=', $position)
                          ->where('position', '<', $object->position)->get() as $item) {
@@ -19,7 +19,7 @@ trait ChangePosition {
         $object->position = $position;
     }
 
-    public function reindexPositions($model, $groupBy = 'shared_id') {
+    public static function reindexPositions($model, $groupBy = 'shared_id') {
         $position = 1;
 
         foreach ($model::all()->sortBy('position')->groupBy($groupBy) as $items) {
