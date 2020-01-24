@@ -1,28 +1,52 @@
 <h2 mat-dialog-title>
-    <span *ngIf="this.modal_type == 'new_role'">
+    <span *ngIf="this.modal_type == 'new'">
         {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.TITLE_NEW_ROLE' | translate }}
     </span>
 
-    <span *ngIf="this.modal_type == 'edit_role'">
+    <span *ngIf="this.modal_type == 'edit'">
         {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.TITLE_EDIT_ROLE' | translate }}
     </span>
 </h2>
 
 <mat-dialog-content>
-    <div class="form-group">
-        <label>
+    <div class="from-group mb-4" *ngIf="this.modal_type == 'new'">
+        <label class="text-primary" style="font-weight: 600;">
             {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.INPUT_FIELD' | translate }}
         </label>
 
-        <input #role_name matInput type="text" class="form-control" required>
-        <div class="invalid-feedback" *ngIf="(role_name.dirty || role_name.touched) && role_name.invalid">
-            {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.INPUT_FIELD_ERROR' | translate }}
+        <div class="input-group">
+            <input type="text" class="form-control" #new aria-label="" [value]="role['name_' + this.lang]">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getRoleTranslations(new.value)">
+                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                </button>
+            </div>
         </div>
     </div>
+
+    <div class="from-group mb-4" *ngIf="this.modal_type == 'edit'">
+        <label class="text-primary" style="font-weight: 600;">
+            {{ 'STOWARZYSZENIE.MODALS.EDIT_ROLE.INPUT_FIELD' | translate }}
+        </label>
+
+        <div class="input-group">
+            <input type="text" class="form-control" #translate aria-label="" [value]="role['name_' + this.lang]">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getRoleTranslations(translate.value)">
+                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <app-translations-list *ngIf="this.translations.length != 0" [translations]="this.translations"></app-translations-list>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button type=" button " class="btn btn-sm btn-secondary " (click)="sendRoleName(role_name.value) " [disabled]="role_name.value=='' ">
-        {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.BUTTON_ADD' | translate }}
+    <button type="button" class="btn btn-sm btn-primary " [class.btn-progress]="saving" (click)="addRole()" *ngIf="modal_type === 'new'">
+        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.ADD' | translate }}
+    </button>
+    <button type="button" class="btn btn-sm btn-primary " [class.btn-progress]="saving" (click)="updateRole()" *ngIf="modal_type === 'edit'">
+        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE' | translate }}
     </button>
     <button type="button " class="btn btn-sm btn-link " (click)="dismiss() ">
         {{ 'STOWARZYSZENIE.MODALS.BUTTON_CANCEL' | translate }}

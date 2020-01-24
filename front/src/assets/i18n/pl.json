@@ -72,6 +72,9 @@
                 "TITLE_EDIT_ROLE": "Edytuj nazwę roli",
                 "TITLE_NEW_ROLE": "Dodaj nową rolę",
                 "TRIGGER_BUTTON": "Dodaj rolę"
+            },
+            "EDIT_ROLE": {
+                "INPUT_FIELD": "Edytuj nazwę roli i przetłumacz"
             }
         },
         "MODULES": {
