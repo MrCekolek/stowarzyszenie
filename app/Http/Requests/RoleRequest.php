@@ -12,6 +12,11 @@ class RoleRequest extends FormRequest {
 
                 break;
 
+            case 'update':
+                $this->checkUpdate();
+
+                break;
+
             case 'destroy':
                 $this->checkDestroy($input['id']);
 
@@ -27,6 +32,13 @@ class RoleRequest extends FormRequest {
             'name_en' => 'required|unique:roles',
             'name_ru' => 'required|unique:roles'
         ];
+    }
+
+    protected function checkUpdate() {
+        $this->checkCreate();
+        $this->rules = array_merge($this->rules, [
+            'id' => 'required|exists:roles'
+        ]);
     }
 
     protected function checkDestroy($id) {

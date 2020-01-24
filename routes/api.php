@@ -53,6 +53,7 @@ Route::group([
         Route::post('delete/{role}', 'RoleController@destroy');
         Route::post('get', 'RoleController@index');
         Route::post('create', 'RoleController@create');
+        Route::post('{role}/update', 'RoleController@update');
         Route::post('{role}/permission/get', 'PermissionParentController@rolePermissions');
         Route::post('{role}/permission/update', 'PermissionParentController@updateRolePermissions');
     });
