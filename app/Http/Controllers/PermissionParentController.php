@@ -35,7 +35,7 @@ class PermissionParentController extends Controller {
         }
 
         return LogService::read(true, [
-            'role' => $role->name,
+            'role' => $role,
             'permissions' => $permissionParents
         ]);
     }

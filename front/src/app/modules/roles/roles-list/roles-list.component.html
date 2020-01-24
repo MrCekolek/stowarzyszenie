@@ -10,13 +10,15 @@
     </p>
 
     <div class="tab-content">
+        <app-alert *ngIf="this.alert" [alertType]="this.alert.type" [message]="this.alert.message"></app-alert>
+
         <div class="container-fluid">
             <div class="mb-3 card">
                 <div class="card-header justify-content-between">
                     <h4>
                         <i class="fas fa-user-tag mr-2"></i> {{ 'STOWARZYSZENIE.MODULES.ROLES.LIST_TITLE' | translate }}
                     </h4>
-                    <button class="btn btn-secondary btn-sm" (click)="openNewRoleModal()">
+                    <button class="btn btn-primary btn-sm" (click)="openNewRoleModal()">
                     <i class="fas fa-plus mr-2"></i>
                     {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.TRIGGER_BUTTON' | translate }}
                 </button>
@@ -50,8 +52,8 @@
                             </div>
                         </option>
 
-                        <option *ngFor="let role of this.rolesNames" [value]="role.id">
-                            {{ role.name }}
+                        <option *ngFor="let role of this.roles" [value]="role.id">
+                            {{ role['name_' + lang] }}
                         </option>
                     </select>
                     </div>
@@ -59,7 +61,7 @@
                     <div class="d-flex mb-3" *ngIf="this.selectedRole.permissions && !this.selectedChooseRoles">
                         {{ 'STOWARZYSZENIE.MODULES.ROLES.ARE_EDITING' | translate }}
                         <strong class="ml-3">
-                            {{ ' ' + this.selectedRole.role }}
+                            {{ ' ' + this.selectedRole.role['name_' + lang] }}
                         </strong>
                         <button class="btn btn-link btn-sm ml-5" (click)="openEditRoleModal(this.selectedRole.role)" style="padding: 0;">
                             {{ 'STOWARZYSZENIE.MODULES.ROLES.EDIT_NAME' | translate }}
