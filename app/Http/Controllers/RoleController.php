@@ -42,6 +42,25 @@ class RoleController extends Controller {
         ]);
     }
 
+    public function update(Request $request, Role $role) {
+        $input = $request->all();
+        $validation = new RoleRequest($input, 'update');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        $success = $role->update([
+            'name_pl' => $input['name_pl'],
+            'name_en' => $input['name_en'],
+            'name_ru' => $input['name_ru']
+        ]);
+
+        return LogService::update($success > 0, [
+            'role' => $role->toArray()
+        ]);
+    }
+
     /**
      * @param Role $role
      * @return JsonResponse
