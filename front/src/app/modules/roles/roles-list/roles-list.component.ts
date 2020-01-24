@@ -3,6 +3,9 @@ import {PermissionRoleApiService} from "../../../core/http/permission-role-api.s
 import {NewRoleModalComponent} from '../new-role-modal/new-role-modal.component';
 import {MatDialog, MatDialogConfig} from "@angular/material";
 import { DeleteAlertComponent } from 'src/app/shared/components/delete-alert/delete-alert.component';
+import { AlertModel } from 'src/app/shared/models/alert.model';
+import { LanguageService } from 'src/app/shared/services/user/language.service';
+import { Role } from 'src/app/shared/models/role.model';
 
 @Component({
   selector: 'app-roles-list',
@@ -13,24 +16,25 @@ export class RolesListComponent implements OnInit {
 
   private selectedChooseRoles: boolean;
   private rolesNames: any = [];
-  private roles: any = {};
+  private roles: any = [];
   private selectedRole: any = {};
   private rolesAreLoading;
-  private alertMessage: string = '';
-  private alertClass: string = '';
   private isSaving: boolean = false;
 
-  private newRoleSuccessMess = 'STOWARZYSZENIE.MODALS.NEW_ROLE.DIALOG_MESSAGE_SUCCESS';
+  private alert: AlertModel;
+  lang;
 
   constructor(
     private permissionRoleApiService: PermissionRoleApiService,
-    private dialog: MatDialog
-  ) {
-  }
+    private dialog: MatDialog,
+    private languageService: LanguageService
+  ) { }
 
   ngOnInit() {
     this.selectedChooseRoles = true;
-
+    this.languageService.currentLang.subscribe(data => {
+      this.lang = data;
+    });
     this.getRoles();
   }
 
@@ -38,11 +42,8 @@ export class RolesListComponent implements OnInit {
     this.rolesAreLoading = true;
     this.permissionRoleApiService.getRoles().subscribe(
       roles => {
-        this.rolesNames = roles.roles;
-        
-        if (this.rolesNames.length > 0) {
-          this.rolesAreLoading = false;
-        }
+        this.roles = roles.roles;
+        this.rolesAreLoading = false;
       }
     );
   }
@@ -76,6 +77,7 @@ export class RolesListComponent implements OnInit {
       this.selectedChooseRoles = false;
 
       this.permissionRoleApiService.getRoleWithPermissions(id).subscribe(role => {
+        console.log(role);
         this.selectedRole = role;
         this.selectedRole.isSelected = false;
         this.selectedRole.isClosed = false;
@@ -94,29 +96,33 @@ export class RolesListComponent implements OnInit {
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
-      modal_type: 'new_role'
+      modal_type: 'new'
     };
 
     const dialogRef = this.dialog.open(NewRoleModalComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
       data => {
-        this.permissionRoleApiService.addNewRole(data);
-        this.alertClass = 'success';
-        this.alertMessage = 'STOWARZYSZENIE.MODALS.NEW_ROLE.ALERTS.NEW_ROLE_SUCCESS';
-        this.getRoles();
+        if (data) {
+          if (data.success) {
+            this.roles.push(data.role);
+            this.alert = new AlertModel('success', data.message);
+          } else {
+            this.alert = new AlertModel('danger', data.message);
+          }
+        }
       }
     );
   }
 
-  openEditRoleModal(roleName) {
+  openEditRoleModal(role) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
-      modal_type: 'edit_role',
-      role_name: roleName
+      modal_type: 'edit',
+      role: role
     };
 
     const dialogRef = this.dialog.open(NewRoleModalComponent, dialogConfig);
@@ -131,11 +137,9 @@ export class RolesListComponent implements OnInit {
 
   saveRole(roleId) {
     this.isSaving = true;
-    this.permissionRoleApiService.updateRole(roleId, this.selectedRole).subscribe(data => {
+    this.permissionRoleApiService.updateRoleName(roleId).subscribe(data => {
       if (data.success) {
         this.isSaving = false;
-        this.alertMessage= 'STOWARZYSZENIE.MODULES.ROLES.UPDATED_MESSAGE';
-        this.alertClass = 'success';
       }
     });
   }
@@ -152,8 +156,6 @@ export class RolesListComponent implements OnInit {
           this.permissionRoleApiService.deleteRole(RoleId).subscribe(message => {
             console.log(message);
             this.getRoles();
-            this.alertMessage= 'STOWARZYSZENIE.MODALS.DELETE_ALERT.DELETED_MESSAGE';
-            this.alertClass = 'success';
             this.isSaving = false;
             this.selectedRole = {};
           });

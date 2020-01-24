@@ -72,6 +72,9 @@
                 "TITLE_EDIT_ROLE": "Изменить имя роли",
                 "TITLE_NEW_ROLE": "Добавить новую роль",
                 "TRIGGER_BUTTON": "Добавить роль"
+            },
+            "EDIT_ROLE": {
+                "INPUT_FIELD": "Изменить название роли и перевести"
             }
         },
         "MODULES": {

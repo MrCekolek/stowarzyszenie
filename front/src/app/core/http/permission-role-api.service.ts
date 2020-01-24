@@ -18,13 +18,15 @@ export class PermissionRoleApiService {
   }
 
   addNewRole(role: object) {
-    return this.api.post('role/create', role).subscribe(
-      data => console.log(data)
-    );
+    return this.api.post('role/create', role);
   }
 
-  updateRole(roleID: number, roleConfig: any) {
+  updateRolePermissions(roleID: number, roleConfig: any) {
     return this.api.post('role/' + roleID + '/permission/update', roleConfig);
+  }
+
+  updateRoleName(role: any) {
+    return this.api.post(`role/${role.id}/update`);
   }
 
   deleteRole(roleId: number) {
