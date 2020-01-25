@@ -6,6 +6,7 @@ import { DeleteAlertComponent } from 'src/app/shared/components/delete-alert/del
 import { AlertModel } from 'src/app/shared/models/alert.model';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 import { Role } from 'src/app/shared/models/role.model';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-roles-list',
@@ -17,12 +18,21 @@ export class RolesListComponent implements OnInit {
   private selectedChooseRoles: boolean;
   private rolesNames: any = [];
   private roles: any = [];
-  private selectedRole: any = {};
+  private selectedRole: Role = {
+    id: 0,
+    name_pl: '',
+    name_en: '',
+    name_ru: '',
+    permissions: [],
+    isSelected: false,
+    isClosed: false
+  };
   private rolesAreLoading;
   private isSaving: boolean = false;
 
   private alert: AlertModel;
   lang;
+  permissionsLoading = false;
 
   constructor(
     private permissionRoleApiService: PermissionRoleApiService,
@@ -36,6 +46,7 @@ export class RolesListComponent implements OnInit {
       this.lang = data;
     });
     this.getRoles();
+    this.permissionsLoading = false;
   }
 
   getRoles() {
@@ -73,21 +84,20 @@ export class RolesListComponent implements OnInit {
   }
 
   selectRole(id) {
-    if (id != 0) {
-      this.selectedChooseRoles = false;
+    this.permissionsLoading = true;
+    this.selectedChooseRoles = false;
 
-      this.permissionRoleApiService.getRoleWithPermissions(id).subscribe(role => {
-        console.log(role);
-        this.selectedRole = role;
-        this.selectedRole.isSelected = false;
-        this.selectedRole.isClosed = false;
-        this.roles.parentChildChecklist = this.selectedRole.permissions;
-        this.roles.isAllSelected = false;
-        this.roles.isAllCollapsed = false;
-      });
-    } else {
-      this.selectedChooseRoles = true;
-    }
+    this.permissionRoleApiService.getRoleWithPermissions(id).subscribe(role => {
+      console.log(role);
+      this.selectedRole = role;
+      this.selectedRole.isSelected = false;
+      this.selectedRole.isClosed = false;
+      this.roles.parentChildChecklist = role.permissions;
+      this.selectedRole.permissions = role.permissions;
+      this.roles.isAllSelected = false;
+      this.roles.isAllCollapsed = false;
+      this.permissionsLoading = false;
+    });
   }
 
   openNewRoleModal() {
@@ -129,7 +139,7 @@ export class RolesListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       data => { 
-        this.selectedRole.role = data.name;
+        this.selectedRole = data;
         this.getRoles();
       }
     );
@@ -137,28 +147,39 @@ export class RolesListComponent implements OnInit {
 
   saveRole(roleId) {
     this.isSaving = true;
-    this.permissionRoleApiService.updateRoleName(roleId).subscribe(data => {
+    this.permissionRoleApiService.updateRolePermissions(roleId, this.selectedRole.permissions).subscribe(data => {
       if (data.success) {
         this.isSaving = false;
       }
     });
   }
 
-  deleteRole(RoleId) {
+  deleteRole() {
     const dialogConfig = new MatDialogConfig();
 
-    const dialogRef = this.dialog.open(DeleteAlertComponent, dialogConfig);
+    dialogConfig.autoFocus = true;
 
+    dialogConfig.data = {
+      title: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.ROLE.TITLE',
+      text: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.ROLE.TEXT',
+      element: this.selectedRole,
+      apiToDelete: `role/delete/`
+    };
+
+    console.log(this.selectedRole);
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
+    
     dialogRef.afterClosed().subscribe(
-      data => { 
+      (data) => {
         if (data) {
-          this.isSaving = true;
-          this.permissionRoleApiService.deleteRole(RoleId).subscribe(message => {
-            console.log(message);
-            this.getRoles();
-            this.isSaving = false;
-            this.selectedRole = {};
-          });
+          if (data.success) {
+            const index = this.roles.indexOf(data.role);
+            this.roles.splice(index, 1);
+            this.alert = new AlertModel('success', data.message);
+          } else {
+            this.alert = new AlertModel('danger', data.message);
+          }
         }
       }
     );

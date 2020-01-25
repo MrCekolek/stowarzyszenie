@@ -22,11 +22,11 @@ export class PermissionRoleApiService {
   }
 
   updateRolePermissions(roleID: number, roleConfig: any) {
-    return this.api.post('role/' + roleID + '/permission/update', roleConfig);
+    return this.api.post(`role/${roleID}/permission/update`, roleConfig);
   }
 
   updateRoleName(role: any) {
-    return this.api.post(`role/${role.id}/update`);
+    return this.api.post(`role/${role.id}/update`, role);
   }
 
   deleteRole(roleId: number) {

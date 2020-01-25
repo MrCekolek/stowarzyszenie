@@ -6,4 +6,6 @@ export interface Role {
     name_en: string;
     name_ru: string;
     permissions: Array<PermissionGroup>;
+    isSelected?: boolean;
+    isClosed: boolean;
 }
