@@ -24,6 +24,10 @@
                     "PORTFOLIO": {
                         "CARD": "Are you sure you want to delete the card?",
                         "CARD_TITLE": "Delete card"
+                    },
+                    "ROLE": {
+                        "TITLE": "Delete a role",
+                        "TEXT": "Are you sure you want to delete the role"
                     }
                 }
             },

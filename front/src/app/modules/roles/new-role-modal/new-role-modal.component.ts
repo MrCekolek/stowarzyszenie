@@ -23,7 +23,9 @@ export class NewRoleModalComponent implements OnInit {
     name_pl: '',
     name_en: '',
     name_ru: '',
-    permissions: []
+    permissions: [],
+    isSelected: false,
+    isClosed: false
   };
 
   lang;
@@ -39,6 +41,7 @@ export class NewRoleModalComponent implements OnInit {
     this.modal_type = data.modal_type;
 
     if (data.role) {
+      console.log(data.role);
       this.role = data.role;
 
       this.translations[0] = data.role.name_pl;
@@ -63,7 +66,11 @@ export class NewRoleModalComponent implements OnInit {
   }
 
   updateRole() {
+    this.role.name_pl = this.translations[0];
+    this.role.name_en = this.translations[1];
+    this.role.name_ru = this.translations[2];
     this.saving = true;
+    console.log(this.role);
     this.roleApiService.updateRoleName(this.role).subscribe(response => {
       console.log(response);
       this.dialogRef.close(response);

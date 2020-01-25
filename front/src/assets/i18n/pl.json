@@ -24,6 +24,10 @@
                     "PORTFOLIO": {
                         "CARD": "Czy na pewno chcesz usunąć kartę",
                         "CARD_TITLE": "Usuwanie karty"
+                    },
+                    "ROLE": {
+                        "TITLE": "Usuwanie roli",
+                        "TEXT": "Czy na pewno chcesz usunąć rolę"
                     }
                 }
             },
