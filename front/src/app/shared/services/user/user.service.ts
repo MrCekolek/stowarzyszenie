@@ -35,7 +35,13 @@ export class UserService {
     return this.api.post('account/me');
   }
 
-  // checkPermission() {
-  //   return this.user.roles[0].permissions[""0""].pivot.selected;
-  // }
+  checkPermission(permissionKey) {
+    this.user.roles.forEach(role => {
+      if (role.permissions.find((x: any) => x.translation_key === permissionKey)) {
+        return true;
+      }
+    });
+
+    return false;
+  }
 }
