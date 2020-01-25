@@ -50,7 +50,7 @@
                     </div>
 
                     <div *ngIf="!permissionsLoading; else permissionsLoad">
-                        <div *ngIf="this.selectedRole.role && this.selectedRole.permissions && !this.selectedChooseRoles">
+                        <div *ngIf="this.selectedRole && this.selectedRole.role && this.selectedRole.permissions && !this.selectedChooseRoles">
                             <div class="d-flex mb-3">
                                 {{ 'STOWARZYSZENIE.MODULES.ROLES.ARE_EDITING' | translate }}
                                 <strong class="ml-3" *ngIf="this.selectedRole">
