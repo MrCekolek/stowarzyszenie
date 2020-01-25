@@ -5,7 +5,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from '../../app-routing.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import {MatInputModule} from "@angular/material";
+import { MatInputModule } from "@angular/material";
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 

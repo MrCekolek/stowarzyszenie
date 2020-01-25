@@ -146,6 +146,7 @@ export class RolesListComponent implements OnInit {
 
   saveRole(roleId) {
     this.isSaving = true;
+    console.log(this.selectedRole);
     this.permissionRoleApiService.updateRolePermissions(roleId, this.selectedRole.permissions).subscribe(data => {
       if (data.success) {
         this.isSaving = false;

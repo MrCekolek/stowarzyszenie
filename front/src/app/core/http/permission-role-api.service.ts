@@ -21,8 +21,12 @@ export class PermissionRoleApiService {
     return this.api.post('role/create', role);
   }
 
-  updateRolePermissions(roleID: number, roleConfig: any) {
-    return this.api.post(`role/${roleID}/permission/update`, roleConfig);
+  updateRolePermissions(roleID: number, permissions: any) {
+    const obj = {
+      id: roleID,
+      permissions: permissions
+    };
+    return this.api.post(`role/${roleID}/permission/update`, obj);
   }
 
   updateRoleName(role: any) {

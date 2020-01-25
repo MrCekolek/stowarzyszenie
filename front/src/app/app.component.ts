@@ -37,19 +37,19 @@ export class AppComponent {
     
     let events: any = this.router.events;
 
-    if (this.loggedIn) {
-      this.router.events.subscribe(event => {
-        // update user model
-        if (event instanceof NavigationStart) {
-          this.userService.me().subscribe(
-            response => {
-              this.userService.changeUser(new UserModel(response));
-              console.log(this.userService.getUser());
-            }
-          );
-        }
-      });
-    }
+    // if (this.loggedIn) {
+    //   this.router.events.subscribe(event => {
+    //     // update user model
+    //     if (event instanceof NavigationStart) {
+    //       this.userService.me().subscribe(
+    //         response => {
+    //           this.userService.changeUser(new UserModel(response));
+    //           console.log(this.userService.getUser());
+    //         }
+    //       );
+    //     }
+    //   });
+    // }
 
     this.userService.loginStatus.subscribe(value => {
       this.loggedIn = value;

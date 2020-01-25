@@ -10,10 +10,6 @@ use App\Services\LogService;
 use Illuminate\Http\Request;
 
 class PermissionParentController extends Controller {
-    public function __construct() {
-        $this->middleware('auth:api');
-    }
-
     public function rolePermissions(Role $role) {
         $validation = new PermissionParentRequest($role->toArray(), 'rolePermissions');
 
