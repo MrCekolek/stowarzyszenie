@@ -18,15 +18,7 @@ export class RolesListComponent implements OnInit {
   private selectedChooseRoles: boolean;
   private rolesNames: any = [];
   private roles: any = [];
-  private selectedRole: Role = {
-    id: 0,
-    name_pl: '',
-    name_en: '',
-    name_ru: '',
-    permissions: [],
-    isSelected: false,
-    isClosed: false
-  };
+  private selectedRole: any;
   private rolesAreLoading;
   private isSaving: boolean = false;
 
@@ -139,14 +131,22 @@ export class RolesListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       data => { 
-        this.selectedRole = data;
-        this.getRoles();
+        if (data) {
+          if (data.success) {
+            this.selectedRole = data;
+            this.getRoles();
+            this.alert = new AlertModel('success', data.message);
+          } else {
+            this.alert = new AlertModel('danger', data.message);
+          }
+        }
       }
     );
   }
 
   saveRole(roleId) {
     this.isSaving = true;
+    console.log(this.selectedRole);
     this.permissionRoleApiService.updateRolePermissions(roleId, this.selectedRole.permissions).subscribe(data => {
       if (data.success) {
         this.isSaving = false;
@@ -162,8 +162,8 @@ export class RolesListComponent implements OnInit {
     dialogConfig.data = {
       title: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.ROLE.TITLE',
       text: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.ROLE.TEXT',
-      element: this.selectedRole,
-      apiToDelete: `role/delete/`
+      element: this.selectedRole.role,
+      apiToDelete: `role/delete/${this.selectedRole.role.id}`
     };
 
     console.log(this.selectedRole);
@@ -177,6 +177,7 @@ export class RolesListComponent implements OnInit {
             const index = this.roles.indexOf(data.role);
             this.roles.splice(index, 1);
             this.alert = new AlertModel('success', data.message);
+            this.selectedRole = null;
           } else {
             this.alert = new AlertModel('danger', data.message);
           }
