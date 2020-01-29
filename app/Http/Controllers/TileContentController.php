@@ -8,12 +8,14 @@ use App\Models\Tile;
 use App\Models\TileContent;
 use App\Services\LogService;
 use App\Traits\ChangePosition;
+use App\Traits\ManagePortfolio;
 use App\Traits\Translatable;
 use Illuminate\Http\Request;
 
 class TileContentController extends Controller {
     use Translatable,
-        ChangePosition;
+        ChangePosition,
+        ManagePortfolio;
 
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['index']]);
@@ -90,5 +92,16 @@ class TileContentController extends Controller {
         return LogService::delete($success > 0, [
             'tileContents' => TileContent::where('tile_id', $input['tile_id'])->get()->toArray()
         ]);
+    }
+
+    public function updateVisibility(Request $request) {
+        $input = $request->all();
+        $validation = new TileContentRequest($input, 'updateVisibility');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        return LogService::update(self::changeVisibility($input, TileContent::class));
     }
 }
