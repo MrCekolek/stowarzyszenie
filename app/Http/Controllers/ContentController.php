@@ -8,12 +8,14 @@ use App\Models\Content;
 use App\Models\TileContent;
 use App\Services\LogService;
 use App\Traits\ChangePosition;
+use App\Traits\ManagePortfolio;
 use App\Traits\Translatable;
 use Illuminate\Http\Request;
 
 class ContentController extends Controller {
     use Translatable,
-        ChangePosition;
+        ChangePosition,
+        ManagePortfolio;
 
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['index']]);
@@ -78,5 +80,38 @@ class ContentController extends Controller {
         return LogService::delete($success > 0, [
             'contents' => Content::where('tile_content_id', $input['tile_content_id'])->get()->toArray()
         ]);
+    }
+
+    public function updateVisibility(Request $request) {
+        $input = $request->all();
+        $validation = new ContentRequest($input, 'updateVisibility');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        return LogService::update(self::changeVisibility($input, Content::class));
+    }
+
+    public function updateSelected(Request $request) {
+        $input = $request->all();
+        $validation = new ContentRequest($input, 'updateSelected');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        return LogService::update(self::changeSelected($input, Content::where('id', $input['id'])->first()));
+    }
+
+    public function updateValue(Request $request) {
+        $input = $request->all();
+        $validation = new ContentRequest($input, 'updateValue');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        return LogService::update(self::changeValue($input, Content::where('id', $input['id'])->first()));
     }
 }
