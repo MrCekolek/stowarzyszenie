@@ -21,6 +21,21 @@ class ContentRequest extends FormRequest {
                 $this->checkDestroy();
 
                 break;
+
+            case 'updateVisibility':
+                $this->checkUpdateVisibility();
+
+                break;
+
+            case 'updateSelected':
+                $this->checkUpdateSelected();
+
+                break;
+
+            case 'updateValue':
+                $this->checkUpdateValue();
+
+                break;
         }
 
         parent::__construct($input);
@@ -54,6 +69,31 @@ class ContentRequest extends FormRequest {
             'shared_id' => 'required|exists:contents',
             'tile_content_id' => 'required|exists:tile_contents,id',
             'tile_content_shared_id' => 'required|exists:tile_contents,shared_id'
+        ];
+    }
+
+    public function checkUpdateVisibility() {
+        $this->rules = [
+            'id' => 'required|exists:contents',
+            'shared_id' => 'required|exists:contents',
+            'field' => 'required|in:admin,user',
+            'visibility' => 'required|in:true,false'
+        ];
+    }
+
+    public function checkUpdateSelected() {
+        $this->rules = [
+            'id' => 'required|exists:contents',
+            'selected' => 'required|in:true,false'
+        ];
+    }
+
+    public function checkUpdateValue() {
+        $this->rules = [
+            'id' => 'required|exists:contents',
+            'value_pl' => 'required',
+            'value_en' => 'required',
+            'value_ru' => 'required',
         ];
     }
 }

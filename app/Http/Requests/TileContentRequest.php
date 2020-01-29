@@ -19,6 +19,11 @@ class TileContentRequest extends FormRequest {
                 $this->checkDestroy();
 
                 break;
+
+            case 'updateVisibility':
+                $this->checkUpdateVisibility();
+
+                break;
         }
 
         parent::__construct($input);
@@ -51,6 +56,15 @@ class TileContentRequest extends FormRequest {
             'shared_id' => 'required|exists:tile_contents',
             'tile_id' => 'required|exists:tiles,id',
             'tile_shared_id' => 'required|exists:tiles,shared_id'
+        ];
+    }
+
+    public function checkUpdateVisibility() {
+        $this->rules = [
+            'id' => 'required|exists:tile_contents',
+            'shared_id' => 'required|exists:tile_contents',
+            'field' => 'required|in:admin,user',
+            'visibility' => 'required|in:true,false'
         ];
     }
 }

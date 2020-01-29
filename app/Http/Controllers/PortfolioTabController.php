@@ -8,12 +8,14 @@ use App\Models\Portfolio;
 use App\Models\PortfolioTab;
 use App\Services\LogService;
 use App\Traits\ChangePosition;
+use App\Traits\ManagePortfolio;
 use App\Traits\Translatable;
 use Illuminate\Http\Request;
 
 class PortfolioTabController extends Controller {
     use Translatable,
-        ChangePosition;
+        ChangePosition,
+        ManagePortfolio;
 
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['index']]);
@@ -77,5 +79,16 @@ class PortfolioTabController extends Controller {
         return LogService::delete($success > 0, [
             'portfolioTabs' => PortfolioTab::where('portfolio_id', $input['portfolio_id'])->get()->toArray()
         ]);
+    }
+
+    public function updateVisibility(Request $request) {
+        $input = $request->all();
+        $validation = new PortfolioTabRequest($input, 'updateVisibility');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        return LogService::update(self::changeVisibility($input, PortfolioTab::class));
     }
 }

@@ -8,12 +8,14 @@ use App\Models\PortfolioTab;
 use App\Models\Tile;
 use App\Services\LogService;
 use App\Traits\ChangePosition;
+use App\Traits\ManagePortfolio;
 use App\Traits\Translatable;
 use Illuminate\Http\Request;
 
 class TileController extends Controller {
     use Translatable,
-        ChangePosition;
+        ChangePosition,
+        ManagePortfolio;
 
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['index']]);
@@ -83,5 +85,16 @@ class TileController extends Controller {
         return LogService::delete($success > 0, [
             'tiles' => Tile::where('portfolio_tab_id', $input['portfolio_tab_id'])->get()->toArray()
         ]);
+    }
+
+    public function updateVisibility(Request $request) {
+        $input = $request->all();
+        $validation = new TileRequest($input, 'updateVisibility');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        return LogService::update(self::changeVisibility($input, Tile::class));
     }
 }

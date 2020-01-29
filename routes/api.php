@@ -14,8 +14,6 @@
 Route::group([
     'middleware' => 'api'
 ], function ($router) {
-//    Route::post('login', 'AuthController@login');
-
     Route::prefix('lang')->group(function () {
         Route::post('get', 'PreferenceUserController@getLang');
         Route::post('set', 'PreferenceUserController@setLang');
@@ -64,6 +62,7 @@ Route::group([
             Route::post('create', 'PortfolioTabController@create');
             Route::post('update', 'PortfolioTabController@update');
             Route::post('destroy', 'PortfolioTabController@destroy');
+            Route::post('visibility/update', 'PortfolioTabController@updateVisibility');
         });
 
         Route::prefix('tile')->group(function () {
@@ -71,18 +70,23 @@ Route::group([
             Route::post('create', 'TileController@create');
             Route::post('update', 'TileController@update');
             Route::post('destroy', 'TileController@destroy');
+            Route::post('visibility/update', 'TileController@updateVisibility');
 
             Route::prefix('content')->group(function () {
                 Route::post('{tile}/get', 'TileContentController@index');
                 Route::post('create', 'TileContentController@create');
                 Route::post('update', 'TileContentController@update');
                 Route::post('destroy', 'TileContentController@destroy');
+                Route::post('visibility/update', 'TileContentController@updateVisibility');
 
                 Route::prefix('content')->group(function () {
                     Route::post('{tileContent}/get', 'ContentController@index');
                     Route::post('create', 'ContentController@create');
                     Route::post('update', 'ContentController@update');
                     Route::post('destroy', 'ContentController@destroy');
+                    Route::post('visibility/update', 'ContentController@updateVisibility');
+                    Route::post('selected/update', 'ContentController@updateSelected');
+                    Route::post('value/update', 'ContentController@updateValue');
                 });
             });
         });

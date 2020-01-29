@@ -21,6 +21,11 @@ class PortfolioTabRequest extends FormRequest {
                 $this->checkDestroy();
 
                 break;
+
+            case 'updateVisibility':
+                $this->checkUpdateVisibility();
+
+                break;
         }
 
         parent::__construct($input);
@@ -50,6 +55,15 @@ class PortfolioTabRequest extends FormRequest {
         $this->rules = [
             'shared_id' => 'required|exists:portfolio_tabs',
             'portfolio_id' => 'required|exists:portfolios,id'
+        ];
+    }
+
+    public function checkUpdateVisibility() {
+        $this->rules = [
+            'id' => 'required|exists:portfolio_tabs',
+            'shared_id' => 'required|exists:portfolio_tabs',
+            'field' => 'required|in:admin,user',
+            'visibility' => 'required|in:true,false'
         ];
     }
 }
