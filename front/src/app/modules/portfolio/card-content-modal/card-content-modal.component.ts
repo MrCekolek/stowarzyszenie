@@ -39,6 +39,7 @@ export class CardContentModalComponent implements OnInit {
     name_en: '',
     name_ru: '',
     type: '',
+    options: [],
     tile_id: 0,  
     tile_shared_id: 0
   };
@@ -84,16 +85,22 @@ export class CardContentModalComponent implements OnInit {
       name_en: this.titleTranslations[1],
       name_ru: this.titleTranslations[2],
       type: this.selectedType,
+      options: this.contents,
       tile_id: this.card.id,  
       tile_shared_id: this.card.shared_id
     };
 
     this.portfolioApiService.addNewContentToCard(this.newContent).subscribe(response => {
+      console.log(response);
       if (response.success) {
         this.isSaving = false;
         this.dialogRef.close(response.tileContent);
       }
     });
+  }
+
+  getNewOption(option) {
+    this.contents.push(option);
   }
 
   translate(input, type) {

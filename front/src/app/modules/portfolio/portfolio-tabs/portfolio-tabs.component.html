@@ -25,6 +25,7 @@
 
         <!-- button dodania nowego taba -->
         <!-- TODO: permission -->
+        <!-- *ngIf="userService.checkPermission('PROFILE.ADD_TABS')" -->
         <li class="nav-item mr-2">
             <div class="btn btn-warning" (click)="openTabModal('new')">
                 <i class="fas fa-plus"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.ADD' | translate }}
@@ -36,7 +37,7 @@
 
 <div class="tab-content mt-5" id="tbs-content" *ngIf="this.activeTab">
     <div class="tab-pane fade" [id]="'tab_' + this.activeTab.id" role="tabpanel">
-
+        <!-- *ngIf="!tabLoading; else loading" -->
         <div class="container">
             <div class="row" *ngIf="activeTabsCards">
                 <div class="col-sm-12 col-md-6 col-lg-6" *ngFor="let cart of activeTabsCards">
@@ -75,4 +76,14 @@
             </div>
         </div>
     </div>
+
+    <ng-template #loading>
+        <div class="overlay-loader">
+            <div class="loader">
+                <div class="spinner-border text-warning" role="status" style="width: 3rem; height: 3rem;">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </ng-template>
 </div>

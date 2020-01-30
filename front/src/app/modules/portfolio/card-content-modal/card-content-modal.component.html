@@ -105,38 +105,7 @@
                 {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.CHECKBOX_ADD_OPTION_LABEL' | translate }}
             </h5>
 
-            <ul class="list-unstyled">
-                <li *ngFor="let option of contents; let i = index">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" [id]="'option' + i" diabled>
-                        <label class="custom-control-label" [for]="'option' + i">
-                            {{ option['name_' + lang] }}
-                        </label>
-                    </div>
-                </li>
-
-                <li>
-                    <div class="input-group">
-                        <input type="text" class="form-control" #translateOption [placeholder]="'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.CHECKBOX_CONTENT_PLACEHOLDER' | translate">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button" [class.btn-progress]="this.translateLoading" (click)="translate(translateOption.value, 'option')">
-                                {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
-                            </button>
-                        </div>
-                    </div>
-
-                    <app-translations-list *ngIf="this.newOptionTranslations.length > 0" [translations]="newOptionTranslations"></app-translations-list>
-
-                    <a class="btn btn-link collapsed" data-toggle="collapse" [href]="'#translations' + i" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.CHECKBOX_OPEN_TRANSLTIONS' | translate }}
-                    </a>
-                    <div class="collapse" [id]="'#translations' + i">
-                        <p>
-
-                        </p>
-                    </div>
-                </li>
-            </ul>
+            <app-options-list [options]="contents" [type]="modal_type" (newOptionEv)="getNewOption($event)"></app-options-list>
         </div>
 
 

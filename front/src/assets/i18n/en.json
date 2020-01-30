@@ -7,7 +7,8 @@
             "SAVE": "Save changes",
             "SAVE_SHORT": "Save",
             "BACK": "Return",
-            "TRANSLATE": "translate"
+            "TRANSLATE": "translate",
+            "HIDE": "Hide"
         },
         "HELPERS": {
             "ALERT": {
@@ -28,6 +29,10 @@
                     "ROLE": {
                         "TITLE": "Delete a role",
                         "TEXT": "Are you sure you want to delete the role"
+                    },
+                    "CARD_CONTENT": {
+                        "TITLE": "Deleting card contents",
+                        "TEXT": "Are you sure you want to delete the content"
                     }
                 }
             },
@@ -275,7 +280,8 @@
                         "HELP_TEXT_1": "The tabs visible on user profiles have content that they can fill out. You decide what type of content is available for them to fill.",
                         "CHECKBOX_CONTENT_PLACEHOLDER": "Enter a name for the new option ...",
                         "CHECKBOX_ADD_OPTION_LABEL": "Manage the list of options",
-                        "CHECKBOX_OPEN_TRANSLTIONS": "See translations"
+                        "CHECKBOX_OPEN_TRANSLTIONS": "See translations",
+                        "OPITON_SHOW_TRANSLATIONS": "Show translations"
                     },
                     "TYPE_DESC": {
                         "INPUT": "Short text field",
@@ -373,6 +379,9 @@
                             "CHANGE_ROLE": "Change user roles",
                             "DELETE": "Deleting users",
                             "USERS": "Members"
+                        },
+                        "PROFILE": {
+                            "ADD_TABS": "Adding bookmarks in the portfolio"
                         }
                     }
                 }

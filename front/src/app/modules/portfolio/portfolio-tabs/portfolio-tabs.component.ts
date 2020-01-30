@@ -11,6 +11,7 @@ import { AlertModel } from '../../../shared/models/alert.model';
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { LanguageService } from '../../../shared/services/user/language.service';
 import { EditCardModalComponent } from '../edit-card-modal/edit-card-modal.component';
+import { UserService } from 'src/app/shared/services/user/user.service';
 
 @Component({
   selector: 'app-portfolio-tabs',
@@ -40,12 +41,15 @@ export class PortfolioTabsComponent implements OnInit {
 
   private alert: AlertModel;
 
+  tabLoading;
+
   constructor(
     private portfolioService: PortfolioService,
     private apiService: ApiService,
     private portfolioApiService: PortfolioApiService,
     private dialog: MatDialog,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -55,11 +59,13 @@ export class PortfolioTabsComponent implements OnInit {
     this.selectActiveTab(this.tabs[0]);
   }
 
-  selectActiveTab(tab) {
+  selectActiveTab(tab) {                                                           
+    // this.tabLoading = true;
     this.activeTab = tab;
     console.log(this.portfolioService.getTabCards(tab.id).subscribe(cards => {
       console.log(cards);
       this.activeTabsCards = cards.tiles;
+      // this.tabLoading = false;
     }));
   }
 
