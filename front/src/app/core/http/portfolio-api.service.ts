@@ -63,4 +63,8 @@ export class PortfolioApiService {
   addContentToCardContent(content) {
     return this.apiService.post('portfolio/tile/content/content/create', content);
   }
+
+  deleteContentFromCardContent(content) {
+    return this.apiService.post('portfolio/tile/content/content/destroy', content);
+  }
 }

@@ -15,9 +15,10 @@ import { PortfolioCardComponent } from './portfolio-card/portfolio-card.componen
 import { FormsModule } from '@angular/forms';
 import { EditCardModalComponent } from './edit-card-modal/edit-card-modal.component';
 import { ContentOptionsComponent } from './content-options/content-options.component';
+import { OptionsListComponent } from './options-list/options-list.component';
 
 @NgModule({
-  declarations: [WholePortfolioComponent, PortfolioTabsComponent, OneTabComponent, UserPortfolioComponent, AddTabModalComponent, CardContentModalComponent, PortfolioCardComponent, EditCardModalComponent, ContentOptionsComponent],
+  declarations: [WholePortfolioComponent, PortfolioTabsComponent, OneTabComponent, UserPortfolioComponent, AddTabModalComponent, CardContentModalComponent, PortfolioCardComponent, EditCardModalComponent, ContentOptionsComponent, OptionsListComponent],
   imports: [
     CommonModule,
     SharedModule,

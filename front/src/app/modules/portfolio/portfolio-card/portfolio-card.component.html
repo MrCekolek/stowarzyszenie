@@ -15,6 +15,9 @@
                     <a class="dropdown-item has-icon text-danger" (click)="deleteCard()">
                         <i class="far fa-trash-alt"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
                     </a>
+                    <a class="dropdown-item has-icon text-gray" (click)="hideCar()">
+                        <i [ngClass]="{'fa-eye-slash': card.admin_visibility, 'fa-eye': !card.admin_visibility}" class="fas"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.HIDE' | translate }}
+                    </a>
                 </div>
             </div>
         </div>
@@ -40,56 +43,74 @@
             </div>
 
             <div class="contents" *ngIf="this.contents.length > 0">
-                <div *ngFor="let content of contents; let i = index">
-                    <div [ngSwitch]="content.type">
-                        <div *ngSwitchCase="'input'">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">
-                                    {{ content['name_' + lang] }}
-                                </label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" readonly [placeholder]="'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.ADMIN_CONTENT_PLACEHOLDER' | translate">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div *ngSwitchCase="'textarea'">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">
-                                    {{ content['name_' + lang] }}
-                                </label>
-                                <div class="col-sm-9">
-                                    <textarea class="form-control" rows="4" cols="5" value="{{'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.ADMIN_CONTENT_PLACEHOLDER' | translate}}">
-                                    </textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div *ngSwitchCase="'checkbox'">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">
-                                    {{ content['name_' + lang] }}
-                                </label>
-                                <div class="col-sm-9">
-                                    <ul class="list-unstyled">
-                                        <li *ngFor="let item of content.contents">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck1" diabled>
-                                                <label class="custom-control-label" for="customCheck1">
-                                                    {{ item['name_' + lang] }}
-                                                </label>
+                <ul class="list-unstyled">
+                    <li class="list-item" *ngFor="let content of contents; let i = index">
+                        <div [ngSwitch]="content.type">
+                            <div *ngSwitchCase="'input'">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">
+                                        {{ content['name_' + lang] }}
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" readonly [placeholder]="'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.ADMIN_CONTENT_PLACEHOLDER' | translate">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-danger btn-icon" (click)="deleteContent(content)">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
                                             </div>
-                                        </li>
-                                    </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div *ngSwitchDefault>
+                            <div *ngSwitchCase="'textarea'">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">
+                                        {{ content['name_' + lang] }}
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" rows="4" cols="5" value="{{'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.ADMIN_CONTENT_PLACEHOLDER' | translate}}">
+                                        </textarea>
+                                    </div>
+                                </div>
 
+                                <button class="btn btn-danger btn-icon" (click)="deleteContent(content)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+
+                            <div *ngSwitchCase="'checkbox'">
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <button class="btn btn-danger btn-icon btn-sm mr-2" [class.btn-progress]="content.isDeleting" (click)="deleteContent(content)">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <label class="col-form-label">
+                                            {{ content['name_' + lang] }}
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <ul class="list-unstyled">
+                                            <li *ngFor="let item of content.contents; let i = index">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" [id]="'option' + i" disabled>
+                                                    <label class="custom-control-label" [for]="'option' + i">
+                                                        {{ item['value_' + lang] }}
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngSwitchDefault>
+
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
         </ng-template>
 

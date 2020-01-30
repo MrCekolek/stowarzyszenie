@@ -6,6 +6,7 @@ import { CardContentModalComponent } from '../card-content-modal/card-content-mo
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { PortfolioCard } from 'src/app/shared/models/portfollio-card.model';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
+import { AlertModel } from 'src/app/shared/models/alert.model';
 
 @Component({
   selector: 'app-portfolio-card',
@@ -20,6 +21,7 @@ export class PortfolioCardComponent implements OnInit {
   @Output() editCardEv = new EventEmitter<any>();
   lang: string;
   private isLoading: boolean = true;
+  private alert: AlertModel;
 
   constructor(
     private portfolioApiService: PortfolioApiService,
@@ -55,7 +57,11 @@ export class PortfolioCardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       (data) => {
-        this.contents.push(data);
+        if (data) {
+          if (data.success) {
+            this.contents.push(data);
+          }
+        }
       }
     );
   }
@@ -68,4 +74,32 @@ export class PortfolioCardComponent implements OnInit {
     this.editCardEv.emit(this.card);
   }
 
+  deleteContent(content) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      title: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.CARD_CONTENT.TITLE',
+      text: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.CARD_CONTENT.TEXT',
+      element: content,
+      apiToDelete: 'portfolio/tile/content/destroy'
+    };
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
+    
+    dialogRef.afterClosed().subscribe(
+      (data) => {
+        if (data) {
+          if (data.success) {
+            const index = this.contents.indexOf(data.content);
+            this.contents.splice(index, 1);
+            this.alert = new AlertModel('success', data.message);
+          } else {
+            this.alert = new AlertModel('danger', data.message);
+          }
+        }
+      }
+    );
+  }
 }

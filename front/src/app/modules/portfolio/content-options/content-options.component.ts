@@ -20,9 +20,9 @@ export class ContentOptionsComponent implements OnInit {
   private newContent = {
     id: 0,
     shared_id: 0,
-    name_pl: '',
-    name_en: '',
-    name_ru: '',
+    value_pl: '',
+    value_en: '',
+    value_ru: '',
     type: '',
     tile_id: 0,  
     tile_shared_id: 0
@@ -64,13 +64,15 @@ export class ContentOptionsComponent implements OnInit {
     this.newContent = {
       id: 0,
       shared_id: 0,
-      name_pl: this.translations[0],
-      name_en: this.translations[1],
-      name_ru:  this.translations[2],
+      value_pl: this.translations[0],
+      value_en: this.translations[1],
+      value_ru:  this.translations[2],
       type: this.selectedContent,
       tile_id: this.card.id,  
       tile_shared_id: this.card.shared_id
     };
+
+    console.log(this.newContent);
 
     this.portfolioApi.addNewContentToCard(this.newContent).subscribe(response => {
       console.log(response);

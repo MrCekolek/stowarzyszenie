@@ -23,7 +23,7 @@ class TileContentController extends Controller {
 
     public function index(Tile $tile) {
         return LogService::read(true, [
-            'tileContents' => TileContent::where('tile_id', $tile->id)->get()->toArray()
+            'tileContents' => TileContent::with('contents')->where('tile_id', $tile->id)->get()->toArray()
         ]);
     }
 
@@ -48,7 +48,7 @@ class TileContentController extends Controller {
         );
 
         return LogService::create($success, [
-            'tileContent' => $tileContent->toArray()
+            'tileContent' => TileContent::with('contents')->where('id', $tileContent->id)->get()->toArray()
         ]);
     }
 
