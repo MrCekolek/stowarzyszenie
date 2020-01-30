@@ -1,0 +1,65 @@
+<div>
+    <div class="form-group">
+        <label class="text-primary">
+            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.CONTENT_NAME_LABEL' | translate }}
+        </label>
+
+        <div class="input-group">
+            <input type="text" class="form-control" name="optionName" #optionName>
+            <button class="btn btn-primary" type="button" [class.btn-progress]="this.optionAddLoading" (click)="addOption(optionName.value)">
+                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.ADD' | translate }}
+                </button>
+        </div>
+    </div>
+
+    <ul class="list-unstyled">
+        <li class="list-item" *ngFor="let option of options; let i = index">
+            <div class="d-flex justify-content-between">
+                <div>
+                    {{ option['value_' + lang] }}
+                </div>
+
+                <div>
+                    <button class="btn btn-danger" *ngIf="this.type === 'edit'" (click)="deleteOptionFromServer(option)">
+                        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
+                    </button>
+                    <button class="btn btn-danger" *ngIf="this.type === 'new'" (click)="deleteOptionFromView(option)">
+                        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
+                    </button>
+                </div>
+            </div>
+
+            <button class="btn btn-link p-0" type="button" data-toggle="collapse" [attr.data-target]="'#translations' + i" aria-expanded="false" [attr.aria-controls]="collapseExample">
+                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.OPITON_SHOW_TRANSLATIONS' | translate }}
+            </button>
+            <div class="collapse" [id]="'translations' + i">
+                <div class="form-group row">
+                    <label [for]="'input' + i" class="col-sm-3 col-form-label">
+                        PL
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" [id]="'input' + i" [value]="option.value_pl">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label [for]="'input' + i + 1" class="col-sm-3 col-form-label">
+                        EN
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" [id]="'input' + i + 1" [value]="option.value_en">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label [for]="'input' + i + 2" class="col-sm-3 col-form-label">
+                        RU
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" [id]="'input' + i + 2" [value]="option.value_ru">
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

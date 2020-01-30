@@ -7,7 +7,8 @@
             "SAVE": "Zapisz zmiany",
             "SAVE_SHORT": "Zapisz",
             "BACK": "Powrót",
-            "TRANSLATE": "Przetłumacz"
+            "TRANSLATE": "Przetłumacz",
+            "HIDE": "Ukryj"
         },
         "HELPERS": {
             "ALERT": {
@@ -28,6 +29,10 @@
                     "ROLE": {
                         "TITLE": "Usuwanie roli",
                         "TEXT": "Czy na pewno chcesz usunąć rolę"
+                    },
+                    "CARD_CONTENT": {
+                        "TITLE": "Usuwanie zawartości karty",
+                        "TEXT": "Czy na pewno chcesz usunąć zawartość"
                     }
                 }
             },
@@ -275,7 +280,8 @@
                         "HELP_TEXT_1": "Karty widoczne na profilach użytkowników posiadają zawartość, którą mogą oni wypełniać. Decydujesz, jaki rodzaj zawartości jest dla nich dostępny do wypełniania.",
                         "CHECKBOX_CONTENT_PLACEHOLDER": "Wpisz nazwę nowej opcji...",
                         "CHECKBOX_ADD_OPTION_LABEL": "Zarządzaj listą opcji",
-                        "CHECKBOX_OPEN_TRANSLTIONS": "Zobacz tłumaczenia"
+                        "CHECKBOX_OPEN_TRANSLTIONS": "Zobacz tłumaczenia",
+                        "OPITON_SHOW_TRANSLATIONS": "Pokaż tłumaczenia"
                     },
                     "TYPE_DESC": {
                         "INPUT": "Krótkie pole tekstowe",
@@ -373,6 +379,9 @@
                             "CHANGE_ROLE": "Zmiana ról użytkowników",
                             "DELETE": "Usuwanie użytkowników",
                             "USERS": "Użytkownicy"
+                        },
+                        "PROFILE": {
+                            "ADD_TABS": "Dodawanie zakładek w portfolio"
                         }
                     }
                 }
