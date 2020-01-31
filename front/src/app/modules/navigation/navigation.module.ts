@@ -23,4 +23,5 @@ import { UserSearchComponent } from './user-search/user-search.component';
   exports: [NavbarComponent],
   providers: []
 })
+
 export class NavigationModule { }

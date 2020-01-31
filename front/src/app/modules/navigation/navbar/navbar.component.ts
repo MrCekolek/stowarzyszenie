@@ -8,8 +8,7 @@ import { SearchService } from "../../../shared/services/user/search.service";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { map } from "rxjs/operators";
 import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
-import { NavigationStart } from "@angular/router";
-import { UserModel } from '../../../shared/models/user.model';
+import { UserProviderService } from "../../../core/services/user-provider.service";
 
 declare const $: any;
 
@@ -58,7 +57,8 @@ export class NavbarComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private languageService: LanguageService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private userProviderService: UserProviderService
   ) {
     this.userService.loginStatus.subscribe(value => this.loggedIn = value);
     this.createForm();
