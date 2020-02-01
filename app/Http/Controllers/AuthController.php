@@ -16,6 +16,13 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+/**
+ * Class AuthController
+ *
+ * @package stowarzyszenie\controllers
+ *
+ * @author  Stowarzyszenie CIOB <CIOBstowarzyszenie@gmail.com>
+ */
 class AuthController extends Controller {
     use Translatable;
 
@@ -29,10 +36,34 @@ class AuthController extends Controller {
     }
 
     /**
-     * Get a JWT via given credentials.
-     *
-     * @param Request $request
-     * @return JsonResponse
+     * @OA\Post(
+     *     path="/account/login",
+     *     tags={"authentication"},
+     *     summary="Logs in user",
+     *     operationId="AuthControllerAccountLogin",
+     *     @OA\Parameter(
+     *         name="login_email",
+     *         in="query",
+     *         description="User email",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="password",
+     *         in="query",
+     *         description="User password",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
      */
     public function accountLogin(Request $request) {
         $credentials = $request->all([
@@ -75,9 +106,16 @@ class AuthController extends Controller {
     }
 
     /**
-     * Get the authenticated User.
-     *
-     * @return JsonResponse
+     * @OA\Post(
+     *     path="/account/me",
+     *     tags={"authentication"},
+     *     summary="Gets current logged in user",
+     *     operationId="AuthControllerMe",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
      */
     public function me() {
         return LogService::read(true, [
@@ -93,6 +131,72 @@ class AuthController extends Controller {
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/account/register",
+     *     tags={"authentication"},
+     *     summary="Registers user",
+     *     operationId="AuthControllerAccountRegister",
+     *     @OA\Parameter(
+     *         name="login_email",
+     *         in="query",
+     *         description="User login email",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="password",
+     *         in="query",
+     *         description="User password",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="first_name",
+     *         in="query",
+     *         description="User first name",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="last_name",
+     *         in="query",
+     *         description="User last name",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="birthdate",
+     *         in="query",
+     *         description="User birthdate",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="gender",
+     *         in="query",
+     *         description="User gender in:F,M",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function accountRegister(Request $request) {
         $input = $request->all();
 
@@ -170,6 +274,27 @@ class AuthController extends Controller {
         $this->send($input['login_email']);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/account/activate",
+     *     tags={"authentication"},
+     *     summary="Activates user account",
+     *     operationId="AuthControllerAccountActivate",
+     *     @OA\Parameter(
+     *         name="token",
+     *         in="query",
+     *         description="Generated user unique token",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function accountActivate(Request $request) {
         $input = $request->all();
 
@@ -204,9 +329,16 @@ class AuthController extends Controller {
     }
 
     /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return JsonResponse
+     * @OA\Post(
+     *     path="/logout",
+     *     tags={"authentication"},
+     *     summary="Logs out user",
+     *     operationId="AuthControllerLogout",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
      */
     public function logout() {
         auth()->logout();
@@ -215,9 +347,16 @@ class AuthController extends Controller {
     }
 
     /**
-     * Refresh a token.
-     *
-     * @return JsonResponse
+     * @OA\Post(
+     *     path="/account/refresh",
+     *     tags={"authentication"},
+     *     summary="Refreshes users generated token",
+     *     operationId="AuthControllerRefresh",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
      */
     public function refresh() {
         return $this->respondWithToken(auth()->refresh());
