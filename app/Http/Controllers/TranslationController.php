@@ -8,6 +8,13 @@ use App\Services\LogService;
 use App\Traits\Translatable;
 use Illuminate\Http\Request;
 
+/**
+ * Class TranslationController
+ *
+ * @package stowarzyszenie\controllers
+ *
+ * @author  Stowarzyszenie CIOB <CIOBstowarzyszenie@gmail.com>
+ */
 class TranslationController extends Controller
 {
     use Translatable;
@@ -16,6 +23,27 @@ class TranslationController extends Controller
         $this->middleware('auth:api');
     }
 
+    /**
+     * @OA\Post(
+     *     path="/translation/get",
+     *     tags={"translation"},
+     *     summary="Gets translations",
+     *     operationId="TranslationControllerGetTranslation",
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="query",
+     *         description="Phrase to translate in users language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function getTranslation(Request $request) {
         $input = $request->all();
 

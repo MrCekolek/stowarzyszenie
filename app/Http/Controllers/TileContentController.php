@@ -12,6 +12,13 @@ use App\Traits\ManagePortfolio;
 use App\Traits\Translatable;
 use Illuminate\Http\Request;
 
+/**
+ * Class TileContentController
+ *
+ * @package stowarzyszenie\controllers
+ *
+ * @author  Stowarzyszenie CIOB <CIOBstowarzyszenie@gmail.com>
+ */
 class TileContentController extends Controller {
     use Translatable,
         ChangePosition,
@@ -21,12 +28,90 @@ class TileContentController extends Controller {
         $this->middleware('auth:api', ['except' => ['index']]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/portfolio/tile/content/{cardId}/get",
+     *     tags={"card_content"},
+     *     summary="Gets all card contents",
+     *     operationId="TileContentIndex",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function index(Tile $tile) {
         return LogService::read(true, [
             'tileContents' => TileContent::with('contents')->where('tile_id', $tile->id)->get()->toArray()
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/portfolio/tile/content/create",
+     *     tags={"card_content"},
+     *     summary="Creates card content",
+     *     operationId="TileContentControllerCreate",
+     *     @OA\Parameter(
+     *         name="name_pl",
+     *         in="query",
+     *         description="Translation in polish language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="name_en",
+     *         in="query",
+     *         description="Translation in english language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="name_ru",
+     *         in="query",
+     *         description="Translation in russian language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="type",
+     *         in="query",
+     *         description="Card content type",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="tile_id",
+     *         in="query",
+     *         description="Card id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="tile_shared_id",
+     *         in="query",
+     *         description="Card shared id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function create(Request $request) {
         $input = $request->all();
         $validation = new TileContentRequest($input, 'create');
@@ -52,6 +137,117 @@ class TileContentController extends Controller {
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/portfolio/tile/content/update",
+     *     tags={"card_content"},
+     *     summary="Updates card content",
+     *     operationId="TileContentControllerUpdate",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="query",
+     *         description="Card content id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="shared_id",
+     *         in="query",
+     *         description="Card content shared id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="name_pl",
+     *         in="query",
+     *         description="Translation in polish language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="name_en",
+     *         in="query",
+     *         description="Translation in english language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="name_ru",
+     *         in="query",
+     *         description="Translation in russian language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="type",
+     *         in="query",
+     *         description="Card content type",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="position",
+     *         in="query",
+     *         description="Card content position",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="admin_visibility",
+     *         in="query",
+     *         description="Admin visibility",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="user_visibility",
+     *         in="query",
+     *         description="User visibility",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="tile_id",
+     *         in="query",
+     *         description="Card id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="tile_shared_id",
+     *         in="query",
+     *         description="Card shared id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function update(Request $request) {
         $success = true;
         $input = $request->all();
@@ -75,6 +271,45 @@ class TileContentController extends Controller {
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/portfolio/tile/content/destroy",
+     *     tags={"card_content"},
+     *     summary="Deletes specific card content",
+     *     operationId="TileContentControllerDestroy",
+     *     @OA\Parameter(
+     *         name="shared_id",
+     *         in="query",
+     *         description="Card content shared id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="tile_id",
+     *         in="query",
+     *         description="Card id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="tile_shared_id",
+     *         in="query",
+     *         description="Card shared id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function destroy(Request $request) {
         $input = $request->all();
         $validation = new TileContentRequest($input, 'destroy');
@@ -94,6 +329,54 @@ class TileContentController extends Controller {
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/portfolio/tile/content/visibility/update",
+     *     tags={"card_content"},
+     *     summary="Changes card content admin or user visibility",
+     *     operationId="TileContentControllerUpdateVisibility",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="query",
+     *         description="Card content id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="shared_id",
+     *         in="query",
+     *         description="Card content shared id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="field",
+     *         in="query",
+     *         description="Admin or user visibility in:admin,user",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="visibility",
+     *         in="query",
+     *         description="Visibility in:true,false",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function updateVisibility(Request $request) {
         $input = $request->all();
         $validation = new TileContentRequest($input, 'updateVisibility');

@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\App;
 use JWTAuth;
 use Config;
 
+
+/**
+ * Class PreferenceUserController
+ *
+ * @package stowarzyszenie\controllers
+ *
+ * @author  Stowarzyszenie CIOB <CIOBstowarzyszenie@gmail.com>
+ */
 class PreferenceUserController extends Controller {
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['setLang']]);
@@ -26,6 +34,27 @@ class PreferenceUserController extends Controller {
         }
     }
 
+    /**
+     * @OA\Post(
+     *     path="/lang/set",
+     *     tags={"language"},
+     *     summary="Changes users language",
+     *     operationId="setLang",
+     *     @OA\Parameter(
+     *         name="lang",
+     *         in="query",
+     *         description="Language in:en,pl,ru",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function setLang(Request $request) {
         $input = $request->all();
 
@@ -46,6 +75,18 @@ class PreferenceUserController extends Controller {
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/lang/get",
+     *     tags={"language"},
+     *     summary="Gets users language",
+     *     operationId="getLang",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function getLang(Request $request) {
         if ($user = JWTAuth::user()) {
             $preference = PreferenceUser::where('user_id', $user['id'])
