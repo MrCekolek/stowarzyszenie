@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PortfolioService } from 'src/app/core/services/portfolio.service';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
+import { UserProviderService } from 'src/app/shared/services/user/user-provider.service';
 
 @Component({
   selector: 'app-whole-portfolio',
@@ -16,7 +17,8 @@ export class WholePortfolioComponent implements OnInit {
 
   constructor(
     private portfolioService: PortfolioService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private userProvider: UserProviderService
   ) { }
 
   ngOnInit() {
@@ -29,6 +31,8 @@ export class WholePortfolioComponent implements OnInit {
     this.languageService.currentLang.subscribe( lg => {
       this.lang = lg;
     });
+
+    console.log(this.userProvider.checkPermission('USERS.ADD'));
   }
 
   sortTabsByPosition() {
