@@ -9,7 +9,53 @@ use App\Services\ErrorService;
 use App\Services\LogService;
 use Illuminate\Http\Request;
 
+/**
+ * Class ChangePasswordController
+ *
+ * @package stowarzyszenie\controllers
+ *
+ * @author  Stowarzyszenie CIOB <CIOBstowarzyszenie@gmail.com>
+ */
 class ChangePasswordController extends Controller {
+    /**
+     * @OA\Post(
+     *     path="/account/password/change",
+     *     tags={"authentication"},
+     *     summary="Changes user passowrd",
+     *     operationId="ChangePasswordControllerAccountPasswordChange",
+     *     @OA\Parameter(
+     *         name="login_email",
+     *         in="query",
+     *         description="User email",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="token",
+     *         in="query",
+     *         description="User token",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="password",
+     *         in="query",
+     *         description="User password",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function accountPasswordChange(Request $request) {
         $input = $request->all();
 

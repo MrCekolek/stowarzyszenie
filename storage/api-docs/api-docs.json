@@ -1,0 +1,1875 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Sample App API swagger documentation",
+        "description": "This is a sample API Documentation",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "email": "apiteam@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/account/login": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Logs in user",
+                "operationId": "AuthControllerAccountLogin",
+                "parameters": [
+                    {
+                        "name": "login_email",
+                        "in": "query",
+                        "description": "User email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "User password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/account/me": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Gets current logged in user",
+                "operationId": "AuthControllerMe",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/account/register": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Registers user",
+                "operationId": "AuthControllerAccountRegister",
+                "parameters": [
+                    {
+                        "name": "login_email",
+                        "in": "query",
+                        "description": "User login email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "User password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "first_name",
+                        "in": "query",
+                        "description": "User first name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "query",
+                        "description": "User last name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "birthdate",
+                        "in": "query",
+                        "description": "User birthdate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "gender",
+                        "in": "query",
+                        "description": "User gender in:F,M",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/account/activate": {
+            "get": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Activates user account",
+                "operationId": "AuthControllerAccountActivate",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Generated user unique token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Logs out user",
+                "operationId": "AuthControllerLogout",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/account/refresh": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Refreshes users generated token",
+                "operationId": "AuthControllerRefresh",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/account/password/change": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Changes user passowrd",
+                "operationId": "ChangePasswordControllerAccountPasswordChange",
+                "parameters": [
+                    {
+                        "name": "login_email",
+                        "in": "query",
+                        "description": "User email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "User token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "User password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/content/content/{cardContentId}/get": {
+            "post": {
+                "tags": [
+                    "content_option"
+                ],
+                "summary": "Gets all options that belongs to specific card content",
+                "operationId": "ContentControllerIndex",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/content/content/create": {
+            "post": {
+                "tags": [
+                    "content_option"
+                ],
+                "summary": "Creates content option",
+                "operationId": "ContentControllerCreate",
+                "parameters": [
+                    {
+                        "name": "value_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "value_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "value_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tile_content_id",
+                        "in": "query",
+                        "description": "Card content id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tile_content_shared_id",
+                        "in": "query",
+                        "description": "Card content shared_id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tile_shared_id",
+                        "in": "query",
+                        "description": "Card shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/content/content/update": {
+            "post": {
+                "tags": [
+                    "content_option"
+                ],
+                "summary": "Updates content option",
+                "operationId": "ContentControllerUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Content option id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "shared_id",
+                        "in": "query",
+                        "description": "Content option shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "value_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "value_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "value_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "selected",
+                        "in": "query",
+                        "description": "Is option selected?",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "position",
+                        "in": "query",
+                        "description": "Content option position",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "admin_visibility",
+                        "in": "query",
+                        "description": "Admin visibility",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_visibility",
+                        "in": "query",
+                        "description": "User visibility",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tile_content_id",
+                        "in": "query",
+                        "description": "Card content id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tile_content_shared_id",
+                        "in": "query",
+                        "description": "Card content shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/content/content/destroy": {
+            "post": {
+                "tags": [
+                    "content_option"
+                ],
+                "summary": "Deletes specific card content option",
+                "operationId": "ContentConteollerDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Content option id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "shared_id",
+                        "in": "query",
+                        "description": "Content option shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tile_content_id",
+                        "in": "query",
+                        "description": "Card content option id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tile_content_shared_id",
+                        "in": "query",
+                        "description": "Card content option shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/content/content/visibility/update": {
+            "post": {
+                "tags": [
+                    "content_option"
+                ],
+                "summary": "Changes card content option admin or user visibility",
+                "operationId": "ContentControllerUpdateVisibility",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Card content option id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "shared_id",
+                        "in": "query",
+                        "description": "Card content option shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "field",
+                        "in": "query",
+                        "description": "Admin or user visibility in:admin,user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "visibility",
+                        "in": "query",
+                        "description": "Visibility in:true,false",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/content/content/selected/update": {
+            "post": {
+                "tags": [
+                    "content_option"
+                ],
+                "summary": "Changes card content option admin or user visibility",
+                "operationId": "ContentControllerUpdateSelected",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Card content option id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "selected",
+                        "in": "query",
+                        "description": "Is card content option selected?",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/content/content/value/update": {
+            "post": {
+                "tags": [
+                    "content_option"
+                ],
+                "summary": "Changes card content option admin or user visibility",
+                "operationId": "ContentControllerUpdateValue",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Card content option id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "value_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "value_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "value_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/interest/get": {
+            "post": {
+                "tags": [
+                    "interest"
+                ],
+                "summary": "Gets all interests",
+                "operationId": "InterestControllerIndex",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/interest/create": {
+            "post": {
+                "tags": [
+                    "interest"
+                ],
+                "summary": "Creates interest",
+                "operationId": "InterestControllerCreate",
+                "parameters": [
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/interest/update": {
+            "post": {
+                "tags": [
+                    "interest"
+                ],
+                "summary": "Updates interest",
+                "operationId": "InterestControllerUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Interest id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/interest/destroy": {
+            "post": {
+                "tags": [
+                    "interest"
+                ],
+                "summary": "Destroys interest",
+                "operationId": "InterestControllerDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Interest id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/role/{roleId}/permission/get": {
+            "post": {
+                "tags": [
+                    "permission"
+                ],
+                "summary": "Gets role permissions",
+                "operationId": "PermissionParentControllerRolePermissions",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Role id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/role/{roleId}/permission/update": {
+            "post": {
+                "tags": [
+                    "permission"
+                ],
+                "summary": "Updates role permissions",
+                "operationId": "PermissionParentControllerUpdateRolePermissions",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Role's id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "permissions",
+                        "in": "query",
+                        "description": "Role permissions",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tabs/{portfolioId}/get": {
+            "post": {
+                "tags": [
+                    "portfolio_tab"
+                ],
+                "summary": "Gets portfolio tabs",
+                "operationId": "PortfolioTabControllerIndex",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tabs/create": {
+            "post": {
+                "tags": [
+                    "portfolio_tab"
+                ],
+                "summary": "Creates portfolio tab",
+                "operationId": "PortfolioTabControllerCreate",
+                "parameters": [
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tabs/update": {
+            "post": {
+                "tags": [
+                    "portfolio_tab"
+                ],
+                "summary": "Updates portfolio tab",
+                "operationId": "PortfolioTabControllerUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "PortfolioTab id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "shared_id",
+                        "in": "query",
+                        "description": "PortfolioTab shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "position",
+                        "in": "query",
+                        "description": "PortfolioTab position",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "admin_visibility",
+                        "in": "query",
+                        "description": "PortfolioTab admin visibility",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_visibility",
+                        "in": "query",
+                        "description": "PortfolioTab user visibility",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tabs/destroy": {
+            "post": {
+                "tags": [
+                    "portfolio_tab"
+                ],
+                "summary": "Destroys portfolio tab",
+                "operationId": "PortfolioTabControllerDestroy",
+                "parameters": [
+                    {
+                        "name": "shared_id",
+                        "in": "query",
+                        "description": "PortfolioTab shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "portfolio_id",
+                        "in": "query",
+                        "description": "PortfolioTab portfolio id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tabs/visibility/update": {
+            "post": {
+                "tags": [
+                    "portfolio_tab"
+                ],
+                "summary": "Changes portfolio tab's admin or user visibility",
+                "operationId": "PortfolioTabControllerUpdateVisibility",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "PortfolioTab id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "shared_id",
+                        "in": "query",
+                        "description": "PortfolioTab shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "field",
+                        "in": "query",
+                        "description": "Admin or user visibility in:admin,user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "visibility",
+                        "in": "query",
+                        "description": "Visibility in:true,false",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/lang/set": {
+            "post": {
+                "tags": [
+                    "language"
+                ],
+                "summary": "Changes users language",
+                "operationId": "setLang",
+                "parameters": [
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Language in:en,pl,ru",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/lang/get": {
+            "post": {
+                "tags": [
+                    "language"
+                ],
+                "summary": "Gets users language",
+                "operationId": "getLang",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/account/password/reset": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Resets user password",
+                "operationId": "accountPasswordReset",
+                "parameters": [
+                    {
+                        "name": "login_email",
+                        "in": "query",
+                        "description": "User email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/role/get": {
+            "post": {
+                "tags": [
+                    "role"
+                ],
+                "summary": "Gets all roles",
+                "operationId": "RoleControllerIndex",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/role/create": {
+            "post": {
+                "tags": [
+                    "role"
+                ],
+                "summary": "Creates role",
+                "operationId": "RoleControllerCreate",
+                "parameters": [
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/role/{roleId}/update": {
+            "post": {
+                "tags": [
+                    "role"
+                ],
+                "summary": "Updates role",
+                "operationId": "RoleControllerUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Role id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/role/delete/{roleId}": {
+            "post": {
+                "tags": [
+                    "role"
+                ],
+                "summary": "Deletes specific role",
+                "operationId": "RoleControllerDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Role's id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/content/{cardId}/get": {
+            "post": {
+                "tags": [
+                    "card_content"
+                ],
+                "summary": "Gets all card contents",
+                "operationId": "TileContentIndex",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/content/create": {
+            "post": {
+                "tags": [
+                    "card_content"
+                ],
+                "summary": "Creates card content",
+                "operationId": "TileContentControllerCreate",
+                "parameters": [
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Card content type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tile_id",
+                        "in": "query",
+                        "description": "Card id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tile_shared_id",
+                        "in": "query",
+                        "description": "Card shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/content/update": {
+            "post": {
+                "tags": [
+                    "card_content"
+                ],
+                "summary": "Updates card content",
+                "operationId": "TileContentControllerUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Card content id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "shared_id",
+                        "in": "query",
+                        "description": "Card content shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Card content type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "position",
+                        "in": "query",
+                        "description": "Card content position",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "admin_visibility",
+                        "in": "query",
+                        "description": "Admin visibility",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_visibility",
+                        "in": "query",
+                        "description": "User visibility",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tile_id",
+                        "in": "query",
+                        "description": "Card id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tile_shared_id",
+                        "in": "query",
+                        "description": "Card shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/content/destroy": {
+            "post": {
+                "tags": [
+                    "card_content"
+                ],
+                "summary": "Deletes specific card content",
+                "operationId": "TileContentControllerDestroy",
+                "parameters": [
+                    {
+                        "name": "shared_id",
+                        "in": "query",
+                        "description": "Card content shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tile_id",
+                        "in": "query",
+                        "description": "Card id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tile_shared_id",
+                        "in": "query",
+                        "description": "Card shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/content/visibility/update": {
+            "post": {
+                "tags": [
+                    "card_content"
+                ],
+                "summary": "Changes card content admin or user visibility",
+                "operationId": "TileContentControllerUpdateVisibility",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Card content id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "shared_id",
+                        "in": "query",
+                        "description": "Card content shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "field",
+                        "in": "query",
+                        "description": "Admin or user visibility in:admin,user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "visibility",
+                        "in": "query",
+                        "description": "Visibility in:true,false",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/{portfolioTabId}/get": {
+            "post": {
+                "tags": [
+                    "card"
+                ],
+                "summary": "Gets all cards that belongs to portfolio tab with contents",
+                "operationId": "TileControllerIndex",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/create": {
+            "post": {
+                "tags": [
+                    "card"
+                ],
+                "summary": "Creates card",
+                "operationId": "TileControllerCreate",
+                "parameters": [
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "portfolio_tab_id",
+                        "in": "query",
+                        "description": "Portfolio tab id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "portfolio_tab_shared_id",
+                        "in": "query",
+                        "description": "Portfolio tab shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/update": {
+            "post": {
+                "tags": [
+                    "card"
+                ],
+                "summary": "Updates card",
+                "operationId": "TileControllerUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Tile id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "shared_id",
+                        "in": "query",
+                        "description": "Tile shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "position",
+                        "in": "query",
+                        "description": "Tile's position",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "admin_visibility",
+                        "in": "query",
+                        "description": "Admin visibility",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_visibility",
+                        "in": "query",
+                        "description": "User visibility",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "portfolio_tab_id",
+                        "in": "query",
+                        "description": "Portfolio tab id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "portfolio_tab_shared_id",
+                        "in": "query",
+                        "description": "Portfolio tab shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/destroy": {
+            "post": {
+                "tags": [
+                    "card"
+                ],
+                "summary": "Deletes specific card",
+                "operationId": "TileControllerDestroy",
+                "parameters": [
+                    {
+                        "name": "shared_id",
+                        "in": "query",
+                        "description": "Card shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "portfolio_tab_id",
+                        "in": "query",
+                        "description": "Card portfolio tab id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "portfolio_tab_shared_id",
+                        "in": "query",
+                        "description": "Card portfolio tab shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/tile/visibility/update": {
+            "post": {
+                "tags": [
+                    "card"
+                ],
+                "summary": "Changes card admin or user visibility",
+                "operationId": "TileControllerUpdateVisibility",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Card id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "shared_id",
+                        "in": "query",
+                        "description": "Card shared id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "field",
+                        "in": "query",
+                        "description": "Admin or user visibility in:admin,user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "visibility",
+                        "in": "query",
+                        "description": "Visibility in:true,false",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/translation/get": {
+            "post": {
+                "tags": [
+                    "translation"
+                ],
+                "summary": "Gets translations",
+                "operationId": "TranslationControllerGetTranslation",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Phrase to translate in users language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/user/get": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Gets all users",
+                "operationId": "UserControllerIndex",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/email/exist": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Check if users email exists",
+                "operationId": "UserControllerEmailExist",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "api_key": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

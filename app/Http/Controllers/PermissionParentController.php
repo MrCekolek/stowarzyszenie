@@ -9,7 +9,35 @@ use App\Models\Role;
 use App\Services\LogService;
 use Illuminate\Http\Request;
 
+/**
+ * Class PermissionParentController
+ *
+ * @package stowarzyszenie\controllers
+ *
+ * @author  Stowarzyszenie CIOB <CIOBstowarzyszenie@gmail.com>
+ */
 class PermissionParentController extends Controller {
+    /**
+     * @OA\Post(
+     *     path="/role/{roleId}/permission/get",
+     *     tags={"permission"},
+     *     summary="Gets role permissions",
+     *     operationId="PermissionParentControllerRolePermissions",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="query",
+     *         description="Role id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function rolePermissions(Role $role) {
         $validation = new PermissionParentRequest($role->toArray(), 'rolePermissions');
 
@@ -36,6 +64,36 @@ class PermissionParentController extends Controller {
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/role/{roleId}/permission/update",
+     *     tags={"permission"},
+     *     summary="Updates role permissions",
+     *     operationId="PermissionParentControllerUpdateRolePermissions",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="query",
+     *         description="Role's id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="permissions",
+     *         in="query",
+     *         description="Role permissions",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function updateRolePermissions(Request $request, Role $role) {
         $input = $request->all();
 
