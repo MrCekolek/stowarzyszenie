@@ -30,4 +30,19 @@ export class UserProviderService {
       });
     });
   }
+
+  checkPermission(permissionKey): boolean {
+    console.log(this.getUser().roles);
+
+    this.getUser().roles.forEach(role => {
+      const key: any = role.permissions.find((x: any) => x.translation_key === permissionKey);
+      console.log(key.pivot.selected);
+      
+      if (key.pivot.selected === 'true' || key.pivot.selected === true || key.pivot.selecte) {
+        return true;
+      }
+    });
+
+    return false;
+  }
 }
