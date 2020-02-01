@@ -20,6 +20,7 @@ export class AppComponent {
   constructor(
     public translateService: TranslateService,
     public userService: UserService,
+    public userProviderService: UserProviderService,
     @Inject(Document) private document: Document,
     private renderer: Renderer2,
     private router: Router,
@@ -34,7 +35,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.isPageLoading = true;
-    
+
     let events: any = this.router.events;
 
     if (this.loggedIn) {
@@ -43,8 +44,7 @@ export class AppComponent {
         if (event instanceof NavigationStart) {
           this.userService.me().subscribe(
             response => {
-              this.userService.changeUser(new UserModel(response));
-              console.log(this.userService.getUser());
+              this.userProviderService.setUser(new UserModel(response));
             }
           );
         }

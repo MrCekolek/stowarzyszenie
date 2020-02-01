@@ -8,8 +8,7 @@ import 'hammerjs';
 import { NavigationModule } from './modules/navigation/navigation.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { PageLoaderComponent } from './shared/components/page-loader/page-loader.component';
-import { UserProviderService } from './shared/services/user/user-provider.service';
-import { userProviderFactory } from './shared/functions/userProviderFactory';
+import { UserProviderService} from "./core/services/user-provider.service";
 
 @NgModule({
   declarations: [
@@ -25,9 +24,17 @@ import { userProviderFactory } from './shared/functions/userProviderFactory';
     DashboardModule
   ],
   providers: [Document, UserProviderService, {
-    provide: APP_INITIALIZER,
-    useFactory: userProviderFactory, deps: [UserProviderService], multi: true
-  }],
+      provide: APP_INITIALIZER,
+      useFactory: userProviderFactory,
+      deps: [UserProviderService],
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
+
+export function userProviderFactory(provider: UserProviderService) {
+  return () => provider.load();
+}
+

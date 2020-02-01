@@ -7,7 +7,7 @@ import { ApiService } from '../../../core/http/api.service';
 })
 export class UserProviderService {
 
-  private User: UserModel
+  private User: UserModel;
 
   constructor(
     private apiService: ApiService
@@ -15,6 +15,10 @@ export class UserProviderService {
 
   public getUser(): UserModel {
     return this.User;
+  }
+
+  public setUser(user) {
+    this.User = user;
   }
 
   load() {
