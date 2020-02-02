@@ -42,7 +42,8 @@ class PortfolioTabController extends Controller {
      */
     public function index(Portfolio $portfolio) {
         return LogService::read(true, [
-            'portfolioTabs' => PortfolioTab::where('portfolio_id', $portfolio->id)->get()->toArray()
+            'portfolioTabs' => PortfolioTab::with(['tiles.tileContents.contents'])
+                ->where('portfolio_id', $portfolio->id)->get()->toArray()
         ]);
     }
 
