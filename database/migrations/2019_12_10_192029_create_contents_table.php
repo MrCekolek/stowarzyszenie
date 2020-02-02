@@ -17,6 +17,9 @@ class CreateContentsTable extends Migration {
             $table->text('value_pl')->nullable();
             $table->text('value_en')->nullable();
             $table->text('value_ru')->nullable();
+            $table->text('filled_pl')->nullable();
+            $table->text('filled_en')->nullable();
+            $table->text('filled_ru')->nullable();
             $table->boolean('selected')->default(0);
             $table->integer('position')->default(0);
             $table->boolean('admin_visibility')->default(1);

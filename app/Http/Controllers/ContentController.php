@@ -428,10 +428,10 @@ class ContentController extends Controller {
 
     /**
      * @OA\Post(
-     *     path="/portfolio/tile/content/content/value/update",
+     *     path="/portfolio/tile/content/content/filled/update",
      *     tags={"content_option"},
      *     summary="Changes card content option admin or user visibility",
-     *     operationId="ContentControllerUpdateValue",
+     *     operationId="ContentControllerUpdateFilled",
      *     @OA\Parameter(
      *         name="id",
      *         in="query",
@@ -474,14 +474,14 @@ class ContentController extends Controller {
      *     )
      * )
      */
-    public function updateValue(Request $request) {
+    public function updateFilled(Request $request) {
         $input = $request->all();
-        $validation = new ContentRequest($input, 'updateValue');
+        $validation = new ContentRequest($input, 'updateFilled');
 
         if ($validation->fails()) {
             return $validation->failResponse();
         }
 
-        return LogService::update(self::changeValue($input, Content::where('id', $input['id'])->first()));
+        return LogService::update(self::changeFilled($input, Content::where('id', $input['id'])->first()));
     }
 }

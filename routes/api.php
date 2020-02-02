@@ -87,7 +87,7 @@ Route::group([
                     Route::post('destroy', 'ContentController@destroy');
                     Route::post('visibility/update', 'ContentController@updateVisibility');
                     Route::post('selected/update', 'ContentController@updateSelected');
-                    Route::post('value/update', 'ContentController@updateValue');
+                    Route::post('filled/update', 'ContentController@updateFilled');
                 });
             });
         });
