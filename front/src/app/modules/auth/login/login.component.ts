@@ -6,9 +6,9 @@ import { LoginModel } from "../../../shared/models/login.model";
 import { TokenService } from "./service/token.service";
 import { LanguageService } from "../../../shared/services/user/language.service";
 import { SharedModule } from "../../../shared/shared.module";
-import { UserService } from "../../../shared/services/user/user.service";
 import { UserModel } from "../../../shared/models/user.model";
 import { Router } from "@angular/router";
+import { UserProviderService } from "../../../core/services/user-provider.service";
 
 @Component({
   selector: 'app-login',
@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
     private translateService: TranslateService,
     private languageService: LanguageService,
     private sharedModule: SharedModule,
-    private userService: UserService,
-    private router: Router
+    private router: Router,
+    private userProviderService: UserProviderService
   ) {
     this.passwordIsHidden = true;
     this.createForm();
@@ -69,8 +69,8 @@ export class LoginComponent implements OnInit {
   handleResponse(response) {
     this.loginError = '';
     this.tokenService.handle(response.access_token);
-    this.userService.changeLoginStatus(true);
-    this.userService.changeUser(new UserModel(response['user']['original']));
+    this.userProviderService.changeLoginStatus(true);
+    this.userProviderService.setUser(new UserModel(response['user']['original']));
     this.languageService.setLang(this.sharedModule.detectLang(response['user']['original']['user']['preference_user']['lang']));
     this.router.navigateByUrl('dashboard');
   }

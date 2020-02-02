@@ -11,7 +11,6 @@ import { AlertModel } from '../../../shared/models/alert.model';
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { LanguageService } from '../../../shared/services/user/language.service';
 import { EditCardModalComponent } from '../edit-card-modal/edit-card-modal.component';
-import { UserService } from 'src/app/shared/services/user/user.service';
 
 @Component({
   selector: 'app-portfolio-tabs',
@@ -48,8 +47,7 @@ export class PortfolioTabsComponent implements OnInit {
     private apiService: ApiService,
     private portfolioApiService: PortfolioApiService,
     private dialog: MatDialog,
-    private languageService: LanguageService,
-    private userService: UserService
+    private languageService: LanguageService
   ) { }
 
   ngOnInit() {

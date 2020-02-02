@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
-import { UserService } from "./user.service";
 import { ApiService } from "../../../core/http/api.service";
+import { UserProviderService } from "../../../core/services/user-provider.service";
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +21,10 @@ export class LanguageService {
   constructor(
     private http: HttpClient,
     private translateService: TranslateService,
-    private userService: UserService,
+    private userProviderService: UserProviderService,
     private api: ApiService
   ) {
-    this.userService.loginStatus.subscribe(value => this.loggedIn = value);
+    this.userProviderService.loginStatus.subscribe(value => this.loggedIn = value);
 
     if (this.loggedIn) {
       this.getLang();
@@ -54,6 +54,6 @@ export class LanguageService {
   }
 
   getUser() {
-    return this.userService.getUser();
+    return this.userProviderService.getUser();
   }
 }

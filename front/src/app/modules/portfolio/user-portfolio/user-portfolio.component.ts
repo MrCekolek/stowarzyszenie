@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../../../shared/services/user/user.service';
 import { LanguageService } from '../../../shared/services/user/language.service';
-
 
 @Component({
   selector: 'app-user-portfolio',
@@ -16,7 +14,6 @@ export class UserPortfolioComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService,
     private languageService: LanguageService
   ) { }
 
