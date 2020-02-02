@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material";
 import { PortfolioModule } from '../portfolio/portfolio.module';
 import { InterestsModule } from '../interests/interests.module';
-import { UserService } from 'src/app/shared/services/user/user.service';
 
 @NgModule({
   declarations: [UserTileComponent, UsersListComponent],
@@ -22,6 +21,6 @@ import { UserService } from 'src/app/shared/services/user/user.service';
     PortfolioModule,
     InterestsModule
   ],
-  providers: [UserService]
+  providers: []
 })
 export class UsersModule { }

@@ -3,7 +3,6 @@ import { PortfolioCard } from 'src/app/shared/models/portfollio-card.model';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 import { ApiService } from 'src/app/core/http/api.service';
-import { UserService } from 'src/app/shared/services/user/user.service';
 import { PortfolioApiService } from 'src/app/core/http/portfolio-api.service';
 
 @Component({

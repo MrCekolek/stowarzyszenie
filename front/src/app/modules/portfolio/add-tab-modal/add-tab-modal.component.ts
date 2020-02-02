@@ -4,7 +4,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LanguageService } from '../../../shared/services/user/language.service';
 import { ApiService } from '../../../core/http/api.service';
 import { PortfolioApiService } from '../../../core/http/portfolio-api.service';
-import { UserService } from '../../../shared/services/user/user.service';
 
 @Component({
   selector: 'app-add-tab-modal',
@@ -42,9 +41,8 @@ export class AddTabModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data,
     private languageService: LanguageService,
     private apiService: ApiService,
-    private portfolioService: PortfolioApiService,
-    private userService: UserService
-  ) { 
+    private portfolioService: PortfolioApiService
+  ) {
     this.modal_type = data.modal_type;
 
     if (data.tab) {
