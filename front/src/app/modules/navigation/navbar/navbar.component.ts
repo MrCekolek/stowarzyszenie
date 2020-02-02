@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { UserService } from "../../../shared/services/user/user.service";
 import { TokenService } from "../../auth/login/service/token.service";
 import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { LanguageService } from "../../../shared/services/user/language.service";
@@ -51,7 +50,6 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private translateService: TranslateService,
-    private userService: UserService,
     private tokenService: TokenService,
     private searchService: SearchService,
     private formBuilder: FormBuilder,
@@ -60,7 +58,7 @@ export class NavbarComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private userProviderService: UserProviderService
   ) {
-    this.userService.loginStatus.subscribe(value => this.loggedIn = value);
+    this.userProviderService.loginStatus.subscribe(value => this.loggedIn = value);
     this.createForm();
   }
 
@@ -106,7 +104,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.tokenService.remove();
-    this.userService.changeLoginStatus(false);
+    this.userProviderService.changeLoginStatus(false);
     this.router.navigateByUrl('/auth/login');
   }
 

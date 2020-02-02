@@ -8,7 +8,7 @@ import 'hammerjs';
 import { NavigationModule } from './modules/navigation/navigation.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { PageLoaderComponent } from './shared/components/page-loader/page-loader.component';
-import { UserProviderService} from "./core/services/user-provider.service";
+import {UserProviderService} from "./core/services/user-provider.service";
 
 @NgModule({
   declarations: [

@@ -1,11 +1,10 @@
 import { Component, Inject, OnDestroy, Renderer2, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { UserService } from './shared/services/user/user.service';
 import { Router, NavigationStart } from '@angular/router';
 import { UserModel } from './shared/models/user.model';
 import { SearchService } from './shared/services/user/search.service';
 import { map } from 'rxjs/operators';
-import { UserProviderService } from './shared/services/user/user-provider.service';
+import { UserProviderService } from "./core/services/user-provider.service";
 
 @Component({
   selector: 'app-root',
@@ -19,18 +18,14 @@ export class AppComponent {
 
   constructor(
     public translateService: TranslateService,
-    public userService: UserService,
     public userProviderService: UserProviderService,
     @Inject(Document) private document: Document,
     private renderer: Renderer2,
     private router: Router,
     private searchService: SearchService,
-    private userProvider: UserProviderService
   ) {
     this.translateService.addLangs(['pl', 'en']);
     this.translateService.setDefaultLang('pl');
-
-    this.userService.changeUser(this.userProvider.getUser());
   }
 
   ngOnInit() {
@@ -38,20 +33,7 @@ export class AppComponent {
 
     let events: any = this.router.events;
 
-    if (this.loggedIn) {
-      this.router.events.subscribe(event => {
-        // update user model
-        if (event instanceof NavigationStart) {
-          this.userService.me().subscribe(
-            response => {
-              this.userProviderService.setUser(new UserModel(response));
-            }
-          );
-        }
-      });
-    }
-
-    this.userService.loginStatus.subscribe(value => {
+    this.userProviderService.loginStatus.subscribe(value => {
       this.loggedIn = value;
 
       if (!value) {
@@ -60,6 +42,19 @@ export class AppComponent {
         this.renderer.removeClass(document.body, 'layout-3');
       }
     });
+
+    if (this.loggedIn) {
+      this.router.events.subscribe(event => {
+        // update user model
+        if (event instanceof NavigationStart) {
+          this.userProviderService.me().subscribe(
+            response => {
+              this.userProviderService.setUser(new UserModel(response));
+            }
+          );
+        }
+      });
+    }
 
     this.isPageLoading = false;
   }

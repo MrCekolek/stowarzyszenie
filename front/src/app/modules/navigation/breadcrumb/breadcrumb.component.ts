@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET, NavigationStart } from "@angular/router";
-import { UserService } from "../../../shared/services/user/user.service";
-import { UserModel } from "../../../shared/models/user.model";
 
 interface IBreadcrumb {
   label: string;
@@ -21,7 +19,6 @@ export class BreadcrumbComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private userService: UserService
   ) {
     this.breadcrumbs = [];
   }
