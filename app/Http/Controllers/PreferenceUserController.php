@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\PreferenceUserRequest;
 use App\Models\PreferenceUser;
+use App\Traits\UploadFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 use JWTAuth;
 use Config;
 
@@ -17,6 +19,8 @@ use Config;
  * @author  Stowarzyszenie CIOB <CIOBstowarzyszenie@gmail.com>
  */
 class PreferenceUserController extends Controller {
+    use UploadFile;
+
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['setLang']]);
     }
@@ -97,5 +101,55 @@ class PreferenceUserController extends Controller {
                 'lang' => $preference['lang']
             ]);
         }
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/account/avatar/update",
+     *     tags={"user"},
+     *     summary="Changes user avatar",
+     *     operationId="PreferenceUserControllerUpdateAvatar",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="query",
+     *         description="User id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="avatar",
+     *         in="query",
+     *         description="Image jpeg,png,jpg,gif",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function updateAvatar(Request $request) {
+        $input = $request->all();
+
+        $validation = new PreferenceUserRequest($input, 'updateAvatar');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        $image = $request->file('avatar');
+        $name = Str::slug($input['name']) . '_' . time();
+        $folder  = '/uploads/images/';
+        $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
+        $this->uploadOne($image, $folder, 'public', $name);
+
+        $preferenceUser = PreferenceUser::where('id', auth()->user()->preferenceUser()->first()->id)->first();
+        $preferenceUser->avatar = $filePath;
+        $preferenceUser->save();
     }
 }

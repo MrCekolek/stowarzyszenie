@@ -11,6 +11,11 @@ class PreferenceUserRequest extends FormRequest {
                 $this->checkSetLang();
 
                 break;
+
+            case 'updateAvatar':
+                $this->checkUpdateAvatar();
+
+                break;
         }
 
         parent::__construct($input);
@@ -19,6 +24,13 @@ class PreferenceUserRequest extends FormRequest {
     public function checkSetLang() {
         $this->rules = [
             'lang' => 'required|in:en,pl,ru'
+        ];
+    }
+
+    public function checkUpdateAvatar() {
+        $this->rules = [
+            'id' => 'required|exists:users',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif'
         ];
     }
 }
