@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" *ngIf="(!card?.admin_visibility) || (card?.admin_visibility && !card?.user_visibility)">
     <div class="card-header">
         <h4>
             {{ card['name_' + this.lang] }}

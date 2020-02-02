@@ -77,14 +77,14 @@ class ContentRequest extends FormRequest {
             'id' => 'required|exists:contents',
             'shared_id' => 'required|exists:contents',
             'field' => 'required|in:admin,user',
-            'visibility' => 'required|in:true,false'
+            'visibility' => 'required'
         ];
     }
 
     public function checkUpdateSelected() {
         $this->rules = [
             'id' => 'required|exists:contents',
-            'selected' => 'required|in:true,false'
+            'selected' => 'required'
         ];
     }
 

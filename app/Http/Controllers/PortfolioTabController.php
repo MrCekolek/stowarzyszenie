@@ -309,6 +309,6 @@ class PortfolioTabController extends Controller {
             return $validation->failResponse();
         }
 
-        return LogService::update(self::changeVisibility($input, PortfolioTab::class));
+        return LogService::update(self::changeVisibility($input, (new PortfolioTab())));
     }
 }
