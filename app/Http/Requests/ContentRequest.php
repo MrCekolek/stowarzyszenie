@@ -32,8 +32,8 @@ class ContentRequest extends FormRequest {
 
                 break;
 
-            case 'updateValue':
-                $this->checkUpdateValue();
+            case 'updateFilled':
+                $this->checkUpdateFilled();
 
                 break;
         }
@@ -88,12 +88,12 @@ class ContentRequest extends FormRequest {
         ];
     }
 
-    public function checkUpdateValue() {
+    public function checkUpdateFilled() {
         $this->rules = [
             'id' => 'required|exists:contents',
-            'value_pl' => 'required',
-            'value_en' => 'required',
-            'value_ru' => 'required',
+            'filled_pl' => 'required',
+            'filled_en' => 'required',
+            'filled_ru' => 'required',
         ];
     }
 }

@@ -23,10 +23,10 @@ trait ManagePortfolio {
         return $success > 0;
     }
 
-    public static function changeValue($input, $model) {
-        $model->value_pl = $input['value_pl'];
-        $model->value_en = $input['value_en'];
-        $model->value_ru = $input['value_ru'];
+    public static function changeFilled($input, $model) {
+        $model->filled_pl = $input['filled_pl'];
+        $model->filled_en = $input['filled_en'];
+        $model->filled_ru = $input['filled_ru'];
 
         return $model->save();
     }
