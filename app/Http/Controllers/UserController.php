@@ -34,6 +34,32 @@ class UserController extends Controller {
 
     /**
      * @OA\Post(
+     *     path="/user/{userId}/get",
+     *     tags={"authentication"},
+     *     summary="Gets specific user",
+     *     operationId="UserControllerShow",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function show(User $user) {
+        return LogService::read(true, [
+            'user' => User::with([
+                'affilationUser',
+                'portfolio',
+                'preferenceUser',
+                'roles.permissions'
+            ])
+            ->where('id', $user->id)
+            ->first()
+            ->toArray()
+        ]);
+    }
+
+    /**
+     * @OA\Post(
      *     path="/email/exist",
      *     tags={"authentication"},
      *     summary="Check if users email exists",
