@@ -106,18 +106,9 @@ class PreferenceUserController extends Controller {
     /**
      * @OA\Post(
      *     path="/account/avatar/update",
-     *     tags={"user"},
+     *     tags={"authentication"},
      *     summary="Changes user avatar",
      *     operationId="PreferenceUserControllerUpdateAvatar",
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="query",
-     *         description="User id",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
      *     @OA\Parameter(
      *         name="avatar",
      *         in="query",

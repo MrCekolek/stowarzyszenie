@@ -29,7 +29,6 @@ class PreferenceUserRequest extends FormRequest {
 
     public function checkUpdateAvatar() {
         $this->rules = [
-            'id' => 'required|exists:users',
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif'
         ];
     }
