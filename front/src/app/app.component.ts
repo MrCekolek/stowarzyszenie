@@ -4,7 +4,7 @@ import { Router, NavigationStart } from '@angular/router';
 import { UserModel } from './shared/models/user.model';
 import { SearchService } from './shared/services/user/search.service';
 import { map } from 'rxjs/operators';
-import { UserProviderService } from "./core/services/user-provider.service";
+import { UserProviderService } from './core/services/user-provider.service';
 
 @Component({
   selector: 'app-root',

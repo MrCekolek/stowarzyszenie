@@ -7,6 +7,9 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmat
 import { PortfolioCard } from 'src/app/shared/models/portfollio-card.model';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 import { AlertModel } from 'src/app/shared/models/alert.model';
+import { Route } from '@angular/compiler/src/core';
+import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-portfolio-card',
@@ -19,6 +22,8 @@ export class PortfolioCardComponent implements OnInit {
   contents = [];
   @Output() delCardEv = new EventEmitter<any>();
   @Output() editCardEv = new EventEmitter<any>();
+  @Input() portfolioRole: string;
+  @Input() owner: boolean;
   lang: string;
   private isLoading: boolean = true;
   private alert: AlertModel;
@@ -26,7 +31,10 @@ export class PortfolioCardComponent implements OnInit {
   constructor(
     private portfolioApiService: PortfolioApiService,
     private dialog: MatDialog,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private userProvider: UserProviderService
   ) { }
 
   ngOnInit() {
@@ -58,9 +66,8 @@ export class PortfolioCardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       (data) => {
         if (data) {
-          if (data.success) {
-            this.contents.push(data);
-          }
+            this.contents.push(data[0]);
+            console.log(this.contents);
         }
       }
     );

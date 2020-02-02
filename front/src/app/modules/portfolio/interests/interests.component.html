@@ -1,0 +1,26 @@
+<div class="col-sm-12">
+    <div class="card col-sm-12">
+        <div class="card-body">
+            <ul class="list-unstyled" *ngIf="this.owner && this.role === 'user'">
+                <li class="list-item" *ngFor="let int of interests">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" [id]="'int' + int.id">
+
+                        <label class="custom-control-label" [for]="'int' + int.id">
+                            {{ int['name_' + lang] }}
+                        </label>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="list-unstyled" *ngIf="(this.role === 'preview') || (this.role === 'admin')">
+                <li class="list-item" *ngFor="let int of interests">
+                    <!-- TODO: pobranie interestow dla konkretnego uzytkownika i sprawdzenie tutaj czy jest zaznaczony -->
+                    <p *ngIf="int.selected">
+                        {{ int['name_' + lang] }}
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

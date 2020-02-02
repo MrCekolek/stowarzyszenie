@@ -8,7 +8,8 @@
             "SAVE_SHORT": "Zapisz",
             "BACK": "Powrót",
             "TRANSLATE": "Przetłumacz",
-            "HIDE": "Ukryj"
+            "HIDE": "Ukryj",
+            "SHOW": "Pokaż"
         },
         "HELPERS": {
             "ALERT": {
@@ -45,7 +46,11 @@
             "LOADING_TEXT": "Ładowanie",
             "SEARCH_PLACEHOLDER": "Wyszukaj",
             "HELP": "Pomoc",
-            "OPTIONS": "Opcje"
+            "OPTIONS": "Opcje",
+            "TOOLTIPS": {
+                "DISABLED_TAB": "Ta karta jest wyłączona i nie jest widoczna dla użytkowników. Włącz jej widoczność, aby edytować"
+            },
+            "EXIT_PREVIEW_MODE": "Wyjdź z podglądu"
         },
         "LABELS_TABLES": {
             "AVATAR": "Avatar",
@@ -293,7 +298,9 @@
                 "EDIT_CARD": {
                     "TITLE": "Edytuj kartę",
                     "INPUT_LABEL": "Edytuj tytuł karty"
-                }
+                },
+                "OWNER_DESC_ADD": "Dodaj opis do swojego profilu",
+                "EMPTY_DESC_PROFILE": "Użytkownik nie dodał jeszcze opisu do swojego portfolio"
             },
             "ROLES": {
                 "ARE_EDITING": "Edytujesz rolę:",
@@ -382,6 +389,10 @@
                         },
                         "PROFILE": {
                             "ADD_TABS": "Dodawanie zakładek w portfolio"
+                        },
+                        "PORTFOLIO": {
+                            "MANAGE_TABS": "Zarządzanie zakładkami w portfolio",
+                            "PORTFOLIO": "Uprawnienia dotyczące portfolio"
                         }
                     }
                 }

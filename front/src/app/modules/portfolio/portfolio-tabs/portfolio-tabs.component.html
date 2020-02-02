@@ -6,18 +6,34 @@
                         </a> -->
 
             <div class="btn-group">
-                <a type="button" (click)="selectActiveTab(tab)" class="btn btn-primary text-white" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab">
+                <!-- disabled tab -->
+                <a type="button" *ngIf="(this.role === 'admin' && !tab.admin_visibility) || (this.role === 'user' && this.owner && !tab.user_visibility)" [class.btn-progress]="tab.hiddingLoader" data-toggle="tooltip" [title]="'STOWARZYSZENIE.HELPERS.TOOLTIPS.DISABLED_TAB' | translate"
+                    (click)="selectActiveTab(tab)" class="btn btn-primary text-white disabled" [id]="'tab' + tab.id" [href]="'#tab_' + tab.id" role="tab">
+                    {{ tab['name_' + lang] }} 
+                </a>
+
+                <!-- normal tab -->
+                <a type="button" *ngIf="(this.role === 'admin' && tab.admin_visibility) || (this.role === 'user' && !this.owner && tab.user_visibility) || (this.role === 'user' && this.owner && tab.user_visibility && !this.preview)" (click)="selectActiveTab(tab)" class="btn btn-primary text-white"
+                    [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab">
                                 {{ tab['name_' + lang] }} 
-                            </a>
-                <a type="button" class="btn btn-primary text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                </a>
+                <a type="button" *ngIf="(this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS')) || (this.role === 'user' && this.owner || this.preview)" class="btn btn-primary text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
                     <span class="sr-only">Toggle Dropdown</span>
                 </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item text-success" (click)="openTabModal('edit', tab)">
+                <div class="dropdown-menu" *ngIf="(this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS')) || (this.owner)">
+                    <a class="dropdown-item text-success" (click)="openTabModal('edit', tab)" *ngIf="this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS')">
                         <i class="fas fa-pencil-alt mr-2"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
                     </a>
-                    <a class="dropdown-item text-danger" (click)="openDeleteDialog(tab)">
+                    <a class="dropdown-item text-danger" (click)="openDeleteDialog(tab)" *ngIf="this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS')">
                         <i class="fas fa-times mr-2"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
+                    </a>
+                    <a class="dropdown-item" (click)="hideOrShowTab(tab)" *ngIf="(this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS')) || this.owner">
+                        <span *ngIf="tab.admin_visibility">
+                            <i class="fas fa-eye-slash mr-2"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.HIDE' | translate }}
+                        </span>
+                        <span *ngIf="!tab.admin_visibility">
+                            <i class="fas fa-eye mr-2"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SHOW' | translate }}
+                        </span>
                     </a>
                 </div>
             </div>
@@ -25,8 +41,8 @@
 
         <!-- button dodania nowego taba -->
         <!-- TODO: permission -->
-        <!-- *ngIf="userProviderService.checkPermission('PROFILE.ADD_TABS')" -->
-        <li class="nav-item mr-2">
+        <!-- *ngIf="userService.checkPermission('PROFILE.ADD_TABS')" -->
+        <li class="nav-item mr-2" *ngIf="this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS')">
             <div class="btn btn-warning" (click)="openTabModal('new')">
                 <i class="fas fa-plus"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.ADD' | translate }}
             </div>
@@ -41,12 +57,12 @@
         <div class="container">
             <div class="row" *ngIf="activeTabsCards">
                 <div class="col-sm-12 col-md-6 col-lg-6" *ngFor="let cart of activeTabsCards">
-                    <app-portfolio-card (editCardEv)="editCard($event)" (delCardEv)="deleteCard($event)" [card]="cart"></app-portfolio-card>
+                    <app-portfolio-card [owner]="this.owner" [portfolioRole]="this.role" (editCardEv)="editCard($event)" (delCardEv)="deleteCard($event)" [card]="cart"></app-portfolio-card>
                 </div>
 
                 <!-- static card to adding new cards -->
                 <!-- TODO: only for editing preferences -->
-                <div class="col-sm-12 col-md-6 col-lg-6">
+                <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS') && this.activeTab.name_en !== 'Interests'">
                     <div class="card card-add-new" (click)="this.addCard('Card Header')">
                         <div class="card-body">
                             <div class="empty-state" data-height="300" style="height: 300px;">
@@ -74,6 +90,10 @@
                     </div>
                 </div>
             </div>
+
+            <ng-template #innterests>
+                <app-interests [owner]="this.owner" [lang]="this.lang" [role]="role"></app-interests>
+            </ng-template>
         </div>
     </div>
 

@@ -8,7 +8,8 @@
             "SAVE_SHORT": "Save",
             "BACK": "Return",
             "TRANSLATE": "translate",
-            "HIDE": "Hide"
+            "HIDE": "Hide",
+            "SHOW": "Show"
         },
         "HELPERS": {
             "ALERT": {
@@ -45,7 +46,11 @@
             "LOADING_TEXT": "Landing",
             "SEARCH_PLACEHOLDER": "Search",
             "HELP": "Help",
-            "OPTIONS": "Options"
+            "OPTIONS": "Options",
+            "TOOLTIPS": {
+                "DISABLED_TAB": "This card is disabled and is not visible to users. Turn on her visibility to edit"
+            },
+            "EXIT_PREVIEW_MODE": "Exit the preview"
         },
         "LABELS_TABLES": {
             "AVATAR": "Avatar",
@@ -293,7 +298,9 @@
                 "EDIT_CARD": {
                     "TITLE": "Edit card",
                     "INPUT_LABEL": "Edit card title"
-                }
+                },
+                "OWNER_DESC_ADD": "Add a description to your profile",
+                "EMPTY_DESC_PROFILE": "The user has not added description to his portfolio yet"
             },
             "ROLES": {
                 "ARE_EDITING": "You are editing role:",
@@ -382,6 +389,10 @@
                         },
                         "PROFILE": {
                             "ADD_TABS": "Adding bookmarks in the portfolio"
+                        },
+                        "PORTFOLIO": {
+                            "MANAGE_TABS": "Portfolio management",
+                            "PORTFOLIO": "Portfolio Permissions"
                         }
                     }
                 }
