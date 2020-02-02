@@ -31,6 +31,7 @@ Route::group([
         Route::post('refresh', 'AuthController@refresh');
         Route::post('login', 'AuthController@accountLogin');
         Route::get('activate', 'AuthController@accountActivate');
+        Route::post('avatar/update', 'PreferenceUserController@updateAvatar');
 
         Route::prefix('register')->group(function () {
             Route::post('', 'AuthController@accountRegister');
