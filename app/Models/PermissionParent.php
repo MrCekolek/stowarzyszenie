@@ -20,6 +20,11 @@ class PermissionParent extends BaseModel {
                 'id' => 2,
                 'name' => 'Roles',
                 'translation_key' => 'ROLES.ROLES'
+            ],
+            'Portfolio' => [
+                'id' => 3,
+                'name' => 'Portfolio',
+                'translation_key' => 'PORTFOLIO.PORTFOLIO'
             ]
         ];
     }

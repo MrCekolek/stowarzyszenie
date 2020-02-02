@@ -14,3 +14,62 @@
         {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.PROFILE.SECTION_LEAD_OWNER' | translate }}
     </p>
 </div>
+
+<div class="row justify-content-start">
+    <div class="col-sm-12" style="padding-left: 0;">
+        <div class="card author-box card-primary">
+            <div class="card-body">
+                <div class="row">
+                    <div class="author-box-left">
+                        <div class="avatar-item">
+                            <img alt="image" [src]="this.user?.preference_user.avatar" class="rounded-circle author-box-picture">
+                            <div *ngIf="this.isOwner" class="avatar-badge" title="" data-toggle="tooltip" data-original-title="Edit avatar">
+                                <i class="fas fa-pencil-alt"></i>
+                                <input type="file" style="opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%; cursor: pointer;" />
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <a class="btn btn-light mt-3 follow-btn" *ngIf="this.isOwner" (click)="enterPreviewMode()">
+                            <i class="fas fa-eye"></i> {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CHECK_OTHERS' | translate }}
+                        </a>
+                    </div>
+
+                    <div class="author-box-details">
+                        <div class="author-box-name">
+                            <span class="text-muted">
+                                {{ this.user?.affilation_user.title }}
+                            </span>
+                            <a class="text-primary">
+                                {{ this.user?.first_name + ' ' + this.user?.last_name }}        
+                            </a>
+                        </div>
+                        <div class="author-box-job">
+                            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.USER_ROLE' | translate }}
+                        </div>
+                        <div class="author-box-description">
+                            <p>
+                                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.USER_DESC' | translate }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- zakladki -->
+<div class="row" *ngIf="!this.loading; else loader">
+    <app-portfolio-tabs *ngIf="this.allTabs.length > 0" [tabs]="this.allTabs" [lang]="this.lang">
+    </app-portfolio-tabs>
+    <ng-template></ng-template>
+</div>
+
+<ng-template #loader>
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</ng-template>

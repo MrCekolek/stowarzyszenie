@@ -11,6 +11,8 @@ import { AlertModel } from '../../../shared/models/alert.model';
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { LanguageService } from '../../../shared/services/user/language.service';
 import { EditCardModalComponent } from '../edit-card-modal/edit-card-modal.component';
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-portfolio-tabs',
@@ -39,6 +41,8 @@ export class PortfolioTabsComponent implements OnInit {
   private activeTabsCards: any = [];
 
   private alert: AlertModel;
+  private role;
+  private owner?;
 
   tabLoading;
 
@@ -47,10 +51,22 @@ export class PortfolioTabsComponent implements OnInit {
     private apiService: ApiService,
     private portfolioApiService: PortfolioApiService,
     private dialog: MatDialog,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private userProvider: UserProviderService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    if (this.router.url.includes('portfolio-settings')) {
+      this.role = 'admin';
+      console.log(this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS'));
+    } else if (this.router.url.includes('users/profile')) {
+      this.role = 'user';
+      this.owner = Number.parseInt(this.route.snapshot.paramMap.get('id')) === this.userProvider.getUser().id;
+    } else if (this.router.url.includes('profile-preview')) {
+      this.role = 'preview';
+    }
   }
 
   ngAfterViewInit() {
@@ -199,16 +215,48 @@ export class PortfolioTabsComponent implements OnInit {
       (data) => {
         if (data) {
           console.log(data);
-          // if (data.success) {
-          //   const index = this.activeTabsCards.indexOf(card);
-          //   this.activeTabsCards[index] = data.card;
-          //   this.alert = new AlertModel('success', data.message);
-          // } else {
-          //   this.alert = new AlertModel('danger', data.message);
-          // }
+          if (data.success) {
+            const index = this.activeTabsCards.indexOf(card);
+            this.activeTabsCards[index] = data.card;
+            this.alert = new AlertModel('success', data.message);
+          } else {
+            this.alert = new AlertModel('danger', data.message);
+          }
         }
       }
     );
+  }
+
+  hideOrShowTab(tab) {
+    let obj = {};
+
+    tab.hiddingLoader = true;
+
+    if (this.userProvider.getUser().roles.find( x => x.name_en === 'Admin')) {
+      obj = {
+        id: tab.id,
+        shared_id: tab.shared_id,
+        field: 'admin',
+        visibility: !tab.admin_visibility
+      };
+    } else {
+      obj = {
+        id: tab.id,
+        shared_id: tab.shared_id,
+        field: 'user',
+        visibility: !tab.user_visibility
+      };
+    }
+
+    this.portfolioApiService.hideOrShowTab(obj).subscribe(res => {
+      if (res.success) {
+        tab.admin_visibility = !tab.admin_visibility;
+        tab.hiddingLoader = false;
+        this.alert = new AlertModel('success', res.message);
+      } else {
+        this.alert = new AlertModel('danger', res.message);
+      }
+    });
   }
 
   drop(event: CdkDragDrop<string[]>) {

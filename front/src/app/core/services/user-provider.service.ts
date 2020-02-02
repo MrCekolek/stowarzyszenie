@@ -22,33 +22,40 @@ export class UserProviderService {
         this.loggedIn.next(value);
     }
 
-    me() {
-        return this.api.post('account/me');
+    public setUser(user) {
+      this.user = user;
     }
 
     public getUser(): UserModel {
         return this.user;
     }
 
-    public setUser(user) {
-        this.user = user;
+    load() {
+      let logged = false;
+
+      this.loggedIn.subscribe(lg => {
+        logged = lg;
+      });
+
+      if (logged) {
+        return new Promise((resolve, reject) => {
+          this.me().subscribe(
+              (data) => {
+                  this.user = data['user'];
+              },
+              (err) => {
+                  reject(err);
+              },
+              () => {
+                  resolve(true);
+              }
+          );
+        });
+      }
     }
 
-    load() {
-        return new Promise((resolve, reject) => {
-                this.me().subscribe(
-                    (data) => {
-                        this.user = data['user'];
-                    },
-                    (err) => {
-                        reject(err);
-                    },
-                    () => {
-                       resolve(true);
-                    }
-                );
-            }
-        );
+    me() {
+      return this.api.post('account/me');
     }
 
     checkPermission(permissionKey): boolean {

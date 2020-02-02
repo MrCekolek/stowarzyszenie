@@ -51,7 +51,15 @@ class Permission extends BaseModel {
                         'ROLES.DELETE',
                         PermissionParent::permissionParents()['Roles']['id'])
                 ]
-            ]
+                ],
+                PermissionParent::permissionParents()['Portfolio']['name'] => [
+                    [
+                        self::definePermission(
+                            'Manage',
+                            'PORTFOLIO.MANAGE_TABS',
+                            PermissionParent::permissionParents()['Portfolio']['id'])
+                    ]
+                ]
         ];
     }
 
