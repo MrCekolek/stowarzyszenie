@@ -13,7 +13,7 @@
                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}
                 </button>
                 <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
-                    <a class="dropdown-item has-icon" href="#" *ngFor="let lang of translateService.getLangs(); let i = index" [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
+                    <a class="dropdown-item has-icon" *ngFor="let lang of translateService.getLangs(); let i = index" [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
                         <img [src]="this.flagsImages[i]" [alt]="this.languageService.currentLang" class="mr-2" style="height: 22px;"> {{ this.translations[i] | translate }}
                     </a>
                 </div>

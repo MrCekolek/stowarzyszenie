@@ -44,6 +44,12 @@ export class PortfolioApiService {
     return this.apiService.post('portfolio/tabs/destroy', tab);
   }
 
+  // hide / show by admin or user
+  // tab with id, shared id, visibility
+  hideOrShowTab(tab) {
+    return this.apiService.post('portfolio/tabs/visibility/update', tab);
+  }
+
   addNewContentToCard(content: Object) {
     return this.apiService.post('portfolio/tile/content/create', content);
   }

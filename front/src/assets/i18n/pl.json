@@ -8,7 +8,8 @@
             "SAVE_SHORT": "Zapisz",
             "BACK": "Powrót",
             "TRANSLATE": "Przetłumacz",
-            "HIDE": "Ukryj"
+            "HIDE": "Ukryj",
+            "SHOW": "Pokaż"
         },
         "HELPERS": {
             "ALERT": {
@@ -45,7 +46,10 @@
             "LOADING_TEXT": "Ładowanie",
             "SEARCH_PLACEHOLDER": "Wyszukaj",
             "HELP": "Pomoc",
-            "OPTIONS": "Opcje"
+            "OPTIONS": "Opcje",
+            "TOOLTIPS": {
+                "DISABLED_TAB": "Ta karta jest wyłączona i nie jest widoczna dla użytkowników. Włącz jej widoczność, aby edytować"
+            }
         },
         "LABELS_TABLES": {
             "AVATAR": "Avatar",
@@ -382,6 +386,10 @@
                         },
                         "PROFILE": {
                             "ADD_TABS": "Dodawanie zakładek w portfolio"
+                        },
+                        "PORTFOLIO": {
+                            "MANAGE_TABS": "Zarządzanie zakładkami w portfolio",
+                            "PORTFOLIO": "Uprawnienia dotyczące portfolio"
                         }
                     }
                 }

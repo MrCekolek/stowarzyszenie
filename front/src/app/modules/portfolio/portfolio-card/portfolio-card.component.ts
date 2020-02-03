@@ -7,6 +7,9 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmat
 import { PortfolioCard } from 'src/app/shared/models/portfollio-card.model';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 import { AlertModel } from 'src/app/shared/models/alert.model';
+import { Route } from '@angular/compiler/src/core';
+import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-portfolio-card',
@@ -23,10 +26,16 @@ export class PortfolioCardComponent implements OnInit {
   private isLoading: boolean = true;
   private alert: AlertModel;
 
+  private role;
+  private owner;
+
   constructor(
     private portfolioApiService: PortfolioApiService,
     private dialog: MatDialog,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private userProvider: UserProviderService
   ) { }
 
   ngOnInit() {
@@ -39,6 +48,16 @@ export class PortfolioCardComponent implements OnInit {
     this.languageService.currentLang.subscribe(lang => {
       this.lang = lang;
     });
+
+    if (this.router.url.includes('portfolio-settings')) {
+      this.role = 'admin';
+      console.log(this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS'));
+    } else if (this.router.url.includes('users/profile')) {
+      this.role = 'user';
+      this.owner = Number.parseInt(this.route.snapshot.paramMap.get('id')) === this.userProvider.getUser().id;
+    } else if (this.router.url.includes('profile-preview')) {
+      this.role = 'preview';
+    }
 
     console.log(this.card);
   }
@@ -58,9 +77,8 @@ export class PortfolioCardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       (data) => {
         if (data) {
-          if (data.success) {
-            this.contents.push(data);
-          }
+            this.contents.push(data[0]);
+            console.log(this.contents);
         }
       }
     );

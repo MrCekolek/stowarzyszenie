@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PortfolioService } from 'src/app/core/services/portfolio.service';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
+
 import { UserProviderService } from "../../../core/services/user-provider.service";
 
 @Component({
