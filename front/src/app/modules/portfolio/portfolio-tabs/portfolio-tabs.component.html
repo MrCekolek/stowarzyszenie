@@ -6,15 +6,18 @@
                         </a> -->
 
             <div class="btn-group">
-                <a type="button" *ngIf="(!tab.admin_visibility) || (tab.admin_visibility && !tab.user_visibility)" [class.btn-progress]="tab.hiddingLoader" data-toggle="tooltip" [title]="'STOWARZYSZENIE.HELPERS.TOOLTIPS.DISABLED_TAB' | translate" (click)="selectActiveTab(tab)"
-                    class="btn btn-primary text-white disabled" [id]="'tab' + tab.id" [href]="'#tab_' + tab.id" role="tab">
+                <!-- disabled tab -->
+                <a type="button" *ngIf="(this.role === 'admin' && !tab.admin_visibility) || (this.role === 'user' && this.owner && !tab.user_visibility)" [class.btn-progress]="tab.hiddingLoader" data-toggle="tooltip" [title]="'STOWARZYSZENIE.HELPERS.TOOLTIPS.DISABLED_TAB' | translate"
+                    (click)="selectActiveTab(tab)" class="btn btn-primary text-white disabled" [id]="'tab' + tab.id" [href]="'#tab_' + tab.id" role="tab">
                     {{ tab['name_' + lang] }} 
                 </a>
 
-                <a type="button" *ngIf="tab.admin_visibility" (click)="selectActiveTab(tab)" class="btn btn-primary text-white" [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab">
+                <!-- normal tab -->
+                <a type="button" *ngIf="(this.role === 'admin' && tab.admin_visibility) || (this.role === 'user' && !this.owner && tab.user_visibility) || (this.role === 'user' && this.owner && tab.user_visibility && !this.preview)" (click)="selectActiveTab(tab)" class="btn btn-primary text-white"
+                    [id]="'tab' + tab.id" data-toggle="tab" [href]="'#tab_' + tab.id" role="tab">
                                 {{ tab['name_' + lang] }} 
                 </a>
-                <a type="button" *ngIf="(this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS')) || (this.role === 'user' && this.owner)" class="btn btn-primary text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                <a type="button" *ngIf="(this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS')) || (this.role === 'user' && this.owner || this.preview)" class="btn btn-primary text-white dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
                     <span class="sr-only">Toggle Dropdown</span>
                 </a>
                 <div class="dropdown-menu" *ngIf="(this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS')) || (this.owner)">
@@ -54,12 +57,12 @@
         <div class="container">
             <div class="row" *ngIf="activeTabsCards">
                 <div class="col-sm-12 col-md-6 col-lg-6" *ngFor="let cart of activeTabsCards">
-                    <app-portfolio-card (editCardEv)="editCard($event)" (delCardEv)="deleteCard($event)" [card]="cart"></app-portfolio-card>
+                    <app-portfolio-card [owner]="this.owner" [portfolioRole]="this.role" (editCardEv)="editCard($event)" (delCardEv)="deleteCard($event)" [card]="cart"></app-portfolio-card>
                 </div>
 
                 <!-- static card to adding new cards -->
                 <!-- TODO: only for editing preferences -->
-                <div class="col-sm-12 col-md-6 col-lg-6">
+                <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS') && this.activeTab.name_en !== 'Interests'">
                     <div class="card card-add-new" (click)="this.addCard('Card Header')">
                         <div class="card-body">
                             <div class="empty-state" data-height="300" style="height: 300px;">
@@ -87,6 +90,10 @@
                     </div>
                 </div>
             </div>
+
+            <ng-template #innterests>
+                <app-interests [owner]="this.owner" [lang]="this.lang" [role]="role"></app-interests>
+            </ng-template>
         </div>
     </div>
 

@@ -9,7 +9,7 @@ export class UserModel {
   birthdate: string;
   gender: number;
   affilation_user?: object;
-  portfolio: object;
+  portfolio: any;
   preference_user?: object;
   lang: string;
   roles: Array<Role>;

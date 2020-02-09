@@ -16,4 +16,8 @@ export class LoginApiService {
   login(loginModel: LoginModel): Observable<any> {
     return this.api.post('account/login', loginModel);
   }
+
+  getUserByID(userID: number) {
+    return this.api.post(`user/${userID}/get`);
+  }
 }
