@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class InterestUserRequest extends FormRequest {
+class PortfolioRequest extends FormRequest {
     protected $rules = [];
 
     public function __construct(array $input, $filter) {
@@ -18,9 +18,8 @@ class InterestUserRequest extends FormRequest {
 
     public function checkUpdate() {
         $this->rules = [
-            'user_id' => 'required|exists:users',
-            'interest_id' => 'required|exists:interests',
-            'selected' => 'required'
+            'id' => 'required|exists:portfolios',
+            'description' => 'required'
         ];
     }
 }
