@@ -32,6 +32,10 @@ export class PortfolioApiService {
     return this.apiService.post('portfolio/tile/destroy', card);
   }
 
+  hideOrShowCard(card: Object) {
+    return this.apiService.post('portfolio/tile/visibility/update', card);
+  }
+
   addTab(tab) {
     return this.apiService.post('portfolio/tabs/create', tab);
   }
@@ -72,5 +76,9 @@ export class PortfolioApiService {
 
   deleteContentFromCardContent(content) {
     return this.apiService.post('portfolio/tile/content/content/destroy', content);
+  }
+
+  updateDescription(portfolio: Object) {
+    return this.apiService.post('portfolio/update', portfolio);
   }
 }

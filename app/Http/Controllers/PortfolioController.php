@@ -17,10 +17,10 @@ use Illuminate\Http\Request;
 class PortfolioController extends Controller {
     /**
      * @OA\Post(
-     *     path="/interest/user/{userId}/get",
-     *     tags={"interest_user"},
+     *     path="/portfolio/update",
+     *     tags={"portfolio"},
      *     summary="Gets all interests that belongs to user",
-     *     operationId="InterestControllerIndex",
+     *     operationId="PortfolioControllerUpdate",
      *     @OA\Parameter(
      *         name="id",
      *         in="query",

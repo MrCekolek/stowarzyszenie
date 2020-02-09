@@ -293,7 +293,9 @@
                         "TEXTAREA": "Długie pole tekstowe",
                         "CHECKBOX": "Lista oznaczanych opcji"
                     },
-                    "ADMIN_CONTENT_PLACEHOLDER": "Tekst użytkownika"
+                    "ADMIN_CONTENT_PLACEHOLDER": "Tekst użytkownika",
+                    "EMPTY_TAB": "Ta zakładka nie posiada zawartości",
+                    "DISABLED_CARD": "Ta karta jest wyłączona i niewidoczna dla innych użytkowników. Włącz jej widoczność aby edytować"
                 },
                 "EDIT_CARD": {
                     "TITLE": "Edytuj kartę",
@@ -392,7 +394,8 @@
                         },
                         "PORTFOLIO": {
                             "MANAGE_TABS": "Zarządzanie zakładkami w portfolio",
-                            "PORTFOLIO": "Uprawnienia dotyczące portfolio"
+                            "PORTFOLIO": "Uprawnienia dotyczące portfolio",
+                            "MANAGE_CARDS": "Zarządzanie kartami portfolio (dodawanie, usuwanie, edycja)"
                         }
                     }
                 }

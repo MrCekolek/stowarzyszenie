@@ -43,16 +43,18 @@ export class UserPortfolioComponent implements OnInit {
     
     this.userID = this.route.snapshot.params['id'];
 
-    this.user = this.userProvider.getUser();
-
     this.loginServie.getUserByID(this.userID).subscribe(res => {
-      console.log(res);
-      this.user = res;
-
+      this.user = res.user;
+      console.log(res.user);
       this.isOwner = this.userID == this.userProvider.getUser().id;  
-    });
+    }, () => {}, () => {
+      //get roles
+      for (let i = 0; i < this.user.roles.length; i++) {
+        this.rolesList += this.user.roles[i]['name_' + this.lang] + ' ';
+      }
 
-    console.log(this.user);
+      this.loading = false;
+    });
 
     this.portfolioService.getTabs(this.userID).subscribe(value => {
       this.allTabs = value.portfolioTabs;
@@ -62,19 +64,22 @@ export class UserPortfolioComponent implements OnInit {
     this.languageService.currentLang.subscribe( lg => {
       this.lang = lg;
     });
-
-    //get roles
-    for (let i = 0; i < this.user.roles.length; i++) {
-      this.rolesList += this.user.roles[i]['name_' + this.lang] + ' ';
-    }
   }
 
   // TODO: zapis do api description
   modifyDesc(newValue: string) {
-    this.descLoader = true;
-    this.user.portfolio.description = newValue;
-    this.descEditing = false;
-    this.descLoader = false;
+
+    const portfolio = {
+      id: this.userProvider.getUser().id,
+      description: newValue
+    };
+
+    this.portfolioService.updateDescription(portfolio).subscribe(res => {
+      console.log(res);
+      if (res.success) {
+        this.descEditing = false;
+      }
+    });
   }
 
   enterPreviewMode() {
