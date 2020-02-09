@@ -46,7 +46,7 @@ Route::group([
 
     Route::prefix('user')->group(function () {
         Route::post('get', 'UserController@index');
-        Route::post('{userId}/get', 'UserController@show');
+        Route::post('{user}/get', 'UserController@show');
     });
 
     Route::prefix('role')->group(function () {
@@ -101,7 +101,8 @@ Route::group([
         Route::post('{interest}/destroy', 'InterestController@destroy');
 
         Route::prefix('user')->group(function () {
-            Route::post('{user/get}', 'InterestUserController@index');
+            Route::post('{user}/get', 'InterestUserController@index');
+            Route::post('selected/update', 'InterestUserController@updateSelected');
         });
     });
 });
