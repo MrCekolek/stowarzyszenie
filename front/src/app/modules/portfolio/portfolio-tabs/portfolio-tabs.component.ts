@@ -125,6 +125,7 @@ export class PortfolioTabsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       (data) => {
         if (data) {
+          console.log(data);
           if (data.success) {
             if (type === 'new') {
               this.tabs.push(data.portfolioTab);
@@ -237,14 +238,14 @@ export class PortfolioTabsComponent implements OnInit {
 
     tab.hiddingLoader = true;
 
-    if (this.userProvider.getUser().roles.find( x => x.name_en === 'Admin')) {
+    if (this.role === 'admin') {
       obj = {
         id: tab.id,
         shared_id: tab.shared_id,
         field: 'admin',
         visibility: !tab.admin_visibility
       };
-    } else {
+    } else if (this.role === 'user') {
       obj = {
         id: tab.id,
         shared_id: tab.shared_id,
@@ -253,9 +254,8 @@ export class PortfolioTabsComponent implements OnInit {
       };
     }
 
-    console.log(obj);
-
     this.portfolioApiService.hideOrShowTab(obj).subscribe(res => {
+      console.log(res);
       if (res.success) {
         if (this.role === 'admin') {
           tab.admin_visibility = !tab.admin_visibility;
@@ -263,7 +263,7 @@ export class PortfolioTabsComponent implements OnInit {
           tab.user_visibility = !tab.user_visibility;
         }
 
-        tab.hiddingLoader = false;
+        console.log(tab);
         this.alert = new AlertModel('success', res.message);
       } else {
         this.alert = new AlertModel('danger', res.message);

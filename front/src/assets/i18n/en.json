@@ -293,7 +293,9 @@
                         "TEXTAREA": "Long text field",
                         "CHECKBOX": "List of marked options"
                     },
-                    "ADMIN_CONTENT_PLACEHOLDER": "Users text"
+                    "ADMIN_CONTENT_PLACEHOLDER": "Users text",
+                    "EMPTY_TAB": "This tab has no content",
+                    "DISABLED_CARD": "This card is disabled and invisible to other users. Turn on its visibility to edit"
                 },
                 "EDIT_CARD": {
                     "TITLE": "Edit card",
@@ -392,7 +394,8 @@
                         },
                         "PORTFOLIO": {
                             "MANAGE_TABS": "Portfolio management",
-                            "PORTFOLIO": "Portfolio Permissions"
+                            "PORTFOLIO": "Portfolio Permissions",
+                            "MANAGE_CARDS": "Portfolio card management (adding, removing, editing)"
                         }
                     }
                 }

@@ -58,6 +58,12 @@ class Permission extends BaseModel {
                             'Manage',
                             'PORTFOLIO.MANAGE_TABS',
                             PermissionParent::permissionParents()['Portfolio']['id'])
+                    ],
+                    [
+                        self::definePermission(
+                            'Manage cards',
+                            'PORTFOLIO.MANAGE_CARDS',
+                            PermissionParent::permissionParents()['Portfolio']['id'])
                     ]
                 ]
         ];
