@@ -6,6 +6,14 @@
         {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.PROFILE.TITLE_UNOWNER' | translate }}
     </h1>
 </div>
+
+<div *ngIf="this.preview">
+    <button class="btn btn-danger btn-sm mb-4" (click)="this.exitPreviewMode()">
+        <i class="fas fa-eye-slash"></i>
+        {{ 'STOWARZYSZENIE.HELPERS.EXIT_PREVIEW_MODE' | translate }}
+    </button>
+</div>
+
 <div class="section-body">
     <h2 class="section-title" *ngIf="isOwner">
         {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.PROFILE.SECTION_TITLE_OWNER' | translate }}
@@ -45,11 +53,48 @@
                             </a>
                         </div>
                         <div class="author-box-job">
-                            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.USER_ROLE' | translate }}
+                            <span *ngIf="this.router.url.includes('portfolio-settings')">
+                                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.USER_ROLE' | translate }}
+                            </span>
+                            <span *ngIf="this.router.url.includes('users/profile') && this.rolesList">
+                                {{ this.rolesList }}
+                            </span>
                         </div>
                         <div class="author-box-description">
-                            <p>
+                            <p *ngIf="this.router.url.includes('portfolio-settings')">
                                 {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.USER_DESC' | translate }}
+                            </p>
+
+                            <div *ngIf="this.isOwner">
+                                <p *ngIf="!this.descEditing; else descEditor" class="d-flex align-items-center">
+                                    <span *ngIf="!this.user?.portfolio.description">
+                                        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.OWNER_DESC_ADD' | translate }}
+                                    </span>
+
+                                    <span *ngIf="this.user?.portfolio.description">
+                                        {{ this.user?.portfolio.description }}
+                                    </span>
+
+                                    <button class="btn btn-info btn-sm ml-3" (click)="this.descEditing = true">
+                                        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
+                                    </button>
+                                </p>
+
+                                <ng-template #descEditor>
+                                    <p class="d-flex align-item-center">
+                                        <input type="text" class="form-control form-control-sm" #descc>
+                                        <button class="btn btn-sm btn-icon btn-success" (click)="modifyDesc(descc.value)" [class.btn-progess]="this.descLoader">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-danger" (click)="this.descEditing = false">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </p>
+                                </ng-template>
+                            </div>
+
+                            <p *ngIf="!this.isOwner && this.router.url.includes('users/profile/') && !this.user?.portfolio.description">
+                                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.EMPTY_DESC_PROFILE' | translate }}
                             </p>
                         </div>
                     </div>
@@ -61,7 +106,7 @@
 
 <!-- zakladki -->
 <div class="row" *ngIf="!this.loading; else loader">
-    <app-portfolio-tabs *ngIf="this.allTabs.length > 0" [tabs]="this.allTabs" [lang]="this.lang">
+    <app-portfolio-tabs *ngIf="this.allTabs.length > 0" [tabs]="this.allTabs" [lang]="this.lang" [preview]="preview">
     </app-portfolio-tabs>
     <ng-template></ng-template>
 </div>

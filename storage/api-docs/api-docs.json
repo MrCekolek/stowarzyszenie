@@ -565,13 +565,13 @@
                 }
             }
         },
-        "/portfolio/tile/content/content/value/update": {
+        "/portfolio/tile/content/content/filled/update": {
             "post": {
                 "tags": [
                     "content_option"
                 ],
                 "summary": "Changes card content option admin or user visibility",
-                "operationId": "ContentControllerUpdateValue",
+                "operationId": "ContentControllerUpdateFilled",
                 "parameters": [
                     {
                         "name": "id",
@@ -1073,6 +1073,31 @@
                 ],
                 "summary": "Gets users language",
                 "operationId": "getLang",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/account/avatar/update": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Changes user avatar",
+                "operationId": "PreferenceUserControllerUpdateAvatar",
+                "parameters": [
+                    {
+                        "name": "avatar",
+                        "in": "query",
+                        "description": "Image jpeg,png,jpg,gif",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "default": {
                         "description": "successful operation"
@@ -1841,6 +1866,20 @@
                 ],
                 "summary": "Gets all users",
                 "operationId": "UserControllerIndex",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/user/{userId}/get": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Gets specific user",
+                "operationId": "UserControllerShow",
                 "responses": {
                     "default": {
                         "description": "successful operation"

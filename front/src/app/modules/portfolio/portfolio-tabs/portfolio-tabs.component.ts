@@ -27,6 +27,8 @@ export class PortfolioTabsComponent implements OnInit {
   private load = false;
   private cardAddingLoad = false;
 
+  @Input() preview: boolean = false;
+
   private activeTab: PortfolioTab = {
     id: 1,
     shared_id: 0,
@@ -64,13 +66,11 @@ export class PortfolioTabsComponent implements OnInit {
     } else if (this.router.url.includes('users/profile')) {
       this.role = 'user';
       this.owner = Number.parseInt(this.route.snapshot.paramMap.get('id')) === this.userProvider.getUser().id;
-    } else if (this.router.url.includes('profile-preview')) {
-      this.role = 'preview';
     }
   }
 
   ngAfterViewInit() {
-    this.selectActiveTab(this.tabs[0]);
+    // this.selectActiveTab(this.tabs[0]);
   }
 
   selectActiveTab(tab) {                                                           
@@ -228,7 +228,12 @@ export class PortfolioTabsComponent implements OnInit {
   }
 
   hideOrShowTab(tab) {
-    let obj = {};
+    let obj = {
+      id: 0,
+      shared_id: 0,
+      field: '',
+      visibility: true
+    };
 
     tab.hiddingLoader = true;
 
@@ -248,9 +253,16 @@ export class PortfolioTabsComponent implements OnInit {
       };
     }
 
+    console.log(obj);
+
     this.portfolioApiService.hideOrShowTab(obj).subscribe(res => {
       if (res.success) {
-        tab.admin_visibility = !tab.admin_visibility;
+        if (this.role === 'admin') {
+          tab.admin_visibility = !tab.admin_visibility;
+        } else if (this.role === 'user' && this.owner) {
+          tab.user_visibility = !tab.user_visibility;
+        }
+
         tab.hiddingLoader = false;
         this.alert = new AlertModel('success', res.message);
       } else {

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LanguageService } from '../../../shared/services/user/language.service';
 import { UserProviderService } from 'src/app/core/services/user-provider.service';
 import { PortfolioApiService } from 'src/app/core/http/portfolio-api.service';
 import { UserModel } from 'src/app/shared/models/user.model';
+import { LoginApiService } from 'src/app/core/http/login-api.service';
 
 @Component({
   selector: 'app-user-portfolio',
@@ -19,22 +20,38 @@ export class UserPortfolioComponent implements OnInit {
   lang: string = '';
 
   private loading = true;
+  private descLoader = false;
 
   user: UserModel;
+
+  private rolesList: string = '';
+  private descEditing: boolean;
+  private preview: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private languageService: LanguageService,
     private userProvider: UserProviderService,
-    private portfolioService: PortfolioApiService
+    private portfolioService: PortfolioApiService,
+    private loginServie: LoginApiService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.loading = true;
+    this.descEditing = false;
     
     this.userID = this.route.snapshot.params['id'];
-    this.isOwner = this.userID == this.userProvider.getUser().id;  
+
     this.user = this.userProvider.getUser();
+
+    this.loginServie.getUserByID(this.userID).subscribe(res => {
+      console.log(res);
+      this.user = res;
+
+      this.isOwner = this.userID == this.userProvider.getUser().id;  
+    });
+
     console.log(this.user);
 
     this.portfolioService.getTabs(this.userID).subscribe(value => {
@@ -45,5 +62,28 @@ export class UserPortfolioComponent implements OnInit {
     this.languageService.currentLang.subscribe( lg => {
       this.lang = lg;
     });
+
+    //get roles
+    for (let i = 0; i < this.user.roles.length; i++) {
+      this.rolesList += this.user.roles[i]['name_' + this.lang] + ' ';
+    }
+  }
+
+  // TODO: zapis do api description
+  modifyDesc(newValue: string) {
+    this.descLoader = true;
+    this.user.portfolio.description = newValue;
+    this.descEditing = false;
+    this.descLoader = false;
+  }
+
+  enterPreviewMode() {
+    this.isOwner = false;
+    this.preview = true;
+  }
+
+  exitPreviewMode() {
+    this.isOwner = true;
+    this.preview = false;
   }
 }

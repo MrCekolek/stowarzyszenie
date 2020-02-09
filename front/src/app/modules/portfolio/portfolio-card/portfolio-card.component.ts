@@ -22,12 +22,11 @@ export class PortfolioCardComponent implements OnInit {
   contents = [];
   @Output() delCardEv = new EventEmitter<any>();
   @Output() editCardEv = new EventEmitter<any>();
+  @Input() portfolioRole: string;
+  @Input() owner: boolean;
   lang: string;
   private isLoading: boolean = true;
   private alert: AlertModel;
-
-  private role;
-  private owner;
 
   constructor(
     private portfolioApiService: PortfolioApiService,
@@ -48,16 +47,6 @@ export class PortfolioCardComponent implements OnInit {
     this.languageService.currentLang.subscribe(lang => {
       this.lang = lang;
     });
-
-    if (this.router.url.includes('portfolio-settings')) {
-      this.role = 'admin';
-      console.log(this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS'));
-    } else if (this.router.url.includes('users/profile')) {
-      this.role = 'user';
-      this.owner = Number.parseInt(this.route.snapshot.paramMap.get('id')) === this.userProvider.getUser().id;
-    } else if (this.router.url.includes('profile-preview')) {
-      this.role = 'preview';
-    }
 
     console.log(this.card);
   }
