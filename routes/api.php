@@ -107,4 +107,11 @@ Route::group([
             Route::post('selected/update', 'InterestUserController@updateSelected');
         });
     });
+
+    Route::prefix('home_navigation')->group(function () {
+        Route::post('get', 'HomeNavigationController@index');
+        Route::post('create', 'HomeNavigationController@create');
+        Route::post('update', 'HomeNavigationController@update');
+        Route::post('destroy', 'HomeNavigationController@destroy');
+    });
 });
