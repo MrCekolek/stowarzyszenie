@@ -10,6 +10,7 @@ import { AlertModel } from 'src/app/shared/models/alert.model';
 import { Route } from '@angular/compiler/src/core';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { UserProviderService } from 'src/app/core/services/user-provider.service';
+import { ContentFillComponent } from '../content-fill/content-fill.component';
 
 @Component({
   selector: 'app-portfolio-card',
@@ -27,6 +28,8 @@ export class PortfolioCardComponent implements OnInit {
   lang: string;
   private isLoading: boolean = true;
   private alert: AlertModel;
+
+  private role;
 
   constructor(
     private portfolioApiService: PortfolioApiService,
@@ -47,6 +50,14 @@ export class PortfolioCardComponent implements OnInit {
     this.languageService.currentLang.subscribe(lang => {
       this.lang = lang;
     });
+
+    if (this.router.url.includes('portfolio-settings')) {
+      this.role = 'admin';
+      console.log(this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS'));
+    } else if (this.router.url.includes('users/profile')) {
+      this.role = 'user';
+      this.owner = Number.parseInt(this.route.snapshot.paramMap.get('id')) === this.userProvider.getUser().id;
+    }
 
     console.log(this.card);
   }
@@ -105,6 +116,73 @@ export class PortfolioCardComponent implements OnInit {
           } else {
             this.alert = new AlertModel('danger', data.message);
           }
+        }
+      }
+    );
+  }
+
+  hideCard() {
+    let obj = {};
+
+    if (this.userProvider.getUser().roles.find( x => x.name_en === 'Admin')) {
+      obj = {
+        id: this.card.id,
+        shared_id: this.card.shared_id,
+        field: 'admin',
+        visibility: !this.card.admin_visibility
+      };
+    } else {
+      obj = {
+        id: this.card.id,
+        shared_id: this.card.shared_id,
+        field: 'user',
+        visibility: !this.card.user_visibility
+      };
+    }
+
+    this.portfolioApiService.hideOrShowCard(obj).subscribe(res => {
+      if (res.success) {
+        this.card.admin_visibility = !this.card.admin_visibility;
+        this.alert = new AlertModel('success', res.message);
+      } else {
+        this.alert = new AlertModel('danger', res.message);
+      }
+    });
+  }
+
+  saveContent(content) {
+    console.log(content);
+    content.saveLoading = true;
+    this.portfolioApiService.updateContentInCard(content).subscribe(res => {
+      console.log(res);
+
+      content.saveLoading = false;
+    });
+  }
+
+  hideContent(content) {
+    if (this.role === 'admin') {
+      content.admin_visibility = !content.admin_visibility;
+    } else if (this.role === 'user') {
+      content.user_visibility = !content.user_visibility;
+    }
+  }
+
+  openFillContentModal(content: any) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      content: content
+    };
+
+    const dialogRef = this.dialog.open(ContentFillComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      (data) => {
+        if (data) {
+          console.log(data);
         }
       }
     );

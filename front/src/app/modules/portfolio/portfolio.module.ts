@@ -17,17 +17,20 @@ import { EditCardModalComponent } from './edit-card-modal/edit-card-modal.compon
 import { ContentOptionsComponent } from './content-options/content-options.component';
 import { OptionsListComponent } from './options-list/options-list.component';
 import { InterestsComponent } from './interests/interests.component';
+import { ContentFillComponent } from './content-fill/content-fill.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [WholePortfolioComponent, PortfolioTabsComponent, OneTabComponent, UserPortfolioComponent, AddTabModalComponent, CardContentModalComponent, PortfolioCardComponent, EditCardModalComponent, ContentOptionsComponent, OptionsListComponent, InterestsComponent],
+  declarations: [WholePortfolioComponent, PortfolioTabsComponent, OneTabComponent, UserPortfolioComponent, AddTabModalComponent, CardContentModalComponent, PortfolioCardComponent, EditCardModalComponent, ContentOptionsComponent, OptionsListComponent, InterestsComponent, ContentFillComponent],
   imports: [
     CommonModule,
     SharedModule,
     MatTabsModule,
     DragDropModule,
     MatTooltipModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
   ],
-  entryComponents: [AddTabModalComponent, CardContentModalComponent, EditCardModalComponent]
+  entryComponents: [AddTabModalComponent, CardContentModalComponent, EditCardModalComponent, ContentFillComponent]
 })
 export class PortfolioModule { }

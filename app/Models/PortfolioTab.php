@@ -53,7 +53,7 @@ class PortfolioTab extends BaseModel {
         $portfolioTab->portfolio_id = $input['portfolio_id'];
         $success = $portfolioTab->save();
 
-        return $portfolioTab;
+        return self::where('id', $portfolioTab->id)->first();
     }
 
     public static function updatePortfolioTab($portfolioTab, $input, &$success) {

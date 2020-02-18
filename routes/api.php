@@ -59,6 +59,8 @@ Route::group([
     });
 
     Route::prefix('portfolio')->group(function () {
+        Route::post('update', 'PortfolioController@update');
+
         Route::prefix('tabs')->group(function () {
             Route::post('{portfolio}/get', 'PortfolioTabController@index');
             Route::post('create', 'PortfolioTabController@create');

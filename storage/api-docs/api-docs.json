@@ -751,6 +751,63 @@
                 }
             }
         },
+        "/interest/user/{userId}/get": {
+            "post": {
+                "tags": [
+                    "interest_user"
+                ],
+                "summary": "Gets all interests that belongs to user",
+                "operationId": "InterestControllerIndex",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/interest/user/selected/update": {
+            "post": {
+                "tags": [
+                    "interest_user"
+                ],
+                "summary": "Select specific interest for user",
+                "operationId": "InterestControllerIndex",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "interest_id",
+                        "in": "query",
+                        "description": "Interest id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "selected",
+                        "in": "query",
+                        "description": "Is selected (true or false)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/role/{roleId}/permission/get": {
             "post": {
                 "tags": [
@@ -797,6 +854,40 @@
                         "name": "permissions",
                         "in": "query",
                         "description": "Role permissions",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/portfolio/update": {
+            "post": {
+                "tags": [
+                    "portfolio"
+                ],
+                "summary": "Gets all interests that belongs to user",
+                "operationId": "PortfolioControllerUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Portfolio id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "Portfolio description",
                         "required": true,
                         "schema": {
                             "type": "string"

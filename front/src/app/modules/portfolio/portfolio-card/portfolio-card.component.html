@@ -3,20 +3,26 @@
         <h4>
             {{ card['name_' + this.lang] }}
         </h4>
-        <div class="card-header-action">
+        <div class="card-header-action" *ngIf="this.role === 'admin' || (this.role === 'user' && this.owner)">
             <div class="dropdown">
                 <a data-toggle="dropdown" class="btn btn-success text-white dropdown-toggle" aria-expanded="false">
                     {{ 'STOWARZYSZENIE.HELPERS.OPTIONS' | translate }}
                 </a>
                 <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 26px, 0px); top: 0px; left: 0px; will-change: transform;">
-                    <a class="dropdown-item has-icon" (click)="emitEditEvent()">
+                    <a class="dropdown-item has-icon" (click)="emitEditEvent()" *ngIf="this.role === 'admin'">
                         <i class="far fa-edit"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
                     </a>
-                    <a class="dropdown-item has-icon text-danger" (click)="deleteCard()">
+                    <a class="dropdown-item has-icon text-danger" (click)="deleteCard()" *ngIf="this.role === 'admin'">
                         <i class="far fa-trash-alt"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
                     </a>
-                    <a class="dropdown-item has-icon text-gray" (click)="hideCar()">
-                        <i [ngClass]="{'fa-eye-slash': card.admin_visibility, 'fa-eye': !card.admin_visibility}" class="fas"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.HIDE' | translate }}
+
+                    <a class="dropdown-item" (click)="hideCard()" *ngIf="(this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS')) || (this.role === 'user' && this.owner)">
+                        <span *ngIf="card.admin_visibility">
+                            <i class="fas fa-eye-slash mr-2"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.HIDE' | translate }}
+                        </span>
+                        <span *ngIf="!card.admin_visibility" (click)="hideCard()">
+                            <i class="fas fa-eye mr-2"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SHOW' | translate }}
+                        </span>
                     </a>
                 </div>
             </div>
@@ -31,8 +37,8 @@
         </div>
 
         <ng-template #content>
-            <div *ngIf="this.contents.length === 0">
-                <div class="empty-state" data-height="400" style="height: 400px;">
+            <div *ngIf="card.tile_contents.length === 0">
+                <div class="empty-state" data-height="200" style="height: 200px;">
                     <div class="empty-state-icon">
                         <i class="fas fa-question"></i>
                     </div>
@@ -42,10 +48,11 @@
                 </div>
             </div>
 
-            <div class="contents" *ngIf="this.contents.length > 0">
+            <div class="contents" *ngIf="card.tile_contents.length > 0">
                 <ul class="list-unstyled">
                     <li class="list-item" *ngFor="let content of contents; let i = index">
                         <div [ngSwitch]="content.type">
+
                             <div *ngSwitchCase="'input'">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">
@@ -53,10 +60,19 @@
                                     </label>
                                     <div class="col-sm-9">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" [readonly]="!content.editing" [placeholder]="'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.ADMIN_CONTENT_PLACEHOLDER' | translate">
+                                            <input type="text" *ngIf="this.role === 'admin'" class="form-control form-control-sm" [disabled]="this.role === 'admin'">
+                                            <p *ngIf="this.owner">
+                                                {{ content.contents[0]['value_' + lang] }}
+                                            </p>
                                             <div class="input-group-append">
-                                                <button class="btn btn-danger btn-icon" (click)="deleteContent(content)">
+                                                <button class="btn btn-danger btn-icon btn-sm" *ngIf="this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_CARDS')" (click)="deleteContent(content)">
                                                     <i class="fas fa-times"></i>
+                                                </button>
+                                                <button class="btn btn-success btn-icon btn-sm" *ngIf="this.owner" (click)="openFillContentModal(content)">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </button>
+                                                <button title="Ukryj" class="btn btn-warning btn-icon btn-sm" *ngIf="this.role === 'admin' || this.owner" (click)="hideContent(content)">
+                                                    <i class="fas fa-eye-slash"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -70,31 +86,44 @@
                                         {{ content['name_' + lang] }}
                                     </label>
                                     <div class="col-sm-9">
-                                        <textarea class="form-control" rows="4" cols="5" value="{{'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.ADMIN_CONTENT_PLACEHOLDER' | translate}}">
+                                        <textarea [disabled]="this.role === 'admin'" class="form-control" rows="4" cols="5" value="{{'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.ADMIN_CONTENT_PLACEHOLDER' | translate}}">
                                         </textarea>
                                     </div>
                                 </div>
 
-                                <button class="btn btn-danger btn-icon" (click)="deleteContent(content)">
+                                <button class="btn btn-danger btn-icon btn-sm" *ngIf="this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_CARDS')" (click)="deleteContent(content)">
                                     <i class="fas fa-times"></i>
+                                </button>
+                                <button class="btn btn-warning btn-icon btn-sm" *ngIf="this.role === 'admin' || this.owner" (click)="hideContent(content)">
+                                    <i class="fas fa-eye-slash"></i>
+                                </button>
+                                <button class="btn btn-success btn-icon btn-sm" *ngIf="this.role === 'admin' || this.owner" (click)="saveContent(content)">
+                                    <i class="fas fa-check"></i>
                                 </button>
                             </div>
 
                             <div *ngSwitchCase="'checkbox'">
                                 <div class="form-group row">
                                     <div class="col-sm-4">
-                                        <button class="btn btn-danger btn-icon btn-sm mr-2" [class.btn-progress]="content.isDeleting" (click)="deleteContent(content)">
-                                            <i class="fas fa-times"></i>
-                                        </button>
                                         <label class="col-form-label">
                                             {{ content['name_' + lang] }}
                                         </label>
+
+                                        <button class="btn btn-danger btn-icon btn-sm mr-2" [class.btn-progress]="content.isDeleting" (click)="deleteContent(content)">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-icon btn-sm" *ngIf="this.role === 'admin' || this.owner" (click)="hideContent(content)">
+                                            <i class="fas fa-eye-slash"></i>
+                                        </button>
+                                        <button class="btn btn-success btn-icon btn-sm" *ngIf="this.role === 'admin'" (click)="saveContent(content)">
+                                            <i class="fas fa-check"></i>
+                                        </button>
                                     </div>
                                     <div class="col-sm-8">
                                         <ul class="list-unstyled">
                                             <li *ngFor="let item of content.contents; let i = index">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" [id]="'option' + i" disabled>
+                                                    <input type="checkbox" class="custom-control-input" [id]="'option' + i" [disabled]="this.role === 'admin'">
                                                     <label class="custom-control-label" [for]="'option' + i">
                                                         {{ item['value_' + lang] }}
                                                     </label>
@@ -114,7 +143,7 @@
             </div>
         </ng-template>
 
-        <a class="btn btn-primary text-white mt-4" (click)="openNewContentModal('new')">
+        <a class="btn btn-primary text-white mt-4" (click)="openNewContentModal('new')" *ngIf="this.role === 'admin'">
             {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.EMPTY_CARD_BUTTON' | translate }}
         </a>
     </div>
