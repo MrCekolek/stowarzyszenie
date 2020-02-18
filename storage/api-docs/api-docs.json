@@ -617,6 +617,212 @@
                 }
             }
         },
+        "/home_navigation/get": {
+            "post": {
+                "tags": [
+                    "home_navigation"
+                ],
+                "summary": "Gets all home navigation links with content",
+                "operationId": "HomeNavigationControllerIndex",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/home_navigation/create": {
+            "post": {
+                "tags": [
+                    "home_navigation"
+                ],
+                "summary": "Creates home navigation",
+                "operationId": "HomeNavigationControllerCreate",
+                "parameters": [
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "Home Navigation destination link",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/home_navigation/update": {
+            "post": {
+                "tags": [
+                    "home_navigation"
+                ],
+                "summary": "Updates home navigation",
+                "operationId": "HomeNavigationControllerUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Home navigation id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "link",
+                        "in": "query",
+                        "description": "Home Navigation destination link",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/home_navigation/destroy": {
+            "post": {
+                "tags": [
+                    "home_navigation"
+                ],
+                "summary": "Destroys home navigation",
+                "operationId": "HomeNavigationControllerDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Home navigation id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/interest/get": {
             "post": {
                 "tags": [
