@@ -228,6 +228,117 @@
                 }
             }
         },
+        "/conference/user/create": {
+            "post": {
+                "tags": [
+                    "conference_user"
+                ],
+                "summary": "Registers users to conference",
+                "operationId": "ConferenceUserControllerCreate",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "conference_id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/conference/user/update": {
+            "post": {
+                "tags": [
+                    "conference_user"
+                ],
+                "summary": "Updates registration user to conference",
+                "operationId": "ConferenceUserControllerUpdate",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "conference_id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/conference/user/destroy": {
+            "post": {
+                "tags": [
+                    "conference_user"
+                ],
+                "summary": "Removes users from conference",
+                "operationId": "ConferenceUserControllerUpdate",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "conference_id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/portfolio/tile/content/content/{cardContentId}/get": {
             "post": {
                 "tags": [

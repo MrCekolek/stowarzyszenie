@@ -114,4 +114,12 @@ Route::group([
         Route::post('update', 'HomeNavigationController@update');
         Route::post('destroy', 'HomeNavigationController@destroy');
     });
+
+    Route::prefix('conference')->group(function () {
+        Route::prefix('user')->group(function () {
+            Route::post('create', 'ConferenceUserController@create');
+            Route::post('update', 'ConferenceUserController@update');
+            Route::post('destroy', 'ConferenceUserController@destroy');
+        });
+    });
 });
