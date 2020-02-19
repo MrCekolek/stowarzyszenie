@@ -17,6 +17,7 @@ class CreateConferenceUsersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('conference_id');
             $table->unsignedBigInteger('user_id');
+            $table->string('status')->default('Nieopłacone');
             $table->timestamps();
 
             $table->unique(['conference_id', 'user_id']);
