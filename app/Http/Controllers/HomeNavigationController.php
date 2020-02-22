@@ -40,6 +40,15 @@ class HomeNavigationController extends Controller {
      *     summary="Creates home navigation",
      *     operationId="HomeNavigationControllerCreate",
      *     @OA\Parameter(
+     *         name="status",
+     *         in="query",
+     *         description="Status of a page",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         name="name_pl",
      *         in="query",
      *         description="Translation in polish language",
@@ -102,6 +111,15 @@ class HomeNavigationController extends Controller {
      *             type="string"
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="user_id",
+     *         in="query",
+     *         description="User id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
      *     @OA\Response(
      *         response="default",
      *         description="successful operation"
@@ -116,18 +134,10 @@ class HomeNavigationController extends Controller {
             return $validation->failResponse();
         }
 
-        $homeNavigation = new HomeNavigation();
-        $homeNavigation->name_pl = $input['name_pl'];
-        $homeNavigation->name_en = $input['name_en'];
-        $homeNavigation->name_ru = $input['name_ru'];
-        $homeNavigation->link = $input['link'];
-        $homeNavigation->content_pl = $input['content_pl'];
-        $homeNavigation->content_en = $input['content_en'];
-        $homeNavigation->content_ru = $input['content_ru'];
-        $success = $homeNavigation->save();
+        $homeNavigation = HomeNavigation::addHomeNavigation($input, $success);
 
         return LogService::create($success, [
-            'home_navigation' => $homeNavigation->toArray()
+            'home_navigation' => $homeNavigation->load('user')->toArray()
         ]);
     }
 
@@ -223,18 +233,10 @@ class HomeNavigationController extends Controller {
             return $validation->failResponse();
         }
 
-        $homeNavigation = HomeNavigation::where('id', $input['id'])->first();
-        $homeNavigation->name_pl = $input['name_pl'];
-        $homeNavigation->name_en = $input['name_en'];
-        $homeNavigation->name_ru = $input['name_ru'];
-        $homeNavigation->link = $input['link'];
-        $homeNavigation->content_pl = $input['content_pl'];
-        $homeNavigation->content_en = $input['content_en'];
-        $homeNavigation->content_ru = $input['content_ru'];
-        $success = $homeNavigation->save();
+        $homeNavigation = HomeNavigation::updateHomeNavigation($input, $success);
 
         return LogService::update($success, [
-            'home_navigation' => $homeNavigation->toArray()
+            'home_navigation' => $homeNavigation->load('user')->toArray()
         ]);
     }
 

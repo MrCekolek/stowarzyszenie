@@ -121,4 +121,8 @@ class User extends Authenticatable implements JWTSubject {
         return $this->belongsToMany(Conference::class)
             ->using(ConferenceUser::class);
     }
+
+    public function homeNavigations() {
+        return $this->hasMany(HomeNavigation::class);
+    }
 }
