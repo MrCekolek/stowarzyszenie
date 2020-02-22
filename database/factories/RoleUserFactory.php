@@ -2,7 +2,6 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\User;
