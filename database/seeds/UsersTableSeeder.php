@@ -5,7 +5,6 @@ use App\Models\AffiliationUser;
 use App\Models\PreferenceUser;
 use Illuminate\Database\Seeder;
 
-
 class UsersTableSeeder extends Seeder {
     /**
      * Run the database seeds.

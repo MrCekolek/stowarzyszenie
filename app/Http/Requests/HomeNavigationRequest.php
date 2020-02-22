@@ -28,13 +28,15 @@ class HomeNavigationRequest extends FormRequest {
 
     public function checkCreate() {
         $this->rules = [
+            'status' => 'required',
             'name_pl' => 'required',
             'name_en' => 'required',
             'name_ru' => 'required',
             'link' => 'required',
             'content_pl' => 'required',
             'content_en' => 'required',
-            'content_ru' => 'required'
+            'content_ru' => 'required',
+            'user_id' => 'required|exists:users'
         ];
     }
 

@@ -15,6 +15,7 @@ class CreateHomeNavigationsTable extends Migration
     {
         Schema::create('home_navigations', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('status');
             $table->string('name_pl')->nullable();
             $table->string('name_en')->nullable();
             $table->string('name_ru')->nullable();
@@ -22,7 +23,13 @@ class CreateHomeNavigationsTable extends Migration
             $table->text('content_pl')->nullable();
             $table->text('content_en')->nullable();
             $table->text('content_ru')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
