@@ -61,5 +61,4 @@ export class ConfirmationDialogComponent implements OnInit {
   dismiss() {
     this.dialogRef.close();
   }
-
 }

@@ -38,6 +38,13 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'managements',
+    loadChildren: './modules/managements/managements.module#ManagementsModule',
+    canActivateChild: [
+      LoggedGuard
+    ]
+  },
+  {
     path: '**',
     redirectTo: ''
   }

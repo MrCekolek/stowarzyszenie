@@ -34,6 +34,10 @@
                     "CARD_CONTENT": {
                         "TITLE": "Deleting card contents",
                         "TEXT": "Are you sure you want to delete the content"
+                    },
+                    "TRANSLATION": {
+                        "TITLE": "Delete translation",
+                        "TEXT": "Are you sure you want to delete the translation"
                     }
                 }
             },
@@ -89,6 +93,16 @@
             },
             "EDIT_ROLE": {
                 "INPUT_FIELD": "Edit role name and translate"
+            },
+            "NEW_TRANSLATION": {
+                "TRIGGER_BUTTON": "Add a translation",
+                "TITLE_NEW_TRANSLATION": "Add a new translation",
+                "TITLE_EDIT_TRANSLATION": "Edit translation name",
+                "INPUT_FIELD": "Name of the new translation",
+                "INPUT_FIELD_KEY": "Translation key"
+            },
+            "EDIT_TRANSLATION": {
+                "INPUT_FIELD": "Edit translation name and translate"
             }
         },
         "MODULES": {
@@ -220,6 +234,10 @@
                         "PORTFOLIO_MENU": "Portfolio",
                         "ROLES_PREFERENCES": "Roles and Permissions",
                         "USERS_LIST": "Users List"
+                    },
+                    "MANAGEMENT": {
+                        "MANAGEMENT_MENU": "Management",
+                        "TRANSLATIONS": "Translations"
                     }
                 },
                 "WEBPAGE_TITLE_MEMBERS": "Ciob members"
@@ -324,6 +342,11 @@
                 "ENTRIES": "Show",
                 "SEARCH": "Search for user",
                 "USERS_LIST_TITLE": "Users List"
+            },
+            "MANAGEMENTS": {
+                "TITLE": "Translations",
+                "LIST_TITLE": "Translation list",
+                "PAGE_DESC1": "Manage translations in the system."
             }
         },
         "PAGINATION": {
@@ -352,6 +375,9 @@
                             "READ": "Successful data reading",
                             "UPDATE": ""
                         }
+                    },
+                    "ERROR": {
+                        "TRANSLATION_KEY_EXISTS": "The translation key provided already exists"
                     }
                 },
                 "CRUD": {
@@ -401,6 +427,13 @@
                 }
             }
         },
-        "zzzz": "Card header"
+        "LABELS": {
+            "ID": "Id",
+            "LOGIN_EMAIL": "Email",
+            "FIRST_NAME": "First name",
+            "LAST_NAME": "Last name",
+            "LOADING_DATA": "Loading data",
+            "NO_DATA": "No data"
+        }
     }
 }
