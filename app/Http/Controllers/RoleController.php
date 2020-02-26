@@ -165,7 +165,7 @@ class RoleController extends Controller {
 
     /**
      * @OA\Post(
-     *     path="/role/delete/{roleId}",
+     *     path="/role/delete",
      *     tags={"role"},
      *     summary="Deletes specific role",
      *     operationId="RoleControllerDestroy",
@@ -184,14 +184,16 @@ class RoleController extends Controller {
      *     )
      * )
      */
-    public function destroy(Role $role) {
-        $validation = new RoleRequest($role->toArray(), 'destroy');
+    public function destroy(Request $request) {
+        $input = $request->all();
+
+        $validation = new RoleRequest($input, 'destroy');
 
         if ($validation->fails()) {
             return $validation->failResponse();
         }
 
-        $success = Role::destroy($role->id);
+        $success = Role::destroy($input['id']);
 
         return LogService::delete($success);
     }

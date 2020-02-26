@@ -83,6 +83,10 @@ export class InterestModalComponent implements OnInit {
 
   addInterest() {
     this.isSaving = true;
+    this.interest.name_pl = this.translations[0];
+    this.interest.name_en = this.translations[1];
+    this.interest.name_ru = this.translations[2];
+
     this.interestsService.addNewInterest(this.interest).subscribe(response => {
       this.isSaving = false;
       this.dialogRef.close(response);
@@ -94,6 +98,7 @@ export class InterestModalComponent implements OnInit {
     this.interest.name_pl = this.translations[0];
     this.interest.name_en = this.translations[1];
     this.interest.name_ru = this.translations[2];
+
     this.interestsService.updateInterest(this.interest).subscribe(data => {
       this.isSaving = false;
       this.dialogRef.close(data);

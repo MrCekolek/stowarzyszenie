@@ -1,11 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {PermissionRoleApiService} from "../../../core/http/permission-role-api.service";
-import {NewRoleModalComponent} from '../new-role-modal/new-role-modal.component';
-import {MatDialog, MatDialogConfig} from "@angular/material";
-import { DeleteAlertComponent } from 'src/app/shared/components/delete-alert/delete-alert.component';
+import { Component, OnInit } from '@angular/core';
+import { PermissionRoleApiService } from "../../../core/http/permission-role-api.service";
+import { NewRoleModalComponent } from '../new-role-modal/new-role-modal.component';
+import { MatDialog, MatDialogConfig } from "@angular/material";
 import { AlertModel } from 'src/app/shared/models/alert.model';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
-import { Role } from 'src/app/shared/models/role.model';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -21,6 +19,7 @@ export class RolesListComponent implements OnInit {
   private selectedRole: any;
   private rolesAreLoading;
   private isSaving: boolean = false;
+  private isLoading: boolean = false;
 
   private alert: AlertModel;
   lang;
@@ -42,12 +41,18 @@ export class RolesListComponent implements OnInit {
   }
 
   getRoles() {
+    this.isLoading = true;
+
     this.rolesAreLoading = true;
     this.permissionRoleApiService.getRoles().subscribe(
-      roles => {
-        this.roles = roles.roles;
-        this.rolesAreLoading = false;
-      }
+        (roles) => {
+          this.roles = roles.roles;
+          this.rolesAreLoading = false;
+        },
+        () => {},
+        () => {
+          this.isLoading = false;
+        }
     );
   }
 
@@ -80,7 +85,6 @@ export class RolesListComponent implements OnInit {
     this.selectedChooseRoles = false;
 
     this.permissionRoleApiService.getRoleWithPermissions(id).subscribe(role => {
-      console.log(role);
       this.selectedRole = role;
       this.selectedRole.isSelected = false;
       this.selectedRole.isClosed = false;
@@ -145,13 +149,19 @@ export class RolesListComponent implements OnInit {
   }
 
   saveRole(roleId) {
+    this.isLoading = true;
     this.isSaving = true;
-    console.log(this.selectedRole);
-    this.permissionRoleApiService.updateRolePermissions(roleId, this.selectedRole.permissions).subscribe(data => {
-      if (data.success) {
-        this.isSaving = false;
-      }
-    });
+    this.permissionRoleApiService.updateRolePermissions(roleId, this.selectedRole.permissions).subscribe(
+        (data) => {
+          if (data.success) {
+            this.isSaving = false;
+          }
+        },
+        () => {},
+        () => {
+          this.isLoading = false;
+        }
+      );
   }
 
   deleteRole() {
@@ -163,10 +173,8 @@ export class RolesListComponent implements OnInit {
       title: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.ROLE.TITLE',
       text: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.ROLE.TEXT',
       element: this.selectedRole.role,
-      apiToDelete: `role/delete/${this.selectedRole.role.id}`
+      apiToDelete: `role/delete`
     };
-
-    console.log(this.selectedRole);
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
     
@@ -174,8 +182,9 @@ export class RolesListComponent implements OnInit {
       (data) => {
         if (data) {
           if (data.success) {
-            const index = this.roles.indexOf(data.role);
+            const index = this.roles.findIndex(item => item.id === data.role.id);
             this.roles.splice(index, 1);
+
             this.alert = new AlertModel('success', data.message);
             this.selectedRole = null;
           } else {
