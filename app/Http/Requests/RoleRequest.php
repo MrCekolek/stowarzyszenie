@@ -18,7 +18,7 @@ class RoleRequest extends FormRequest {
                 break;
 
             case 'destroy':
-                $this->checkDestroy($input['id']);
+                $this->checkDestroy();
 
                 break;
         }
@@ -41,7 +41,7 @@ class RoleRequest extends FormRequest {
         ]);
     }
 
-    protected function checkDestroy($id) {
+    protected function checkDestroy() {
         $this->rules = [
             'id' => 'required|exists:roles'
         ];

@@ -10,12 +10,11 @@
                 <div class="d-flex justify-content-around">
                     <!-- wyszukiwarka -->
                     <div class="searchbox d-flex">
-                        <div class="ml-3">{{ 'STOWARZYSZENIE.MODULES.USERS.SEARCH' | translate }}</div>
-                        <i class="fas fa-search search-icon"></i>
                         <form [formGroup]="userListForm" novalidate>
-                            <mat-form-field class="search-form-field" floatLabel="never">
-                                <input matInput id="search_input" formControlName="search_input" placeholder="Search user..." autocomplete="off" (keyup)="searchUsers()" />
+                            <mat-form-field floatLabel="never">
+                                <input matInput id="search_input" formControlName="search_input" placeholder="{{ 'STOWARZYSZENIE.MODULES.USERS.SEARCH' | translate }}" autocomplete="off" (keyup)="searchUsers()" />
                             </mat-form-field>
+                            <i class="fas fa-search search-icon"></i>
                         </form>
                     </div>
                 </div>
@@ -123,7 +122,6 @@
 
                     <ng-container matColumnDef="loading">
                         <mat-footer-cell *matFooterCellDef colspan="6">
-                            <!--                      TODO Spinnerek ? :) -->
                             {{ 'STOWARZYSZENIE.LABELS.LOADING_DATA' | translate }}
                         </mat-footer-cell>
                     </ng-container>

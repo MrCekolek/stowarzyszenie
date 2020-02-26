@@ -433,7 +433,9 @@
             "FIRST_NAME": "First name",
             "LAST_NAME": "Last name",
             "LOADING_DATA": "Loading data",
-            "NO_DATA": "No data"
+            "NO_DATA": "No data",
+            "PER_PAGE": "Per page:",
+            "OF": "of"
         }
     }
 }

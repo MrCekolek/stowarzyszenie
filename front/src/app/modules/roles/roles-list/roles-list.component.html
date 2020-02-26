@@ -30,23 +30,23 @@
                         </div>
 
                         <!-- roles select -->
-                        <select class="custom-select" #roleSelect (change)="selectRole(roleSelect.value)">
-                        <option value="0" selected>
-                            {{ 'STOWARZYSZENIE.MODULES.ROLES.SELECT_DESC' | translate }}
-                        </option>
+                        <select class="custom-select" #roleSelect (change)="selectRole(roleSelect.value)" [disabled]="this.isLoading">
+                            <option value="0" selected>
+                                {{ 'STOWARZYSZENIE.MODULES.ROLES.SELECT_DESC' | translate }}
+                            </option>
 
-                        <option value="spinner" *ngIf="rolesAreLoading">
-                            <div class="d-flex justify-content-center">
-                                <div class="spinner-border" role="status">
-                                    <span class="sr-only">Loading...</span>
+                            <option value="spinner" *ngIf="rolesAreLoading">
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </option>
+                            </option>
 
-                        <option *ngFor="let role of this.roles" [value]="role.id">
-                            {{ role['name_' + lang] }}
-                        </option>
-                    </select>
+                            <option *ngFor="let role of this.roles" [value]="role.id">
+                                {{ role['name_' + lang] }}
+                            </option>
+                        </select>
                     </div>
 
                     <div *ngIf="!permissionsLoading; else permissionsLoad">

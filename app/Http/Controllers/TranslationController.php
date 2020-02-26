@@ -363,7 +363,6 @@ class TranslationController extends Controller {
         return false;
     }
 
-
     /**
      * @OA\Post(
      *     path="/translation/destroy",
@@ -405,7 +404,6 @@ class TranslationController extends Controller {
 
         return false;
     }
-
 
     private function arrayMergeRecursive() {
         return array_merge_recursive(array_merge_recursive($this->pl, $this->en), $this->ru);

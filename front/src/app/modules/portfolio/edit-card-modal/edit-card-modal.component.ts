@@ -67,7 +67,6 @@ export class EditCardModalComponent implements OnInit {
 
     this.addLoading = true;
     this.apiService.post('translation/get', obj).subscribe(response => {
-      console.log(response);
       this.translations[0] = response.translation.name_pl;
       this.translations[1] = response.translation.name_en;
       this.translations[2] = response.translation.name_ru;
@@ -85,11 +84,10 @@ export class EditCardModalComponent implements OnInit {
     this.card.name_pl = this.translations[0];
     this.card.name_en = this.translations[1];
     this.card.name_ru = this.translations[2];
-    console.log(this.card);
+
     this.portfolioService.updateCard(this.card).subscribe(data => {
       this.isSaving = false;
       this.dialogRef.close(data);
     });
   }
-
 }

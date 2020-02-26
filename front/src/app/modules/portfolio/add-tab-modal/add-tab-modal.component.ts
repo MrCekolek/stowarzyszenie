@@ -78,7 +78,6 @@ export class AddTabModalComponent implements OnInit {
 
     this.addLoading = true;
     this.apiService.post('translation/get', obj).subscribe(response => {
-      console.log(response);
       this.translations[0] = response.translation.name_pl;
       this.translations[1] = response.translation.name_en;
       this.translations[2] = response.translation.name_ru;
@@ -93,7 +92,11 @@ export class AddTabModalComponent implements OnInit {
 
   addTab() {
     this.isSaving = true;
+    this.tab.name_pl = this.translations[0];
+    this.tab.name_en = this.translations[1];
+    this.tab.name_ru = this.translations[2];
     this.tab.portfolio_id = this.user.id;
+
     this.portfolioService.addTab(this.tab).subscribe(response => {
       this.isSaving = false;
       console.log('response z modala');
@@ -107,11 +110,10 @@ export class AddTabModalComponent implements OnInit {
     this.tab.name_pl = this.translations[0];
     this.tab.name_en = this.translations[1];
     this.tab.name_ru = this.translations[2];
-    console.log(this.tab);
+
     this.portfolioService.updateTab(this.tab).subscribe(data => {
       this.isSaving = false;
       this.dialogRef.close(data);
     });
   }
-
 }

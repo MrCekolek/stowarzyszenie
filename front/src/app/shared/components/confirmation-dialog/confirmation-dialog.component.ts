@@ -52,9 +52,12 @@ export class ConfirmationDialogComponent implements OnInit {
 
   accept() {
     this.loading = true;
+
     this.apiService.post(this.apiToDelete, this.elToDelete).subscribe(response => {
-      console.log(response);
-      this.dialogRef.close(response);
+      let obj = response;
+      obj['role'] = this.elToDelete;
+
+      this.dialogRef.close(obj);
     });
   }
 
