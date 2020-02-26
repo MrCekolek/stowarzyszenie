@@ -751,6 +751,15 @@
                 "operationId": "HomeNavigationControllerCreate",
                 "parameters": [
                     {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status of a page",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "name_pl",
                         "in": "query",
                         "description": "Translation in polish language",
@@ -808,6 +817,15 @@
                         "name": "content_ru",
                         "in": "query",
                         "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User id",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2242,6 +2260,72 @@
                 }
             }
         },
+        "/translation": {
+            "post": {
+                "tags": [
+                    "translation"
+                ],
+                "summary": "Gets translations files in json format",
+                "operationId": "TranslationControllerIndex",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/translation/create": {
+            "post": {
+                "tags": [
+                    "translation"
+                ],
+                "summary": "Add translations to json files",
+                "operationId": "TranslationControllerCreate",
+                "parameters": [
+                    {
+                        "name": "key",
+                        "in": "query",
+                        "description": "JSON key",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "translation_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "translation_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "translation_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/translation/get": {
             "post": {
                 "tags": [
@@ -2260,6 +2344,72 @@
                         }
                     }
                 ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/translation/update": {
+            "post": {
+                "tags": [
+                    "translation"
+                ],
+                "summary": "Update translations to json files",
+                "operationId": "TranslationControllerUpdate",
+                "parameters": [
+                    {
+                        "name": "key",
+                        "in": "query",
+                        "description": "JSON key",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "translation_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "translation_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "translation_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/translation/destroy": {
+            "post": {
+                "tags": [
+                    "translation"
+                ],
+                "summary": "Deleted translations files in json format",
+                "operationId": "TranslationControllerDestroy",
                 "responses": {
                     "default": {
                         "description": "successful operation"

@@ -242,6 +242,20 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="dropdown">
+                        <a class="nav-link">
+                            <i class="fas fa-id-card"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.MANAGEMENT.MANAGEMENT_MENU' | translate }}
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['managements/translations']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.MANAGEMENT.TRANSLATIONS' | translate }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </aside>
         </div>
@@ -254,7 +268,7 @@
         </div>
         <footer class="main-footer">
             <div class="footer-left">
-                Copyright © 2019
+                Copyright © 2020
                 <div class="bullet"></div> Stowarzyszenie CIOB
             </div>
             <div class="footer-right">
