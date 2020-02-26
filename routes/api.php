@@ -54,7 +54,7 @@ Route::group([
     });
 
     Route::prefix('role')->group(function () {
-        Route::post('delete/{role}', 'RoleController@destroy');
+        Route::post('delete', 'RoleController@destroy');
         Route::post('get', 'RoleController@index');
         Route::post('create', 'RoleController@create');
         Route::post('{role}/update', 'RoleController@update');

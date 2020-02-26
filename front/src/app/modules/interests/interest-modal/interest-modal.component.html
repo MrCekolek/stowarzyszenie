@@ -21,7 +21,7 @@
                 <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getInterestTranslations(new.value)" *ngIf="this.modal_type == 'new'">
                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
                 </button>
-                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="updateInterest(edit)" *ngIf="this.modal_type == 'edit'">
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="updateInterest()" *ngIf="this.modal_type == 'edit'">
                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
                 </button>
             </div>

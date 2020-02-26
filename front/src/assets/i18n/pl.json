@@ -433,7 +433,9 @@
             "FIRST_NAME": "Imię",
             "LAST_NAME": "Nazwisko",
             "LOADING_DATA": "Ładowanie danych",
-            "NO_DATA": "Brak danych"
+            "NO_DATA": "Brak danych",
+            "PER_PAGE": "Na stronę:",
+            "OF": "z"
         }
     }
 }

@@ -55,6 +55,9 @@ export class NewTranslationModalComponent implements OnInit {
 
   addTranslation() {
     this.saving = true;
+    this.translation.translation_pl = this.translations[0];
+    this.translation.translation_en = this.translations[1];
+    this.translation.translation_ru = this.translations[2];
 
     this.translationApiService.addTranslation(this.translation).subscribe(response => {
       this.dialogRef.close(response);
@@ -63,10 +66,10 @@ export class NewTranslationModalComponent implements OnInit {
   }
 
   updateTranslation() {
+    this.saving = true;
     this.translation.translation_pl = this.translations[0];
     this.translation.translation_en = this.translations[1];
     this.translation.translation_ru = this.translations[2];
-    this.saving = true;
 
     this.translationApiService.updateTranslations(this.translation).subscribe(response => {
       this.dialogRef.close(response);

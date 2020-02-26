@@ -90,7 +90,7 @@ export class NavbarComponent implements OnInit {
   
             this.isLoading = false;
           }
-        )
+        );
   
         const searchService = this.searchService;
         const self = this;
@@ -112,8 +112,10 @@ export class NavbarComponent implements OnInit {
     this.languageService.setLang(lang);
   }
 
-  searchUsers() {
-    this.listData.filter = this.search_input.value.trim().toLowerCase();
+  searchUsers(value) {
+    if (!this.isLoading) {
+      this.listData.filter = value;
+    }
   }
 
   get search_input() {

@@ -41,7 +41,6 @@ export class NewRoleModalComponent implements OnInit {
     this.modal_type = data.modal_type;
 
     if (data.role) {
-      console.log(data.role);
       this.role = data.role;
 
       this.translations[0] = data.role.name_pl;
@@ -59,6 +58,10 @@ export class NewRoleModalComponent implements OnInit {
 
   addRole() {
     this.saving = true;
+    this.role.name_pl = this.translations[0];
+    this.role.name_en = this.translations[1];
+    this.role.name_ru = this.translations[2];
+
     this.roleApiService.addNewRole(this.role).subscribe(response => {
       this.dialogRef.close(response);
       this.saving = false;
@@ -66,13 +69,12 @@ export class NewRoleModalComponent implements OnInit {
   }
 
   updateRole() {
+    this.saving = true;
     this.role.name_pl = this.translations[0];
     this.role.name_en = this.translations[1];
     this.role.name_ru = this.translations[2];
-    this.saving = true;
-    console.log(this.role);
+
     this.roleApiService.updateRoleName(this.role).subscribe(response => {
-      console.log(response);
       this.dialogRef.close(response);
       this.saving = false;
     });
@@ -89,7 +91,6 @@ export class NewRoleModalComponent implements OnInit {
 
     this.addLoading = true;
     this.apService.post('translation/get', obj).subscribe(response => {
-      console.log(response);
       this.translations[0] = response.translation.name_pl;
       this.translations[1] = response.translation.name_en;
       this.translations[2] = response.translation.name_ru;
