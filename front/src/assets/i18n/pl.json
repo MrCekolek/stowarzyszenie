@@ -34,6 +34,10 @@
                     "CARD_CONTENT": {
                         "TITLE": "Usuwanie zawartości karty",
                         "TEXT": "Czy na pewno chcesz usunąć zawartość"
+                    },
+                    "TRANSLATION": {
+                        "TITLE": "Usuwanie tłumaczenia",
+                        "TEXT": "Czy na pewno chcesz usunąć tłumaczenie"
                     }
                 }
             },
@@ -89,6 +93,16 @@
             },
             "EDIT_ROLE": {
                 "INPUT_FIELD": "Edytuj nazwę roli i przetłumacz"
+            },
+            "NEW_TRANSLATION": {
+                "TRIGGER_BUTTON": "Dodaj tłumaczenie",
+                "TITLE_NEW_TRANSLATION": "Dodaj nowe tłumaczenie",
+                "TITLE_EDIT_TRANSLATION": "Edytuj nazwę tłumaczenia",
+                "INPUT_FIELD": "Nazwa nowego tłumaczenia",
+                "INPUT_FIELD_KEY": "Klucz tłumaczenia"
+            },
+            "EDIT_TRANSLATION": {
+                "INPUT_FIELD": "Edytuj nazwę tłumaczenia i przetłumacz"
             }
         },
         "MODULES": {
@@ -220,6 +234,10 @@
                         "PORTFOLIO_MENU": "Portfolio",
                         "ROLES_PREFERENCES": "Role i uprawnienia",
                         "USERS_LIST": "Lista użytkowników"
+                    },
+                    "MANAGEMENT": {
+                        "MANAGEMENT_MENU": "Zarządzanie",
+                        "TRANSLATIONS": "Tłumaczenia"
                     }
                 },
                 "WEBPAGE_TITLE_MEMBERS": "Ciob members"
@@ -324,6 +342,11 @@
                 "ENTRIES": "Pokazuj",
                 "SEARCH": "Wyszukaj użytkownika",
                 "USERS_LIST_TITLE": "Lista użytkowników"
+            },
+            "MANAGEMENTS": {
+                "TITLE": "Tłumaczenia",
+                "LIST_TITLE": "Lista tłumaczeń",
+                "PAGE_DESC1": "Zarządzaj tłumaczeniami w systemie."
             }
         },
         "PAGINATION": {
@@ -352,6 +375,9 @@
                             "READ": "Pomyślny odczyt danych",
                             "UPDATE": "Pomyślnie zmodyfikowano dane"
                         }
+                    },
+                    "ERROR": {
+                        "TRANSLATION_KEY_EXISTS": "Podany klucz tłumaczenia już istnieje"
                     }
                 },
                 "CRUD": {
@@ -401,6 +427,13 @@
                 }
             }
         },
-        "zzzz": "Nagłówek karty"
+        "LABELS": {
+            "ID": "ID",
+            "LOGIN_EMAIL": "E-mail",
+            "FIRST_NAME": "Imię",
+            "LAST_NAME": "Nazwisko",
+            "LOADING_DATA": "Ładowanie danych",
+            "NO_DATA": "Brak danych"
+        }
     }
 }

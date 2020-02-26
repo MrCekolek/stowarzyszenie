@@ -34,6 +34,10 @@
                     "CARD_CONTENT": {
                         "TITLE": "Удаление содержимого карты",
                         "TEXT": "Вы уверены, что хотите удалить контент?"
+                    },
+                    "TRANSLATION": {
+                        "TITLE": "Удалить перевод",
+                        "TEXT": "Вы уверены, что хотите удалить перевод?"
                     }
                 }
             },
@@ -89,6 +93,16 @@
             },
             "EDIT_ROLE": {
                 "INPUT_FIELD": "Изменить название роли и перевести"
+            },
+            "NEW_TRANSLATION": {
+                "TRIGGER_BUTTON": "Добавить перевод",
+                "TITLE_NEW_TRANSLATION": "Добавить новый перевод",
+                "TITLE_EDIT_TRANSLATION": "Изменить название перевода",
+                "INPUT_FIELD": "Название нового перевода",
+                "INPUT_FIELD_KEY": "Ключ перевода"
+            },
+            "EDIT_TRANSLATION": {
+                "INPUT_FIELD": "Изменить название перевода и перевести"
             }
         },
         "MODULES": {
@@ -220,6 +234,10 @@
                         "PORTFOLIO_MENU": "портфель",
                         "ROLES_PREFERENCES": "Роли и разрешения",
                         "USERS_LIST": "Список пользователей"
+                    },
+                    "MANAGEMENT": {
+                        "MANAGEMENT_MENU": "управление",
+                        "TRANSLATIONS": "Переводы"
                     }
                 },
                 "WEBPAGE_TITLE_MEMBERS": "Ciob Члены"
@@ -324,6 +342,11 @@
                 "ENTRIES": "Шоу",
                 "SEARCH": "Поиск пользователя",
                 "USERS_LIST_TITLE": "Список пользователей"
+            },
+            "MANAGEMENTS": {
+                "TITLE": "Переводы",
+                "LIST_TITLE": "Список переводов",
+                "PAGE_DESC1": "Управлять переводами в системе."
             }
         },
         "PAGINATION": {
@@ -352,6 +375,9 @@
                             "READ": "Успешное чтение данных",
                             "UPDATE": ""
                         }
+                    },
+                    "ERROR": {
+                        "TRANSLATION_KEY_EXISTS": "Предоставленный ключ перевода уже существует"
                     }
                 },
                 "CRUD": {
@@ -401,6 +427,13 @@
                 }
             }
         },
-        "zzzz": "Заголовок карты"
+        "LABELS": {
+            "ID": "Я бы",
+            "LOGIN_EMAIL": "Эл. адрес",
+            "FIRST_NAME": "Имя",
+            "LAST_NAME": "Фамилия",
+            "LOADING_DATA": "Загрузка данных",
+            "NO_DATA": "Нет данных"
+        }
     }
 }

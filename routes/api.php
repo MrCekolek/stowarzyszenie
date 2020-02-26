@@ -20,6 +20,10 @@ Route::group([
     });
 
     Route::prefix('translation')->group(function () {
+        Route::post('', 'TranslationController@index');
+        Route::post('create', 'TranslationController@create');
+        Route::post('update', 'TranslationController@update');
+        Route::post('destroy/{translationKey}', 'TranslationController@destroy');
         Route::post('get', 'TranslationController@getTranslation');
     });
 
