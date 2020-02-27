@@ -33,5 +33,17 @@ class HomeNavigationSeeder extends Seeder {
             'content_ru' => '',
             'user_id' => 1
         ]);
+
+        factory(HomeNavigation::class)->create([
+            'status' => HomeNavigation::statuses()['published'],
+            'name_pl' => 'Konferencja',
+            'name_en' => 'Conference',
+            'name_ru' => 'конференция',
+            'link' => '/conference/page',
+            'content_pl' => '',
+            'content_en' => '',
+            'content_ru' => '',
+            'user_id' => 1
+        ]);
     }
 }

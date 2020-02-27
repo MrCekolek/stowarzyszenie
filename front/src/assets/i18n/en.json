@@ -347,6 +347,20 @@
                 "TITLE": "Translations",
                 "LIST_TITLE": "Translation list",
                 "PAGE_DESC1": "Manage translations in the system."
+            },
+            "CONFERENCE": {
+                "STATUS": {
+                    "WAITING": "waiting",
+                    "DURING": "during",
+                    "FINISHED": "finished"
+                }
+            },
+            "HOME_NAVIGATION": {
+                "STATUS": {
+                    "PUBLISHED": "published",
+                    "IN_PROGRESS": "in progress",
+                    "NOT_EDITABLE": "not editable"
+                }
             }
         },
         "PAGINATION": {

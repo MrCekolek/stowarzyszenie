@@ -347,6 +347,20 @@
                 "TITLE": "Переводы",
                 "LIST_TITLE": "Список переводов",
                 "PAGE_DESC1": "Управлять переводами в системе."
+            },
+            "CONFERENCE": {
+                "STATUS": {
+                    "WAITING": "ожидания",
+                    "DURING": "в процессе",
+                    "FINISHED": "завершено"
+                }
+            },
+            "HOME_NAVIGATION": {
+                "STATUS": {
+                    "PUBLISHED": "опубликованный",
+                    "IN_PROGRESS": "в процессе",
+                    "NOT_EDITABLE": "не редактируется"
+                }
             }
         },
         "PAGINATION": {
