@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder {
         $this->call(UsersTableSeeder::class);
         $this->call(PortfolioTabsSeeder::class);
         $this->call(HomeNavigationSeeder::class);
+        $this->call(ConferenceTableSeeder::class);
     }
 }

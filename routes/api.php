@@ -120,10 +120,23 @@ Route::group([
     });
 
     Route::prefix('conference')->group(function () {
+        Route::post('', 'ConferenceController@index');
+        Route::post('active/get', 'ConferenceController@getActive');
+        Route::post('create', 'ConferenceController@create');
+        Route::post('update', 'ConferenceController@update');
+        Route::post('destroy', 'ConferenceController@destroy');
+
         Route::prefix('user')->group(function () {
             Route::post('create', 'ConferenceUserController@create');
             Route::post('update', 'ConferenceUserController@update');
             Route::post('destroy', 'ConferenceUserController@destroy');
+        });
+
+        Route::prefix('page')->group(function () {
+            Route::post('', 'ConferencePageController@index');
+            Route::post('create', 'ConferencePageController@create');
+            Route::post('update', 'ConferencePageController@update');
+            Route::post('destroy', 'ConferencePageController@destroy');
         });
     });
 });
