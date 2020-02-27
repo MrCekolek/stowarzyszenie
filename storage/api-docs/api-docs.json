@@ -228,6 +228,432 @@
                 }
             }
         },
+        "/conference/get": {
+            "post": {
+                "tags": [
+                    "conference"
+                ],
+                "summary": "Gets all conferences",
+                "operationId": "ConferenceControllerIndex",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/conference/active/get": {
+            "post": {
+                "tags": [
+                    "conference"
+                ],
+                "summary": "Gets active conferences",
+                "operationId": "ConferenceControllerGetActive",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/conference/create": {
+            "post": {
+                "tags": [
+                    "conference"
+                ],
+                "summary": "Creates conference",
+                "operationId": "ConferenceControllerCreate",
+                "parameters": [
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "conference_id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/conference/update": {
+            "post": {
+                "tags": [
+                    "conference"
+                ],
+                "summary": "Updates conference",
+                "operationId": "ConferenceControllerUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "conference_id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/conference/destroy": {
+            "post": {
+                "tags": [
+                    "conference"
+                ],
+                "summary": "Deletes conference",
+                "operationId": "ConferenceControllerDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/conference/page/get": {
+            "post": {
+                "tags": [
+                    "conference_page"
+                ],
+                "summary": "Gets all conference pages",
+                "operationId": "ConferencePageControllerIndex",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/conference/page/create": {
+            "post": {
+                "tags": [
+                    "conference_page"
+                ],
+                "summary": "Creates page for conference",
+                "operationId": "ConferencePageControllerCreate",
+                "parameters": [
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "conference_id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/conference/page/update": {
+            "post": {
+                "tags": [
+                    "conference_page"
+                ],
+                "summary": "Updates page for conference",
+                "operationId": "ConferencePageControllerUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ConferencePage id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "conference_id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/conference/page/destroy": {
+            "post": {
+                "tags": [
+                    "conference_page"
+                ],
+                "summary": "Deletes conference page",
+                "operationId": "ConferencePageControllerDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Conference page id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/conference/user/create": {
             "post": {
                 "tags": [
@@ -1665,7 +2091,7 @@
                 }
             }
         },
-        "/role/delete/{roleId}": {
+        "/role/delete": {
             "post": {
                 "tags": [
                     "role"

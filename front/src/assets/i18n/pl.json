@@ -347,6 +347,20 @@
                 "TITLE": "Tłumaczenia",
                 "LIST_TITLE": "Lista tłumaczeń",
                 "PAGE_DESC1": "Zarządzaj tłumaczeniami w systemie."
+            },
+            "CONFERENCE": {
+                "STATUS": {
+                    "WAITING": "oczekująca",
+                    "DURING": "w toku",
+                    "FINISHED": "zakończona"
+                }
+            },
+            "HOME_NAVIGATION": {
+                "STATUS": {
+                    "PUBLISHED": "opublikowana",
+                    "IN_PROGRESS": "w toku",
+                    "NOT_EDITABLE": "nieedytowalna"
+                }
             }
         },
         "PAGINATION": {
