@@ -1,0 +1,15 @@
+<td>
+    {{ link['name_' + lang] }}
+</td>
+<!-- status -->
+<td><div class="badge badge-secondary">
+    {{ link.status }}
+</div></td>
+<td>
+    <a [routerLink]="['/page-edit', link.id]" class="btn btn-success">
+        <i class="fas fa-pencil-alt"></i> {{ 'STOWARZYSZENIE.MODULES.PAGES.TABLE_ACTIONS_EDIT' | translate }}
+    </a>
+    <a class="btn btn-secondary btn-danger">
+        <i class="fas fa-times"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
+    </a>
+</td>

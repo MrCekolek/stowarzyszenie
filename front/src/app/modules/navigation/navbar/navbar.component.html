@@ -245,6 +245,25 @@
 
                     <li class="dropdown">
                         <a class="nav-link">
+                            <i class="fas fa-file-alt"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.PAGES_ADMIN.TITLE_MENU_V2' | translate }}
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['pages/homepages']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.PAGES_ADMIN.HOMEPAGES' | translate }}
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['pages/conference']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.PAGES_ADMIN.CONFERENCE' | translate }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="nav-link">
                             <i class="fas fa-id-card"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.MANAGEMENT.MANAGEMENT_MENU' | translate }}
                         </a>
 

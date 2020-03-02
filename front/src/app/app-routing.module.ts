@@ -38,6 +38,13 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'pages',
+    loadChildren: './modules/nav-admin/nav-admin.module#NavAdminModule',
+    canActivateChild: [
+      LoggedGuard
+    ]
+  },
+  {
     path: 'managements',
     loadChildren: './modules/managements/managements.module#ManagementsModule',
     canActivateChild: [

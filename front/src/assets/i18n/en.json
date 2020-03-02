@@ -38,6 +38,10 @@
                     "TRANSLATION": {
                         "TITLE": "Delete translation",
                         "TEXT": "Are you sure you want to delete the translation"
+                    },
+                    "HOMEPAGE": {
+                        "TITLE": "Deleting page",
+                        "TEXT": "Are you sure u want to delete page"
                     }
                 }
             },
@@ -54,7 +58,10 @@
             "TOOLTIPS": {
                 "DISABLED_TAB": "This card is disabled and is not visible to users. Turn on her visibility to edit"
             },
-            "EXIT_PREVIEW_MODE": "Exit the preview"
+            "EXIT_PREVIEW_MODE": "Exit the preview",
+            "POLISH_LANG": "Polish",
+            "ENGLISH_LANG": "English",
+            "RUSSIAN_LANG": "Russian"
         },
         "LABELS_TABLES": {
             "AVATAR": "Avatar",
@@ -103,6 +110,10 @@
             },
             "EDIT_TRANSLATION": {
                 "INPUT_FIELD": "Edit translation name and translate"
+            },
+            "HOMEPAGES": {
+                "TITLE_NEW": "Adding new page",
+                "INPUT_NEW_LABEL": "New page name"
             }
         },
         "MODULES": {
@@ -238,6 +249,11 @@
                     "MANAGEMENT": {
                         "MANAGEMENT_MENU": "Management",
                         "TRANSLATIONS": "Translations"
+                    },
+                    "PAGES_ADMIN": {
+                        "TITLE_MENU": "Pages management",
+                        "HOMEPAGES": "Main navigation",
+                        "CONFERENCE": "Conference page"
                     }
                 },
                 "WEBPAGE_TITLE_MEMBERS": "Ciob members"
@@ -348,19 +364,29 @@
                 "LIST_TITLE": "Translation list",
                 "PAGE_DESC1": "Manage translations in the system."
             },
-            "CONFERENCE": {
-                "STATUS": {
-                    "WAITING": "waiting",
-                    "DURING": "during",
-                    "FINISHED": "finished"
-                }
-            },
-            "HOME_NAVIGATION": {
-                "STATUS": {
-                    "PUBLISHED": "published",
-                    "IN_PROGRESS": "in progress",
-                    "NOT_EDITABLE": "not editable"
-                }
+            "PAGES": {
+                "PAGES_ADMIN_TITLE": "Main navigation",
+                "PAGES_SUBTITLE": "Navigation management",
+                "PAGES_DESC": "Here you can manage navigation of home page of site. Add pages, edit their content, delete them.",
+                "ADD_NEW_PAGE": "Add new page",
+                "HOMELINKS_TABLE_NAME": "Page name",
+                "HOMELINKS_TABLE_STATUS": "Page status",
+                "HOMELINKS_TABLE_ACTIONS": "Actions",
+                "TABLE_ACTIONS_EDIT": "Edit page content",
+                "EMPTY_TABLE_DESC": "There are no pages in the system.",
+                "EMPTY_TABLE_TITLE": "No pages",
+                "CONFERENCE_PAGES_ADMIN_TITLE": "Conference page",
+                "PAGE_EDIT_TITLE": "Edit page content",
+                "PAGE_EDIT_SUBTITLE": "Content editor",
+                "PAGE_EDIT_DESC": "Here you can add and edit content for your page.",
+                "PAGE_EDIT_CHOOSE_LANGUAGE": "Choose language of content",
+                "PAGE_EDIT_CHOOSE_LANGUAGE_DESC": "Click on languages in which you want to add and edit your content. It can have content i different languages (also all).",
+                "PAGE_EDIT_CONTENT": "Content",
+                "PAGE_EDIT_PUBLISH": "Publish",
+                "PAGE_EDIT_SAVE_DRAFT": "Save as draft",
+                "PAGE_EDIT_INPUT_TITLE": "Page name",
+                "CONFERENCE_PAGES_ADMIN_SUBTITLE": "Editing conference pages",
+                "CONFERENCE_PAGES_ADMIN_DESC": "Here you can edit navigation only on conference page. You can manage the most important aspects of conference, like tracks. dates etc."
             }
         },
         "PAGINATION": {
@@ -389,9 +415,6 @@
                             "READ": "Successful data reading",
                             "UPDATE": ""
                         }
-                    },
-                    "ERROR": {
-                        "TRANSLATION_KEY_EXISTS": "The translation key provided already exists"
                     }
                 },
                 "CRUD": {
@@ -450,6 +473,11 @@
             "NO_DATA": "No data",
             "PER_PAGE": "Per page:",
             "OF": "of"
+        },
+        "PAGE_STATUS": {
+            "PUBLISHED": "Published",
+            "IN_PROGRESS": "In editing",
+            "NOT_EDITABLE": "Not editable"
         }
     }
 }
