@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center mb-4">
+  <button class="btn btn-sm btn-primary" (click)="addHomepage()">
+    <i class="fas fa-plus mr-2"></i> {{ 'STOWARZYSZENIE.MODULES.PAGES.ADD_NEW_PAGE' | translate }}
+  </button>
+</div>
+
+<div class="table-responsive" *ngIf="links.length > 0; else noLinks">
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <th>
+          {{ 'STOWARZYSZENIE.MODULES.PAGES.HOMELINKS_TABLE_NAME' | translate }}
+        </th>
+        <th>
+          {{ 'STOWARZYSZENIE.MODULES.PAGES.HOMELINKS_TABLE_STATUS' | translate }}
+        </th>
+        <th>
+          {{ 'STOWARZYSZENIE.MODULES.PAGES.HOMELINKS_TABLE_ACTIONS' | translate }}
+        </th>
+      </tr>
+      <tr *ngFor="let link of links">
+        <app-home-link-tile [link]="link" [lang]="lang"></app-home-link-tile>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noLinks>
+  <div class="empty-state" data-height="200">
+    <div class="empty-state-icon">
+      <i class="fas fa-question"></i>
+    </div>
+    <h2>
+      {{ 'STOWARZYSZENIE.MODULES.PAGES.EMPTY_TABLE_TITLE' | translate }}
+    </h2>
+    <p class="lead">
+      {{ 'STOWARZYSZENIE.MODULES.PAGES.EMPTY_TABLE_DESC' | translate }}
+    </p>
+  </div>
+</ng-template>

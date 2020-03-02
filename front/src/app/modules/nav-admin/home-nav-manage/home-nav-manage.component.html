@@ -1,0 +1,22 @@
+<div class="section-header">
+    <h1>
+        {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGES_ADMIN_TITLE' | translate }}
+    </h1>
+</div>
+
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGES_SUBTITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGES_DESC' | translate }}
+    </p>
+
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <app-home-links-list [links]="homelinks"></app-home-links-list>
+            </div>
+        </div>
+    </div>
+</div>
