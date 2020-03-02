@@ -113,6 +113,7 @@ Route::group([
     });
 
     Route::prefix('home_navigation')->group(function () {
+        Route::post('{homeNavigation}', 'HomeNavigationController@show');
         Route::post('get', 'HomeNavigationController@index');
         Route::post('create', 'HomeNavigationController@create');
         Route::post('update', 'HomeNavigationController@update');
@@ -121,6 +122,7 @@ Route::group([
 
     Route::prefix('conference')->group(function () {
         Route::post('', 'ConferenceController@index');
+        Route::post('{conferenceId}', 'ConferenceController@show');
         Route::post('active/get', 'ConferenceController@getActive');
         Route::post('create', 'ConferenceController@create');
         Route::post('update', 'ConferenceController@update');
@@ -134,6 +136,7 @@ Route::group([
 
         Route::prefix('page')->group(function () {
             Route::post('', 'ConferencePageController@index');
+            Route::post('{pageId}', 'ConferencePageController@show');
             Route::post('create', 'ConferencePageController@create');
             Route::post('update', 'ConferencePageController@update');
             Route::post('destroy', 'ConferencePageController@destroy');

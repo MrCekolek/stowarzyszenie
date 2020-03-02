@@ -36,7 +36,7 @@ class Conference extends BaseModel {
         return $conference;
     }
 
-    private static function fillConference($conference, $input, &$success) {
+    private static function fillConference(&$conference, $input, &$success) {
         $conference->name_pl = $input['name_pl'];
         $conference->name_en = $input['name_en'];
         $conference->name_ru = $input['name_ru'];

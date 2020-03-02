@@ -64,9 +64,7 @@ export class CardContentModalComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() { }
 
   dismiss() {
     this.titleTranslations = [];
@@ -91,7 +89,6 @@ export class CardContentModalComponent implements OnInit {
     };
 
     this.portfolioApiService.addNewContentToCard(this.newContent).subscribe(response => {
-      console.log(response);
       if (response.success) {
         this.isSaving = false;
         this.dialogRef.close(response.tileContent);
@@ -115,8 +112,6 @@ export class CardContentModalComponent implements OnInit {
     }
 
     this.apiService.post('translation/get', obj).subscribe(response => {
-      console.log(response);
-
       if (type === 'title') {
         this.titleTranslations[0] = response.translation.name_pl;
         this.titleTranslations[1] = response.translation.name_en;

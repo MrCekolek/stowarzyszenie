@@ -9,6 +9,7 @@ export class PortfolioCard {
     user_visibility: number;
     portfolio_tab_id: number;
     portfolio_tab_shared_id: number;
+    tile_contents: object;
 
     constructor(portfolioCard: Object) {
         this.id = portfolioCard['id'];
@@ -21,5 +22,6 @@ export class PortfolioCard {
         this.user_visibility = portfolioCard['user_visibility'];
         this.portfolio_tab_id = portfolioCard['portfolio_tab_id'];
         this.portfolio_tab_shared_id =  portfolioCard['portfolio_tab_shared_id'];
+        this.tile_contents = portfolioCard['tile_contents'];
     }
 }

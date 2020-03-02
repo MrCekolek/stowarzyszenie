@@ -15,7 +15,7 @@ class CreateConferencesTable extends Migration
     {
         Schema::create('conferences', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('status');
+            $table->string('status')->default('waiting');
             $table->string('translation_key');
             $table->string('name_pl')->nullable();
             $table->string('name_en')->nullable();

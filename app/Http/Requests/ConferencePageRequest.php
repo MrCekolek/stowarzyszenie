@@ -12,6 +12,11 @@ class ConferencePageRequest extends FormRequest {
 
                 break;
 
+            case 'show':
+                $this->checkShow();
+
+                break;
+
             case 'create':
                 $this->checkCreate();
 
@@ -34,6 +39,12 @@ class ConferencePageRequest extends FormRequest {
     protected function checkIndex() {
         $this->rules = [
             'conference_id' => 'required|exists:conferences,id'
+        ];
+    }
+
+    protected function checkShow() {
+        $this->rules = [
+            'id' => 'required|exists:conference_pages'
         ];
     }
 

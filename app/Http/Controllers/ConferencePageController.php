@@ -26,6 +26,15 @@ class ConferencePageController extends Controller
      *     tags={"conference_page"},
      *     summary="Gets all conference pages",
      *     operationId="ConferencePageControllerIndex",
+     *     @OA\Parameter(
+     *         name="conference_id",
+     *         in="query",
+     *         description="Conference id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
      *     @OA\Response(
      *         response="default",
      *         description="successful operation"
@@ -42,6 +51,40 @@ class ConferencePageController extends Controller
 
         return LogService::read(true, [
             'conferencePages' => ConferencePage::where('id', $input['conference_id'])->get()->toArray()
+        ]);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/conference/page/{pageId}",
+     *     tags={"conference_page"},
+     *     summary="Gets specific conference pages",
+     *     operationId="ConferencePageControllerShow",
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="query",
+     *         description="Conference page id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function show(Request $request, ConferencePage $conferencePage) {
+        $input = $request->all();
+        $validation = new ConferencePageRequest($input, 'show');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        return LogService::read(true, [
+            'conferencePage' => ConferencePage::where('id', $input['id'])->get()->toArray()
         ]);
     }
 
@@ -230,7 +273,7 @@ class ConferencePageController extends Controller
         $conferencePage = ConferencePage::updateConferencePage($input, $success);
 
         return LogService::update($success, [
-            'conferencePage' => $conferencePage->load('conference')->toArray()
+            'conferencePage' => $conferencePage->toArray()
         ]);
     }
 
