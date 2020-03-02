@@ -253,7 +253,8 @@
                     "PAGES_ADMIN": {
                         "TITLE_MENU": "Pages management",
                         "HOMEPAGES": "Main navigation",
-                        "CONFERENCE": "Conference page"
+                        "CONFERENCE": "Conference page",
+                        "TITLE_MENU_V2": "Manage pages"
                     }
                 },
                 "WEBPAGE_TITLE_MEMBERS": "Ciob members"
