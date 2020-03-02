@@ -253,7 +253,8 @@
                     "PAGES_ADMIN": {
                         "TITLE_MENU": "Управление страницами",
                         "HOMEPAGES": "Основная навигация",
-                        "CONFERENCE": "Страница конференции"
+                        "CONFERENCE": "Страница конференции",
+                        "TITLE_MENU_V2": "Управление страницами"
                     }
                 },
                 "WEBPAGE_TITLE_MEMBERS": "Ciob Члены"
