@@ -37,7 +37,7 @@
         </div>
 
         <ng-template #content>
-            <div *ngIf="card.tile_contents.length === 0">
+            <div *ngIf="contents.length === 0">
                 <div class="empty-state" data-height="200" style="height: 200px;">
                     <div class="empty-state-icon">
                         <i class="fas fa-question"></i>
@@ -48,7 +48,7 @@
                 </div>
             </div>
 
-            <div class="contents" *ngIf="card.tile_contents.length > 0">
+            <div class="contents" *ngIf="contents.length > 0">
                 <ul class="list-unstyled">
                     <li class="list-item" *ngFor="let content of contents; let i = index">
                         <div [ngSwitch]="content.type">

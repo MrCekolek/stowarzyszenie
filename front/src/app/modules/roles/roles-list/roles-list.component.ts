@@ -182,7 +182,7 @@ export class RolesListComponent implements OnInit {
       (data) => {
         if (data) {
           if (data.success) {
-            const index = this.roles.findIndex(item => item.id === data.role.id);
+            const index = this.roles.findIndex(item => item.id === data.elToDelete.id);
             this.roles.splice(index, 1);
 
             this.alert = new AlertModel('success', data.message);

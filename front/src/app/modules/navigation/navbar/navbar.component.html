@@ -53,11 +53,11 @@
 <div id="app" *ngIf="this.loggedIn">
     <div class="main-wrapper main-wrapper-1">
         <div class="navbar-bg"></div>
-        <nav class="navbar navbar-expand-lg main-navbar">
+        <nav id="main-navbar" class="navbar navbar-expand-lg main-navbar">
             <form class="form-inline mr-auto">
                 <ul class="navbar-nav mr-3">
-                    <li><a data-toggle="sidebar" data-target="#sidebar-wrapper" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
-                    <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+                    <li><a (click)="this.toggleSidebar()" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+                    <li><a data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
                 </ul>
                 <div class="search-element">
 
@@ -176,7 +176,7 @@
                 </li>
             </ul>
         </nav>
-        <div class="main-sidebar sidebar-style-2" tabindex="1" style="overflow: hidden; outline: none;">
+        <div id="sidebar-wrapper-parent" class="main-sidebar sidebar-style-2" tabindex="1" style="overflow: hidden; outline: none;">
             <aside id="sidebar-wrapper">
                 <div class="sidebar-brand">
                     <a href="index.html">
@@ -261,12 +261,12 @@
         </div>
 
         <!-- Main Content -->
-        <div class="main-content" style="min-height: 523px;">
+        <div id="main-content" class="main-content" style="min-height: 523px;">
             <section class="section">
                 <router-outlet *ngIf="this.loggedIn"></router-outlet>
             </section>
         </div>
-        <footer class="main-footer">
+        <footer id="main-footer" class="main-footer">
             <div class="footer-left">
                 Copyright © 2020
                 <div class="bullet"></div> Stowarzyszenie CIOB

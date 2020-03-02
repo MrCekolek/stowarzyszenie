@@ -53,13 +53,10 @@ export class PortfolioCardComponent implements OnInit {
 
     if (this.router.url.includes('portfolio-settings')) {
       this.role = 'admin';
-      console.log(this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS'));
     } else if (this.router.url.includes('users/profile')) {
       this.role = 'user';
       this.owner = Number.parseInt(this.route.snapshot.paramMap.get('id')) === this.userProvider.getUser().id;
     }
-
-    console.log(this.card);
   }
 
   openNewContentModal(modal_type) {
@@ -78,7 +75,6 @@ export class PortfolioCardComponent implements OnInit {
       (data) => {
         if (data) {
             this.contents.push(data[0]);
-            console.log(this.contents);
         }
       }
     );
@@ -110,8 +106,9 @@ export class PortfolioCardComponent implements OnInit {
       (data) => {
         if (data) {
           if (data.success) {
-            const index = this.contents.indexOf(data.content);
+            const index = this.contents.findIndex(item => item.id === data.elToDelete.id);
             this.contents.splice(index, 1);
+
             this.alert = new AlertModel('success', data.message);
           } else {
             this.alert = new AlertModel('danger', data.message);
@@ -151,11 +148,8 @@ export class PortfolioCardComponent implements OnInit {
   }
 
   saveContent(content) {
-    console.log(content);
     content.saveLoading = true;
     this.portfolioApiService.updateContentInCard(content).subscribe(res => {
-      console.log(res);
-
       content.saveLoading = false;
     });
   }
@@ -182,7 +176,6 @@ export class PortfolioCardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       (data) => {
         if (data) {
-          console.log(data);
         }
       }
     );

@@ -46,7 +46,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" #translateInput aria-label="">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button" [class.btn-progress]="this.translateLoading" (click)="translate(translateInput.value, 'title')">
+                        <button class="btn btn-primary" type="button" [class.btn-progress]="this.titleLoading" (click)="translate(translateInput.value, 'title')">
                             {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
                         </button>
                     </div>
@@ -69,7 +69,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" #translateTextArea aria-label="">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button" [class.btn-progress]="this.translateLoading" (click)="translate(translateTextArea.value, 'title')">
+                        <button class="btn btn-primary" type="button" [class.btn-progress]="this.titleLoading" (click)="translate(translateTextArea.value, 'title')">
                             {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
                         </button>
                     </div>
@@ -92,7 +92,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" #translateChck aria-label="">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button" [class.btn-progress]="this.translateLoading" (click)="translate(translateChck.value, 'title')">
+                        <button class="btn btn-primary" type="button" [class.btn-progress]="this.titleLoading" (click)="translate(translateChck.value, 'title')">
                             {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
                         </button>
                     </div>

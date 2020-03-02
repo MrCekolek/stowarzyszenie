@@ -7,8 +7,8 @@
         <div class="input-group">
             <input type="text" class="form-control" name="optionName" #optionName>
             <button class="btn btn-primary" type="button" [class.btn-progress]="this.optionAddLoading" (click)="addOption(optionName.value)">
-                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.ADD' | translate }}
-                </button>
+                {{ 'STOWARZYSZENIE.CRUD_BUTTONS.ADD' | translate }}
+            </button>
         </div>
     </div>
 
@@ -38,7 +38,7 @@
                         PL
                     </label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" [id]="'input' + i" [value]="option.value_pl">
+                        <input type="text" class="form-control" [id]="'input' + i" [(ngModel)]="option.value_pl">
                     </div>
                 </div>
 
@@ -47,7 +47,7 @@
                         EN
                     </label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" [id]="'input' + i + 1" [value]="option.value_en">
+                        <input type="text" class="form-control" [id]="'input' + i + 1" [(ngModel)]="option.value_en">
                     </div>
                 </div>
 
@@ -56,7 +56,7 @@
                         RU
                     </label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" [id]="'input' + i + 2" [value]="option.value_ru">
+                        <input type="text" class="form-control" [id]="'input' + i + 2" [(ngModel)]="option.value_ru">
                     </div>
                 </div>
             </div>

@@ -62,7 +62,41 @@ export class NavbarComponent implements OnInit {
     this.createForm();
   }
 
-  ngOnInit() {    
+  ngOnInit() {
+    window.addEventListener('resize', function () {
+      if (window.innerWidth <= 1024) {
+        if (document.getElementById('main-navbar').classList.contains('main-navbar-toggled')) {
+          document.getElementById('main-navbar').classList.remove('main-navbar-toggled');
+          document.getElementById('main-navbar').classList.add('main-navbar-collapsed');
+        }
+
+        if (document.getElementById('main-content').classList.contains('main-content-toggled')) {
+          document.getElementById('main-content').classList.remove('main-content-toggled');
+          document.getElementById('main-content').classList.add('main-content-collapsed');
+        }
+
+        if (document.getElementById('main-footer').classList.contains('main-footer-toggled')) {
+          document.getElementById('main-footer').classList.remove('main-footer-toggled');
+          document.getElementById('main-footer').classList.add('main-footer-collapsed');
+        }
+      } else {
+        if (document.getElementById('main-navbar').classList.contains('main-navbar-collapsed')) {
+          document.getElementById('main-navbar').classList.remove('main-navbar-collapsed');
+          document.getElementById('main-navbar').classList.add('main-navbar-toggled');
+        }
+
+        if (document.getElementById('main-content').classList.contains('main-content-collapsed')) {
+          document.getElementById('main-content').classList.remove('main-content-collapsed');
+          document.getElementById('main-content').classList.add('main-content-toggled');
+        }
+
+        if (document.getElementById('main-footer').classList.contains('main-footer-collapsed')) {
+          document.getElementById('main-footer').classList.remove('main-footer-collapsed');
+          document.getElementById('main-footer').classList.add('main-footer-toggled');
+        }
+      }
+    });
+
     // $(document).ready(() => {
     //   $('li.dropdown').unbind('click');
 
@@ -124,5 +158,25 @@ export class NavbarComponent implements OnInit {
 
   emitPageLoadingValue(value) {
     this.isPageLoading.emit(value);
+  }
+
+  toggleSidebar() {
+    if (document.body.classList.contains('sidebar-gone')) {
+      document.body.classList.remove('sidebar-gone');
+      document.getElementById('main-navbar').classList.remove('main-navbar-collapsed');
+      document.getElementById('main-navbar').classList.add('main-navbar-toggled');
+      document.getElementById('main-content').classList.remove('main-content-collapsed');
+      document.getElementById('main-content').classList.add('main-content-toggled');
+      document.getElementById('main-footer').classList.remove('main-footer-collapsed');
+      document.getElementById('main-footer').classList.add('main-footer-toggled');
+    } else {
+      document.body.classList.add('sidebar-gone');
+      document.getElementById('main-navbar').classList.remove('main-navbar-toggled');
+      document.getElementById('main-navbar').classList.add('main-navbar-collapsed');
+      document.getElementById('main-content').classList.remove('main-content-toggled');
+      document.getElementById('main-content').classList.add('main-content-collapsed');
+      document.getElementById('main-footer').classList.remove('main-footer-toggled');
+      document.getElementById('main-footer').classList.add('main-footer-collapsed');
+    }
   }
 }

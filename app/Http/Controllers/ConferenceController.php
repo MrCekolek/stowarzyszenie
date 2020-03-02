@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 class ConferenceController extends Controller
 {
     public function __construct() {
-        $this->middleware('auth:api', ['except' => ['index']]);
+        $this->middleware('auth:api', ['except' => ['index', 'show']]);
     }
 
     /**
@@ -34,7 +34,41 @@ class ConferenceController extends Controller
      */
     public function index() {
         return LogService::read(true, [
-            'conferences' => Conference::all()->toArray()
+            'conferences' => Conference::with('conferencePages')->get()->toArray()
+        ]);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/conference/{conferenceId}",
+     *     tags={"conference"},
+     *     summary="Gets specfic conference",
+     *     operationId="ConferenceControllerShow",
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="query",
+     *         description="Conference id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function show(Request $request, Conference $conference) {
+        $input = $request->all();
+        $validation = new ConferenceRequest($input, 'show');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        return LogService::read(true, [
+            'conferences' => $conference->load('conferencePages')->toArray()
         ]);
     }
 
@@ -51,8 +85,10 @@ class ConferenceController extends Controller
      * )
      */
     public function getActive() {
+        $conference = Conference::with('conferencePages')->where('status', 'during')->first();
+
         return LogService::read(true, [
-            'conferences' => Conference::where('status', 'during')->first()->toArray()
+            'conference' => !empty($conference) ? $conference->toArray() : []
         ]);
     }
 
@@ -142,7 +178,7 @@ class ConferenceController extends Controller
         $conference = Conference::addConference($input, $success);
 
         return LogService::create($success, [
-            'conference' => $conference->toArray()
+            'conference' => $conference->load('conferencePages')->toArray()
         ]);
     }
 
@@ -241,7 +277,7 @@ class ConferenceController extends Controller
         $conference = Conference::updateConference($input, $success);
 
         return LogService::update($success, [
-            'conference' => $conference->load('conference')->toArray()
+            'conference' => $conference->load('conferencePages')->toArray()
         ]);
     }
 

@@ -12,6 +12,11 @@ class ConferenceRequest extends FormRequest {
 
                 break;
 
+            case 'show':
+                $this->checkShow();
+
+                break;
+
             case 'update':
                 $this->checkUpdate();
 
@@ -36,6 +41,12 @@ class ConferenceRequest extends FormRequest {
             'content_en' => 'required',
             'content_ru' => 'required'
         ]);
+    }
+
+    protected function checkShow() {
+        $this->rules = [
+            'id' => 'required|exists:conferences'
+        ];
     }
 
     protected function checkUpdate() {

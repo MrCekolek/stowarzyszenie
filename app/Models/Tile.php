@@ -41,7 +41,7 @@ class Tile extends BaseModel {
         return $tile;
     }
 
-    public static function updateTile($tile, $input, &$success) {
+    public static function updateTile(&$tile, $input, &$success) {
         $tile->name_pl = $input['name_pl'];
         $tile->name_en = $input['name_en'];
         $tile->name_ru = $input['name_ru'];

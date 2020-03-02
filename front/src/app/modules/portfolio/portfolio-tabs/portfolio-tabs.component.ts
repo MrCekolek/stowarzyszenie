@@ -62,7 +62,6 @@ export class PortfolioTabsComponent implements OnInit {
   ngOnInit() {
     if (this.router.url.includes('portfolio-settings')) {
       this.role = 'admin';
-      console.log(this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS'));
     } else if (this.router.url.includes('users/profile')) {
       this.role = 'user';
       this.owner = Number.parseInt(this.route.snapshot.paramMap.get('id')) === this.userProvider.getUser().id;
@@ -73,14 +72,19 @@ export class PortfolioTabsComponent implements OnInit {
     // this.selectActiveTab(this.tabs[0]);
   }
 
-  selectActiveTab(tab) {                                                           
-    // this.tabLoading = true;
+  selectActiveTab(tab) {
+    this.tabLoading = true;
     this.activeTab = tab;
-    console.log(this.portfolioService.getTabCards(tab.id).subscribe(cards => {
-      console.log(cards);
-      this.activeTabsCards = cards.tiles;
-      // this.tabLoading = false;
-    }));
+
+    this.portfolioService.getTabCards(tab.id).subscribe(
+        (cards) => {
+          this.activeTabsCards = cards.tiles;
+        },
+        () => {},
+        () => {
+          this.tabLoading = false;
+        }
+      );
   }
 
   addCard(name: string) {
@@ -104,7 +108,7 @@ export class PortfolioTabsComponent implements OnInit {
           response.tile
         ));
       } else {
-        console.log("nie udalo sie dodac");
+        // console.log("nie udalo sie dodac");
       }
       this.cardAddingLoad = false;
     });
@@ -125,7 +129,6 @@ export class PortfolioTabsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       (data) => {
         if (data) {
-          console.log(data);
           if (data.success) {
             if (type === 'new') {
               this.tabs.push(data.portfolioTab);
@@ -215,10 +218,10 @@ export class PortfolioTabsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       (data) => {
         if (data) {
-          console.log(data);
           if (data.success) {
             const index = this.activeTabsCards.indexOf(card);
-            this.activeTabsCards[index] = data.card;
+            this.activeTabsCards[index] = data.tile;
+
             this.alert = new AlertModel('success', data.message);
           } else {
             this.alert = new AlertModel('danger', data.message);
@@ -255,7 +258,6 @@ export class PortfolioTabsComponent implements OnInit {
     }
 
     this.portfolioApiService.hideOrShowTab(obj).subscribe(res => {
-      console.log(res);
       if (res.success) {
         if (this.role === 'admin') {
           tab.admin_visibility = !tab.admin_visibility;
@@ -263,7 +265,6 @@ export class PortfolioTabsComponent implements OnInit {
           tab.user_visibility = !tab.user_visibility;
         }
 
-        console.log(tab);
         this.alert = new AlertModel('success', res.message);
       } else {
         this.alert = new AlertModel('danger', res.message);
