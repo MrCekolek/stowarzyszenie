@@ -27,7 +27,7 @@ class ConferencePage extends BaseModel {
         return $conferencePage;
     }
 
-    private static function fillConferencePage($conferencePage, $input, &$success) {
+    private static function fillConferencePage(&$conferencePage, $input, &$success) {
         $conferencePage->name_pl = $input['name_pl'];
         $conferencePage->name_en = $input['name_en'];
         $conferencePage->name_ru = $input['name_ru'];

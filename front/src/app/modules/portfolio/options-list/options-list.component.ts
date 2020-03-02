@@ -50,7 +50,7 @@ export class OptionsListComponent implements OnInit {
       newOption.value_en = response.translation.name_en;
       newOption.value_ru = response.translation.name_ru;
 
-      this.options.push(newOption);
+      // this.options.push(newOption);
       this.newOptionEv.emit(newOption);
       this.optionAddLoading = false;
     });

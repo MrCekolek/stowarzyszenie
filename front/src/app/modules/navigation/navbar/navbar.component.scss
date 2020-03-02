@@ -166,3 +166,35 @@ a.dropdown-item img {
 .hide {
     display: none;
 }
+
+.main-navbar-toggled {
+    left: 250px;
+    right: 5px;
+}
+
+.main-navbar-collapsed {
+    left: 5px;
+    right: 0;
+}
+
+.main-content-toggled {
+    padding-left: 280px;
+    padding-right: 30px;
+    padding-top: 80px;
+    width: 100%;
+    position: relative;
+}
+
+.main-content-collapsed {
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 100%;
+}
+
+.main-footer-toggled {
+    padding-left: 280px;
+}
+
+.main-footer-collapsed {
+    padding-left: 30px;
+}

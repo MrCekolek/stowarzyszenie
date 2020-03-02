@@ -120,7 +120,7 @@ class TileController extends Controller {
         );
 
         return LogService::create($success, [
-            'tile' => $tile->toArray()
+            'tile' => $tile->load('tileContents.contents')->toArray()
         ]);
     }
 
@@ -242,7 +242,7 @@ class TileController extends Controller {
         }
 
         return LogService::update($success, [
-            'tile' => Tile::where('id', $input['id'])->first()->toArray()
+            'tile' => Tile::with('tileContents.contents')->where('id', $input['id'])->first()->toArray()
         ]);
     }
 
@@ -300,7 +300,7 @@ class TileController extends Controller {
         self::reindexPositions(Tile::class);
 
         return LogService::delete($success > 0, [
-            'tiles' => Tile::where('portfolio_tab_id', $input['portfolio_tab_id'])->get()->toArray()
+            'tiles' => Tile::with('tileContents.contents')->where('portfolio_tab_id', $input['portfolio_tab_id'])->get()->toArray()
         ]);
     }
 

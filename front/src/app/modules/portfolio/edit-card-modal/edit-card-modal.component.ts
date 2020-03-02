@@ -22,7 +22,8 @@ export class EditCardModalComponent implements OnInit {
     admin_visibility: 1,
     user_visibility: 1,
     portfolio_tab_id: 0,
-    portfolio_tab_shared_id: 0
+    portfolio_tab_shared_id: 0,
+    tile_contents: {}
   };
   
   private addLoading = false;

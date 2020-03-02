@@ -29,7 +29,32 @@ class HomeNavigationController extends Controller {
      */
     public function index() {
         return LogService::read(true, [
-            'home_navigations' => HomeNavigation::all()->toArray()
+            'homeNavigations' => HomeNavigation::with('user')->get()->toArray()
+        ]);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/home_navigation/{homeNavigation}",
+     *     tags={"home_navigation"},
+     *     summary="Gets specific home navigation links with content",
+     *     operationId="HomeNavigationControllerShow",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function show(Request $request, HomeNavigation $homeNavigation) {
+        $input = $request->all();
+        $validation = new HomeNavigationRequest($input, 'show');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        return LogService::read(true, [
+            'homeNavigation' => $homeNavigation->load('user')->toArray()
         ]);
     }
 
@@ -137,7 +162,7 @@ class HomeNavigationController extends Controller {
         $homeNavigation = HomeNavigation::addHomeNavigation($input, $success);
 
         return LogService::create($success, [
-            'home_navigation' => $homeNavigation->load('user')->toArray()
+            'homeNavigation' => $homeNavigation->load('user')->toArray()
         ]);
     }
 
@@ -236,7 +261,7 @@ class HomeNavigationController extends Controller {
         $homeNavigation = HomeNavigation::updateHomeNavigation($input, $success);
 
         return LogService::update($success, [
-            'home_navigation' => $homeNavigation->load('user')->toArray()
+            'homeNavigation' => $homeNavigation->load('user')->toArray()
         ]);
     }
 

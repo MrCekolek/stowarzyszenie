@@ -12,6 +12,11 @@ class HomeNavigationRequest extends FormRequest {
 
                 break;
 
+            case 'show':
+                $this->checkShow();
+
+                break;
+
             case 'update':
                 $this->checkUpdate();
 
@@ -37,6 +42,12 @@ class HomeNavigationRequest extends FormRequest {
             'content_en' => 'required',
             'content_ru' => 'required',
             'user_id' => 'required|exists:users'
+        ];
+    }
+
+    public function checkShow() {
+        $this->rules = [
+            'id' => 'required|exists:home_navigations'
         ];
     }
 
