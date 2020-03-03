@@ -11,7 +11,8 @@ class HomeNavigationSeeder extends Seeder {
      */
     public function run() {
         factory(HomeNavigation::class)->create([
-            'status' => HomeNavigation::statuses()['published'],
+            'status' => 'not editable',
+            'translation_key' => HomeNavigation::statuses()['not editable'],
             'name_pl' => 'Logowanie',
             'name_en' => 'Sign In',
             'name_ru' => 'Войти',
@@ -23,7 +24,8 @@ class HomeNavigationSeeder extends Seeder {
         ]);
 
         factory(HomeNavigation::class)->create([
-            'status' => HomeNavigation::statuses()['published'],
+            'status' => 'not editable',
+            'translation_key' => HomeNavigation::statuses()['not editable'],
             'name_pl' => 'Zarejestruj się',
             'name_en' => 'Register',
             'name_ru' => 'зарегистрироваться',
@@ -35,7 +37,8 @@ class HomeNavigationSeeder extends Seeder {
         ]);
 
         factory(HomeNavigation::class)->create([
-            'status' => HomeNavigation::statuses()['published'],
+            'status' => 'not editable',
+            'translation_key' => HomeNavigation::statuses()['not editable'],
             'name_pl' => 'Konferencja',
             'name_en' => 'Conference',
             'name_ru' => 'конференция',

@@ -16,6 +16,7 @@ class CreateHomeNavigationsTable extends Migration
         Schema::create('home_navigations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('status');
+            $table->string('translation_key');
             $table->string('name_pl')->nullable();
             $table->string('name_en')->nullable();
             $table->string('name_ru')->nullable();
