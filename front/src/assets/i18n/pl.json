@@ -38,6 +38,10 @@
                     "TRANSLATION": {
                         "TITLE": "Usuwanie tłumaczenia",
                         "TEXT": "Czy na pewno chcesz usunąć tłumaczenie"
+                    },
+                    "HOMEPAGE": {
+                        "TITLE": "Usuwanie strony",
+                        "TEXT": "Czy na pewno chcesz usunąć stronę"
                     }
                 }
             },
@@ -54,7 +58,10 @@
             "TOOLTIPS": {
                 "DISABLED_TAB": "Ta karta jest wyłączona i nie jest widoczna dla użytkowników. Włącz jej widoczność, aby edytować"
             },
-            "EXIT_PREVIEW_MODE": "Wyjdź z podglądu"
+            "EXIT_PREVIEW_MODE": "Wyjdź z podglądu",
+            "POLISH_LANG": "Polski",
+            "ENGLISH_LANG": "Angielski",
+            "RUSSIAN_LANG": "Rosyjski"
         },
         "LABELS_TABLES": {
             "AVATAR": "Avatar",
@@ -103,6 +110,10 @@
             },
             "EDIT_TRANSLATION": {
                 "INPUT_FIELD": "Edytuj nazwę tłumaczenia i przetłumacz"
+            },
+            "HOMEPAGES": {
+                "TITLE_NEW": "Dodanie nowej strony",
+                "INPUT_NEW_LABEL": "Nowa nazwa strony"
             }
         },
         "MODULES": {
@@ -238,6 +249,11 @@
                     "MANAGEMENT": {
                         "MANAGEMENT_MENU": "Zarządzanie",
                         "TRANSLATIONS": "Tłumaczenia"
+                    },
+                    "PAGES_ADMIN": {
+                        "TITLE_MENU": "Zarządzanie stronami",
+                        "HOMEPAGES": "Nawigacja główna",
+                        "CONFERENCE": "Strona konferencji"
                     }
                 },
                 "WEBPAGE_TITLE_MEMBERS": "Ciob members"
@@ -348,19 +364,29 @@
                 "LIST_TITLE": "Lista tłumaczeń",
                 "PAGE_DESC1": "Zarządzaj tłumaczeniami w systemie."
             },
-            "CONFERENCE": {
-                "STATUS": {
-                    "WAITING": "oczekująca",
-                    "DURING": "w toku",
-                    "FINISHED": "zakończona"
-                }
-            },
-            "HOME_NAVIGATION": {
-                "STATUS": {
-                    "PUBLISHED": "opublikowana",
-                    "IN_PROGRESS": "w toku",
-                    "NOT_EDITABLE": "nieedytowalna"
-                }
+            "PAGES": {
+                "PAGES_ADMIN_TITLE": "Nawigacja główna",
+                "PAGES_SUBTITLE": "Zarządzanie nawigacją",
+                "PAGES_DESC": "Tutaj możesz zarządzać nawigacją strony głównej witryny. Dodaj strony, edytuj ich zawartość, usuń je.",
+                "ADD_NEW_PAGE": "Dodaj nową stronę",
+                "HOMELINKS_TABLE_NAME": "Nazwa strony",
+                "HOMELINKS_TABLE_STATUS": "Status strony",
+                "HOMELINKS_TABLE_ACTIONS": "Działania",
+                "TABLE_ACTIONS_EDIT": "Edytuj zawartość strony",
+                "EMPTY_TABLE_DESC": "Brak stron w systemie.",
+                "EMPTY_TABLE_TITLE": "Brak stron",
+                "CONFERENCE_PAGES_ADMIN_TITLE": "Strona konferencji",
+                "PAGE_EDIT_TITLE": "Edytuj zawartość strony",
+                "PAGE_EDIT_SUBTITLE": "Edytor treści",
+                "PAGE_EDIT_DESC": "Tutaj możesz dodawać i edytować treść swojej strony.",
+                "PAGE_EDIT_CHOOSE_LANGUAGE": "Wybierz język treści",
+                "PAGE_EDIT_CHOOSE_LANGUAGE_DESC": "Kliknij języki, w których chcesz dodać i edytować treść. Może zawierać treści w różnych językach (także wszystkie).",
+                "PAGE_EDIT_CONTENT": "Zawartość",
+                "PAGE_EDIT_PUBLISH": "Publikuj",
+                "PAGE_EDIT_SAVE_DRAFT": "Zapisz jako szkic",
+                "PAGE_EDIT_INPUT_TITLE": "Nazwa strony",
+                "CONFERENCE_PAGES_ADMIN_SUBTITLE": "Edycja stron konferencji",
+                "CONFERENCE_PAGES_ADMIN_DESC": "Tutaj możesz edytować nawigację tylko na stronie konferencji. Możesz zarządzać najważniejszymi aspektami konferencji, takimi jak ścieżki. daty itp."
             }
         },
         "PAGINATION": {
@@ -389,9 +415,6 @@
                             "READ": "Pomyślny odczyt danych",
                             "UPDATE": "Pomyślnie zmodyfikowano dane"
                         }
-                    },
-                    "ERROR": {
-                        "TRANSLATION_KEY_EXISTS": "Podany klucz tłumaczenia już istnieje"
                     }
                 },
                 "CRUD": {
@@ -450,6 +473,11 @@
             "NO_DATA": "Brak danych",
             "PER_PAGE": "Na stronę:",
             "OF": "z"
+        },
+        "PAGE_STATUS": {
+            "PUBLISHED": "Opublikowana",
+            "IN_PROGRESS": "W edycji",
+            "NOT_EDITABLE": "Nie można edytować"
         }
     }
 }
