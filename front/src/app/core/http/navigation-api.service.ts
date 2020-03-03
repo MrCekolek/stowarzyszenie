@@ -13,7 +13,7 @@ export class NavigationApiService {
 
   // pobiera linki nawigacji ze strony głównej
   getHomeLinks() {
-    return this.api.post('home_navigation/get');
+    return this.api.post('home_navigation');
   }
 
   addHomeLink(newLink: HomeNavigation) {
