@@ -6,6 +6,7 @@ class HomeNavigation extends BaseModel
 {
     protected $fillable = [
         'status',
+        'translation_key',
         'name_pl',
         'name_en',
         'name_ru',
@@ -40,6 +41,7 @@ class HomeNavigation extends BaseModel
 
     public static function fillHomeNavigation($homeNavigation, $input, &$success) {
         $homeNavigation->status = $input['status'];
+        $homeNavigation->translation_key = self::statuses()[$input['status']];
         $homeNavigation->name_pl = $input['name_pl'];
         $homeNavigation->name_en = $input['name_en'];
         $homeNavigation->name_ru = $input['name_ru'];
