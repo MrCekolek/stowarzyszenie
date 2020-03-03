@@ -1,16 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { HomepagesModalComponent } from '../homepages-modal/homepages-modal.component';
+import { ConferencePagesComponent } from '../conference-pages/conference-pages.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
-import { HomeNavigation } from 'src/app/shared/models/home-navigation';
 
 @Component({
-  selector: 'app-home-links-list',
-  templateUrl: './home-links-list.component.html',
-  styleUrls: ['./home-links-list.component.scss']
+  selector: 'app-conference-pages-list',
+  templateUrl: './conference-pages-list.component.html',
+  styleUrls: ['./conference-pages-list.component.scss']
 })
-export class HomeLinksListComponent implements OnInit {
+export class ConferencePagesListComponent implements OnInit {
 
   @Input() links = [];
   lang;
@@ -27,11 +26,11 @@ export class HomeLinksListComponent implements OnInit {
     });
   }
 
-  addHomepage() {
+  addPage() {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
-    const dialogRef = this.dialog.open(HomepagesModalComponent, dialogConfig);
+    const dialogRef = this.dialog.open(ConferencePagesComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
       (data) => {
@@ -50,10 +49,10 @@ export class HomeLinksListComponent implements OnInit {
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
-      title: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.INTERESTS.TITLE',
-      text: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.INTERESTS.TEXT',
-      element: page,
-      apiToDelete: 'home_navigation/destroy'
+      // title: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.INTERESTS.TITLE',
+      // text: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.INTERESTS.TEXT',
+      // element: page,
+      // apiToDelete: 'home_navigation/destroy'
     };
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
@@ -70,4 +69,5 @@ export class HomeLinksListComponent implements OnInit {
       }
     );
   }
+
 }

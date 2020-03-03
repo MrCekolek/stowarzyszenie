@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeNavManageComponent } from './home-nav-manage/home-nav-manage.component';
 import { ConferencePagesComponent } from './conference-pages/conference-pages.component';
+import { PageEditComponent } from './page-edit/page-edit.component';
 
 const routes: Routes = [
     {
@@ -23,7 +24,7 @@ const routes: Routes = [
             },
             {
                 path: 'page-edit/:id',
-                component: HomeNavManageComponent
+                component: PageEditComponent
             }
         ]
     }
