@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 import { ApiService } from 'src/app/core/http/api.service';
+import { HomeNavigation } from 'src/app/shared/models/home-navigation';
+import { NavigationApiService } from 'src/app/core/http/navigation-api.service';
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-homepages-modal',
@@ -19,10 +22,24 @@ export class HomepagesModalComponent implements OnInit {
 
   private lang;
 
+  private page: HomeNavigation = {
+    name_pl: '',
+    name_en: '',
+    name_ru: '',
+    link: '',
+    content_pl: '',
+    content_en: '',
+    content_ru: '',
+    status: 'STOWARZYSZENIE.PAGE_STATUS.IN_PROGRESS',
+    user_id: this.userService.getUser().id
+  };
+
   constructor(
     private dialogRef: MatDialogRef<HomepagesModalComponent>,
     private languageService: LanguageService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private navigationApi: NavigationApiService,
+    private userService: UserProviderService
   ) { }
 
   ngOnInit() {
@@ -37,7 +54,7 @@ export class HomepagesModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  getInterestTranslations(input) {
+  getTranslations(input) {
     const obj = {
       name: input
     };
@@ -49,7 +66,20 @@ export class HomepagesModalComponent implements OnInit {
       this.translations[1] = response.translation.name_en;
       this.translations[2] = response.translation.name_ru;
 
+      this.page.name_pl = response.translation.name_pl;
+      this.page.name_en = response.translation.name_en;
+      this.page.name_ru = response.translation.name_ru;
+
       this.addLoading = false;
+    });
+  }
+
+  addPage() {
+    this.page.link = this.page.name_en;
+    console.log(this.page);
+
+    this.navigationApi.addHomeLink(this.page).subscribe(res => {
+      this.dialogRef.close(res);
     });
   }
 }

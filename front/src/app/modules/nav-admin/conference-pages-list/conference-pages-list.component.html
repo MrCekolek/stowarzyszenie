@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-center mb-4">
+    <button class="btn btn-sm btn-primary">
+      <i class="fas fa-plus mr-2"></i> {{ 'STOWARZYSZENIE.MODULES.PAGES.ADD_NEW_PAGE' | translate }}
+    </button>
+  </div>
+  
+  <!-- *ngIf="this.loading" -->
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border text-primary">
+    </div>
+  </div>
+  
+  <div #content class="table-responsive">
+      <!-- *ngIf="links.length > 0 && !loading; else noLinks" -->
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <th>
+            {{ 'STOWARZYSZENIE.MODULES.PAGES.HOMELINKS_TABLE_NAME' | translate }}
+          </th>
+          <th>
+            {{ 'STOWARZYSZENIE.MODULES.PAGES.HOMELINKS_TABLE_STATUS' | translate }}
+          </th>
+          <th>
+            {{ 'STOWARZYSZENIE.MODULES.PAGES.HOMELINKS_TABLE_ACTIONS' | translate }}
+          </th>
+        </tr>
+        <!-- <tr *ngFor="let link of links">
+          <td>
+            {{ link['name_' + lang] }}
+          </td>
+          status -->
+          <!-- <td>
+            <div class="badge" [ngClass]="{'badge-secondary': link.status === 'STOWARZYSZENIE.PAGE_STATUS.NOT_EDITABLE', 'badge-gray': link.status === 'STOWARZYSZENIE.PAGE_STATUS.IN_PROGRESS',  'badge-success': link.status === 'STOWARZYSZENIE.PAGE_STATUS.PUBLISHED'}">
+              {{ link.status | translate }}
+            </div>
+          </td>
+          <td> -->
+              <!-- <a [routerLink]="['../page-edit', link.id]" class="btn btn-link text-success">
+                <i class="fas fa-pencil-alt"></i>
+              </a>
+              <a class="btn btn-link text-danger" (click)="deletePage(link)">
+                <i class="fas fa-times"></i>
+              </a>
+              <a class="btn btn-link text-secondary">
+                <i class="fas fa-eye"></i>
+              </a>
+          </td>
+        </tr> --> 
+      </tbody>
+    </table>
+  </div>
+  
+  <ng-template #noLinks>
+    <div class="empty-state" data-height="200">
+      <div class="empty-state-icon">
+        <i class="fas fa-question"></i>
+      </div>
+      <h2>
+        {{ 'STOWARZYSZENIE.MODULES.PAGES.EMPTY_TABLE_TITLE' | translate }}
+      </h2>
+      <p class="lead">
+        {{ 'STOWARZYSZENIE.MODULES.PAGES.EMPTY_TABLE_DESC' | translate }}
+      </p>
+    </div>
+  </ng-template>
+  

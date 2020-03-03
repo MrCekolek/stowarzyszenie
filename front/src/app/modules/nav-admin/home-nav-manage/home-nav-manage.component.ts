@@ -9,14 +9,17 @@ import { NavigationApiService } from 'src/app/core/http/navigation-api.service';
 export class HomeNavManageComponent implements OnInit {
 
   homelinks = [];
+  loading: boolean;
 
   constructor(
     private naviApiService: NavigationApiService
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.naviApiService.getHomeLinks().subscribe(res => {
       this.homelinks = res.home_navigations;
+      this.loading = false;
     });
   }
 }

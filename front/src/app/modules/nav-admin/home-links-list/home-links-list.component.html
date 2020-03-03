@@ -4,8 +4,13 @@
   </button>
 </div>
 
-<div class="table-responsive" *ngIf="links.length > 0; else noLinks">
-  <table class="table table-striped">
+<div class="d-flex justify-content-center" *ngIf="this.loading">
+  <div class="spinner-border text-primary">
+  </div>
+</div>
+
+<div #content class="table-responsive">
+  <table class="table table-striped" *ngIf="links.length > 0 && !loading; else noLinks">
     <tbody>
       <tr>
         <th>
@@ -19,7 +24,26 @@
         </th>
       </tr>
       <tr *ngFor="let link of links">
-        <app-home-link-tile [link]="link" [lang]="lang"></app-home-link-tile>
+        <td>
+          {{ link['name_' + lang] }}
+        </td>
+        <!-- status -->
+        <td>
+          <div class="badge" [ngClass]="{'badge-secondary': link.status === 'STOWARZYSZENIE.PAGE_STATUS.NOT_EDITABLE', 'badge-gray': link.status === 'STOWARZYSZENIE.PAGE_STATUS.IN_PROGRESS',  'badge-success': link.status === 'STOWARZYSZENIE.PAGE_STATUS.PUBLISHED'}">
+            {{ link.status | translate }}
+          </div>
+        </td>
+        <td>
+            <a [routerLink]="['../page-edit', link.id]" class="btn btn-link text-success">
+              <i class="fas fa-pencil-alt"></i>
+            </a>
+            <a class="btn btn-link text-danger" (click)="deletePage(link)">
+              <i class="fas fa-times"></i>
+            </a>
+            <a class="btn btn-link text-secondary">
+              <i class="fas fa-eye"></i>
+            </a>
+        </td>
       </tr>
     </tbody>
   </table>
