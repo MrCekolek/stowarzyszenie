@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationApiService } from 'src/app/core/http/navigation-api.service';
 
 @Component({
   selector: 'app-conference-pages',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConferencePagesComponent implements OnInit {
 
-  constructor() { }
+  conflinks = [];
+  loading: boolean;
+
+  constructor(
+    private naviApiService: NavigationApiService
+  ) { }
 
   ngOnInit() {
+    // TODO: pobranie menu konferencji
+    // this.loading = true;
+    // this.naviApiService.getHomeLinks().subscribe(res => {
+    //   this.conflinks = res.home_navigations;
+    //   this.loading = false;
+    // });
   }
-
 }

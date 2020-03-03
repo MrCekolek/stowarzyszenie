@@ -5,16 +5,21 @@ import { HomeNavManageComponent } from './home-nav-manage/home-nav-manage.compon
 import { PageEditComponent } from './page-edit/page-edit.component';
 import { NavAdminRouting } from './nav-admin-routing.module';
 import { HomeLinksListComponent } from './home-links-list/home-links-list.component';
-import { HomeLinkTileComponent } from './home-link-tile/home-link-tile.component';
 import { ConferencePagesComponent } from './conference-pages/conference-pages.component';
 import { HomepagesModalComponent } from './homepages-modal/homepages-modal.component';
+import { ConferencePagesListComponent } from './conference-pages-list/conference-pages-list.component';
+import { FormsModule } from '@angular/forms';
+import { ConferencePagesModalComponent } from './conference-pages-modal/conference-pages-modal.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
-  declarations: [HomeNavManageComponent, PageEditComponent, HomeLinksListComponent, HomeLinkTileComponent, ConferencePagesComponent, HomepagesModalComponent],
+  declarations: [HomeNavManageComponent, PageEditComponent, HomeLinksListComponent, ConferencePagesComponent, HomepagesModalComponent, ConferencePagesListComponent, ConferencePagesModalComponent],
   imports: [
     CommonModule,
     SharedModule,
-    NavAdminRouting
+    NavAdminRouting,
+    FormsModule,
+    AngularEditorModule
   ],
   entryComponents: [HomepagesModalComponent]
 })
