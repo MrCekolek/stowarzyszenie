@@ -113,8 +113,8 @@ Route::group([
     });
 
     Route::prefix('home_navigation')->group(function () {
+        Route::post('', 'HomeNavigationController@index');
         Route::post('{homeNavigation}', 'HomeNavigationController@show');
-        Route::post('get', 'HomeNavigationController@index');
         Route::post('create', 'HomeNavigationController@create');
         Route::post('update', 'HomeNavigationController@update');
         Route::post('destroy', 'HomeNavigationController@destroy');
