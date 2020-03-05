@@ -242,12 +242,37 @@
                 }
             }
         },
+        "/conference/{conferenceId}": {
+            "post": {
+                "tags": [
+                    "conference"
+                ],
+                "summary": "Gets specfic conference",
+                "operationId": "ConferenceControllerShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/conference/active/get": {
             "post": {
                 "tags": [
                     "conference"
                 ],
-                "summary": "Gets active conferences",
+                "summary": "Gets active conference",
                 "operationId": "ConferenceControllerGetActive",
                 "responses": {
                     "default": {
@@ -455,6 +480,42 @@
                 ],
                 "summary": "Gets all conference pages",
                 "operationId": "ConferencePageControllerIndex",
+                "parameters": [
+                    {
+                        "name": "conference_id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/conference/page/{pageId}": {
+            "post": {
+                "tags": [
+                    "conference_page"
+                ],
+                "summary": "Gets specific conference pages",
+                "operationId": "ConferencePageControllerShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Conference page id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "default": {
                         "description": "successful operation"
@@ -1161,6 +1222,20 @@
                 ],
                 "summary": "Gets all home navigation links with content",
                 "operationId": "HomeNavigationControllerIndex",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/home_navigation/{homeNavigation}": {
+            "post": {
+                "tags": [
+                    "home_navigation"
+                ],
+                "summary": "Gets specific home navigation links with content",
+                "operationId": "HomeNavigationControllerShow",
                 "responses": {
                     "default": {
                         "description": "successful operation"
@@ -1996,6 +2071,31 @@
                 }
             }
         },
+        "/{role}/show": {
+            "post": {
+                "tags": [
+                    "role"
+                ],
+                "summary": "Shows specific role",
+                "operationId": "RoleControllerShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Role's id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/role/create": {
             "post": {
                 "tags": [
@@ -2103,6 +2203,149 @@
                         "name": "id",
                         "in": "query",
                         "description": "Role's id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/role/{roleId}/users": {
+            "post": {
+                "tags": [
+                    "role_user"
+                ],
+                "summary": "Gets all users that belongs to specific role",
+                "operationId": "RoleUserControllerGetUsers",
+                "parameters": [
+                    {
+                        "name": "role_id",
+                        "in": "query",
+                        "description": "Role id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/role/{roleId}/users/not": {
+            "post": {
+                "tags": [
+                    "role_user"
+                ],
+                "summary": "Gets all users that dont belongs to specific role",
+                "operationId": "RoleUserControllerGetUsers",
+                "parameters": [
+                    {
+                        "name": "role_id",
+                        "in": "query",
+                        "description": "Role id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/user/{userId}/roles": {
+            "post": {
+                "tags": [
+                    "role_user"
+                ],
+                "summary": "Gets all roles that belongs to specific user",
+                "operationId": "RoleUserControllerGetRoles",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/role/{role}/user/{user}/create": {
+            "post": {
+                "tags": [
+                    "role_user"
+                ],
+                "summary": "Assigns user to role",
+                "operationId": "RoleUserControllerCreate",
+                "parameters": [
+                    {
+                        "name": "role_id",
+                        "in": "query",
+                        "description": "Role's id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User's id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/role/{role}/user/{user}/delete": {
+            "post": {
+                "tags": [
+                    "role_user"
+                ],
+                "summary": "Removes user from role",
+                "operationId": "RoleUserControllerDestroy",
+                "parameters": [
+                    {
+                        "name": "role_id",
+                        "in": "query",
+                        "description": "Role's id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User's id",
                         "required": true,
                         "schema": {
                             "type": "string"
