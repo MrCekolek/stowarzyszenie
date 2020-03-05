@@ -125,6 +125,8 @@ export class UsersListComponent implements OnInit, AfterViewInit {
         this.userRoleApiService.getUsers(this.roleId).subscribe(
             (data) => {
               this.listData = new MatTableDataSource(data['users']);
+              this.listData.sort = this.sort;
+              this.listData.paginator = this.paginator;
             }
         );
     });
