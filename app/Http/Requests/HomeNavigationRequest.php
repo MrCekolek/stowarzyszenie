@@ -41,7 +41,7 @@ class HomeNavigationRequest extends FormRequest {
             'content_pl' => 'required',
             'content_en' => 'required',
             'content_ru' => 'required',
-            'user_id' => 'required|exists:users'
+            'user_id' => 'required|exists:users,id'
         ];
     }
 

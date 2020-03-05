@@ -40,6 +40,41 @@ class RoleController extends Controller {
 
     /**
      * @OA\Post(
+     *     path="/{role}/show",
+     *     tags={"role"},
+     *     summary="Shows specific role",
+     *     operationId="RoleControllerShow",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="query",
+     *         description="Role's id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function show(Request $request, Role $role) {
+        $input = $request->all();
+
+        $validation = new RoleRequest($input, 'show');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        return LogService::read(true, [
+            'role' => $role->toArray()
+        ]);
+    }
+
+    /**
+     * @OA\Post(
      *     path="/role/create",
      *     tags={"role"},
      *     summary="Creates role",

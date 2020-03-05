@@ -52,6 +52,13 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'role',
+    loadChildren: './modules/role-user/role-user.module#RoleUserModule',
+    canActivateChild: [
+      LoggedGuard
+    ]
+  },
+  {
     path: '**',
     redirectTo: ''
   }
