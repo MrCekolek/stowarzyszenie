@@ -12,6 +12,11 @@ class RoleRequest extends FormRequest {
 
                 break;
 
+            case 'show':
+                $this->checkShow();
+
+                break;
+
             case 'update':
                 $this->checkUpdate();
 
@@ -24,6 +29,12 @@ class RoleRequest extends FormRequest {
         }
 
         parent::__construct($input);
+    }
+
+    protected function checkShow() {
+        $this->rules = [
+            'id' => 'required|exists:roles'
+        ];
     }
 
     protected function checkCreate() {

@@ -42,6 +42,10 @@
                     "HOMEPAGE": {
                         "TITLE": "Deleting page",
                         "TEXT": "Are you sure u want to delete page"
+                    },
+                    "ROLE_USER": {
+                        "TITLE": "Deleting role user",
+                        "TEXT": "Are you sure you want to delete user role"
                     }
                 }
             },
@@ -114,6 +118,10 @@
             "HOMEPAGES": {
                 "TITLE_NEW": "Adding new page",
                 "INPUT_NEW_LABEL": "New page name"
+            },
+            "NEW_ROLE_USER": {
+                "TRIGGER_BUTTON": "Add user",
+                "TITLE_NEW_ROLE": "Assign a role to the user"
             }
         },
         "MODULES": {
@@ -388,6 +396,12 @@
                 "PAGE_EDIT_INPUT_TITLE": "Page name",
                 "CONFERENCE_PAGES_ADMIN_SUBTITLE": "Editing conference pages",
                 "CONFERENCE_PAGES_ADMIN_DESC": "Here you can edit navigation only on conference page. You can manage the most important aspects of conference, like tracks. dates etc."
+            },
+            "ROLE_USER": {
+                "LABEL": {
+                    "SHOW": "Show users belonging to a given role"
+                },
+                "USERS_LIST_TITLE": "The list of users assigned to the role"
             }
         },
         "PAGINATION": {

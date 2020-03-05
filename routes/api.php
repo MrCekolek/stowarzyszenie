@@ -51,6 +51,7 @@ Route::group([
     Route::prefix('user')->group(function () {
         Route::post('get', 'UserController@index');
         Route::post('{user}/get', 'UserController@show');
+        Route::post('{user}/roles', 'RoleUserController@getRoles');
     });
 
     Route::prefix('role')->group(function () {
@@ -60,6 +61,11 @@ Route::group([
         Route::post('{role}/update', 'RoleController@update');
         Route::post('{role}/permission/get', 'PermissionParentController@rolePermissions');
         Route::post('{role}/permission/update', 'PermissionParentController@updateRolePermissions');
+        Route::post('{role}/users', 'RoleUserController@getUsers');
+        Route::post('{role}/users/not', 'RoleUserController@getUsersNot');
+        Route::post('{role}/show', 'RoleController@show');
+        Route::post('{role}/user/{user}/destroy', 'RoleUserController@destroy');
+        Route::post('{role}/user/{user}/create', 'RoleUserController@create');
     });
 
     Route::prefix('portfolio')->group(function () {
@@ -114,19 +120,19 @@ Route::group([
 
     Route::prefix('home_navigation')->group(function () {
         Route::post('', 'HomeNavigationController@index');
-        Route::post('{homeNavigation}', 'HomeNavigationController@show');
         Route::post('create', 'HomeNavigationController@create');
         Route::post('update', 'HomeNavigationController@update');
         Route::post('destroy', 'HomeNavigationController@destroy');
+        Route::post('{homeNavigation}', 'HomeNavigationController@show');
     });
 
     Route::prefix('conference')->group(function () {
         Route::post('', 'ConferenceController@index');
-        Route::post('{conferenceId}', 'ConferenceController@show');
         Route::post('active/get', 'ConferenceController@getActive');
         Route::post('create', 'ConferenceController@create');
         Route::post('update', 'ConferenceController@update');
         Route::post('destroy', 'ConferenceController@destroy');
+        Route::post('{conferenceId}', 'ConferenceController@show');
 
         Route::prefix('user')->group(function () {
             Route::post('create', 'ConferenceUserController@create');
@@ -136,10 +142,10 @@ Route::group([
 
         Route::prefix('page')->group(function () {
             Route::post('', 'ConferencePageController@index');
-            Route::post('{pageId}', 'ConferencePageController@show');
             Route::post('create', 'ConferencePageController@create');
             Route::post('update', 'ConferencePageController@update');
             Route::post('destroy', 'ConferencePageController@destroy');
+            Route::post('{pageId}', 'ConferencePageController@show');
         });
     });
 });

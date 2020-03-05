@@ -11,6 +11,7 @@ import { PageLoaderComponent } from './shared/components/page-loader/page-loader
 import { UserProviderService } from "./core/services/user-provider.service";
 import { NgxJsonViewerModule } from "ngx-json-viewer";
 import { ManagementsModule } from "./modules/managements/managements.module";
+import { RoleUserModule } from "./modules/role-user/role-user.module";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ManagementsModule } from "./modules/managements/managements.module";
     AppRoutingModule,
     DashboardModule,
     ManagementsModule,
+    RoleUserModule,
     NgxJsonViewerModule
   ],
   providers: [Document, UserProviderService, {

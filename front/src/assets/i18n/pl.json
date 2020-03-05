@@ -42,6 +42,10 @@
                     "HOMEPAGE": {
                         "TITLE": "Usuwanie strony",
                         "TEXT": "Czy na pewno chcesz usunąć stronę"
+                    },
+                    "ROLE_USER": {
+                        "TITLE": "Usuwanie użytkownikowi roli",
+                        "TEXT": "Czy na pewno chcesz usunąć użytkownikowi rolę"
                     }
                 }
             },
@@ -114,6 +118,10 @@
             "HOMEPAGES": {
                 "TITLE_NEW": "Dodanie nowej strony",
                 "INPUT_NEW_LABEL": "Nowa nazwa strony"
+            },
+            "NEW_ROLE_USER": {
+                "TRIGGER_BUTTON": "Dodaj użytkownika",
+                "TITLE_NEW_ROLE": "Przypisz użytkownikowi rolę"
             }
         },
         "MODULES": {
@@ -388,6 +396,12 @@
                 "PAGE_EDIT_INPUT_TITLE": "Nazwa strony",
                 "CONFERENCE_PAGES_ADMIN_SUBTITLE": "Edycja stron konferencji",
                 "CONFERENCE_PAGES_ADMIN_DESC": "Tutaj możesz edytować nawigację tylko na stronie konferencji. Możesz zarządzać najważniejszymi aspektami konferencji, takimi jak ścieżki. daty itp."
+            },
+            "ROLE_USER": {
+                "LABEL": {
+                    "SHOW": "Pokaż użytkowników należących do danej roli"
+                },
+                "USERS_LIST_TITLE": "Lista użytkowników przypisanych do roli"
             }
         },
         "PAGINATION": {
