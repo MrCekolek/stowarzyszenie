@@ -395,7 +395,8 @@
                 "PAGE_EDIT_SAVE_DRAFT": "Zapisz jako szkic",
                 "PAGE_EDIT_INPUT_TITLE": "Nazwa strony",
                 "CONFERENCE_PAGES_ADMIN_SUBTITLE": "Edycja stron konferencji",
-                "CONFERENCE_PAGES_ADMIN_DESC": "Tutaj możesz edytować nawigację tylko na stronie konferencji. Możesz zarządzać najważniejszymi aspektami konferencji, takimi jak ścieżki. daty itp."
+                "CONFERENCE_PAGES_ADMIN_DESC": "Tutaj możesz edytować nawigację tylko na stronie konferencji. Możesz zarządzać najważniejszymi aspektami konferencji, takimi jak ścieżki. daty itp.",
+                "PAGE_EDIT_NO_ACTIONS": "Brak akcji dla stron, których nie można edytować"
             },
             "ROLE_USER": {
                 "LABEL": {

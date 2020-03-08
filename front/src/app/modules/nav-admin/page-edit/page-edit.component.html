@@ -14,7 +14,7 @@
 
     <div class="col-sm-12">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body" *ngIf="this.page">
                 <h3>
                     {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_CHOOSE_LANGUAGE' | translate }}
                 </h3>
@@ -33,11 +33,11 @@
                                 {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_INPUT_TITLE' | translate }}
                             </label>
                             <div class="col-sm-12 col-md-7">
-                              <input type="text" class="form-control">
+                              <input type="text" class="form-control" [value]="page.name_pl">
                             </div>
                           </div>
                         <div class="mt-4"></div>
-                        <angular-editor id="editorpl"  [(ngModel)]="htmlContentPl" [config]="editorConfig"></angular-editor>
+                        <angular-editor id="editorpl"  [(ngModel)]="page.content_pl" [config]="editorConfig"></angular-editor>
                         <div class="mb-4"></div>
                       </div>
                     </div>
@@ -51,11 +51,11 @@
                                 {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_INPUT_TITLE' | translate }}
                             </label>
                             <div class="col-sm-12 col-md-7">
-                              <input type="text" class="form-control">
+                              <input type="text" class="form-control" [value]="page.name_en">
                             </div>
                           </div>
                           <div class="mt-4"></div>
-                        <angular-editor id="editoren"  [(ngModel)]="htmlContentEn" [config]="editorConfig"></angular-editor>
+                        <angular-editor id="editoren" [(ngModel)]="page.content_en" [config]="editorConfig"></angular-editor>
                         <div class="mb-4"></div>
                       </div>
                     </div>
@@ -69,11 +69,11 @@
                                 {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_INPUT_TITLE' | translate }}
                             </label>
                             <div class="col-sm-12 col-md-7">
-                              <input type="text" class="form-control">
+                              <input type="text" class="form-control" [value]="page.name_ru">
                             </div>
                           </div>
                         <div class="mt-4"></div>
-                        <angular-editor id="editorru" [(ngModel)]="htmlContentRu" [config]="editorConfig"></angular-editor>
+                        <angular-editor id="editorru" [(ngModel)]="page.content_ru" [config]="editorConfig"></angular-editor>
                         <div class="mb-4"></div>
                       </div>
                     </div>
@@ -82,16 +82,18 @@
                   <div class="form-group row mb-4 mt-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                     <div class="col-sm-12 col-md-7">
-                      <button class="btn btn-primary" (click)="writeContents()">
+                      <button class="btn btn-primary" (click)="publishPage()">
                           {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_PUBLISH' | translate }}
                       </button>
 
-                      <button class="btn btn-secondary ml-3">
+                      <button class="btn btn-secondary ml-3" (click)="saveAsDraft()">
                           {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_SAVE_DRAFT' | translate }}
                       </button>
                     </div>
                 </div>
               </div>
+
+              <!-- loader -->
           </div>
     </div>
 </div>

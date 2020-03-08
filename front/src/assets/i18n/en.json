@@ -395,7 +395,8 @@
                 "PAGE_EDIT_SAVE_DRAFT": "Save as draft",
                 "PAGE_EDIT_INPUT_TITLE": "Page name",
                 "CONFERENCE_PAGES_ADMIN_SUBTITLE": "Editing conference pages",
-                "CONFERENCE_PAGES_ADMIN_DESC": "Here you can edit navigation only on conference page. You can manage the most important aspects of conference, like tracks. dates etc."
+                "CONFERENCE_PAGES_ADMIN_DESC": "Here you can edit navigation only on conference page. You can manage the most important aspects of conference, like tracks. dates etc.",
+                "PAGE_EDIT_NO_ACTIONS": "No actions for not editable content"
             },
             "ROLE_USER": {
                 "LABEL": {

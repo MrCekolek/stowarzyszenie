@@ -16,6 +16,10 @@ export class NavigationApiService {
     return this.api.post('home_navigation');
   }
 
+  getHomeLink(linkID: any) {
+    return this.api.post(`home_navigation/${linkID.id}`, linkID);
+  }
+
   addHomeLink(newLink: HomeNavigation) {
     return this.api.post('home_navigation/create', newLink);
   }
