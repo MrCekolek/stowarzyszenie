@@ -29,21 +29,27 @@
         </td>
         <!-- status -->
         <td>
-          <div class="badge" [ngClass]="{'badge-secondary': link.status === 'STOWARZYSZENIE.PAGE_STATUS.NOT_EDITABLE', 'badge-gray': link.status === 'STOWARZYSZENIE.PAGE_STATUS.IN_PROGRESS',  'badge-success': link.status === 'STOWARZYSZENIE.PAGE_STATUS.PUBLISHED'}">
+          <div class="badge" [ngClass]="{'badge-light': link.translation_key === 'STOWARZYSZENIE.PAGE_STATUS.NOT_EDITABLE', 'badge-warning': link.translation_key === 'STOWARZYSZENIE.PAGE_STATUS.IN_PROGRESS',  'badge-success': link.translation_key === 'STOWARZYSZENIE.PAGE_STATUS.PUBLISHED'}">
             {{ link.status | translate }}
           </div>
         </td>
-        <td>
+        <td *ngIf="link.status !== 'not editable'; else noteditable">
             <a [routerLink]="['../page-edit', link.id]" class="btn btn-link text-success">
               <i class="fas fa-pencil-alt"></i>
             </a>
             <a class="btn btn-link text-danger" (click)="deletePage(link)">
               <i class="fas fa-times"></i>
             </a>
-            <a class="btn btn-link text-secondary">
+            <!-- <a class="btn btn-link text-secondary">
               <i class="fas fa-eye"></i>
-            </a>
+            </a> -->
         </td>
+
+        <ng-template #noteditable>
+          <td>
+            {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_NO_ACTIONS' | translate }}
+          </td>
+        </ng-template>
       </tr>
     </tbody>
   </table>
