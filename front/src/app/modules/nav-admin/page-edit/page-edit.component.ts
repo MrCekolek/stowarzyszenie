@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { NavigationApiService } from 'src/app/core/http/navigation-api.service';
 
 @Component({
   selector: 'app-page-edit',
@@ -56,10 +57,9 @@ export class PageEditComponent implements OnInit {
   };
 
   pageId: number;
-  
-  HTMLpl;
-  HTMLen;
-  HTMLru;
+
+  private page;
+  private pageLoading;
 
   htmlContentPl;
   htmlContentEn;
@@ -67,23 +67,43 @@ export class PageEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-
-    ) {}
+    private navigationApi: NavigationApiService,
+    private router: Router
+  ) {}
 
     //pobieranie jednego page?
   ngOnInit() {
+    this.pageLoading = true;
     this.pageId = Number.parseInt(this.route.snapshot.paramMap.get('id'));
+//BRZUNIOOO
+    const link = {
+      id: this.pageId
+    };
+
+    this.navigationApi.getHomeLink(link).subscribe(res => {
+      this.page = res.homeNavigation;
+      console.log(this.page);
+      this.pageLoading = false;
+    });
   }
 
-  // catchHTMLPL($event) {
-  //   this.HTMLpl = $event;
-  //   console.log(this.HTMLpl);
-  // }
+  saveAsDraft() {
+    this.page.status = 'in progress';
 
-  writeContents() {
-    console.log(this.htmlContentEn);
-    console.log(this.htmlContentPl);
-    console.log(this.htmlContentRu);
+    this.navigationApi.updateHomeLink(this.page).subscribe(res => {
+      if (res.success) {
+        this.router.navigate(['pages/homepages']);
+      }
+    });
   }
 
+  publishPage() {
+    this.page.status = 'published';
+
+    this.navigationApi.updateHomeLink(this.page).subscribe(res => {
+      if (res.success) {
+        this.router.navigate(['pages/homepages']);
+      }
+    });
+  }
 }
