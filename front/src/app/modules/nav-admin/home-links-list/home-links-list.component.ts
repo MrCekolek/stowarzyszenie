@@ -37,7 +37,7 @@ export class HomeLinksListComponent implements OnInit {
       (data) => {
         if (data) {
           if (data.success) {
-            this.links.push(data.page);
+            this.links.push(data.homeNavigation);
           }
         }
       }

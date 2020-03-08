@@ -38,9 +38,6 @@ class HomeNavigationRequest extends FormRequest {
             'name_en' => 'required',
             'name_ru' => 'required',
             'link' => 'required',
-            'content_pl' => 'required',
-            'content_en' => 'required',
-            'content_ru' => 'required',
             'user_id' => 'required|exists:users,id'
         ];
     }

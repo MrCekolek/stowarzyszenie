@@ -18,7 +18,7 @@ export class HomeNavManageComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.naviApiService.getHomeLinks().subscribe(res => {
-      this.homelinks = res.home_navigations;
+      this.homelinks = res.homeNavigations;
       this.loading = false;
     });
   }

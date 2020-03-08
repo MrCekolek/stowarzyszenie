@@ -19,9 +19,9 @@ class HomeNavigation extends BaseModel
 
     public static function statuses() {
         return [
-            'published' => 'STOWARZYSZENIE.MODULES.HOME_NAVIGATION.STATUS.PUBLISHED',
-            'in progress' => 'STOWARZYSZENIE.MODULES.HOME_NAVIGATION.STATUS.IN_PROGRESS',
-            'not editable' => 'STOWARZYSZENIE.MODULES.HOME_NAVIGATION.STATUS.NOT_EDITABLE'
+            'published' => 'STOWARZYSZENIE.PAGE_STATUS.PUBLISHED',
+            'in progress' => 'STOWARZYSZENIE.PAGE_STATUS.IN_PROGRESS',
+            'not editable' => 'STOWARZYSZENIE.PAGE_STATUS.NOT_EDITABLE'
         ];
     }
 
