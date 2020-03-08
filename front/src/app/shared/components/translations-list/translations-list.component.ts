@@ -9,13 +9,13 @@ import { LanguageService } from '../../services/user/language.service';
 export class TranslationsListComponent implements OnInit {
 
   @Input() translations: any;
+  @Input() type: any;
 
   constructor(
     private languageService: LanguageService
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   trackByFn(index: any, item: any) {
     return index;

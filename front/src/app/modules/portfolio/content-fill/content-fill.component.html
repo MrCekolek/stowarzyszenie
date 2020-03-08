@@ -12,17 +12,17 @@
         </label>
 
         <div class="input-group">
-            <input type="text" class="form-control" #value aria-label="" [value]="content?.contents[0]['value_' + lang]">
+            <input *ngIf="this.type === 'input'" type="text" class="form-control" aria-label="" [(ngModel)]="content?.contents[0]['filled_' + this.lang]">
+            <textarea *ngIf="this.type === 'textarea'" class="form-control" aria-label="" [(ngModel)]="content?.contents[0]['filled_' + this.lang]"></textarea>
             <div class="input-group-append">
-                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="translate(value.value)">
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.translating" (click)="translate()">
                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
                 </button>
             </div>
         </div>
     </div>
 
-    <app-translations-list [translations]="translations"></app-translations-list>
-
+    <app-translations-list *ngIf="translations.length" [translations]="translations" [type]="this.type"></app-translations-list>
 </mat-dialog-content>
 
 <mat-dialog-actions>

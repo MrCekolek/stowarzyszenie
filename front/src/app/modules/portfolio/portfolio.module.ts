@@ -19,18 +19,20 @@ import { OptionsListComponent } from './options-list/options-list.component';
 import { InterestsComponent } from './interests/interests.component';
 import { ContentFillComponent } from './content-fill/content-fill.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [WholePortfolioComponent, PortfolioTabsComponent, OneTabComponent, UserPortfolioComponent, AddTabModalComponent, CardContentModalComponent, PortfolioCardComponent, EditCardModalComponent, ContentOptionsComponent, OptionsListComponent, InterestsComponent, ContentFillComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    MatTabsModule,
-    DragDropModule,
-    MatTooltipModule,
-    FormsModule,
-    MatSnackBarModule
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        MatTabsModule,
+        DragDropModule,
+        MatTooltipModule,
+        FormsModule,
+        MatSnackBarModule,
+        RouterModule
+    ],
   entryComponents: [AddTabModalComponent, CardContentModalComponent, EditCardModalComponent, ContentFillComponent]
 })
 export class PortfolioModule { }

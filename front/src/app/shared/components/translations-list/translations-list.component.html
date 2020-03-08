@@ -13,7 +13,8 @@
                     {{ this.languageService.supportedLangs[i] }}
                 </label>
                 <div class="col-sm-9">
-                    <input type="email" class="form-control" [name]="this.translations[i]" [id]="'text' + i" [value]="text" data-toggle="tooltip" data-placement="top" [title]="'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.INTERESTS.MODAL.INPUT_HINT' | translate" [(ngModel)]="this.translations[i]">
+                    <input *ngIf="this.type === 'input'" type="email" class="form-control" [name]="this.translations[i]" [id]="'text' + i" data-toggle="tooltip" data-placement="top" [title]="'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.INTERESTS.MODAL.INPUT_HINT' | translate" [(ngModel)]="this.translations[i]">
+                    <textarea *ngIf="this.type === 'textarea'" class="form-control" [name]="this.translations[i]" [id]="'text' + i" data-toggle="tooltip" data-placement="top" [title]="'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.INTERESTS.MODAL.INPUT_HINT' | translate" [(ngModel)]="this.translations[i]"></textarea>
                 </div>
             </div>
         </li>

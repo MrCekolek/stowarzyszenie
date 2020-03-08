@@ -43,7 +43,7 @@
         </div>
     </div>
 
-    <app-translations-list *ngIf="this.translations.length != 0" [translations]="this.translations"></app-translations-list>
+    <app-translations-list *ngIf="this.translations.length != 0" [translations]="this.translations" [type]="'input'"></app-translations-list>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button type="button" [disabled]="translations.length === 0" class="btn btn-primary" [class.btn-progress]="isSaving" (click)="addInterest()" *ngIf="modal_type === 'new'">

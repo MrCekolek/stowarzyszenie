@@ -305,7 +305,7 @@
                 "ADD_MODAL": {
                     "TITLE": "Dodaj nową zakładkę",
                     "TITLE_EDIT": "Edytuj zakładkę",
-                    "NEW_INPUT": "Podaj nazwę nowej zakładki",
+                    "NEW_INPUT": "Wprowadź nazwę nowej zawartości karty",
                     "EDIT_INPUT": "Edytuj nazwę w aktualnym języku, aby przetłumaczyć"
                 },
                 "CONTENT": {
@@ -338,7 +338,8 @@
                     },
                     "ADMIN_CONTENT_PLACEHOLDER": "Tekst użytkownika",
                     "EMPTY_TAB": "Ta zakładka nie posiada zawartości",
-                    "DISABLED_CARD": "Ta karta jest wyłączona i niewidoczna dla innych użytkowników. Włącz jej widoczność aby edytować"
+                    "DISABLED_CARD": "Ta karta jest wyłączona i niewidoczna dla innych użytkowników. Włącz jej widoczność aby edytować",
+                    "EMPTY_CARD_USER": "W tej karcie nie ma nic."
                 },
                 "EDIT_CARD": {
                     "TITLE": "Edytuj kartę",

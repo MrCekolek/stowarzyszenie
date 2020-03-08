@@ -3,6 +3,7 @@
         {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.PAGE_TITLE' | translate }}
     </h1>
 </div>
+
 <div class="section-body">
     <h2 class="section-title">
         {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.SECTION_TITLE' | translate }}
@@ -14,12 +15,18 @@
     <div class="row justify-content-start">
         <div class="col-sm-12" style="padding-left: 0;">
             <div class="card author-box card-primary">
+                <div class="loader-container" *ngIf="this.loading">
+                    <div class="loader">
+                        <div class="spinner-border text-primary"></div>
+                    </div>
+                </div>
+
                 <div class="card-body">
                     <div class="row">
                         <div class="author-box-left">
                             <img alt="image" src="../../../../assets/images/avatars/avatar-1.png" class="rounded-circle author-box-picture">
                             <div class="clearfix"></div>
-                            <a class="btn btn-light mt-3 follow-btn" data-follow-action="alert('follow clicked');">
+                            <a class="btn btn-light mt-3 follow-btn" data-follow-action="alert('follow clicked');" (click)="openPreviewModeAdmin()">
                                 <i class="fas fa-eye"></i> {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CHECK_OTHERS' | translate }}
                             </a>
                         </div>
@@ -27,7 +34,7 @@
                         <div class="author-box-details">
                             <div class="author-box-name">
                                 <span class="text-muted">
-                                        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.USER_TITLE' | translate }} 
+                                        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.USER_TITLE' | translate }}
                                     </span>
                                 <a class="text-primary">
                                         {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.FIRSTNAME_LASTNAME' | translate }}
@@ -50,7 +57,7 @@
 
     <!-- zakladki -->
     <div class="row" *ngIf="!this.loading; else loader">
-        <app-portfolio-tabs *ngIf="this.allTabs.length > 0" [tabs]="this.allTabs" [lang]="this.lang">
+        <app-portfolio-tabs *ngIf="this.allTabs.length > 0" [tabs]="this.allTabs" [lang]="this.lang" [preview]="false">
             <p>Some random HTML with some random content</p>
         </app-portfolio-tabs>
         <ng-template></ng-template>

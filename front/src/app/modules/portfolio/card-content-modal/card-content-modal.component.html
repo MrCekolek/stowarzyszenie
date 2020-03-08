@@ -53,7 +53,7 @@
                 </div>
             </div>
 
-            <app-translations-list *ngIf="this.titleTranslations.length != 0" [translations]="this.titleTranslations"></app-translations-list>
+            <app-translations-list *ngIf="this.titleTranslations.length != 0" [translations]="this.titleTranslations" [type]="'input'"></app-translations-list>
         </div>
 
         <div *ngSwitchCase="'textarea'">
@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <app-translations-list *ngIf="this.titleTranslations.length != 0" [translations]="this.titleTranslations"></app-translations-list>
+            <app-translations-list *ngIf="this.titleTranslations.length != 0" [translations]="this.titleTranslations" [type]="'input'"></app-translations-list>
         </div>
 
         <div *ngSwitchCase="'checkbox'">
@@ -99,7 +99,7 @@
                 </div>
             </div>
 
-            <app-translations-list *ngIf="this.titleTranslations.length != 0" [translations]="this.titleTranslations"></app-translations-list>
+            <app-translations-list *ngIf="this.titleTranslations.length != 0" [translations]="this.titleTranslations" [type]="'input'"></app-translations-list>
 
             <h5>
                 {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.MODAL.CHECKBOX_ADD_OPTION_LABEL' | translate }}
@@ -114,10 +114,10 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button type="button" class="btn btn-primary" [class.btn-progress]="isSaving" *ngIf="modal_type === 'new'" (click)="addNewContent()">
+    <button type="button" class="btn btn-primary"  *ngIf="modal_type === 'new'" (click)="addNewContent()">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
     </button>
-    <button type="button" [class.btn-progress]="this.isSaving" class="btn btn-primary" *ngIf="modal_type === 'edit'" (click)="updateContent()">
+    <button type="button" class="btn btn-primary" *ngIf="modal_type === 'edit'" (click)="updateContent()">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE' | translate }}
     </button>
     <button type="button " class="btn btn-link" (click)="dismiss()">
