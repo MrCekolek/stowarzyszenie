@@ -36,6 +36,10 @@ export class PortfolioApiService {
     return this.apiService.post('portfolio/tile/visibility/update', card);
   }
 
+  hideOrShowCardContent(content: Object) {
+    return this.apiService.post('portfolio/tile/content/visibility/update', content);
+  }
+
   addTab(tab) {
     return this.apiService.post('portfolio/tabs/create', tab);
   }
@@ -66,6 +70,10 @@ export class PortfolioApiService {
     return this.apiService.post('portfolio/tile/content/update', content);
   }
 
+  updateContentInContent(content: Object) {
+    return this.apiService.post('portfolio/tile/content/content/filled/update', content);
+  }
+
   getCardContent(cardID: number) {
     return this.apiService.post(`portfolio/tile/content/${cardID}/get`);
   }
@@ -80,5 +88,9 @@ export class PortfolioApiService {
 
   updateDescription(portfolio: Object) {
     return this.apiService.post('portfolio/update', portfolio);
+  }
+
+  markOption(option: Object) {
+    return this.apiService.post('portfolio/tile/content/content/selected/update', option);
   }
 }

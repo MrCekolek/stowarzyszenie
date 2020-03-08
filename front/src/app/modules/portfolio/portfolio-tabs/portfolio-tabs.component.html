@@ -5,7 +5,7 @@
                             {{ tab['name_' + lang] }} 
                         </a> -->
 
-            <div class="btn-group">
+            <div class="btn-group"  *ngIf="this.role === 'admin' || (this.role === 'user' && !this.preview && this.owner) || (this.role === 'user' && this.preview && tab.admin_visibility && tab.user_visibility)">
                 <!-- disabled tab -->
                 <a type="button" *ngIf="(!tab.admin_visibility && this.role === 'admin') || (tab.admin_visibility && this.role === 'user' && this.owner && !tab.user_visibility)" data-toggle="tooltip" [title]="'STOWARZYSZENIE.HELPERS.TOOLTIPS.DISABLED_TAB' | translate"
                     (click)="selectActiveTab(tab)" class="btn btn-primary text-white disabled" [id]="'tab' + tab.id" [href]="'#tab_' + tab.id" role="tab">
@@ -57,7 +57,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-6" *ngFor="let cart of activeTabsCards">
-                    <app-portfolio-card [owner]="this.owner" [portfolioRole]="this.role" (editCardEv)="editCard($event)" (delCardEv)="deleteCard($event)" [card]="cart"></app-portfolio-card>
+                    <app-portfolio-card [owner]="this.owner" [portfolioRole]="this.role" (editCardEv)="editCard($event)" (delCardEv)="deleteCard($event)" [card]="cart" [preview]="this.preview"></app-portfolio-card>
                 </div>
                 <!-- static card to adding new cards -->
                 <!-- TODO: only for editing preferences -->

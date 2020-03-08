@@ -23,11 +23,11 @@ export class PortfolioTabsComponent implements OnInit {
 
   @Input() lang: any;
   @Input() tabs: any;
+  @Input() preview: boolean = false;
+
   editMode = false;
   private load = false;
   private cardAddingLoad = false;
-
-  @Input() preview: boolean = false;
 
   private activeTab: PortfolioTab = {
     id: 1,
@@ -45,6 +45,7 @@ export class PortfolioTabsComponent implements OnInit {
   private alert: AlertModel;
   private role;
   private owner?;
+  private userID;
 
   tabLoading;
 
@@ -65,6 +66,7 @@ export class PortfolioTabsComponent implements OnInit {
     } else if (this.router.url.includes('users/profile')) {
       this.role = 'user';
       this.owner = Number.parseInt(this.route.snapshot.paramMap.get('id')) === this.userProvider.getUser().id;
+      this.userID = this.route.snapshot.params['id'];
     }
   }
 
@@ -99,7 +101,7 @@ export class PortfolioTabsComponent implements OnInit {
       admin_visibility: 1,
       user_visibility: 1,
       portfolio_tab_id: this.activeTab.id,
-      portfolio_tab_shared_id: this.languageService.getUser().id
+      portfolio_tab_shared_id: this.activeTab.shared_id
     };
 
     this.portfolioService.addCardToTab(newCard).subscribe(response => {

@@ -297,7 +297,7 @@
                 "SECTION_DESC1": "Customize your users portfolio - decide what data they can fill and divide the data into tabs.",
                 "SECTION_TITLE": "Settings",
                 "PROFILE": {
-                    "TITLE_OWNER": "your profile",
+                    "TITLE_OWNER": "Your profile",
                     "TITLE_UNOWNER": "User Profile",
                     "SECTION_TITLE_OWNER": "Profile",
                     "SECTION_LEAD_OWNER": "Here you can view your profile and edit the information it contains. You can also choose which sections to show or not."
@@ -305,7 +305,7 @@
                 "ADD_MODAL": {
                     "TITLE": "Add a new tab",
                     "TITLE_EDIT": "Edit tab",
-                    "NEW_INPUT": "Enter a name for the new tab",
+                    "NEW_INPUT": "Enter a name for the new card content",
                     "EDIT_INPUT": "Edit the name in the current language to translate"
                 },
                 "CONTENT": {
@@ -338,7 +338,8 @@
                     },
                     "ADMIN_CONTENT_PLACEHOLDER": "Users text",
                     "EMPTY_TAB": "This tab has no content",
-                    "DISABLED_CARD": "This card is disabled and invisible to other users. Turn on its visibility to edit"
+                    "DISABLED_CARD": "This card is disabled and invisible to other users. Turn on its visibility to edit",
+                    "EMPTY_CARD_USER": "There is nothing in this card."
                 },
                 "EDIT_CARD": {
                     "TITLE": "Edit card",

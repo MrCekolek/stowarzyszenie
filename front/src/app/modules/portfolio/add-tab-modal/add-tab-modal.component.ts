@@ -99,8 +99,6 @@ export class AddTabModalComponent implements OnInit {
 
     this.portfolioService.addTab(this.tab).subscribe(response => {
       this.isSaving = false;
-      console.log('response z modala');
-      console.log(response);
       this.dialogRef.close(response);
     });
   }

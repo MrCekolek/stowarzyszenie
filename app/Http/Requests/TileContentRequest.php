@@ -36,7 +36,9 @@ class TileContentRequest extends FormRequest {
             'name_ru' => 'required',
             'type' => 'required',
             'tile_id' => 'required|exists:tiles,id',
-            'tile_shared_id' => 'required|exists:tiles,shared_id'
+            'tile_shared_id' => 'required|exists:tiles,shared_id',
+            'admin_visibility' => 'required',
+            'user_visibility' => 'required'
         ];
     }
 
@@ -46,8 +48,8 @@ class TileContentRequest extends FormRequest {
             'id' => 'required|exists:tile_contents',
             'shared_id' => 'required|exists:tile_contents',
             'position' => 'required',
-            'admin_visibility' => 'required|in:true,false',
-            'user_visibility' => 'required|in:true,false'
+            'admin_visibility' => 'required',
+            'user_visibility' => 'required'
         ]);
     }
 
@@ -64,7 +66,7 @@ class TileContentRequest extends FormRequest {
             'id' => 'required|exists:tile_contents',
             'shared_id' => 'required|exists:tile_contents',
             'field' => 'required|in:admin,user',
-            'visibility' => 'required|in:true,false'
+            'visibility' => 'required'
         ];
     }
 }

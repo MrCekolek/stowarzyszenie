@@ -114,9 +114,9 @@
                     <ng-container matColumnDef="actions">
                         <mat-header-cell *matHeaderCellDef></mat-header-cell>
                         <mat-cell *matCellDef="let row">
-                            <button class="btn btn-default">
-                <i class="fas fa-address-card"></i>
-              </button>
+                            <button class="btn btn-default" [routerLink]="['../profile/', row.id]">
+                                <i class="fas fa-address-card"></i>
+                            </button>
                         </mat-cell>
                     </ng-container>
 

@@ -3,6 +3,7 @@ import { PortfolioService } from 'src/app/core/services/portfolio.service';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 
 import { UserProviderService } from "../../../core/services/user-provider.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-whole-portfolio',
@@ -19,7 +20,8 @@ export class WholePortfolioComponent implements OnInit {
   constructor(
     private portfolioService: PortfolioService,
     private languageService: LanguageService,
-    private userProvider: UserProviderService
+    private userProvider: UserProviderService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -38,5 +40,9 @@ export class WholePortfolioComponent implements OnInit {
 
   sortTabsByPosition() {
     
+  }
+
+  openPreviewModeAdmin() {
+    this.router.navigate(['users/profile/1'], { queryParams: { preview: true } });
   }
 }

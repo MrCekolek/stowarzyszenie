@@ -33,6 +33,8 @@ class Tile extends BaseModel {
         $tile->name_pl = $input['name_pl'];
         $tile->name_en = $input['name_en'];
         $tile->name_ru = $input['name_ru'];
+        $tile->admin_visibility = $input['admin_visibility'];
+        $tile->user_visibility = $input['user_visibility'];
         $tile->position = self::where('portfolio_tab_shared_id', $input['portfolio_tab_shared_id'])->max('position') + 1;
         $tile->portfolio_tab_id = $input['portfolio_tab_id'];
         $tile->portfolio_tab_shared_id = $input['portfolio_tab_shared_id'];

@@ -24,4 +24,12 @@ export class PortfolioService {
   addCardToTab(card: Object) {
     return this.portfolioApiService.addCard(card);
   }
+
+  updateContentInContent(content: Object) {
+    return this.portfolioApiService.updateContentInContent(content);
+  }
+
+  markOption(option: Object) {
+    return this.portfolioApiService.markOption(option);
+  }
 }
