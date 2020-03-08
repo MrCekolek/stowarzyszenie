@@ -30,7 +30,7 @@ export class HomepagesModalComponent implements OnInit {
     content_pl: '',
     content_en: '',
     content_ru: '',
-    status: 'STOWARZYSZENIE.PAGE_STATUS.IN_PROGRESS',
+    status: 'in progress',
     user_id: this.userService.getUser().id
   };
 
