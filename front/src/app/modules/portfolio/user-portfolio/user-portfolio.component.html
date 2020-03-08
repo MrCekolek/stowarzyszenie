@@ -7,7 +7,8 @@
     </h1>
 </div>
 
-<div *ngIf="this.preview">
+<div *ngIf="!this.loading && ((!this.isOwner && this.preview && (this.userID == this.userProvider.getUser().id)) ||
+             (this.isOwner && this.preview && this.userID !== this.userProvider.getUser().id))">
     <button class="btn btn-danger btn-sm mb-4" (click)="this.exitPreviewMode()">
         <i class="fas fa-eye-slash"></i>
         {{ 'STOWARZYSZENIE.HELPERS.EXIT_PREVIEW_MODE' | translate }}
@@ -21,106 +22,108 @@
     <p class="section-lead" *ngIf="isOwner">
         {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.PROFILE.SECTION_LEAD_OWNER' | translate }}
     </p>
-</div>
 
-<div class="row justify-content-start">
-    <div class="col-sm-12" style="padding-left: 0;">
-        <div class="card author-box card-primary">
-            <div class="loader-container" *ngIf="loading">
-                <div class="loader">
-                    <div class="spinner-border text-primary"></div>
-                </div>
-            </div>
-
-            <div class="card-body">
-                <div class="row">
-                    <div class="author-box-left">
-                        <div class="avatar-item">
-                            <img alt="image" [src]="this.user?.preference_user.avatar" class="rounded-circle author-box-picture">
-                            <div *ngIf="this.isOwner" class="avatar-badge" title="" data-toggle="tooltip" data-original-title="Edit avatar">
-                                <i class="fas fa-pencil-alt"></i>
-                                <input type="file" style="opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%; cursor: pointer;" />
-                            </div>
-                        </div>
-
-                        <div class="clearfix"></div>
-                        <a class="btn btn-light mt-3 follow-btn" *ngIf="this.isOwner" (click)="enterPreviewMode()">
-                            <i class="fas fa-eye"></i> {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CHECK_OTHERS' | translate }}
-                        </a>
+    <div class="row justify-content-start">
+        <div class="col-sm-12" style="padding-left: 0;">
+            <div class="card author-box card-primary">
+                <div class="loader-container" *ngIf="loading">
+                    <div class="loader">
+                        <div class="spinner-border text-primary"></div>
                     </div>
+                </div>
 
-                    <div class="author-box-details">
-                        <div class="author-box-name">
-                            <span class="text-muted">
-                                {{ this.user?.affilation_user?.title }}
-                            </span>
-                            <a class="text-primary">
-                                {{ this.user?.first_name + ' ' + this.user?.last_name }}        
+                <div class="card-body">
+                    <div class="row">
+                        <div class="author-box-left">
+                            <div class="avatar-item">
+                                <img alt="image" [src]="this.user?.preference_user.avatar" class="rounded-circle author-box-picture">
+                                <div *ngIf="this.isOwner" class="avatar-badge" title="" data-toggle="tooltip" data-original-title="Edit avatar">
+                                    <i class="fas fa-pencil-alt"></i>
+                                    <input type="file" style="opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%; cursor: pointer;" />
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <a class="btn btn-light mt-3 follow-btn" *ngIf="this.isOwner" (click)="enterPreviewMode()">
+                                <i class="fas fa-eye"></i> {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CHECK_OTHERS' | translate }}
                             </a>
                         </div>
-                        <div class="author-box-job">
-                            <span *ngIf="this.router.url.includes('portfolio-settings')">
-                                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.USER_ROLE' | translate }}
-                            </span>
-                            <span *ngIf="this.router.url.includes('users/profile') && this.rolesList">
-                                {{ this.rolesList }}
-                            </span>
-                        </div>
-                        <div class="author-box-description">
-                            <p *ngIf="this.router.url.includes('portfolio-settings')">
-                                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.USER_DESC' | translate }}
-                            </p>
 
-                            <div *ngIf="this.isOwner || preview">
-                                <p *ngIf="!this.descEditing; else descEditor" class="d-flex align-items-center">
-                                    <span *ngIf="!this.user?.portfolio.description">
-                                        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.OWNER_DESC_ADD' | translate }}
-                                    </span>
-
-                                    <span *ngIf="this.user?.portfolio.description">
-                                        {{ this.user?.portfolio?.description }}
-                                    </span>
-
-                                    <button class="btn btn-info btn-sm ml-3" (click)="this.descEditing = true">
-                                        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
-                                    </button>
+                        <div class="author-box-details">
+                            <div class="author-box-name">
+                                <span class="text-muted">
+                                    {{ this.user?.affilation_user?.title }}
+                                </span>
+                                <a class="text-primary">
+                                    {{ this.user?.first_name + ' ' + this.user?.last_name }}
+                                </a>
+                            </div>
+                            <div class="author-box-job">
+                                <span *ngIf="this.router.url.includes('portfolio-settings')">
+                                    {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.USER_ROLE' | translate }}
+                                </span>
+                                <span *ngIf="this.router.url.includes('users/profile') && this.rolesList">
+                                    {{ this.rolesList }}
+                                </span>
+                            </div>
+                            <div class="author-box-description">
+                                <p *ngIf="this.router.url.includes('portfolio-settings')">
+                                    {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.USER_DESC' | translate }}
                                 </p>
 
-                                <ng-template #descEditor>
-                                    <p class="d-flex align-item-center">
-                                        <input type="text" class="form-control form-control-sm" #descc>
-                                        <button class="btn btn-sm btn-icon btn-success" (click)="modifyDesc(descc.value)" [class.btn-progess]="this.descLoader">
-                                            <i class="fas fa-check"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-icon btn-danger" (click)="this.descEditing = false">
-                                            <i class="fas fa-times"></i>
+                                <div *ngIf="(this.isOwner && !this.preview) || (!this.isOwner && !this.preview)">
+                                    <p *ngIf="!this.descEditing; else descEditor" class="d-flex align-items-center">
+                                        <span *ngIf="!this.user?.portfolio.description">
+                                            {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.OWNER_DESC_ADD' | translate }}
+                                        </span>
+
+                                        <span *ngIf="this.user?.portfolio.description">
+                                            {{ this.user?.portfolio?.description }}
+                                        </span>
+
+                                        <button class="btn btn-info btn-sm ml-3" (click)="this.descEditing = true">
+                                            {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
                                         </button>
                                     </p>
-                                </ng-template>
-                            </div>
 
-                            <p *ngIf="!this.isOwner && this.router.url.includes('users/profile/') && !this.user?.portfolio.description">
-                                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.EMPTY_DESC_PROFILE' | translate }}
-                            </p>
+                                    <ng-template #descEditor>
+                                        <p class="d-flex align-item-center">
+                                            <input type="text" class="form-control form-control-sm" [(ngModel)]="description" [disabled]="this.loadingDesc">
+                                            <button class="btn btn-sm btn-icon btn-success" (click)="modifyDesc()" [class.btn-progess]="this.descLoader">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-icon btn-danger" (click)="stopModify()">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </p>
+                                    </ng-template>
+                                </div>
+
+                                <p *ngIf="!this.isOwner && this.router.url.includes('users/profile/') && !this.user?.portfolio.description">
+                                    {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.EMPTY_DESC_PROFILE' | translate }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- zakladki -->
-<div class="row" *ngIf="!this.loading; else loader">
-    <app-portfolio-tabs *ngIf="this.allTabs.length > 0" [tabs]="this.allTabs" [lang]="this.lang" [preview]="preview">
-    </app-portfolio-tabs>
-    <ng-template></ng-template>
-</div>
-
-<ng-template #loader>
-    <div class="d-flex justify-content-center">
-        <div class="spinner-border text-primary" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
+    <!-- zakladki -->
+    <div class="row" *ngIf="!this.loading; else loader">
+        <app-portfolio-tabs *ngIf="this.allTabs.length > 0 && this.preview" [tabs]="this.allTabs" [lang]="this.lang" [preview]="preview">
+        </app-portfolio-tabs >
+        <app-portfolio-tabs *ngIf="this.allTabs.length > 0 && !this.preview" [tabs]="this.allTabs" [lang]="this.lang" [preview]="preview">
+        </app-portfolio-tabs>
+        <ng-template></ng-template>
     </div>
-</ng-template>
+
+    <ng-template #loader>
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </ng-template>
+</div>

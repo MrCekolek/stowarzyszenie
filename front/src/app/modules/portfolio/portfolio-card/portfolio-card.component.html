@@ -1,9 +1,9 @@
-<div class="card">
+<div *ngIf="this.role === 'admin' || (this.role === 'user' && !this.preview && this.userID == this.userProvider.getUser().id) || (this.role === 'user' && this.preview && this.card.admin_visibility && this.card.user_visibility)" class="card" [ngClass]="{ 'disabled': this.card.admin_visibility == 0 || (this.role === 'user' && this.card.user_visibility == 0) }">
     <div class="card-header">
         <h4>
             {{ card['name_' + this.lang] }}
         </h4>
-        <div class="card-header-action" *ngIf="this.role === 'admin' || (this.role === 'user' && this.owner)">
+        <div class="card-header-action" *ngIf="this.role === 'admin' || (this.card.admin_visibility && (this.role === 'user' && this.userID == this.userProvider.getUser().id && !this.preview))">
             <div class="dropdown">
                 <a data-toggle="dropdown" class="btn btn-success text-white dropdown-toggle" aria-expanded="false">
                     {{ 'STOWARZYSZENIE.HELPERS.OPTIONS' | translate }}
@@ -17,10 +17,10 @@
                     </a>
 
                     <a class="dropdown-item" (click)="hideCard()" *ngIf="(this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS')) || (this.role === 'user' && this.owner)">
-                        <span *ngIf="card.admin_visibility">
+                        <span *ngIf="(this.role === 'admin' && this.card.admin_visibility) || (this.role === 'user' && this.card.user_visibility)">
                             <i class="fas fa-eye-slash mr-2"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.HIDE' | translate }}
                         </span>
-                        <span *ngIf="!card.admin_visibility" (click)="hideCard()">
+                        <span *ngIf="(this.role === 'admin' && !this.card.admin_visibility) || (this.role === 'user' && !this.card.user_visibility)">
                             <i class="fas fa-eye mr-2"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SHOW' | translate }}
                         </span>
                     </a>
@@ -42,8 +42,11 @@
                     <div class="empty-state-icon">
                         <i class="fas fa-question"></i>
                     </div>
-                    <p class="lead">
+                    <p *ngIf="this.role === 'admin'" class="lead">
                         {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.EMPTY_CARD' | translate }}
+                    </p>
+                    <p *ngIf="this.role === 'user'" class="lead">
+                        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.EMPTY_CARD_USER' | translate }}
                     </p>
                 </div>
             </div>
@@ -51,8 +54,8 @@
             <div class="contents" *ngIf="contents.length > 0">
                 <ul class="list-unstyled">
                     <li class="list-item" *ngFor="let content of contents; let i = index">
-                        <div [ngSwitch]="content.type">
-
+                        <div *ngIf="this.role === 'admin' || (this.role === 'user' && !this.preview && (this.userID == this.userProvider.getUser().id)) || (this.role === 'user' && this.preview && content.admin_visibility && content.user_visibility)"
+                             [ngSwitch]="content.type" [ngClass]="{ 'disabled': content.admin_visibility == 0 || (this.role === 'user' && content.user_visibility == 0) }">
                             <div *ngSwitchCase="'input'">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">
@@ -60,19 +63,19 @@
                                     </label>
                                     <div class="col-sm-9">
                                         <div class="input-group">
-                                            <input type="text" *ngIf="this.role === 'admin'" class="form-control form-control-sm" [disabled]="this.role === 'admin'">
-                                            <p *ngIf="this.owner">
-                                                {{ content.contents[0]['value_' + lang] }}
-                                            </p>
-                                            <div class="input-group-append">
+                                            <input type="text" class="form-control form-control-sm" [value]="content.contents[0]['filled_' + this.lang]" disabled>
+                                            <div class="input-group-append" *ngIf="this.role === 'admin' || (this.role === 'user' && content.admin_visibility)">
                                                 <button class="btn btn-danger btn-icon btn-sm" *ngIf="this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_CARDS')" (click)="deleteContent(content)">
                                                     <i class="fas fa-times"></i>
                                                 </button>
-                                                <button class="btn btn-success btn-icon btn-sm" *ngIf="this.owner" (click)="openFillContentModal(content)">
+                                                <button class="btn btn-success btn-icon btn-sm" *ngIf="this.owner && !this.preview" (click)="openFillContentModal(content, 'input')">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </button>
-                                                <button title="Ukryj" class="btn btn-warning btn-icon btn-sm" *ngIf="this.role === 'admin' || this.owner" (click)="hideContent(content)">
+                                                <button class="btn btn-warning btn-icon btn-sm" *ngIf="(this.role === 'admin' && content.admin_visibility) || (this.role === 'user' && this.userID == this.userProvider.getUser().id && content.user_visibility && !this.preview)" (click)="hideContent(content)">
                                                     <i class="fas fa-eye-slash"></i>
+                                                </button>
+                                                <button class="btn btn-warning btn-icon btn-sm" *ngIf="(this.role === 'admin' && !content.admin_visibility) || (this.role === 'user' && this.userID == this.userProvider.getUser().id && !content.user_visibility && !this.preview)" (click)="hideContent(content)">
+                                                    <i class="fas fa-eye"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -86,50 +89,56 @@
                                         {{ content['name_' + lang] }}
                                     </label>
                                     <div class="col-sm-9">
-                                        <textarea [disabled]="this.role === 'admin'" class="form-control" rows="4" cols="5" value="{{'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.ADMIN_CONTENT_PLACEHOLDER' | translate}}">
-                                        </textarea>
+                                        <div class="input-group">
+                                            <textarea class="form-control" rows="4" cols="5" [value]="content.contents[0]['filled_' + this.lang]" disabled></textarea>
+                                            <div class="input-group-append" *ngIf="this.role === 'admin' || (this.role === 'user' && content.admin_visibility)">
+                                                <button class="btn btn-danger btn-icon btn-sm" *ngIf="this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_CARDS')" (click)="deleteContent(content)">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                                <button class="btn btn-success btn-icon btn-sm" *ngIf="this.owner && !this.preview" (click)="openFillContentModal(content, 'textarea')">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </button>
+                                                <button class="btn btn-warning btn-icon btn-sm" *ngIf="(this.role === 'admin' && content.admin_visibility) || (this.role === 'user' && this.userID == this.userProvider.getUser().id && content.user_visibility && !this.preview)" (click)="hideContent(content)">
+                                                    <i class="fas fa-eye-slash"></i>
+                                                </button>
+                                                <button class="btn btn-warning btn-icon btn-sm" *ngIf="(this.role === 'admin' && !content.admin_visibility) || (this.role === 'user' && this.userID == this.userProvider.getUser().id && !content.user_visibility && !this.preview)" (click)="hideContent(content)">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <button class="btn btn-danger btn-icon btn-sm" *ngIf="this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_CARDS')" (click)="deleteContent(content)">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                                <button class="btn btn-warning btn-icon btn-sm" *ngIf="this.role === 'admin' || this.owner" (click)="hideContent(content)">
-                                    <i class="fas fa-eye-slash"></i>
-                                </button>
-                                <button class="btn btn-success btn-icon btn-sm" *ngIf="this.role === 'admin' || this.owner" (click)="saveContent(content)">
-                                    <i class="fas fa-check"></i>
-                                </button>
                             </div>
 
                             <div *ngSwitchCase="'checkbox'">
                                 <div class="form-group row">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                         <label class="col-form-label">
                                             {{ content['name_' + lang] }}
                                         </label>
-
-                                        <button class="btn btn-danger btn-icon btn-sm mr-2" [class.btn-progress]="content.isDeleting" (click)="deleteContent(content)">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-icon btn-sm" *ngIf="this.role === 'admin' || this.owner" (click)="hideContent(content)">
-                                            <i class="fas fa-eye-slash"></i>
-                                        </button>
-                                        <button class="btn btn-success btn-icon btn-sm" *ngIf="this.role === 'admin'" (click)="saveContent(content)">
-                                            <i class="fas fa-check"></i>
-                                        </button>
                                     </div>
-                                    <div class="col-sm-8">
-                                        <ul class="list-unstyled">
-                                            <li *ngFor="let item of content.contents; let i = index">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" [id]="'option' + i" [disabled]="this.role === 'admin'">
-                                                    <label class="custom-control-label" [for]="'option' + i">
-                                                        {{ item['value_' + lang] }}
-                                                    </label>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                    <div class="col-sm-9">
+                                        <div class="input-group">
+                                            <ul class="list-unstyled">
+                                                <li *ngFor="let item of content.contents; let i = index">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" [id]="'option' + i" [disabled]="this.role === 'admin' || (this.role === 'user' && this.preview)" (click)="this.markCheckbox(i, item)" [checked]="item.selected == 1">
+                                                        <label class="custom-control-label" [for]="'option' + i">
+                                                            {{ item['value_' + lang] }}
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <button class="btn btn-danger btn-icon btn-sm" *ngIf="this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_CARDS')" (click)="deleteContent(content)">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                            <button class="btn btn-warning btn-icon btn-sm" *ngIf="(this.role === 'admin' && content.admin_visibility) || (this.role === 'user' && this.userID == this.userProvider.getUser().id && content.user_visibility && !this.preview)" (click)="hideContent(content)">
+                                                <i class="fas fa-eye-slash"></i>
+                                            </button>
+                                            <button class="btn btn-warning btn-icon btn-sm" *ngIf="(this.role === 'admin' && !content.admin_visibility) || (this.role === 'user' && this.userID == this.userProvider.getUser().id && !content.user_visibility && !this.preview)" (click)="hideContent(content)">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -36,6 +36,8 @@ class TileRequest extends FormRequest {
             'name_pl' => 'required',
             'name_en' => 'required',
             'name_ru' => 'required',
+            'admin_visibility' => 'required',
+            'user_visibility' => 'required',
             'portfolio_tab_id' => 'required|exists:portfolio_tabs,id',
             'portfolio_tab_shared_id' => 'required|exists:portfolio_tabs,shared_id'
         ];
@@ -66,7 +68,7 @@ class TileRequest extends FormRequest {
             'id' => 'required|exists:tiles',
             'shared_id' => 'required|exists:tiles',
             'field' => 'required|in:admin,user',
-            'visibility' => 'required|in:true,false'
+            'visibility' => 'required'
         ];
     }
 }

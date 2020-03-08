@@ -49,7 +49,7 @@ class CreateTileContentJob implements ShouldQueue
             $tileContent->name_en = $this->tileContent->name_en;
             $tileContent->name_ru = $this->tileContent->name_ru;
             $tileContent->type = $this->tileContent->type;
-            $tileContent->translation_key = $this->tileContent->translationKey;
+            $tileContent->translation_key = $this->tileContent->translation_key;
             $tileContent->position = $this->tileContent->position;
             $tileContent->tile_id = $tile->id;
             $tileContent->tile_shared_id = $tile->shared_id;

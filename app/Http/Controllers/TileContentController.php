@@ -385,6 +385,6 @@ class TileContentController extends Controller {
             return $validation->failResponse();
         }
 
-        return LogService::update(self::changeVisibility($input, TileContent::class));
+        return LogService::update(self::changeVisibility($input, (new TileContent())));
     }
 }

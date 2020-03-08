@@ -50,6 +50,8 @@ class TileContent extends BaseModel {
         $tileContent->type = $input['type'];
         $tileContent->translation_key = self::translations()[$input['type']];
         $tileContent->position = self::where('tile_shared_id', $input['tile_shared_id'])->max('position') + 1;
+        $tileContent->admin_visibility = $input['admin_visibility'];
+        $tileContent->user_visibility = $input['user_visibility'];
         $tileContent->tile_id = $input['tile_id'];
         $tileContent->tile_shared_id = $input['tile_shared_id'];
         $success = $tileContent->save();
@@ -92,7 +94,7 @@ class TileContent extends BaseModel {
             $content->tile_content_shared_id = $tileContent->shared_id;
             $content->save();
 
-            $contents[] = $content;
+            $contents[] = $content->toArray();
         } else {
             foreach ($options as $option) {
                 $content = new Content();
@@ -105,7 +107,7 @@ class TileContent extends BaseModel {
                 $content->tile_content_shared_id = $tileContent->shared_id;
                 $content->save();
 
-                $contents[] = $content;
+                $contents[] = $content->toArray();
             }
         }
 

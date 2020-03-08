@@ -360,6 +360,6 @@ class TileController extends Controller {
             return $validation->failResponse();
         }
 
-        return LogService::update(self::changeVisibility($input, Tile::class));
+        return LogService::update(self::changeVisibility($input, (new Tile())));
     }
 }

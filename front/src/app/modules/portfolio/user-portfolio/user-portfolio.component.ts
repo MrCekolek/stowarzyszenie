@@ -21,12 +21,13 @@ export class UserPortfolioComponent implements OnInit {
 
   private loading = true;
   private descLoader = false;
-
+  private loadingDesc = false;
   user: UserModel;
+  private description;
 
   private rolesList: string = '';
   private descEditing: boolean;
-  private preview: boolean;
+  private preview: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,8 +46,15 @@ export class UserPortfolioComponent implements OnInit {
 
     this.loginServie.getUserByID(this.userID).subscribe(res => {
       this.user = res.user;
-      console.log(res.user);
-      this.isOwner = this.userID == this.userProvider.getUser().id;  
+      this.description = this.user.portfolio.description;
+      this.isOwner = this.userID == this.userProvider.getUser().id;
+
+      if (this.route.snapshot.queryParamMap.get('preview') == 'true') {
+        this.preview = true;
+      } else {
+        this.preview = !this.isOwner;
+      }
+
     }, () => {}, () => {
       //get roles
       for (let i = 0; i < this.user.roles.length; i++) {
@@ -67,19 +75,36 @@ export class UserPortfolioComponent implements OnInit {
   }
 
   // TODO: zapis do api description
-  modifyDesc(newValue: string) {
+  modifyDesc() {
+    if (this.description !== '' && this.description !== null) {
+      this.loadingDesc = true;
 
-    const portfolio = {
-      id: this.userProvider.getUser().id,
-      description: newValue
-    };
+      const portfolio = {
+        id: this.userProvider.getUser().id,
+        description: this.description
+      };
 
-    this.portfolioService.updateDescription(portfolio).subscribe(res => {
-      console.log(res);
-      if (res.success) {
-        this.descEditing = false;
-      }
-    });
+      this.portfolioService.updateDescription(portfolio).subscribe(
+          (res) => {
+            if (res.success) {
+              this.user.portfolio.description = this.description;
+              this.descEditing = false;
+            } else {
+              this.description = this.user.portfolio.description;
+            }
+          },
+          () => {},
+          () => {
+            this.loadingDesc = false;
+          }
+      );
+    }
+  }
+
+  stopModify() {
+    this.description = this.user.portfolio.description;
+
+    this.descEditing = false
   }
 
   enterPreviewMode() {
