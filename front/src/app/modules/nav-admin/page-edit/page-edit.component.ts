@@ -11,7 +11,7 @@ import { NavigationApiService } from 'src/app/core/http/navigation-api.service';
 export class PageEditComponent implements OnInit {
 
   editorConfig: AngularEditorConfig = {
-    editable: true,
+      editable: true,
       spellcheck: true,
       height: 'auto',
       minHeight: '0',
@@ -48,7 +48,7 @@ export class PageEditComponent implements OnInit {
     ],
     uploadUrl: 'v1/image',
     uploadWithCredentials: false,
-    sanitize: true,
+    sanitize: false,
     toolbarPosition: 'top',
     toolbarHiddenButtons: [
       ['bold', 'italic'],

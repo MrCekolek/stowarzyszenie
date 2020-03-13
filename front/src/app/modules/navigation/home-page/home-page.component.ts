@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NavigationService } from 'src/app/core/services/navigation.service';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 import { ActivatedRoute } from '@angular/router';
@@ -7,7 +7,8 @@ import { NavigationApiService } from 'src/app/core/http/navigation-api.service';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
+  styleUrls: ['./home-page.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HomePageComponent implements OnInit {
 
@@ -29,5 +30,4 @@ export class HomePageComponent implements OnInit {
       this.navigationService.selectedPage = this.navigationService.getPage(this.route.snapshot.paramMap.get('id'));
     }
   }
-
 }
