@@ -2,12 +2,17 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoggedGuard } from "./shared/guards/logged.guard.guard";
 import { NotLoggedGuard } from "./shared/guards/not-logged.guard.guard";
+import { HomePageComponent } from './modules/navigation/home-page/home-page.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'auth',
     pathMatch: 'full'
+  },
+  {
+    path: 'homepage/:id',
+    component: HomePageComponent
   },
   {
     path: 'auth',
