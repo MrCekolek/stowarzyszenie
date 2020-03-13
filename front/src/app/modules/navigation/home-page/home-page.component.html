@@ -1,0 +1,11 @@
+<div class="section-header" *ngIf="this.navigationService.selectedPage">
+    <h1>
+        {{ this.navigationService.selectedPage['name_' + this.lang] }}
+    </h1>
+</div>
+
+<div class="section-body" *ngIf="this.navigationService.selectedPage" [innerHTML]="this.navigationService.selectedPage['content_' + this.lang]">
+    <div class="col-sm-12">
+        {{ this.navigationService.selectedPage['content_' + this.lang] }}
+    </div>
+</div>

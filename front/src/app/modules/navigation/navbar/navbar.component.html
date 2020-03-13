@@ -9,12 +9,12 @@
         <div class="nav-collapse">
             <div class="dropdown d-inline">
                 <button class="btn bg-white dropdown-toggle" type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]" [alt]="this.languageService.currentLang" class="mr-2" style="height: 22px;">
+                    <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]" [alt]="this.lang" class="mr-2" style="height: 22px;">
                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}
                 </button>
                 <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
                     <a class="dropdown-item has-icon" *ngFor="let lang of translateService.getLangs(); let i = index" [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
-                        <img [src]="this.flagsImages[i]" [alt]="this.languageService.currentLang" class="mr-2" style="height: 22px;"> {{ this.translations[i] | translate }}
+                        <img [src]="this.flagsImages[i]" [alt]="this.lang" class="mr-2" style="height: 22px;"> {{ this.translations[i] | translate }}
                     </a>
                 </div>
             </div>
@@ -27,6 +27,13 @@
                         {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.HOME' | translate }}
                     </a>
                 </li>
+
+                <li *ngFor="let link of homelinks">
+                    <a class="nav-link" (click)="selectHomepage(link.id)">
+                        {{ link['name_' + this.lang] }}
+                    </a>
+                </li>
+
                 <li class="nav-item" [routerLink]="['/auth/login']" routerLinkActive="active">
                     <a class="nav-link">
                         {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.LOGIN' | translate }}
