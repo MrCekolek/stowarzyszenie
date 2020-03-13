@@ -8,6 +8,8 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { map } from "rxjs/operators";
 import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
 import { UserProviderService } from "../../../core/services/user-provider.service";
+import { NavigationApiService } from 'src/app/core/http/navigation-api.service';
+import { NavigationService } from 'src/app/core/services/navigation.service';
 
 declare const $: any;
 
@@ -48,6 +50,9 @@ export class NavbarComponent implements OnInit {
     'ru': 2,
   };
 
+  lang;
+  private homelinks;
+
   constructor(
     private translateService: TranslateService,
     private tokenService: TokenService,
@@ -56,13 +61,25 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private languageService: LanguageService,
     private activatedRoute: ActivatedRoute,
-    private userProviderService: UserProviderService
+    private userProviderService: UserProviderService,
+    private navigationApi: NavigationApiService,
+    private navigationService: NavigationService
   ) {
     this.userProviderService.loginStatus.subscribe(value => this.loggedIn = value);
     this.createForm();
   }
 
   ngOnInit() {
+    this.languageService.currentLang.subscribe(value => {
+      this.lang = value;
+    });
+
+    this.navigationApi.getHomeLinks().subscribe(res => {
+      this.homelinks = res.homeNavigations.filter(x => (x.status === 'published'));
+      this.navigationService.homepagesList = this.homelinks;
+      console.log(this.homelinks);
+    });
+
     window.addEventListener('resize', function () {
       if (window.innerWidth <= 1024) {
         if (document.getElementById('main-navbar').classList.contains('main-navbar-toggled')) {
@@ -97,15 +114,6 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-    // $(document).ready(() => {
-    //   $('li.dropdown').unbind('click');
-
-    //   $('li.dropdown').click(() => {
-    //     console.log( $(this).closest('ul.dropdown-menu'));
-    //     $(this).closest('ul.dropdown-menu').slideToggle();
-    //   });
-    // });
-
     this.searchService.getUsers()
         .pipe(
           map(
@@ -128,6 +136,13 @@ export class NavbarComponent implements OnInit {
   
         const searchService = this.searchService;
         const self = this;
+
+
+  }
+
+  selectHomepage(id) {
+    this.navigationService.selectedPage = this.navigationService.getPage(id);
+    this.router.navigate(['../homepage', id]);
   }
 
   createForm() {
