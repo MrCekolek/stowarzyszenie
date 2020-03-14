@@ -17,13 +17,14 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { LangPipe } from './pipes/lang.pipe';
 import { TranslationsListComponent } from './components/translations-list/translations-list.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 export function HttpLoaderFactory (http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [SpinnerComponent, DeleteAlertComponent, AlertComponent, LangPipe, TranslationsListComponent, ConfirmationDialogComponent],
+  declarations: [SpinnerComponent, DeleteAlertComponent, AlertComponent, LangPipe, TranslationsListComponent, ConfirmationDialogComponent, SafeHtmlPipe],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -57,7 +58,8 @@ export function HttpLoaderFactory (http: HttpClient) {
     AlertComponent,
     MatDialogModule,
     OverlayModule,
-    TranslationsListComponent
+    TranslationsListComponent,
+    SafeHtmlPipe
   ],
   providers: [
     {
