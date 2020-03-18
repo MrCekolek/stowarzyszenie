@@ -264,11 +264,11 @@
                 </div>
             </div>
 
-            <!-- phone -->
             <div class="form-group">
                 <label>
                     {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PHONE' | translate }}
                 </label>
+
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
@@ -279,6 +279,8 @@
                     <input id="phone_number" class="form-control" formControlName="phone_number" type="text" placeholder="123456789">
                 </div>
             </div>
+
+            <button class="btn btn-block btn-primary" (click)="registerAccount()"></button>
         </form>
     </cdk-step>
 </auth-stepper>

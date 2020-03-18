@@ -27,14 +27,23 @@
                     <button class="btn btn-primary btn-block" type="button" cdkStepperNext *ngIf="this.selectedIndex !== 3 && !this.registerCompleted">
                         {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.GO_TO_STEP' | translate }} {{ this.selectedIndex + 2 }}
                     </button>
+                                        
+                    <button type="button" class="btn btn-block btn-primary" *ngIf="this.selectedIndex === 3 && !this.registerCompleted" (click)="this.completeRegistration()">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BUTTON_REGISTER' | translate }}
+                    </button>
+
+                    <button *ngIf="this.registerCompleted" type="button" class="btn btn-block btn-primary" (click)="this.resendEmailActivation()">
+                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.SEND_AGAIN' | translate }}
+                    </button>
 
                     <button cdkStepperPrevious type="button" class="btn text-primary btn-block" *ngIf="this.selectedIndex !== 0 && !this.registerCompleted">
                         <i class="fas fa-arrow-left"></i> {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BACK_TO_STEP' | translate }} {{ this.selectedIndex }}
                     </button>
+
                 </div>
             </div>
 
-            <a [routerLink]="['../login']" class="external-link secondary mb-5">
+            <a [routerLink]="['../login']" class="btn btn-link text-primary">
                 {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.LOGIN_LINK' | translate }}
             </a>
         </div>
@@ -54,14 +63,6 @@
                             {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.PAGE_DESC1' | translate }} {{ this.registeredEmail }}. {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.PAGE_DESC2' | translate }}
                         </p>
                     </div>
-
-                    <button type="button" class="submit-button" *ngIf="this.selectedIndex === 3 && !this.registerCompleted" (click)="this.completeRegistration()">
-                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.BUTTON_REGISTER' | translate }}
-                    </button>
-
-                    <button *ngIf="this.registerCompleted" type="button" class="submit-button" (click)="this.resendEmailActivation()">
-                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFTER.SEND_AGAIN' | translate }}
-                    </button>
                 </form>
             </div>
         </div>
