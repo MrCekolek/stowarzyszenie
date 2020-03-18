@@ -44,15 +44,17 @@ export class AppComponent {
       }
     });
 
-    if (this.loggedIn && this.tokenService.get()) {
+    if (this.loggedIn) {
       this.router.events.subscribe(event => {
         // update user model
         if (event instanceof NavigationStart) {
-          this.userProviderService.me().subscribe(
-            response => {
-              this.userProviderService.setUser(new UserModel(response));
-            }
-          );
+          if (this.tokenService.get()) {
+            this.userProviderService.me().subscribe(
+                response => {
+                  this.userProviderService.setUser(new UserModel(response));
+                }
+            );
+          }
         }
       });
     }
