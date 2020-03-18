@@ -36,12 +36,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
 
   }
-
-  ngAfterViewInit() {
-    console.log(this.datepicker.nativeElement);
-    this.datepicker.nativeElement.daterangepicker();
-  }
-
   createForm() {
     this.registerFormStep1 = this.formBuilder.group({
       'login_email': ['', [

@@ -31,4 +31,8 @@ export class NavigationApiService {
   deleteHomeLink(linkID: number) {
     return this.api.post('home_navigation/destroy');
   }
+
+  getConferenceNavigation(conferenceID: Object) {
+    return this.api.post('/conference/page/get', conferenceID);
+  }
 }
