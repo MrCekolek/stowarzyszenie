@@ -11,9 +11,9 @@
         </label>
 
         <div class="input-group">
-            <input *ngIf="card['name_' + this.lang]" type="text" class="form-control" #new aria-label="" [value]="card['name_' + this.lang]">
+            <input *ngIf="card['name_' + this.lang]" type="text" class="form-control" #new aria-label="" [(ngModel)]="card['name_' + this.lang]">
             <div class="input-group-append">
-                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getCardTranslations(new.value)">
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getCardTranslations()">
                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
                 </button>
             </div>

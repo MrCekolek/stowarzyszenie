@@ -17,7 +17,7 @@
           <div class="card">
               <div class="card-body">
                   <form [formGroup]="afterResetForm">
-                      <div *ngIf="!this.resetSend else sent">
+                      <div *ngIf="!this.reseted else resetedNg">
                           <div class="form-group">
                               <label for="password">
                                 {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.PASSWORD_PLACEHOLDER' | translate }}
@@ -55,9 +55,8 @@
                                 </ng-template>
                               </small>
 
-
                               <button class="btn btn-block btn-primary"
-                              [disabled]="password.invalid"
+                                [disabled]="password.invalid"
                                 (click)="changePassword(afterResetForm.getRawValue())"
                                 [disabled]="!afterResetForm.valid">
                                 {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.BUTTON' | translate }}
@@ -71,45 +70,19 @@
                             </div>
                       </div> 
   
-                      <ng-template #sent>
+                      <ng-template #resetedNg>
                           <h1>
-                              {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.SENT_TITLE' | translate }}
+                              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.RESETED_TITLE' | translate }} <i class="fas fa-check"></i>
                           </h1>
-  
+
                           <p>
-                              {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.SENT_DESC' | translate }}
+                              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.RESETED_DESC' | translate }}
                           </p>
-                     </ng-template> 
 
-                     <!-- poprawnie zresetowano -->
-                    <div *ngIf="this.reseted">
-                      <h1>
-                          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.RESETED_TITLE' | translate }} <i class="fas fa-check"></i>
-                      </h1>
-
-                      <p>
-                          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.RESETED_DESC' | translate }}
-                      </p>
-
-                      <button class="btn btn-block btn-primary" [routerLink]="['../login']">
-                          {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.LOGIN_LINK' | translate }}
-                      </button>
-                    </div>
-
-                  <!-- blad -->
-                  <div *ngIf="this.reseted">
-                    <h1>
-                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.RESETED_TITLE' | translate }} <i class="fas fa-check"></i>
-                    </h1>
-
-                    <p>
-                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.RESETED_DESC' | translate }}
-                    </p>
-
-                    <button class="btn btn-block btn-primary" [routerLink]="['../login']">
-                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.LOGIN_LINK' | translate }}
-                    </button>
-                  </div>
+                          <button class="btn btn-block btn-primary" [routerLink]="['../login']">
+                              {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.LOGIN_LINK' | translate }}
+                          </button>
+                     </ng-template>
                   </form>
 
                   <a [routerLink]="['../login']"  class="btn text-primary">
