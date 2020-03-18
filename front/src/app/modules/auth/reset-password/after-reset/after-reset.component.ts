@@ -32,6 +32,8 @@ export class AfterResetComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.reseted = false;
+
     this.createForm();
   }
 
@@ -53,7 +55,6 @@ export class AfterResetComponent implements OnInit {
   changePassword(afterResetForm: Object) {
     this.resettingLoader = true;
     this.afterResetApiService.changePassword(afterResetForm).subscribe(data => {
-      console.log(data);
       if (data.success) {
         this.reseted = true;
       } else {
