@@ -3,8 +3,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router, NavigationStart } from '@angular/router';
 import { UserModel } from './shared/models/user.model';
 import { SearchService } from './shared/services/user/search.service';
-import { map } from 'rxjs/operators';
 import { UserProviderService } from './core/services/user-provider.service';
+import { TokenService } from "./modules/auth/login/service/token.service";
 
 @Component({
   selector: 'app-root',
@@ -23,6 +23,7 @@ export class AppComponent {
     private renderer: Renderer2,
     private router: Router,
     private searchService: SearchService,
+    private tokenService: TokenService
   ) {
     this.translateService.addLangs(['pl', 'en']);
     this.translateService.setDefaultLang('pl');
@@ -43,7 +44,7 @@ export class AppComponent {
       }
     });
 
-    if (this.loggedIn) {
+    if (this.loggedIn && this.tokenService.get()) {
       this.router.events.subscribe(event => {
         // update user model
         if (event instanceof NavigationStart) {
