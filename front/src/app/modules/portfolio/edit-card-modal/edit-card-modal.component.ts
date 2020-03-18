@@ -57,13 +57,12 @@ export class EditCardModalComponent implements OnInit {
 
   dismiss() {
     this.translations = [];
-    this.card = null;
     this.dialogRef.close();
   }
 
-  getCardTranslations(input) {
+  getCardTranslations() {
     const obj = {
-      name: input
+      name: this.card['name_' + this.lang]
     };
 
     this.addLoading = true;
