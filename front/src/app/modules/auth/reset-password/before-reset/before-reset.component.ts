@@ -16,6 +16,7 @@ export class BeforeResetComponent implements OnInit {
   private isLoading: boolean = false;
   private emailExist: boolean = false;
   private valueChangesSubscription;
+  private resetLoading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -75,11 +76,19 @@ export class BeforeResetComponent implements OnInit {
   ngOnInit() {
   }
 
-  sendReset(beforeResendForm) {
-    this.isLoading = true;
+  sendReset(loginEmail) {
+    this.resetLoading = true;
     this.resetSend = !this.resetSend;
+    const obj = {
+      login_email: loginEmail
+    };
 
-    this.beforeResetApiService.sendReset(beforeResendForm).subscribe();
+    this.beforeResetApiService.sendReset(obj).subscribe(data => {
+      console.log(data);
+      if (data.success) {
+        this.resetLoading = false;
+      }
+    });
   }
 
   get login_email() {
