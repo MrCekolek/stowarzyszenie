@@ -112,7 +112,7 @@
                 </label>
 
                 <!-- birthdate picker -->
-                <input type="text" class="form-control datemask" id="birthdate" formControlName="birthdate" #datepicker placeholder="YYYY/MM/DD">
+                <input type="text" class="form-control datemask" id="birthdate" formControlName="birthdate" #datepicker placeholder="DD/MM/YYYY">
 
                 <!-- feedback -->
                 <div class="invalid-feedback" *ngIf="(birthdate.dirty || birthdate.touched) && birthdate.invalid && birthdate.errors.required">
@@ -264,13 +264,21 @@
                 </div>
             </div>
 
-            <mat-form-field appearance="outline ">
-                <mat-label>
+            <!-- phone -->
+            <div class="form-group">
+                <label>
                     {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.PHONE' | translate }}
-                </mat-label>
-
-                <input id="phone_number" formControlName="phone_number" type="text " placeholder="123456789 " matInput>
-            </mat-form-field>
+                </label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                    </div>
+                    <!-- input for email -->
+                    <input id="phone_number" class="form-control" formControlName="phone_number" type="text" placeholder="123456789">
+                </div>
+            </div>
         </form>
     </cdk-step>
 </auth-stepper>

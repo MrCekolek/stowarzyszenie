@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { BeforeResetComponent } from './reset-password/before-reset/before-reset.component';
@@ -37,6 +38,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTooltipModule
   ]
 })
 export class AuthModule { }

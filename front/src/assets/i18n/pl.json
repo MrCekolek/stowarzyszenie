@@ -130,7 +130,10 @@
                     "BACK_TO_LOGIN": "Wróć do logowania",
                     "BUTTON_SEND": "Wyślij link ",
                     "PAGE_HINT": "Zapomniałeś hasła do swojego konta? Zresetuj je podając niżej email, do którego jest przypisane Twoje konto (bądź email kontaktowy, jeżeli go podałeś). Na podany adres zostanie wysłany email z linkiem do resetowania hasła.",
-                    "PAGE_TITLE": "Zresetuj hasło "
+                    "PAGE_TITLE": "Zresetuj hasło ",
+                    "EMAIL_HINT": "Wpisz poprawny adres e-mail, aby go zresetować",
+                    "SENT_TITLE": "E-mail wysłany",
+                    "SENT_DESC": "E-mail z instrukcjami resetowania został wysłany do Twojej skrzynki odbiorczej. Postępuj zgodnie z instrukcjami w zestawie."
                 },
                 "LOGIN": {
                     "ALERT": {
@@ -213,6 +216,11 @@
                     "STEP3_TITLE": "Afiliacja",
                     "STEP4_TITLE": "Dane kontaktowe",
                     "WOMAN": "Jestem kobietą"
+                },
+                "RESET_PASS_BEFORE_BTN": "Zresetuj hasło",
+                "RESETTING": {
+                    "PAGE_TITLE": "Zresetuj hasło",
+                    "PAGE_HINT": "Tutaj możesz zresetować zapomniane hasło. Wpisz nowe hasło w polu."
                 }
             },
             "NAVIGATION": {

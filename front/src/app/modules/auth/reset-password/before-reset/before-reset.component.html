@@ -1,84 +1,88 @@
-<div class="container-fluid">
+<div class="section-header">
+    <h1>
+        {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.PAGE_TITLE' | translate }}
+    </h1>
+</div>
+
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.PAGE_TITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.PAGE_HINT' | translate }}
+    </p>
+
     <div class="row justify-content-center">
         <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
-            <div class="form-container">
-                <form [formGroup]="beforeResetForm">
-                    <div *ngIf="!this.resetSend else sent">
-                        <h1>
-                            {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.PAGE_TITLE' | translate }}
-                        </h1>
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="beforeResetForm">
+                        <div *ngIf="!this.resetSend || this.resetLoading; else sent">
 
-                        <p>
-                            {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.PAGE_HINT' | translate }}
-                        </p>
-
-                        <!-- email input -->
-                        <mat-form-field class="auth-form-field" appearance="outline">
-                            <mat-label>
-                                {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.EMAIL_PLACEHOLDER' | translate }}
-                            </mat-label>
-
-                            <input id="login_email" formControlName="login_email" type="email" placeholder="email@domain.com" matInput required>
-
-                            <mat-hint>
-                                <div *ngIf="login_email.valid || login_email.untouched; else loginEmailInvalid">
-                                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.EMAIL_HINT' | translate }}
+                            <div class="form-group">
+                                <label for="login_email">
+                                    {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.EMAIL_PLACEHOLDER' | translate }}
+                                </label>
+                                <div class="input-group mb-2">
+                                    <input id="login_email"class="form-control" [class.is-valid]="(login_email.dirty || login_email.touched) && login_email.valid && !isLoading" [class.is-invalid]="(login_email.dirty || login_email.touched) && login_email.invalid && !isLoading" formControlName="login_email" type="email" placeholder="email@domain.com" aria-describedby="emailhint" required>
+                                  <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <div *ngIf="(login_email.dirty || login_email.touched) && login_email.valid && !isLoading">
+                                            <i class="fas fa-check text-success"></i> 
+                                        </div>
+                                        <div *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && !isLoading">
+                                            <i class="fas fa-times text-danger"></i>
+                                        </div>
+                                        <div *ngIf="(login_email.dirty || login_email.touched) && isLoading" class="spinn">
+                                            <div class="spinner-border spinner-border-sm text-primary"></div>
+                                        </div>
+                                    </div>
+                                  </div>
                                 </div>
-                                <ng-template #loginEmailInvalid>
-                                    <div *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.required">
-                                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
-                                    </div>
-                                    <div *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.email">
-                                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_INCORRECT' | translate }}
-                                    </div>
-                                    <div *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.emailNotExist">
-                                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_NOT_EXISTS' | translate }}
-                                    </div>
+                                <small id="emailhint" class="form-text text-muted mb-3">
+                                    <span *ngIf="login_email.valid || login_email.untouched; else loginEmailInvalid">
+                                        {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.EMAIL_HINT' | translate }}
+                                    </span>
+                                    <ng-template #loginEmailInvalid>
+                                        <span class="text-danger" *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.required">
+                                            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.REQUIRED' | translate }}
+                                        </span>
+                                        <span  class="text-danger" *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.email">
+                                            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_INCORRECT' | translate }}
+                                        </span>
+                                        <span  class="text-danger" *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && login_email.errors.emailNotExist">
+                                            {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.ALERTS.EMAIL_NOT_EXISTS' | translate }}
+                                        </span>
+                                    </ng-template>
+                                </small>
+
+                                <button class="btn btn-primary btn-block" matTooltip="{{}'STOWARZYSZENIE.MODULES.AUTH.FORGOT.EMAIL_HINT' | translate}" [matTooltipDisabled]="login_email.valid" [disabled]="login_email.invalid" [class.btn-progress]="resetLoading" (click)="sendReset(login_email.value)">
+                                    {{ 'STOWARZYSZENIE.MODULES.AUTH.RESET_PASS_BEFORE_BTN' | translate }}
+                                </button>
+
+                                <ng-template #noLoading>
+                                    <span>
+                                        {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.BUTTON_SEND' | translate }}
+                                    </span>
                                 </ng-template>
-                            </mat-hint>
+                              </div>
+                        </div> 
+    
+                        <ng-template #sent>
+                            <h1>
+                                {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.SENT_TITLE' | translate }}
+                            </h1>
+    
+                            <p>
+                                {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.SENT_DESC' | translate }}
+                            </p>
+                       </ng-template> 
+                    </form>
 
-                            <div class="alert-icon">
-                                <!-- <div *ngIf="(login_email.dirty || login_email.touched) && login_email.valid && !isLoading">
-                                    <i class="fas fa-check ok"></i>
-                                </div>
-                                <div *ngIf="(login_email.dirty || login_email.touched) && login_email.invalid && !isLoading">
-                                    <i class="fas fa-times wrong"></i>
-                                </div> -->
-                                <div *ngIf="(login_email.dirty || login_email.touched) && isLoading" class="spinn">
-                                    <div class="spinner-border"></div>
-                                </div>
-                            </div>
-                        </mat-form-field>
-
-                        <button class="submit-button" (click)="sendReset(beforeResetForm.getRawValue())" [disabled]="!login_email.valid || isLoading">
-                          <div class="spinner-border" *ngIf="isLoading; else noLoading"></div>
-                        </button>
-
-                        <ng-template #noLoading>
-                            <span>
-                    {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.BUTTON_SEND' | translate }}
-                </span>
-                        </ng-template>
-                    </div>
-
-                    <ng-template #sent>
-                        <h1>
-                            Wysłano email
-                        </h1>
-
-                        <p>
-                            Email z linkiem do resetu hasła został wysłany. Sprawdź swoją skrzynkę mailową i podążaj za wysłanymi instrukcjami.
-                        </p>
-
-                        <button class="submit-button" (click)="sendReset(beforeResetForm)">
-              Przejdź do resetu
-            </button>
-                    </ng-template>
-                </form>
-
-                <a [routerLink]="['../login']" class="external-link primary">
-                    <i class="fas fa-arrow-left"></i> {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.BACK_TO_LOGIN' | translate }}
-                </a>
+                    <a [routerLink]="['../login']" class="btn text-primary">
+                        <i class="fas fa-arrow-left"></i> {{ 'STOWARZYSZENIE.MODULES.AUTH.FORGOT.BACK_TO_LOGIN' | translate }}
+                    </a>
+                </div>
             </div>
         </div>
     </div>

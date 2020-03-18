@@ -12,6 +12,7 @@ export class AfterResetComponent implements OnInit {
   afterResetForm: FormGroup;
   passwordIsHidden: boolean;
   private reseted: boolean;
+  private resettingLoader: boolean = false;
   private routeParams = {
     login_email: null,
     token: null
@@ -22,7 +23,6 @@ export class AfterResetComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private afterResetApiService: AfterResetApiService
   ) {
-    this.reseted = false;
     this.passwordIsHidden = true;
     this.activatedRoute.queryParams.subscribe(
       params => {
@@ -51,9 +51,17 @@ export class AfterResetComponent implements OnInit {
   }
 
   changePassword(afterResetForm: Object) {
-    this.reseted = true;
+    this.resettingLoader = true;
+    this.afterResetApiService.changePassword(afterResetForm).subscribe(data => {
+      console.log(data);
+      if (data.success) {
+        this.reseted = true;
+      } else {
+        this.reseted = false;
+      }
 
-    this.afterResetApiService.changePassword(afterResetForm).subscribe()
+      this.resettingLoader = false;
+    });
   }
 
   togglePassword() {

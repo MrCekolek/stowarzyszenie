@@ -130,7 +130,10 @@
                     "BACK_TO_LOGIN": "Return To Login",
                     "BUTTON_SEND": "Send a link",
                     "PAGE_HINT": "Forgot your account password? Reset them by entering the email address to which your account is assigned below (or the contact email if you have provided it). An email with a password reset link will be sent to the provided address.",
-                    "PAGE_TITLE": "Reset Password"
+                    "PAGE_TITLE": "Reset Password",
+                    "EMAIL_HINT": "Enter correct email addres to reset",
+                    "SENT_TITLE": "Email sent",
+                    "SENT_DESC": "Email with resetting instructions has been sent to your inbox. Follow the instructions included."
                 },
                 "LOGIN": {
                     "ALERT": {
@@ -213,6 +216,11 @@
                     "STEP3_TITLE": "Affiliation",
                     "STEP4_TITLE": "Contact Details",
                     "WOMAN": "I'm a woman"
+                },
+                "RESET_PASS_BEFORE_BTN": "Reset password",
+                "RESETTING": {
+                    "PAGE_TITLE": "Reset password",
+                    "PAGE_HINT": "Here you can reset your forgotten password. Type yout new password in field."
                 }
             },
             "NAVIGATION": {
