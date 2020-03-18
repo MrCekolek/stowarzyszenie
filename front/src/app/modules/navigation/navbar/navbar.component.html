@@ -50,7 +50,7 @@
 
     <div class="main-content" style="padding-top: 80px;">
         <div class="section container">
-            <router-outlet></router-outlet>
+            <router-outlet *ngIf="!this.loggedIn"></router-outlet>
         </div>
     </div>
 </div>
