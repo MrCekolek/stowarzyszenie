@@ -11,8 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-class CreateTileContentJob implements ShouldQueue
-{
+class CreateTileContentJob implements ShouldQueue {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $tileContent,
@@ -26,8 +25,7 @@ class CreateTileContentJob implements ShouldQueue
      * @param $input
      * @param $contents
      */
-    public function __construct($tileContent, $input, $contents)
-    {
+    public function __construct($tileContent, $input, $contents) {
         $this->tileContent = $tileContent;
         $this->input = $input;
         $this->contents = $contents;
@@ -38,8 +36,7 @@ class CreateTileContentJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
-    {
+    public function handle() {
         foreach (Tile::where('shared_id', $this->input['tile_shared_id'])
                      ->where('id', '!=', $this->input['tile_id'])
                      ->get() as $tile) {
@@ -74,6 +71,9 @@ class CreateTileContentJob implements ShouldQueue
                     $content->value_pl = '';
                     $content->value_en = '';
                     $content->value_ru = '';
+                    $content->filled_pl = '';
+                    $content->filled_en = '';
+                    $content->filled_ru = '';
                     $content->position = $this->contents->position;
                     $content->tile_content_id = $tileContent->id;
                     $content->tile_content_shared_id = $tileContent->shared_id;

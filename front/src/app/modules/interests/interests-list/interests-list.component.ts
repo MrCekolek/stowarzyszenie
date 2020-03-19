@@ -41,7 +41,6 @@ export class InterestsListComponent implements OnInit {
         }
       };
 
-      console.log(this.allInterests);
       this.loading = false;
     });
 

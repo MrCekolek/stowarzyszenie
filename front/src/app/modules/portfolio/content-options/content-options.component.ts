@@ -47,7 +47,6 @@ export class ContentOptionsComponent implements OnInit {
 
     this.translateLoading = true;
     this.apiService.post('translation/get', obj).subscribe(response => {
-      console.log(response);
       this.translations[0] = response.translation.name_pl;
       this.translations[1] = response.translation.name_en;
       this.translations[2] = response.translation.name_ru;
@@ -71,8 +70,6 @@ export class ContentOptionsComponent implements OnInit {
       tile_id: this.card.id,  
       tile_shared_id: this.card.shared_id
     };
-
-    console.log(this.newContent);
 
     this.portfolioApi.addNewContentToCard(this.newContent).subscribe(response => {
       console.log(response);

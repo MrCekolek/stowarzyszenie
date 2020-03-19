@@ -37,6 +37,10 @@ export class NewTranslationModalComponent implements OnInit {
     this.modal_type = data.modal_type;
 
     if (data.translation) {
+      this.translation.translation_pl = data.translation.translation_pl;
+      this.translation.translation_en = data.translation.translation_en;
+      this.translation.translation_ru = data.translation.translation_ru;
+
       this.translation.translation_key = data.translation.translation_key;
 
       if (data.translation.translation_pl && data.translation.translation_en && data.translation.translation_ru) {

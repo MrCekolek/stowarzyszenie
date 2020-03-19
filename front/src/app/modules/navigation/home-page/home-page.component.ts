@@ -35,7 +35,6 @@ export class HomePageComponent implements OnInit {
       };
   
       this.navigationApi.getHomeLink(obj).subscribe(res => {
-        console.log(res);
         this.navigationService.selectedPage = res.homeNavigation;
       });
     });

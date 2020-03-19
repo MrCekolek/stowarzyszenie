@@ -43,7 +43,7 @@ class TileContent extends BaseModel {
 
     public static function addTileContent($input, &$success) {
         $tileContent = new self();
-        $tileContent->shared_id = self::where('tile_shared_id', $input['tile_shared_id'])->max('shared_id') + 1;
+        $tileContent->shared_id = self::max('shared_id') + 1;
         $tileContent->name_pl = $input['name_pl'];
         $tileContent->name_en = $input['name_en'];
         $tileContent->name_ru = $input['name_ru'];
@@ -81,7 +81,7 @@ class TileContent extends BaseModel {
 
     public static function addContent($tileContent, $options) {
         $contents = [];
-        $sharedId = Content::where('tile_content_shared_id', $tileContent->id)->max('shared_id') + 1;
+        $sharedId = Content::max('shared_id') + 1;
 
         if ($tileContent->type === self::types()['input'] || $tileContent->type === self::types()['textarea']) {
             $content = new Content();
@@ -89,6 +89,9 @@ class TileContent extends BaseModel {
             $content->value_pl = '';
             $content->value_en = '';
             $content->value_ru = '';
+            $content->filled_pl = '';
+            $content->filled_en = '';
+            $content->filled_ru = '';
             $content->position = Content::where('tile_content_shared_id', $tileContent->id)->max('position') + 1;
             $content->tile_content_id = $tileContent->id;
             $content->tile_content_shared_id = $tileContent->shared_id;

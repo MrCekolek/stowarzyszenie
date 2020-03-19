@@ -44,9 +44,9 @@
                 </label>
 
                 <div class="input-group">
-                    <input type="text" class="form-control" #translateInput aria-label="">
+                    <input type="text" class="form-control" #translateInput aria-label="" [(ngModel)]="this.newContent['name_' + this.lang]">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button" [class.btn-progress]="this.titleLoading" (click)="translate(translateInput.value, 'title')">
+                        <button class="btn btn-primary" type="button" [class.btn-progress]="this.titleLoading" (click)="translate(translateInput.value, 'title')" [disabled]="this.newContent['name_' + this.lang] === ''">
                             {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
                         </button>
                     </div>
@@ -67,9 +67,9 @@
                 </label>
 
                 <div class="input-group">
-                    <input type="text" class="form-control" #translateTextArea aria-label="">
+                    <input type="text" class="form-control" #translateTextArea aria-label="" [(ngModel)]="this.newContent['name_' + this.lang]">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button" [class.btn-progress]="this.titleLoading" (click)="translate(translateTextArea.value, 'title')">
+                        <button class="btn btn-primary" type="button" [class.btn-progress]="this.titleLoading" (click)="translate(translateTextArea.value, 'title')" [disabled]="this.newContent['name_' + this.lang] === ''">
                             {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
                         </button>
                     </div>
@@ -90,9 +90,9 @@
                 </label>
 
                 <div class="input-group">
-                    <input type="text" class="form-control" #translateChck aria-label="">
+                    <input type="text" class="form-control" #translateChck aria-label="" [(ngModel)]="this.newContent['name_' + this.lang]">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button" [class.btn-progress]="this.titleLoading" (click)="translate(translateChck.value, 'title')">
+                        <button class="btn btn-primary" type="button" [class.btn-progress]="this.titleLoading" (click)="translate(translateChck.value, 'title')" [disabled]="this.newContent['name_' + this.lang] === ''">
                             {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
                         </button>
                     </div>
@@ -114,10 +114,10 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button type="button" class="btn btn-primary"  *ngIf="modal_type === 'new'" (click)="addNewContent()">
+    <button type="button" class="btn btn-primary"  *ngIf="modal_type === 'new'" (click)="addNewContent()" [disabled]="this.titleTranslations.length === 0" [class.btn-progress]="this.isSaving">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
     </button>
-    <button type="button" class="btn btn-primary" *ngIf="modal_type === 'edit'" (click)="updateContent()">
+    <button type="button" class="btn btn-primary" *ngIf="modal_type === 'edit'" [class.btn-progress]="this.isSaving">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE' | translate }}
     </button>
     <button type="button " class="btn btn-link" (click)="dismiss()">

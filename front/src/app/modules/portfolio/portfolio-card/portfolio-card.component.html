@@ -1,4 +1,4 @@
-<div *ngIf="this.role === 'admin' || (this.role === 'user' && !this.preview && this.userID == this.userProvider.getUser().id) || (this.role === 'user' && this.preview && this.card.admin_visibility && this.card.user_visibility)" class="card" [ngClass]="{ 'disabled': this.card.admin_visibility == 0 || (this.role === 'user' && this.card.user_visibility == 0) }">
+<div class="card" [ngClass]="{ 'disabled': this.card.admin_visibility == 0 || (this.role === 'user' && this.card.user_visibility == 0) }">
     <div class="card-header">
         <h4>
             {{ card['name_' + this.lang] }}
@@ -37,7 +37,7 @@
         </div>
 
         <ng-template #content>
-            <div *ngIf="contents.length === 0">
+            <div *ngIf="contents.length === 0 || (this.preview && this.checkIfAllContentsInvisible(contents))">
                 <div class="empty-state" data-height="200" style="height: 200px;">
                     <div class="empty-state-icon">
                         <i class="fas fa-question"></i>
@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <div class="contents" *ngIf="contents.length > 0">
+            <div class="contents" *ngIf="(contents.length > 0 && !this.preview) || (this.preview && !this.checkIfAllContentsInvisible(contents))">
                 <ul class="list-unstyled">
                     <li class="list-item" *ngFor="let content of contents; let i = index">
                         <div *ngIf="this.role === 'admin' || (this.role === 'user' && !this.preview && (this.userID == this.userProvider.getUser().id)) || (this.role === 'user' && this.preview && content.admin_visibility && content.user_visibility)"

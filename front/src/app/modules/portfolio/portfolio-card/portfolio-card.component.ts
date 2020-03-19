@@ -4,7 +4,6 @@ import { CardContent } from '../../../shared/models/card-content';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { CardContentModalComponent } from '../card-content-modal/card-content-modal.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
-import { PortfolioCard } from 'src/app/shared/models/portfollio-card.model';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 import { AlertModel } from 'src/app/shared/models/alert.model';
 import { Route } from '@angular/compiler/src/core';
@@ -200,6 +199,10 @@ export class PortfolioCardComponent implements OnInit {
   }
 
   openFillContentModal(content: any, contentType: any) {
+    var contentFilledPl = content.contents[0].filled_pl;
+    var contentFilledEn = content.contents[0].filled_en;
+    var contentFilledRu = content.contents[0].filled_ru;
+
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
@@ -219,6 +222,10 @@ export class PortfolioCardComponent implements OnInit {
           this.contents[index].contents[0].filled_pl = data.contents[0].filled_pl;
           this.contents[index].contents[0].filled_en = data.contents[0].filled_en;
           this.contents[index].contents[0].filled_ru = data.contents[0].filled_ru;
+        } else {
+          content.contents[0].filled_pl = contentFilledPl;
+          content.contents[0].filled_en = contentFilledEn;
+          content.contents[0].filled_ru = contentFilledRu;
         }
       }
     );
@@ -239,5 +246,17 @@ export class PortfolioCardComponent implements OnInit {
           }
         }
     );
+  }
+
+  checkIfAllContentsInvisible(contents) {
+    var allInvisible = true;
+
+    for (let i = 0; i < contents.length; i++) {
+      if (contents[i].admin_visibility == 1 && contents[i].user_visibility == 1) {
+        allInvisible = false;
+      }
+    }
+
+    return allInvisible;
   }
 }

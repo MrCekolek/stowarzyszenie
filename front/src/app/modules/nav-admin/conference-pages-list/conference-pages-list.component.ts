@@ -60,7 +60,6 @@ export class ConferencePagesListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       (data) => {
         if (data) {
-          console.log(data);
           if (data.success) {
             const index = this.links.indexOf(data.page);
             this.links.splice(index, 1);
@@ -69,5 +68,4 @@ export class ConferencePagesListComponent implements OnInit {
       }
     );
   }
-
 }

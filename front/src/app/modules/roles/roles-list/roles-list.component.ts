@@ -122,6 +122,10 @@ export class RolesListComponent implements OnInit {
   }
 
   openEditRoleModal(role) {
+    var roleNamePl = role.name_pl;
+    var roleNameEn = role.name_en;
+    var roleNameRu = role.name_ru;
+
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
@@ -143,6 +147,10 @@ export class RolesListComponent implements OnInit {
           } else {
             this.alert = new AlertModel('danger', data.message);
           }
+        } else {
+          role.name_pl = roleNamePl;
+          role.name_en = roleNameEn;
+          role.name_ru = roleNameRu;
         }
       }
     );

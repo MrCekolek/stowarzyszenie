@@ -20,12 +20,9 @@ export class InterestsComponent implements OnInit {
   // TODO: pobrac interesty dla użytkownika
   ngOnInit() {
     this.interestsApiService.getAllInterests().subscribe(res => {
-      console.log(res);
       if (res.success) {
         this.interests = res.interests;
       }
     });
-
-    console.log(this.role);
   }
 }

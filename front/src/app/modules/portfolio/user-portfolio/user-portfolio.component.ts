@@ -41,35 +41,47 @@ export class UserPortfolioComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.descEditing = false;
-    
-    this.userID = this.route.snapshot.params['id'];
 
-    this.loginServie.getUserByID(this.userID).subscribe(res => {
-      this.user = res.user;
-      this.description = this.user.portfolio.description;
-      this.isOwner = this.userID == this.userProvider.getUser().id;
+    this.route.paramMap.subscribe(
+        (params) => {
+            this.loading = true;
+            this.preview = false;
 
-      if (this.route.snapshot.queryParamMap.get('preview') == 'true') {
-        this.preview = true;
-      } else {
-        this.preview = !this.isOwner;
-      }
+            this.userID = params.get('id');
 
-    }, () => {}, () => {
-      //get roles
-      for (let i = 0; i < this.user.roles.length; i++) {
-        this.rolesList += this.user.roles[i]['name_' + this.lang] + ' ';
-      }
+            this.loginServie.getUserByID(this.userID).subscribe(
+                (res) => {
+                  this.user = res.user;
+                  this.description = this.user.portfolio.description;
+                  this.isOwner = this.userID == this.userProvider.getUser().id;
 
-      this.loading = false;
-    });
+                  if (this.route.snapshot.queryParamMap.get('preview') == 'true') {
+                    this.preview = true;
+                  } else {
+                    this.preview = !this.isOwner;
+                  }
+                },
+                () => {},
+                () => {
+                  //get roles
+                  for (let i = 0; i < this.user.roles.length; i++) {
+                    this.rolesList += this.user.roles[i]['name_' + this.lang] + ' ';
+                  }
+                }
+            );
 
-    this.portfolioService.getTabs(this.userID).subscribe(value => {
-      this.allTabs = value.portfolioTabs;
-      this.loading = false;
-    });
+            this.portfolioService.getTabs(this.userID).subscribe(value => {
+              this.allTabs = value.portfolioTabs;
+              this.loading = false;
+            });
+        },
+        () => {},
+        () => {
+            this.loading = false;
+        }
+    );
 
-    this.languageService.currentLang.subscribe( lg => {
+    this.languageService.currentLang.subscribe(lg => {
       this.lang = lg;
     });
   }

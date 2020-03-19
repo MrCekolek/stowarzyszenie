@@ -82,7 +82,6 @@ export class PageEditComponent implements OnInit {
 
     this.navigationApi.getHomeLink(link).subscribe(res => {
       this.page = res.homeNavigation;
-      console.log(this.page);
       this.pageLoading = false;
     });
   }

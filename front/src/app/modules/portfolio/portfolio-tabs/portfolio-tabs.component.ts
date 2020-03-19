@@ -117,6 +117,12 @@ export class PortfolioTabsComponent implements OnInit {
   }
 
   openTabModal(type: string, tab?: any) {
+    if (type === 'edit') {
+      var tabNamePl = tab.name_pl;
+      var tabNameEn = tab.name_en;
+      var tabNameRu = tab.name_ru;
+    }
+
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
@@ -142,6 +148,12 @@ export class PortfolioTabsComponent implements OnInit {
             }
           } else {
             this.alert = new AlertModel('danger', data.message);
+          }
+        } else {
+          if (type === 'edit') {
+            tab.name_pl = tabNamePl;
+            tab.name_en = tabNameEn;
+            tab.name_ru = tabNameRu;
           }
         }
       }
@@ -207,6 +219,10 @@ export class PortfolioTabsComponent implements OnInit {
   }
 
   editCard(card) {
+    var cardNamePl = card.name_pl;
+    var cardNameEn = card.name_en;
+    var cardNameRu = card.name_ru;
+
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
@@ -228,6 +244,10 @@ export class PortfolioTabsComponent implements OnInit {
           } else {
             this.alert = new AlertModel('danger', data.message);
           }
+        } else {
+          card.name_pl = cardNamePl;
+          card.name_en = cardNameEn;
+          card.name_ru = cardNameRu;
         }
       }
     );
