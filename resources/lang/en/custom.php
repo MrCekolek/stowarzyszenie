@@ -32,5 +32,19 @@ return [
             "read" => "Data read successfully.",
             "update" => "The data has been successfully modified."
         ]
+    ],
+    "blade" => [
+        "passwordReset" => [
+            "change_request" => "Change Password Request",
+            "before_information" => "Click on the button below to change password.",
+            "button_name" => "Reset Password",
+            "after_information" => "Thanks,"
+        ],
+        "signUp" => [
+            "signup_request" => "Account authentication",
+            "before_information" => "Click on the button below to activate account.",
+            "button_name" => "Activate Account",
+            "after_information" => "Thanks,"
+        ]
     ]
 ];

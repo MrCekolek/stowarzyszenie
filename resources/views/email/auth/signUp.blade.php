@@ -1,12 +1,12 @@
 @component('mail::message')
-# Account authentication
+# {{ __('custom.blade.signUp.signup_request', [], $lang) }}
 
-Click on the button below to activate account.
+{{ __('custom.blade.signUp.before_information', [], $lang) }}
 
 @component('mail::button', ['url' =>  config('app.url') . '/api/account/activate?token=' . $token])
-    Activate Account
+    {{ __('custom.blade.signUp.button_name', [], $lang) }}
 @endcomponent
 
-Thanks,<br>
+{{ __('custom.blade.signUp.after_information', [], $lang) }} <br>
 {{ config('app.name') }}
 @endcomponent

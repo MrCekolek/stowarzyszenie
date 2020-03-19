@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Jobs\SendPasswordResetEmailJob;
 use App\Models\PasswordReset;
+use App\Models\PreferenceUser;
+use App\Models\User;
 use App\Services\LogService;
+use App\Traits\ValidateLangable;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -18,6 +21,8 @@ use Illuminate\Support\Str;
  * @author  Stowarzyszenie CIOB <CIOBstowarzyszenie@gmail.com>
  */
 class ResetPasswordController extends Controller {
+    use ValidateLangable;
+
     /**
      * @OA\Post(
      *     path="/account/password/reset",
@@ -55,8 +60,9 @@ class ResetPasswordController extends Controller {
 
     public function send($email) {
         $token = $this->createToken($email);
+        $lang = self::validateLang(PreferenceUser::where('user_id', User::where('login_email', $email)->first()->id)->first()->lang);
 
-        SendPasswordResetEmailJob::dispatch($email, $token);
+        SendPasswordResetEmailJob::dispatch($email, $lang, $token);
     }
 
     public function createToken($email) {

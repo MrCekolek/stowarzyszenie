@@ -36,6 +36,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
 
   }
+
   createForm() {
     this.registerFormStep1 = this.formBuilder.group({
       'login_email': ['', [

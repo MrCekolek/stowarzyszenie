@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Services\ErrorService;
 use App\Services\LogService;
 use App\Traits\Translatable;
+use App\Traits\ValidateLangable;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,7 +25,8 @@ use Illuminate\Support\Str;
  * @author  Stowarzyszenie CIOB <CIOBstowarzyszenie@gmail.com>
  */
 class AuthController extends Controller {
-    use Translatable;
+    use Translatable,
+        ValidateLangable;
 
     /**
      * Create a new AuthController instance.
@@ -225,6 +227,13 @@ class AuthController extends Controller {
             'phone_number' => $input['phone_number']
         ]);
 
+        PreferenceUser::create([
+            'avatar' => $input['avatar'],
+            'time_zone' => $time_zone,
+            'lang' => $input['lang'],
+            'user_id' => $user['id']
+        ]);
+
         AffiliationUser::create([
             'title' => $input['title'],
             'institution' => $input['institution'],
@@ -235,24 +244,17 @@ class AuthController extends Controller {
             'user_id' => $user['id']
         ]);
 
-        PreferenceUser::create([
-            'avatar' => $input['avatar'],
-            'time_zone' => $time_zone,
-            'lang' => $input['lang'],
-            'user_id' => $user['id']
-        ]);
-
-        $this->send($input['login_email']);
+        $this->send($input['lang'], $input['login_email']);
     }
 
     public function getGeolocation() {
         return PreferenceUserController::getGeolocation();
     }
 
-    public function send($email) {
+    public function send($lang, $email) {
         $token = $this->createToken($email);
 
-        SendAuthEmailJob::dispatch($email, $token);
+        SendAuthEmailJob::dispatch($email, $lang, $token);
     }
 
     public function createToken($email) {
@@ -271,7 +273,7 @@ class AuthController extends Controller {
     public function accountResendRegister(Request $request) {
         $input = $request->all();
 
-        $this->send($input['login_email']);
+        $this->send($input['lang'], $input['login_email']);
     }
 
     /**

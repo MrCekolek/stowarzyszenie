@@ -53,6 +53,10 @@ export class LanguageService {
     );
   }
 
+  setLangWithoutDB(lang) {
+    this.lang.next(lang);
+  }
+
   getUser() {
     return this.userProviderService.getUser();
   }

@@ -51,6 +51,10 @@ export class StepperComponent extends CdkStepper implements OnInit {
     this.registerComponent.registerAccount(this.getRegisterModel());
   }
 
+  isLoading() {
+    return this.registerComponent.isLoading;
+  }
+
   resendEmailActivation() {
     this.registerComponent.resendEmailActivation(this.getRegisterModel());
   }
