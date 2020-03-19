@@ -12,6 +12,7 @@ export class AfterResetComponent implements OnInit {
   afterResetForm: FormGroup;
   passwordIsHidden: boolean;
   private reseted: boolean;
+  private resetingError;
   private resettingLoader: boolean = false;
   private routeParams = {
     login_email: null,
@@ -33,6 +34,7 @@ export class AfterResetComponent implements OnInit {
 
   ngOnInit() {
     this.reseted = false;
+    this.resetingError = '';
 
     this.createForm();
   }
@@ -54,15 +56,20 @@ export class AfterResetComponent implements OnInit {
 
   changePassword(afterResetForm: Object) {
     this.resettingLoader = true;
-    this.afterResetApiService.changePassword(afterResetForm).subscribe(data => {
-      if (data.success) {
-        this.reseted = true;
-      } else {
-        this.reseted = false;
+    this.afterResetApiService.changePassword(afterResetForm).subscribe(
+      (data) => {
+        if (data.success) {
+          this.reseted = true;
+        } else {
+          this.resetingError = data.error.token[0];
+          this.reseted = false;
+        }
+      },
+      () => {},
+      () => {
+        this.resettingLoader = false;
       }
-
-      this.resettingLoader = false;
-    });
+    );
   }
 
   togglePassword() {

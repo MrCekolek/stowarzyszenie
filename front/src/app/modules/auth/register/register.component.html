@@ -112,7 +112,8 @@
                 </label>
 
                 <!-- birthdate picker -->
-                <input type="text" class="form-control datemask" id="birthdate" formControlName="birthdate" #datepicker placeholder="DD/MM/YYYY">
+                <input type="text" class="form-control datemask" id="birthdate" formControlName="birthdate" #datepicker placeholder="DD/MM/YYYY" [ngClass]="{'is-valid': (birthdate.dirty || birthdate.touched) && birthdate.valid,
+                'is-invalid': (birthdate.dirty || birthdate.touched) && birthdate.invalid}">
 
                 <!-- feedback -->
                 <div class="invalid-feedback" *ngIf="(birthdate.dirty || birthdate.touched) && birthdate.invalid && birthdate.errors.required">
@@ -159,10 +160,10 @@
             <!-- academic title -->
             <div class="form-group">
                 <label>
-                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.TITLE' | translate }} *
+                    {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.TITLE' | translate }}
                 </label>
 
-                <input id="title" formControlName="title" type="text" class="form-control" required>
+                <input id="title" formControlName="title" type="text" class="form-control">
                 <div class="valid-feedback text-muted">
                     {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.AFFILIATION.TITLE_HINT' | translate }}
                 </div>
@@ -249,10 +250,10 @@
                         </div>
                     </div>
                     <!-- input for email -->
-                    <input class="form-control" id="contact_email" formControlName="contact_email" type="email" placeholder="your.email@domain.com" required [ngClass]="{'is-valid': (login_email.dirty || login_email.touched) && login_email.valid, 
-                        'is-invalid': (login_email.dirty || login_email.touched) && login_email.invalid}">
+                    <input class="form-control" id="contact_email" formControlName="contact_email" type="email" placeholder="your.email@domain.com" required [ngClass]="{'is-valid': (contact_email.dirty || contact_email.touched) && contact_email.valid,
+                        'is-invalid': (contact_email.dirty || contact_email.touched) && contact_email.invalid}">
                     <!-- feedback divs -->
-                    <div class="valid-feedback text-muted" style="display: block;" *ngIf="contact_email.valid || contact_email.untouched; else contactEmailInvalid ">
+                    <div class="valid-feedback text-muted" style="display: block;" *ngIf="contact_email.valid || contact_email.untouched">
                         {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.CONTACT_EMAIL_HINT' | translate }}
                     </div>
                     <div class="invalid-feedback" *ngIf="(contact_email.dirty || contact_email.touched) && contact_email.invalid && contact_email.errors.email ">

@@ -1,12 +1,12 @@
 @component('mail::message')
-# Change Password Request
+# {{ __('custom.blade.passwordReset.change_request', [], $lang) }}
 
-Click on the button below to change password.
+{{ __('custom.blade.passwordReset.before_information', [], $lang) }}
 
 @component('mail::button', ['url' => config('app.front_url') . '/auth/onreset?login_email=' . $email . '&token=' . $token])
-    Reset Password
+    {{ __('custom.blade.passwordReset.button_name', [], $lang) }}
 @endcomponent
 
-Thanks,<br>
+{{ __('custom.blade.passwordReset.after_information', [], $lang) }} <br>
 {{ config('app.name') }}
 @endcomponent

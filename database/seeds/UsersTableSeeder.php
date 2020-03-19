@@ -13,12 +13,27 @@ class UsersTableSeeder extends Seeder {
      */
     public function run() {
         // generowanie admina
-        factory(User::class)->create([
+        $user = factory(User::class)->create([
             'first_name' => 'Admin',
             'last_name' => '',
             'login_email' => 'admin@admin.pl',
             'password' => 'admin123'
-        ])->each(function ($user) {
+        ]);
+
+        factory(PreferenceUser::class)->create([
+            'user_id' => $user->id
+        ]);
+
+        factory(AffiliationUser::class)->create([
+            'user_id' => $user->id
+        ]);
+
+        // generowanie reszty uzytkownikow
+        for ($i = 0; $i < 5; $i++) {
+            $user = factory(User::class)->create([
+                'password' => '12345678'
+            ]);
+
             factory(PreferenceUser::class)->create([
                 'user_id' => $user->id
             ]);
@@ -26,21 +41,6 @@ class UsersTableSeeder extends Seeder {
             factory(AffiliationUser::class)->create([
                 'user_id' => $user->id
             ]);
-        });
-
-        // generowanie reszty uzytkownikow
-        for ($i = 0; $i < 5; $i++) {
-            factory(User::class)->create([
-                'password' => '12345678'
-            ])->each(function ($user) {
-                factory(PreferenceUser::class)->create([
-                    'user_id' => $user->id
-                ]);
-
-                factory(AffiliationUser::class)->create([
-                    'user_id' => $user->id
-                ]);
-            });
         }
     }
 }
