@@ -16,6 +16,19 @@
       <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
           <div class="card">
               <div class="card-body">
+                  <!-- alert for errors with signing in -->
+                  <div class="alert alert-danger alert-has-icon text-white" *ngIf="this.resetingError != ''">
+                      <div class="alert-icon">
+                          <i class="fas fa-exclamation-triangle"></i>
+                      </div>
+                      <div class="alert-body">
+                          <div class="alert-title">
+                              {{ 'STOWARZYSZENIE.MODULES.AUTH.LOGIN.ALERT.TITLE' | translate }}
+                          </div>
+                          {{ this.resetingError | translate }}
+                      </div>
+                  </div>
+
                   <form [formGroup]="afterResetForm">
                       <div *ngIf="!this.reseted else resetedNg">
                           <div class="form-group">
@@ -32,9 +45,9 @@
                                 [class.is-valid]="password.valid"
                                 [class.is-invalid]="password.dirty && password.invalid">
 
-                                <div class="input-group-append">
+                                <div class="input-group-append" (click)="this.passwordIsHidden = !this.passwordIsHidden">
                                   <div class="input-group-text">
-                                      <div (click)="this.passwordIsHidden = !this.passwordIsHidden">
+                                      <div>
                                         <i class="fas fa-eye" *ngIf="this.passwordIsHidden"></i>
                                         <i class="fas fa-eye-slash" *ngIf="!this.passwordIsHidden"></i>
                                       </div>
@@ -58,7 +71,8 @@
                               <button class="btn btn-block btn-primary"
                                 [disabled]="password.invalid"
                                 (click)="changePassword(afterResetForm.getRawValue())"
-                                [disabled]="!afterResetForm.valid">
+                                [disabled]="!afterResetForm.valid"
+                                [ngClass]="{'btn-progress': this.resettingLoader}">
                                 {{ 'STOWARZYSZENIE.MODULES.AUTH.REGISTER.RESET.BUTTON' | translate }}
                               </button>
 

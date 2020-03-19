@@ -9,14 +9,16 @@ use Illuminate\Queue\SerializesModels;
 class SignUpMail extends Mailable {
     use Queueable, SerializesModels;
 
-    public $token;
+    public $lang,
+        $token;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($token) {
+    public function __construct($lang, $token) {
+        $this->lang = $lang;
         $this->token = $token;
     }
 
@@ -27,6 +29,7 @@ class SignUpMail extends Mailable {
      */
     public function build() {
         return $this->markdown('email.auth.signUp')->with([
+            'lang' => $this->lang,
             'token' => $this->token
         ]);
     }

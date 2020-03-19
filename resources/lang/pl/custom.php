@@ -30,5 +30,19 @@ return [
             "read" => "Pomyślnie odczytano dane.",
             "update" => "Pomyślnie zmodyfikowano dane."
         ]
+    ],
+    "blade" => [
+        "passwordReset" => [
+            "change_request" => "Prośba o zmianę hasła",
+            "before_information" => "Kliknij przycisk poniżej, aby zmienić hasło.",
+            "button_name" => "Zresetuj hasło",
+            "after_information" => "Dziękujemy,"
+        ],
+        "signUp" => [
+            "signup_request" => "Aktywacja konta",
+            "before_information" => "Kliknij przycisk poniżej, aby aktywować konto.",
+            "button_name" => "Aktywuj konto",
+            "after_information" => "Dziękujemy,"
+        ]
     ]
 ];

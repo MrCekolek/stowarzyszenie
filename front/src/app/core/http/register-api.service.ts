@@ -27,6 +27,7 @@ export class RegisterApiService {
   }
 
   resendEmailActivation(registerModel: RegisterModel) {
+    registerModel.setLang(this.translateService.currentLang);
     return this.api.post('account/register/resend', registerModel);
   }
 }

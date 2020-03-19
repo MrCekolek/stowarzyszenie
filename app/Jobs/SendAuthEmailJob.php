@@ -13,15 +13,18 @@ use Illuminate\Support\Facades\Mail;
 class SendAuthEmailJob implements ShouldQueue {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $email, $token;
+    private $email,
+        $lang,
+        $token;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($email, $token) {
+    public function __construct($email, $lang, $token) {
         $this->email = $email;
+        $this->lang = $lang;
         $this->token = $token;
     }
 
@@ -31,6 +34,6 @@ class SendAuthEmailJob implements ShouldQueue {
      * @return void
      */
     public function handle() {
-        Mail::to($this->email)->send(new SignUpMail($this->token));
+        Mail::to($this->email)->send(new SignUpMail($this->lang, $this->token));
     }
 }
