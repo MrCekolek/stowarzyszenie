@@ -34,8 +34,6 @@ export class WholePortfolioComponent implements OnInit {
     this.languageService.currentLang.subscribe( lg => {
       this.lang = lg;
     });
-
-    console.log(this.userProvider.checkPermission('USERS.ADD'));
   }
 
   sortTabsByPosition() {

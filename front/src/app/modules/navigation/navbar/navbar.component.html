@@ -73,7 +73,7 @@
                         <button class="btn" type="submit"><i class="fas fa-search"></i></button>
                     </form> -->
 
-                    <input #searchinput class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250" style="width: 250px;" (keyup)="searchUsers(searchinput.value)">
+                    <input #searchinput class="form-control" type="search" placeholder="{{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SEARCHBAR.SEARCH' | translate }}" aria-label="Search" data-width="250" style="width: 250px;" (keyup)="searchUsers(searchinput.value)">
                     <button class="btn" type="submit"><i class="fas fa-search"></i></button>
                     <div class="search-backdrop"></div>
                     <div class="search-result">
@@ -116,12 +116,12 @@
                                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <td class="text-align-right">
-                                        <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="See profile">
-                            <i class="fas fa-address-card"></i>
-                          </button>
-                                        <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="Send message">
-                            <i class="fas fa-envelope"></i>
-                          </button>
+                                        <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="{{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SEARCHBAR.SEE_PROFILE' | translate }}" [routerLink]="['/users/profile/', row.id]">
+                                            <i class="fas fa-address-card"></i>
+                                        </button>
+<!--                                        <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="Send message">-->
+<!--                                            <i class="fas fa-envelope"></i>-->
+<!--                                        </button>-->
                                     </td>
                                 </mat-cell>
                             </ng-container>

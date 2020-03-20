@@ -15,7 +15,7 @@
             <input *ngIf="this.type === 'input'" type="text" class="form-control" aria-label="" [(ngModel)]="content?.contents[0]['filled_' + this.lang]">
             <textarea *ngIf="this.type === 'textarea'" class="form-control" aria-label="" [(ngModel)]="content?.contents[0]['filled_' + this.lang]"></textarea>
             <div class="input-group-append">
-                <button class="btn btn-primary" type="button" [class.btn-progress]="this.translating" (click)="translate()">
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.translating" (click)="translate()" [disabled]="content?.contents[0]['filled_' + this.lang] === ''">
                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
                 </button>
             </div>
@@ -26,7 +26,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button type="button" [class.btn-progress]="this.isSaving" class="btn btn-primary" (click)="updateContent()">
+    <button type="button" [class.btn-progress]="this.isSaving" class="btn btn-primary" (click)="updateContent()" [disabled]="this.translations.length === 0">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE' | translate }}
     </button>
     <button type="button " class="btn btn-link" (click)="dismiss()">

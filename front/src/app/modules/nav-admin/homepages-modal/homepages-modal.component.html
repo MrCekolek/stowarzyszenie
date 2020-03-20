@@ -11,9 +11,9 @@
         </label>
 
         <div class="input-group">
-            <input type="text" class="form-control" #new>
+            <input type="text" class="form-control" #new [(ngModel)]="this.page['name_' + this.lang]">
             <div class="input-group-append">
-                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getTranslations(new.value)" >
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getTranslations(new.value)" [disabled]="this.page['name_' + this.lang] === ''">
                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
                 </button>
             </div>
@@ -23,7 +23,7 @@
     <app-translations-list *ngIf="this.translations.length != 0" [translations]="this.translations" [type]="'input'"></app-translations-list>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button type="button" class="btn btn-primary" [class.btn-progress]="isSaving" (click)="addPage()" >
+    <button type="button" class="btn btn-primary" [class.btn-progress]="this.isSaving" (click)="addPage()" [disabled]="this.translations.length === 0">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
     </button>
     <button type="button " class="btn btn-link" (click)="dismiss()">

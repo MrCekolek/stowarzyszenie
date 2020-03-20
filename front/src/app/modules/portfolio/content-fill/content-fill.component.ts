@@ -28,8 +28,6 @@ export class ContentFillComponent implements OnInit {
     private portfolioService: PortfolioService
   ) { 
     if (data.content) {
-      console.log(data.content);
-
       this.content = data.content;
       this.type = data.type;
 

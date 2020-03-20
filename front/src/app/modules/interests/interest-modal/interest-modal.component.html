@@ -16,12 +16,12 @@
         </label>
 
         <div class="input-group">
-            <input type="text" class="form-control" #new aria-label="" [value]="interest['name_' + this.lang]">
+            <input type="text" class="form-control" #new aria-label="" [(ngModel)]="interest['name_' + this.lang]">
             <div class="input-group-append">
-                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getInterestTranslations(new.value)" *ngIf="this.modal_type == 'new'">
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getInterestTranslations(new.value)" *ngIf="this.modal_type == 'new'" [disabled]="interest['name_' + this.lang] === ''">
                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
                 </button>
-                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="updateInterest()" *ngIf="this.modal_type == 'edit'">
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="updateInterest()" *ngIf="this.modal_type == 'edit'" [disabled]="interest['name_' + this.lang] === ''">
                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
                 </button>
             </div>

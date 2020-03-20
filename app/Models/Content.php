@@ -29,12 +29,12 @@ class Content extends BaseModel {
 
     public static function addContent($input, &$success) {
         $content = new self();
-        $content->shared_id = self::where('tile_content_shared_id')->max('shared_id') + 1;
+        $content->shared_id = self::max('shared_id') + 1;
         $content->value_pl = $input['value_pl'];
         $content->value_en = $input['value_en'];
         $content->value_ru = $input['value_ru'];
         $content->selected = $input['selected'];
-        $content->position = self::where('tile_content_shared_id')->max('position') + 1;
+        $content->position = self::where('tile_content_shared_id', $input['tile_content_shared_id'])->max('position') + 1;
         $content->tile_content_id = $input['tile_content_id'];
         $content->tile_content_shared_id = $input['tile_content_shared_id'];
         $success = $content->save();

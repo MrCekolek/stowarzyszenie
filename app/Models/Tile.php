@@ -29,7 +29,7 @@ class Tile extends BaseModel {
 
     public static function addTile($input, &$success) {
         $tile = new self();
-        $tile->shared_id = self::where('portfolio_tab_shared_id', $input['portfolio_tab_shared_id'])->max('shared_id') + 1;
+        $tile->shared_id = self::max('shared_id') + 1;
         $tile->name_pl = $input['name_pl'];
         $tile->name_en = $input['name_en'];
         $tile->name_ru = $input['name_ru'];

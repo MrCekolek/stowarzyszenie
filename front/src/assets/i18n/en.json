@@ -246,7 +246,9 @@
                     "REGISTER": "Register"
                 },
                 "SEARCHBAR": {
-                    "TITLE": "Members"
+                    "TITLE": "Members",
+                    "SEARCH": "Search...",
+                    "SEE_PROFILE": "See profile"
                 },
                 "SIDENAV": {
                     "DASHBOARD": "Dashboard",

@@ -16,9 +16,9 @@
         </label>
 
         <div class="input-group">
-            <input type="text" class="form-control" #new aria-label="" [value]="tab['name_' + this.lang]">
+            <input type="text" class="form-control" #new aria-label="" [(ngModel)]="tab['name_' + this.lang]">
             <div class="input-group-append">
-                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getTabTranslations(new.value)" *ngIf="this.modal_type == 'new'">
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getTabTranslations(new.value)" *ngIf="this.modal_type == 'new'" [disabled]="tab['name_' + this.lang] === ''">
                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
                 </button>
                 <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="updateTab()" *ngIf="this.modal_type == 'edit'">
@@ -34,9 +34,9 @@
         </label>
 
         <div class="input-group">
-            <input type="text" class="form-control" #translate aria-label="" [value]="tab['name_' + this.lang]">
+            <input type="text" class="form-control" #translate aria-label="" [(ngModel)]="tab['name_' + this.lang]">
             <div class="input-group-append">
-                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getTabTranslations(translate.value)" *ngIf="this.modal_type == 'edit'">
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getTabTranslations(translate.value)" *ngIf="this.modal_type == 'edit'" [disabled]="tab['name_' + this.lang] === ''">
                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
                 </button>
             </div>

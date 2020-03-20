@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ApiService } from '../../../core/http/api.service';
 import { ContentTypes } from '../../../shared/models/content-types';
 import { PortfolioApiService } from 'src/app/core/http/portfolio-api.service';
+import { LanguageService } from "../../../shared/services/user/language.service";
 
 @Component({
   selector: 'app-card-content-modal',
@@ -15,6 +16,7 @@ export class CardContentModalComponent implements OnInit {
   private card;
   private selectedType;
   isSaving = false;
+  private lang;
   private types = [
     {
       label: 'input',
@@ -57,7 +59,8 @@ export class CardContentModalComponent implements OnInit {
     private dialogRef: MatDialogRef<CardContentModalComponent>,
     @Inject(MAT_DIALOG_DATA) data,
     private apiService: ApiService,
-    private portfolioApiService: PortfolioApiService
+    private portfolioApiService: PortfolioApiService,
+    private languageService: LanguageService
   ) {
     this.modal_type = data.modal_type;
 
@@ -66,7 +69,11 @@ export class CardContentModalComponent implements OnInit {
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.languageService.currentLang.subscribe(lang => {
+      this.lang = lang;
+    });
+  }
 
   dismiss() {
     this.titleTranslations = [];
