@@ -84,7 +84,6 @@ export class BeforeResetComponent implements OnInit {
     };
 
     this.beforeResetApiService.sendReset(obj).subscribe(data => {
-      console.log(data);
       if (data.success) {
         this.resetLoading = false;
       }

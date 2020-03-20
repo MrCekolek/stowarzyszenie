@@ -61,7 +61,6 @@ export class HomepagesModalComponent implements OnInit {
 
     this.addLoading = true;
     this.apiService.post('translation/get', obj).subscribe(response => {
-      console.log(response);
       this.translations[0] = response.translation.name_pl;
       this.translations[1] = response.translation.name_en;
       this.translations[2] = response.translation.name_ru;
@@ -75,11 +74,17 @@ export class HomepagesModalComponent implements OnInit {
   }
 
   addPage() {
+    this.isSaving = true;
     this.page.link = this.page.name_en;
-    console.log(this.page);
 
-    this.navigationApi.addHomeLink(this.page).subscribe(res => {
-      this.dialogRef.close(res);
-    });
+    this.navigationApi.addHomeLink(this.page).subscribe(
+      (res) => {
+        this.dialogRef.close(res);
+      },
+      () => {},
+      () => {
+        this.isSaving = false;
+      }
+    );
   }
 }

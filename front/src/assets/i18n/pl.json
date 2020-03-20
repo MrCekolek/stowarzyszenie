@@ -246,7 +246,9 @@
                     "REGISTER": "Zarejestruj się"
                 },
                 "SEARCHBAR": {
-                    "TITLE": "Użytkownicy"
+                    "TITLE": "Użytkownicy",
+                    "SEARCH": "Szukaj...",
+                    "SEE_PROFILE": "Zobacz profil"
                 },
                 "SIDENAV": {
                     "DASHBOARD": "Główna",

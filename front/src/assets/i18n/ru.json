@@ -246,7 +246,9 @@
                     "REGISTER": "зарегистрироваться"
                 },
                 "SEARCHBAR": {
-                    "TITLE": "члены"
+                    "TITLE": "члены",
+                    "SEARCH": "Поиск...",
+                    "SEE_PROFILE": "Посмотреть профиль"
                 },
                 "SIDENAV": {
                     "DASHBOARD": "Индекс",

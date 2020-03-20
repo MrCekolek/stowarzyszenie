@@ -6,7 +6,7 @@
 
         <div class="input-group">
             <input type="text" class="form-control" name="optionName" #optionName>
-            <button class="btn btn-primary" type="button" [class.btn-progress]="this.optionAddLoading" (click)="addOption(optionName.value)">
+            <button class="btn btn-primary" type="button" [class.btn-progress]="this.optionAddLoading" (click)="addOption(optionName.value)" [disabled]="optionName.value === ''">
                 {{ 'STOWARZYSZENIE.CRUD_BUTTONS.ADD' | translate }}
             </button>
         </div>

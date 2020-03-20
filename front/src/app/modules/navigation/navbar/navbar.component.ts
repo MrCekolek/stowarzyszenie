@@ -77,7 +77,6 @@ export class NavbarComponent implements OnInit {
     this.navigationApi.getHomeLinks().subscribe(res => {
       this.homelinks = res.homeNavigations.filter(x => (x.status === 'published'));
       this.navigationService.homepagesList = this.homelinks;
-      console.log(this.homelinks);
     });
 
     window.addEventListener('resize', function () {

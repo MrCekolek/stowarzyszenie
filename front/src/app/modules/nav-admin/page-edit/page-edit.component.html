@@ -33,7 +33,7 @@
                                 {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_INPUT_TITLE' | translate }}
                             </label>
                             <div class="col-sm-12 col-md-7">
-                              <input type="text" class="form-control" [value]="page.name_pl">
+                              <input type="text" class="form-control" [(ngModel)]="page.name_pl">
                             </div>
                           </div>
                         <div class="mt-4"></div>
@@ -51,7 +51,7 @@
                                 {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_INPUT_TITLE' | translate }}
                             </label>
                             <div class="col-sm-12 col-md-7">
-                              <input type="text" class="form-control" [value]="page.name_en">
+                              <input type="text" class="form-control" [(ngModel)]="page.name_en">
                             </div>
                           </div>
                           <div class="mt-4"></div>
@@ -69,7 +69,7 @@
                                 {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_INPUT_TITLE' | translate }}
                             </label>
                             <div class="col-sm-12 col-md-7">
-                              <input type="text" class="form-control" [value]="page.name_ru">
+                              <input type="text" class="form-control" [(ngModel)]="page.name_ru">
                             </div>
                           </div>
                         <div class="mt-4"></div>

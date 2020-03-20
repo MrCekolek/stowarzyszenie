@@ -56,9 +56,11 @@
         <!-- *ngIf="!tabLoading; else loading" -->
         <div class="container">
             <div class="row">
-                <div class="col-sm-12 col-md-6 col-lg-6" *ngFor="let cart of activeTabsCards">
-                    <app-portfolio-card [owner]="this.owner" [portfolioRole]="this.role" (editCardEv)="editCard($event)" (delCardEv)="deleteCard($event)" [card]="cart" [preview]="this.preview"></app-portfolio-card>
-                </div>
+                <ng-container *ngFor="let cart of activeTabsCards">
+                    <div *ngIf="this.role === 'admin' || (this.role === 'user' && !this.preview && this.userID == this.userProvider.getUser().id) || (this.role === 'user' && this.preview && cart.admin_visibility && cart.user_visibility)" class="col-sm-12 col-md-6 col-lg-6">
+                        <app-portfolio-card [owner]="this.owner" [portfolioRole]="this.role" (editCardEv)="editCard($event)" (delCardEv)="deleteCard($event)" [card]="cart" [preview]="this.preview"></app-portfolio-card>
+                    </div>
+                </ng-container>
                 <!-- static card to adding new cards -->
                 <!-- TODO: only for editing preferences -->
                 <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_CARDS')">
