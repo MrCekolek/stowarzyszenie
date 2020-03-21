@@ -24,6 +24,8 @@ class Conference extends BaseModel {
 
     public static function addConference($input, &$success) {
         $conference = new self();
+        $conference->status = 'waiting';
+        $conference->translation_key = self::statuses()['waiting'];
         self::fillConference($conference, $input, $success);
 
         return $conference;
@@ -31,6 +33,8 @@ class Conference extends BaseModel {
 
     public static function updateConference($input, &$success) {
         $conference = self::where('id', $input['id'])->first();
+        $conference->status = $input['status'];
+        $conference->translation_key = self::statuses()[$input['status']];
         self::fillConference($conference, $input,$success);
 
         return $conference;
@@ -43,7 +47,6 @@ class Conference extends BaseModel {
         $conference->content_pl = $input['content_pl'];
         $conference->content_en = $input['content_en'];
         $conference->content_ru = $input['content_ru'];
-        $conference->conference_id = $input['conference_id'];
         $success = $conference->save();
     }
 
