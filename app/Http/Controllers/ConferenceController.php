@@ -198,6 +198,15 @@ class ConferenceController extends Controller
      *         )
      *     ),
      *     @OA\Parameter(
+     *         name="status",
+     *         in="query",
+     *         description="Conference status",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         name="name_pl",
      *         in="query",
      *         description="Translation in polish language",
@@ -246,15 +255,6 @@ class ConferenceController extends Controller
      *         name="content_ru",
      *         in="query",
      *         description="Translation in russian language",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="conference_id",
-     *         in="query",
-     *         description="Conference id",
      *         required=true,
      *         @OA\Schema(
      *             type="string"
