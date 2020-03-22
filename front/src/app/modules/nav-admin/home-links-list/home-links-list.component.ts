@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { HomepagesModalComponent } from '../homepages-modal/homepages-modal.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { HomeNavigation } from 'src/app/shared/models/home-navigation';
+import {NavigationService} from "../../../core/services/navigation.service";
 
 @Component({
   selector: 'app-home-links-list',
@@ -18,7 +19,8 @@ export class HomeLinksListComponent implements OnInit {
 
   constructor(
     private languageService: LanguageService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private navigationService: NavigationService
   ) { }
 
   ngOnInit() {
@@ -38,6 +40,8 @@ export class HomeLinksListComponent implements OnInit {
         if (data) {
           if (data.success) {
             this.links.push(data.homeNavigation);
+
+            this.navigationService.homepagesList.push(data.homeNavigation);
           }
         }
       }
@@ -64,6 +68,10 @@ export class HomeLinksListComponent implements OnInit {
           if (data.success) {
             const index = this.links.indexOf(data.page);
             this.links.splice(index, 1);
+
+            const indexNavServ = this.navigationService.homepagesList.findIndex(item => item.id === page.id);
+
+            this.navigationService.homepagesList.splice(indexNavServ, 1);
           }
         }
       }

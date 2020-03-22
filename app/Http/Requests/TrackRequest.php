@@ -2,18 +2,13 @@
 
 namespace App\Http\Requests;
 
-class ConferencePageRequest extends FormRequest {
+class TrackRequest extends FormRequest {
     protected $rules = [];
 
     public function __construct(array $input, $filter) {
         switch ($filter) {
             case 'index':
                 $this->checkIndex();
-
-                break;
-
-            case 'show':
-                $this->checkShow();
 
                 break;
 
@@ -42,33 +37,26 @@ class ConferencePageRequest extends FormRequest {
         ];
     }
 
-    protected function checkShow() {
-        $this->rules = [
-            'id' => 'required|exists:conference_pages'
-        ];
-    }
-
     protected function checkCreate() {
-        $this->rules = [
+        $this->checkIndex();
+        $this->rules = array_merge($this->rules, [
             'name_pl' => 'required',
             'name_en' => 'required',
             'name_ru' => 'required',
-            'content_pl' => 'required',
-            'content_en' => 'required',
-            'content_ru' => 'required'
-        ];
+            'interest_id' => 'required|exists:interests,id'
+        ]);
     }
 
     protected function checkUpdate() {
         $this->checkCreate();
         $this->rules = array_merge($this->rules, [
-            'id' => 'required|exists:conference_pages'
+            'id' => 'required|exists:tracks'
         ]);
     }
 
     protected function checkDestroy() {
         $this->rules = [
-            'id' => 'required|exists:conference_pages'
+            'id' => 'required|exists:tracks'
         ];
     }
 }

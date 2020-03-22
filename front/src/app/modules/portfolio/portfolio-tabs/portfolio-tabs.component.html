@@ -55,7 +55,7 @@
     <div class="tab-pane fade" [id]="'tab_' + this.activeTab.id" role="tabpanel">
         <!-- *ngIf="!tabLoading; else loading" -->
         <div class="container">
-            <div class="row">
+            <div class="row" *ngIf="this.activeTab.shared_id !== 2">
                 <ng-container *ngFor="let cart of activeTabsCards">
                     <div *ngIf="this.role === 'admin' || (this.role === 'user' && !this.preview && this.userID == this.userProvider.getUser().id) || (this.role === 'user' && this.preview && cart.admin_visibility && cart.user_visibility)" class="col-sm-12 col-md-6 col-lg-6">
                         <app-portfolio-card [owner]="this.owner" [portfolioRole]="this.role" (editCardEv)="editCard($event)" (delCardEv)="deleteCard($event)" [card]="cart" [preview]="this.preview"></app-portfolio-card>
@@ -90,16 +90,10 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <div>
-                    xd
-                    <app-interests [owner]="owner" [lang]="lang" [role]="role"></app-interests>
-                </div> -->
             </div>
-
-            <ng-template #innterests>
-                <app-interests [owner]="this.owner" [lang]="this.lang" [role]="role"></app-interests>
-            </ng-template>
+            <div *ngIf="this.activeTab.shared_id === 2">
+                <app-interests [owner]="this.owner" [userID]="this.userID" [lang]="this.lang" [role]="role" [preview]="this.preview" [portfolio]="true"></app-interests>
+            </div>
         </div>
     </div>
 

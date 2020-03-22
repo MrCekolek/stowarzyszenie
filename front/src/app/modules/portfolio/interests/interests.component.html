@@ -1,25 +1,34 @@
 <div class="col-sm-12">
     <div class="card col-sm-12">
         <div class="card-body">
-            <ul class="list-unstyled" *ngIf="this.owner && this.role === 'user'">
-                <li class="list-item" *ngFor="let int of interests">
+            <ul class="list-unstyled" *ngIf="(this.owner && !this.preview)">
+                <li class="list-item" *ngFor="let interest of interests">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" [id]="'int' + int.id">
+                        <input type="checkbox" class="custom-control-input" [id]="'int' + interest.id" #int (click)="markInterest(interest, int.checked)" [checked]="interestChecked(interest)"/>
 
-                        <label class="custom-control-label" [for]="'int' + int.id">
-                            {{ int['name_' + lang] }}
+                        <label class="custom-control-label" [for]="'int' + interest.id">
+                            {{ interest['name_' + lang] }}
                         </label>
                     </div>
                 </li>
             </ul>
 
-            <ul class="list-unstyled" *ngIf="(this.role === 'preview') || (this.role === 'admin')">
-                <li class="list-item" *ngFor="let int of interests">
-                    <!-- TODO: pobranie interestow dla konkretnego uzytkownika i sprawdzenie tutaj czy jest zaznaczony -->
-                    <p *ngIf="int.selected">
-                        {{ int['name_' + lang] }}
+            <ul class="list-unstyled" *ngIf="!this.owner || this.preview">
+                <li class="list-item" *ngFor="let interestUser of interestUsers">
+                    <p>
+                        <i class="fas fa-check"></i>
+                        {{ interestUser['interest']['name_' + lang] }}
                     </p>
                 </li>
+
+                <div *ngIf="interestUsers.length === 0" class="empty-state" data-height="200" style="height: 200px;">
+                    <div class="empty-state-icon">
+                        <i class="fas fa-question"></i>
+                    </div>
+                    <p class="lead">
+                        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.EMPTY_CARD_USER' | translate }}
+                    </p>
+                </div>
             </ul>
         </div>
     </div>

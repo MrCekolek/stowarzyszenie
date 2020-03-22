@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NavigationApiService } from 'src/app/core/http/navigation-api.service';
+import {NavigationService} from "../../../core/services/navigation.service";
 
 @Component({
   selector: 'app-page-edit',
@@ -68,7 +69,8 @@ export class PageEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private navigationApi: NavigationApiService,
-    private router: Router
+    private router: Router,
+    private navigationService: NavigationService
   ) {}
 
     //pobieranie jednego page?
@@ -91,6 +93,10 @@ export class PageEditComponent implements OnInit {
 
     this.navigationApi.updateHomeLink(this.page).subscribe(res => {
       if (res.success) {
+        const index = this.navigationService.homepagesList.findIndex(item => item.id === res.homeNavigation.id);
+
+        this.navigationService.homepagesList[index] = res.homeNavigation;
+
         this.router.navigate(['pages/homepages']);
       }
     });
@@ -101,7 +107,11 @@ export class PageEditComponent implements OnInit {
 
     this.navigationApi.updateHomeLink(this.page).subscribe(res => {
       if (res.success) {
-        this.router.navigate(['pages/homepages']);
+          const index = this.navigationService.homepagesList.findIndex(item => item.id === res.homeNavigation.id);
+
+          this.navigationService.homepagesList[index] = res.homeNavigation;
+
+          this.router.navigate(['pages/homepages']);
       }
     });
   }

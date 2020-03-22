@@ -107,15 +107,16 @@ Route::group([
     });
 
     Route::prefix('interest')->group(function () {
+        Route::prefix('user')->group(function () {
+            Route::post('{user}/get', 'InterestUserController@index');
+            Route::post('create', 'InterestUserController@create');
+            Route::post('destroy', 'InterestUserController@destroy');
+        });
+
         Route::post('get', 'InterestController@index');
         Route::post('create', 'InterestController@create');
         Route::post('{interest}/update', 'InterestController@update');
         Route::post('{interest}/destroy', 'InterestController@destroy');
-
-        Route::prefix('user')->group(function () {
-            Route::post('{user}/get', 'InterestUserController@index');
-            Route::post('selected/update', 'InterestUserController@updateSelected');
-        });
     });
 
     Route::prefix('home_navigation')->group(function () {
@@ -138,6 +139,12 @@ Route::group([
             Route::post('create', 'ConferenceUserController@create');
             Route::post('update', 'ConferenceUserController@update');
             Route::post('destroy', 'ConferenceUserController@destroy');
+        });
+
+        Route::prefix('track')->group(function () {
+            Route::post('get', 'TrackController@index');
+            Route::post('create', 'TrackController@create');
+            Route::post('destroy', 'TrackController@destroy');
         });
 
         Route::prefix('page')->group(function () {
