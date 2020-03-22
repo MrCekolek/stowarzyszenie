@@ -11,9 +11,8 @@ class CreateInterestUsersTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('interest_users', function (Blueprint $table) {
+        Schema::create('interest_user', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->boolean('selected')->default(0);
             $table->unsignedBigInteger('interest_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

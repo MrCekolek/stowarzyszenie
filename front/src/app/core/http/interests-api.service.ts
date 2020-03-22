@@ -14,6 +14,28 @@ export class InterestsApiService {
     return this.api.post('interest/get');
   }
 
+  getUserInterests(user: Object) {
+    return this.api.post(`interest/user/${user}/get`);
+  }
+
+  createInterestUser(user, interest) {
+    const obj = {
+      user_id: user,
+      interest_id: interest
+    };
+
+    return this.api.post('interest/user/create', obj);
+  }
+
+  deleteInterestUser(user, interest) {
+    const obj = {
+      user_id: user,
+      interest_id: interest
+    };
+
+    return this.api.post('interest/user/destroy', obj);
+  }
+
   addInterest(name: Object) {
     return this.api.post('interest/create', name);
   }
