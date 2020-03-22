@@ -13,4 +13,8 @@ class Interest extends BaseModel {
         return $this->belongsToMany(User::class)
             ->using(InterestUser::class);
     }
+
+    public function tracks() {
+        return $this->hasMany(Track::class);
+    }
 }

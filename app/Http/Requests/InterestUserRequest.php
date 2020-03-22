@@ -7,8 +7,13 @@ class InterestUserRequest extends FormRequest {
 
     public function __construct(array $input, $filter) {
         switch ($filter) {
-            case 'update':
-                $this->checkUpdate();
+            case 'create':
+                $this->checkCreate();
+
+                break;
+
+            case 'destroy':
+                $this->checkDestroy();
 
                 break;
         }
@@ -16,11 +21,14 @@ class InterestUserRequest extends FormRequest {
         parent::__construct($input);
     }
 
-    public function checkUpdate() {
+    public function checkCreate() {
         $this->rules = [
-            'user_id' => 'required|exists:users',
-            'interest_id' => 'required|exists:interests',
-            'selected' => 'required'
+            'user_id' => 'required|exists:users,id',
+            'interest_id' => 'required|exists:interests,id',
         ];
+    }
+
+    public function checkDestroy() {
+        $this->checkCreate();
     }
 }

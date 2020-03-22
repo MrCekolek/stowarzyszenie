@@ -378,6 +378,15 @@
                         }
                     },
                     {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Conference status",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "name_pl",
                         "in": "query",
                         "description": "Translation in polish language",
@@ -426,15 +435,6 @@
                         "name": "content_ru",
                         "in": "query",
                         "description": "Translation in russian language",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "conference_id",
-                        "in": "query",
-                        "description": "Conference id",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2916,6 +2916,81 @@
                         "name": "visibility",
                         "in": "query",
                         "description": "Visibility in:true,false",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/conference/track/get": {
+            "post": {
+                "tags": [
+                    "conference_track"
+                ],
+                "summary": "Gets all conference tracks",
+                "operationId": "TrackControllerIndex",
+                "parameters": [
+                    {
+                        "name": "conference_id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/conference/track/create": {
+            "post": {
+                "tags": [
+                    "conference_track"
+                ],
+                "summary": "Creates track for conference",
+                "operationId": "TrackControllerCreate",
+                "parameters": [
+                    {
+                        "name": "conference_id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/conference/track/destroy": {
+            "post": {
+                "tags": [
+                    "conference_track"
+                ],
+                "summary": "Deletes conference track",
+                "operationId": "TrackControllerDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Conference track id",
                         "required": true,
                         "schema": {
                             "type": "string"

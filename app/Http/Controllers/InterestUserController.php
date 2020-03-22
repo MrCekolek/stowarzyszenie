@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\InterestUserRequest;
+use App\Models\Interest;
 use App\Models\InterestUser;
 use App\Models\User;
 use App\Services\LogService;
@@ -25,7 +26,7 @@ class InterestUserController extends Controller {
      *     path="/interest/user/{userId}/get",
      *     tags={"interest_user"},
      *     summary="Gets all interests that belongs to user",
-     *     operationId="InterestControllerIndex",
+     *     operationId="InterestUserControllerIndex",
      *     @OA\Response(
      *         response="default",
      *         description="successful operation"
@@ -34,16 +35,17 @@ class InterestUserController extends Controller {
      */
     public function index(User $user) {
         return LogService::read(true, [
-            'interestUsers' => InterestUser::where('user_id', $user->id)->first()->toArray()
+            'interests' => Interest::with('users')->get()->toArray(),
+            'interestUsers' => InterestUser::where('user_id', $user->id)->with('interest')->get()->toArray()
         ]);
     }
 
     /**
      * @OA\Post(
-     *     path="/interest/user/selected/update",
+     *     path="/interest/user/create",
      *     tags={"interest_user"},
-     *     summary="Select specific interest for user",
-     *     operationId="InterestControllerIndex",
+     *     summary="Assign interest for user",
+     *     operationId="InterestUserControllerCreate",
      *     @OA\Parameter(
      *         name="user_id",
      *         in="query",
@@ -62,10 +64,49 @@ class InterestUserController extends Controller {
      *             type="string"
      *         )
      *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function create(Request $request) {
+        $input = $request->all();
+        $validation = new InterestUserRequest($input, 'create');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        $interestUser = new InterestUser();
+        $interestUser->user_id = $input['user_id'];
+        $interestUser->interest_id = $input['interest_id'];
+        $success = $interestUser->save();
+
+        return LogService::create($success, [
+            'interestUser' => $interestUser->toArray()
+        ]);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/interest/user/destroy",
+     *     tags={"interest_user"},
+     *     summary="Deletes specific role",
+     *     operationId="InterestUserControllerDestroy",
      *     @OA\Parameter(
-     *         name="selected",
+     *         name="user_id",
      *         in="query",
-     *         description="Is selected (true or false)",
+     *         description="User id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="interest_id",
+     *         in="query",
+     *         description="Interest id",
      *         required=true,
      *         @OA\Schema(
      *             type="string"
@@ -77,20 +118,19 @@ class InterestUserController extends Controller {
      *     )
      * )
      */
-    public function update(Request $request) {
+    public function destroy(Request $request) {
         $input = $request->all();
-        $validation = new InterestUserRequest($input, 'update');
+
+        $validation = new InterestUserRequest($input, 'destroy');
 
         if ($validation->fails()) {
             return $validation->failResponse();
         }
 
-        $interestUser = InterestUser::where('user_id', $input['user_id'])
+        $success = InterestUser::where('user_id', $input['user_id'])
             ->where('interest_id', $input['interest_id'])
-            ->first();
-        $interestUser->selected = $input['selected'];
-        $success = $interestUser->save();
+            ->delete();
 
-        return LogService::update($success);
+        return LogService::delete($success);
     }
 }

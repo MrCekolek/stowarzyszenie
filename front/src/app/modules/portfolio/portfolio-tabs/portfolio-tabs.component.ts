@@ -63,6 +63,8 @@ export class PortfolioTabsComponent implements OnInit {
   ngOnInit() {
     if (this.router.url.includes('portfolio-settings')) {
       this.role = 'admin';
+      this.owner = true;
+      this.userID = this.userProvider.getUser().id;
     } else if (this.router.url.includes('users/profile')) {
       this.role = 'user';
       this.owner = Number.parseInt(this.route.snapshot.paramMap.get('id')) === this.userProvider.getUser().id;
