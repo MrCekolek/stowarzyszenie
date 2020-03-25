@@ -154,5 +154,12 @@ Route::group([
             Route::post('destroy', 'ConferencePageController@destroy');
             Route::post('{pageId}', 'ConferencePageController@show');
         });
+
+        Route::prefix('programme_committee')->group(function () {
+            Route::post('', 'ProgrammeCommitteeController@index');
+            Route::post('create', 'ProgrammeCommitteeController@create');
+            Route::post('update', 'ProgrammeCommitteeController@update');
+            Route::post('destroy', 'ProgrammeCommitteeController@destroy');
+        });
     });
 });

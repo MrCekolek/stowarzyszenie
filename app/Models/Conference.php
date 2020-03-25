@@ -27,6 +27,7 @@ class Conference extends BaseModel {
         $conference->status = 'waiting';
         $conference->translation_key = self::statuses()['waiting'];
         self::fillConference($conference, $input, $success);
+        ConferencePreference::addConferencePreference($input, $conference, $success);
 
         return $conference;
     }
@@ -36,6 +37,7 @@ class Conference extends BaseModel {
         $conference->status = $input['status'];
         $conference->translation_key = self::statuses()[$input['status']];
         self::fillConference($conference, $input,$success);
+        ConferencePreference::updateConferencePreferences($input, $conference, $success);
 
         return $conference;
     }
@@ -61,5 +63,14 @@ class Conference extends BaseModel {
     public function users() {
         return $this->belongsToMany(User::class)
             ->using(ConferenceUser::class);
+    }
+
+    public function conferencePreference() {
+        return $this->hasOne(ConferencePreference::class);
+    }
+
+    public function programmeCommittee() {
+        return $this->belongsToMany(User::class)
+            ->using(ProgrammeCommittee::class);
     }
 }

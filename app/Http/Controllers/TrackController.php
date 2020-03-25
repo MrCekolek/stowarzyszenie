@@ -136,7 +136,7 @@ class TrackController extends Controller {
      *     path="/conference/track/update",
      *     tags={"conference_track"},
      *     summary="Update track for conference",
-     *     operationId="TrackControllerCreate",
+     *     operationId="TrackControllerUpdate",
      *     @OA\Parameter(
      *         name="id",
      *         in="query",
@@ -234,7 +234,7 @@ class TrackController extends Controller {
      *         )
      *     ),
      *     @OA\Response(
-     *         response="default",w
+     *         response="default",
      *         description="successful operation"
      *     )
      * )

@@ -99,6 +99,15 @@ class ConferenceController extends Controller
      *     summary="Creates conference",
      *     operationId="ConferenceControllerCreate",
      *     @OA\Parameter(
+     *         name="acronym",
+     *         in="query",
+     *         description="Acronym of conference",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         name="name_pl",
      *         in="query",
      *         description="Translation in polish language",
@@ -148,6 +157,42 @@ class ConferenceController extends Controller
      *         in="query",
      *         description="Translation in russian language",
      *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="place_pl",
+     *         in="query",
+     *         description="Place of conference in polish language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="place_en",
+     *         in="query",
+     *         description="Place of conference in english language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="place_ru",
+     *         in="query",
+     *         description="Place of conference in russian language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="website",
+     *         in="query",
+     *         description="Url of website",
+     *         required=false,
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -178,7 +223,7 @@ class ConferenceController extends Controller
         $conference = Conference::addConference($input, $success);
 
         return LogService::create($success, [
-            'conference' => $conference->load('conferencePages')->toArray()
+            'conference' => $conference->load(['conferencePages', 'conferencePreference'])->toArray()
         ]);
     }
 
@@ -201,6 +246,15 @@ class ConferenceController extends Controller
      *         name="status",
      *         in="query",
      *         description="Conference status",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="acronym",
+     *         in="query",
+     *         description="Acronym of conference",
      *         required=true,
      *         @OA\Schema(
      *             type="string"
@@ -260,6 +314,42 @@ class ConferenceController extends Controller
      *             type="string"
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="place_pl",
+     *         in="query",
+     *         description="Place of conference in polish language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="place_en",
+     *         in="query",
+     *         description="Place of conference in english language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="place_ru",
+     *         in="query",
+     *         description="Place of conference in russian language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="website",
+     *         in="query",
+     *         description="Url of website",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
      *     @OA\Response(
      *         response="default",
      *         description="successful operation"
@@ -277,7 +367,7 @@ class ConferenceController extends Controller
         $conference = Conference::updateConference($input, $success);
 
         return LogService::update($success, [
-            'conference' => $conference->load('conferencePages')->toArray()
+            'conference' => $conference->load(['conferencePages', 'conferencePreference'])->toArray()
         ]);
     }
 
