@@ -17,6 +17,7 @@ class CreateConferencesTable extends Migration
             $table->bigIncrements('id');
             $table->string('status')->default('waiting');
             $table->string('translation_key');
+            $table->string('acronym')->nullable();
             $table->string('name_pl')->nullable();
             $table->string('name_en')->nullable();
             $table->string('name_ru')->nullable();
