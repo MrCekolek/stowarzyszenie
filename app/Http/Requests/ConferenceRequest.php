@@ -38,7 +38,10 @@ class ConferenceRequest extends FormRequest {
             'name_ru' => 'required',
             'content_pl' => 'required',
             'content_en' => 'required',
-            'content_ru' => 'required'
+            'content_ru' => 'required',
+            'place_pl' => 'required',
+            'place_en' => 'required',
+            'place_ru' => 'required'
         ];
     }
 

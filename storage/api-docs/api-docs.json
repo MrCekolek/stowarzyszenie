@@ -290,6 +290,15 @@
                 "operationId": "ConferenceControllerCreate",
                 "parameters": [
                     {
+                        "name": "acronym",
+                        "in": "query",
+                        "description": "Acronym of conference",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "name_pl",
                         "in": "query",
                         "description": "Translation in polish language",
@@ -339,6 +348,42 @@
                         "in": "query",
                         "description": "Translation in russian language",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "place_pl",
+                        "in": "query",
+                        "description": "Place of conference in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "place_en",
+                        "in": "query",
+                        "description": "Place of conference in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "place_ru",
+                        "in": "query",
+                        "description": "Place of conference in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "website",
+                        "in": "query",
+                        "description": "Url of website",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -387,6 +432,15 @@
                         }
                     },
                     {
+                        "name": "acronym",
+                        "in": "query",
+                        "description": "Acronym of conference",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "name_pl",
                         "in": "query",
                         "description": "Translation in polish language",
@@ -436,6 +490,42 @@
                         "in": "query",
                         "description": "Translation in russian language",
                         "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "place_pl",
+                        "in": "query",
+                        "description": "Place of conference in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "place_en",
+                        "in": "query",
+                        "description": "Place of conference in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "place_ru",
+                        "in": "query",
+                        "description": "Place of conference in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "website",
+                        "in": "query",
+                        "description": "Url of website",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -1593,7 +1683,7 @@
                     "interest_user"
                 ],
                 "summary": "Gets all interests that belongs to user",
-                "operationId": "InterestControllerIndex",
+                "operationId": "InterestUserControllerIndex",
                 "responses": {
                     "default": {
                         "description": "successful operation"
@@ -1601,13 +1691,13 @@
                 }
             }
         },
-        "/interest/user/selected/update": {
+        "/interest/user/create": {
             "post": {
                 "tags": [
                     "interest_user"
                 ],
-                "summary": "Select specific interest for user",
-                "operationId": "InterestControllerIndex",
+                "summary": "Assign interest for user",
+                "operationId": "InterestUserControllerCreate",
                 "parameters": [
                     {
                         "name": "user_id",
@@ -1626,11 +1716,36 @@
                         "schema": {
                             "type": "string"
                         }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/interest/user/destroy": {
+            "post": {
+                "tags": [
+                    "interest_user"
+                ],
+                "summary": "Deletes specific role",
+                "operationId": "InterestUserControllerDestroy",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
-                        "name": "selected",
+                        "name": "interest_id",
                         "in": "query",
-                        "description": "Is selected (true or false)",
+                        "description": "Interest id",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2019,6 +2134,151 @@
                         "name": "avatar",
                         "in": "query",
                         "description": "Image jpeg,png,jpg,gif",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "conference/programme_committee": {
+            "post": {
+                "tags": [
+                    "programme_committee"
+                ],
+                "summary": "Read all users that belongs to conference programme committee",
+                "operationId": "ProgrammeCommitteeIndex",
+                "parameters": [
+                    {
+                        "name": "conference_id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "conference/programme_committee/create": {
+            "post": {
+                "tags": [
+                    "programme_committee"
+                ],
+                "summary": "Assign user to conference programme committee",
+                "operationId": "ProgrammeCommitteeCreate",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "conference_id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "contact_email",
+                        "in": "query",
+                        "description": "Contact email of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "conference/programme_committee/update": {
+            "post": {
+                "tags": [
+                    "programme_committee"
+                ],
+                "summary": "Update programme committee",
+                "operationId": "ProgrammeCommitteeUpdate",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "conference_id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "contact_email",
+                        "in": "query",
+                        "description": "Contact email of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "conference/programme_committee/destroy": {
+            "post": {
+                "tags": [
+                    "programme_committee"
+                ],
+                "summary": "Deassign user to conference programme committee",
+                "operationId": "ProgrammeCommitteeDestroy",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "conference_id",
+                        "in": "query",
+                        "description": "Conference id",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2962,6 +3222,112 @@
                 "summary": "Creates track for conference",
                 "operationId": "TrackControllerCreate",
                 "parameters": [
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "interest_id",
+                        "in": "query",
+                        "description": "Interest id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "conference_id",
+                        "in": "query",
+                        "description": "Conference id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/conference/track/update": {
+            "post": {
+                "tags": [
+                    "conference_track"
+                ],
+                "summary": "Update track for conference",
+                "operationId": "TrackControllerUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Track id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_pl",
+                        "in": "query",
+                        "description": "Translation in polish language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_en",
+                        "in": "query",
+                        "description": "Translation in english language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name_ru",
+                        "in": "query",
+                        "description": "Translation in russian language",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "interest_id",
+                        "in": "query",
+                        "description": "Interest id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "name": "conference_id",
                         "in": "query",
