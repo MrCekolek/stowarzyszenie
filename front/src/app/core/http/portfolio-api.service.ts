@@ -93,4 +93,8 @@ export class PortfolioApiService {
   markOption(option: Object) {
     return this.apiService.post('portfolio/tile/content/content/selected/update', option);
   }
+
+  changeAvatar(avatar: Object) {
+    return this.apiService.post('account/avatar/update', avatar);
+  }
 }

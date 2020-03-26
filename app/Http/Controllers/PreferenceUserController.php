@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\PreferenceUserRequest;
 use App\Models\PreferenceUser;
+use App\Services\LogService;
 use App\Traits\UploadFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 use JWTAuth;
 use Config;
 
@@ -133,14 +134,17 @@ class PreferenceUserController extends Controller {
             return $validation->failResponse();
         }
 
-        $image = $request->file('avatar');
-        $name = Str::slug($input['name']) . '_' . time();
-        $folder  = '/uploads/images/';
-        $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
-        $this->uploadOne($image, $folder, 'public', $name);
+        $name = time() . '.' . explode('/', explode(':', substr($input['avatar'], 0, strpos($input['avatar'], ';')))[1])[1];
+        $filePath = public_path('uploads/images/avatars/') . $name;
+
+        Image::make($input['avatar'])->save($filePath);
 
         $preferenceUser = PreferenceUser::where('id', auth()->user()->preferenceUser()->first()->id)->first();
-        $preferenceUser->avatar = $filePath;
-        $preferenceUser->save();
+        $preferenceUser->avatar = config('app.back_url') . '/' . 'uploads/images/avatars/' . $name;
+        $success = $preferenceUser->save();
+
+        return LogService::update($success, [
+           'avatar' => $preferenceUser->avatar
+        ]);
     }
 }

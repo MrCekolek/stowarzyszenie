@@ -162,4 +162,8 @@ Route::group([
             Route::post('destroy', 'ProgrammeCommitteeController@destroy');
         });
     });
+
+    Route::prefix('image')->group(function () {
+        Route::post('upload', 'ImageController@create');
+    });
 });

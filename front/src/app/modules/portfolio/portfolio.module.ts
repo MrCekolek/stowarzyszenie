@@ -12,14 +12,15 @@ import { AddTabModalComponent } from './add-tab-modal/add-tab-modal.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CardContentModalComponent } from './card-content-modal/card-content-modal.component';
 import { PortfolioCardComponent } from './portfolio-card/portfolio-card.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { EditCardModalComponent } from './edit-card-modal/edit-card-modal.component';
 import { ContentOptionsComponent } from './content-options/content-options.component';
 import { OptionsListComponent } from './options-list/options-list.component';
 import { InterestsComponent } from './interests/interests.component';
 import { ContentFillComponent } from './content-fill/content-fill.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {RouterModule} from "@angular/router";
+import { RouterModule } from "@angular/router";
+import { MatInputModule } from "@angular/material";
 
 @NgModule({
   declarations: [WholePortfolioComponent, PortfolioTabsComponent, OneTabComponent, UserPortfolioComponent, AddTabModalComponent, CardContentModalComponent, PortfolioCardComponent, EditCardModalComponent, ContentOptionsComponent, OptionsListComponent, InterestsComponent, ContentFillComponent],
@@ -31,7 +32,9 @@ import {RouterModule} from "@angular/router";
         MatTooltipModule,
         FormsModule,
         MatSnackBarModule,
-        RouterModule
+        RouterModule,
+        ReactiveFormsModule,
+        MatInputModule
     ],
   entryComponents: [AddTabModalComponent, CardContentModalComponent, EditCardModalComponent, ContentFillComponent]
 })

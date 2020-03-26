@@ -47,7 +47,7 @@ export class PageEditComponent implements OnInit {
         tag: 'h1',
       },
     ],
-    uploadUrl: 'v1/image',
+    uploadUrl: 'http://stowarzyszenie.test/api/image/upload',
     uploadWithCredentials: false,
     sanitize: false,
     toolbarPosition: 'top',
