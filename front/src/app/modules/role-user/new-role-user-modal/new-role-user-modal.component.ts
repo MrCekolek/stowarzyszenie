@@ -1,11 +1,11 @@
-import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
 import { LanguageService } from "../../../shared/services/user/language.service";
 import { PermissionRoleApiService } from "../../../core/http/permission-role-api.service";
 import { UserRoleApiService } from "../../../core/http/user-role-api.service";
-import {AlertModel} from "../../../shared/models/alert.model";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {TranslateService} from "@ngx-translate/core";
+import { AlertModel } from "../../../shared/models/alert.model";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-new-role-user-modal',

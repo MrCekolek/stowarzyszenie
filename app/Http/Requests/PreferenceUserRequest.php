@@ -29,7 +29,7 @@ class PreferenceUserRequest extends FormRequest {
 
     public function checkUpdateAvatar() {
         $this->rules = [
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif'
+            'avatar' => 'required'
         ];
     }
 }

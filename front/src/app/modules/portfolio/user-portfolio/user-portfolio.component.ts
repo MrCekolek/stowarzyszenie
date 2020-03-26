@@ -5,6 +5,7 @@ import { UserProviderService } from 'src/app/core/services/user-provider.service
 import { PortfolioApiService } from 'src/app/core/http/portfolio-api.service';
 import { UserModel } from 'src/app/shared/models/user.model';
 import { LoginApiService } from 'src/app/core/http/login-api.service';
+import { FormBuilder, FormGroup } from "@angular/forms";
 
 @Component({
   selector: 'app-user-portfolio',
@@ -28,6 +29,7 @@ export class UserPortfolioComponent implements OnInit {
   private rolesList: string = '';
   private descEditing: boolean;
   private preview: boolean = false;
+  private avatarForm: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +37,8 @@ export class UserPortfolioComponent implements OnInit {
     private userProvider: UserProviderService,
     private portfolioService: PortfolioApiService,
     private loginServie: LoginApiService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -84,6 +87,14 @@ export class UserPortfolioComponent implements OnInit {
     this.languageService.currentLang.subscribe(lg => {
       this.lang = lg;
     });
+
+    this.createForm();
+  }
+
+  createForm() {
+    this.avatarForm = this.formBuilder.group({
+        'avatar': [null, []]
+    });
   }
 
   // TODO: zapis do api description
@@ -127,5 +138,35 @@ export class UserPortfolioComponent implements OnInit {
   exitPreviewMode() {
     this.isOwner = true;
     this.preview = false;
+  }
+
+  onFileChange(event) {
+    const reader = new FileReader();
+
+    if(event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+          this.avatarForm.patchValue({
+              avatar: reader.result
+          });
+
+          if (this.avatarForm.get('avatar').value !== '') {
+              this.portfolioService.changeAvatar(this.avatarForm.getRawValue()).subscribe(res => {
+                  if (res.success) {
+                      // @ts-ignore
+                      this.user.preference_user.avatar = res.avatar;
+                      // @ts-ignore
+                      this.userProvider.getUser().preference_user.avatar = res.avatar;
+                  }
+              });
+          }
+      };
+    }
+  }
+
+  get avatar() {
+    return this.avatarForm.get('avatar');
   }
 }
