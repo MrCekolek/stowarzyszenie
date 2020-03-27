@@ -65,7 +65,9 @@
             "EXIT_PREVIEW_MODE": "Exit the preview",
             "POLISH_LANG": "Polish",
             "ENGLISH_LANG": "English",
-            "RUSSIAN_LANG": "Russian"
+            "RUSSIAN_LANG": "Russian",
+            "CONFERENCE_ALREADY_EXISTS": "Conference already exsists. You can't add more. If you want to manage your conference, go to \"Actual Conference\"",
+            "BACK_TO_CONFERENCE": "Back to conference settings"
         },
         "LABELS_TABLES": {
             "AVATAR": "Avatar",
@@ -262,7 +264,9 @@
                         "PORTFOLIO": "Portfolio settings",
                         "PORTFOLIO_MENU": "Portfolio",
                         "ROLES_PREFERENCES": "Roles and Permissions",
-                        "USERS_LIST": "Users List"
+                        "USERS_LIST": "Users List",
+                        "CONFERENCE_MENU": "Conference",
+                        "ACTUAL_CONFERENCE": "Actual conference"
                     },
                     "MANAGEMENT": {
                         "MANAGEMENT_MENU": "Management",
@@ -414,6 +418,65 @@
                     "SHOW": "Show users belonging to a given role"
                 },
                 "USERS_LIST_TITLE": "The list of users assigned to the role"
+            },
+            "CONFERENCE": {
+                "ACTUAL_PAGE_TITLE": "Actual conference",
+                "ACTUAL_SECTION_TITLE": "Informations about actual conference",
+                "ACTUAL_PAGE_DESC": "Here you can edit all important aspects of conference.",
+                "ACTUAL": {
+                    "NO_CONFERENCE": "There is no actual conference",
+                    "NO_CONFERENCE_DESC": "Any actual conference found. Do you want to create new?",
+                    "ADD_CONF_BUTT": "Add new conference"
+                },
+                "OPTIONS_PAGE": {
+                    "GENERAL": {
+                        "TITLE": "General settings",
+                        "DESC": "General settings of conference like title, place, date etc."
+                    },
+                    "BUTTON": "Change settings",
+                    "TRACKS": {
+                        "TITLE": "Manage tracks",
+                        "DESC": "Manage conference tracks, choose their titles and categories, assign people to them."
+                    },
+                    "CONFERENCE_PAGE": {
+                        "TITLE": "Conference page",
+                        "DESC": "Manage conference page that will be visible to other users on home page. Manage page menu, add new informations and edit existing."
+                    },
+                    "CALENDAR": {
+                        "TITLE": "Calendar settings",
+                        "DESC": "Manage dates in conference like starting date, end, deadline of submitting papers and reviews, etc."
+                    },
+                    "COMMITTEE": {
+                        "TITLE": "Program committee",
+                        "DESC": "Manage people who are part of program committee."
+                    },
+                    "GALLERY": {
+                        "TITLE": "Gallery",
+                        "DESC": "Manage gallery of photos in your conference."
+                    },
+                    "PROGRAMME": {
+                        "TITLE": "Conference programme",
+                        "DESC": "Manage conference programme, set the events and their hours (its not the same as calendar!)."
+                    }
+                },
+                "STATUS": {
+                    "WAITING": "Pending",
+                    "DURING": "During",
+                    "FINISHED": "Finished"
+                }
+            },
+            "ADD_CONFERENCE": {
+                "PAGE_TITLE": "Add new conference",
+                "SECTION_TITLE": "Add new conference",
+                "PAGE_DESC": "Add new conference to system, set its title and next you can manage different modules of conference like programme, conference page etc.",
+                "ADD_CONF_TITLE": "Fill informations about new conference",
+                "FIELD_CONF_NAME_LABEL": "Conference name",
+                "CONF_ACRONYM_LABEL": "Conference acronym",
+                "BTN_ADD": "Add conference",
+                "HELP_BLOCK": "Acronym / short name for your conference",
+                "CONF_WEBSITE_LABEL": "Conference website",
+                "HELP_BLOCK2": "Optional field - if u have external website for your conference, enter its address here. If not, you can create page for your conference in system.",
+                "CONF_PLACE_LABEL": "Conference place"
             }
         },
         "PAGINATION": {
@@ -505,6 +568,7 @@
             "PUBLISHED": "Published",
             "IN_PROGRESS": "In editing",
             "NOT_EDITABLE": "Not editable"
-        }
+        },
+        "HELPERSCONFERENCE_EXISTS_BTN": "Go to Actual Conference"
     }
 }

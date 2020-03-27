@@ -64,6 +64,13 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'manage-conference',
+    loadChildren: './modules/manage-conference/manage-conference.module#ManageConferenceModule',
+    canActivateChild: [
+      LoggedGuard
+    ]
+  },
+  {
     path: '**',
     redirectTo: ''
   }

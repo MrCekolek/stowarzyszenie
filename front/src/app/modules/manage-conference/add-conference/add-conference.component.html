@@ -1,0 +1,108 @@
+<div class="section-header">
+    <h1>{{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.PAGE_TITLE' | translate }}</h1>
+</div>
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.SECTION_TITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.PAGE_DESC' | translate }}
+    </p>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-center" *ngIf="loading; else content">
+                <div class="spinner-border text-primary"></div>
+            </div>
+
+            <ng-template #content>
+                <div *ngIf="this.conference && this.conference.length > 0" class="mt-2">
+                    <p>
+                        {{ 'STOWARZYSZENIE.HELPERS.CONFERENCE_ALREADY_EXISTS' | translate }}
+                    </p>
+    
+                    <div class="d-flex justify-content-center mt-3">
+                        <a [routerLink]="['../general-settings']"  class="btn btn-primary">
+                            {{ 'STOWARZYSZENIE.HELPERSCONFERENCE_EXISTS_BTN' | translate }}
+                        </a>
+                    </div>
+                </div>
+    
+                <div *ngIf="!this.conference || this.conference.length === 0">
+                    <h5 class="mb-4 text-secondary">
+                        {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.ADD_CONF_TITLE' | translate }}
+                    </h5>
+                    <!-- conference name -->
+                    <div class="form-group">
+                        <label>
+                            {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.FIELD_CONF_NAME_LABEL' | translate }}
+                        </label>
+
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" [(ngModel)]="confname" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" [class.btn-progress]="translateNameLoading" type="button" (click)="getNameTranslations()">
+                                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                                </button>
+                            </div>
+                        </div>
+
+                        <app-translations-list *ngIf="this.nameTranslations.length != 0" [translations]="this.nameTranslations" [type]="'input'"></app-translations-list>
+                    </div>
+                    
+                    <!-- conference acronym -->
+                    <div class="form-group mb-3">
+                        <label>
+                            {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.CONF_ACRONYM_LABEL' | translate }}
+                        </label>
+                        <input type="text" class="form-control" [(ngModel)]="confacronym" aria-describedby="helpblock" required>
+
+                        <small id="helpblock" class="form-text text-muted">
+                            {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.HELP_BLOCK' | translate }}    
+                        </small>
+                    </div>
+
+                    <!-- conference website -->
+                    <div class="form-group mb-3">
+                        <label>
+                            {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.CONF_WEBSITE_LABEL' | translate }}
+                        </label>
+                        <input type="text" class="form-control" [(ngModel)]="confweb" aria-describedby="helpblock2">
+
+                        <small id="helpblock2" class="form-text text-muted">
+                            {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.HELP_BLOCK2' | translate }}    
+                        </small>
+                    </div>
+
+                    <!-- conference place -->
+                    <div class="form-group mb-3">
+                        <label>
+                            {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.CONF_PLACE_LABEL' | translate }}
+                        </label>
+
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" [(ngModel)]="confplace" required> 
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" [class.btn-progress]="translatePlaceLoading" type="button" (click)="getPlaceTranslations()">
+                                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                                </button>
+                            </div>
+                        </div>
+
+                        <app-translations-list *ngIf="this.placeTranslations.length != 0" [translations]="this.placeTranslations" [type]="'input'"></app-translations-list>
+                    </div>
+
+                    <button class="btn btn-block btn-primary mt-5" (click)="addConference()" [class.btn-progress]="addLoading" [disabled]="nameTranslations.length === 0 && placeTranslations.length === 0">
+                        {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.BTN_ADD' | translate }}
+                    </button>
+                </div>
+            </ng-template>
+
+            <div class="d-flex justify-content-center">
+                <a [routerLink]="['../actual']" routerLinkActive="router-link-active"  class="btn text-primary mt-4">
+                    {{ 'STOWARZYSZENIE.HELPERS.BACK_TO_CONFERENCE' | translate }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

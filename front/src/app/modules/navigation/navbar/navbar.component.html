@@ -252,6 +252,20 @@
 
                     <li class="dropdown">
                         <a class="nav-link">
+                            <i class="fas fa-handshake"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.CONFERENCE_MENU' | translate }}
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['manage-conference/actual']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.ACTUAL_CONFERENCE' | translate }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="nav-link">
                             <i class="fas fa-file-alt"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.PAGES_ADMIN.TITLE_MENU_V2' | translate }}
                         </a>
 
