@@ -1,0 +1,190 @@
+<div class="section-header">
+    <h1>{{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL_PAGE_TITLE' | translate }}</h1>
+</div>
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL_SECTION_TITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL_PAGE_DESC' | translate }}
+    </p>
+
+
+    <div *ngIf="this.loading; else content">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-primary"></div>
+        </div>
+    </div>
+
+    <ng-template #content>
+        <div class="card" *ngIf="this.conference && !this.conference.conference">
+            <div class="card-body">
+                <div *ngIf="this.message">
+                    {{ this.message | translate }}
+                </div>
+    
+                <div class="empty-state" data-height="400" style="height: 400px;">
+                    <div class="empty-state-icon">
+                        <i class="fas fa-question"></i>
+                    </div>
+    
+                    <h2>
+                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE' | translate }}
+                    </h2>
+    
+                    <p class="lead">
+                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE_DESC' | translate}}
+                    </p>
+    
+                    <a class="btn btn-primary mt-4" [routerLink]="['../create']">
+                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.ADD_CONF_BUTT' | translate }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    
+        <!-- moduły konferencji -->
+        <div class="row" *ngIf="this.conference && this.conference.conference">
+            <!-- ogólne ustawienia konferencji -->
+            <div class="col-lg-6">
+                <div class="card card-large-icons">
+                    <div class="card-icon bg-primary text-white">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="card-body">
+                        <h4>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.GENERAL.TITLE' | translate }}
+                        </h4>
+                        <p>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.GENERAL.DESC' | translate }}
+                        </p>
+                        <a [routerLink]="['/routePath']" class="card-cta">
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.BUTTON' | translate }} <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- zarządzanie trackami -->
+            <div class="col-lg-6">
+                <div class="card card-large-icons">
+                    <div class="card-icon bg-primary text-white">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <div class="card-body">
+                        <h4>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.TRACKS.TITLE' | translate }}
+                        </h4>
+                        <p>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.TRACKS.DESC' | translate }}
+                        </p>
+                        <a  class="card-cta">
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.BUTTON' | translate }} <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Zarządzanie podstroną konferencji -->
+            <div class="col-lg-6">
+                <div class="card card-large-icons">
+                    <div class="card-icon bg-primary text-white">
+                        <i class="fas fa-file"></i>
+                    </div>
+                    <div class="card-body">
+                        <h4>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.CONFERENCE_PAGE.TITLE' | translate }}
+                        </h4>
+                        <p>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.CONFERENCE_PAGE.DESC' | translate }}
+                        </p>
+                        <a  class="card-cta">
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.BUTTON' | translate }} <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- kalndarz, terminy -->
+            <div class="col-lg-6">
+                <div class="card card-large-icons">
+                    <div class="card-icon bg-primary text-white">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="card-body">
+                        <h4>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.CALENDAR.TITLE' | translate }}
+                        </h4>
+                        <p>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.CALENDAR.DESC' | translate }}
+                        </p>
+                        <a  class="card-cta">
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.BUTTON' | translate }} <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- komitet programowy -->
+            <div class="col-lg-6">
+                <div class="card card-large-icons">
+                    <div class="card-icon bg-primary text-white">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-body">
+                        <h4>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.COMMITTEE.TITLE' | translate }}
+                        </h4>
+                        <p>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.COMMITTEE.DESC' | translate }}
+                        </p>
+                        <a  class="card-cta">
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.BUTTON' | translate }} <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- zarządzanie galerią -->
+            <div class="col-lg-6">
+                <div class="card card-large-icons">
+                    <div class="card-icon bg-primary text-white">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="card-body">
+                        <h4>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.GALLERY.TITLE' | translate }}
+                        </h4>
+                        <p>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.GALLERY.DESC' | translate }}
+                        </p>
+                        <a  class="card-cta">
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.BUTTON' | translate }} <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- program konferencji -->
+            <div class="col-lg-6">
+                <div class="card card-large-icons">
+                    <div class="card-icon bg-primary text-white">
+                        <i class="far fa-calendar-alt"></i>
+                    </div>
+                    <div class="card-body">
+                        <h4>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.PROGRAMME.TITLE' | translate }}
+                        </h4>
+                        <p>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.PROGRAMME.DESC' | translate }}
+                        </p>
+                        <a  class="card-cta">
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.BUTTON' | translate }} <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+</div>

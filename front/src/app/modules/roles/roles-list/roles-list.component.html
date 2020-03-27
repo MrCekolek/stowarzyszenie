@@ -18,7 +18,7 @@
                     <h4>
                         <i class="fas fa-user-tag mr-2"></i> {{ 'STOWARZYSZENIE.MODULES.ROLES.LIST_TITLE' | translate }}
                     </h4>
-                    <button class="btn btn-primary btn-sm" (click)="openNewRoleModal()">
+                    <button class="btn btn-primary btn-sm" (click)="openNewRoleModal()" *ngIf="this.userProvider.checkPermission('ROLES.ADD')">
                         <i class="fas fa-plus mr-2"></i>
                         {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE.TRIGGER_BUTTON' | translate }}
                     </button>
