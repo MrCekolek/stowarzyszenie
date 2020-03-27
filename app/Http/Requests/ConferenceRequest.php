@@ -32,18 +32,15 @@ class ConferenceRequest extends FormRequest {
     }
 
     protected function checkCreate() {
-        $this->rules = [
-            'name_pl' => 'required',
-            'name_en' => 'required',
-            'name_ru' => 'required',
-            'content_pl' => 'required',
-            'content_en' => 'required',
-            'content_ru' => 'required',
-            'place_pl' => 'required',
-            'place_en' => 'required',
-            'place_ru' => 'required'
-        ];
-    }
+    $this->rules = [
+        'name_pl' => 'required',
+        'name_en' => 'required',
+        'name_ru' => 'required',
+        'place_pl' => 'required',
+        'place_en' => 'required',
+        'place_ru' => 'required'
+    ];
+}
 
     protected function checkShow() {
         $this->rules = [

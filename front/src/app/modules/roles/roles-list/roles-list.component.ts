@@ -5,6 +5,7 @@ import { MatDialog, MatDialogConfig } from "@angular/material";
 import { AlertModel } from 'src/app/shared/models/alert.model';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-roles-list',
@@ -28,7 +29,8 @@ export class RolesListComponent implements OnInit {
   constructor(
     private permissionRoleApiService: PermissionRoleApiService,
     private dialog: MatDialog,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private userProvider: UserProviderService
   ) { }
 
   ngOnInit() {

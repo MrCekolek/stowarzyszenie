@@ -65,7 +65,9 @@
             "EXIT_PREVIEW_MODE": "Wyjdź z podglądu",
             "POLISH_LANG": "Polski",
             "ENGLISH_LANG": "Angielski",
-            "RUSSIAN_LANG": "Rosyjski"
+            "RUSSIAN_LANG": "Rosyjski",
+            "CONFERENCE_ALREADY_EXISTS": "Konferencja już istnieje. Nie możesz dodać więcej. Jeśli chcesz zarządzać konferencją, przejdź do „Aktualnej konferencji”",
+            "BACK_TO_CONFERENCE": "Powrót do ustawień konferencji"
         },
         "LABELS_TABLES": {
             "AVATAR": "Avatar",
@@ -262,7 +264,9 @@
                         "PORTFOLIO": "Ustawienia portfolio",
                         "PORTFOLIO_MENU": "Portfolio",
                         "ROLES_PREFERENCES": "Role i uprawnienia",
-                        "USERS_LIST": "Lista użytkowników"
+                        "USERS_LIST": "Lista użytkowników",
+                        "CONFERENCE_MENU": "Konferencja",
+                        "ACTUAL_CONFERENCE": "Aktualna konferencja"
                     },
                     "MANAGEMENT": {
                         "MANAGEMENT_MENU": "Zarządzanie",
@@ -414,6 +418,65 @@
                     "SHOW": "Pokaż użytkowników należących do danej roli"
                 },
                 "USERS_LIST_TITLE": "Lista użytkowników przypisanych do roli"
+            },
+            "CONFERENCE": {
+                "ACTUAL_PAGE_TITLE": "Aktualna konferencja",
+                "ACTUAL_SECTION_TITLE": "Informacje o aktualnej konferencji",
+                "ACTUAL_PAGE_DESC": "Tutaj możesz edytować wszystkie ważne aspekty konferencji.",
+                "ACTUAL": {
+                    "NO_CONFERENCE": "Brak aktualnych konferencji",
+                    "NO_CONFERENCE_DESC": "Każda znaleziono aktualnej konferencji. Chcesz stworzyć nową?",
+                    "ADD_CONF_BUTT": "Dodaj nową konferencję"
+                },
+                "OPTIONS_PAGE": {
+                    "GENERAL": {
+                        "TITLE": "Ustawienia główne",
+                        "DESC": "Ogólne ustawienia konferencji, takie jak tytuł, miejsce, data itp."
+                    },
+                    "BUTTON": "Zmień ustawienia",
+                    "TRACKS": {
+                        "TITLE": "Zarządzaj trackami",
+                        "DESC": "Zarządzaj trackami konferencyjnymi, wybierz ich tytuły i kategorie, przypisz do nich osoby."
+                    },
+                    "CONFERENCE_PAGE": {
+                        "TITLE": "Strona konferencji",
+                        "DESC": "Zarządzaj stroną konferencji, która będzie widoczna dla innych użytkowników na stronie głównej. Zarządzaj menu strony, dodawaj nowe informacje i edytuj istniejące."
+                    },
+                    "CALENDAR": {
+                        "TITLE": "Ustawienia kalendarza",
+                        "DESC": "Zarządzaj datami konferencji, takimi jak data rozpoczęcia, koniec, termin przesyłania prac i recenzji itp."
+                    },
+                    "COMMITTEE": {
+                        "TITLE": "Komitet programowy",
+                        "DESC": "Zarządzaj ludźmi wchodzącymi w skład komitetu programowego."
+                    },
+                    "GALLERY": {
+                        "TITLE": "Galeria",
+                        "DESC": "Zarządzaj galerią zdjęć na konferencji."
+                    },
+                    "PROGRAMME": {
+                        "TITLE": "Program konferencji",
+                        "DESC": "Zarządzaj programem konferencji, ustaw wydarzenia i ich godziny (to nie to samo co kalendarz!)."
+                    }
+                },
+                "STATUS": {
+                    "WAITING": "Oczekująca",
+                    "DURING": "W trakcie",
+                    "FINISHED": "Zakończona"
+                }
+            },
+            "ADD_CONFERENCE": {
+                "PAGE_TITLE": "Dodaj nową konferencję",
+                "SECTION_TITLE": "Dodaj nową konferencję",
+                "PAGE_DESC": "Dodaj nową konferencję do systemu, ustaw jej tytuł, a następnie możesz zarządzać różnymi modułami konferencji, takimi jak program, strona konferencji itp.",
+                "ADD_CONF_TITLE": "Podaj informacje o nowej konferencji",
+                "FIELD_CONF_NAME_LABEL": "Nazwa konferencji",
+                "CONF_ACRONYM_LABEL": "Akronim konferencji",
+                "BTN_ADD": "Dodaj konferencję",
+                "HELP_BLOCK": "Skrót / krótka nazwa Twojej konferencji",
+                "CONF_WEBSITE_LABEL": "Strona internetowa konferencji",
+                "HELP_BLOCK2": "Pole opcjonalne - jeśli masz zewnętrzną stronę internetową dla swojej konferencji, wpisz tutaj jej adres. Jeśli nie, możesz utworzyć stronę swojej konferencji w systemie.",
+                "CONF_PLACE_LABEL": "Miejsce konferencji"
             }
         },
         "PAGINATION": {
@@ -505,6 +568,7 @@
             "PUBLISHED": "Opublikowana",
             "IN_PROGRESS": "W edycji",
             "NOT_EDITABLE": "Nie można edytować"
-        }
+        },
+        "HELPERSCONFERENCE_EXISTS_BTN": "Przejdź do faktycznej konferencji"
     }
 }
