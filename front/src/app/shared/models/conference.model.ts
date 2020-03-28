@@ -6,6 +6,9 @@ export class Conference {
     content_pl: Object;
     content_en: Object;
     content_ru: Object;
+    place_pl: string;
+    place_en: string;
+    place_ru: string;
     status: string;
 
     constructor(conference: Object) {
@@ -16,6 +19,9 @@ export class Conference {
         this.content_pl = conference['content_pl'];
         this.content_en = conference['content_en'];
         this.content_ru = conference['content_ru'];
+        this.place_pl = conference['place_pl'];
+        this.place_en = conference['place_en'];
+        this.place_ru = conference['place_ru'];
         this.status = conference['status'];
     }
 }
