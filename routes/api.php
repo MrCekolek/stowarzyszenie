@@ -145,6 +145,11 @@ Route::group([
             Route::post('get', 'TrackController@index');
             Route::post('create', 'TrackController@create');
             Route::post('destroy', 'TrackController@destroy');
+
+            Route::prefix('article')->group(function () {
+                Route::post('create', 'TrackArticleController@create');
+                Route::post('{track}', 'TrackArticleController@index');
+            });
         });
 
         Route::prefix('page')->group(function () {

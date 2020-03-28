@@ -130,4 +130,8 @@ class User extends Authenticatable implements JWTSubject {
         return $this->belongsToMany(Conference::class)
             ->using(ProgrammeCommittee::class);
     }
+
+    public function trackArticles() {
+        return $this->hasMany(TrackArticle::class);
+    }
 }
