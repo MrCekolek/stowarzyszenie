@@ -18,4 +18,8 @@ class Track extends BaseModel {
     public function conference() {
         return $this->belongsTo(Conference::class);
     }
+
+    public function trackArticles() {
+        return $this->hasMany(TrackArticle::class);
+    }
 }

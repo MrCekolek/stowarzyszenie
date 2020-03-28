@@ -85,7 +85,7 @@ class ConferenceController extends Controller
      * )
      */
     public function getActive() {
-        $conference = Conference::with('conferencePages')->where('status', 'during')->first();
+        $conference = Conference::with('conferencePages')->where('status', '!=', 'finished')->first();
 
         return LogService::read(true, [
             'conference' => !empty($conference) ? $conference->toArray() : []
