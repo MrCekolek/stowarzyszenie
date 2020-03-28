@@ -4,15 +4,13 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateConferencesTable extends Migration
-{
+class CreateConferencesTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('conferences', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('status')->default('waiting');
@@ -33,8 +31,7 @@ class CreateConferencesTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('conferences');
     }
 }
