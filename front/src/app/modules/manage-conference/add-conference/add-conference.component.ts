@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ManageConferenceApiService } from 'src/app/core/http/manage-conference-api.service';
 import { Conference } from 'src/app/shared/models/conference.model';
 import { ApiService } from 'src/app/core/http/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-conference',
@@ -29,7 +30,8 @@ export class AddConferenceComponent implements OnInit {
 
   constructor(
     private manageConferenceApi: ManageConferenceApiService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -78,12 +80,18 @@ export class AddConferenceComponent implements OnInit {
       content_pl: {},
       content_en: {},
       content_ru: {},
+      place_pl: this.placeTranslations[0],
+      place_en: this.placeTranslations[1],
+      place_ru: this.placeTranslations[2],
       status: '',
       conference_id: 0
     }
 
     this.manageConferenceApi.addConference(conf).subscribe(res => {
       console.log(res);
+      if (res.success) {
+        this.router.navigateByUrl('../actual');
+      }
       this.addLoading = false;
     });
   }
