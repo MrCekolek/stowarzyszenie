@@ -73,4 +73,8 @@ class Conference extends BaseModel {
         return $this->belongsToMany(User::class)
             ->using(ProgrammeCommittee::class);
     }
+
+    public function conferenceEvents() {
+        return $this->hasMany(ConferenceEvent::class);
+    }
 }

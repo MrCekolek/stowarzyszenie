@@ -1,30 +1,28 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateTracksTable extends Migration {
+class CreateConferenceEventsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('tracks', function (Blueprint $table) {
+        Schema::create('conference_events', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name_pl')->nullable();
             $table->string('name_en')->nullable();
             $table->string('name_ru')->nullable();
+            $table->timestamp('date');
             $table->string('colour')->nullable();
-            $table->unsignedBigInteger('interest_id');
+            $table->text('description_pl')->nullable();
+            $table->text('description_en')->nullable();
+            $table->text('description_ru')->nullable();
             $table->unsignedBigInteger('conference_id');
             $table->timestamps();
-
-            $table->foreign('interest_id')
-                ->references('id')
-                ->on('interests')
-                ->onDelete('cascade');
 
             $table->foreign('conference_id')
                 ->references('id')
@@ -39,6 +37,6 @@ class CreateTracksTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('tracks');
+        Schema::dropIfExists('conference_events');
     }
 }
