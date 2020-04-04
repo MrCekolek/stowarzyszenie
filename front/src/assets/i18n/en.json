@@ -67,7 +67,9 @@
             "ENGLISH_LANG": "English",
             "RUSSIAN_LANG": "Russian",
             "CONFERENCE_ALREADY_EXISTS": "Conference already exsists. You can't add more. If you want to manage your conference, go to \"Actual Conference\"",
-            "BACK_TO_CONFERENCE": "Back to conference settings"
+            "BACK_TO_CONFERENCE": "Back to conference settings",
+            "CONFERENCE_NOT_EXIST": "No conference in system",
+            "CONF_NOT_EXISTS_BTN": "Add new conference"
         },
         "LABELS_TABLES": {
             "AVATAR": "Avatar",
@@ -463,6 +465,11 @@
                     "WAITING": "Pending",
                     "DURING": "During",
                     "FINISHED": "Finished"
+                },
+                "GENERAL": {
+                    "PAGE_TITLE": "General settings",
+                    "SECTION_TITLE": "Change settings",
+                    "PAGE_DESC": "Change general settings of conference, which was filled while adding it."
                 }
             },
             "ADD_CONFERENCE": {
@@ -548,7 +555,88 @@
                         "PORTFOLIO": {
                             "MANAGE_TABS": "Portfolio management",
                             "PORTFOLIO": "Portfolio Permissions",
-                            "MANAGE_CARDS": "Portfolio card management (adding, removing, editing)"
+                            "MANAGE_CARDS": "Portfolio card management (adding, removing, editing)",
+                            "ADD_TABS": "Adding new tabs",
+                            "EDIT_TABS": "Editing tabs",
+                            "DELETE_TABS": "Deleting tabs",
+                            "ADD_CARDS": "Adding new cards to tabs",
+                            "EDIT_CARD_NAMES": "Editing cards name",
+                            "DELETE_CARD": "Deleting cards from tabs",
+                            "ADD_CONTENT": "Adding new contents to card",
+                            "DELETE_CONTENT": "Deleting content from cards",
+                            "EDIT_CONTENT": "Editing content in cards",
+                            "HIDE_TABS": "Hiding tabs from users potfolio",
+                            "HIDE_CARD": "Hiding cards from users portfolio",
+                            "HIDE_CONTENT": "Hiding content in cards"
+                        },
+                        "INTERESTS": {
+                            "INTERESTS": "Research areas",
+                            "ADD": "Adding new research areas",
+                            "DELETE": "Deleting research areas",
+                            "EDIT": "Editing research areas"
+                        },
+                        "HOME_NAVIGATION": {
+                            "NAVIGATION": "Managing main navigation",
+                            "ADD": "Adding new pages to main navigation",
+                            "DELETE": "Deleting pages from main navigation",
+                            "EDIT": "Editing pages in main navigation"
+                        },
+                        "TRANSLATIONS": {
+                            "TRANSLATIONS": "Translations",
+                            "ADD": "Adding new translation to system",
+                            "EDIT": "Editing translations",
+                            "DELETE": "Deleting translations"
+                        },
+                        "CONFERENCE_GENERAL": {
+                            "GENERAL": "General aspects of conferenece",
+                            "ADD_NEW": "Adding new conference",
+                            "CHANGE_CONFERENCE_STATUS": "Changing status of conference",
+                            "REGISTER_TO_CONF": "Registering to conference",
+                            "CHANGE_PAYMENTS": "Changing status of payments"
+                        },
+                        "CONFERENCE_TRACKS": {
+                            "TRACKS": "Conference tracks",
+                            "ADD_NEW": "Adding new tracks to conference",
+                            "EDIT_TRACK": "Editing conference tracks",
+                            "DELETE_TRACK": "Deleting conference tracks",
+                            "ASSIGN_CHAIR": "Assigning chairs to tracks"
+                        },
+                        "CONFERENCE_PAGE": {
+                            "PAGE": "Conference page",
+                            "ADD_NEW": "Add new subpage to menu of conference page",
+                            "EDIT_PAGE": "Edit subpage in menu of conference page",
+                            "DELETE_PAGE": "Deleting subpage in menu of conference page"
+                        },
+                        "CONFERENCE_CALENDAR": {
+                            "CALENDAR": "Conference calendar",
+                            "ADD_DATE": "Adding dates to conference calendar",
+                            "EDIT_DATE": "Editing dates in conference calendar",
+                            "DELETE_DATE": "Deleting dates in conference calendar"
+                        },
+                        "PROGRAM_COMMITTEE": {
+                            "COMMITTEE": "Program committee",
+                            "ADD_PC": "Adding new program committee",
+                            "DELETE_PC": "Deleting program committees"
+                        },
+                        "CONFERENCE_GALLERY": {
+                            "GALLERY": "Conference gallery"
+                        },
+                        "CONFERENCE_PROGRAMME": {
+                            "PROGRAMME": "Conference programme",
+                            "SET_DATES": "Setting dates of conference events in conference programme"
+                        },
+                        "CONFERENCE_ARTICLES": {
+                            "ARTICLES": "Conference articles",
+                            "ACCEPT_ARTICLES": "Accepting articles sent to conference",
+                            "REJECT_ARTICLES": "Rejection of articles sent to conference"
+                        },
+                        "CONFERENCE_REVIEWS": {
+                            "REVIEWS": "Conference reviews",
+                            "ASSIGN_REVIEWERS": "Assigning reviewers to accepted articles"
+                        },
+                        "PROGRAM_GALLERY": {
+                            "ADD_PICTURE": "Adding pictures to conference gallery",
+                            "DELETE_PICTURE": "Deleting pictures from conference gallery"
                         }
                     }
                 }

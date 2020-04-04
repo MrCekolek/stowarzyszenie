@@ -10,6 +10,7 @@ export class Conference {
     place_en: string;
     place_ru: string;
     status: string;
+    website: string;
 
     constructor(conference: Object) {
         this.conference_id = conference['conference_id'];
@@ -23,5 +24,6 @@ export class Conference {
         this.place_en = conference['place_en'];
         this.place_ru = conference['place_ru'];
         this.status = conference['status'];
+        this.website = conference['website'];
     }
 }

@@ -28,12 +28,13 @@ export class ActualConferenceComponent implements OnInit {
 
     this.manageConferenceApi.getConference().subscribe(res => {
       console.log(res);
-      this.loading = false;
       if (res.success) {
         this.conference = res.conference;
       } else {
         this.message = res.message;
       }
+
+      this.loading = false;
     });
   }
 
