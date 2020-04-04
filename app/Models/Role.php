@@ -9,6 +9,20 @@ class Role extends BaseModel {
         'name_ru'
     ];
 
+    public static function roles() {
+        return [
+            'Administrator',
+            'User',
+            'General Chair',
+            'Programme Chair',
+            'Programme committee',
+            'Track chair',
+            'Local chair',
+            'Reviewer',
+            'Author'
+        ];
+    }
+
     public function users() {
         return $this->belongsToMany(User::class)
             ->using(RoleUser::class);

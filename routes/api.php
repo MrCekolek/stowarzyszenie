@@ -150,6 +150,12 @@ Route::group([
                 Route::post('create', 'TrackArticleController@create');
                 Route::post('{track}', 'TrackArticleController@index');
             });
+
+            Route::prefix('reviewer')->group(function () {
+                Route::post('create', 'TrackReviewerController@create');
+                Route::post('destroy', 'TrackReviewerController@destroy');
+                Route::post('{track}/get', 'TrackReviewerController@index');
+            });
         });
 
         Route::prefix('page')->group(function () {
@@ -158,6 +164,14 @@ Route::group([
             Route::post('update', 'ConferencePageController@update');
             Route::post('destroy', 'ConferencePageController@destroy');
             Route::post('{pageId}', 'ConferencePageController@show');
+        });
+
+        Route::prefix('event')->group(function () {
+            Route::post('', 'ConferenceEventController@index');
+            Route::post('create', 'ConferenceEventController@create');
+            Route::post('update', 'ConferenceEventController@update');
+            Route::post('destroy', 'ConferenceEventController@destroy');
+            Route::post('{conferenceEvent}', 'ConferenceEventController@show');
         });
 
         Route::prefix('programme_committee')->group(function () {

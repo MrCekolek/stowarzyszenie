@@ -7,6 +7,7 @@ class Track extends BaseModel {
         'name_pl',
         'name_en',
         'name_ru',
+        'colour',
         'interest_id',
         'conference_id'
     ];
@@ -21,5 +22,10 @@ class Track extends BaseModel {
 
     public function trackArticles() {
         return $this->hasMany(TrackArticle::class);
+    }
+
+    public function trackReviewers() {
+        return $this->belongsToMany(User::class)
+            ->using(TrackReviewer::class);
     }
 }

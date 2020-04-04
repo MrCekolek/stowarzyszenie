@@ -14,9 +14,11 @@ trait Translatable {
         ];
     }
 
-    public function translate($source, $expression, $model, $field) {
+    public function translate($source, $expression, $model, $field, $initialize = []) {
         foreach (self::languages() as $language) {
-            if ($source !== $language) {
+            if (isset($initialize[$language])) {
+                $model->{'name_' . $language} = $initialize[$language];
+            } elseif ($source !== $language) {
                 TranslateJob::dispatchNow($source, $language, $expression, $model, $field . '_' . $language);
             } else {
                 $model->{'name_' . $source} = $expression;

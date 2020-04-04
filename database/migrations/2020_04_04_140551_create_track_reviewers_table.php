@@ -1,28 +1,29 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateInterestUsersTable extends Migration {
+class CreateTrackReviewersTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('interest_user', function (Blueprint $table) {
+        Schema::create('track_reviewer', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('interest_id');
+            $table->unsignedBigInteger('track_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-            $table->unique(['interest_id', 'user_id']);
+            $table->unique(['track_id', 'user_id']);
 
-            $table->foreign('interest_id')
+            $table->foreign('track_id')
                 ->references('id')
-                ->on('interests')
+                ->on('tracks')
                 ->onDelete('cascade');
+
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
@@ -36,6 +37,6 @@ class CreateInterestUsersTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('interest_user');
+        Schema::dropIfExists('track_reviewer');
     }
 }
