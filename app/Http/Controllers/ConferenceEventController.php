@@ -2,29 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TrackRequest;
-use App\Models\Track;
+use App\Http\Requests\ConferenceEventRequest;
+use App\Models\ConferenceEvent;
 use App\Services\LogService;
 use Illuminate\Http\Request;
 
 /**
- * Class TrackController
+ * Class ConferenceEventController
  *
  * @package stowarzyszenie\controllers
  *
  * @author  Stowarzyszenie CIOB <CIOBstowarzyszenie@gmail.com>
  */
-class TrackController extends Controller {
+class ConferenceEventController extends Controller {
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['index']]);
     }
 
     /**
      * @OA\Post(
-     *     path="/conference/track/get",
-     *     tags={"conference_track"},
-     *     summary="Gets all conference tracks",
-     *     operationId="TrackControllerIndex",
+     *     path="/conference/event/get",
+     *     tags={"conference_event"},
+     *     summary="Gets all conference events",
+     *     operationId="ConferenceEventControllerIndex",
      *     @OA\Parameter(
      *         name="conference_id",
      *         in="query",
@@ -42,23 +42,23 @@ class TrackController extends Controller {
      */
     public function index(Request $request) {
         $input = $request->all();
-        $validation = new TrackRequest($input, 'index');
+        $validation = new ConferenceEventRequest($input, 'index');
 
         if ($validation->fails()) {
             return $validation->failResponse();
         }
 
         return LogService::read(true, [
-            'tracks' => Track::where('conference_id', $input['conference_id'])->with('interest')->get()->toArray()
+            'conferenceEvents' => ConferenceEvent::where('id', $input['conference_id'])->get()->toArray()
         ]);
     }
 
     /**
      * @OA\Post(
-     *     path="/conference/track/create",
-     *     tags={"conference_track"},
-     *     summary="Creates track for conference",
-     *     operationId="TrackControllerCreate",
+     *     path="/conference/event/create",
+     *     tags={"conference_event"},
+     *     summary="Creates event for conference",
+     *     operationId="ConferenceEventControllerCreate",
      *     @OA\Parameter(
      *         name="name_pl",
      *         in="query",
@@ -87,18 +87,45 @@ class TrackController extends Controller {
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="colour",
+     *         name="date",
      *         in="query",
-     *         description="Track colour",
+     *         description="Date of event",
      *         required=true,
      *         @OA\Schema(
      *             type="string"
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="interest_id",
+     *         name="colour",
      *         in="query",
-     *         description="Interest id",
+     *         description="Event colour",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="description_pl",
+     *         in="query",
+     *         description="Description in polish language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="description_en",
+     *         in="query",
+     *         description="Description in english language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="description_ru",
+     *         in="query",
+     *         description="Description in russian language",
      *         required=true,
      *         @OA\Schema(
      *             type="string"
@@ -121,36 +148,29 @@ class TrackController extends Controller {
      */
     public function create(Request $request) {
         $input = $request->all();
-        $validation = new TrackRequest($input, 'create');
+        $validation = new ConferenceEventRequest($input, 'create');
 
         if ($validation->fails()) {
             return $validation->failResponse();
         }
 
-        $track = new Track();
-        $track->name_pl = $input['name_pl'];
-        $track->name_en = $input['name_en'];
-        $track->name_ru = $input['name_ru'];
-        $track->colour = $input['colour'];
-        $track->interest_id = $input['interest_id'];
-        $track->conference_id = $input['conference_id'];
-        $success = $track->save();
+        $conferenceEvent = ConferenceEvent::addConferenceEvent($input, $success);
 
         return LogService::create($success, [
-            'track' => $track->load('interest')->toArray()
+            'conferenceEvent' => $conferenceEvent->toArray()
         ]);
     }
 
     /**
      * @OA\Post(
-     *     path="/conference/track/update",
-     *     tags={"conference_track"},
-     *     summary="Update track for conference",
-     *     operationId="TrackControllerUpdate",
+     *     path="/conference/event/update",
+     *     tags={"conference_event"},
+     *     summary="Updates event for conference",
+     *     operationId="ConferenceEventControllerUpdate",
      *     @OA\Parameter(
      *         name="id",
      *         in="query",
-     *         description="Track id",
+     *         description="ConferenceEvent id",
      *         required=true,
      *         @OA\Schema(
      *             type="string"
@@ -175,15 +195,6 @@ class TrackController extends Controller {
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="colour",
-     *         in="query",
-     *         description="Track colour",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
      *         name="name_ru",
      *         in="query",
      *         description="Translation in russian language",
@@ -193,9 +204,45 @@ class TrackController extends Controller {
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="interest_id",
+     *         name="date",
      *         in="query",
-     *         description="Interest id",
+     *         description="Date of event",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="colour",
+     *         in="query",
+     *         description="Event colour",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="description_pl",
+     *         in="query",
+     *         description="Description in polish language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="description_en",
+     *         in="query",
+     *         description="Description in english language",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="description_ru",
+     *         in="query",
+     *         description="Description in russian language",
      *         required=true,
      *         @OA\Schema(
      *             type="string"
@@ -218,36 +265,29 @@ class TrackController extends Controller {
      */
     public function update(Request $request) {
         $input = $request->all();
-        $validation = new TrackRequest($input, 'update');
+        $validation = new ConferenceEventRequest($input, 'update');
 
         if ($validation->fails()) {
             return $validation->failResponse();
         }
 
-        $track = Track::where('id', $input['id'])->first();
-        $track->name_pl = $input['name_pl'];
-        $track->name_en = $input['name_en'];
-        $track->name_ru = $input['name_ru'];
-        $track->colour = $input['colour'];
-        $track->interest_id = $input['interest_id'];
-        $track->conference_id = $input['conference_id'];
-        $success = $track->save();
+        $conferenceEvent = ConferenceEvent::updateConferenceEvent($input, $success);
 
         return LogService::update($success, [
-            'track' => $track->load('interest')->toArray()
+            'conferenceEvent' => $conferenceEvent->toArray()
         ]);
     }
 
     /**
      * @OA\Post(
-     *     path="/conference/track/destroy",
-     *     tags={"conference_track"},
-     *     summary="Deletes conference track",
-     *     operationId="TrackControllerDestroy",
+     *     path="/conference/event/destroy",
+     *     tags={"conference_event"},
+     *     summary="Deletes conference event",
+     *     operationId="ConferenceEventControllerDestroy",
      *     @OA\Parameter(
      *         name="id",
      *         in="query",
-     *         description="Conference track id",
+     *         description="Conference page id",
      *         required=true,
      *         @OA\Schema(
      *             type="string"
@@ -261,13 +301,13 @@ class TrackController extends Controller {
      */
     public function destroy(Request $request) {
         $input = $request->all();
-        $validation = new TrackRequest($input, 'destroy');
+        $validation = new ConferenceEventRequest($input, 'destroy');
 
         if ($validation->fails()) {
             return $validation->failResponse();
         }
 
-        $success = Track::destroy($input['id']);
+        $success = ConferenceEvent::destroy($input['id']);
 
         return LogService::delete($success);
     }

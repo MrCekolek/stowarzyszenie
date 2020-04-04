@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class TrackRequest extends FormRequest {
+class ConferenceEventRequest extends FormRequest {
     protected $rules = [];
 
     public function __construct(array $input, $filter) {
@@ -38,26 +38,29 @@ class TrackRequest extends FormRequest {
     }
 
     protected function checkCreate() {
-        $this->checkIndex();
-        $this->rules = array_merge($this->rules, [
+        $this->rules = [
             'name_pl' => 'required',
             'name_en' => 'required',
             'name_ru' => 'required',
+            'date' => 'required',
             'colour' => 'required',
-            'interest_id' => 'required|exists:interests,id'
-        ]);
+            'description_pl' => 'required',
+            'description_en' => 'required',
+            'description_ru' => 'required',
+            'conference_id' => 'required|exists:conferences,id'
+        ];
     }
 
     protected function checkUpdate() {
         $this->checkCreate();
         $this->rules = array_merge($this->rules, [
-            'id' => 'required|exists:tracks'
+            'id' => 'required|exists:conference_events'
         ]);
     }
 
     protected function checkDestroy() {
         $this->rules = [
-            'id' => 'required|exists:tracks'
+            'id' => 'required|exists:conference_events'
         ];
     }
 }

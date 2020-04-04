@@ -13,26 +13,42 @@ class RolesTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        // generowanie roli w systemie - admin
-        $this->translate(
-            'pl',
-            'Administrator',
-            (new Role()),
-            'name'
-        );
+        foreach (Role::roles() as $role) {
+            switch ($role) {
+                case 'Track chair':
+                    $this->translate(
+                        'en',
+                        $role,
+                        (new Role()),
+                        'name',
+                        [
+                            'pl' => 'Przewodniczący tracku'
+                        ]
+                    );
 
-        $this->translate(
-            'pl',
-            'Użytkownik',
-            (new Role()),
-            'name'
-        );
+                    break;
 
-        $this->translate(
-            'pl',
-            'Test',
-            (new Role()),
-            'name'
-        );
+                case 'Local chair':
+                    $this->translate(
+                        'en',
+                        $role,
+                        (new Role()),
+                        'name',
+                        [
+                            'pl' => 'Przewodniczący lokalny'
+                        ]
+                    );
+
+                    break;
+
+                default:
+                    $this->translate(
+                        'en',
+                        $role,
+                        (new Role()),
+                        'name'
+                    );
+            }
+        }
     }
 }
