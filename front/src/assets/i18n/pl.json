@@ -67,7 +67,9 @@
             "ENGLISH_LANG": "Angielski",
             "RUSSIAN_LANG": "Rosyjski",
             "CONFERENCE_ALREADY_EXISTS": "Konferencja już istnieje. Nie możesz dodać więcej. Jeśli chcesz zarządzać konferencją, przejdź do „Aktualnej konferencji”",
-            "BACK_TO_CONFERENCE": "Powrót do ustawień konferencji"
+            "BACK_TO_CONFERENCE": "Powrót do ustawień konferencji",
+            "CONFERENCE_NOT_EXIST": "Brak konferencji w systemie",
+            "CONF_NOT_EXISTS_BTN": "Dodaj nową konferencję"
         },
         "LABELS_TABLES": {
             "AVATAR": "Avatar",
@@ -463,6 +465,11 @@
                     "WAITING": "Oczekująca",
                     "DURING": "W trakcie",
                     "FINISHED": "Zakończona"
+                },
+                "GENERAL": {
+                    "PAGE_TITLE": "Ustawienia główne",
+                    "SECTION_TITLE": "Zmień ustawienia",
+                    "PAGE_DESC": "Zmień ogólne ustawienia konferencji, które zostały wypełnione podczas dodawania."
                 }
             },
             "ADD_CONFERENCE": {
@@ -548,7 +555,88 @@
                         "PORTFOLIO": {
                             "MANAGE_TABS": "Zarządzanie zakładkami w portfolio",
                             "PORTFOLIO": "Uprawnienia dotyczące portfolio",
-                            "MANAGE_CARDS": "Zarządzanie kartami portfolio (dodawanie, usuwanie, edycja)"
+                            "MANAGE_CARDS": "Zarządzanie kartami portfolio (dodawanie, usuwanie, edycja)",
+                            "ADD_TABS": "Dodawanie nowych zakładek",
+                            "EDIT_TABS": "Edycja zakładek",
+                            "DELETE_TABS": "Usuwanie zakładek",
+                            "ADD_CARDS": "Dodawanie nowych kart do zakładek",
+                            "EDIT_CARD_NAMES": "Edycja nazwy karty",
+                            "DELETE_CARD": "Usuwanie kart z zakładek",
+                            "ADD_CONTENT": "Dodanie nowej zawartości do karty",
+                            "DELETE_CONTENT": "Usuwanie zawartości z kart",
+                            "EDIT_CONTENT": "Edycja treści w kartach",
+                            "HIDE_TABS": "Ukrywanie kart w portfolio użytkowników",
+                            "HIDE_CARD": "Ukrywanie kart w portfolio użytkowników",
+                            "HIDE_CONTENT": "Ukrywanie zawartości na kartach"
+                        },
+                        "INTERESTS": {
+                            "INTERESTS": "Obszary badawcze",
+                            "ADD": "Dodanie nowych obszarów badawczych",
+                            "DELETE": "Usuwanie obszarów badawczych",
+                            "EDIT": "Edycja obszarów badawczych"
+                        },
+                        "HOME_NAVIGATION": {
+                            "NAVIGATION": "Zarządzanie główną nawigacją",
+                            "ADD": "Dodawanie nowych stron do głównej nawigacji",
+                            "DELETE": "Usuwanie stron z głównej nawigacji",
+                            "EDIT": "Edycja stron w głównej nawigacji"
+                        },
+                        "TRANSLATIONS": {
+                            "TRANSLATIONS": "Tłumaczenia",
+                            "ADD": "Dodawanie nowego tłumaczenia do systemu",
+                            "EDIT": "Edycja tłumaczeń",
+                            "DELETE": "Usuwanie tłumaczeń"
+                        },
+                        "CONFERENCE_GENERAL": {
+                            "GENERAL": "Ogólne aspekty konferencji",
+                            "ADD_NEW": "Dodawanie nowej konferencji",
+                            "CHANGE_CONFERENCE_STATUS": "Zmiana statusu konferencji",
+                            "REGISTER_TO_CONF": "Rejestracja do konferencji",
+                            "CHANGE_PAYMENTS": "Zmiana statusu płatności"
+                        },
+                        "CONFERENCE_TRACKS": {
+                            "TRACKS": "Tematy konferencyjne",
+                            "ADD_NEW": "Dodawanie nowych tematów do konferencji",
+                            "EDIT_TRACK": "Edycja tematów konferencyjnych",
+                            "DELETE_TRACK": "Usuwanie ścieżek konferencyjnych",
+                            "ASSIGN_CHAIR": "Przypisywanie krzeseł do tematów"
+                        },
+                        "CONFERENCE_PAGE": {
+                            "PAGE": "Strona konferencji",
+                            "ADD_NEW": "Dodaj nową podstronę do menu strony konferencji",
+                            "EDIT_PAGE": "Edytuj podstronę w menu strony konferencji",
+                            "DELETE_PAGE": "Usuwanie podstrony w menu strony konferencji"
+                        },
+                        "CONFERENCE_CALENDAR": {
+                            "CALENDAR": "Kalendarz konferencji",
+                            "ADD_DATE": "Dodawanie dat do kalendarza konferencji",
+                            "EDIT_DATE": "Edycja dat w kalendarzu konferencji",
+                            "DELETE_DATE": "Usuwanie dat w kalendarzu konferencji"
+                        },
+                        "PROGRAM_COMMITTEE": {
+                            "COMMITTEE": "Komitet programowy",
+                            "ADD_PC": "Dodanie nowego komitetu programowego",
+                            "DELETE_PC": "Usuwanie komitetów programowych"
+                        },
+                        "CONFERENCE_GALLERY": {
+                            "GALLERY": "Galeria konferencji"
+                        },
+                        "CONFERENCE_PROGRAMME": {
+                            "PROGRAMME": "Program konferencji",
+                            "SET_DATES": "Ustalanie dat wydarzeń konferencyjnych w programie konferencji"
+                        },
+                        "CONFERENCE_ARTICLES": {
+                            "ARTICLES": "Artykuły konferencyjne",
+                            "ACCEPT_ARTICLES": "Akceptowanie artykułów wysyłanych na konferencję",
+                            "REJECT_ARTICLES": "Odrzucenie artykułów wysłanych na konferencję"
+                        },
+                        "CONFERENCE_REVIEWS": {
+                            "REVIEWS": "Recenzje z konferencji",
+                            "ASSIGN_REVIEWERS": "Przypisywanie recenzentów do zaakceptowanych artykułów"
+                        },
+                        "PROGRAM_GALLERY": {
+                            "ADD_PICTURE": "Dodawanie zdjęć do galerii konferencji",
+                            "DELETE_PICTURE": "Usuwanie zdjęć z galerii konferencji"
                         }
                     }
                 }

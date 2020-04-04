@@ -17,7 +17,7 @@
     </div>
 
     <ng-template #content>
-        <div class="card" *ngIf="this.conference && !this.conference.conference">
+        <div class="card" *ngIf="!this.conference">
             <div class="card-body">
                 <div *ngIf="this.message">
                     {{ this.message | translate }}
@@ -44,7 +44,7 @@
         </div>
     
         <!-- moduły konferencji -->
-        <div class="row" *ngIf="this.conference && this.conference.conference">
+        <div class="row" *ngIf="this.conference">
             <!-- ogólne ustawienia konferencji -->
             <div class="col-lg-6">
                 <div class="card card-large-icons">
@@ -58,7 +58,7 @@
                         <p>
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.GENERAL.DESC' | translate }}
                         </p>
-                        <a [routerLink]="['/routePath']" class="card-cta">
+                        <a [routerLink]="['../general']" class="card-cta">
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.BUTTON' | translate }} <i class="fas fa-chevron-right"></i>
                         </a>
                     </div>

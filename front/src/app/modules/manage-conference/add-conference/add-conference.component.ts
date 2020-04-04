@@ -40,6 +40,7 @@ export class AddConferenceComponent implements OnInit {
     this.manageConferenceApi.getConference().subscribe(res => {
       console.log(res);
       this.conference = res.conference;
+      console.log(this.conference);
       this.loading = false;
     });
   }
@@ -77,9 +78,10 @@ export class AddConferenceComponent implements OnInit {
       name_pl: this.nameTranslations[0],
       name_en: this.nameTranslations[1],
       name_ru: this.nameTranslations[2],
-      content_pl: {},
-      content_en: {},
-      content_ru: {},
+      content_pl: '',
+      content_en: '',
+      content_ru: '',
+      website: this.confweb || '',
       place_pl: this.placeTranslations[0],
       place_en: this.placeTranslations[1],
       place_ru: this.placeTranslations[2],
@@ -87,10 +89,12 @@ export class AddConferenceComponent implements OnInit {
       conference_id: 0
     }
 
+    console.log(conf);
+
     this.manageConferenceApi.addConference(conf).subscribe(res => {
       console.log(res);
       if (res.success) {
-        this.router.navigateByUrl('../actual');
+        this.router.navigateByUrl('manage-conference/actual');
       }
       this.addLoading = false;
     });

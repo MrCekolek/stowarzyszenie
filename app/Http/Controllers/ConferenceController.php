@@ -223,7 +223,7 @@ class ConferenceController extends Controller
         $conference = Conference::addConference($input, $success);
 
         return LogService::create($success, [
-            'conference' => $conference->load('conferencePages', 'conferencePreference')->toArray()
+            'conference' => $conference->load(['conferencePages', 'conferencePreference'])->toArray()
         ]);
     }
 
