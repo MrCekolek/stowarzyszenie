@@ -628,11 +628,15 @@
                         "CONFERENCE_ARTICLES": {
                             "ARTICLES": "Artykuły konferencyjne",
                             "ACCEPT_ARTICLES": "Akceptowanie artykułów wysyłanych na konferencję",
-                            "REJECT_ARTICLES": "Odrzucenie artykułów wysłanych na konferencję"
+                            "REJECT_ARTICLES": "Odrzucenie artykułów wysłanych na konferencję",
+                            "PUBLISH_ARTICLES": "Publikowanie artykułów na konferencję",
+                            "ASSIGN_REVIEWERS": "Przypisywanie recenzentów do artykułów w określonym tracku",
+                            "ADD_COMMENT": "Dodawanie komentarzy dla autorów do ich artykułów"
                         },
                         "CONFERENCE_REVIEWS": {
                             "REVIEWS": "Recenzje z konferencji",
-                            "ASSIGN_REVIEWERS": "Przypisywanie recenzentów do zaakceptowanych artykułów"
+                            "ASSIGN_REVIEWERS": "Przypisywanie recenzentów do zaakceptowanych artykułów",
+                            "REVIEWING": "Może recenzować przypisane artykuły"
                         },
                         "PROGRAM_GALLERY": {
                             "ADD_PICTURE": "Dodawanie zdjęć do galerii konferencji",
