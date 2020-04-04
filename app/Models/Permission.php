@@ -327,12 +327,36 @@ class Permission extends BaseModel {
                             'CONFERENCE_ARTICLES.REJECT_ARTICLES',
                             PermissionParent::permissionParents()['Conference_Articles']['id'])
                     ],
+                    [
+                        self::definePermission(
+                            'Publish articles',
+                            'CONFERENCE_ARTICLES.PUBLISH_ARTICLES',
+                            PermissionParent::permissionParents()['Conference_Articles']['id'])
+                    ],
+                    [
+                        self::definePermission(
+                            'Assign reviewers in track',
+                            'CONFERENCE_ARTICLES.ASSIGN_REVIEWERS',
+                            PermissionParent::permissionParents()['Conference_Articles']['id'])
+                    ],
+                    [
+                        self::definePermission(
+                            'Add comment for author',
+                            'CONFERENCE_ARTICLES.ADD_COMMENT',
+                            PermissionParent::permissionParents()['Conference_Articles']['id'])
+                    ],
                 ],
             PermissionParent::permissionParents()['Conference_Reviews']['name'] => [
                     [
                         self::definePermission(
                             'Assign reviewers',
                             'CONFERENCE_REVIEWS.ASSIGN_REVIEWERS',
+                            PermissionParent::permissionParents()['Conference_Reviews']['id'])
+                    ],
+                    [
+                        self::definePermission(
+                            'Can review',
+                            'CONFERENCE_REVIEWS.REVIEWING',
                             PermissionParent::permissionParents()['Conference_Reviews']['id'])
                     ],
                 ],
