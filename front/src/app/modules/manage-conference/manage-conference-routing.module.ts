@@ -22,15 +22,13 @@ const routes: Routes = [{
             component: ActualConferenceComponent,
             canActivateChild: [
                 LoggedGuard
-            ],
-            children: [
-                {
-                    path: 'general',
-                    component: GeneralSettingsComponent,
-                    canActivateChild: [
-                        LoggedGuard
-                    ]
-                }
+            ]
+        },
+        {
+            path: 'general',
+            component: GeneralSettingsComponent,
+            canActivateChild: [
+                LoggedGuard
             ]
         },
         {
