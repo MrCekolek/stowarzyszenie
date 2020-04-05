@@ -268,7 +268,8 @@
                         "ROLES_PREFERENCES": "Role i uprawnienia",
                         "USERS_LIST": "Lista użytkowników",
                         "CONFERENCE_MENU": "Konferencja",
-                        "ACTUAL_CONFERENCE": "Aktualna konferencja"
+                        "ACTUAL_CONFERENCE": "Aktualna konferencja",
+                        "GENERAL_SETT_CONF": "Ustawienia główne"
                     },
                     "MANAGEMENT": {
                         "MANAGEMENT_MENU": "Zarządzanie",
@@ -428,7 +429,10 @@
                 "ACTUAL": {
                     "NO_CONFERENCE": "Brak aktualnych konferencji",
                     "NO_CONFERENCE_DESC": "Każda znaleziono aktualnej konferencji. Chcesz stworzyć nową?",
-                    "ADD_CONF_BUTT": "Dodaj nową konferencję"
+                    "ADD_CONF_BUTT": "Dodaj nową konferencję",
+                    "GENERAL_SETTINGS": {
+                        "INFO_TITLE": "Ogólne informacje o konferencji"
+                    }
                 },
                 "OPTIONS_PAGE": {
                     "GENERAL": {
@@ -459,6 +463,10 @@
                     "PROGRAMME": {
                         "TITLE": "Program konferencji",
                         "DESC": "Zarządzaj programem konferencji, ustaw wydarzenia i ich godziny (to nie to samo co kalendarz!)."
+                    },
+                    "PARTICIPANTS": {
+                        "TITLE": "Uczestnicy",
+                        "DESC": "Zobacz listę użytkowników zarejestrowanych na konferencję, zmień status swoich płatności."
                     }
                 },
                 "STATUS": {
