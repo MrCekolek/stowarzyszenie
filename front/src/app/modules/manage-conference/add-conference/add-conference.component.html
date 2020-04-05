@@ -16,10 +16,10 @@
             </div>
 
             <ng-template #content>
-                <div *ngIf="this.conference" class="mt-2">
-                    <p>
+                <div *ngIf="this.conference && this.conference.length > 0" class="mt-2">
+                    <h3>
                         {{ 'STOWARZYSZENIE.HELPERS.CONFERENCE_ALREADY_EXISTS' | translate }}
-                    </p>
+                    </h3>
     
                     <div class="d-flex justify-content-center mt-3">
                         <a [routerLink]="['../actual']"  class="btn btn-primary">
@@ -28,7 +28,7 @@
                     </div>
                 </div>
     
-                <div  *ngIf="!this.conference">
+                <div  *ngIf="!this.conference || this.conference.length === 0">
                     <h5 class="mb-4 text-secondary">
                         {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.ADD_CONF_TITLE' | translate }}
                     </h5>

@@ -268,7 +268,8 @@
                         "ROLES_PREFERENCES": "Roles and Permissions",
                         "USERS_LIST": "Users List",
                         "CONFERENCE_MENU": "Conference",
-                        "ACTUAL_CONFERENCE": "Actual conference"
+                        "ACTUAL_CONFERENCE": "Actual conference",
+                        "GENERAL_SETT_CONF": "General settings"
                     },
                     "MANAGEMENT": {
                         "MANAGEMENT_MENU": "Management",
@@ -428,7 +429,10 @@
                 "ACTUAL": {
                     "NO_CONFERENCE": "There is no actual conference",
                     "NO_CONFERENCE_DESC": "Any actual conference found. Do you want to create new?",
-                    "ADD_CONF_BUTT": "Add new conference"
+                    "ADD_CONF_BUTT": "Add new conference",
+                    "GENERAL_SETTINGS": {
+                        "INFO_TITLE": "General informations about conference"
+                    }
                 },
                 "OPTIONS_PAGE": {
                     "GENERAL": {
@@ -459,6 +463,10 @@
                     "PROGRAMME": {
                         "TITLE": "Conference programme",
                         "DESC": "Manage conference programme, set the events and their hours (its not the same as calendar!)."
+                    },
+                    "PARTICIPANTS": {
+                        "TITLE": "Participants",
+                        "DESC": "See list of users registered to conference, change status of their payments."
                     }
                 },
                 "STATUS": {
