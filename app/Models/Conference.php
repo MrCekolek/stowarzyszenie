@@ -77,4 +77,8 @@ class Conference extends BaseModel {
     public function conferenceEvents() {
         return $this->hasMany(ConferenceEvent::class);
     }
+
+    public function conferenceCfp() {
+        return $this->hasOne(ConferenceCfp::class);
+    }
 }

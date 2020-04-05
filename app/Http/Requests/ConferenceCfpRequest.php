@@ -2,11 +2,16 @@
 
 namespace App\Http\Requests;
 
-class ConferenceUserRequest extends FormRequest {
+class ConferenceCfpRequest extends FormRequest {
     protected $rules = [];
 
     public function __construct(array $input, $filter) {
         switch ($filter) {
+            case 'index':
+                $this->checkIndex();
+
+                break;
+
             case 'create':
                 $this->checkCreate();
 
@@ -26,21 +31,26 @@ class ConferenceUserRequest extends FormRequest {
         parent::__construct($input);
     }
 
-    public function checkCreate() {
+    protected function checkIndex() {
         $this->rules = [
-            'user_id' => 'required|exists:users,id',
             'conference_id' => 'required|exists:conferences,id'
         ];
     }
 
-    public function checkUpdate() {
-        $this->checkCreate();
+    protected function checkCreate() {
+        $this->checkIndex();
+    }
+
+    protected function checkUpdate() {
+        $this->checkIndex();
         $this->rules = array_merge($this->rules, [
-            'status' => 'required'
+            'id' => 'required|exists:conference_cfps'
         ]);
     }
 
-    public function checkDestroy() {
-        $this->checkCreate();
+    protected function checkDestroy() {
+        $this->rules = [
+            'id' => 'required|exists:conference_cfps'
+        ];
     }
 }

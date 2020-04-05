@@ -28,4 +28,9 @@ class Track extends BaseModel {
         return $this->belongsToMany(User::class)
             ->using(TrackReviewer::class);
     }
+
+    public function trackChairs() {
+        return $this->belongsToMany(User::class)
+            ->using(TrackChair::class);
+    }
 }

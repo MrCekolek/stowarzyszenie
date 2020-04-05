@@ -149,12 +149,25 @@ Route::group([
             Route::prefix('article')->group(function () {
                 Route::post('create', 'TrackArticleController@create');
                 Route::post('{track}', 'TrackArticleController@index');
+
+                Route::prefix('comment')->group(function () {
+                    Route::post('', 'ArticleCommentController@index');
+                    Route::post('create', 'ArticleCommentController@create');
+                    Route::post('update', 'ArticleCommentController@update');
+                    Route::post('destroy', 'ArticleCommentController@destroy');
+                });
             });
 
             Route::prefix('reviewer')->group(function () {
                 Route::post('create', 'TrackReviewerController@create');
                 Route::post('destroy', 'TrackReviewerController@destroy');
                 Route::post('{track}/get', 'TrackReviewerController@index');
+            });
+
+            Route::prefix('chair')->group(function () {
+                Route::post('create', 'TrackChairController@create');
+                Route::post('destroy', 'TrackChairController@destroy');
+                Route::post('{track}/get', 'TrackChairController@index');
             });
         });
 
@@ -179,6 +192,13 @@ Route::group([
             Route::post('create', 'ProgrammeCommitteeController@create');
             Route::post('update', 'ProgrammeCommitteeController@update');
             Route::post('destroy', 'ProgrammeCommitteeController@destroy');
+        });
+
+        Route::prefix('cfp')->group(function () {
+            Route::post('', 'ConferenceCfpController@index');
+            Route::post('create', 'ConferenceCfpController@create');
+            Route::post('update', 'ConferenceCfpController@update');
+            Route::post('destroy', 'ConferenceCfpController@destroy');
         });
     });
 

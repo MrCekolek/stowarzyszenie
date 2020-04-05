@@ -484,6 +484,12 @@
                 "CONF_WEBSITE_LABEL": "Strona internetowa konferencji",
                 "HELP_BLOCK2": "Pole opcjonalne - jeśli masz zewnętrzną stronę internetową dla swojej konferencji, wpisz tutaj jej adres. Jeśli nie, możesz utworzyć stronę swojej konferencji w systemie.",
                 "CONF_PLACE_LABEL": "Miejsce konferencji"
+            },
+            "CONFERENCE_USER": {
+                "STATUS": {
+                    "PAID": "Opłacony",
+                    "UNPAID": "Nie opłacony"
+                }
             }
         },
         "PAGINATION": {

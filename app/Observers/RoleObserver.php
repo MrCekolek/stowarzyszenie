@@ -25,16 +25,19 @@ class RoleObserver {
 
     private function getSelected($role, $permission) {
         switch ($role->id) {
+            // Administrator
             case 1:
                 return 1;
 
                 break;
 
+            // User
             case 2:
                 return 0;
 
                 break;
 
+            // General Chair
             case 3:
                 switch ($permission->translation_key) {
                     case 'USERS.CHANGE_ROLE':
@@ -50,6 +53,7 @@ class RoleObserver {
 
                 break;
 
+            // Programme Chair
             case 4:
                 switch ($permission->translation_key) {
                     case 'CONFERENCE_CFP.MANAGE_CFP':
@@ -65,6 +69,7 @@ class RoleObserver {
 
                 break;
 
+            // Programme committee
             case 5:
                 switch ($permission->translation_key) {
                     case 'CONFERENCE_ARTICLES.ACCEPT_ARTICLES':
@@ -80,6 +85,7 @@ class RoleObserver {
 
                 break;
 
+            // Track chair
             case 6:
                 switch ($permission->translation_key) {
                     case 'CONFERENCE_ARTICLES.ASSIGN_REVIEWERS':
@@ -93,6 +99,7 @@ class RoleObserver {
 
                 break;
 
+            // Local chair
             case 7:
                 switch ($permission->translation_key) {
                     case 'CONFERENCE_PAGE.ADD_NEW':
@@ -108,6 +115,7 @@ class RoleObserver {
 
                 break;
 
+            // Reviewer
             case 8:
                 switch ($permission->translation_key) {
                     case 'CONFERENCE_REVIEWS.REVIEWING':
@@ -122,6 +130,7 @@ class RoleObserver {
 
                 break;
 
+            // Author
             case 9:
                 switch ($permission->translation_key) {
                     case 'CONFERENCE_ARTICLES.PUBLISH_ARTICLES':
@@ -132,6 +141,11 @@ class RoleObserver {
                     default:
                         return 0;
                 }
+
+                break;
+
+            default:
+                return 0;
         }
     }
 }

@@ -1,29 +1,28 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateConferenceUsersTable extends Migration {
+class CreateArticleCommentsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('conference_users', function (Blueprint $table) {
+        Schema::create('article_comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('conference_id');
+            $table->string('description')->nullable();
+            $table->unsignedBigInteger('track_article_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('status')->default('unpaid');
-            $table->string('translation_key');
             $table->timestamps();
 
-            $table->unique(['conference_id', 'user_id']);
+            $table->unique(['track_article_id', 'user_id']);
 
-            $table->foreign('conference_id')
+            $table->foreign('track_article_id')
                 ->references('id')
-                ->on('conferences')
+                ->on('track_articles')
                 ->onDelete('cascade');
 
             $table->foreign('user_id')
@@ -39,6 +38,6 @@ class CreateConferenceUsersTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('conference_users');
+        Schema::dropIfExists('article_comments');
     }
 }
