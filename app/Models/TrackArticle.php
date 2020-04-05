@@ -62,4 +62,8 @@ class TrackArticle extends BaseModel {
     public function track() {
         return $this->belongsTo(Track::class);
     }
+
+    public function articleComments() {
+        return $this->hasMany(ArticleComment::class);
+    }
 }

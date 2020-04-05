@@ -484,6 +484,12 @@
                 "CONF_WEBSITE_LABEL": "Conference website",
                 "HELP_BLOCK2": "Optional field - if u have external website for your conference, enter its address here. If not, you can create page for your conference in system.",
                 "CONF_PLACE_LABEL": "Conference place"
+            },
+            "CONFERENCE_USER": {
+                "STATUS": {
+                    "PAID": "Paid",
+                    "UNPAID": "Unpaid"
+                }
             }
         },
         "PAGINATION": {

@@ -2,18 +2,13 @@
 
 namespace App\Http\Requests;
 
-class ConferenceUserRequest extends FormRequest {
+class TrackChairRequest extends FormRequest {
     protected $rules = [];
 
     public function __construct(array $input, $filter) {
         switch ($filter) {
             case 'create':
                 $this->checkCreate();
-
-                break;
-
-            case 'update':
-                $this->checkUpdate();
 
                 break;
 
@@ -29,15 +24,8 @@ class ConferenceUserRequest extends FormRequest {
     public function checkCreate() {
         $this->rules = [
             'user_id' => 'required|exists:users,id',
-            'conference_id' => 'required|exists:conferences,id'
+            'track_id' => 'required|exists:tracks,id',
         ];
-    }
-
-    public function checkUpdate() {
-        $this->checkCreate();
-        $this->rules = array_merge($this->rules, [
-            'status' => 'required'
-        ]);
     }
 
     public function checkDestroy() {

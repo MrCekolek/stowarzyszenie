@@ -1,29 +1,27 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateConferenceUsersTable extends Migration {
+class CreateTrackChairsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('conference_users', function (Blueprint $table) {
+        Schema::create('track_chair', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('conference_id');
+            $table->unsignedBigInteger('track_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('status')->default('unpaid');
-            $table->string('translation_key');
             $table->timestamps();
 
-            $table->unique(['conference_id', 'user_id']);
+            $table->unique(['track_id', 'user_id']);
 
-            $table->foreign('conference_id')
+            $table->foreign('track_id')
                 ->references('id')
-                ->on('conferences')
+                ->on('tracks')
                 ->onDelete('cascade');
 
             $table->foreign('user_id')
@@ -39,6 +37,6 @@ class CreateConferenceUsersTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('conference_users');
+        Schema::dropIfExists('track_chair');
     }
 }

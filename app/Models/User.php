@@ -139,4 +139,9 @@ class User extends Authenticatable implements JWTSubject {
         return $this->belongsToMany(Track::class)
             ->using(TrackReviewer::class);
     }
+
+    public function trackChairs() {
+        return $this->belongsToMany(Track::class)
+            ->using(TrackChair::class);
+    }
 }

@@ -56,6 +56,8 @@ class ConferenceUserController extends Controller {
         $conferenceUser = new ConferenceUser();
         $conferenceUser->user_id = $input['user_id'];
         $conferenceUser->conference_id = $input['conference_id'];
+        $conferenceUser->status = 'unpaid';
+        $conferenceUser->translation_key = ConferenceUser::statuses()['unpaid'];
         $success = $conferenceUser->save();
 
         return LogService::create($success);
@@ -112,6 +114,7 @@ class ConferenceUserController extends Controller {
             ->where('conference_id', $input['conference_id'])
             ->first();
         $conferenceUser->status = $input['status'];
+        $conferenceUser->translation_key = ConferenceUser::statuses()[$input['status']];
         $success = $conferenceUser->save();
 
         return LogService::create($success);
