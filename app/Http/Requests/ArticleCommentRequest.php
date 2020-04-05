@@ -2,11 +2,16 @@
 
 namespace App\Http\Requests;
 
-class ConferenceUserRequest extends FormRequest {
+class ArticleCommentRequest extends FormRequest {
     protected $rules = [];
 
     public function __construct(array $input, $filter) {
         switch ($filter) {
+            case 'index':
+                $this->checkIndex();
+
+                break;
+
             case 'create':
                 $this->checkCreate();
 
@@ -26,21 +31,28 @@ class ConferenceUserRequest extends FormRequest {
         parent::__construct($input);
     }
 
+    public function checkIndex() {
+        $this->rules = [
+            'track_article_id' => 'required|exists:track_articles,id'
+        ];
+    }
+
     public function checkCreate() {
         $this->rules = [
+            'description' => 'required',
             'user_id' => 'required|exists:users,id',
-            'conference_id' => 'required|exists:conferences,id'
+            'track_article_id' => 'required|exists:track_articles,id'
         ];
     }
 
     public function checkUpdate() {
         $this->checkCreate();
-        $this->rules = array_merge($this->rules, [
-            'status' => 'required'
-        ]);
     }
 
     public function checkDestroy() {
-        $this->checkCreate();
+        $this->rules = [
+            'user_id' => 'required|exists:users,id',
+            'track_article_id' => 'required|exists:track_articles,id'
+        ];
     }
 }
