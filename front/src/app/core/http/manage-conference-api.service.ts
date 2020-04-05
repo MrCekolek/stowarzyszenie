@@ -18,7 +18,7 @@ export class ManageConferenceApiService {
     return this.api.post('conference/create', conference);
   }
 
-  removeConference() {
-
+  updateConference(conference: Object) {
+    return this.api.post('conference/update', conference);
   }
 }
