@@ -3,6 +3,8 @@
 namespace App\Models;
 
 class ConferenceUser extends BasePivot {
+    protected $table = 'conference_user';
+
     protected $fillable = [
         'conference_id',
         'user_id',

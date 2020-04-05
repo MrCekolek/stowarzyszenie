@@ -11,7 +11,7 @@ class CreateConferenceUsersTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('conference_users', function (Blueprint $table) {
+        Schema::create('conference_user', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('conference_id');
             $table->unsignedBigInteger('user_id');
@@ -39,6 +39,6 @@ class CreateConferenceUsersTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('conference_users');
+        Schema::dropIfExists('conference_user');
     }
 }
