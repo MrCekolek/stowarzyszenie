@@ -34,7 +34,7 @@ class ConferenceController extends Controller
      */
     public function index() {
         return LogService::read(true, [
-            'conferences' => Conference::with('conferencePages')->get()->toArray()
+            'conferences' => Conference::with(['conferencePages', 'conferencePreference', 'programmeCommittee', 'conferenceEvents', 'conferenceCfp'])->get()->toArray()
         ]);
     }
 
@@ -68,7 +68,7 @@ class ConferenceController extends Controller
         }
 
         return LogService::read(true, [
-            'conferences' => $conference->load('conferencePages')->toArray()
+            'conferences' => $conference->load(['conferencePages', 'conferencePreference', 'programmeCommittee', 'conferenceEvents', 'conferenceCfp'])->toArray()
         ]);
     }
 
@@ -85,7 +85,7 @@ class ConferenceController extends Controller
      * )
      */
     public function getActive() {
-        $conference = Conference::with('conferencePages')->where('status', '!=', 'finished')->first();
+        $conference = Conference::with(['conferencePages', 'conferencePreference', 'programmeCommittee', 'conferenceEvents', 'conferenceCfp'])->where('status', '!=', 'finished')->first();
 
         return LogService::read(true, [
             'conference' => !empty($conference) ? $conference->toArray() : []
@@ -223,7 +223,7 @@ class ConferenceController extends Controller
         $conference = Conference::addConference($input, $success);
 
         return LogService::create($success, [
-            'conference' => $conference->load(['conferencePages', 'conferencePreference'])->toArray()
+            'conference' => $conference->load(['conferencePages', 'conferencePreference', 'programmeCommittee', 'conferenceEvents', 'conferenceCfp'])->toArray()
         ]);
     }
 
@@ -367,7 +367,7 @@ class ConferenceController extends Controller
         $conference = Conference::updateConference($input, $success);
 
         return LogService::update($success, [
-            'conference' => $conference->load(['conferencePages', 'conferencePreference'])->toArray()
+            'conference' => $conference->load(['conferencePages', 'conferencePreference', 'programmeCommittee', 'conferenceEvents', 'conferenceCfp'])->toArray()
         ]);
     }
 
