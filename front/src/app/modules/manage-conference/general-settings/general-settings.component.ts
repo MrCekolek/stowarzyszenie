@@ -11,7 +11,7 @@ import { LanguageService } from 'src/app/shared/services/user/language.service';
 })
 export class GeneralSettingsComponent implements OnInit {
 
-
+  private finished: boolean = false;
   private loading: boolean = true;
   private conference;
 
@@ -21,10 +21,7 @@ export class GeneralSettingsComponent implements OnInit {
 
   // adding conf fields
   private confname;
-  private confacronym;
-  private confweb;
   private confplace;
-  private confstatus;
 
   //translations arrays
   private nameTranslations = [];
@@ -59,8 +56,21 @@ export class GeneralSettingsComponent implements OnInit {
 
     this.manageConferenceApi.getConference().subscribe(res => {
       this.conference = res.conference;
-      this.confacronym = res.conference.acronym;
-      this.confweb = res.conference.website;
+
+      if (this.conference && this.conference.id) {
+        if (this.conference.status === 'finished') {
+          this.finished = true;
+        }
+
+        this.nameTranslations[0] = this.conference.name_pl;
+        this.nameTranslations[1] = this.conference.name_en;
+        this.nameTranslations[2] = this.conference.name_ru;
+
+        this.placeTranslations[0] = this.conference.conference_preference['place_pl'];
+        this.placeTranslations[1] = this.conference.conference_preference['place_en'];
+        this.placeTranslations[2] = this.conference.conference_preference['place_ru'];
+      }
+
       this.loading = false;
     });
 
@@ -96,17 +106,33 @@ export class GeneralSettingsComponent implements OnInit {
   }
 
   updateConference() {
+    this.addLoading = true;
     this.conference.name_pl = this.nameTranslations[0];
-    this.conference.name_pl = this.nameTranslations[1];
-    this.conference.name_pl = this.nameTranslations[2];
-    this.conference.acronym = this.confacronym;
-    this.conference.website = this.confweb;
+    this.conference.name_en = this.nameTranslations[1];
+    this.conference.name_ru = this.nameTranslations[2];
     this.conference.place_pl = this.placeTranslations[0];
     this.conference.place_en = this.placeTranslations[1];
     this.conference.place_ru = this.placeTranslations[2];
-    this.conference.status = this.confstatus;
+    this.conference.website = this.conference.conference_preference.website;
 
-    this.manageConferenceApi.updateConference(this.conference);
+    this.manageConferenceApi.updateConference(this.conference).subscribe(
+        (res) => {
+          if (res.success) {
+            this.conference = res.conference;
+
+            if (this.conference.status == 'finished') {
+              this.finished = true;
+            }
+          }
+        },
+        () => {},
+        () => {
+          this.addLoading = false;
+        }
+      );
   }
 
+  changeStatus(event) {
+    this.conference.status = event.target.value;
+  }
 }

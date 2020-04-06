@@ -6,6 +6,7 @@ class Conference extends BaseModel {
     protected $fillable = [
         'status',
         'translation_key',
+        'acronym',
         'name_pl',
         'name_en',
         'name_ru',
@@ -43,6 +44,7 @@ class Conference extends BaseModel {
     }
 
     private static function fillConference(&$conference, $input, &$success) {
+        $conference->acronym = $input['acronym'];
         $conference->name_pl = $input['name_pl'];
         $conference->name_en = $input['name_en'];
         $conference->name_ru = $input['name_ru'];
