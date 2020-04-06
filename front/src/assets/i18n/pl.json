@@ -437,7 +437,7 @@
                 "OPTIONS_PAGE": {
                     "GENERAL": {
                         "TITLE": "Ustawienia główne",
-                        "DESC": "Ogólne ustawienia konferencji, takie jak tytuł, miejsce, data itp."
+                        "DESC": "Ogólne ustawienia konferencji, takie jak tytuł, miejsce, data itp. Tutaj możesz również zmienić status konferencji, np. zakończona lub w trakcie."
                     },
                     "BUTTON": "Zmień ustawienia",
                     "TRACKS": {
@@ -477,7 +477,8 @@
                 "GENERAL": {
                     "PAGE_TITLE": "Ustawienia główne",
                     "SECTION_TITLE": "Zmień ustawienia",
-                    "PAGE_DESC": "Zmień ogólne ustawienia konferencji, które zostały wypełnione podczas dodawania."
+                    "PAGE_DESC": "Zmień ogólne ustawienia konferencji, które zostały wypełnione podczas dodawania.",
+                    "CHANGE_STATUS": "Zmień status konferencji"
                 }
             },
             "ADD_CONFERENCE": {

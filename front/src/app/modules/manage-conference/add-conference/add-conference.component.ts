@@ -86,7 +86,8 @@ export class AddConferenceComponent implements OnInit {
       place_en: this.placeTranslations[1],
       place_ru: this.placeTranslations[2],
       status: '',
-      conference_id: 0
+      conference_id: 0,
+      acronym: ''
     }
 
     console.log(conf);
