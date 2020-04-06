@@ -17,7 +17,7 @@
     </div>
 
     <ng-template #content>
-        <div class="card" *ngIf="!this.conference || this.conference.length === 0">
+        <div class="card" *ngIf="!this.conference.id">
             <div class="card-body">
                 <div *ngIf="this.message">
                     {{ this.message | translate }}
@@ -44,7 +44,7 @@
         </div>
     
         <!-- moduły konferencji -->
-        <div class="row" *ngIf="this.conference">
+        <div class="row" *ngIf="this.conference.id">
             <!-- ogólne ustawienia konferencji -->
             <div class="col-lg-6">
                 <div class="card card-large-icons">
