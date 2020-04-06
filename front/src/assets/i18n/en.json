@@ -437,7 +437,7 @@
                 "OPTIONS_PAGE": {
                     "GENERAL": {
                         "TITLE": "General settings",
-                        "DESC": "General settings of conference like title, place, date etc."
+                        "DESC": "General settings of conference like title, place, date etc. Here you can also change status of conference like ended or during."
                     },
                     "BUTTON": "Change settings",
                     "TRACKS": {
@@ -477,7 +477,8 @@
                 "GENERAL": {
                     "PAGE_TITLE": "General settings",
                     "SECTION_TITLE": "Change settings",
-                    "PAGE_DESC": "Change general settings of conference, which was filled while adding it."
+                    "PAGE_DESC": "Change general settings of conference, which was filled while adding it.",
+                    "CHANGE_STATUS": "Change conference status"
                 }
             },
             "ADD_CONFERENCE": {

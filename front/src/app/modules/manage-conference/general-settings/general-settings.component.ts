@@ -12,7 +12,7 @@ import { LanguageService } from 'src/app/shared/services/user/language.service';
 export class GeneralSettingsComponent implements OnInit {
 
 
-  private loading: boolean;
+  private loading: boolean = true;
   private conference;
 
   translateNameLoading;
@@ -24,12 +24,28 @@ export class GeneralSettingsComponent implements OnInit {
   private confacronym;
   private confweb;
   private confplace;
+  private confstatus;
 
   //translations arrays
   private nameTranslations = [];
   private placeTranslations = [];
 
   private lang;
+
+  private statuses = [
+    {
+      name: 'waiting',
+      translation_key: 'STOWARZYSZENIE.MODULES.CONFERENCE.STATUS.WAITING'
+    },
+    {
+      name: 'during',
+      translation_key: 'STOWARZYSZENIE.MODULES.CONFERENCE.STATUS.DURING'
+    },
+    {
+      name: 'finished',
+      translation_key: 'STOWARZYSZENIE.MODULES.CONFERENCE.STATUS.FINISHED'
+    }
+  ];
 
   constructor(
     private manageConferenceApi: ManageConferenceApiService,
@@ -43,12 +59,13 @@ export class GeneralSettingsComponent implements OnInit {
 
     this.manageConferenceApi.getConference().subscribe(res => {
       this.conference = res.conference;
+      this.confacronym = res.conference.acronym;
+      this.confweb = res.conference.website;
+      this.loading = false;
     });
 
     this.languageService.currentLang.subscribe(value => {
       this.lang = value;
-
-      this.loading = false;
     });
   }
 
@@ -82,6 +99,12 @@ export class GeneralSettingsComponent implements OnInit {
     this.conference.name_pl = this.nameTranslations[0];
     this.conference.name_pl = this.nameTranslations[1];
     this.conference.name_pl = this.nameTranslations[2];
+    this.conference.acronym = this.confacronym;
+    this.conference.website = this.confweb;
+    this.conference.place_pl = this.placeTranslations[0];
+    this.conference.place_en = this.placeTranslations[1];
+    this.conference.place_ru = this.placeTranslations[2];
+    this.conference.status = this.confstatus;
 
     this.manageConferenceApi.updateConference(this.conference);
   }
