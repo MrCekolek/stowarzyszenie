@@ -16,11 +16,11 @@
             </div>
 
             <ng-template #content>
-                <div *ngIf="!this.conference" class="mt-2 mb-4">
+                <div *ngIf="this.conference && (!this.conference.id || (this.conference.id && this.finished))" class="mt-2 mb-4">
                     <h4>
                         {{ 'STOWARZYSZENIE.HELPERS.CONFERENCE_NOT_EXIST' | translate }}
                     </h4>
-    
+
                     <div class="d-flex justify-content-center mt-3">
                         <a [routerLink]="['../create']"  class="btn btn-primary">
                             {{ 'STOWARZYSZENIE.HELPERS.CONF_NOT_EXISTS_BTN' | translate }}
@@ -28,7 +28,7 @@
                     </div>
                 </div>
 
-                <div *ngIf="this.conference">
+                <div *ngIf="this.conference && this.conference.id && !this.finished">
                     <h4 class="mb-3">
                         {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.GENERAL_SETTINGS.INFO_TITLE' | translate }}
                     </h4>
@@ -40,7 +40,7 @@
                         </label>
 
                         <div class="input-group mb-4">
-                            <input type="text" class="form-control" required [value]="this.conference['name_' + this.lang]? this.conference['name_' + this.lang]: ''">
+                            <input type="text" class="form-control" required [(ngModel)]="this.conference['name_' + this.lang]">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" [class.btn-progress]="translateNameLoading" type="button" (click)="getNameTranslations()" [disabled]="confname === ''">
                                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
@@ -56,10 +56,10 @@
                         <label>
                             {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.CONF_ACRONYM_LABEL' | translate }}
                         </label>
-                        <input type="text" class="form-control" aria-describedby="helpblock" required [value]="this.conference.acronym? this.conference.acronym: ''">
+                        <input type="text" class="form-control" aria-describedby="helpblock" required [(ngModel)]="this.conference.acronym">
 
                         <small id="helpblock" class="form-text text-muted">
-                            {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.HELP_BLOCK' | translate }}    
+                            {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.HELP_BLOCK' | translate }}
                         </small>
                     </div>
 
@@ -68,10 +68,10 @@
                         <label>
                             {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.CONF_WEBSITE_LABEL' | translate }}
                         </label>
-                        <input type="text" class="form-control" aria-describedby="helpblock2" [value]="this.conference.website? this.conference.website: ''">
+                        <input type="text" class="form-control" aria-describedby="helpblock2" [(ngModel)]="this.conference.conference_preference.website">
 
                         <small id="helpblock2" class="form-text text-muted">
-                            {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.HELP_BLOCK2' | translate }}    
+                            {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.HELP_BLOCK2' | translate }}
                         </small>
                     </div>
 
@@ -82,7 +82,7 @@
                         </label>
 
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" required [value]="this.conference['place_' + this.lang]? this.conference['place_' + this.lang]: ''"> 
+                            <input type="text" class="form-control" required [value]="this.conference.conference_preference['place_' + this.lang]? this.conference.conference_preference['place_' + this.lang]: ''">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" [class.btn-progress]="translatePlaceLoading" type="button" (click)="getPlaceTranslations()" [disabled]="confplace === ''">
                                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
@@ -115,14 +115,16 @@
                           </option>
                         </select> -->
 
-                        <select [(ngModel)]="confstatus" class="custom-select">
-                            <option *ngFor="let status of statuses" [ngValue]="status.name" [selected]="conference.status === status.name">
-                                {{ status.translation_key | translate }}</option>
+                        <select class="custom-select" (change)="changeStatus($event)">
+                            <option *ngFor="let status of statuses" value="{{ status.name }}" [selected]="conference.status == status.name">
+                                {{ status.translation_key | translate }}
+                            </option>
                         </select>
                     </div>
-                    
 
-                    <button class="btn btn-block btn-primary mt-5" (click)="updateConference()" [class.btn-progress]="addLoading" [disabled]="nameTranslations.length === 0 && placeTranslations.length === 0">
+
+                    <button class="btn btn-block btn-primary mt-5" (click)="updateConference()" [class.btn-progress]="addLoading" [disabled]="nameTranslations.length === 0 && placeTranslations.length === 0 &&
+                        this.conference && this.conference.acronym && this.conference.conference_preference.website">
                         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE' | translate }}
                     </button>
                 </div>
