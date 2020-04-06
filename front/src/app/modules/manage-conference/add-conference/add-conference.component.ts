@@ -87,13 +87,10 @@ export class AddConferenceComponent implements OnInit {
       place_ru: this.placeTranslations[2],
       status: '',
       conference_id: 0,
-      acronym: ''
+      acronym: this.confacronym
     }
 
-    console.log(conf);
-
     this.manageConferenceApi.addConference(conf).subscribe(res => {
-      console.log(res);
       if (res.success) {
         this.router.navigateByUrl('manage-conference/actual');
       }

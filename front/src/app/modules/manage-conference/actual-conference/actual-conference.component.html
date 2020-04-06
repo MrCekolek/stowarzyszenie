@@ -22,27 +22,27 @@
                 <div *ngIf="this.message">
                     {{ this.message | translate }}
                 </div>
-    
+
                 <div class="empty-state" data-height="400" style="height: 400px;">
                     <div class="empty-state-icon">
                         <i class="fas fa-question"></i>
                     </div>
-    
+
                     <h2>
                         {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE' | translate }}
                     </h2>
-    
+
                     <p class="lead">
                         {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE_DESC' | translate}}
                     </p>
-    
+
                     <a class="btn btn-primary mt-4" [routerLink]="['../create']">
                         {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.ADD_CONF_BUTT' | translate }}
                     </a>
                 </div>
             </div>
         </div>
-    
+
         <!-- moduły konferencji -->
         <div class="row" *ngIf="this.conference.id">
             <!-- ogólne ustawienia konferencji -->
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <!-- zarządzanie trackami -->
             <div class="col-lg-6">
                 <div class="card card-large-icons">
@@ -104,7 +104,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <!-- Zarządzanie podstroną konferencji -->
             <div class="col-lg-6">
                 <div class="card card-large-icons">
@@ -124,7 +124,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <!-- kalndarz, terminy -->
             <div class="col-lg-6">
                 <div class="card card-large-icons">
@@ -144,7 +144,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <!-- komitet programowy -->
             <div class="col-lg-6">
                 <div class="card card-large-icons">
@@ -164,7 +164,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <!-- zarządzanie galerią -->
             <div class="col-lg-6">
                 <div class="card card-large-icons">
@@ -184,7 +184,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <!-- program konferencji -->
             <div class="col-lg-6">
                 <div class="card card-large-icons">
