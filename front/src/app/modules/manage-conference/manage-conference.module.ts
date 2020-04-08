@@ -7,16 +7,31 @@ import { AddConferenceComponent } from './add-conference/add-conference.componen
 import { GeneralSettingsComponent } from './general-settings/general-settings.component';
 import { FormsModule } from '@angular/forms';
 import { CommitteeComponent } from './committee/committee.component';
-
-
+import { ManageTracksComponent } from './manage-tracks/manage-tracks.component';
+import { TrackModalComponent } from './track-modal/track-modal.component';
+import { TrackMembersComponent } from './track-members/track-members.component';
+import { AssignUserComponent } from './assign-user/assign-user.component';
+import { PaymentsComponent } from './payments/payments.component';
+import { ConferenceCfpComponent } from './conference-cfp/conference-cfp.component';
+import { ConferencePageComponent } from './conference-page/conference-page.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { GalleryComponent } from './gallery/gallery.component';
+import { ProgrammeComponent } from './programme/programme.component';
+import { ConferenceRoleModalComponent } from './conference-role-modal/conference-role-modal.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ConfPagesModalComponent } from './conf-pages-modal/conf-pages-modal.component';
+import { ConfpageEditComponent } from './confpage-edit/confpage-edit.component';
+import { EventModalComponent } from './event-modal/event-modal.component';
 
 @NgModule({
-  declarations: [ActualConferenceComponent, AddConferenceComponent, GeneralSettingsComponent, CommitteeComponent],
+  declarations: [ActualConferenceComponent, AddConferenceComponent, GeneralSettingsComponent, CommitteeComponent, ManageTracksComponent, ConfPagesModalComponent, TrackModalComponent, TrackMembersComponent, AssignUserComponent, PaymentsComponent, ConferenceCfpComponent, CalendarComponent, GalleryComponent, ProgrammeComponent, ConferenceRoleModalComponent, ConferencePageComponent, ConfpageEditComponent, EventModalComponent],
   imports: [
     CommonModule,
     ManageConferenceRoutingModule,
     SharedModule,
-    FormsModule
-  ]
+    FormsModule,
+    AngularEditorModule
+  ],
+  entryComponents: [TrackModalComponent, AssignUserComponent, ConferenceRoleModalComponent, ConfPagesModalComponent, EventModalComponent]
 })
 export class ManageConferenceModule { }

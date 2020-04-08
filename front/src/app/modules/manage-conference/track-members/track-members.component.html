@@ -1,0 +1,133 @@
+<div class="section-header">
+    <h1>{{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.PAGE_TITLE' | translate }}</h1>
+</div>
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.SECTION_TITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.PAGE_DESC' | translate }}
+    </p>
+
+    <h5 class="mb-4" *ngIf="this.track">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.SECTION_TITLE_TRACKNAME' | translate }} {{ track['name_' + this.lang] }}
+    </h5>
+    
+    <div class="d-flex justify-content-center" *ngIf="loading; else content">
+        <div class="spinner-border text-primary"></div>
+    </div>
+
+    <ng-template #content>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.CHAIRS_TITLE' | translate }}
+                        </h4>
+                    </div>
+
+                    <div class="card-body">
+                        <div *ngFor="let chair of this.track_chairs">
+                            <div class="user-item">
+                                <!-- TODO: chair image -->
+                                <img alt="image" src="assets/img/avatar/avatar-4.png" class="img-fluid">
+                                <div class="user-details">
+                                    <div class="user-name">
+                                        <!-- TODO: imie i nazwisko chaira -->
+                                    </div>
+                                    <div class="text-job text-muted">
+                                        <!-- TODO: miejsce pracy / akademia itp chaira -->
+                                    </div>
+                                    <div class="user-cta">
+                                        <!-- TODO: usuneicie chaira z tracka -->
+                                        <button class="btn btn-primary follow-btn" (click)="deleteChairFromTrack(chair)">
+                                            <i class="fa fa-times text-danger"></i>
+                                        </button>
+                                    </div>
+                                </div>   
+                            </div>
+                        </div>
+    
+                        <div *ngIf="!this.track_chairs">
+                            <p class="text-primary mb-2">
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.NO_CHAIRS' | translate }}
+                            </p>
+    
+                            <div class="d-flex justify-content-center">
+                                <button class="btn btn-primary" (click)="assignChair()">
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.ASSIGN_CHAIR' | translate }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.REVIEWERS_TITLE' | translate }}
+                        </h4>
+                    </div>
+
+                    <div class="card-body">
+                        <ul class="list-unstyled user-details list-unstyled-border list-unstyled-noborder">
+                            <li class="media" *ngFor="let reviewer of this.track_reviewers">
+                                <img alt="image" class="mr-3 rounded-circle" width="50" [src]="'assets/img/avatar/avatar-1.png'">
+    
+                                <div class="media-body">
+                                <div class="media-title">
+                                    <!-- TODO: imie i nazwisko recenzenta -->
+                                    Brian Adams
+                                </div>
+                                <div class="text-job text-muted">
+                                    <!-- TODO: miejsce pracy / badan / akademia recenzenta -->
+                                    Akademia Medyczna w Białymstoku
+                                </div>
+                                </div>
+    
+                                <div class="media-items">
+                                    <div class="media-item">
+                                        <div class="media-value">
+                                            100
+                                        </div>
+                                        <div class="media-label">
+                                            Recenzji
+                                        </div>
+                                    </div>
+    
+                                    <div class="media-item">
+                                        <div class="media-value">26</div>
+                                        <div class="media-label">Przypisanych Prac</div>
+                                    </div>
+
+                                    <div class="media-item">
+                                        <button class="btn btn-icon btn-danger" (click)="deleteReviewerFromTrack(reviewer.id)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+    
+                        <div *ngIf="!this.track_reviewers">
+                            <p class="text-primary mb-2">
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.NO_REVIEWERS' | translate }}
+                            </p>
+    
+                            <div class="d-flex justify-content-center">
+                                <button class="btn btn-primary" (click)="assignReviewer()">
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.ASSIGN_REVIEWER' | translate }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

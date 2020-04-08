@@ -9,11 +9,10 @@ import { ConferencePagesComponent } from './conference-pages/conference-pages.co
 import { HomepagesModalComponent } from './homepages-modal/homepages-modal.component';
 import { ConferencePagesListComponent } from './conference-pages-list/conference-pages-list.component';
 import { FormsModule } from '@angular/forms';
-import { ConferencePagesModalComponent } from './conference-pages-modal/conference-pages-modal.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
-  declarations: [HomeNavManageComponent, PageEditComponent, HomeLinksListComponent, ConferencePagesComponent, HomepagesModalComponent, ConferencePagesListComponent, ConferencePagesModalComponent],
+  declarations: [HomeNavManageComponent, PageEditComponent, HomeLinksListComponent, ConferencePagesComponent, HomepagesModalComponent, ConferencePagesListComponent],
   imports: [
     CommonModule,
     SharedModule,
