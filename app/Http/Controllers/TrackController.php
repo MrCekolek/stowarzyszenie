@@ -49,7 +49,32 @@ class TrackController extends Controller {
         }
 
         return LogService::read(true, [
-            'tracks' => Track::where('conference_id', $input['conference_id'])->with('interest')->get()->toArray()
+            'tracks' => Track::where('conference_id', $input['conference_id'])->with(['interest', 'trackArticles', 'trackReviewers', 'trackChairs'])->get()->toArray()
+        ]);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/conference/track/{track}/get",
+     *     tags={"conference_track"},
+     *     summary="Gets conference track",
+     *     operationId="TrackControllerShow",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function show(Request $request, Track $track) {
+        $input = $request->all();
+        $validation = new TrackRequest($input, 'show');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        return LogService::read(true, [
+            'track' => Track::where('id', $track->id)->with(['interest', 'trackArticles', 'trackReviewers', 'trackChairs'])->first()->toArray()
         ]);
     }
 
@@ -137,7 +162,7 @@ class TrackController extends Controller {
         $success = $track->save();
 
         return LogService::create($success, [
-            'track' => $track->load('interest')->toArray()
+            'track' => $track->load(['interest', 'trackArticles', 'trackReviewers', 'trackChairs'])->toArray()
         ]);
     }
 
@@ -234,7 +259,7 @@ class TrackController extends Controller {
         $success = $track->save();
 
         return LogService::update($success, [
-            'track' => $track->load('interest')->toArray()
+            'track' => $track->load(['interest', 'trackArticles', 'trackReviewers', 'trackChairs'])->toArray()
         ]);
     }
 

@@ -12,6 +12,11 @@ class TrackRequest extends FormRequest {
 
                 break;
 
+            case 'show':
+                $this->checkShow();
+
+                break;
+
             case 'create':
                 $this->checkCreate();
 
@@ -37,6 +42,12 @@ class TrackRequest extends FormRequest {
         ];
     }
 
+    protected function checkShow() {
+        $this->rules = [
+            'id' => 'required|exists:tracks'
+        ];
+    }
+
     protected function checkCreate() {
         $this->checkIndex();
         $this->rules = array_merge($this->rules, [
@@ -56,8 +67,6 @@ class TrackRequest extends FormRequest {
     }
 
     protected function checkDestroy() {
-        $this->rules = [
-            'id' => 'required|exists:tracks'
-        ];
+        $this->checkShow();
     }
 }
