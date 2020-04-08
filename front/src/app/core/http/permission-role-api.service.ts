@@ -36,4 +36,8 @@ export class PermissionRoleApiService {
   deleteRole(roleId: number) {
     return this.api.post('role/delete/' + roleId);
   }
+
+  getUsersWithRole(role) {
+    return this.api.post(`role/${role.role_id}/users`, role);
+  }
 }

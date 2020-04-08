@@ -46,6 +46,22 @@
                     "ROLE_USER": {
                         "TITLE": "Deleting role user",
                         "TEXT": "Are you sure you want to delete user role"
+                    },
+                    "TRACK_REVIEWER": {
+                        "TITLE": "Deleting track reviewer",
+                        "TEXT": "Are you sure you want to delete reviewer"
+                    },
+                    "TRACK_CHAIR": {
+                        "TITLE": "Deleting track chair",
+                        "TEXT": "Are you sure you want to delete chair"
+                    },
+                    "TRACK": {
+                        "TITLE": "Deleting conference track",
+                        "TEXT": "Are you sure you want to delete track"
+                    },
+                    "CONFPAGE": {
+                        "TITLE": "Deleting conference subpage",
+                        "TEXT": "Are you sure you want to delete subpage"
                     }
                 }
             },
@@ -126,6 +142,15 @@
             "NEW_ROLE_USER": {
                 "TRIGGER_BUTTON": "Add user",
                 "TITLE_NEW_ROLE": "Assign a role to the user"
+            },
+            "CONFPAGES": {
+                "TITLE_NEW": "New conference subpage",
+                "INPUT_NEW_LABEL": "Enter name of new subpage",
+                "INPUT_EDIT_LABEL": "Edit name of event"
+            },
+            "EVENTS": {
+                "TITLE_NEW": "New event",
+                "TITLE_EDIT": "Edit event"
             }
         },
         "MODULES": {
@@ -269,7 +294,8 @@
                         "USERS_LIST": "Users List",
                         "CONFERENCE_MENU": "Conference",
                         "ACTUAL_CONFERENCE": "Actual conference",
-                        "GENERAL_SETT_CONF": "General settings"
+                        "GENERAL_SETT_CONF": "General settings",
+                        "CONF_TRACKS": "Tracks settings"
                     },
                     "MANAGEMENT": {
                         "MANAGEMENT_MENU": "Management",
@@ -280,6 +306,14 @@
                         "HOMEPAGES": "Main navigation",
                         "CONFERENCE": "Conference page",
                         "TITLE_MENU_V2": "Manage pages"
+                    },
+                    "CONFERENCE": {
+                        "CFP": "Call For Papers",
+                        "PAGE": "Conference page",
+                        "CALENDAR": "Calendar settings",
+                        "COMMITTEE": "Program committee",
+                        "GALLERY": "Conference gallery",
+                        "PROGRAMME": "Conference programme"
                     }
                 },
                 "WEBPAGE_TITLE_MEMBERS": "Ciob members"
@@ -304,7 +338,20 @@
                     },
                     "USER_DESC": "Description added by the user",
                     "USER_ROLE": "User role",
-                    "USER_TITLE": "title"
+                    "USER_TITLE": "title",
+                    "TRACKS": {
+                        "MODAL": {
+                            "TITLE_NEW": "Add new track",
+                            "TITLE_EDIT": "Edit track",
+                            "INPUT_LABEL_NEW": "Enter name of new track",
+                            "INPUT_LABEL_COLOR": "Choose color of track",
+                            "INPUT_LABEL_INTEREST": "Choose research area of track",
+                            "NEW_REVIEWER": "Assign new reviewer",
+                            "NEW_CHAIR": "Assign new chair",
+                            "NEW_CHAIR_LABEL": "Users with role 'track chair' to assign",
+                            "NEW_REVIEWER_LABEL": "Users with role 'reviewer' to assign"
+                        }
+                    }
                 },
                 "ADMIN_INTERESTS_DESC1": "Manage a list of user research areas. Add and remove names of areas that users can select on their profiles.",
                 "CHECK_OTHERS": "Check how others see your portfolio",
@@ -414,7 +461,17 @@
                 "PAGE_EDIT_INPUT_TITLE": "Page name",
                 "CONFERENCE_PAGES_ADMIN_SUBTITLE": "Editing conference pages",
                 "CONFERENCE_PAGES_ADMIN_DESC": "Here you can edit navigation only on conference page. You can manage the most important aspects of conference, like tracks. dates etc.",
-                "PAGE_EDIT_NO_ACTIONS": "No actions for not editable content"
+                "PAGE_EDIT_NO_ACTIONS": "No actions for not editable content",
+                "FILE_LABEL": "You can add file instead of creating text here, add file below:",
+                "FILE_SECTION_TITLE": "Choose file",
+                "FILE": "Click here to choose file",
+                "FILE_SECTION_TITLE_1": "Choose file",
+                "NO_CFP_TITLE": "No Call For Papers",
+                "NO_CFP_DESC": "There is no Call For Papers. You can add it by clicking button below.",
+                "ADD_CFP_BTN": "Add CFP",
+                "CONFPAGES_ADMIN_TITLE": "Conference page",
+                "CONFPAGES_ADMIN_SUBTITLE": "Manage conference page menu",
+                "CONFPAGES_ADMIN_DESC": "Here you can manage whole conference page menu, manage links in menu, add new and edit their content. Created page will be see to all users and guests."
             },
             "ROLE_USER": {
                 "LABEL": {
@@ -467,6 +524,10 @@
                     "PARTICIPANTS": {
                         "TITLE": "Participants",
                         "DESC": "See list of users registered to conference, change status of their payments."
+                    },
+                    "CFP": {
+                        "TITLE": "Call For Papers",
+                        "DESC": "Manage your conference CFP, you can add your own file or create page for it in system."
                     }
                 },
                 "STATUS": {
@@ -479,6 +540,58 @@
                     "SECTION_TITLE": "Change settings",
                     "PAGE_DESC": "Change general settings of conference, which was filled while adding it.",
                     "CHANGE_STATUS": "Change conference status"
+                },
+                "TRACKS": {
+                    "PAGE_TITLE": "Track settings",
+                    "SECTION_TITLE": "Manage tracks",
+                    "PAGE_DESC": "Manage tracks of actual conference, set chairs to them and reviewers.",
+                    "NO_TRACKS": "Conference has no tracks. Add some to manage them.",
+                    "ADD_BTN": "Add new track to conference",
+                    "MANAGE_PEOPLE": "Manage people in this track",
+                    "TRACK_CHAIRS_TILE": "Chairs:",
+                    "TRACK_INTEREST_TILE": "Research area"
+                },
+                "TRACK_MEMBERS": {
+                    "PAGE_TITLE": "People in track",
+                    "SECTION_TITLE": "Manage people in track",
+                    "PAGE_DESC": "Here you can manage people which are in track, you can add reviewers and chairs to track.",
+                    "CHAIRS_TITLE": "Chairs in this track",
+                    "REVIEWERS_TITLE": "Reviewers assigned to this track",
+                    "NO_REVIEWERS": "No reviewers assigned to track",
+                    "ASSIGN_REVIEWER": "Assign new reviewer",
+                    "NO_CHAIRS": "No chairs assigned to this track",
+                    "ASSIGN_CHAIR": "Assign new chair",
+                    "TABLE_USERS_TITLE": "User",
+                    "TABLE_INTEREST_TITLE": "User's research area",
+                    "TABLE_ACADEMIC_TITLE": "Place of researches",
+                    "TABLE_ROLES_TITLE": "User roles",
+                    "TABLE_EMAIL_TITLE": "Contact email",
+                    "SECTION_TITLE_TRACKNAME": "You are editing track",
+                    "TABLE_ACTIONS_TITLE": "Actions",
+                    "ALREADY_ASSIGNED": "User already assigned"
+                },
+                "PAYMENTS": {
+                    "PAGE_TITLE": "Participants",
+                    "SECTION_TITLE": "Manage participants",
+                    "PAGE_DESC": "Here you can see full list of users that registered to conference. You can manage them, change status of their payments etc.",
+                    "PARTICIPANTS_TITLE": "All participants",
+                    "USER_TH": "User",
+                    "STATUS_TH": "Status",
+                    "TRACK_TH": "Track",
+                    "ACTIONS_TH": "Actions",
+                    "ROLE_TH": "Roles in conference",
+                    "DELETE_ACTION": "Delete from conference",
+                    "ROLE_ACTION": "Manage roles",
+                    "PAYMENT_ACTION": "Change status of payment"
+                },
+                "PARTICIPANTS": {
+                    "ROLE_MODAL": {
+                        "TITLE": "Manage conference roles",
+                        "ALL_ROLES": "System roles",
+                        "ADD_ROLE": "Add role to user",
+                        "ROLE_ASSIGNED": "Role already assigned",
+                        "ROLE_TITLE_CELL": "Role"
+                    }
                 }
             },
             "ADD_CONFERENCE": {
@@ -499,6 +612,31 @@
                     "PAID": "Paid",
                     "UNPAID": "Unpaid"
                 }
+            },
+            "ADMIN": {
+                "TRACKS": {
+                    "MODAL": {
+                        "NO_INTERESTS": "No research areas in system"
+                    }
+                }
+            },
+            "CFP": {
+                "PAGE_TITLE": "Call For Papers",
+                "SECTION_TITLE": "Manage CFP",
+                "PAGE_DESC": "Edit CFP for your conference, which will be displayed for all users and guests while registering to conference, on conference page etc."
+            },
+            "CONFPAGES": {
+                "PAGE_EDIT_TITLE": "Edit subpage of conference page"
+            },
+            "CALENDAR": {
+                "PAGE_TITLE": "Calendar",
+                "PAGE_SUBTITLE": "Manage conference calendar",
+                "PAGE_DESC": "Here you can manage all dates in conference you want to display for users.",
+                "DATES_TABLE_TITLE": "All events",
+                "EVENT_NAME_TITLE": "Event name",
+                "DATE_TITLE": "Date of event",
+                "ACTIONS_TITLE": "Actions",
+                "BTN_ADD": "Add new event"
             }
         },
         "PAGINATION": {

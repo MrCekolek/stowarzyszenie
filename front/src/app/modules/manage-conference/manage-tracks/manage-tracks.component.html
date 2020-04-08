@@ -1,0 +1,115 @@
+<div class="section-header">
+    <h1>{{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACKS.PAGE_TITLE' | translate }}</h1>
+</div>
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACKS.SECTION_TITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACKS.PAGE_DESC' | translate }}
+    </p>
+
+    <div class="d-flex justify-content-center" *ngIf="loading; else content">
+        <div class="spinner-border text-primary"></div>
+    </div>
+
+    <ng-template #content>
+        <div class="d-flex justify-content-center mb-4">
+            <button class="btn btn-primary btn-icon icon-left" (click)="addTrackModal()" *ngIf="this.conference_id">
+                <i class="fas fa-plus"></i> {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACKS.ADD_BTN' | translate }}
+            </button>
+        </div>
+
+        <div *ngIf="this.tracks">
+            <div class="row" *ngIf="this.tracks.length > 0">
+                <div class="col-lg-6 col-sm-12" *ngFor="let track of tracks">
+                    <div class="card" [ngStyle]="{'border': '1px solid ' + track.colour}">
+                        <div class="card-header" [ngStyle]="{'color': track.colour}">
+                            <h4>
+                                {{ track['name_' + this.lang] }}
+                            </h4>
+                            <div class="card-header-action">
+                                <button  class="btn btn-icon btn-success" (click)="updateTrack(track)">
+                                    <i class="fa fa-pencil-alt"></i>
+                                </button>
+                                <button  class="btn btn-icon btn-danger" (click)="deleteTrack(track)">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- TODO: pobranie chairsow z tracku -->
+                        <div class="card-body">
+                            <div>
+                                <h5 class="mb-3">
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACKS.TRACK_CHAIRS_TILE' | translate }}
+                                </h5>
+                                <!-- TODO pobranie chairsow do tracku kazdego  -->
+                                <div class="badge badge-primary">
+                                    Hasan Basri
+                                </div>
+                                <div class="badge badge-primary">
+                                    Brian Adams
+                                </div>
+                                <div class="badge badge-primary">
+                                    Hasan Basri
+                                </div>
+                            </div>
+
+                            <h5 class="mb-3 mt-4">
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACKS.TRACK_INTEREST_TILE' | translate }}
+                            </h5>
+                            <!-- TODO: interest tracku -->
+                            <div class="badge badge-secondary mt-43">
+                                Interest name
+                            </div>
+                        </div>
+
+                        <div class="card-footer text-white">
+                            <a [routerLink]="['../tracks/members', track.id]">
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACKS.MANAGE_PEOPLE' | translate }}
+                                <i class="fa fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+
+
+            <div class="card" *ngIf="this.tracks.length === 0">
+                <div class="card-body text-center">
+                    <!-- TODO: sprawdzic czemu nie chce byc wieksze?? :c takie malutkie sie wstydzi -->
+                    <span class="text-danger">
+                        <i class="fas fa-exclamation-triangle fa-lg"></i>
+                    </span>
+                    <h5 class="h3 text-acenter">
+                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACKS.NO_TRACKS' | translate }}
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+
+        <div *ngIf="!this.tracks && !this.conference_id">
+            <div class="empty-state" data-height="400" style="height: 400px;">
+                <div class="empty-state-icon">
+                    <i class="fas fa-question"></i>
+                </div>
+
+                <h2>
+                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE' | translate }}
+                </h2>
+
+                <p class="lead">
+                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE_DESC' | translate}}
+                </p>
+
+                <a class="btn btn-primary mt-4" [routerLink]="['../create']">
+                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.ADD_CONF_BUTT' | translate }}
+                </a>
+            </div>
+        </div>
+    
+    </ng-template>
+</div>
+            

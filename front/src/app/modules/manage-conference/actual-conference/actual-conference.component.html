@@ -78,7 +78,7 @@
                         <p>
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.TRACKS.DESC' | translate }}
                         </p>
-                        <a  class="card-cta">
+                        <a  class="card-cta" [routerLink]="['../tracks']">
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.BUTTON' | translate }} <i class="fas fa-chevron-right"></i>
                         </a>
                     </div>
@@ -89,7 +89,7 @@
             <div class="col-lg-6">
                 <div class="card card-large-icons">
                     <div class="card-icon bg-primary text-white">
-                        <i class="fas fa-th-large"></i>
+                        <i class="fas fa-money-bill-wave"></i>
                     </div>
                     <div class="card-body">
                         <h4>
@@ -98,13 +98,33 @@
                         <p>
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.PARTICIPANTS.DESC' | translate }}
                         </p>
-                        <a  class="card-cta">
+                        <a  class="card-cta" [routerLink]="['../participants']">
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.BUTTON' | translate }} <i class="fas fa-chevron-right"></i>
                         </a>
                     </div>
                 </div>
             </div>
 
+            <!-- call for papers -->
+            <div class="col-lg-6">
+                <div class="card card-large-icons">
+                    <div class="card-icon bg-primary text-white">
+                        <i class="fas fa-file-audio"></i>
+                    </div>
+                    <div class="card-body">
+                        <h4>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.CFP.TITLE' | translate }}
+                        </h4>
+                        <p>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.CFP.DESC' | translate }}
+                        </p>
+                        <a  class="card-cta" [routerLink]="['../cfp']">
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.BUTTON' | translate }} <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    
             <!-- Zarządzanie podstroną konferencji -->
             <div class="col-lg-6">
                 <div class="card card-large-icons">
@@ -118,7 +138,7 @@
                         <p>
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.CONFERENCE_PAGE.DESC' | translate }}
                         </p>
-                        <a  class="card-cta">
+                        <a  class="card-cta" [routerLink]="['../conference-page']">
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.BUTTON' | translate }} <i class="fas fa-chevron-right"></i>
                         </a>
                     </div>
@@ -138,7 +158,7 @@
                         <p>
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.CALENDAR.DESC' | translate }}
                         </p>
-                        <a  class="card-cta">
+                        <a  class="card-cta" [routerLink]="['../calendar']">
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.BUTTON' | translate }} <i class="fas fa-chevron-right"></i>
                         </a>
                     </div>
@@ -158,7 +178,7 @@
                         <p>
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.COMMITTEE.DESC' | translate }}
                         </p>
-                        <a  class="card-cta">
+                        <a  class="card-cta" [routerLink]="['../committee']">
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.BUTTON' | translate }} <i class="fas fa-chevron-right"></i>
                         </a>
                     </div>
@@ -178,7 +198,7 @@
                         <p>
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.GALLERY.DESC' | translate }}
                         </p>
-                        <a  class="card-cta">
+                        <a  class="card-cta" [routerLink]="['../gallery']">
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.BUTTON' | translate }} <i class="fas fa-chevron-right"></i>
                         </a>
                     </div>
@@ -198,7 +218,7 @@
                         <p>
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.PROGRAMME.DESC' | translate }}
                         </p>
-                        <a  class="card-cta">
+                        <a  class="card-cta" [routerLink]="['../programme']">
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.OPTIONS_PAGE.BUTTON' | translate }} <i class="fas fa-chevron-right"></i>
                         </a>
                     </div>

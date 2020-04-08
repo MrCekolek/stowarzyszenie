@@ -1,0 +1,94 @@
+<div class="section-header">
+    <h1>
+        {{ 'STOWARZYSZENIE.MODULES.PAGES.CONFPAGES_ADMIN_TITLE' | translate }}
+    </h1>
+</div>
+
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.PAGES.CONFPAGES_ADMIN_SUBTITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.PAGES.CONFPAGES_ADMIN_DESC' | translate }}
+    </p>
+
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-center mb-4">
+                    <button class="btn btn-sm btn-primary" (click)="addConfpage()">
+                      <i class="fas fa-plus mr-2"></i> {{ 'STOWARZYSZENIE.MODULES.PAGES.ADD_NEW_PAGE' | translate }}
+                    </button>
+                  </div>
+                  
+                  <div class="d-flex justify-content-center" *ngIf="this.loading">
+                    <div class="spinner-border text-primary">
+                    </div>
+                  </div>
+                  
+                  <div #content class="table-responsive">
+                    <table class="table table-striped" *ngIf="conflinks.length > 0 && !loading; else noLinks">
+                      <tbody>
+                        <tr>
+                            <th>
+                                {{ 'STOWARZYSZENIE.MODULES.PAGES.HOMELINKS_TABLE_NAME' | translate }}
+                            </th>
+                            <th>
+                                {{ 'STOWARZYSZENIE.MODULES.PAGES.HOMELINKS_TABLE_STATUS' | translate }}
+                            </th>
+                            <th>
+                                {{ 'STOWARZYSZENIE.MODULES.PAGES.HOMELINKS_TABLE_ACTIONS' | translate }}
+                            </th>
+                        </tr>
+                        <tr *ngFor="let link of conflinks">
+                            <td>
+                                {{ link['name_' + lang] }}
+                            </td>
+
+                            <!-- status -->
+                            <td>
+                                <div class="badge" [ngClass]="{'badge-light': link.translation_key === 'STOWARZYSZENIE.PAGE_STATUS.NOT_EDITABLE', 'badge-warning': link.translation_key === 'STOWARZYSZENIE.PAGE_STATUS.IN_PROGRESS',  'badge-success': link.translation_key === 'STOWARZYSZENIE.PAGE_STATUS.PUBLISHED'}">
+                                    {{ link.status | translate }}
+                                </div>
+                            </td>
+
+                            <td *ngIf="link.status !== 'not editable'; else noteditable">
+                                <a [routerLink]="['../confpage-edit', link.id]" class="btn btn-link text-success">
+                                <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                <a class="btn btn-link text-danger" (click)="deletePage(link)">
+                                <i class="fas fa-times"></i>
+                                </a>
+                                <!-- <a class="btn btn-link text-secondary">
+                                <i class="fas fa-eye"></i>
+                                </a> -->
+                            </td>
+                    
+                            <ng-template #noteditable>
+                            <td>
+                                {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_NO_ACTIONS' | translate }}
+                            </td>
+                            </ng-template>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                  <ng-template #noLinks>
+                    <div class="empty-state" data-height="200">
+                      <div class="empty-state-icon">
+                        <i class="fas fa-question"></i>
+                      </div>
+                      <h2>
+                        {{ 'STOWARZYSZENIE.MODULES.PAGES.EMPTY_TABLE_TITLE' | translate }}
+                      </h2>
+                      <p class="lead">
+                        {{ 'STOWARZYSZENIE.MODULES.PAGES.EMPTY_TABLE_DESC' | translate }}
+                      </p>
+                    </div>
+                  </ng-template>
+                  
+            </div>
+        </div>
+    </div>
+</div>

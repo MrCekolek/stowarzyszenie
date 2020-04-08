@@ -1,0 +1,131 @@
+<h2 mat-dialog-title>
+    <span *ngIf="this.role == 8">
+        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.TRACKS.MODAL.NEW_REVIEWER' | translate }}
+    </span>
+
+    <span *ngIf="this.role == 6">
+        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.TRACKS.MODAL.NEW_CHAIR' | translate }}
+    </span>
+</h2>
+<mat-dialog-content>
+    <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 *ngIf="this.role == 8">
+                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.TRACKS.MODAL.NEW_REVIEWER_LABEL' | translate }}
+              </h4>
+              <h4 *ngIf="this.role == 6">
+                {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.TRACKS.MODAL.NEW_CHAIR_LABEL' | translate }}
+              </h4>
+
+              <div class="card-header-form">
+                <form>
+                  <!-- TODO: wyszukiwarka -->
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <div class="input-group-btn">
+                      <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <tbody><tr>
+                    <th>
+                      {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.TABLE_USERS_TITLE' | translate }}
+                    </th>
+                    <th>
+                      {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.TABLE_INTEREST_TITLE' | translate}}
+                    </th>
+                    <th>
+                      {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.TABLE_ROLES_TITLE' | translate }}
+                    </th>
+                    <th>
+                      {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.TABLE_EMAIL_TITLE' | translate }}
+                    </th>
+                    <th>
+                      {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.TABLE_ACTIONS_TITLE' | translate }}
+                    </th>
+                  </tr>
+
+                  <tr *ngFor="let user of users">
+                    <td>
+                      <li class="media">
+                        <!-- TODO: ma zwrocic tez avatar! -->
+                        <img alt="image" class="mr-3 rounded-circle" width="50" [src]="tutajpowinienbycavatar">
+                        <div class="media-body">
+                          <!-- TODO: ma zwrocic tez tytul academicki!! -->
+                          <div class="media-title">
+                            {{ user.name }}
+                          </div>
+                          <div class="text-job text-muted">
+
+                          </div>
+                        </div>
+                      </li>
+                    </td>
+
+                    <!-- TODO: niech zwraca userow z ich interestami tutaj -->
+                    <td>
+                      <div class="badge badge-primary">
+                        Test interest
+                      </div>
+                      <div class="badge badge-primary">
+                        Political Science
+                      </div>
+                    </td>
+
+                    <!-- wszystkie role -->
+                    <!-- TODO: nazwy rol ma tez zwracac!!! -->
+                    <td>
+                      <div class="badge badge-secondary">
+                        Track chair
+                      </div>
+                      <div class="badge badge-secondary">
+                        Author
+                      </div>
+                      <div class="badge badge-secondary">
+                        Reviewer
+                      </div>
+                    </td>
+
+                    <!-- email kontaktowy -->
+                    <td>
+                      {{ user.contact_email }}
+                    </td>
+
+                    <!-- akcje -->
+                    <td>
+                      <a class="btn btn-info text-white" (click)="addToList(user)" *ngIf="this.selectedusers.indexOf(user) === -1; else assigned">
+                        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.ADD' | translate }}
+                      </a>
+
+                      <ng-template #assigned>
+                        <p class="text-muted">
+                          {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.ALREADY_ASSIGNED' | translate }}
+                        </p>
+                      </ng-template>
+                      
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button type="button" class="btn btn-primary" [class.btn-progress]="this.isSaving" (click)="save()">
+        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
+    </button>
+    <button type="button" class="btn btn-link" (click)="dismiss()">
+        {{ 'STOWARZYSZENIE.MODALS.BUTTON_CANCEL' | translate }}
+    </button>
+</mat-dialog-actions>

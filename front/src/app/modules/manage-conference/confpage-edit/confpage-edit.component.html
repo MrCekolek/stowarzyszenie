@@ -1,0 +1,94 @@
+<div class="section-header">
+    <h1>
+        {{ 'STOWARZYSZENIE.MODULES.CONFPAGES.PAGE_EDIT_TITLE' | translate }}
+    </h1>
+</div>
+
+<div class="section-body">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body" *ngIf="this.subpage">
+                <h3>
+                    {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_CHOOSE_LANGUAGE' | translate }}
+                </h3>
+                <p>
+                    {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_CHOOSE_LANGUAGE_DESC' | translate }}
+                </p>
+
+                <div id="accordion">
+                    <div class="accordion">
+                      <div class="accordion-header collapsed" role="button" data-toggle="collapse" data-target="#panel-body-1">
+                        <h4>{{ 'STOWARZYSZENIE.HELPERS.POLISH_LANG' | translate }}</h4>
+                      </div>
+                      <div class="accordion-body collapse" id="panel-body-1" data-parent="#accordion" style="">
+                        <div class="form-group row mb-4">
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
+                                {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_INPUT_TITLE' | translate }}
+                            </label>
+                            <div class="col-sm-12 col-md-7">
+                              <input type="text" class="form-control" [(ngModel)]="subpage.name_pl">
+                            </div>
+                          </div>
+                        <div class="mt-4"></div>
+                        <angular-editor id="editorpl"  [(ngModel)]="subpage.content_pl" [config]="editorConfig"></angular-editor>
+                        <div class="mb-4"></div>
+                      </div>
+                    </div>
+                    <div class="accordion">
+                      <div class="accordion-header" role="button" data-toggle="collapse" data-target="#panel-body-2" >
+                        <h4>{{ 'STOWARZYSZENIE.HELPERS.ENGLISH_LANG' | translate }}</h4>
+                      </div>
+                      <div class="accordion-body collapse" id="panel-body-2" data-parent="#accordion" style="">
+                        <div class="form-group row mb-4">
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
+                                {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_INPUT_TITLE' | translate }}
+                            </label>
+                            <div class="col-sm-12 col-md-7">
+                              <input type="text" class="form-control" [(ngModel)]="subpage.name_en">
+                            </div>
+                          </div>
+                          <div class="mt-4"></div>
+                        <angular-editor id="editoren" [(ngModel)]="subpage.content_en" [config]="editorConfig"></angular-editor>
+                        <div class="mb-4"></div>
+                      </div>
+                    </div>
+                    <div class="accordion">
+                      <div class="accordion-header" role="button" data-toggle="collapse" data-target="#panel-body-3">
+                        <h4>{{ 'STOWARZYSZENIE.HELPERS.RUSSIAN_LANG' | translate }}</h4>
+                      </div>
+                      <div class="accordion-body collapse" id="panel-body-3" data-parent="#accordion" style="">
+                        <div class="form-group row mb-4">
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
+                                {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_INPUT_TITLE' | translate }}
+                            </label>
+                            <div class="col-sm-12 col-md-7">
+                              <input type="text" class="form-control" [(ngModel)]="subpage.name_ru">
+                            </div>
+                          </div>
+                        <div class="mt-4"></div>
+                        <angular-editor id="editorru" [(ngModel)]="subpage.content_ru" [config]="editorConfig"></angular-editor>
+                        <div class="mb-4"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row mb-4 mt-4">
+                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                    <div class="col-sm-12 col-md-7">
+                        <!-- TODO: zrobi publikowanie (click)="publishPage()"-->
+                      <button class="btn btn-primary" >
+                          {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_PUBLISH' | translate }}
+                      </button>
+
+                      <!-- TODO: zrobi draft (click)="saveDraft()"-->
+                      <button class="btn btn-secondary ml-3" (click)="saveAsDraft()">
+                          {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_SAVE_DRAFT' | translate }}
+                      </button>
+                    </div>
+                </div>
+              </div>
+
+              <!-- loader -->
+          </div>
+    </div>
+</div>

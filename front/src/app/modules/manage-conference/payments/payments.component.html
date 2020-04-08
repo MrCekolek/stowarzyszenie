@@ -1,0 +1,122 @@
+<div class="section-header">
+    <h1>{{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.PAGE_TITLE' | translate }}</h1>
+</div>
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.SECTION_TITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.PAGE_DESC' | translate }}
+    </p>
+
+    <div class="d-flex justify-content-center" *ngIf="loading; else content">
+        <div class="spinner-border text-primary"></div>
+    </div>
+
+    <ng-template #content>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>
+                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.PARTICIPANTS_TITLE' | translate }}
+                        </h4>
+                        <div class="card-header-form">
+                            <form>
+                                <!-- TODO: zrobic przeszukiwanie listy uczestnikow -->
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                    <!-- tytuły kolumn -->
+                                    <th>
+                                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.USER_TH' | translate }}
+                                    </th>
+                                    <th>
+                                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.STATUS_TH' | translate }}
+                                    </th>
+                                    <th>
+                                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.TRACK_TH' | translate }}
+                                    </th>
+                                    <th>
+                                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.ROLE_TH' | translate }}
+                                    </th>
+                                    <th>
+                                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.ACTIONS_TH' | translate }}
+                                    </th>
+                                    </tr>
+
+                                    <!-- *ngFor="let user of users" -->
+                                    <tr>
+                                        <!-- TODO: avatar uzytkownika -->
+                                        <td>
+                                            <img alt="image" [src]="//" class="rounded-circle" width="35" data-toggle="tooltip" title="" data-original-title="user bname and surname">
+                                        </td>
+
+                                        <!-- status -->
+                                        <td>
+                                            <!-- TODO: status of payments -->
+                                            <!-- {{ user.status }} -->
+                                            <div class="badge badge-danger">
+                                                Not paid
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <!-- TODO: track do ktorego uzytkownik wyslal paper (jak nie wyslal nigdzie to nic tu nie ma) -->
+                                            <!-- {{ user.track }} [ngStyle]="{'background-color': user.track.colour}" -->
+                                            <div class="badge badge-info">
+                                                track test
+                                            </div>
+                                        </td>
+
+                                        <!-- role w konferencji -->
+                                        <td>
+                                            <div class="badge badge-success">Author</div>
+                                        </td>
+
+                                        <!-- akcje -->
+                                        <td>
+                                            <div class="dropdown d-inline">
+                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.ACTIONS_TH' | translate }} 
+                                                </button>
+                                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                    <a class="dropdown-item has-icon" (click)="roleModal(user)">
+                                                        <i class="fas fa-user-tag"></i>
+                                                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.ROLE_ACTION' | translate }}
+                                                    </a>
+
+                                                    <a class="dropdown-item has-icon" (click)="paymentsModal()">
+                                                        <i class="fas fa-money-bill-wave-alt"></i>
+                                                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.PAYMENT_ACTION' | translate }}
+                                                    </a>
+
+                                                    <a class="dropdown-item has-icon text-danger" (click)="deleteModal()">
+                                                        <i class="fas fa-trash"></i> 
+                                                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.DELETE_ACTION' | translate }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </ng-template>
+</div>
