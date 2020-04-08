@@ -71,6 +71,20 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'conference-articles',
+    loadChildren: './modules/conference-articles/conference-articles.module#ConferenceArticlesModule',
+    canActivateChild: [
+      LoggedGuard
+    ]
+  },
+  {
+    path: 'conference-reviews',
+    loadChildren: './modules/conference-reviews/conference-reviews.module#ConferenceReviewsModule',
+    canActivateChild: [
+      LoggedGuard
+    ]
+  },
+  {
     path: '**',
     redirectTo: ''
   }

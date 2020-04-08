@@ -52,10 +52,7 @@ class ConferencePageRequest extends FormRequest {
         $this->rules = [
             'name_pl' => 'required',
             'name_en' => 'required',
-            'name_ru' => 'required',
-            'content_pl' => 'required',
-            'content_en' => 'required',
-            'content_ru' => 'required'
+            'name_ru' => 'required'
         ];
     }
 

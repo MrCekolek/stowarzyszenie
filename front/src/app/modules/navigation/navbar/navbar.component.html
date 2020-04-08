@@ -266,6 +266,46 @@
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.GENERAL_SETT_CONF' | translate }}
                                 </a>
                             </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['manage-conference/tracks']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.CONF_TRACKS' | translate }}
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['manage-conference/participants']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.PAGE_TITLE' | translate }}
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['manage-conference/cfp']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.CONFERENCE.CFP' | translate }}
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['manage-conference/conference-page']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.CONFERENCE.PAGE' | translate }}
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['manage-conference/calendar']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.CONFERENCE.CALENDAR' | translate }}
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['manage-conference/committee']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.CONFERENCE.COMMITTEE' | translate }}
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['manage-conference/gallery']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.CONFERENCE.GALLERY' | translate }}
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['manage-conference/programme']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.CONFERENCE.PROGRAMME' | translate }}
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
@@ -278,11 +318,6 @@
                             <li routerLinkActive="active">
                                 <a [routerLink]="['pages/homepages']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.PAGES_ADMIN.HOMEPAGES' | translate }}
-                                </a>
-                            </li>
-                            <li routerLinkActive="active">
-                                <a [routerLink]="['pages/conference']" class="nav-link">
-                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.PAGES_ADMIN.CONFERENCE' | translate }}
                                 </a>
                             </li>
                         </ul>

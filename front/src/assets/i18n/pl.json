@@ -46,6 +46,22 @@
                     "ROLE_USER": {
                         "TITLE": "Usuwanie użytkownikowi roli",
                         "TEXT": "Czy na pewno chcesz usunąć użytkownikowi rolę"
+                    },
+                    "TRACK_REVIEWER": {
+                        "TITLE": "Usuwanie recenzenta tracku",
+                        "TEXT": "Czy na pewno chcesz usunąć recenzenta"
+                    },
+                    "TRACK_CHAIR": {
+                        "TITLE": "Usuwanie przewodniczącego tracku",
+                        "TEXT": "Czy na pewno chcesz usunąć przewodniczącego"
+                    },
+                    "TRACK": {
+                        "TITLE": "Usuwanie tracku konferencji",
+                        "TEXT": "Czy na pewno chcesz usunąć track"
+                    },
+                    "CONFPAGE": {
+                        "TITLE": "Usuwanie podstrony konferencji",
+                        "TEXT": "Czy na pewno chcesz usunąć podstronę?"
                     }
                 }
             },
@@ -126,6 +142,15 @@
             "NEW_ROLE_USER": {
                 "TRIGGER_BUTTON": "Dodaj użytkownika",
                 "TITLE_NEW_ROLE": "Przypisz użytkownikowi rolę"
+            },
+            "CONFPAGES": {
+                "TITLE_NEW": "Nowa podstrona konferencji",
+                "INPUT_NEW_LABEL": "Wpisz nazwę nowej podstrony",
+                "INPUT_EDIT_LABEL": "Edytuj nazwę wydarzenia"
+            },
+            "EVENTS": {
+                "TITLE_NEW": "Nowe wydarzenie",
+                "TITLE_EDIT": "Edytuj wydarzenie"
             }
         },
         "MODULES": {
@@ -269,7 +294,8 @@
                         "USERS_LIST": "Lista użytkowników",
                         "CONFERENCE_MENU": "Konferencja",
                         "ACTUAL_CONFERENCE": "Aktualna konferencja",
-                        "GENERAL_SETT_CONF": "Ustawienia główne"
+                        "GENERAL_SETT_CONF": "Ustawienia główne",
+                        "CONF_TRACKS": "Ustawienia tematów"
                     },
                     "MANAGEMENT": {
                         "MANAGEMENT_MENU": "Zarządzanie",
@@ -280,6 +306,14 @@
                         "HOMEPAGES": "Nawigacja główna",
                         "CONFERENCE": "Strona konferencji",
                         "TITLE_MENU_V2": "Zarządzaj stronami"
+                    },
+                    "CONFERENCE": {
+                        "CFP": "Call For Papers",
+                        "PAGE": "Strona konferencji",
+                        "CALENDAR": "Ustawienia kalendarza",
+                        "COMMITTEE": "Komitet programowy",
+                        "GALLERY": "Galeria konferencji",
+                        "PROGRAMME": "Program konferencji"
                     }
                 },
                 "WEBPAGE_TITLE_MEMBERS": "Ciob members"
@@ -304,7 +338,20 @@
                     },
                     "USER_DESC": "Opis dodany przez użytkownika",
                     "USER_ROLE": "Rola użytkownika",
-                    "USER_TITLE": "Tytuł"
+                    "USER_TITLE": "Tytuł",
+                    "TRACKS": {
+                        "MODAL": {
+                            "TITLE_NEW": "Dodaj nowy track",
+                            "TITLE_EDIT": "Edytuj track",
+                            "INPUT_LABEL_NEW": "Wpisz nazwę nowego tracku",
+                            "INPUT_LABEL_COLOR": "Wybierz kolor tracku",
+                            "INPUT_LABEL_INTEREST": "Wybierz obszar badań tematu",
+                            "NEW_REVIEWER": "Przypisz nowego recenzenta",
+                            "NEW_CHAIR": "Przypisz nowego przewodniczącego",
+                            "NEW_CHAIR_LABEL": "Użytkownicy z przypisaną rolą „przewodniczący tracku”",
+                            "NEW_REVIEWER_LABEL": "Użytkownicy z przypisaną rolą „recenzent”"
+                        }
+                    }
                 },
                 "ADMIN_INTERESTS_DESC1": "Zarządzaj listą obszarów badań użytkowników. Dodawaj i usuwaj nazwy obszarów, które użytkownicy mogą wybierać na swoich profilach.",
                 "CHECK_OTHERS": "Sprawdź jak inni widzą twoje portfolio",
@@ -414,7 +461,17 @@
                 "PAGE_EDIT_INPUT_TITLE": "Nazwa strony",
                 "CONFERENCE_PAGES_ADMIN_SUBTITLE": "Edycja stron konferencji",
                 "CONFERENCE_PAGES_ADMIN_DESC": "Tutaj możesz edytować nawigację tylko na stronie konferencji. Możesz zarządzać najważniejszymi aspektami konferencji, takimi jak ścieżki. daty itp.",
-                "PAGE_EDIT_NO_ACTIONS": "Brak akcji dla stron, których nie można edytować"
+                "PAGE_EDIT_NO_ACTIONS": "Brak akcji dla stron, których nie można edytować",
+                "FILE_LABEL": "Możesz tutaj dodać plik zamiast tworzyć tekst, dodaj plik poniżej:",
+                "FILE_SECTION_TITLE": "Wybierz plik",
+                "FILE": "Kliknij tutaj, aby wybrać plik",
+                "FILE_SECTION_TITLE_1": "Wybierz plik",
+                "NO_CFP_TITLE": "Brak zaproszenia do składania dokumentów",
+                "NO_CFP_DESC": "Nie ma zaproszenia do składania dokumentów. Możesz go dodać, klikając przycisk poniżej.",
+                "ADD_CFP_BTN": "Dodaj CFP",
+                "CONFPAGES_ADMIN_TITLE": "Strona konferencji",
+                "CONFPAGES_ADMIN_SUBTITLE": "Zarządzaj menu strony konferencji",
+                "CONFPAGES_ADMIN_DESC": "Tutaj możesz zarządzać całym menu strony konferencji, zarządzać linkami w menu, dodawać nowe i edytować ich zawartość. Utworzona strona będzie widoczna dla wszystkich użytkowników i gości."
             },
             "ROLE_USER": {
                 "LABEL": {
@@ -467,6 +524,10 @@
                     "PARTICIPANTS": {
                         "TITLE": "Uczestnicy",
                         "DESC": "Zobacz listę użytkowników zarejestrowanych na konferencję, zmień status swoich płatności."
+                    },
+                    "CFP": {
+                        "TITLE": "Zaproszenia do publikowania",
+                        "DESC": "Zarządzaj CFP konferencji, możesz dodać własny plik lub utworzyć dla niego stronę w systemie."
                     }
                 },
                 "STATUS": {
@@ -479,6 +540,58 @@
                     "SECTION_TITLE": "Zmień ustawienia",
                     "PAGE_DESC": "Zmień ogólne ustawienia konferencji, które zostały wypełnione podczas dodawania.",
                     "CHANGE_STATUS": "Zmień status konferencji"
+                },
+                "TRACKS": {
+                    "PAGE_TITLE": "Ustawienia tematów",
+                    "SECTION_TITLE": "Zarządzaj tematami",
+                    "PAGE_DESC": "Zarządzaj tematami aktualnej konferencji, wybierz przewodniczących i recenzentów.",
+                    "NO_TRACKS": "Konferencja nie ma tracków. Dodaj jakieś, aby nimi zarządzać.",
+                    "ADD_BTN": "Dodaj nowy track do konferencji",
+                    "MANAGE_PEOPLE": "Zarządzaj ludźmi w tym tracku",
+                    "TRACK_CHAIRS_TILE": "Przewodniczący:",
+                    "TRACK_INTEREST_TILE": "Obszar badawczy"
+                },
+                "TRACK_MEMBERS": {
+                    "PAGE_TITLE": "Ludzie przypisani do tracku",
+                    "SECTION_TITLE": "Zarządzaj ludźmi przypisanymi do tracku",
+                    "PAGE_DESC": "Tutaj możesz zarządzać osobami należącymi do tracku, możesz dodawać recenzentów i przewodniczących do tracków.",
+                    "CHAIRS_TITLE": "Przewodniczący w tym tracku",
+                    "REVIEWERS_TITLE": "Recenzenci przypisani do tego tracku",
+                    "NO_REVIEWERS": "Brak recenzentów przypisanych do tracku",
+                    "ASSIGN_REVIEWER": "Przypisz nowego recenzenta",
+                    "NO_CHAIRS": "Brak przypisanych przewodniczących do tego tracku",
+                    "ASSIGN_CHAIR": "Przypisz nowego przewodniczącego",
+                    "TABLE_USERS_TITLE": "Użytkownik",
+                    "TABLE_INTEREST_TITLE": "Obszar badań użytkownika",
+                    "TABLE_ACADEMIC_TITLE": "Miejsce badań",
+                    "TABLE_ROLES_TITLE": "Role użytkowników",
+                    "TABLE_EMAIL_TITLE": "Kontaktowy adres e-mail",
+                    "SECTION_TITLE_TRACKNAME": "Edytujesz track",
+                    "TABLE_ACTIONS_TITLE": "Akcje",
+                    "ALREADY_ASSIGNED": "Użytkownik jest już przypisany"
+                },
+                "PAYMENTS": {
+                    "PAGE_TITLE": "Uczestnicy",
+                    "SECTION_TITLE": "Zarządzaj uczestnikami",
+                    "PAGE_DESC": "Tutaj możesz zobaczyć pełną listę użytkowników zarejestrowanych na konferencję. Możesz nimi zarządzać, zmieniać status ich płatności itp.",
+                    "PARTICIPANTS_TITLE": "Wszyscy uczestnicy",
+                    "USER_TH": "Użytkownik",
+                    "STATUS_TH": "Status",
+                    "TRACK_TH": "Track",
+                    "ACTIONS_TH": "Akcje",
+                    "ROLE_TH": "Role w konferencji",
+                    "DELETE_ACTION": "Usuń z konferencji",
+                    "ROLE_ACTION": "Zarządzaj rolami",
+                    "PAYMENT_ACTION": "Zmień status płatności"
+                },
+                "PARTICIPANTS": {
+                    "ROLE_MODAL": {
+                        "TITLE": "Zarządzaj rolami konferencji",
+                        "ALL_ROLES": "Role systemowe",
+                        "ADD_ROLE": "Dodaj rolę użytkownikowi",
+                        "ROLE_ASSIGNED": "Rola już przypisana",
+                        "ROLE_TITLE_CELL": "Rola"
+                    }
                 }
             },
             "ADD_CONFERENCE": {
@@ -499,6 +612,31 @@
                     "PAID": "Opłacony",
                     "UNPAID": "Nie opłacony"
                 }
+            },
+            "ADMIN": {
+                "TRACKS": {
+                    "MODAL": {
+                        "NO_INTERESTS": "Brak obszarów badawczych w systemie"
+                    }
+                }
+            },
+            "CFP": {
+                "PAGE_TITLE": "Call For Papers",
+                "SECTION_TITLE": "Zarządzaj CFP",
+                "PAGE_DESC": "Edytuj CFP dla swojej konferencji, która będzie wyświetlana dla wszystkich użytkowników i gości podczas rejestracji na konferencję, na stronie konferencji itp."
+            },
+            "CONFPAGES": {
+                "PAGE_EDIT_TITLE": "Edytuj podstronę strony konferencji"
+            },
+            "CALENDAR": {
+                "PAGE_TITLE": "Kalendarz",
+                "PAGE_SUBTITLE": "Zarządzaj kalendarzem konferencji",
+                "PAGE_DESC": "Tutaj możesz zarządzać wszystkimi datami konferencji, które chcesz wyświetlać użytkownikom.",
+                "DATES_TABLE_TITLE": "Wszystkie wydarzenia",
+                "EVENT_NAME_TITLE": "Nazwa wydarzenia",
+                "DATE_TITLE": "Data wydarzenia",
+                "ACTIONS_TITLE": "Akcje",
+                "BTN_ADD": "Dodaj nowe wydarzenie"
             }
         },
         "PAGINATION": {
