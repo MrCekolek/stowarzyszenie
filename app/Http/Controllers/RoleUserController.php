@@ -52,7 +52,7 @@ class RoleUserController extends Controller {
         }
 
         return LogService::read(true, [
-            'users' => $role->users()->get()->toArray()
+            'users' => $role->users()->with(['preferenceUser', 'affilationUser', 'interests', 'roles'])->get()->toArray()
         ]);
     }
 

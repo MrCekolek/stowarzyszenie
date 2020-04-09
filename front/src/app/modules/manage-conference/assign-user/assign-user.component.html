@@ -56,10 +56,9 @@
                   <tr *ngFor="let user of users">
                     <td>
                       <li class="media">
-                        <!-- TODO: ma zwrocic tez avatar! -->
-                        <img alt="image" class="mr-3 rounded-circle" width="50" [src]="tutajpowinienbycavatar">
+                        <img alt="image" class="mr-3 rounded-circle" width="50" [src]="this.user.preference_user.avatar">
                         <div class="media-body">
-                          <!-- TODO: ma zwrocic tez tytul academicki!! -->
+                          {{ this.user.affilation_user.title }}
                           <div class="media-title">
                             {{ user.name }}
                           </div>
@@ -70,27 +69,15 @@
                       </li>
                     </td>
 
-                    <!-- TODO: niech zwraca userow z ich interestami tutaj -->
                     <td>
-                      <div class="badge badge-primary">
-                        Test interest
-                      </div>
-                      <div class="badge badge-primary">
-                        Political Science
+                      <div class="badge badge-primary" *ngFor="let interest of this.user.interests">
+                        {{ interest['name_' + this.lang] }}
                       </div>
                     </td>
 
-                    <!-- wszystkie role -->
-                    <!-- TODO: nazwy rol ma tez zwracac!!! -->
                     <td>
-                      <div class="badge badge-secondary">
-                        Track chair
-                      </div>
-                      <div class="badge badge-secondary">
-                        Author
-                      </div>
-                      <div class="badge badge-secondary">
-                        Reviewer
+                      <div class="badge badge-secondary" *ngFor="let role of this.user.roles">
+                        {{ role['name_' + this.lang] }}
                       </div>
                     </td>
 

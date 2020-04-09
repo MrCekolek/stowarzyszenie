@@ -59,7 +59,6 @@ export class ManageTracksComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       (data) => {
         if (data) {
-          console.log(data);
           if (data.success) {
             this.tracks.push(data.track);
           }
@@ -119,5 +118,4 @@ export class ManageTracksComponent implements OnInit {
       }
     );
   }
-
 }
