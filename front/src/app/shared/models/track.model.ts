@@ -6,6 +6,8 @@ export class Track {
     colour: string;
     interest_id: string;
     conference_id: string;
+    track_chairs: any;
+    track_reviewers: any;
 
     constructor(track: Object) {
         this.id = track['id'];
@@ -15,5 +17,7 @@ export class Track {
         this.colour = track['colour'];
         this.interest_id = track['interest_id'];
         this.conference_id = track['conference_id'];
+        this.track_chairs = track['track_chairs'];
+        this.track_reviewers = track['track_reviewers'];
     }
 }
