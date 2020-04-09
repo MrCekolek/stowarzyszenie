@@ -14,6 +14,7 @@ export class AssignUserComponent implements OnInit {
 
   private role;
   private trackID;
+  private lang;
 
   private users = [];
   private selectedusers = [];
@@ -42,15 +43,15 @@ export class AssignUserComponent implements OnInit {
    }
 
   ngOnInit() {
-    // TODO: ZROBIC ZEBY MOZNA BYLO POBIERAC ROLE PO NAZWIE ?
-    // tu jest cos nie tak...
+    this.languageService.currentLang.subscribe(value => {
+      this.lang = value;
+    });
+
     const obj = {
       role_id: this.role
     };
-    // TODO: niech zwraca userow z ich wszystkimi danymi, academic title tez!!!
-    // i najlepiej jakby role od razu byly obiektami z nazwami etc a nie tylko id
+
     this.permissionRoleApi.getUsersWithRole(obj).subscribe(res => {
-      console.log(res);
       this.users = res.users;
     });
   }

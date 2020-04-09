@@ -38,7 +38,6 @@ export class TrackMembersComponent implements OnInit {
       id: this.trackID
     };
     this.manageConferenceApi.getTrack(obj).subscribe(res => {
-      console.log(res);
       this.track = res.track;
     });
 
@@ -50,13 +49,11 @@ export class TrackMembersComponent implements OnInit {
 
     // TODO: pobranie chairs
     this.manageConferenceApi.getTrackChair(obj).subscribe(res => {
-      console.log(res);
       this.track_chairs = res.chair;
     });
 
     //TODO: pobranie recenzentow
     this.manageConferenceApi.getTrackReviewers(obj).subscribe(res => {
-      console.log(res);
       this.track_reviewers = res.reviewers;
     });
   }
@@ -80,7 +77,6 @@ export class TrackMembersComponent implements OnInit {
           if (data.success) {
             this.track_reviewers = data.users;
           }
-          console.log(data);
         }
       }
     );
@@ -163,5 +159,4 @@ export class TrackMembersComponent implements OnInit {
       }
     );
   }
-
 }
