@@ -196,8 +196,9 @@ Route::group([
         });
 
         Route::prefix('programme_committee')->group(function () {
-            Route::post('', 'ProgrammeCommitteeController@index');
+            Route::post('get', 'ProgrammeCommitteeController@index');
             Route::post('create', 'ProgrammeCommitteeController@create');
+            Route::post('createMulti', 'ProgrammeCommitteeController@createMulti');
             Route::post('update', 'ProgrammeCommitteeController@update');
             Route::post('destroy', 'ProgrammeCommitteeController@destroy');
         });
