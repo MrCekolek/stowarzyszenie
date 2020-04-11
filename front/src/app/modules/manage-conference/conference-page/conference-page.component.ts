@@ -13,7 +13,8 @@ import { LanguageService } from 'src/app/shared/services/user/language.service';
 })
 export class ConferencePageComponent implements OnInit {
 
-  conflinks = [];
+  private conference;
+  private conflinks = [];
   loading: boolean;
   private lang;
 
@@ -30,11 +31,16 @@ export class ConferencePageComponent implements OnInit {
       this.lang = value;
     });
 
-    this.conferenceApi.getConference().subscribe(res => {
-      this.conflinks = res.conference.conference_pages;
-      console.log(this.conflinks);
-      this.loading = false;
-    });
+    this.conferenceApi.getConference().subscribe(
+        (res) => {
+          this.conference = res.conference;
+          this.conflinks = this.conference.conference_pages;
+        },
+        () => {},
+        () => {
+          this.loading = false;
+        }
+      );
   }
 
   addConfpage() {

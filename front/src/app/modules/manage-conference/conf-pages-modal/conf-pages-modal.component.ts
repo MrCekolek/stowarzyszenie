@@ -46,7 +46,6 @@ export class ConfPagesModalComponent implements OnInit {
     });
 
     this.conferenceApi.getConference().subscribe(res => {
-      console.log(res);
       this.page.conference_id = res.conference.id;
     });
   }
@@ -63,17 +62,22 @@ export class ConfPagesModalComponent implements OnInit {
     };
 
     this.addLoading = true;
-    this.apiService.post('translation/get', obj).subscribe(response => {
-      this.translations[0] = response.translation.name_pl;
-      this.translations[1] = response.translation.name_en;
-      this.translations[2] = response.translation.name_ru;
 
-      this.page.name_pl = response.translation.name_pl;
-      this.page.name_en = response.translation.name_en;
-      this.page.name_ru = response.translation.name_ru;
+    this.apiService.post('translation/get', obj).subscribe(
+        (response) => {
+          this.translations[0] = response.translation.name_pl;
+          this.translations[1] = response.translation.name_en;
+          this.translations[2] = response.translation.name_ru;
 
-      this.addLoading = false;
-    });
+          this.page.name_pl = response.translation.name_pl;
+          this.page.name_en = response.translation.name_en;
+          this.page.name_ru = response.translation.name_ru;
+        },
+        () => {},
+        () => {
+          this.addLoading = false;
+        }
+      );
   }
 
   addPage() {
@@ -82,10 +86,8 @@ export class ConfPagesModalComponent implements OnInit {
 
     this.conferenceApi.addConfpage(this.page).subscribe(
       (res) => {
-        console.log(res);
         this.dialogRef.close(res);
       }
     );
   }
-
 }

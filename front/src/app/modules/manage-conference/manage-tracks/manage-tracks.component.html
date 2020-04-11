@@ -38,31 +38,32 @@
                             </div>
                         </div>
 
-                        <!-- TODO: pobranie chairsow z tracku -->
                         <div class="card-body">
                             <div>
                                 <h5 class="mb-3">
                                     {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACKS.TRACK_CHAIRS_TILE' | translate }}
                                 </h5>
-                                <!-- TODO pobranie chairsow do tracku kazdego  -->
-                                <div class="badge badge-primary">
-                                    Hasan Basri
+
+                                <div *ngIf="track.track_chairs.length < 1">
+                                    {{ 'STOWARZYSZENIE.LABELS.EMPTY' | translate }}
                                 </div>
-                                <div class="badge badge-primary">
-                                    Brian Adams
-                                </div>
-                                <div class="badge badge-primary">
-                                    Hasan Basri
+
+                                <div class="badge badge-primary" *ngFor="let trackChair of track.track_chairs">
+                                    {{ trackChair.first_name + ' ' + trackChair.last_name }}
                                 </div>
                             </div>
 
                             <h5 class="mb-3 mt-4">
                                 {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACKS.TRACK_INTEREST_TILE' | translate }}
                             </h5>
-                            <!-- TODO: interest tracku -->
-                            <div class="badge badge-secondary mt-43">
-                                Interest name
+
+                            <div class="badge badge-secondary mt-43" *ngIf="track.interest else interest">
+                                {{ track.interest['name_' + this.lang] }}
                             </div>
+
+                            <ng-template #interest>
+                                {{ 'STOWARZYSZENIE.LABELS.EMPTY' | translate }}
+                            </ng-template>
                         </div>
 
                         <div class="card-footer text-white">
@@ -75,20 +76,15 @@
                 </div>
             </div>
 
-
             <div class="card" *ngIf="this.tracks.length === 0">
-                <div class="card-body text-center">
-                    <!-- TODO: sprawdzic czemu nie chce byc wieksze?? :c takie malutkie sie wstydzi -->
-                    <span class="text-danger">
-                        <i class="fas fa-exclamation-triangle fa-lg"></i>
-                    </span>
-                    <h5 class="h3 text-acenter">
+                <div class="card-body text-center mt-2">
+                    <h5 class="h3 text-center">
+                        <i id="triangle-big" class="fas fa-exclamation-triangle fa-lg mr-3 text-danger"></i>
                         {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACKS.NO_TRACKS' | translate }}
                     </h5>
                 </div>
             </div>
         </div>
-
 
         <div *ngIf="!this.tracks && !this.conference_id">
             <div class="empty-state" data-height="400" style="height: 400px;">
@@ -109,6 +105,5 @@
                 </a>
             </div>
         </div>
-
     </ng-template>
 </div>

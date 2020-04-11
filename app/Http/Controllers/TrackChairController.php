@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TrackChairRequest;
 use App\Models\Track;
 use App\Models\TrackChair;
+use App\Models\User;
 use App\Services\LogService;
 use Illuminate\Http\Request;
 
@@ -83,6 +84,60 @@ class TrackChairController extends Controller {
 
         return LogService::create($success, [
             'trackChair' => $trackChair->toArray()
+        ]);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/conference/track/chair/create/multi",
+     *     tags={"track_chair"},
+     *     summary="Assign chairs for track",
+     *     operationId="TrackChairControllerCreateMulti",
+     *     @OA\Parameter(
+     *         name="chairs",
+     *         in="query",
+     *         description="Array of users with role chair",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="track_id",
+     *         in="query",
+     *         description="Track id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function createMulti(Request $request) {
+        $input = $request->all();
+        $success = true;
+        $validation = new TrackChairRequest($input, 'createMulti');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        $trackChairs = [];
+        foreach ($input['chairs'] as $chair) {
+            $trackChair = new TrackChair();
+            $trackChair->user_id = $chair['id'];
+            $trackChair->track_id = $input['track_id'];
+            $success &= $trackChair->save();
+
+            $trackChairs[] = $trackChair->user_id;
+        }
+
+        return LogService::create($success, [
+            'trackChairs' => User::whereIn('id', $trackChairs)->with(['preferenceUser', 'affilationUser'])->get()->toArray()
         ]);
     }
 

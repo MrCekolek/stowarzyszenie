@@ -8,7 +8,10 @@
     </span>
 </h2>
 <mat-dialog-content>
-    <div class="row">
+  <div class="d-flex justify-content-center my-3">
+    <div class="spinner-border text-primary" *ngIf="this.loading else content"></div>
+    <ng-template #content>
+      <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
@@ -53,12 +56,18 @@
                     </th>
                   </tr>
 
+                  <tr *ngIf="this.users.length < 1">
+                    <td>
+                      {{ 'STOWARZYSZENIE.LABELS_TABLES.NO_DATA' | translate }}
+                    </td>
+                  </tr>
+
                   <tr *ngFor="let user of users">
                     <td>
                       <li class="media">
-                        <img alt="image" class="mr-3 rounded-circle" width="50" [src]="this.user.preference_user.avatar">
+                        <img alt="image" class="mr-3 rounded-circle" width="50" [src]="user.preference_user.avatar">
                         <div class="media-body">
-                          {{ this.user.affilation_user.title }}
+                          {{ user.affilation_user.title }}
                           <div class="media-title">
                             {{ user.name }}
                           </div>
@@ -70,13 +79,13 @@
                     </td>
 
                     <td>
-                      <div class="badge badge-primary" *ngFor="let interest of this.user.interests">
+                      <div class="badge badge-primary" *ngFor="let interest of user.interests">
                         {{ interest['name_' + this.lang] }}
                       </div>
                     </td>
 
                     <td>
-                      <div class="badge badge-secondary" *ngFor="let role of this.user.roles">
+                      <div class="badge badge-secondary" *ngFor="let role of user.roles">
                         {{ role['name_' + this.lang] }}
                       </div>
                     </td>
@@ -97,19 +106,20 @@
                           {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.ALREADY_ASSIGNED' | translate }}
                         </p>
                       </ng-template>
-                      
                     </td>
                   </tr>
-                </tbody>
-              </table>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </ng-template>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button type="button" class="btn btn-primary" [class.btn-progress]="this.isSaving" (click)="save()">
+    <button type="button" class="btn btn-primary" [class.btn-progress]="this.isSaving" (click)="save()" [disabled]="this.selectedusers.length < 1">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
     </button>
     <button type="button" class="btn btn-link" (click)="dismiss()">

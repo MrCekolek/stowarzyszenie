@@ -12,6 +12,11 @@ class TrackChairRequest extends FormRequest {
 
                 break;
 
+            case 'createMulti':
+                $this->checkCreateMulti();
+
+                break;
+
             case 'destroy':
                 $this->checkDestroy();
 
@@ -24,6 +29,13 @@ class TrackChairRequest extends FormRequest {
     public function checkCreate() {
         $this->rules = [
             'user_id' => 'required|exists:users,id',
+            'track_id' => 'required|exists:tracks,id',
+        ];
+    }
+
+    public function checkCreateMulti() {
+        $this->rules = [
+            'chairs.*.id' => 'required|exists:users,id',
             'track_id' => 'required|exists:tracks,id',
         ];
     }

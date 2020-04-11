@@ -12,6 +12,11 @@ class TrackReviewerRequest extends FormRequest {
 
                 break;
 
+            case 'createMulti':
+                $this->checkCreateMulti();
+
+                break;
+
             case 'destroy':
                 $this->checkDestroy();
 
@@ -24,6 +29,13 @@ class TrackReviewerRequest extends FormRequest {
     public function checkCreate() {
         $this->rules = [
             'user_id' => 'required|exists:users,id',
+            'track_id' => 'required|exists:tracks,id',
+        ];
+    }
+
+    public function checkCreateMulti() {
+        $this->rules = [
+            'reviewers.*.id' => 'required|exists:users,id',
             'track_id' => 'required|exists:tracks,id',
         ];
     }

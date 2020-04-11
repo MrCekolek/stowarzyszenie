@@ -3,6 +3,7 @@ import { ManageConferenceApiService } from 'src/app/core/http/manage-conference-
 import { ApiService } from 'src/app/core/http/api.service';
 import { Router } from '@angular/router';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
+import {AlertModel} from "../../../shared/models/alert.model";
 
 @Component({
   selector: 'app-general-settings',
@@ -19,13 +20,11 @@ export class GeneralSettingsComponent implements OnInit {
   translatePlaceLoading;
   addLoading;
 
-  // adding conf fields
-  private confname;
-  private confplace;
-
   //translations arrays
   private nameTranslations = [];
   private placeTranslations = [];
+
+  private alert: AlertModel;
 
   private lang;
 
@@ -81,8 +80,9 @@ export class GeneralSettingsComponent implements OnInit {
 
   getNameTranslations() {
     const obj: any = {
-      name: this.confname
+      name: this.conference['name_' + this.lang]
     };
+
     this.translateNameLoading = true;
     this.apiService.post('translation/get', obj).subscribe(res => {
       this.nameTranslations[0] = res.translation.name_pl;
@@ -94,8 +94,9 @@ export class GeneralSettingsComponent implements OnInit {
 
   getPlaceTranslations() {
     const obj: any = {
-      name: this.confplace
+      name: this.conference.conference_preference['place_' + this.lang]
     };
+
     this.translatePlaceLoading = true;
     this.apiService.post('translation/get', obj).subscribe(res => {
       this.placeTranslations[0] = res.translation.name_pl;
@@ -120,9 +121,13 @@ export class GeneralSettingsComponent implements OnInit {
           if (res.success) {
             this.conference = res.conference;
 
+            this.alert = new AlertModel('success', res.message);
+
             if (this.conference.status == 'finished') {
               this.finished = true;
             }
+          } else {
+            this.alert = new AlertModel('danger', res.message);
           }
         },
         () => {},

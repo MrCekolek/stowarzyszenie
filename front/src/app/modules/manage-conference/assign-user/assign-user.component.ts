@@ -15,11 +15,12 @@ export class AssignUserComponent implements OnInit {
   private role;
   private trackID;
   private lang;
+  private loading;
 
-  private users = [];
+  private users;
   private selectedusers = [];
 
-  private isSaving;
+  private isSaving = false;
 
   constructor(
     private dialogRef: MatDialogRef<AssignUserComponent>,
@@ -36,39 +37,54 @@ export class AssignUserComponent implements OnInit {
     if (data.track) {
       this.trackID = data.track;
     }
-
-    if (data.users) {
-      this.selectedusers = data.users;
-    }
    }
 
   ngOnInit() {
+    this.loading = true;
+
     this.languageService.currentLang.subscribe(value => {
       this.lang = value;
     });
 
     const obj = {
-      role_id: this.role
+      role_id: this.role,
+      track_id: this.trackID,
+      track_type: this.role == 6 ? 'chair' : 'reviewer'
     };
 
-    this.permissionRoleApi.getUsersWithRole(obj).subscribe(res => {
-      this.users = res.users;
-    });
+    this.permissionRoleApi.getUsersWithRoleNotInTrack(obj).subscribe(
+        (res) => {
+          this.users = res.users;
+        },
+        () => {},
+        () => {
+          this.loading = false;
+        }
+      );
   }
 
-  // TODO: zrobic zeby dalo sie zapisywac kilka na raz osob po checkboxach
   save() {
     this.isSaving = true;
-    if (this.role == 6) {
-      // TODO: zrobic zeby mozna bylo dodawac po kilka
-      // const obj = 
-      // this.manageConferenceApi.addChairToTrack();
-      this.dialogRef.close(this.selectedusers);
-    } else if (this.role === 8) {
-      // this.manageConferenceApi.addReviewerToTrack();
-    }
 
-    this.isSaving = false;
+    if (this.role == 6) {
+      this.manageConferenceApi.addChairsToTrack(this.selectedusers, this.trackID).subscribe(
+          (res) => {
+            if (res.success) {
+              this.dialogRef.close(res);
+            }
+          },
+          () => {},
+          () => {
+            this.isSaving = false;
+          }
+        );
+    } else if (this.role === 8) {
+      this.manageConferenceApi.addReviewersToTrack(this.selectedusers, this.trackID).subscribe(res => {
+        if (res.success) {
+          this.dialogRef.close(res);
+        }
+      });
+    }
   }
 
   dismiss() {

@@ -52,6 +52,7 @@ Route::group([
         Route::post('get', 'UserController@index');
         Route::post('{user}/get', 'UserController@show');
         Route::post('{user}/roles', 'RoleUserController@getRoles');
+        Route::post('{user}/roles/other', 'RoleUserController@getOtherRoles');
     });
 
     Route::prefix('role')->group(function () {
@@ -63,7 +64,9 @@ Route::group([
         Route::post('{role}/permission/update', 'PermissionParentController@updateRolePermissions');
         Route::post('{role}/users', 'RoleUserController@getUsers');
         Route::post('{role}/users/not', 'RoleUserController@getUsersNot');
+        Route::post('{role}/users/{track}/not', 'RoleUserController@getUsersNotInTrack');
         Route::post('{role}/show', 'RoleController@show');
+        Route::post('user/createMulti', 'RoleUserController@createMulti');
         Route::post('{role}/user/{user}/destroy', 'RoleUserController@destroy');
         Route::post('{role}/user/{user}/create', 'RoleUserController@create');
     });
@@ -136,6 +139,7 @@ Route::group([
         Route::post('{conferenceId}', 'ConferenceController@show');
 
         Route::prefix('user')->group(function () {
+            Route::post('get', 'ConferenceUserController@index');
             Route::post('create', 'ConferenceUserController@create');
             Route::post('update', 'ConferenceUserController@update');
             Route::post('destroy', 'ConferenceUserController@destroy');
@@ -145,6 +149,7 @@ Route::group([
             Route::post('get', 'TrackController@index');
             Route::post('{track}/get', 'TrackController@show');
             Route::post('create', 'TrackController@create');
+            Route::post('update', 'TrackController@update');
             Route::post('destroy', 'TrackController@destroy');
 
             Route::prefix('article')->group(function () {
@@ -161,12 +166,14 @@ Route::group([
 
             Route::prefix('reviewer')->group(function () {
                 Route::post('create', 'TrackReviewerController@create');
+                Route::post('create/multi', 'TrackReviewerController@createMulti');
                 Route::post('destroy', 'TrackReviewerController@destroy');
                 Route::post('{track}/get', 'TrackReviewerController@index');
             });
 
             Route::prefix('chair')->group(function () {
                 Route::post('create', 'TrackChairController@create');
+                Route::post('create/multi', 'TrackChairController@createMulti');
                 Route::post('destroy', 'TrackChairController@destroy');
                 Route::post('{track}/get', 'TrackChairController@index');
             });

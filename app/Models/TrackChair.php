@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class TrackChair extends BaseModel {
+class TrackChair extends BasePivot {
     protected $table = 'track_chair';
 
     protected $fillable = [

@@ -62,6 +62,10 @@
                     "CONFPAGE": {
                         "TITLE": "Deleting conference subpage",
                         "TEXT": "Are you sure you want to delete subpage"
+                    },
+                    "PARTICIPANTS": {
+                        "TITLE": "Removing a member from the conference",
+                        "TEXT": "Are you sure you want to remove the member from the conference"
                     }
                 }
             },
@@ -807,7 +811,8 @@
             "LOADING_DATA": "Loading data",
             "NO_DATA": "No data",
             "PER_PAGE": "Per page:",
-            "OF": "of"
+            "OF": "of",
+            "EMPTY": "Lack"
         },
         "PAGE_STATUS": {
             "PUBLISHED": "Published",

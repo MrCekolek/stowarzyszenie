@@ -54,8 +54,7 @@ class TrackRequest extends FormRequest {
             'name_pl' => 'required',
             'name_en' => 'required',
             'name_ru' => 'required',
-            'colour' => 'required',
-            'interest_id' => 'required|exists:interests,id'
+            'colour' => 'required'
         ]);
     }
 

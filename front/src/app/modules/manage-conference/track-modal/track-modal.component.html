@@ -46,25 +46,22 @@
             {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.TRACKS.MODAL.INPUT_LABEL_INTEREST' | translate }}
         </label>
         <div class="input-group">
-            <select class="form-control" [(ngModel)]="selectedInterest">
+            <div class="d-flex justify-content-center my-3" *ngIf="this.interestsLoading else select">
+                <div class="spinner-border text-primary">
+                </div>
+            </div>
 
-                <!-- TODO: loader sie nie wyswietla? -->
-                <!-- <option *ngIf="this.interestsLoading; else ints">
-                    <div class="d-flex justify-content-center">
-                        <div class="spinner-border">
-                        </div>
-                    </div>
-                </option> -->
-                
-                <option [value]="interest.id" *ngFor="let interest of interests">
-                    {{ interest['name_' + this.lang] }}
-                </option>
+            <ng-template #select>
+                <select class="form-control" [(ngModel)]="selectedInterest">
+                    <option value="0" *ngIf="this.interests.length == 0">
+                        {{ 'STOWARZYSZENIE.MODULES.ADMIN.TRACKS.MODAL.NO_INTERESTS' | translate }}
+                    </option>
 
-                <!-- nie wyswietlaja sie interesty -->
-                <!-- <option value="0" *ngIf="this.interests.length === 0">
-                    {{ 'STOWARZYSZENIE.MODULES.ADMIN.TRACKS.MODAL.NO_INTERESTS' | translate }}
-                </option> -->
-            </select>
+                    <option [value]="interest.id" *ngFor="let interest of this.interests">
+                        {{ interest['name_' + this.lang] }}
+                    </option>
+                </select>
+            </ng-template>
 
             <div class="input-append">
                 <i class="fa fa-refresh fa-spin"></i>
@@ -81,10 +78,10 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button type="button" [disabled]="translations.length === 0" class="btn btn-primary" [class.btn-progress]="this.isSaving" (click)="addTrack()" *ngIf="modal_type === 'new'">
+    <button type="button" [disabled]="translations.length === 0 || !this.selectedInterest" class="btn btn-primary" [class.btn-progress]="this.isSaving" (click)="addTrack()" *ngIf="modal_type === 'new'">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
     </button>
-    <button type="button" [disabled]="translations.length === 0" [class.btn-progress]="this.isSaving" class="btn btn-primary" *ngIf="modal_type === 'edit'" (click)="updateTrack()">
+    <button type="button" [disabled]="translations.length === 0 || !this.selectedInterest" [class.btn-progress]="this.isSaving" class="btn btn-primary" *ngIf="modal_type === 'edit'" (click)="updateTrack()">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE' | translate }}
     </button>
     <button type="button " class="btn btn-link" (click)="dismiss()">

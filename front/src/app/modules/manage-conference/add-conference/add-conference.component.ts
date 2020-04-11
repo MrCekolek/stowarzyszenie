@@ -37,18 +37,22 @@ export class AddConferenceComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
 
-    this.manageConferenceApi.getConference().subscribe(res => {
-      console.log(res);
-      this.conference = res.conference;
-      console.log(this.conference);
-      this.loading = false;
-    });
+    this.manageConferenceApi.getConference().subscribe(
+      (res) => {
+        this.conference = res.conference;
+      },
+      () => {},
+      () => {
+        this.loading = false;
+      }
+    );
   }
 
   getNameTranslations() {
     const obj: any = {
       name: this.confname
     };
+
     this.translateNameLoading = true;
     this.apiService.post('translation/get', obj).subscribe(res => {
       this.nameTranslations[0] = res.translation.name_pl;

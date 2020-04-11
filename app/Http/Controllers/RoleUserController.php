@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RoleUserRequest;
 use App\Models\Role;
 use App\Models\RoleUser;
+use App\Models\Track;
+use App\Models\TrackChair;
+use App\Models\TrackReviewer;
 use App\Models\User;
 use App\Services\LogService;
 use Illuminate\Database\Eloquent\Builder;
@@ -53,6 +56,62 @@ class RoleUserController extends Controller {
 
         return LogService::read(true, [
             'users' => $role->users()->with(['preferenceUser', 'affilationUser', 'interests', 'roles'])->get()->toArray()
+        ]);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/role/{roleId}/users/track/not",
+     *     tags={"role_user"},
+     *     summary="Gets all users that belongs to specific role and doesnt belong to track as chair or reviewer",
+     *     operationId="RoleUserControllerGetUsers",
+     *     @OA\Parameter(
+     *         name="role_id",
+     *         in="query",
+     *         description="Role id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="track_id",
+     *         in="query",
+     *         description="Track id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="track_type",
+     *         in="query",
+     *         description="Track Type",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function getUsersNotInTrack(Request $request, Role $role, Track $track) {
+        $input = $request->all();
+        $validation = new RoleUserRequest($input, 'getUsersNotInTrack');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        $trackModel = $input['track_type'] === 'chair' ? TrackChair::class : TrackReviewer::class;
+
+        $usersTrack = $trackModel::where('track_id', $track->id)->get()->pluck('user_id')->toArray();
+
+        return LogService::read(true, [
+            'users' => $role->users()->whereNotIn('users.id', $usersTrack)->with(['preferenceUser', 'affilationUser', 'interests', 'roles'])->get()->toArray()
         ]);
     }
 
@@ -128,6 +187,40 @@ class RoleUserController extends Controller {
 
     /**
      * @OA\Post(
+     *     path="/user/{userId}/roles/other",
+     *     tags={"role_user"},
+     *     summary="Gets other roles that doesnt belongs to specific user",
+     *     operationId="RoleUserControllerGetOtherRoles",
+     *     @OA\Parameter(
+     *         name="user_id",
+     *         in="query",
+     *         description="User id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function getOtherRoles(Request $request) {
+        $input = $request->all();
+        $validation = new RoleUserRequest($input, 'getOtherRoles');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        return LogService::read(true, [
+            'roles' => Role::whereNotIn('id', User::where('id', $input['user_id'])->first()->roles()->get()->pluck('pivot.role_id')->toArray())->get()->toArray()
+        ]);
+    }
+
+    /**
+     * @OA\Post(
      *     path="/role/{role}/user/{user}/create",
      *     tags={"role_user"},
      *     summary="Assigns user to role",
@@ -171,6 +264,60 @@ class RoleUserController extends Controller {
         $success = $roleUser->save();
 
         return LogService::create($success);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/role/{role}/user/{user}/create/multi",
+     *     tags={"role_user"},
+     *     summary="Assigns roles to user",
+     *     operationId="RoleUserControllerCreateMulti",
+     *     @OA\Parameter(
+     *         name="roles",
+     *         in="query",
+     *         description="Roles",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="user_id",
+     *         in="query",
+     *         description="User's id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function createMulti(Request $request) {
+        $input = $request->all();
+        $success = true;
+        $validation = new RoleUserRequest($input, 'createMulti');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        $roles = [];
+        foreach ($input['roles'] as $role) {
+            $roleUser = new RoleUser();
+            $roleUser->role_id = $role['id'];
+            $roleUser->user_id = $input['user_id'];
+            $success &= $roleUser->save();
+
+            $roles[] = $roleUser->role_id;
+        }
+
+        return LogService::create($success, [
+            'roles' => Role::whereIn('id', $roles)->get()->toArray()
+        ]);
     }
 
     /**

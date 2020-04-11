@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TrackReviewerRequest;
 use App\Models\Track;
 use App\Models\TrackReviewer;
+use App\Models\User;
 use App\Services\LogService;
 use Illuminate\Http\Request;
 
@@ -83,6 +84,60 @@ class TrackReviewerController extends Controller {
 
         return LogService::create($success, [
             'trackReviewer' => $trackReviewer->toArray()
+        ]);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/conference/track/reviewer/create/multi",
+     *     tags={"track_chair"},
+     *     summary="Assign reviewers for track",
+     *     operationId="TrackReviewerControllerCreateMulti",
+     *     @OA\Parameter(
+     *         name="chairs",
+     *         in="query",
+     *         description="Array of users with role reviewer",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="track_id",
+     *         in="query",
+     *         description="Track id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function createMulti(Request $request) {
+        $input = $request->all();
+        $success = true;
+        $validation = new TrackReviewerRequest($input, 'createMulti');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        $trackReviewers = [];
+        foreach ($input['reviewers'] as $reviewer) {
+            $trackReviewer = new TrackReviewer();
+            $trackReviewer->user_id = $reviewer['id'];
+            $trackReviewer->track_id = $input['track_id'];
+            $success &= $trackReviewer->save();
+
+            $trackReviewers[] = $trackReviewer->user_id;
+        }
+
+        return LogService::create($success, [
+            'trackReviewers' => User::whereIn('id', $trackReviewers)->with(['preferenceUser', 'affilationUser'])->get()->toArray()
         ]);
     }
 
