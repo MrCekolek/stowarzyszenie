@@ -22,6 +22,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ConfPagesModalComponent } from './conf-pages-modal/conf-pages-modal.component';
 import { ConfpageEditComponent } from './confpage-edit/confpage-edit.component';
 import { EventModalComponent } from './event-modal/event-modal.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DateAdapter, MatNativeDateModule } from '@angular/material';
 
 @NgModule({
   declarations: [ActualConferenceComponent, AddConferenceComponent, GeneralSettingsComponent, CommitteeComponent, ManageTracksComponent, ConfPagesModalComponent, TrackModalComponent, TrackMembersComponent, AssignUserComponent, PaymentsComponent, ConferenceCfpComponent, CalendarComponent, GalleryComponent, ProgrammeComponent, ConferenceRoleModalComponent, ConferencePageComponent, ConfpageEditComponent, EventModalComponent],
@@ -30,8 +32,11 @@ import { EventModalComponent } from './event-modal/event-modal.component';
     ManageConferenceRoutingModule,
     SharedModule,
     FormsModule,
-    AngularEditorModule
+    AngularEditorModule,
+    MatDatepickerModule,
+    MatNativeDateModule 
   ],
-  entryComponents: [TrackModalComponent, AssignUserComponent, ConferenceRoleModalComponent, ConfPagesModalComponent, EventModalComponent]
+  entryComponents: [TrackModalComponent, AssignUserComponent, ConferenceRoleModalComponent, ConfPagesModalComponent, EventModalComponent],
+  providers: [MatDatepickerModule]
 })
 export class ManageConferenceModule { }

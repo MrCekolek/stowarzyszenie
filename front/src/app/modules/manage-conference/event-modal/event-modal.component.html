@@ -8,9 +8,10 @@
 </h2>
 
 <mat-dialog-content>
+    <!-- nazwa -->
     <div class="from-group mb-4" *ngIf="this.modal_type === 'new'">
         <label class="text-primary" style="font-weight: 600;">
-            {{ 'STOWARZYSZENIE.MODALS.CONFPAGES.INPUT_NEW_LABEL' | translate }}
+            {{ 'STOWARZYSZENIE.MODALS.EVENTS.INPUT_NEW_LABEL' | translate }}
         </label>
 
         <div class="input-group">
@@ -25,7 +26,7 @@
 
     <div class="from-group mb-4" *ngIf="this.modal_type === 'edit'">
         <label class="text-primary" style="font-weight: 600;">
-            {{ 'STOWARZYSZENIE.MODALS.CONFPAGES.INPUT_EDIT_LABEL' | translate }}
+            {{ 'STOWARZYSZENIE.MODALS.EVENTS.INPUT_EDIT_LABEL' | translate }}
         </label>
 
         <div class="input-group">
@@ -39,12 +40,68 @@
     </div>
 
     <app-translations-list *ngIf="this.translations.length != 0" [translations]="this.translations" [type]="'input'"></app-translations-list>
+
+    <!-- opis -->
+    <div class="from-group mb-4" *ngIf="this.modal_type === 'new'">
+        <label class="text-primary" style="font-weight: 600;">
+            {{ 'STOWARZYSZENIE.MODALS.EVENTS.INPUT_NEW_DESC_LABEL' | translate }}
+        </label>
+
+        <div class="input-group">
+            <input type="text" class="form-control" #newDesc [(ngModel)]="this.event['description_' + this.lang]">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.descLoading" (click)="getDescTranslations(newDesc.value)" [disabled]="this.event['description_' + this.lang] === ''">
+                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="from-group mb-4" *ngIf="this.modal_type === 'edit'">
+        <label class="text-primary" style="font-weight: 600;">
+            {{ 'STOWARZYSZENIE.MODALS.EVENTS.INPUT_EDIT_DESC_LABEL' | translate }}
+        </label>
+
+        <div class="input-group">
+            <input type="text" class="form-control" #descEdit [(ngModel)]="this.event['description_' + this.lang]">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" [class.btn-progress]="this.addLoading" (click)="getDescTranslations(descEdit.value)" [disabled]="this.event['description_' + this.lang] === ''">
+                    {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <app-translations-list *ngIf="this.descTranslations.length != 0" [translations]="this.descTranslations" [type]="'input'"></app-translations-list>
+
+    <div class="form-group">
+        <label>
+            {{ 'STOWARZYSZENIE.MODALS.EVENTS.CHOOSE_DATE' | translate }}
+        </label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </div>
+          </div>
+          <input type="text" class="form-control daterange-cus" [matDatepicker]="picker" [(ngModel)]="this.event.date">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="text-primary">
+            {{ 'STOWARZYSZENIE.MODALS.EVENTS.COLOUR_LABEL' | translate }}
+        </label>
+        <input type="color" class="form-control" [(ngModel)]="this.event.colour">
+    </div>      
 </mat-dialog-content>
+
 <mat-dialog-actions>
-    <button type="button" class="btn btn-primary" [class.btn-progress]="this.isSaving" (click)="addEvent()" [disabled]="this.translations.length === 0">
+    <button type="button" class="btn btn-primary" [class.btn-progress]="this.isSaving" (click)="addEvent()" [disabled]="this.translations.length === 0" *ngIf="this.modal_type === 'new'">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
     </button>
-    <button type="button" class="btn btn-primary" [class.btn-progress]="this.isSaving" (click)="updateEvent()" [disabled]="this.translations.length === 0">
+    <button type="button" class="btn btn-primary" [class.btn-progress]="this.isSaving" (click)="updateEvent()" [disabled]="this.translations.length === 0" *ngIf="this.modal_type === 'edit'">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
     </button>
     <button type="button " class="btn btn-link" (click)="dismiss()">

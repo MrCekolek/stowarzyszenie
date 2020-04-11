@@ -9,6 +9,8 @@ import { MatInputModule } from "@angular/material";
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 @NgModule({
   declarations: [NavbarComponent, BreadcrumbComponent, UserSearchComponent, HomePageComponent],
@@ -19,7 +21,9 @@ import { HomePageComponent } from './home-page/home-page.component';
     MatSidenavModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    ScrollingModule,
+    NgScrollbarModule
   ],
   exports: [NavbarComponent],
   providers: []
