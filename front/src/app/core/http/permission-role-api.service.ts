@@ -13,6 +13,23 @@ export class PermissionRoleApiService {
     return this.api.post('role/get');
   }
 
+  assignRoles(user, roles) {
+    const obj = {
+      user_id: user.id,
+      roles: roles
+    };
+
+    return this.api.post('role/user/createMulti', obj);
+  }
+
+  getOtherRoles(user) {
+    const obj = {
+      user_id: user.id
+    };
+
+    return this.api.post(`user/${user.id}/roles/other`, obj);
+  }
+
   getRoleWithPermissions(roleId: number) {
     return this.api.post('role/' + roleId + '/permission/get');
   }
@@ -39,5 +56,9 @@ export class PermissionRoleApiService {
 
   getUsersWithRole(role) {
     return this.api.post(`role/${role.role_id}/users`, role);
+  }
+
+  getUsersWithRoleNotInTrack(obj) {
+    return this.api.post(`role/${obj.role_id}/users/${obj.track_id}/not`, obj);
   }
 }

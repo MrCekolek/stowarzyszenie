@@ -16,6 +16,7 @@ export class ConferenceRoleModalComponent implements OnInit {
   private lang;
   private user;
   private saving;
+  private isLoading;
 
   constructor(
     private dialog: MatDialogRef<ConferenceRoleModalComponent>,
@@ -29,20 +30,35 @@ export class ConferenceRoleModalComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.isLoading = true;
+
     this.languageService.currentLang.subscribe(value => {
       this.lang = value;
     });
-    this.rolesApi.getRoles().subscribe(res => {
-      console.log(res);
-      this.allRoles = res.roles;
-    });
+
+    this.rolesApi.getOtherRoles(this.user).subscribe(
+        (res) => {
+          this.allRoles = res.roles;
+        },
+        () => {},
+        () => {
+          this.isLoading = false;
+        }
+      );
   }
 
   saveRoles() {
     this.saving = true;
-    // TODO: przypisz userowi wszystkie role
-    // this.rolesApi.
-    this.dialog.close(this.selectedRoles);
+
+    this.rolesApi.assignRoles(this.user, this.selectedRoles).subscribe(
+      (res) => {
+        this.dialog.close(res);
+      },
+      () => {},
+      () => {
+        this.saving = false;
+      }
+    );
   }
 
   dismiss() {

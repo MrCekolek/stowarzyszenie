@@ -18,4 +18,8 @@ class ConferenceUser extends BasePivot {
               'unpaid' => 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.STATUS.UNPAID'
         ];
     }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

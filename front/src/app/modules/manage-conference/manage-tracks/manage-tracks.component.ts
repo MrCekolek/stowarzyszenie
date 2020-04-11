@@ -27,19 +27,27 @@ export class ManageTracksComponent implements OnInit {
 
   ngOnInit() {  
     this.loading = true;
+
     this.languageService.currentLang.subscribe(value => {
       this.lang = value;
     });
+
     this.manageConferenceApi.getConference().subscribe(value => {
       const obj = {
         conference_id: value.conference.id
       };
+
       this.conference_id = value.conference.id;
 
-      this.manageConferenceApi.getTracks(obj).subscribe(res => {
-        this.tracks = res.tracks;
-        this.loading = false;
-      });
+      this.manageConferenceApi.getTracks(obj).subscribe(
+          (res) => {
+            this.tracks = res.tracks;
+          },
+          () => {},
+          () => {
+            this.loading = false;
+          }
+        );
     });
   }
 
@@ -84,7 +92,7 @@ export class ManageTracksComponent implements OnInit {
       (data) => {
         if (data) {
           if (data.success) {
-            const index = this.tracks.indexOf(track);
+            const index = this.tracks.findIndex(item => item.id === track.id);
             this.tracks[index] = data.track;
           }
         }
@@ -110,7 +118,7 @@ export class ManageTracksComponent implements OnInit {
       (data) => {
         if (data) {
           if (data.success) {
-            const index = this.tracks.indexOf(track);
+            const index = this.tracks.findIndex(item => item.id === track.id);
             this.tracks.splice(index, 1);
           } else {
           }

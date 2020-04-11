@@ -17,14 +17,14 @@ class CreateTracksTable extends Migration {
             $table->string('name_en')->nullable();
             $table->string('name_ru')->nullable();
             $table->string('colour')->nullable();
-            $table->unsignedBigInteger('interest_id');
+            $table->unsignedBigInteger('interest_id')->nullable();
             $table->unsignedBigInteger('conference_id');
             $table->timestamps();
 
             $table->foreign('interest_id')
                 ->references('id')
                 ->on('interests')
-                ->onDelete('cascade');
+                ->onDelete('set null');
 
             $table->foreign('conference_id')
                 ->references('id')

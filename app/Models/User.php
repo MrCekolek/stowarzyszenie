@@ -135,6 +135,14 @@ class User extends Authenticatable implements JWTSubject {
         return $this->hasMany(TrackArticle::class);
     }
 
+    public function trackArticlesActualConference() {
+        $conference = Conference::where('status', '!=', 'finished')->with('tracks')->first();
+        $trackIds = $conference->tracks->pluck('id')->toArray();
+
+        return $this->hasMany(TrackArticle::class)
+            ->whereIn('track_id', $trackIds);
+    }
+
     public function trackReviewers() {
         return $this->belongsToMany(Track::class)
             ->using(TrackReviewer::class);
