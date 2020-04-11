@@ -12,6 +12,11 @@ class RoleUserRequest extends FormRequest {
 
                 break;
 
+            case 'getUsersNotInTrack':
+                $this->checkGetUsersNotInTrack();
+
+                break;
+
             case 'getUsersNot':
                 $this->checkGetUsersNot();
 
@@ -22,8 +27,18 @@ class RoleUserRequest extends FormRequest {
 
                 break;
 
+            case 'getOtherRoles':
+                $this->checkGetOtherRoles();
+
+                break;
+
             case 'create':
                 $this->checkCreate();
+
+                break;
+
+            case 'createMulti':
+                $this->checkCreateMulti();
 
                 break;
 
@@ -42,6 +57,13 @@ class RoleUserRequest extends FormRequest {
         ];
     }
 
+    protected function checkGetUsersNotInTrack() {
+        $this->rules = [
+            'track_id' => 'required|exists:tracks,id',
+            'role_id' => 'required|exists:roles,id'
+        ];
+    }
+
     protected function checkGetUsersNot() {
         $this->rules = [
             'role_id' => 'required|exists:roles,id'
@@ -54,9 +76,22 @@ class RoleUserRequest extends FormRequest {
         ];
     }
 
+    protected function checkGetOtherRoles() {
+        $this->rules = [
+            'user_id' => 'required|exists:users,id'
+        ];
+    }
+
     protected function checkCreate() {
         $this->rules = [
             'role_id' => 'required|exists:roles,id',
+            'user_id' => 'required|exists:users,id'
+        ];
+    }
+
+    protected function checkCreateMulti() {
+        $this->rules = [
+            'roles.*.id' => 'required|exists:roles,id',
             'user_id' => 'required|exists:users,id'
         ];
     }

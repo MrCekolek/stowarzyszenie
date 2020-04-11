@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class TrackReviewer extends BaseModel {
+class TrackReviewer extends BasePivot {
     protected $table = 'track_reviewer';
 
     protected $fillable = [

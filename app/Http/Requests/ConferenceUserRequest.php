@@ -41,6 +41,8 @@ class ConferenceUserRequest extends FormRequest {
     }
 
     public function checkDestroy() {
-        $this->checkCreate();
+        $this->rules = [
+            'user_id' => 'required|exists:users,id'
+        ];
     }
 }

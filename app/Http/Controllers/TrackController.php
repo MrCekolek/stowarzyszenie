@@ -49,7 +49,7 @@ class TrackController extends Controller {
         }
 
         return LogService::read(true, [
-            'tracks' => Track::where('conference_id', $input['conference_id'])->with(['interest', 'trackArticles', 'trackReviewers', 'trackChairs'])->get()->toArray()
+            'tracks' => Track::where('conference_id', $input['conference_id'])->with(['interest', 'trackArticles', 'trackReviewers.preferenceUser', 'trackReviewers.affilationUser', 'trackChairs.preferenceUser', 'trackChairs.affilationUser'])->get()->toArray()
         ]);
     }
 
@@ -74,7 +74,7 @@ class TrackController extends Controller {
         }
 
         return LogService::read(true, [
-            'track' => Track::where('id', $track->id)->with(['interest', 'trackArticles', 'trackReviewers', 'trackChairs'])->first()->toArray()
+            'track' => Track::where('id', $track->id)->with(['interest', 'trackArticles', 'trackReviewers.preferenceUser', 'trackReviewers.affilationUser', 'trackChairs.preferenceUser', 'trackChairs.affilationUser'])->first()->toArray()
         ]);
     }
 

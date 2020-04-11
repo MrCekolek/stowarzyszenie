@@ -62,6 +62,10 @@
                     "CONFPAGE": {
                         "TITLE": "Usuwanie podstrony konferencji",
                         "TEXT": "Czy na pewno chcesz usunąć podstronę?"
+                    },
+                    "PARTICIPANTS": {
+                        "TITLE": "Usuwanie członka z konferencji",
+                        "TEXT": "Czy na pewno chcesz usunąć członka z konferencji"
                     }
                 }
             },
@@ -807,7 +811,8 @@
             "LOADING_DATA": "Ładowanie danych",
             "NO_DATA": "Brak danych",
             "PER_PAGE": "Na stronę:",
-            "OF": "z"
+            "OF": "z",
+            "EMPTY": "Brak"
         },
         "PAGE_STATUS": {
             "PUBLISHED": "Opublikowana",

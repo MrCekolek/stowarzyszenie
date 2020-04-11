@@ -22,9 +22,11 @@ export class TrackModalComponent implements OnInit {
     name_pl: '',
     name_en: '',
     name_ru: '',
-    colour: '',
+    colour: '#000000',
     conference_id: '',
-    interest_id: ''
+    interest_id: '',
+    track_chairs: [],
+    track_reviewers: []
   };
 
   private interests = [];
@@ -50,7 +52,11 @@ export class TrackModalComponent implements OnInit {
       this.translations[1] = data.track.name_en;
       this.translations[2] = data.track.name_ru;
 
-      this.selectedInterest = data.track.interest_id;
+      if (!data.track.interest_id) {
+        this.selectedInterest = "0";
+      } else {
+        this.selectedInterest = data.track.interest_id;
+      }
     }
 
     if (data.conference_id) {
@@ -60,10 +66,20 @@ export class TrackModalComponent implements OnInit {
 
   ngOnInit() {
     this.interestsLoading = true;
-    this.interestsApi.getAllInterests().subscribe(res => {
-      this.interests = res.interests;
-      this.interestsLoading = false;
-    });
+
+    this.interestsApi.getAllInterests().subscribe(
+      (res) => {
+        this.interests = res.interests;
+
+        if (this.interests.length < 1) {
+          this.selectedInterest = "0";
+        }
+      },
+      () => {},
+      () => {
+        this.interestsLoading = false;
+      }
+    );
 
     this.languageService.currentLang.subscribe(value => {
       this.lang = value;
@@ -94,30 +110,40 @@ export class TrackModalComponent implements OnInit {
   }
 
   addTrack() {
-    console.log(this.selectedInterest);
     this.isSaving = true;
+
     this.track.name_pl = this.translations[0];
     this.track.name_en = this.translations[1];
     this.track.name_ru = this.translations[2];
-    this.track.interest_id = this.selectedInterest;
+    this.track.interest_id = this.selectedInterest == 0 ? null : this.selectedInterest;
 
-    console.log(this.track);
-    this.manageConferenceApi.addTrack(this.track).subscribe(response => {
-      this.isSaving = false;
-      this.dialogRef.close(response);
-    });
+    this.manageConferenceApi.addTrack(this.track).subscribe(
+        (response) => {
+          this.dialogRef.close(response);
+        },
+        () => {},
+        () => {
+          this.isSaving = false;
+        }
+      );
   }
 
   updateTrack() {
     this.isSaving = true;
+
     this.track.name_pl = this.translations[0];
     this.track.name_en = this.translations[1];
     this.track.name_ru = this.translations[2];
-    this.track.interest_id = this.selectedInterest;
+    this.track.interest_id = this.selectedInterest == 0 ? null : this.selectedInterest;
 
-    this.manageConferenceApi.addTrack(this.track).subscribe(response => {
-      this.isSaving = false;
-      this.dialogRef.close(response);
-    });
+    this.manageConferenceApi.updateTrack(this.track).subscribe(
+        (response) => {
+          this.dialogRef.close(response);
+        },
+        () => {},
+        () => {
+          this.isSaving = false;
+        }
+      );
   }
 }

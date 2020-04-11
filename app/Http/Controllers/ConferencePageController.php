@@ -84,7 +84,7 @@ class ConferencePageController extends Controller
         }
 
         return LogService::read(true, [
-            'conferencePage' => ConferencePage::where('id', $input['id'])->get()->toArray()
+            'conferencePage' => ConferencePage::where('id', $input['id'])->first()->toArray()
         ]);
     }
 

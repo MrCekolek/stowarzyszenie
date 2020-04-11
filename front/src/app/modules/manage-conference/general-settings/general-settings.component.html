@@ -10,6 +10,8 @@
     </p>
 
     <div class="card">
+        <app-alert *ngIf="this.alert" [alertType]="this.alert.type" [message]="this.alert.message"></app-alert>
+
         <div class="card-body">
             <div class="d-flex justify-content-center" *ngIf="loading; else content">
                 <div class="spinner-border text-primary"></div>

@@ -6,6 +6,7 @@ import { MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material';
 import { AssignUserComponent } from '../assign-user/assign-user.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
+import {AlertModel} from "../../../shared/models/alert.model";
 
 @Component({
   selector: 'app-track-members',
@@ -14,14 +15,11 @@ import { LanguageService } from 'src/app/shared/services/user/language.service';
 })
 export class TrackMembersComponent implements OnInit {
 
-  private track_chairs = [];
-  private track_reviewers = [];
   private track: Track;
-  private track_interest;
   private trackID;
 
   private loading;
-
+  private alert: AlertModel;
   private lang;
 
   constructor(
@@ -32,29 +30,26 @@ export class TrackMembersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = true;
+
     this.trackID = this.route.snapshot.paramMap.get('id');
 
     const obj = {
       id: this.trackID
     };
-    this.manageConferenceApi.getTrack(obj).subscribe(res => {
-      this.track = res.track;
-    });
+
+    this.manageConferenceApi.getTrack(obj).subscribe(
+        (res) => {
+          this.track = res.track;
+        },
+        () => {},
+        () => {
+          this.loading = false;
+        }
+      );
 
     this.languageService.currentLang.subscribe(value => {
       this.lang = value;
-    });
-
-    // this.loading = true;
-
-    // TODO: pobranie chairs
-    this.manageConferenceApi.getTrackChair(obj).subscribe(res => {
-      this.track_chairs = res.chair;
-    });
-
-    //TODO: pobranie recenzentow
-    this.manageConferenceApi.getTrackReviewers(obj).subscribe(res => {
-      this.track_reviewers = res.reviewers;
     });
   }
 
@@ -65,8 +60,7 @@ export class TrackMembersComponent implements OnInit {
 
     dialogConfig.data = {
       role: 8,
-      track: this.trackID,
-      users: this.track_reviewers
+      track: this.trackID
     };
 
     const dialogRef = this.dialog.open(AssignUserComponent, dialogConfig);
@@ -75,7 +69,10 @@ export class TrackMembersComponent implements OnInit {
       (data) => {
         if (data) {
           if (data.success) {
-            this.track_reviewers = data.users;
+            this.track.track_reviewers.push(...data.trackReviewers);
+            this.alert = new AlertModel('success', data.message);
+          } else {
+            this.alert = new AlertModel('danger', data.message);
           }
         }
       }
@@ -89,8 +86,7 @@ export class TrackMembersComponent implements OnInit {
 
     dialogConfig.data = {
       role: 6,
-      track: this.trackID,
-      users: this.track_chairs
+      track: this.trackID
     };
 
     const dialogRef = this.dialog.open(AssignUserComponent, dialogConfig);
@@ -99,7 +95,10 @@ export class TrackMembersComponent implements OnInit {
       (data) => {
         if (data) {
           if (data.success) {
-            this.track_chairs = data.users;
+            this.track.track_chairs.push(...data.trackChairs);
+            this.alert = new AlertModel('success', data.message);
+          } else {
+            this.alert = new AlertModel('danger', data.message);
           }
         }
       }
@@ -107,6 +106,12 @@ export class TrackMembersComponent implements OnInit {
   }
 
   deleteReviewerFromTrack(reviewer) {
+    let obj = {
+      ['name_' + this.lang]: reviewer.first_name + ' ' + reviewer.last_name,
+      track_id: this.trackID,
+      user_id: reviewer.id
+    };
+
     const dialogConfig = new MatDialogConfig();
   
     dialogConfig.autoFocus = true;
@@ -114,7 +119,7 @@ export class TrackMembersComponent implements OnInit {
     dialogConfig.data = {
       title: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.TRACK_REVIEWER.TITLE',
       text: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.TRACK_REVIEWER.TEXT',
-      element: reviewer,
+      element: obj,
       apiToDelete: `conference/track/reviewer/destroy`
     };
   
@@ -124,9 +129,11 @@ export class TrackMembersComponent implements OnInit {
       (data) => {
         if (data) {
           if (data.success) {
-            const index = this.track_reviewers.indexOf(reviewer);
-            this.track_reviewers.splice(index, 1);
+            const index = this.track.track_reviewers.findIndex(item => item.id === reviewer.id);
+            this.track.track_reviewers.splice(index, 1);
+            this.alert = new AlertModel('success', data.message);
           } else {
+            this.alert = new AlertModel('danger', data.message);
           }
         }
       }
@@ -134,6 +141,12 @@ export class TrackMembersComponent implements OnInit {
   }
 
   deleteChairFromTrack(chair) {
+    let obj = {
+      ['name_' + this.lang]: chair.first_name + ' ' + chair.last_name,
+      track_id: this.trackID,
+      user_id: chair.id
+    };
+
     const dialogConfig = new MatDialogConfig();
   
     dialogConfig.autoFocus = true;
@@ -141,7 +154,7 @@ export class TrackMembersComponent implements OnInit {
     dialogConfig.data = {
       title: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.TRACK_CHAIR.TITLE',
       text: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.TRACK_CHAIR.TEXT',
-      element: chair,
+      element: obj,
       apiToDelete: `conference/track/chair/destroy`
     };
   
@@ -151,9 +164,11 @@ export class TrackMembersComponent implements OnInit {
       (data) => {
         if (data) {
           if (data.success) {
-            const index = this.track_chairs.indexOf(chair);
-            this.track_chairs.splice(index, 1);
+            const index = this.track.track_chairs.findIndex(item => item.id === chair.id);
+            this.track.track_chairs.splice(index, 1);
+            this.alert = new AlertModel('success', data.message);
           } else {
+            this.alert = new AlertModel('danger', data.message);
           }
         }
       }
