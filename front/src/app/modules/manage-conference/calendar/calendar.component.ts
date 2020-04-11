@@ -87,10 +87,10 @@ export class CalendarComponent implements OnInit {
     dialogConfig.autoFocus = true;
   
     dialogConfig.data = {
-      title: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.TRACK.TITLE',
-      text: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.TRACK.TEXT',
+      title: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.EVENT.TITLE',
+      text: 'STOWARZYSZENIE.HELPERS.ALERT.DELETE.EVENT.TEXT',
       element: event,
-      apiToDelete: `conference/track/destroy`
+      apiToDelete: `conference/event/destroy`
     };
   
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);

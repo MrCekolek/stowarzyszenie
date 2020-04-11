@@ -95,4 +95,13 @@ export class ManageConferenceApiService {
   updateEvent(event) {
     return this.api.post('conference/event/update', event);
   }
+
+  //PC
+  createPC(user: Object) {
+    return this.api.post('conference/programme_committee/create', user);
+  }
+
+  deletePC(user: Object) {
+    return this.api.post('conference/programme_committee/destroy', user);
+  }
 }
