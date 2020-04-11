@@ -145,7 +145,8 @@
             },
             "NEW_ROLE_USER": {
                 "TRIGGER_BUTTON": "Add user",
-                "TITLE_NEW_ROLE": "Assign a role to the user"
+                "TITLE_NEW_ROLE": "Assign a role to the user",
+                "DELETE": "User already assigned"
             },
             "CONFPAGES": {
                 "TITLE_NEW": "New conference subpage",

@@ -36,7 +36,7 @@ export class ConferenceRoleModalComponent implements OnInit {
       this.lang = value;
     });
 
-    this.rolesApi.getOtherRoles(this.user).subscribe(
+    this.rolesApi.getRoles().subscribe(
         (res) => {
           this.allRoles = res.roles;
         },
@@ -50,7 +50,7 @@ export class ConferenceRoleModalComponent implements OnInit {
   saveRoles() {
     this.saving = true;
 
-    this.rolesApi.assignRoles(this.user, this.selectedRoles).subscribe(
+    this.rolesApi.assignRoles(this.user, this.user.roles).subscribe(
       (res) => {
         this.dialog.close(res);
       },
@@ -61,11 +61,21 @@ export class ConferenceRoleModalComponent implements OnInit {
     );
   }
 
+  roleAssigned(role) {
+    return this.user.roles.findIndex(item => item.id === role.id) === -1;
+  }
+
   dismiss() {
     this.dialog.close();
   }
 
   assignRole(role) {
-    this.selectedRoles.push(role);
+    this.user.roles.push(role);
+  }
+
+  deassignRole(role) {
+    const index = this.user.roles.findIndex(item => item.id === role.id);
+
+    this.user.roles.splice(index, 1);
   }
 }

@@ -305,19 +305,16 @@ class RoleUserController extends Controller {
             return $validation->failResponse();
         }
 
-        $roles = [];
+        RoleUser::where('user_id', $input['user_id'])->delete();
+
         foreach ($input['roles'] as $role) {
             $roleUser = new RoleUser();
             $roleUser->role_id = $role['id'];
             $roleUser->user_id = $input['user_id'];
             $success &= $roleUser->save();
-
-            $roles[] = $roleUser->role_id;
         }
 
-        return LogService::create($success, [
-            'roles' => Role::whereIn('id', $roles)->get()->toArray()
-        ]);
+        return LogService::create($success);
     }
 
     /**

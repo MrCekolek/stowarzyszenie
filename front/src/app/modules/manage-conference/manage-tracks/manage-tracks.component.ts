@@ -5,6 +5,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { TrackModalComponent } from '../track-modal/track-modal.component';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
+import { AlertModel } from "../../../shared/models/alert.model";
 
 @Component({
   selector: 'app-manage-tracks',
@@ -13,6 +14,7 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmat
 })
 export class ManageTracksComponent implements OnInit {
 
+  private alert;
   private tracks = [];
   private loading;
   private conference_id;
@@ -69,6 +71,9 @@ export class ManageTracksComponent implements OnInit {
         if (data) {
           if (data.success) {
             this.tracks.push(data.track);
+            this.alert = new AlertModel('success', data.message);
+          } else {
+            this.alert = new AlertModel('danger', data.message);
           }
         }
       }
@@ -77,6 +82,10 @@ export class ManageTracksComponent implements OnInit {
 
   updateTrack(track) {
     const dialogConfig = new MatDialogConfig();
+
+    var trackNamePl = track.name_pl;
+    var trackNameEn = track.name_en;
+    var trackNameRu = track.name_ru;
 
     dialogConfig.autoFocus = true;
 
@@ -94,7 +103,17 @@ export class ManageTracksComponent implements OnInit {
           if (data.success) {
             const index = this.tracks.findIndex(item => item.id === track.id);
             this.tracks[index] = data.track;
+            this.alert = new AlertModel('success', data.message);
+          } else {
+            track.name_pl = trackNamePl;
+            track.name_en = trackNameEn;
+            track.name_ru = trackNameRu;
+            this.alert = new AlertModel('danger', data.message);
           }
+        } else {
+          track.name_pl = trackNamePl;
+          track.name_en = trackNameEn;
+          track.name_ru = trackNameRu;
         }
       }
     );
@@ -120,7 +139,9 @@ export class ManageTracksComponent implements OnInit {
           if (data.success) {
             const index = this.tracks.findIndex(item => item.id === track.id);
             this.tracks.splice(index, 1);
+            this.alert = new AlertModel('success', data.message);
           } else {
+            this.alert = new AlertModel('danger', data.message);
           }
         }
       }

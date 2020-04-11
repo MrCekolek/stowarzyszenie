@@ -17,6 +17,11 @@ class ProgrammeCommitteeRequest extends FormRequest {
 
                 break;
 
+            case 'createMulti':
+                $this->checkCreateMulti();
+
+                break;
+
             case 'update':
                 $this->checkUpdate();
 
@@ -40,6 +45,13 @@ class ProgrammeCommitteeRequest extends FormRequest {
     public function checkCreate() {
         $this->rules = [
             'user_id' => 'required|exists:users,id',
+            'conference_id' => 'required|exists:conferences,id'
+        ];
+    }
+
+    public function checkCreateMulti() {
+        $this->rules = [
+            'users.*.id' => 'required|exists:users,id',
             'conference_id' => 'required|exists:conferences,id'
         ];
     }

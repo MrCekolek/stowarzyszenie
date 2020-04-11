@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ManageConferenceApiService } from 'src/app/core/http/manage-conference-api.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ConferenceRoleModalComponent } from '../conference-role-modal/conference-role-modal.component';
-import {LanguageService} from "../../../shared/services/user/language.service";
-import {AlertModel} from "../../../shared/models/alert.model";
-import {ConfirmationDialogComponent} from "../../../shared/components/confirmation-dialog/confirmation-dialog.component";
+import { LanguageService } from "../../../shared/services/user/language.service";
+import { AlertModel } from "../../../shared/models/alert.model";
+import { ConfirmationDialogComponent } from "../../../shared/components/confirmation-dialog/confirmation-dialog.component";
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-payments',
@@ -47,6 +48,10 @@ export class PaymentsComponent implements OnInit {
   roleModal(user) {
     const dialogConfig = new MatDialogConfig();
 
+    var originalRoles =  _.cloneDeep(user.roles);
+
+    console.log(user);
+
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
@@ -59,12 +64,13 @@ export class PaymentsComponent implements OnInit {
       (data) => {
         if (data) {
           if (data.success) {
-            const index = this.users.findIndex(item => item.user_id === user.id);
-            this.users[index].user.roles.push(...data.roles);
             this.alert = new AlertModel('success', data.message);
           } else {
+            user.roles = originalRoles;
             this.alert = new AlertModel('danger', data.message);
           }
+        } else {
+          user.roles = originalRoles;
         }
       }
     );

@@ -35,12 +35,19 @@
                                         {{ role['name_' + lang] }}
                                     </td>
                                     <td>
-                                        <a class="btn btn-secondary" *ngIf="selectedRoles.indexOf(role) === -1" (click)="assignRole(role)">
+                                        <a class="btn btn-secondary" *ngIf="this.roleAssigned(role)" (click)="assignRole(role)">
                                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PARTICIPANTS.ROLE_MODAL.ADD_ROLE' | translate}}
                                         </a>
-                                        <div class="btn btn-secondary" *ngIf="selectedRoles.indexOf(role) > -1">
-                                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PARTICIPANTS.ROLE_MODAL.ROLE_ASSIGNED' | translate}}
-                                        </div>
+                                        <ng-container *ngIf="!this.roleAssigned(role)">
+                                            <div class="btn btn-secondary">
+                                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PARTICIPANTS.ROLE_MODAL.ROLE_ASSIGNED' | translate}}
+                                            </div>
+                                            <span class="text-danger ml-3" *ngIf="role.id !== 2">
+                                                <a (click)="deassignRole(role)" class="text-danger">
+                                                    <i class="fas fa-times fa-lg"></i>
+                                                </a>
+                                            </span>
+                                        </ng-container>
                                     </td>
                                 </tr>
                             </tbody>

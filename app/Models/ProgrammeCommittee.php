@@ -10,4 +10,8 @@ class ProgrammeCommittee extends BasePivot {
         'conference_id',
         'contact_email'
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -72,7 +72,7 @@ class Conference extends BaseModel {
     }
 
     public function programmeCommittee() {
-        return $this->belongsToMany(User::class)
+        return $this->belongsToMany(User::class, 'programme_committee')
             ->using(ProgrammeCommittee::class);
     }
 
