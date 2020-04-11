@@ -145,7 +145,8 @@
             },
             "NEW_ROLE_USER": {
                 "TRIGGER_BUTTON": "Dodaj użytkownika",
-                "TITLE_NEW_ROLE": "Przypisz użytkownikowi rolę"
+                "TITLE_NEW_ROLE": "Przypisz użytkownikowi rolę",
+                "DELETE": "Użytkownik już przypisany"
             },
             "CONFPAGES": {
                 "TITLE_NEW": "Nowa podstrona konferencji",

@@ -1,0 +1,94 @@
+<h2 mat-dialog-title>
+    <span>
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PARTICIPANTS.ROLE_MODAL.TITLE' | translate }}
+    </span>
+</h2>
+<mat-dialog-content>
+    <div class="d-flex justify-content-center my-3" *ngIf="this.isLoading; else content">
+        <div class="spinner-border text-primary"></div>
+    </div>
+
+    <ng-template #content>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PARTICIPANTS.ROLE_MODAL.ALL_ROLES' | translate }}
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-md">
+                                <tbody>
+                                <tr>
+                                    <th>
+                                        {{ 'STOWARZYSZENIE.LABELS.FIRST_NAME' | translate }}
+                                    </th>
+                                    <th>
+                                        {{ 'STOWARZYSZENIE.LABELS.LAST_NAME' | translate }}
+                                    </th>
+                                    <th>
+                                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.TABLE_ACTIONS_TITLE' | translate }}
+                                    </th>
+                                </tr>
+
+                                <tr *ngFor="let user of allUsers">
+                                    <td>
+                                        {{ user.first_name }}
+                                    </td>
+                                    <td>
+                                        {{ user.last_name }}
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-secondary" *ngIf="this.userExists(user)" (click)="assignUser(user)">
+                                            {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE_USER.TRIGGER_BUTTON' | translate}}
+                                        </a>
+                                        <ng-container *ngIf="!this.userExists(user)">
+                                            <div class="btn btn-secondary">
+                                                {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE_USER.DELETE' | translate}}
+                                            </div>
+                                            <span class="text-danger ml-3">
+                                                <a (click)="deassignUser(user)" class="text-danger">
+                                                    <i class="fas fa-times fa-lg"></i>
+                                                </a>
+                                            </span>
+                                        </ng-container>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- TODO: paginator -->
+                    <!-- <div class="card-footer text-right">
+                      <nav class="d-inline-block">
+                        <ul class="pagination mb-0">
+                          <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
+                          </li>
+                          <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">2</a>
+                          </li>
+                          <li class="page-item"><a class="page-link" href="#">3</a></li>
+                          <li class="page-item">
+                            <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button type="button" class="btn btn-primary" [class.btn-progress]="this.saving" (click)="saveRoles()">
+        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
+    </button>
+    <button type="button " class="btn btn-link" (click)="dismiss()">
+        {{ 'STOWARZYSZENIE.MODALS.BUTTON_CANCEL' | translate }}
+    </button>
+</mat-dialog-actions>

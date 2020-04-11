@@ -14,6 +14,8 @@
     </div>
 
     <ng-template #content>
+        <app-alert *ngIf="this.alert" [alertType]="this.alert.type" [message]="this.alert.message"></app-alert>
+
         <div class="d-flex justify-content-center mb-4">
             <button class="btn btn-primary btn-icon icon-left" (click)="addTrackModal()" *ngIf="this.conference_id">
                 <i class="fas fa-plus"></i> {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACKS.ADD_BTN' | translate }}

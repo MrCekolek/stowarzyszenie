@@ -115,11 +115,20 @@ export class ManageConferenceApiService {
   }
 
   //PC
-  createPC(user: Object) {
-    return this.api.post('conference/programme_committee/create', user);
+  getPC(conferenceId) {
+    const obj = {
+      conference_id: conferenceId
+    };
+
+    return this.api.post('conference/programme_committee/get', obj);
   }
 
-  deletePC(user: Object) {
-    return this.api.post('conference/programme_committee/destroy', user);
+  createPC(conferenceId, users) {
+    const obj = {
+      conference_id: conferenceId,
+      users: users
+    };
+
+    return this.api.post('conference/programme_committee/createMulti', obj);
   }
 }
