@@ -11,6 +11,10 @@ class TrackArticle extends BaseModel {
         'abstract_en',
         'abstract_ru',
         'file',
+        'status',
+        'keywords',
+        'translation_key',
+        'user_id',
         'track_id'
     ];
 
@@ -50,9 +54,18 @@ class TrackArticle extends BaseModel {
         $trackArticle->abstract_en = $input['abstract_en'];
         $trackArticle->abstract_ru = $input['abstract_ru'];
         $trackArticle->file = $input['file'];
+        $trackArticle->keywords = $input['keywords'];
         $trackArticle->user_id = $input['user_id'];
         $trackArticle->track_id = $input['track_id'];
         $success = $trackArticle->save();
+    }
+
+    public function getKeywordsAttribute($value) {
+        return explode(',', $value);
+    }
+
+    public function setKeywordsAttribute($value) {
+        $this->attributes['keywords'] = str_replace(' ', '', $value);
     }
 
     public function user() {
