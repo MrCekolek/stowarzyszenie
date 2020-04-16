@@ -21,6 +21,7 @@ class CreateTrackArticlesTable extends Migration {
             $table->string('abstract_ru')->nullable();
             $table->string('file')->nullable();
             $table->string('status');
+            $table->string('keywords')->nullable();
             $table->string('translation_key');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('track_id');
