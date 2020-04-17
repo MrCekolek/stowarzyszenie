@@ -155,7 +155,11 @@
             },
             "EVENTS": {
                 "TITLE_NEW": "New event",
-                "TITLE_EDIT": "Edit event"
+                "TITLE_EDIT": "Edit event",
+                "INPUT_NEW_LABEL": "Enter new event name",
+                "INPUT_NEW_DESC_LABEL": "Enter description of new event",
+                "CHOOSE_DATE": "Choose date of event",
+                "COLOUR_LABEL": "Choose color of event"
             }
         },
         "MODULES": {
@@ -319,6 +323,14 @@
                         "COMMITTEE": "Program committee",
                         "GALLERY": "Conference gallery",
                         "PROGRAMME": "Conference programme"
+                    },
+                    "ARTICLES": {
+                        "MAIN": "Articles",
+                        "MY_ARTICLES": "My articles"
+                    },
+                    "REVIEWS": {
+                        "MAIN": "Reviews",
+                        "MY_REVIEWS": "My reviews"
                     }
                 },
                 "WEBPAGE_TITLE_MEMBERS": "Ciob members"
@@ -597,6 +609,18 @@
                         "ROLE_ASSIGNED": "Role already assigned",
                         "ROLE_TITLE_CELL": "Role"
                     }
+                },
+                "TRACK": {
+                    "ARTICLE": {
+                        "STATUS": {
+                            "WAITING": "Waiting for accept",
+                            "REVIEW": "Waiting for review",
+                            "REVIEWED": "Reviewed",
+                            "ACCEPTED": "Accepted",
+                            "IN_PROGRAMME": "Assigned to program",
+                            "REJECTED": "Rejected"
+                        }
+                    }
                 }
             },
             "ADD_CONFERENCE": {
@@ -642,6 +666,44 @@
                 "DATE_TITLE": "Date of event",
                 "ACTIONS_TITLE": "Actions",
                 "BTN_ADD": "Add new event"
+            },
+            "ARTICLES": {
+                "MY": {
+                    "PAGE_TITLE": "My articles",
+                    "SECTION_TITLE": "Manage your articles",
+                    "PAGE_DESC": "Here you can send articles and manage already sent.",
+                    "ALERT_TITLE_CFP": "Check conference CFP",
+                    "ALERT_TEXT_CFP": "Go to conference CFP page and check informations about sending articles.",
+                    "NO_ARTICLES": "Articles not found",
+                    "NO_ARTICLES_DESC": "You have no articles sent to conference.",
+                    "ADD_NEW_BTN": "Submit new article",
+                    "TABLE_TITLE": "Title of article",
+                    "TABLE_STATUS": "Status of article",
+                    "TABLE_ACTION": "Actions",
+                    "SENT_HEADER": "Sent articles"
+                },
+                "SUBMIT": {
+                    "PAGE_TITLE": "Submit article",
+                    "SECTION_TITLE": "Submit new article",
+                    "PAGE_DESC": "Submit your article to conference.",
+                    "TITLE_LABEL": "Article title",
+                    "ABSTRACT_LABEL": "Article abstract",
+                    "KEYWORDS_LABEL": "Keywords",
+                    "KEYWORDS_HELPTEXT": "Enter article keywords separated by commas",
+                    "CHOOSE_FILE_LABEL": "Choose article file",
+                    "CHOOSE_FILE_PLACEHOLDER": "Choose file with document extension (.pdf, .docx, .odt etc)",
+                    "CHOOSE_TRACK_LABEL": "Choose track",
+                    "CHOOSE_TRACK": "Choose track",
+                    "CHOOSE_TRACK_LABELL": "Select the track where you want to send the article",
+                    "SUBMIT_BTN": "Submit",
+                    "NO_TRACKS": "Conference has no tracks",
+                    "BACK_BTN": "Back to articles"
+                },
+                "EDIT": {
+                    "PAGE_TITLE": "Edit article",
+                    "SECTION_TITLE": "Edit article",
+                    "PAGE_DESC": "Edit your article informations."
+                }
             }
         },
         "PAGINATION": {

@@ -155,7 +155,11 @@
             },
             "EVENTS": {
                 "TITLE_NEW": "Nowe wydarzenie",
-                "TITLE_EDIT": "Edytuj wydarzenie"
+                "TITLE_EDIT": "Edytuj wydarzenie",
+                "INPUT_NEW_LABEL": "Wpisz nazwę nowego wydarzenia",
+                "INPUT_NEW_DESC_LABEL": "Wprowadź opis nowego wydarzenia",
+                "CHOOSE_DATE": "Wybierz datę wydarzenia",
+                "COLOUR_LABEL": "Wybierz kolor wydarzenia"
             }
         },
         "MODULES": {
@@ -319,6 +323,14 @@
                         "COMMITTEE": "Komitet programowy",
                         "GALLERY": "Galeria konferencji",
                         "PROGRAMME": "Program konferencji"
+                    },
+                    "ARTICLES": {
+                        "MAIN": "Artykuły",
+                        "MY_ARTICLES": "Moje artykuły"
+                    },
+                    "REVIEWS": {
+                        "MAIN": "Recenzje",
+                        "MY_REVIEWS": "Moje recenzje"
                     }
                 },
                 "WEBPAGE_TITLE_MEMBERS": "Ciob members"
@@ -597,6 +609,18 @@
                         "ROLE_ASSIGNED": "Rola już przypisana",
                         "ROLE_TITLE_CELL": "Rola"
                     }
+                },
+                "TRACK": {
+                    "ARTICLE": {
+                        "STATUS": {
+                            "WAITING": "Czeka na akceptację",
+                            "REVIEW": "Oczekuje na recenzję",
+                            "REVIEWED": "Zrecenzowano",
+                            "ACCEPTED": "Zaakceptowano",
+                            "IN_PROGRAMME": "Przypisano do programu",
+                            "REJECTED": "Odrzucono"
+                        }
+                    }
                 }
             },
             "ADD_CONFERENCE": {
@@ -642,6 +666,44 @@
                 "DATE_TITLE": "Data wydarzenia",
                 "ACTIONS_TITLE": "Akcje",
                 "BTN_ADD": "Dodaj nowe wydarzenie"
+            },
+            "ARTICLES": {
+                "MY": {
+                    "PAGE_TITLE": "Moje artykuły",
+                    "SECTION_TITLE": "Zarządzaj swoimi artykułami",
+                    "PAGE_DESC": "Tutaj możesz wysyłać artykuły i zarządzać już wysłanymi.",
+                    "ALERT_TITLE_CFP": "Sprawdź CFP konferencji",
+                    "ALERT_TEXT_CFP": "Przejdź do CFP konferencji i sprawdź informacje o wysyłaniu artykułów.",
+                    "NO_ARTICLES": "Nie znaleziono artykułów",
+                    "NO_ARTICLES_DESC": "Nie wysłano żadnych artykułów na konferencję.",
+                    "ADD_NEW_BTN": "Prześlij nowy artykuł",
+                    "TABLE_TITLE": "Tytuł artykułu",
+                    "TABLE_STATUS": "Status artykułu",
+                    "TABLE_ACTION": "Akcje",
+                    "SENT_HEADER": "Wysłane artykuły"
+                },
+                "SUBMIT": {
+                    "PAGE_TITLE": "Prześlij artykuł",
+                    "SECTION_TITLE": "Prześlij nowy artykuł",
+                    "PAGE_DESC": "Prześlij swój artykuł na konferencję.",
+                    "TITLE_LABEL": "Tytuł artykułu",
+                    "ABSTRACT_LABEL": "Streszczenie artykułu",
+                    "KEYWORDS_LABEL": "Słowa kluczowe",
+                    "KEYWORDS_HELPTEXT": "Wpisz słowa kluczowe artykułu oddzielone przecinkami",
+                    "CHOOSE_FILE_LABEL": "Wybierz plik artykułu",
+                    "CHOOSE_FILE_PLACEHOLDER": "Wybierz plik z rozszerzeniem dokumentu (.pdf, .docx, .odt itp.)",
+                    "CHOOSE_TRACK_LABEL": "Wybierz utwór",
+                    "CHOOSE_TRACK": "Wybierz track",
+                    "CHOOSE_TRACK_LABELL": "Wybierz track, do którego chcesz wysłać artykuł",
+                    "SUBMIT_BTN": "Zatwierdź",
+                    "NO_TRACKS": "Konferencja nie ma tracków",
+                    "BACK_BTN": "Powrót do artykułów"
+                },
+                "EDIT": {
+                    "PAGE_TITLE": "Edytuj artykuł",
+                    "SECTION_TITLE": "Edytuj artykuł",
+                    "PAGE_DESC": "Edytuj informacje o swoim artykule."
+                }
             }
         },
         "PAGINATION": {
