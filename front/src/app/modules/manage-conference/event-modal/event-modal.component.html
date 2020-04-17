@@ -85,26 +85,84 @@
                 <mat-datepicker #picker></mat-datepicker>
             </div>
           </div>
-          <input type="text" class="form-control daterange-cus" [matDatepicker]="picker" [(ngModel)]="this.event.date">
+          <input type="text" class="form-control daterange-cus" (click)="picker.open()" [matDatepicker]="picker" [(ngModel)]="this.event.datetime" readonly>
         </div>
     </div>
+
+    <div class="form-group">
+        <label>
+            {{ 'STOWARZYSZENIE.MODALS.EVENTS.CHOOSE_HOUR' | translate }}
+        </label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <ngx-material-timepicker-toggle matSuffix [for]="toggleTimepicker"></ngx-material-timepicker-toggle>
+                    <ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>
+                </div>
+            </div>
+            <input type="text" class="form-control daterange-cus" [format]="24" [ngxTimepicker]="toggleTimepicker" [(ngModel)]="this.event.hour" readonly>
+        </div>
+    </div>
+
+    <ng-container *ngIf="this.event.datetime">
+        <div class="form-group">
+            <label>
+                {{ 'STOWARZYSZENIE.MODALS.EVENTS.CHOOSE_DATE' | translate }}
+            </label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerEnd></mat-datepicker>
+                    </div>
+                </div>
+                <input type="text" class="form-control daterange-cus" (click)="pickerEnd.open()" [matDatepicker]="pickerEnd" [(ngModel)]="this.event.end" readonly>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>
+                {{ 'STOWARZYSZENIE.MODALS.EVENTS.CHOOSE_HOUR' | translate }}
+            </label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <ngx-material-timepicker-toggle matSuffix [for]="toggleTimepickerEnd"></ngx-material-timepicker-toggle>
+                        <ngx-material-timepicker #toggleTimepickerEnd></ngx-material-timepicker>
+                    </div>
+                </div>
+                <input type="text" class="form-control daterange-cus" [format]="24" [ngxTimepicker]="toggleTimepickerEnd" [(ngModel)]="this.event.end_hour" readonly>
+            </div>
+        </div>
+    </ng-container>
 
     <div class="form-group">
         <label class="text-primary">
             {{ 'STOWARZYSZENIE.MODALS.EVENTS.COLOUR_LABEL' | translate }}
         </label>
-        <input type="color" class="form-control" [(ngModel)]="this.event.colour">
+        <input [value]="this.event.colour"
+               [style.background]="this.event.colour"
+               [cpOutputFormat]="'hex'"
+               [cpOKButton]="true"
+               [cpPosition]="'top'"
+               [cpSaveClickOutside]="true"
+               [cpOKButtonClass]= "'btn btn-primary btn-xs'"
+               [(colorPicker)]="this.event.colour"
+               class="form-control"/>
     </div>      
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button type="button" class="btn btn-primary" [class.btn-progress]="this.isSaving" (click)="addEvent()" [disabled]="this.translations.length === 0" *ngIf="this.modal_type === 'new'">
+    <button type="button" class="btn btn-primary" [class.btn-progress]="this.loading" (click)="addEvent()" [disabled]="this.translations.length === 0" *ngIf="this.modal_type === 'new'">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
     </button>
-    <button type="button" class="btn btn-primary" [class.btn-progress]="this.isSaving" (click)="updateEvent()" [disabled]="this.translations.length === 0" *ngIf="this.modal_type === 'edit'">
+    <button type="button" class="btn btn-primary" [class.btn-progress]="this.loading" (click)="updateEvent()" [disabled]="this.translations.length === 0" *ngIf="this.modal_type === 'edit'">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
     </button>
-    <button type="button " class="btn btn-link" (click)="dismiss()">
+    <button type="button" class="btn btn-link" (click)="dismiss()">
         {{ 'STOWARZYSZENIE.MODALS.BUTTON_CANCEL' | translate }}
+    </button>
+    <button type="button" class="btn btn-danger" [class.btn-progress]="this.destroying" *ngIf="this.modal_type === 'edit' && this.calendar" (click)="this.delete()">
+        {{ 'STOWARZYSZENIE.STOWARZYSZENIE.DELETE' | translate }}
     </button>
 </mat-dialog-actions>

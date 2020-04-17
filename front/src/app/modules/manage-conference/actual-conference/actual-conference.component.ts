@@ -27,7 +27,6 @@ export class ActualConferenceComponent implements OnInit {
     });
 
     this.manageConferenceApi.getConference().subscribe(res => {
-      console.log(res);
       if (res.success) {
         this.conference = res.conference;
       } else {

@@ -12,6 +12,9 @@ import { UserProviderService } from "./core/services/user-provider.service";
 import { NgxJsonViewerModule } from "ngx-json-viewer";
 import { ManagementsModule } from "./modules/managements/managements.module";
 import { RoleUserModule } from "./modules/role-user/role-user.module";
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { RoleUserModule } from "./modules/role-user/role-user.module";
     DashboardModule,
     ManagementsModule,
     RoleUserModule,
-    NgxJsonViewerModule
+    NgxJsonViewerModule,
+    MatDatepickerModule,
+    NgxMaterialTimepickerModule,
+    ColorPickerModule
   ],
   providers: [Document, UserProviderService, {
       provide: APP_INITIALIZER,

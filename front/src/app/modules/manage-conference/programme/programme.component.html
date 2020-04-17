@@ -1,1 +1,101 @@
-<p>programme works!</p>
+<div class="section-header">
+    <h1>
+        {{ 'STOWARZYSZENIE.MODULES.PAGES.CONFPROGMM_ADMIN_TITLE' | translate }}
+    </h1>
+</div>
+
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.PAGES.CONFPROGMM_ADMIN_SUBTITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.PAGES.CONFPROGMM_ADMIN_DESC' | translate }}
+    </p>
+
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-center" *ngIf="this.loading else content">
+                    <div class="spinner-border text-primary">
+                    </div>
+                </div>
+
+                <div #draggable>
+                    <ng-container id="external-events" *ngIf="this.events.length > 0">
+                        <p>
+                            <strong>{{ 'STOWARZYSZENIE.MODULES.CONFERENCE_PROGRAMMEE.DRAGGABLE' | translate}}</strong>
+                        </p>
+
+                        <div [id]="event.id" *ngFor="let event of this.events" class='fc-event'>
+                            {{ event['name_' + this.lang] }}
+                        </div>
+                    </ng-container>
+                </div>
+
+                <ng-template #content>
+                    <ng-container *ngIf="this.conference && this.conference.id else addConference">
+<!--                        TODO LADNE ULOZENIE ELEMENTOW OBOK SIEBIE -->
+                        <full-calendar
+                                *ngIf="options && !this.dropped"
+                                #fullcalendar
+                                [defaultView]="this.options.defaultView"
+                                [editable]="true"
+                                [droppable]="true"
+                                [events]="this.eventsModel"
+                                [locales]="this.options.locales"
+                                [locale]="this.lang"
+                                [plugins]="this.options.plugins"
+                                [header]="this.options.header"
+                                (drop)="this.drop($event)"
+                                (eventDrop)="this.eventDrop($event)"
+                                (eventClick)="this.eventClick($event)"
+                                (eventResize)="this.eventResize($event)"
+                                (eventRender)="this.eventRender($event)"
+                                [allDaySlot]="false"
+                                deepChangeDetection="true"
+                        ></full-calendar>
+
+                        <full-calendar
+                                *ngIf="options && this.dropped"
+                                #fullcalendar
+                                [editable]="true"
+                                [droppable]="true"
+                                [events]="this.eventsModel"
+                                [locales]="this.options.locales"
+                                [locale]="this.lang"
+                                [plugins]="this.options.plugins"
+                                [header]="this.options.header"
+                                (drop)="this.drop($event)"
+                                (eventDrop)="this.eventDrop($event)"
+                                (eventClick)="eventClick($event)"
+                                (eventResize)="this.eventResize($event)"
+                                (eventRender)="this.eventRender($event)"
+                                [allDaySlot]="false"
+                                deepChangeDetection="true"
+                        ></full-calendar>
+                    </ng-container>
+
+                    <ng-template #addConference>
+                        <div class="empty-state" data-height="400" style="height: 400px;">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-question"></i>
+                            </div>
+
+                            <h2>
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE' | translate }}
+                            </h2>
+
+                            <p class="lead">
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE_DESC' | translate}}
+                            </p>
+
+                            <a class="btn btn-primary mt-4" [routerLink]="['../create']">
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.ADD_CONF_BUTT' | translate }}
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

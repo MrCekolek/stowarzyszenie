@@ -16,33 +16,47 @@ export class PaymentsComponent implements OnInit {
 
   private lang;
   private users = [];
-  private loading;
+  private loadingConference;
+  private loadingUsers;
   private alert: AlertModel;
+  private conference_id;
 
   constructor(
     private manageConferenceApi: ManageConferenceApiService,
     private languageService: LanguageService,
+    private conferenceApi: ManageConferenceApiService,
     private dialog: MatDialog
   ) { }
 
   ngOnInit() {
-    this.loading = true;
+    this.loadingConference = true;
+    this.loadingUsers = true;
 
     this.languageService.currentLang.subscribe(value => {
       this.lang = value;
     });
 
-    this.manageConferenceApi.getRegisteredUsers().subscribe(
+    this.conferenceApi.getConference().subscribe(
         (res) => {
-          this.users = res.conferenceUsers;
-
-          console.log(this.users);
+          this.conference_id = res.conference.id;
         },
         () => {},
         () => {
-          this.loading = false;
+          this.loadingConference = false;
+
+          if (this.conference_id) {
+            this.manageConferenceApi.getRegisteredUsers().subscribe(
+                (res) => {
+                  this.users = res.conferenceUsers;
+                },
+                () => {},
+                () => {
+                  this.loadingUsers = false;
+                }
+            );
+          }
         }
-      );
+    );
   }
 
   roleModal(user) {

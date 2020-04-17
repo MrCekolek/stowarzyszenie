@@ -1,7 +1,19 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '~@fullcalendar/timegrid/main.css';
+
 button,
 a {
     cursor: pointer !important;
+}
+
+.timepicker-overlay {
+    z-index: 1100 !important;
+}
+
+.timepicker-backdrop-overlay {
+    z-index: 1100 !important;
 }
 
 .loading-screen-wrapper {

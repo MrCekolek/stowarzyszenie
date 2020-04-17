@@ -9,19 +9,21 @@
         {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.PAGE_DESC' | translate }}
     </p>
 
-    <div class="d-flex justify-content-center" *ngIf="loading; else content">
-        <div class="spinner-border text-primary"></div>
-    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="d-flex justify-content-center my-3"
+                     *ngIf="this.loadingConference && this.loadingUsers; else content">
+                    <div class="spinner-border text-primary"></div>
+                </div>
 
-    <ng-template #content>
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <app-alert *ngIf="this.alert" [alertType]="this.alert.type" [message]="this.alert.message"></app-alert>
+                <ng-template #content>
+                    <app-alert *ngIf="this.alert" [alertType]="this.alert.type"
+                               [message]="this.alert.message"></app-alert>
 
                     <div class="card-header">
                         <h4>
-                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.PARTICIPANTS_TITLE' | translate }}
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.PARTICIPANTS_TITLE' | translate }}
                         </h4>
                         <div class="card-header-form">
                             <form>
@@ -35,12 +37,12 @@
                             </form>
                         </div>
                     </div>
-                
+
                     <div class="card-body p-0">
-                        <div class="table-responsive">
+                        <div class="table-responsive" *ngIf="this.conference_id else addconference">
                             <table class="table table-striped">
                                 <tbody>
-                                    <tr>
+                                <tr>
                                     <!-- tytuły kolumn -->
                                     <th>
                                         {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.USER_TH' | translate }}
@@ -57,64 +59,91 @@
                                     <th>
                                         {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.ACTIONS_TH' | translate }}
                                     </th>
-                                    </tr>
+                                </tr>
 
-                                    <tr *ngFor="let object of this.users">
-                                        <td>
-                                            <img alt="image" [src]="object.user.preference_user.avatar" class="rounded-circle" width="35" data-toggle="tooltip">
-                                        </td>
+                                <tr *ngFor="let object of this.users">
+                                    <td>
+                                        <img alt="image" [src]="object.user.preference_user.avatar"
+                                             class="rounded-circle" width="35" data-toggle="tooltip">
+                                    </td>
 
-                                        <!-- status -->
-                                        <td>
-                                            <div class="badge badge-danger">
-                                                {{ object.status }}
+                                    <!-- status -->
+                                    <td>
+                                        <div class="badge badge-danger">
+                                            {{ object.status }}
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="badge badge-info"
+                                             *ngFor="let track of object.user.track_articles_actual_conference"
+                                             [ngStyle]="{'background-color': track.track.colour}">
+                                            {{ track['title_' + this.lang] }}
+                                        </div>
+                                    </td>
+
+                                    <!-- role w konferencji -->
+                                    <td>
+                                        <div class="badge badge-success" *ngFor="let role of object.user.roles">
+                                            {{ role['name_' + this.lang] }}
+                                        </div>
+                                    </td>
+
+                                    <!-- akcje -->
+                                    <td>
+                                        <div class="dropdown d-inline">
+                                            <button class="btn btn-primary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.ACTIONS_TH' | translate }}
+                                            </button>
+                                            <div class="dropdown-menu" x-placement="bottom-start"
+                                                 style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                <a class="dropdown-item has-icon" (click)="roleModal(object.user)">
+                                                    <i class="fas fa-user-tag"></i>
+                                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.ROLE_ACTION' | translate }}
+                                                </a>
+
+                                                <a class="dropdown-item has-icon" (click)="paymentsModal()">
+                                                    <i class="fas fa-money-bill-wave-alt"></i>
+                                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.PAYMENT_ACTION' | translate }}
+                                                </a>
+
+                                                <a class="dropdown-item has-icon text-danger"
+                                                   (click)="deleteModal(object.user)">
+                                                    <i class="fas fa-trash"></i>
+                                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.DELETE_ACTION' | translate }}
+                                                </a>
                                             </div>
-                                        </td>
-
-                                        <td>
-                                            <div class="badge badge-info" *ngFor="let track of object.user.track_articles_actual_conference" [ngStyle]="{'background-color': track.track.colour}">
-                                                {{ track['title_' + this.lang] }}
-                                            </div>
-                                        </td>
-
-                                        <!-- role w konferencji -->
-                                        <td>
-                                            <div class="badge badge-success" *ngFor="let role of object.user.roles">
-                                                {{ role['name_' + this.lang] }}
-                                            </div>
-                                        </td>
-
-                                        <!-- akcje -->
-                                        <td>
-                                            <div class="dropdown d-inline">
-                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.ACTIONS_TH' | translate }} 
-                                                </button>
-                                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                                    <a class="dropdown-item has-icon" (click)="roleModal(object.user)">
-                                                        <i class="fas fa-user-tag"></i>
-                                                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.ROLE_ACTION' | translate }}
-                                                    </a>
-
-                                                    <a class="dropdown-item has-icon" (click)="paymentsModal()">
-                                                        <i class="fas fa-money-bill-wave-alt"></i>
-                                                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.PAYMENT_ACTION' | translate }}
-                                                    </a>
-
-                                                    <a class="dropdown-item has-icon text-danger" (click)="deleteModal(object.user)">
-                                                        <i class="fas fa-trash"></i> 
-                                                        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.DELETE_ACTION' | translate }}
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                        </div>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
-                      </div>
+                        </div>
+
+                        <ng-template #addconference>
+                            <div class="empty-state" data-height="400" style="height: 400px;">
+                                <div class="empty-state-icon">
+                                    <i class="fas fa-question"></i>
+                                </div>
+
+                                <h2>
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE' | translate }}
+                                </h2>
+
+                                <p class="lead">
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE_DESC' | translate}}
+                                </p>
+
+                                <a class="btn btn-primary mt-4" [routerLink]="['../create']">
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.ADD_CONF_BUTT' | translate }}
+                                </a>
+                            </div>
+                        </ng-template>
                     </div>
-                  </div>
+                </ng-template>
             </div>
         </div>
-    </ng-template>
+    </div>
 </div>

@@ -488,7 +488,10 @@
                 "ADD_CFP_BTN": "Add CFP",
                 "CONFPAGES_ADMIN_TITLE": "Conference page",
                 "CONFPAGES_ADMIN_SUBTITLE": "Manage conference page menu",
-                "CONFPAGES_ADMIN_DESC": "Here you can manage whole conference page menu, manage links in menu, add new and edit their content. Created page will be see to all users and guests."
+                "CONFPAGES_ADMIN_DESC": "Here you can manage whole conference page menu, manage links in menu, add new and edit their content. Created page will be see to all users and guests.",
+                "CONFPROGMM_ADMIN_TITLE": "Conference programme",
+                "CONFPROGMM_ADMIN_SUBTITLE": "Set a conference plan",
+                "CONFPROGMM_ADMIN_DESC": "Set a conference plan, drag events, double click on them to edit"
             },
             "ROLE_USER": {
                 "LABEL": {
@@ -704,6 +707,9 @@
                     "SECTION_TITLE": "Edit article",
                     "PAGE_DESC": "Edit your article informations."
                 }
+            },
+            "CONFERENCE_PROGRAMMEE": {
+                "DRAGGABLE": "Draggable Events"
             }
         },
         "PAGINATION": {

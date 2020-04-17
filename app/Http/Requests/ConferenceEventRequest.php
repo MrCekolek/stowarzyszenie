@@ -42,7 +42,6 @@ class ConferenceEventRequest extends FormRequest {
             'name_pl' => 'required',
             'name_en' => 'required',
             'name_ru' => 'required',
-            'date' => 'required',
             'colour' => 'required',
             'description_pl' => 'required',
             'description_en' => 'required',

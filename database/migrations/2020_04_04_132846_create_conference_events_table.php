@@ -16,7 +16,8 @@ class CreateConferenceEventsTable extends Migration {
             $table->string('name_pl')->nullable();
             $table->string('name_en')->nullable();
             $table->string('name_ru')->nullable();
-            $table->timestamp('date');
+            $table->timestamp('datetime')->nullable();
+            $table->timestamp('end')->nullable();
             $table->string('colour')->nullable();
             $table->text('description_pl')->nullable();
             $table->text('description_en')->nullable();
