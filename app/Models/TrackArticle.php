@@ -12,7 +12,9 @@ class TrackArticle extends BaseModel {
         'abstract_ru',
         'file',
         'status',
-        'keywords',
+        'keywords_pl',
+        'keywords_en',
+        'keywords_ru',
         'translation_key',
         'user_id',
         'track_id'
@@ -54,18 +56,36 @@ class TrackArticle extends BaseModel {
         $trackArticle->abstract_en = $input['abstract_en'];
         $trackArticle->abstract_ru = $input['abstract_ru'];
         $trackArticle->file = $input['file'];
-        $trackArticle->keywords = $input['keywords'];
+        $trackArticle->keywords_pl = $input['keywords_pl'];
+        $trackArticle->keywords_en = $input['keywords_en'];
+        $trackArticle->keywords_ru = $input['keywords_ru'];
         $trackArticle->user_id = $input['user_id'];
         $trackArticle->track_id = $input['track_id'];
         $success = $trackArticle->save();
     }
 
-    public function getKeywordsAttribute($value) {
+    public function getKeywordsPlAttribute($value) {
         return explode(',', $value);
     }
 
-    public function setKeywordsAttribute($value) {
-        $this->attributes['keywords'] = str_replace(' ', '', $value);
+    public function setKeywordsPlAttribute($value) {
+        $this->attributes['keywords_pl'] = str_replace(' ', '', $value);
+    }
+
+    public function getKeywordsEnAttribute($value) {
+        return explode(',', $value);
+    }
+
+    public function setKeywordsEnAttribute($value) {
+        $this->attributes['keywords_en'] = str_replace(' ', '', $value);
+    }
+
+    public function getKeywordsRuAttribute($value) {
+        return explode(',', $value);
+    }
+
+    public function setKeywordsRuAttribute($value) {
+        $this->attributes['keywords_ru'] = str_replace(' ', '', $value);
     }
 
     public function user() {

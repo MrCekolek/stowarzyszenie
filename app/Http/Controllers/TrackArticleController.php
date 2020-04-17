@@ -115,6 +115,33 @@ class TrackArticleController extends Controller {
      *         )
      *     ),
      *     @OA\Parameter(
+     *         name="keywords_pl",
+     *         in="query",
+     *         description="Keywords pl string",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="keywords_en",
+     *         in="query",
+     *         description="Keywords en string",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="keywords_ru",
+     *         in="query",
+     *         description="Keywords ru string",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         name="user_id",
      *         in="query",
      *         description="User id",
@@ -217,6 +244,33 @@ class TrackArticleController extends Controller {
      *         name="file",
      *         in="query",
      *         description="File",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="keywords_pl",
+     *         in="query",
+     *         description="Keywords pl string",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="keywords_en",
+     *         in="query",
+     *         description="Keywords en string",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="keywords_ru",
+     *         in="query",
+     *         description="Keywords ru string",
      *         required=true,
      *         @OA\Schema(
      *             type="string"
