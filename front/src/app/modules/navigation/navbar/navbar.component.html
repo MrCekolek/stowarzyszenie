@@ -234,6 +234,38 @@
 
                     <li class="dropdown">
                         <a class="nav-link">
+                            <i class="fas fa-newspaper"></i>
+                            <span>
+                                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.ARTICLES.MAIN' | translate }}
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['conference-articles/my']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.ARTICLES.MY_ARTICLES' | translate }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="nav-link">
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>
+                                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.REVIEWS.MAIN' | translate }}
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['conference-reviews/my']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.REVIEWS.MY_REVIEWS' | translate }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="nav-link">
                             <i class="fas fa-id-card"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.PORTFOLIO_MENU' | translate }}
                         </a>
 
