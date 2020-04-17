@@ -26,20 +26,26 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MatNativeDateModule } from '@angular/material';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CommitteeModalComponent } from './committee-modal/committee-modal.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import {ColorPickerModule} from "ngx-color-picker";
 
 @NgModule({
   declarations: [ActualConferenceComponent, AddConferenceComponent, GeneralSettingsComponent, CommitteeComponent, ManageTracksComponent, ConfPagesModalComponent, TrackModalComponent, TrackMembersComponent, AssignUserComponent, PaymentsComponent, ConferenceCfpComponent, CalendarComponent, GalleryComponent, ProgrammeComponent, ConferenceRoleModalComponent, ConferencePageComponent, ConfpageEditComponent, EventModalComponent, CommitteeModalComponent],
-  imports: [
-    CommonModule,
-    ManageConferenceRoutingModule,
-    SharedModule,
-    FormsModule,
-    AngularEditorModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    CarouselModule
-  ],
+    imports: [
+        CommonModule,
+        ManageConferenceRoutingModule,
+        SharedModule,
+        FormsModule,
+        AngularEditorModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        CarouselModule,
+        FullCalendarModule,
+        NgxMaterialTimepickerModule,
+        ColorPickerModule
+    ],
   entryComponents: [TrackModalComponent, AssignUserComponent, ConferenceRoleModalComponent, ConfPagesModalComponent, EventModalComponent, CommitteeModalComponent],
-  providers: [MatDatepickerModule]
+  providers: []
 })
 export class ManageConferenceModule { }

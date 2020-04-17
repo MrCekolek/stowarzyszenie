@@ -488,7 +488,10 @@
                 "ADD_CFP_BTN": "Dodaj CFP",
                 "CONFPAGES_ADMIN_TITLE": "Strona konferencji",
                 "CONFPAGES_ADMIN_SUBTITLE": "Zarządzaj menu strony konferencji",
-                "CONFPAGES_ADMIN_DESC": "Tutaj możesz zarządzać całym menu strony konferencji, zarządzać linkami w menu, dodawać nowe i edytować ich zawartość. Utworzona strona będzie widoczna dla wszystkich użytkowników i gości."
+                "CONFPAGES_ADMIN_DESC": "Tutaj możesz zarządzać całym menu strony konferencji, zarządzać linkami w menu, dodawać nowe i edytować ich zawartość. Utworzona strona będzie widoczna dla wszystkich użytkowników i gości.",
+                "CONFPROGMM_ADMIN_TITLE": "Program konferencji",
+                "CONFPROGMM_ADMIN_SUBTITLE": "Ustaw plan konferencji",
+                "CONFPROGMM_ADMIN_DESC": "Ustaw plan konferencji, przeciągaj wydarzenia, klikaj na nie dwukrotnie w celu edycji"
             },
             "ROLE_USER": {
                 "LABEL": {
@@ -704,6 +707,9 @@
                     "SECTION_TITLE": "Edytuj artykuł",
                     "PAGE_DESC": "Edytuj informacje o swoim artykule."
                 }
+            },
+            "CONFERENCE_PROGRAMMEE": {
+                "DRAGGABLE": "Przeciągane zdarzenia"
             }
         },
         "PAGINATION": {

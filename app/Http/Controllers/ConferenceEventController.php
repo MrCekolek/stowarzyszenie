@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ConferenceEventRequest;
 use App\Models\ConferenceEvent;
 use App\Services\LogService;
+use DateTime;
 use Illuminate\Http\Request;
 
 /**
@@ -87,9 +88,9 @@ class ConferenceEventController extends Controller {
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="date",
+     *         name="datetime",
      *         in="query",
-     *         description="Date of event",
+     *         description="Date of event with time",
      *         required=true,
      *         @OA\Schema(
      *             type="string"
@@ -309,6 +310,8 @@ class ConferenceEventController extends Controller {
 
         $success = ConferenceEvent::destroy($input['id']);
 
-        return LogService::delete($success);
+        return LogService::delete($success, [
+            'destroyed' => $success
+        ]);
     }
 }

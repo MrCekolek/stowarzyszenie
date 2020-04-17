@@ -114,6 +114,10 @@ export class ManageConferenceApiService {
     return this.api.post('conference/event/update', event);
   }
 
+  deleteEvent(event) {
+    return this.api.post('conference/event/destroy', event);
+  }
+
   //PC
   getPC(conferenceId) {
     const obj = {
