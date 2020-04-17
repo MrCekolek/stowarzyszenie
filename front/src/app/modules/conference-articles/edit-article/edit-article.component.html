@@ -1,0 +1,126 @@
+<div class="section-header">
+    <h1>{{ 'STOWARZYSZENIE.MODULES.ARTICLES.EDIT.PAGE_TITLE' | translate }}</h1>
+</div>
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.EDIT.SECTION_TITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.EDIT.PAGE_DESC' | translate }}
+    </p>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-center my-3" *ngIf="loading; else content">
+                <div class="spinner-border text-primary"></div>
+            </div>
+    
+            <ng-template #content>
+                <!-- title -->
+                <div class="form-group">
+                    <label>
+                        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.SUBMIT.TITLE_LABEL' | translate }}
+                    </label>
+
+                    <div class="input-group mb-3">
+                        <textarea type="text" class="form-control" required [(ngModel)]="this.article['title_' + this.lang]"></textarea>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" [class.btn-progress]="translateNameLoading" type="button" (click)="getNameTranslations()">
+                                {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <app-translations-list *ngIf="this.nameTranslations.length != 0" [translations]="this.nameTranslations" [type]="'textarea'"></app-translations-list>
+                </div>
+
+                <!-- abstract -->
+                <div class="form-group">
+                    <label>
+                        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.SUBMIT.ABSTRACT_LABEL' | translate }}
+                    </label>
+
+                    <div class="input-group mb-3">
+                        <textarea type="text"  class="form-control" required [(ngModel)]="this.article['abstract_' + this.lang]"></textarea>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" [class.btn-progress]="translateAbstractLoading" type="button" (click)="getAbstractTranslations()">
+                                {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <app-translations-list *ngIf="this.abstractTranslations.length != 0" [translations]="this.abstractTranslations" [type]="'textarea'"></app-translations-list>
+                </div>
+
+                <!-- keywords -->
+                <div class="form-group">
+                    <label>
+                        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.SUBMIT.KEYWORDS_LABEL' | translate }}
+                    </label>
+
+                    <div class="input-group mb-3">
+                        <textarea type="text" class="form-control" required [(ngModel)]="this.article['keywords_' + this.lang]"></textarea>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" [class.btn-progress]="translateKeywordsLoading" type="button" (click)="getKeywordsTranslations()">
+                                {{ 'STOWARZYSZENIE.CRUD_BUTTONS.TRANSLATE' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                    <small class="form-text text-muted">
+                        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.SUBMIT.KEYWORDS_HELPTEXT' | translate }}
+                    </small>
+
+                    <app-translations-list *ngIf="this.keywordsTranslations.length != 0" [translations]="this.keywordsTranslations" [type]="'textarea'"></app-translations-list>
+                </div>
+
+                <!-- file -->
+                <div class="my-3">
+                    <div class="section-title">
+                        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.SUBMIT.CHOOSE_FILE_LABEL' | translate }}
+                    </div>
+                    <div class="custom-file">
+                        <!-- TODO: [(ngModel)]="this.article.file" (nie dodawalam bo Piotrulinek kochany chcial sam zrobic fileska) -->
+                        <input type="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">
+                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.SUBMIT.CHOOSE_FILE_PLACEHOLDER' | translate }}
+                        </label>
+                    </div>
+                </div>
+
+                <!-- track -->
+                <div class="my-3">
+                    <div class="section-title mt-0">
+                        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.SUBMIT.CHOOSE_TRACK' | translate }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.SUBMIT.CHOOSE_TRACK_LABELL' | translate }}
+                        </label>
+                        <select class="form-control" [(ngModel)]="selectedTrack">
+                            <option value="0" *ngIf="!this.tracks">
+                                {{ 'STOWARZYSZENIE.MODULES.ADMIN.TRACKS.MODAL.NO_INTERESTS' | translate }}
+                            </option>
+
+                            <option value="{{ track.id }}" *ngFor="let track of tracks">
+                                {{ track['name_' + this.lang] }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-primary" [class.btn-progress]="submitLoading" (click)="submitArticle()" [disabled]="nameTranslations.length === 0 || !selectedTrack || keywordsTranslations.length === 0 || abstractTranslations.length === 0">
+                        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.SUBMIT.SUBMIT_BTN' | translate }}
+                    </button>
+                </div>
+
+                <div class="d-flex justify-content-center mt-2">
+                    <a class="text-primary btn btn-link" [routerLink]="['../my']" >
+                        <i class="fas fa-chevron-left"></i> {{ 'STOWARZYSZENIE.MODULES.ARTICLES.SUBMIT.BACK_BTN' | translate }}
+                    </a>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
