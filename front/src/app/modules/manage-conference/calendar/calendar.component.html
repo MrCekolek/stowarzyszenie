@@ -36,12 +36,13 @@
             </div>
 
             <div class="card-body">
-
                 <div class="d-flex justify-content-center" *ngIf="this.loading; else content">
                     <div class="spinner-border text-primary"></div>
                 </div>
 
                 <ng-template #content>
+                    <app-alert *ngIf="this.alert" [alertType]="this.alert.type" [message]="this.alert.message"></app-alert>
+
                     <div class="table-responsive">
                         <table class="table table-striped table-md">
                             <thead class="thead-dark">                                 
@@ -58,15 +59,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- *ngFor="let event of events" -->
-                                <tr>
-                                    <!-- nazwa wydarzenia -->
+                                <tr *ngIf="this.events.length < 1">
                                     <td>
-                                        Deadline: Sending articles to tracks
+                                        {{ 'STOWARZYSZENIE.LABELS.NO_DATA' | translate }}
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr *ngFor="let event of this.events">
+                                    <td>
+                                        {{ event['name_' + this.lang] }}
                                     </td>
                                     <td>
-                                        <!-- Data -->
-                                        10.02.2020
+                                        {{ event.datetime }}
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-start align-items-center">

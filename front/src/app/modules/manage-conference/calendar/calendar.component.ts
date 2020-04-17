@@ -3,6 +3,9 @@ import { ManageConferenceApiService } from 'src/app/core/http/manage-conference-
 import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { EventModalComponent } from '../event-modal/event-modal.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
+import { LanguageService } from "../../../shared/services/user/language.service";
+import * as _ from 'lodash';
+import {AlertModel} from "../../../shared/models/alert.model";
 
 @Component({
   selector: 'app-calendar',
@@ -14,21 +17,32 @@ export class CalendarComponent implements OnInit {
   private events = [];
   private loading;
   private conference_id;
+  private lang;
+  private alert;
 
   constructor(
     private conferenceApi: ManageConferenceApiService,
+    private languageService: LanguageService,
     private dialog: MatDialog
   ) { }
 
   ngOnInit() {
     this.loading = true;
 
-    this.conferenceApi.getConference().subscribe(res => {
-      this.events = res.conference.conference_events;
-      this.conference_id = res.conference.id;
-      
-      this.loading = false;
+    this.languageService.currentLang.subscribe(value => {
+      this.lang = value;
     });
+
+    this.conferenceApi.getConference().subscribe(
+        (res) => {
+          this.events = res.conference.conference_events;
+          this.conference_id = res.conference.id;
+        },
+        () => {},
+        () => {
+          this.loading = false;
+        }
+      );
   }
 
   addEvent() {
@@ -47,9 +61,12 @@ export class CalendarComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       (data) => {
         if (data) {
-          console.log(data);
           if (data.success) {
-            this.events.push(data.event);
+            this.events.push(data.conferenceEvent);
+
+            this.alert = new AlertModel('success', data.message);
+          } else {
+            this.alert = new AlertModel('danger', data.message);
           }
         }
       }
@@ -62,8 +79,8 @@ export class CalendarComponent implements OnInit {
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
-      modal_type: 'new',
-      track: event,
+      modal_type: 'edit',
+      event: _.cloneDeep(event),
       conference_id: this.conference_id
     };
 
@@ -72,9 +89,14 @@ export class CalendarComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       (data) => {
         if (data) {
-          console.log(data);
           if (data.success) {
-            const index = this.events.indexOf(data.event);
+            const index = this.events.findIndex(item => item.id === data.conferenceEvent.id);
+
+            this.events[index] = data.conferenceEvent;
+
+            this.alert = new AlertModel('success', data.message);
+          } else {
+            this.alert = new AlertModel('danger', data.message);
           }
         }
       }
@@ -99,9 +121,13 @@ export class CalendarComponent implements OnInit {
       (data) => {
         if (data) {
           if (data.success) {
-            const index = this.events.indexOf(event);
+            const index = this.events.findIndex(item => item.id === event.id);
+
             this.events.splice(index, 1);
+
+            this.alert = new AlertModel('success', data.message);
           } else {
+            this.alert = new AlertModel('danger', data.message);
           }
         }
       }
