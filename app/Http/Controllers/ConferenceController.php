@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ConferenceRequest;
 use App\Models\Conference;
+use App\Models\TrackArticle;
 use App\Services\LogService;
 use Illuminate\Http\Request;
 
@@ -89,6 +90,26 @@ class ConferenceController extends Controller
 
         return LogService::read(true, [
             'conference' => !empty($conference) ? $conference->toArray() : []
+        ]);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/conference/article/get",
+     *     tags={"conference"},
+     *     summary="Gets all conference articles",
+     *     operationId="ConferenceControllerGetArticles",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function getArticles() {
+        $trackIds = Conference::with('tracks')->where('status', '!=', 'finished')->get()->pluck('tracks.*.id')->collapse()->toArray();
+
+        return LogService::read(true, [
+            'conferenceArticles' => TrackArticle::whereNotIn('track_id', $trackIds)->get()->toArray()
         ]);
     }
 
