@@ -133,6 +133,7 @@ Route::group([
     Route::prefix('conference')->group(function () {
         Route::post('', 'ConferenceController@index');
         Route::post('active/get', 'ConferenceController@getActive');
+        Route::post('article/get', 'ConferenceController@getArticles');
         Route::post('create', 'ConferenceController@create');
         Route::post('update', 'ConferenceController@update');
         Route::post('destroy', 'ConferenceController@destroy');
