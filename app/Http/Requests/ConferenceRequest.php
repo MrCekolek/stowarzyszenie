@@ -17,6 +17,11 @@ class ConferenceRequest extends FormRequest {
 
                 break;
 
+            case 'getUserArticles':
+                $this->getUserArticles();
+
+                break;
+
             case 'update':
                 $this->checkUpdate();
 
@@ -45,6 +50,12 @@ class ConferenceRequest extends FormRequest {
     protected function checkShow() {
         $this->rules = [
             'id' => 'required|exists:conferences'
+        ];
+    }
+
+    protected function getUserArticles() {
+        $this->rules = [
+            'user_id' => 'required|exists:users,id'
         ];
     }
 

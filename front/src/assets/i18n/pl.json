@@ -158,8 +158,11 @@
                 "TITLE_EDIT": "Edytuj wydarzenie",
                 "INPUT_NEW_LABEL": "Wpisz nazwę nowego wydarzenia",
                 "INPUT_NEW_DESC_LABEL": "Wprowadź opis nowego wydarzenia",
-                "CHOOSE_DATE": "Wybierz datę wydarzenia",
-                "COLOUR_LABEL": "Wybierz kolor wydarzenia"
+                "CHOOSE_DATE": "Wybierz datę rozpoczęcia wydarzenia",
+                "COLOUR_LABEL": "Wybierz kolor wydarzenia",
+                "CHOOSE_HOUR": "Wybierz czas rozpoczęcia wydarzenia",
+                "CHOOSE_DATE_END": "Wybierz datę zakończenia wydarzenia",
+                "CHOOSE_HOUR_END": "Wybierz czas zakończenia wydarzenia"
             }
         },
         "MODULES": {
@@ -710,6 +713,11 @@
             },
             "CONFERENCE_PROGRAMMEE": {
                 "DRAGGABLE": "Przeciągane zdarzenia"
+            },
+            "GALLERY": {
+                "UPLOAD_PART1": "Przeciągnij pliki tutaj lub",
+                "UPLOAD_PART3": "aby przesłać.",
+                "UPLOAD_PART2": "przeglądaj"
             }
         },
         "PAGINATION": {

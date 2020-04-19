@@ -11,6 +11,7 @@ class ConferenceEvent extends BaseModel {
         'name_ru',
         'datetime',
         'end',
+        'calendar',
         'colour',
         'description_pl',
         'description_en',
@@ -47,8 +48,8 @@ class ConferenceEvent extends BaseModel {
 
     public static function updateConferenceEvent($input, &$success) {
         $conferenceEvent = self::where('id', $input['id'])->first();
-        $conferenceEvent->datetime = self::formatDate($input, 'datetime', 'hour', true, 'date_changed', $conferenceEvent, isset($input['calendar']));
-        $conferenceEvent->end = self::formatDate($input, 'end', 'end_hour', true, 'date_changed_end', $conferenceEvent, isset($input['calendar']));
+        $conferenceEvent->datetime = self::formatDate($input, 'datetime', 'hour', true, 'date_changed', $conferenceEvent, isset($input['programme_event']));
+        $conferenceEvent->end = self::formatDate($input, 'end', 'end_hour', true, 'date_changed_end', $conferenceEvent, isset($input['programme_event']));
 
         self::fillConferenceEvent($conferenceEvent, $input,$success);
 
@@ -59,6 +60,7 @@ class ConferenceEvent extends BaseModel {
         $conferenceEvent->name_pl = $input['name_pl'];
         $conferenceEvent->name_en = $input['name_en'];
         $conferenceEvent->name_ru = $input['name_ru'];
+        $conferenceEvent->calendar = $input['calendar'];
         $conferenceEvent->colour = $input['colour'];
         $conferenceEvent->description_pl = $input['description_pl'];
         $conferenceEvent->description_en = $input['description_en'];
@@ -67,20 +69,20 @@ class ConferenceEvent extends BaseModel {
         $success = $conferenceEvent->save();
     }
 
-    private static function formatDate($input, $dateTime, $hour, $update, $change, $conferenceEvent, $calendar = false) {
+    private static function formatDate($input, $dateTime, $hour, $update, $change, $conferenceEvent, $programmeEvent = false) {
         if (empty($input[$dateTime])) {
             return null;
         }
 
-        if ($update && !$calendar) {
-            $date = new DateTime(date('Y-m-d H:i:s', (!$input[$change] ? strtotime($conferenceEvent{$dateTime}) : strtotime('+1 day', strtotime($input[$dateTime])))));
-        } else {
+        if (!$update || $programmeEvent) {
             $date = new DateTime($input[$dateTime]);
+        } else {
+            $date = new DateTime(date('Y-m-d H:i:s', (!$input[$change] ? strtotime($conferenceEvent{$dateTime}) : strtotime('+1 day', strtotime($input[$dateTime])))));
         }
 
         if (!empty($input[$hour])) {
             $time = explode(':', $input[$hour]);
-            $date->setTime($time[0], $time[1]);
+            $date->setTime($time[0] == '24' ? '00' : $time[0], $time[1]);
         }
 
         return $date->format('Y-m-d H:i:s');

@@ -83,4 +83,8 @@ class Conference extends BaseModel {
     public function conferenceCfp() {
         return $this->hasOne(ConferenceCfp::class);
     }
+
+    public function conferenceGalleries() {
+        return $this->hasMany(ConferenceGallery::class);
+    }
 }

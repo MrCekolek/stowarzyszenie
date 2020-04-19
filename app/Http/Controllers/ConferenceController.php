@@ -109,7 +109,46 @@ class ConferenceController extends Controller
         $trackIds = Conference::with('tracks')->where('status', '!=', 'finished')->get()->pluck('tracks.*.id')->collapse()->toArray();
 
         return LogService::read(true, [
-            'conferenceArticles' => TrackArticle::whereNotIn('track_id', $trackIds)->get()->toArray()
+            'conferenceArticles' => TrackArticle::whereIn('track_id', $trackIds)->get()->toArray()
+        ]);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/conference/article/user/get",
+     *     tags={"conference"},
+     *     summary="Gets all user articles",
+     *     operationId="ConferenceControllerGetUserArticles",
+     *     @OA\Parameter(
+     *         name="user_id",
+     *         in="query",
+     *         description="User id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function getUserArticles(Request $request) {
+        $input = $request->all();
+        $validation = new ConferenceRequest($input, 'getUserArticles');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        $trackIds = Conference::with('tracks')->where('status', '!=', 'finished')->get()->pluck('tracks.*.id')->collapse()->toArray();
+
+        return LogService::read(true, [
+            'conferenceArticles' => TrackArticle::where('user_id', $input['user_id'])
+                ->whereIn('track_id', $trackIds)
+                ->get()
+                ->toArray()
         ]);
     }
 
