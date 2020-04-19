@@ -1,71 +1,129 @@
-import { Component, EventEmitter } from '@angular/core';
-import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
+import { Component, EventEmitter, OnInit } from '@angular/core';
+import {NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation, NgxGalleryLayout} from 'ngx-gallery';
+import { ManageConferenceApiService } from "../../../core/http/manage-conference-api.service";
+import { AlertModel } from "../../../shared/models/alert.model";
+import 'hammerjs';
 
 @Component({
-  selector: 'app-gallery',
-  templateUrl: './gallery.component.html',
-  styleUrls: ['./gallery.component.scss']
+    selector: 'app-gallery',
+    templateUrl: './gallery.component.html',
+    styleUrls: ['./gallery.component.scss']
 })
 
-export class GalleryComponent {
+export class GalleryComponent implements OnInit {
 
-  options: UploaderOptions;
-  formData: FormData;
-  files: UploadFile[];
-  uploadInput: EventEmitter<UploadInput>;
-  humanizeBytes: Function;
-  dragOver: boolean;
+    private conference;
+    private loading;
+    private images = [];
+    private deleting = false;
+    private imagesDeletingIds = [];
+    private alert;
+    private galleryOptions;
+    private galleryImages = [];
 
-  constructor() {
-    this.options = { concurrency: 1, maxUploads: 100, maxFileSize: 1000000 };
-    this.files = [];
-    this.uploadInput = new EventEmitter<UploadInput>();
-    this.humanizeBytes = humanizeBytes;
-  }
-
-  onUploadOutput(output: UploadOutput): void {
-    console.log(output);
-
-    switch (output.type) {
-      case 'allAddedToQueue':
-        const event: UploadInput = {
-          type: 'uploadAll',
-          url: '/api/conference/gallery/create',
-          method: 'POST',
-          data: { foo: 'bar' }
-        };
-        this.uploadInput.emit(event);
-        break;
-      case 'addedToQueue':
-        if (typeof output.file !== 'undefined') {
-          this.files.push(output.file);
-        }
-        break;
-      case 'uploading':
-        if (typeof output.file !== 'undefined') {
-          // update current data in files array for uploading file
-          const index = this.files.findIndex((file) => typeof output.file !== 'undefined' && file.id === output.file.id);
-          this.files[index] = output.file;
-        }
-        break;
-      case 'removed':
-        // remove file from array when removed
-        this.files = this.files.filter((file: UploadFile) => file !== output.file);
-        break;
-      case 'dragOver':
-        this.dragOver = true;
-        break;
-      case 'dragOut':
-      case 'drop':
-        this.dragOver = false;
-        break;
-      case 'done':
-        // The file is downloaded
-        break;
+    constructor(
+        private conferenceApi: ManageConferenceApiService
+    ) {
     }
-  }
 
-  removeFile(id: string): void {
-    this.uploadInput.emit({ type: 'remove', id: id });
-  }
+    ngOnInit(): void {
+        this.loading = true;
+
+        this.conferenceApi.getConference().subscribe(
+            (res) => {
+                this.conference = res.conference;
+
+                for (let i = 0; i < this.conference.conference_galleries.length; i++) {
+                    this.galleryImages.push({
+                        small: this.conference.conference_galleries[i].file,
+                        medium: this.conference.conference_galleries[i].file,
+                        big: this.conference.conference_galleries[i].file,
+                    });
+                }
+            },
+            () => {
+            },
+            () => {
+                this.loading = false;
+            }
+        );
+
+        this.galleryOptions = [
+            {
+                width: '70%',
+                height: '600px',
+                thumbnailsColumns: 4,
+                imageAnimation: NgxGalleryAnimation.Slide,
+                imageSwipe: true,
+                imageArrowsAutoHide: true,
+                previewCloseOnEsc: true,
+                previewKeyboardNavigation: true,
+                previewZoom: true,
+                previewRotate: true,
+                previewCloseOnClick: true,
+                previewFullscreen: true,
+                previewSwipe: true,
+                thumbnailsSwipe: true
+            },
+            // max-width 800
+            {
+                breakpoint: 800,
+                width: '70%',
+                height: '600px',
+                imagePercent: 80,
+                thumbnailsPercent: 20,
+                thumbnailsMargin: 20,
+                thumbnailMargin: 20
+            },
+            // max-width 400
+            {
+                breakpoint: 400,
+                preview: false
+            }
+        ];
+    }
+
+    changeDeleting() {
+        this.deleting = !this.deleting;
+    }
+
+    removeSelected() {
+        this.loading = true;
+
+        this.conferenceApi.destroyMultiGalleries(this.imagesDeletingIds, this.conference.id).subscribe(
+            (res) => {
+                if (res.success) {
+                    this.conference.conference_galleries = res.conferenceGalleries;
+
+                    this.alert = new AlertModel('success', res.message);
+                } else {
+                    this.alert = new AlertModel('danger', res.message);
+                }
+            },
+            () => {},
+            () => {
+                this.loading = false;
+            }
+        )
+    }
+
+    changeImagesDeleting(id) {
+        const index = this.imagesDeletingIds.indexOf(id);
+
+        if (index != -1) {
+            this.imagesDeletingIds.splice(index, 1);
+        } else {
+            this.imagesDeletingIds.push(id);
+        }
+    }
+
+    previewOpen() {
+        document.getElementById('sidebar-wrapper-parent').style.zIndex = '-1';
+        document.getElementById('main-navbar').style.zIndex = '-1';
+    }
+
+    previewClose() {
+        document.getElementById('sidebar-wrapper-parent').style.zIndex = '890';
+        document.getElementById('main-navbar').style.zIndex = '890';
+    }
 }

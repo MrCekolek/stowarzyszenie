@@ -202,6 +202,7 @@ Route::group([
             Route::post('get', 'ConferenceGalleryController@index');
             Route::post('create', 'ConferenceGalleryController@create');
             Route::post('destroy', 'ConferenceGalleryController@destroy');
+            Route::post('destroy/multi', 'ConferenceGalleryController@destroyMulti');
         });
 
         Route::prefix('programme_committee')->group(function () {

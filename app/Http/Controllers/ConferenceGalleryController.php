@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ConferenceGalleryRequest;
 use App\Models\ConferenceGallery;
 use App\Services\LogService;
+use App\Traits\UploadFile;
 use Illuminate\Http\Request;
 
 /**
@@ -15,6 +16,8 @@ use Illuminate\Http\Request;
  * @author  Stowarzyszenie CIOB <CIOBstowarzyszenie@gmail.com>
  */
 class ConferenceGalleryController extends Controller {
+    use UploadFile;
+
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['index']]);
     }
@@ -91,10 +94,12 @@ class ConferenceGalleryController extends Controller {
             return $validation->failResponse();
         }
 
-        dd($input);
+        $image = $request->file('file');
+        $name = $image->getClientOriginalName();
+        $folder  = '/uploads/images/galleries';
 
         $conferenceGallery = new ConferenceGallery();
-        $conferenceGallery->file = $input['file'];
+        $conferenceGallery->file = config('app.back_url') . '/' . $this->uploadOne($image, $folder, 'public', $name);
         $conferenceGallery->conference_id = $input['conference_id'];
         $success = $conferenceGallery->save();
 
@@ -135,5 +140,41 @@ class ConferenceGalleryController extends Controller {
         $success = ConferenceGallery::destroy($input['id']);
 
         return LogService::delete($success);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/conference/gallery/destroy/multi",
+     *     tags={"conference_gallery"},
+     *     summary="Deletes conference gallery",
+     *     operationId="ConferenceGalleryControllerDestroyMulti",
+     *     @OA\Parameter(
+     *         name="ids",
+     *         in="query",
+     *         description="Conference gallery ids",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function destroyMulti(Request $request) {
+        $input = $request->all();
+        $validation = new ConferenceGalleryRequest($input, 'destroyMulti');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        $success = ConferenceGallery::whereIn('id', $input['ids'])->delete();
+
+        return LogService::delete($success, [
+            'conferenceGalleries' => ConferenceGallery::where('conference_id', $input['conference_id'])->get()->toArray()
+        ]);
     }
 }

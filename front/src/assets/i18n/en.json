@@ -717,7 +717,20 @@
             "GALLERY": {
                 "UPLOAD_PART1": "Drag files here or",
                 "UPLOAD_PART3": "to upload.",
-                "UPLOAD_PART2": "browse"
+                "UPLOAD_PART2": "browse",
+                "ADMIN_TITLE": "Conference gallery",
+                "ADMIN_SUBTITLE": "Manage conference gallery",
+                "ADMIN_DESC": "Here you can manage conference gallery, add new images, preview and delete existing ones",
+                "ADD_BTN": "Add images",
+                "BACK_BTN": "Go back to gallery",
+                "ADD": {
+                    "ADMIN_TITLE": "Conference gallery - add images",
+                    "ADMIN_SUBTITLE": "Manage conference gallery - add images",
+                    "ADMIN_DESC": "Here you can add images to conference gallery by dropping them into special place or by clicking bolded text \"browse\""
+                },
+                "REMOVE_BTN": "Delete images",
+                "REMOVE_SELECTED": "Remove selected",
+                "CANCEL": "Cancel"
             }
         },
         "PAGINATION": {
