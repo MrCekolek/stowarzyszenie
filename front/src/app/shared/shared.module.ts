@@ -47,20 +47,20 @@ export function HttpLoaderFactory (http: HttpClient) {
     MatDialogModule,
     OverlayModule
   ],
-  exports: [
-    CommonModule,
-    TranslateModule,
-    MatTableModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatFormFieldModule,
-    AlertComponent,
-    MatDialogModule,
-    OverlayModule,
-    TranslationsListComponent,
-    SafeHtmlPipe
-  ],
+    exports: [
+        CommonModule,
+        TranslateModule,
+        MatTableModule,
+        MatIconModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatFormFieldModule,
+        AlertComponent,
+        MatDialogModule,
+        OverlayModule,
+        TranslationsListComponent,
+        SafeHtmlPipe
+    ],
   providers: [
     {
       provide: MATERIAL_SANITY_CHECKS,

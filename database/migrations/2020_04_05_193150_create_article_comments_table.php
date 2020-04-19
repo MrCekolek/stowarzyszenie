@@ -13,7 +13,7 @@ class CreateArticleCommentsTable extends Migration {
     public function up() {
         Schema::create('article_comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->unsignedBigInteger('track_article_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

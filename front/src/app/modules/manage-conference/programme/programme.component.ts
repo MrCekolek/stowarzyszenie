@@ -13,7 +13,6 @@ import { EventModalComponent } from "../event-modal/event-modal.component";
 import { AlertModel } from "../../../shared/models/alert.model";
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import * as $ from 'jquery';
 
 @Component({
     selector: 'app-programme',
@@ -23,7 +22,7 @@ import * as $ from 'jquery';
 
 export class ProgrammeComponent implements OnInit {
 
-    @ViewChild('fullcalendar', {static: false}) fullcalendar;
+    @ViewChild('fullcalendar', {static: false}) fullcalendar: FullCalendarComponent;
     @ViewChild('draggable', {static: false}) draggable: ElementRef;
 
     options: any;
@@ -56,11 +55,11 @@ export class ProgrammeComponent implements OnInit {
 
                 if (this.conference && this.conference.id) {
                     this.events = res.conference.conference_events.filter(function (event) {
-                        return event.datetime === null;
+                        return event.datetime === null && event.calendar == "0";
                     });
 
                     this.eventsModelTmp = res.conference.conference_events.filter(function (event) {
-                        return event.datetime !== null;
+                        return event.datetime !== null && event.calendar == "0";
                     });
 
                     for (let i = 0; i < this.eventsModelTmp.length; i++) {
@@ -81,7 +80,7 @@ export class ProgrammeComponent implements OnInit {
 
                 this.options = {
                     editable: true,
-                    theme: 'standart',
+                    theme: 'standard',
                     defaultView: 'dayGridMonth',
                     header: {
                         left: 'prev,next today',
@@ -103,6 +102,7 @@ export class ProgrammeComponent implements OnInit {
             }
         );
     }
+
     eventClick(model) {
         const index = this.conference.conference_events.findIndex(item => item.id == model.event.id);
         const indexEventModel = this.eventsModel.findIndex(item => item.id == model.event.id);
@@ -115,7 +115,7 @@ export class ProgrammeComponent implements OnInit {
             modal_type: 'edit',
             event: _.cloneDeep(this.conference.conference_events[index]),
             conference_id: this.conference.id,
-            calendar: true
+            calendar: false
         };
 
         const dialogRef = this.dialog.open(EventModalComponent, dialogConfig);
@@ -164,9 +164,14 @@ export class ProgrammeComponent implements OnInit {
         this.conference.conference_events[indexEvents]['datetime'] = moment(model.date).format('YYYY-MM-DD HH:mm:ss');
         this.conference.conference_events[indexEvents]['hour'] = moment(model.date).format('HH:mm');
         this.conference.conference_events[indexEvents]['date_changed'] = false;
-        this.conference.conference_events[indexEvents]['calendar'] = true;
+        this.conference.conference_events[indexEvents]['calendar'] = false;
+        this.conference.conference_events[indexEvents]['programme_event'] = true;
 
-        this.conferenceApi.updateEvent(this.conference.conference_events[indexEvents]).subscribe();
+        this.conferenceApi.updateEvent(this.conference.conference_events[indexEvents]).subscribe(
+            (res) => {
+                this.conference.conference_events[indexEvents] = res.conferenceEvent;
+            }
+        );
 
         this.events.splice(index, 1);
 
@@ -201,8 +206,55 @@ export class ProgrammeComponent implements OnInit {
         }
 
         this.conference.conference_events[indexEvents]['date_changed'] = false;
-        this.conference.conference_events[indexEvents]['calendar'] = true;
+        this.conference.conference_events[indexEvents]['calendar'] = false;
+        this.conference.conference_events[indexEvents]['programme_event'] = true;
 
-        this.conferenceApi.updateEvent(this.conference.conference_events[indexEvents]).subscribe();
+        this.conferenceApi.updateEvent(this.conference.conference_events[indexEvents]).subscribe(
+            (res) => {
+                this.conference.conference_events[indexEvents] = res.conferenceEvent;
+            }
+        );
+    }
+
+    addEvent() {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.autoFocus = true;
+
+        dialogConfig.data = {
+            modal_type: 'new',
+            event: null,
+            conference_id: this.conference.id,
+            calendar: false
+        };
+
+        const dialogRef = this.dialog.open(EventModalComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(
+            (data) => {
+                if (data) {
+                    if (data.success) {
+                        this.conference.conference_events.push(data.conferenceEvent);
+
+                        if (data.conferenceEvent.datetime === null) {
+                            this.events.push(data.conferenceEvent);
+                        } else {
+                            this.eventsModel.push({
+                                id: data.conferenceEvent['id'],
+                                title: data.conferenceEvent['name_' + this.lang],
+                                description: data.conferenceEvent['description_' + this.lang],
+                                color: data.conferenceEvent['colour'],
+                                start: data.conferenceEvent['datetime'],
+                                end: data.conferenceEvent['end']
+                            });
+                        }
+
+                        this.alert = new AlertModel('success', data.message);
+                    } else {
+                        this.alert = new AlertModel('danger', data.message);
+                    }
+                }
+            }
+        );
     }
 }

@@ -34,6 +34,13 @@
 
                 <ng-template #content>
                     <ng-container *ngIf="this.conference && this.conference.id else addConference">
+                        <div class="d-flex justify-content-center my-4">
+                            <button class="btn btn-primary with-icon icon-left" (click)="addEvent()" [disabled]="this.loading">
+                                <i class="fas fa-plus"></i>
+                                {{ 'STOWARZYSZENIE.MODULES.CALENDAR.BTN_ADD' | translate }}
+                            </button>
+                        </div>
+
 <!--                        TODO LADNE ULOZENIE ELEMENTOW OBOK SIEBIE -->
                         <full-calendar
                                 *ngIf="options && !this.dropped"

@@ -107,7 +107,7 @@
     <ng-container *ngIf="this.event.datetime">
         <div class="form-group">
             <label>
-                {{ 'STOWARZYSZENIE.MODALS.EVENTS.CHOOSE_DATE' | translate }}
+                {{ 'STOWARZYSZENIE.MODALS.EVENTS.CHOOSE_DATE_END' | translate }}
             </label>
             <div class="input-group">
                 <div class="input-group-prepend">
@@ -122,7 +122,7 @@
 
         <div class="form-group">
             <label>
-                {{ 'STOWARZYSZENIE.MODALS.EVENTS.CHOOSE_HOUR' | translate }}
+                {{ 'STOWARZYSZENIE.MODALS.EVENTS.CHOOSE_HOUR_END' | translate }}
             </label>
             <div class="input-group">
                 <div class="input-group-prepend">
@@ -162,7 +162,7 @@
     <button type="button" class="btn btn-link" (click)="dismiss()">
         {{ 'STOWARZYSZENIE.MODALS.BUTTON_CANCEL' | translate }}
     </button>
-    <button type="button" class="btn btn-danger" [class.btn-progress]="this.destroying" *ngIf="this.modal_type === 'edit' && this.calendar" (click)="this.delete()">
-        {{ 'STOWARZYSZENIE.STOWARZYSZENIE.DELETE' | translate }}
+    <button type="button" class="btn btn-danger" [class.btn-progress]="this.destroying" *ngIf="this.modal_type === 'edit' && !this.event.calendar" (click)="this.delete()">
+        {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
     </button>
 </mat-dialog-actions>

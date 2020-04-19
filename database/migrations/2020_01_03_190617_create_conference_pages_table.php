@@ -18,9 +18,9 @@ class CreateConferencePagesTable extends Migration {
             $table->string('name_pl')->nullable();
             $table->string('name_en')->nullable();
             $table->string('name_ru')->nullable();
-            $table->text('content_pl')->nullable();
-            $table->text('content_en')->nullable();
-            $table->text('content_ru')->nullable();
+            $table->longText('content_pl')->nullable();
+            $table->longText('content_en')->nullable();
+            $table->longText('content_ru')->nullable();
             $table->unsignedBigInteger('conference_id');
             $table->timestamps();
 

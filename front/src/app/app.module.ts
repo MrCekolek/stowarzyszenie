@@ -15,6 +15,7 @@ import { RoleUserModule } from "./modules/role-user/role-user.module";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { NgxUploaderModule } from 'ngx-uploader';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     NgxJsonViewerModule,
     MatDatepickerModule,
     NgxMaterialTimepickerModule,
-    ColorPickerModule
+    ColorPickerModule,
+    NgxUploaderModule
   ],
   providers: [Document, UserProviderService, {
       provide: APP_INITIALIZER,

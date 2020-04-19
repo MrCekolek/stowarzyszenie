@@ -16,9 +16,9 @@ class CreateTrackArticlesTable extends Migration {
             $table->string('title_pl')->nullable();
             $table->string('title_en')->nullable();
             $table->string('title_ru')->nullable();
-            $table->string('abstract_pl')->nullable();
-            $table->string('abstract_en')->nullable();
-            $table->string('abstract_ru')->nullable();
+            $table->longText('abstract_pl')->nullable();
+            $table->longText('abstract_en')->nullable();
+            $table->longText('abstract_ru')->nullable();
             $table->string('file')->nullable();
             $table->string('status');
             $table->string('keywords_pl')->nullable();

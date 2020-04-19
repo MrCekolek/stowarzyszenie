@@ -1,1 +1,57 @@
-<p>gallery works!</p>
+<div class="hero is-fullheight">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-multiline">
+                <div class="column is-6 is-offset-3">
+                    <div class="upload-box">
+                        <div class="upload-box-content">
+                            <div class="drop-container" [ngClass]="{'hovered': this.dragOver === true}" ngFileDrop [options]="options"
+                                 (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput">
+                                <p class="text-center">
+                                    <i class="fas fa-cloud-upload-alt fa-lg mt-3" style="font-size: 50px; color: blue; margin-bottom: 20px;"></i>
+                                    <br/>
+                                    {{ 'STOWARZYSZENIE.MODULES.GALLERY.UPLOAD_PART1' | translate }}
+                                    <label class="upload-button">
+                                        <input type="file" ngFileSelect [options]="options"
+                                               (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput"
+                                               multiple> {{ 'STOWARZYSZENIE.MODULES.GALLERY.UPLOAD_PART2' | translate }}
+                                    </label>
+                                    {{ 'STOWARZYSZENIE.MODULES.GALLERY.UPLOAD_PART3' | translate }}
+                                </p>
+                            </div>
+                            <div class="upload-item" *ngFor="let file of files; let i = index;">
+                                <div class="upload-item-content col-4">
+                                    <div class="filename">
+                                        <div class="filename-left">
+                                            <i class="ionicon ion-ios-copy"></i>
+                                            <span>{{ file.name }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress-content">
+                                        <div class="progress">
+                                            <span class="bar" [style.width]="file?.progress?.data?.percentage + '%'"
+                                                  [class.is-done]="file?.progress?.data?.percentage === 100"></span>
+                                        </div>
+                                    </div>
+                                    <div class="progress-text-content">
+                                        <span class="progress-text"
+                                              [class.is-done]="file?.progress?.data?.percentage === 100">
+                                          <span>{{ file.progress?.data?.percentage }}% </span>
+                                          <span *ngIf="file.progress?.data?.percentage !== 100">Uploading...</span>
+                                          <span *ngIf="file.progress?.data?.percentage === 100">Done</span>
+                                        </span>
+                                        <span class="speed-and-eta-text"
+                                              *ngIf="file.progress?.data?.percentage !== 0 && file.progress?.data?.percentage !== 100">
+                                          <span>{{ file.progress?.data?.speedHuman }} </span>
+                                          <span>ETA {{ file.progress?.data?.etaHuman }}</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

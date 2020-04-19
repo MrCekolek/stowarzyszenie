@@ -13,9 +13,9 @@ class CreateTranslationsTable extends Migration {
     public function up() {
         Schema::create('translations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name_pl')->nullable();
-            $table->string('name_en')->nullable();
-            $table->string('name_ru')->nullable();
+            $table->longText('name_pl')->nullable();
+            $table->longText('name_en')->nullable();
+            $table->longText('name_ru')->nullable();
             $table->timestamps();
         });
     }

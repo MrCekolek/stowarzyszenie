@@ -13,6 +13,7 @@ export class Event {
     conference_id: string;
     date_changed: boolean;
     date_changed_end: boolean;
+    calendar: boolean;
 
     constructor(event: Object) {
         this.name_pl = event['name_pl'];
@@ -29,5 +30,6 @@ export class Event {
         this.conference_id = event['conference_id'];
         this.date_changed = false;
         this.date_changed_end = false;
+        this.calendar = true;
     }
 }
