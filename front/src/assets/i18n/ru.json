@@ -158,8 +158,11 @@
                 "TITLE_EDIT": "Изменить событие",
                 "INPUT_NEW_LABEL": "Введите новое имя события",
                 "INPUT_NEW_DESC_LABEL": "Введите описание нового события",
-                "CHOOSE_DATE": "Выберите дату мероприятия",
-                "COLOUR_LABEL": "Выберите цвет события"
+                "CHOOSE_DATE": "Выберите дату начала мероприятия",
+                "COLOUR_LABEL": "Выберите цвет события",
+                "CHOOSE_HOUR": "Выберите время начала мероприятия",
+                "CHOOSE_DATE_END": "Выберите дату окончания мероприятия",
+                "CHOOSE_HOUR_END": "Выберите время окончания мероприятия"
             }
         },
         "MODULES": {
@@ -710,6 +713,11 @@
             },
             "CONFERENCE_PROGRAMMEE": {
                 "DRAGGABLE": "Draggable События"
+            },
+            "GALLERY": {
+                "UPLOAD_PART1": "Перетащите файлы сюда или",
+                "UPLOAD_PART3": "загружать.",
+                "UPLOAD_PART2": "просматривать"
             }
         },
         "PAGINATION": {

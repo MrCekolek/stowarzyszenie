@@ -29,6 +29,7 @@ import { CommitteeModalComponent } from './committee-modal/committee-modal.compo
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import {ColorPickerModule} from "ngx-color-picker";
+import {NgxUploaderModule} from "ngx-uploader";
 
 @NgModule({
   declarations: [ActualConferenceComponent, AddConferenceComponent, GeneralSettingsComponent, CommitteeComponent, ManageTracksComponent, ConfPagesModalComponent, TrackModalComponent, TrackMembersComponent, AssignUserComponent, PaymentsComponent, ConferenceCfpComponent, CalendarComponent, GalleryComponent, ProgrammeComponent, ConferenceRoleModalComponent, ConferencePageComponent, ConfpageEditComponent, EventModalComponent, CommitteeModalComponent],
@@ -43,7 +44,8 @@ import {ColorPickerModule} from "ngx-color-picker";
         CarouselModule,
         FullCalendarModule,
         NgxMaterialTimepickerModule,
-        ColorPickerModule
+        ColorPickerModule,
+        NgxUploaderModule
     ],
   entryComponents: [TrackModalComponent, AssignUserComponent, ConferenceRoleModalComponent, ConfPagesModalComponent, EventModalComponent, CommitteeModalComponent],
   providers: []

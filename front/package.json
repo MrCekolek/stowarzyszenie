@@ -46,6 +46,7 @@
         "ngx-material-timepicker": "^5.5.1",
         "ngx-owl-carousel-o": "^2.1.0",
         "ngx-scrollbar": "^7.0.0",
+        "ngx-uploader": "^8.0.0",
         "popper.js": "^1.16.0",
         "rxjs": "^6.5.3",
         "tslib": "^1.10.0",

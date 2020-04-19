@@ -4,19 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateConferenceCfpsTable extends Migration {
+class CreateConferenceGalleriesTable extends Migration
+{
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
-        Schema::create('conference_cfps', function (Blueprint $table) {
+    public function up()
+    {
+        Schema::create('conference_galleries', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('file')->nullable();
-            $table->longText('content_pl')->nullable();
-            $table->longText('content_en')->nullable();
-            $table->longText('content_ru')->nullable();
+            $table->string('file');
             $table->unsignedBigInteger('conference_id');
             $table->timestamps();
 
@@ -32,7 +31,8 @@ class CreateConferenceCfpsTable extends Migration {
      *
      * @return void
      */
-    public function down() {
-        Schema::dropIfExists('conference_cfps');
+    public function down()
+    {
+        Schema::dropIfExists('conference_galleries');
     }
 }

@@ -23,6 +23,7 @@ export class EventModalComponent implements OnInit {
     hour: '',
     end: '',
     end_hour: '',
+    calendar: true,
     colour: '#000000',
     description_pl: '',
     description_en: '',
@@ -70,8 +71,8 @@ export class EventModalComponent implements OnInit {
       this.conference_id = data.conference_id;
     }
 
-    if (data.calendar) {
-      this.calendar = data.calendar;
+    if (typeof data.calendar !== 'undefined') {
+      this.event.calendar = data.calendar;
     }
 
     this.modal_type = data.modal_type;

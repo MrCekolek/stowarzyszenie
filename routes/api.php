@@ -134,6 +134,7 @@ Route::group([
         Route::post('', 'ConferenceController@index');
         Route::post('active/get', 'ConferenceController@getActive');
         Route::post('article/get', 'ConferenceController@getArticles');
+        Route::post('article/user/get', 'ConferenceController@getUserArticles');
         Route::post('create', 'ConferenceController@create');
         Route::post('update', 'ConferenceController@update');
         Route::post('destroy', 'ConferenceController@destroy');
@@ -195,6 +196,12 @@ Route::group([
             Route::post('update', 'ConferenceEventController@update');
             Route::post('destroy', 'ConferenceEventController@destroy');
             Route::post('{conferenceEvent}', 'ConferenceEventController@show');
+        });
+
+        Route::prefix('gallery')->group(function () {
+            Route::post('get', 'ConferenceGalleryController@index');
+            Route::post('create', 'ConferenceGalleryController@create');
+            Route::post('destroy', 'ConferenceGalleryController@destroy');
         });
 
         Route::prefix('programme_committee')->group(function () {
