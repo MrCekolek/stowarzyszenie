@@ -47,6 +47,31 @@ class TrackArticleController extends Controller {
 
     /**
      * @OA\Post(
+     *     path="/conference/track/article/show",
+     *     tags={"track_article"},
+     *     summary="Gets article belongs to track",
+     *     operationId="TrackArticleControllerShow",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function show(Request $request) {
+        $input = $request->all();
+        $validation = new TrackArticleRequest($input, 'show');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        return LogService::read(true, [
+            'trackArticle' => TrackArticle::with('articleComments')->where('id', $input['id'])->first()->toArray()
+        ]);
+    }
+
+    /**
+     * @OA\Post(
      *     path="/conference/track/article/create",
      *     tags={"track_article"},
      *     summary="Create articles to track",
