@@ -14,6 +14,7 @@ import { CommitteeComponent } from './committee/committee.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { ProgrammeComponent } from './programme/programme.component';
 import { ConfpageEditComponent } from './confpage-edit/confpage-edit.component';
+import {GalleryAddComponent} from "./gallery/gallery-add/gallery-add.component";
 
 const routes: Routes = [{
     path: '',
@@ -107,6 +108,13 @@ const routes: Routes = [{
         {
             path: 'gallery',
             component: GalleryComponent,
+            canActivateChild: [
+                LoggedGuard
+            ]
+        },
+        {
+            path: 'gallery-add',
+            component: GalleryAddComponent,
             canActivateChild: [
                 LoggedGuard
             ]

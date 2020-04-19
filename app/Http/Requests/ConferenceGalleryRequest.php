@@ -21,6 +21,11 @@ class ConferenceGalleryRequest extends FormRequest {
                 $this->checkDestroy();
 
                 break;
+
+            case 'destroyMulti':
+                $this->checkDestroyMulti();
+
+                break;
         }
 
         parent::__construct($input);
@@ -42,6 +47,12 @@ class ConferenceGalleryRequest extends FormRequest {
     protected function checkDestroy() {
         $this->rules = [
             'id' => 'required|exists:conference_galleries'
+        ];
+    }
+
+    protected function checkDestroyMulti() {
+        $this->rules = [
+            'conference_id' => 'required|exists:conferences,id'
         ];
     }
 }

@@ -135,4 +135,14 @@ export class ManageConferenceApiService {
 
     return this.api.post('conference/programme_committee/createMulti', obj);
   }
+
+  // Gallery
+  destroyMultiGalleries(ids, conferenceId) {
+    const obj = {
+      ids: ids,
+      conference_id: conferenceId
+    };
+
+    return this.api.post('conference/gallery/destroy/multi', obj);
+  }
 }
