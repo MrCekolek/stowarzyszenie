@@ -154,6 +154,7 @@ Route::group([
             Route::post('destroy', 'TrackController@destroy');
 
             Route::prefix('article')->group(function () {
+                Route::post('show', 'TrackArticleController@show');
                 Route::post('create', 'TrackArticleController@create');
                 Route::post('{track}', 'TrackArticleController@index');
 

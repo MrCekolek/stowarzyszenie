@@ -12,6 +12,11 @@ class TrackArticleRequest extends FormRequest {
 
                 break;
 
+            case 'show':
+                $this->checkShow();
+
+                break;
+
             case 'create':
                 $this->checkCreate();
 
@@ -34,6 +39,12 @@ class TrackArticleRequest extends FormRequest {
     public function checkIndex() {
         $this->rules = [
             'track_id' => 'required|exists:tracks,id',
+        ];
+    }
+
+    public function checkShow() {
+        $this->rules = [
+            'id' => 'required|exists:track_articles'
         ];
     }
 
