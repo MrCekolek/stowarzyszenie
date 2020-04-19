@@ -717,7 +717,20 @@
             "GALLERY": {
                 "UPLOAD_PART1": "Przeciągnij pliki tutaj lub",
                 "UPLOAD_PART3": "aby przesłać.",
-                "UPLOAD_PART2": "przeglądaj"
+                "UPLOAD_PART2": "przeglądaj",
+                "ADMIN_TITLE": "Galeria konferencji",
+                "ADMIN_SUBTITLE": "Zarządzaj galerią konferencji",
+                "ADMIN_DESC": "Tutaj możesz zarządzać galerią konferencji, dodawać nowe obrazy, wyświetlać podgląd i usuwać istniejące",
+                "ADD_BTN": "Dodaj obrazy",
+                "BACK_BTN": "Wróć do galerii",
+                "ADD": {
+                    "ADMIN_TITLE": "Galeria konferencji - dodaj zdjęcia",
+                    "ADMIN_SUBTITLE": "Zarządzaj galerią konferencji - dodawaj zdjęcia",
+                    "ADMIN_DESC": "Tutaj możesz dodawać zdjęcia do galerii konferencji, upuszczając je w specjalne miejsce lub klikając pogrubiony tekst „przeglądaj”"
+                },
+                "REMOVE_BTN": "Usuń obrazy",
+                "REMOVE_SELECTED": "Usuń wybrane",
+                "CANCEL": "Anuluj"
             }
         },
         "PAGINATION": {

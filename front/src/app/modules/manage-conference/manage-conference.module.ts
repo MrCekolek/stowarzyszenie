@@ -28,11 +28,14 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CommitteeModalComponent } from './committee-modal/committee-modal.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
-import {ColorPickerModule} from "ngx-color-picker";
-import {NgxUploaderModule} from "ngx-uploader";
+import { ColorPickerModule } from "ngx-color-picker";
+import { NgxUploaderModule } from "ngx-uploader";
+import { GalleryAddComponent } from './gallery/gallery-add/gallery-add.component';
+import { NgxGalleryModule } from "ngx-gallery";
+import 'hammerjs';
 
 @NgModule({
-  declarations: [ActualConferenceComponent, AddConferenceComponent, GeneralSettingsComponent, CommitteeComponent, ManageTracksComponent, ConfPagesModalComponent, TrackModalComponent, TrackMembersComponent, AssignUserComponent, PaymentsComponent, ConferenceCfpComponent, CalendarComponent, GalleryComponent, ProgrammeComponent, ConferenceRoleModalComponent, ConferencePageComponent, ConfpageEditComponent, EventModalComponent, CommitteeModalComponent],
+  declarations: [ActualConferenceComponent, AddConferenceComponent, GeneralSettingsComponent, CommitteeComponent, ManageTracksComponent, ConfPagesModalComponent, TrackModalComponent, TrackMembersComponent, AssignUserComponent, PaymentsComponent, ConferenceCfpComponent, CalendarComponent, GalleryComponent, ProgrammeComponent, ConferenceRoleModalComponent, ConferencePageComponent, ConfpageEditComponent, EventModalComponent, CommitteeModalComponent, GalleryAddComponent],
     imports: [
         CommonModule,
         ManageConferenceRoutingModule,
@@ -45,7 +48,8 @@ import {NgxUploaderModule} from "ngx-uploader";
         FullCalendarModule,
         NgxMaterialTimepickerModule,
         ColorPickerModule,
-        NgxUploaderModule
+        NgxUploaderModule,
+        NgxGalleryModule
     ],
   entryComponents: [TrackModalComponent, AssignUserComponent, ConferenceRoleModalComponent, ConfPagesModalComponent, EventModalComponent, CommitteeModalComponent],
   providers: []

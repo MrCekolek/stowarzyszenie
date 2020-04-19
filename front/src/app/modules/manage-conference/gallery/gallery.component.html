@@ -1,57 +1,98 @@
-<div class="hero is-fullheight">
-    <div class="hero-body">
-        <div class="container">
-            <div class="columns is-multiline">
-                <div class="column is-6 is-offset-3">
-                    <div class="upload-box">
-                        <div class="upload-box-content">
-                            <div class="drop-container" [ngClass]="{'hovered': this.dragOver === true}" ngFileDrop [options]="options"
-                                 (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput">
-                                <p class="text-center">
-                                    <i class="fas fa-cloud-upload-alt fa-lg mt-3" style="font-size: 50px; color: blue; margin-bottom: 20px;"></i>
-                                    <br/>
-                                    {{ 'STOWARZYSZENIE.MODULES.GALLERY.UPLOAD_PART1' | translate }}
-                                    <label class="upload-button">
-                                        <input type="file" ngFileSelect [options]="options"
-                                               (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput"
-                                               multiple> {{ 'STOWARZYSZENIE.MODULES.GALLERY.UPLOAD_PART2' | translate }}
+<div class="section-header">
+    <h1>
+        {{ 'STOWARZYSZENIE.MODULES.GALLERY.ADMIN_TITLE' | translate }}
+    </h1>
+</div>
+
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.GALLERY.ADMIN_SUBTITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.GALLERY.ADMIN_DESC' | translate }}
+    </p>
+
+    <div class="col-sm-12">
+        <div class="card">
+            <app-alert *ngIf="this.alert" [alertType]="this.alert.type" [message]="this.alert.message"></app-alert>
+
+            <div class="card-header" *ngIf="!this.loading && this.conference && this.conference.id">
+                <h4></h4>
+                <ng-container *ngIf="this.deleting">
+                    <div class="card-header-action mr-1">
+                        <a class="btn btn-danger btn-icon icon-left text-white" (click)="this.removeSelected()">
+                            <i class="far fa-trash-alt"></i>
+                            {{ 'STOWARZYSZENIE.MODULES.GALLERY.REMOVE_SELECTED' | translate }}
+                        </a>
+                    </div>
+                    <div class="card-header-action mr-1">
+                        <a class="btn btn-info btn-icon icon-left text-white" (click)="this.changeDeleting()">
+                            <i class="fas fa-ban"></i>
+                            {{ 'STOWARZYSZENIE.MODULES.GALLERY.CANCEL' | translate }}
+                        </a>
+                    </div>
+                </ng-container>
+                <div class="card-header-action mr-1" *ngIf="!this.deleting">
+                    <a class="btn btn-danger btn-icon icon-left text-white" (click)="this.changeDeleting()">
+                        <i class="fas fa-plus"></i>
+                        {{ 'STOWARZYSZENIE.MODULES.GALLERY.REMOVE_BTN' | translate }}
+                    </a>
+                </div>
+                <div class="card-header-action">
+                    <a class="btn btn-primary btn-icon icon-left text-white" [routerLink]="['../gallery-add']">
+                        <i class="fas fa-plus"></i>
+                        {{ 'STOWARZYSZENIE.MODULES.GALLERY.ADD_BTN' | translate }}
+                    </a>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="d-flex justify-content-center" *ngIf="this.loading else content">
+                    <div class="spinner-border text-primary">
+                    </div>
+                </div>
+
+                <ng-template #content>
+                    <ng-container *ngIf="this.conference && this.conference.id else addConference">
+                        <div *ngIf="!this.deleting">
+                            <ngx-gallery class="ngx-gallery ngx-gallery-cstm" [options]="this.galleryOptions" [images]="this.galleryImages" (previewOpen)="this.previewOpen()" (previewClose)="this.previewClose()"></ngx-gallery>
+                        </div>
+
+                        <div class="form-group" *ngIf="this.deleting">
+                            <div class="row gutters-sm">
+                                <div class="col-3 col-sm-2" *ngFor="let conferenceGallery of this.conference.conference_galleries">
+                                    <label class="imagecheck mb-4">
+                                        <input name="imagecheck" type="checkbox" value="1" class="imagecheck-input" />
+                                        <figure class="imagecheck-figure" (click)="this.changeImagesDeleting(conferenceGallery.id)">
+                                            <img src="{{ conferenceGallery.file }}" class="imagecheck-image">
+                                        </figure>
                                     </label>
-                                    {{ 'STOWARZYSZENIE.MODULES.GALLERY.UPLOAD_PART3' | translate }}
-                                </p>
-                            </div>
-                            <div class="upload-item" *ngFor="let file of files; let i = index;">
-                                <div class="upload-item-content col-4">
-                                    <div class="filename">
-                                        <div class="filename-left">
-                                            <i class="ionicon ion-ios-copy"></i>
-                                            <span>{{ file.name }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress-content">
-                                        <div class="progress">
-                                            <span class="bar" [style.width]="file?.progress?.data?.percentage + '%'"
-                                                  [class.is-done]="file?.progress?.data?.percentage === 100"></span>
-                                        </div>
-                                    </div>
-                                    <div class="progress-text-content">
-                                        <span class="progress-text"
-                                              [class.is-done]="file?.progress?.data?.percentage === 100">
-                                          <span>{{ file.progress?.data?.percentage }}% </span>
-                                          <span *ngIf="file.progress?.data?.percentage !== 100">Uploading...</span>
-                                          <span *ngIf="file.progress?.data?.percentage === 100">Done</span>
-                                        </span>
-                                        <span class="speed-and-eta-text"
-                                              *ngIf="file.progress?.data?.percentage !== 0 && file.progress?.data?.percentage !== 100">
-                                          <span>{{ file.progress?.data?.speedHuman }} </span>
-                                          <span>ETA {{ file.progress?.data?.etaHuman }}</span>
-                                        </span>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </ng-container>
+                    <ng-template #addConference>
+                        <div class="empty-state" data-height="400" style="height: 400px;">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-question"></i>
+                            </div>
+
+                            <h2>
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE' | translate }}
+                            </h2>
+
+                            <p class="lead">
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE_DESC' | translate}}
+                            </p>
+
+                            <a class="btn btn-primary mt-4" [routerLink]="['../create']">
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.ADD_CONF_BUTT' | translate }}
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-template>
             </div>
         </div>
     </div>
 </div>
+
