@@ -30,6 +30,12 @@
                                     </th>
                                 </tr>
 
+                                <tr *ngIf="this.allRoles.length == 0">
+                                    <td>
+                                        {{ 'STOWARZYSZENIE.LABELS.NO_DATA' | translate }}
+                                    </td>
+                                </tr>
+
                                 <tr *ngFor="let role of allRoles">
                                     <td>
                                         {{ role['name_' + lang] }}

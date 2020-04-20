@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ManageConferenceApiService } from 'src/app/core/http/manage-conference-api.service';
 import { Cfp } from 'src/app/shared/models/cfp.model';
+import { AlertModel } from "../../../shared/models/alert.model";
 
 @Component({
   selector: 'app-conference-cfp',
@@ -57,47 +58,69 @@ export class ConferenceCfpComponent implements OnInit {
   };
     
   private cfp: Cfp = {
+    id: '',
+    file_name: '',
     file: '',
     content_pl: '',
     content_en: '',
     content_ru: '',
-    conference_id: '',
+    conference_id: ''
   };
   
   private conference;
   private loading;
-  private added;
+  private updating;
+  private alert;
 
   constructor(
     private manageConferenceApi: ManageConferenceApiService
   ) { }
 
   ngOnInit() {
-    this.manageConferenceApi.getConference().subscribe(res => {
-      this.conference = res.conference;
-      this.cfp.conference_id = res.conference.id;
+    this.loading = true;
 
-      const conf = {
-        id: res.conference.id
-      };
-      this.manageConferenceApi.getCFP(conf).subscribe(res => {
-        console.log(res);
-        this.cfp = res.conferences.conference_cfp;
-        if (this.cfp) {
-          this.added = true;
+    this.manageConferenceApi.getConference().subscribe(
+        (res) => {
+          this.conference = res.conference;
+        },
+        () => {},
+        () => {
+          this.loading = false;
         }
-      });
-    });
+      );
   }
 
   addCFP() {
     this.loading = true;
+
+    this.cfp.conference_id = this.conference.id;
+
     this.manageConferenceApi.addCFP(this.cfp).subscribe(res => {
-      console.log(res);
       if (res.success) {
-        this.added = true;
+        this.conference.conference_cfp = res.conferenceCfp;
       }
+
       this.loading = false;
     });
+  }
+
+  updateCfp() {
+    this.updating = true;
+
+    this.manageConferenceApi.updateCFP(this.conference.conference_cfp).subscribe(
+      (res) => {
+        if (res.success) {
+          this.conference.conference_cfp = res.conferenceCfp;
+
+          this.alert = new AlertModel('success', res.message);
+        } else {
+          this.alert = new AlertModel('danger', res.message);
+        }
+      },
+      () => {},
+      () => {
+        this.updating = false;
+      }
+    );
   }
 }

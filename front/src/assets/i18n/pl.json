@@ -66,6 +66,10 @@
                     "PARTICIPANTS": {
                         "TITLE": "Usuwanie członka z konferencji",
                         "TEXT": "Czy na pewno chcesz usunąć członka z konferencji"
+                    },
+                    "EVENT": {
+                        "TITLE": "Usuwanie wydarzenia z kalendarza",
+                        "TEXT": "Czy na pewno chcesz usunąć wydarzenie"
                     }
                 }
             },
@@ -162,7 +166,8 @@
                 "COLOUR_LABEL": "Wybierz kolor wydarzenia",
                 "CHOOSE_HOUR": "Wybierz czas rozpoczęcia wydarzenia",
                 "CHOOSE_DATE_END": "Wybierz datę zakończenia wydarzenia",
-                "CHOOSE_HOUR_END": "Wybierz czas zakończenia wydarzenia"
+                "CHOOSE_HOUR_END": "Wybierz czas zakończenia wydarzenia",
+                "INPUT_EDIT_DESC_LABEL": "Zmień opis w bieżącym języku, aby przetłumaczyć lub edytuj poniższe pola tłumaczenia"
             }
         },
         "MODULES": {
@@ -605,7 +610,8 @@
                     "ROLE_TH": "Role w konferencji",
                     "DELETE_ACTION": "Usuń z konferencji",
                     "ROLE_ACTION": "Zarządzaj rolami",
-                    "PAYMENT_ACTION": "Zmień status płatności"
+                    "PAYMENT_ACTION": "Zmień status płatności",
+                    "NO_USERS": "Brak zarejestrowanych użytkowników na konferencji"
                 },
                 "PARTICIPANTS": {
                     "ROLE_MODAL": {
@@ -658,7 +664,8 @@
             "CFP": {
                 "PAGE_TITLE": "Call For Papers",
                 "SECTION_TITLE": "Zarządzaj CFP",
-                "PAGE_DESC": "Edytuj CFP dla swojej konferencji, która będzie wyświetlana dla wszystkich użytkowników i gości podczas rejestracji na konferencję, na stronie konferencji itp."
+                "PAGE_DESC": "Edytuj CFP dla swojej konferencji, która będzie wyświetlana dla wszystkich użytkowników i gości podczas rejestracji na konferencję, na stronie konferencji itp.",
+                "CHOOSED_FILE": "Wybrałeś plik:"
             },
             "CONFPAGES": {
                 "PAGE_EDIT_TITLE": "Edytuj podstronę strony konferencji"
@@ -730,7 +737,16 @@
                 },
                 "REMOVE_BTN": "Usuń obrazy",
                 "REMOVE_SELECTED": "Usuń wybrane",
-                "CANCEL": "Anuluj"
+                "CANCEL": "Anuluj",
+                "NO_IMAGES": "Konferencja nie ma żadnych przesłanych zdjęć"
+            },
+            "COMMITTEE": {
+                "PAGE_TITLE": "Komitet programowy",
+                "SECTION_TITLE": "Zarządzaj komitetem programowym",
+                "PAGE_DESC": "Tutaj możesz zarządzać komitetem programowym, dodawać lub usuwać użytkowników w komitecie programowym",
+                "LIST_TITLE": "Lista użytkowników w komitecie programowym",
+                "ADD_PC_BTN": "Dodaj użytkownika",
+                "NO_USERS": "Brak użytkowników w komitecie programowym"
             }
         },
         "PAGINATION": {

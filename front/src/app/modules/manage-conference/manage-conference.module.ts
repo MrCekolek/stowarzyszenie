@@ -5,7 +5,7 @@ import { ManageConferenceRoutingModule } from './manage-conference-routing.modul
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AddConferenceComponent } from './add-conference/add-conference.component';
 import { GeneralSettingsComponent } from './general-settings/general-settings.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommitteeComponent } from './committee/committee.component';
 import { ManageTracksComponent } from './manage-tracks/manage-tracks.component';
 import { TrackModalComponent } from './track-modal/track-modal.component';
@@ -49,7 +49,8 @@ import 'hammerjs';
         NgxMaterialTimepickerModule,
         ColorPickerModule,
         NgxUploaderModule,
-        NgxGalleryModule
+        NgxGalleryModule,
+        ReactiveFormsModule
     ],
   entryComponents: [TrackModalComponent, AssignUserComponent, ConferenceRoleModalComponent, ConfPagesModalComponent, EventModalComponent, CommitteeModalComponent],
   providers: []

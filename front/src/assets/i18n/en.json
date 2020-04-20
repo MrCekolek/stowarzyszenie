@@ -66,6 +66,10 @@
                     "PARTICIPANTS": {
                         "TITLE": "Removing a member from the conference",
                         "TEXT": "Are you sure you want to remove the member from the conference"
+                    },
+                    "EVENT": {
+                        "TITLE": "Deleting calendar event",
+                        "TEXT": "Are you sure you want to delete event"
                     }
                 }
             },
@@ -162,7 +166,8 @@
                 "COLOUR_LABEL": "Choose color of event",
                 "CHOOSE_HOUR": "Select the start time of the event",
                 "CHOOSE_DATE_END": "Select the end date of the event",
-                "CHOOSE_HOUR_END": "Select the end time of the event"
+                "CHOOSE_HOUR_END": "Select the end time of the event",
+                "INPUT_EDIT_DESC_LABEL": "Change the description in the current language to translate or edit the translation fields below"
             }
         },
         "MODULES": {
@@ -605,7 +610,8 @@
                     "ROLE_TH": "Roles in conference",
                     "DELETE_ACTION": "Delete from conference",
                     "ROLE_ACTION": "Manage roles",
-                    "PAYMENT_ACTION": "Change status of payment"
+                    "PAYMENT_ACTION": "Change status of payment",
+                    "NO_USERS": "No registered users in conference"
                 },
                 "PARTICIPANTS": {
                     "ROLE_MODAL": {
@@ -658,7 +664,8 @@
             "CFP": {
                 "PAGE_TITLE": "Call For Papers",
                 "SECTION_TITLE": "Manage CFP",
-                "PAGE_DESC": "Edit CFP for your conference, which will be displayed for all users and guests while registering to conference, on conference page etc."
+                "PAGE_DESC": "Edit CFP for your conference, which will be displayed for all users and guests while registering to conference, on conference page etc.",
+                "CHOOSED_FILE": "You choosed file:"
             },
             "CONFPAGES": {
                 "PAGE_EDIT_TITLE": "Edit subpage of conference page"
@@ -730,7 +737,16 @@
                 },
                 "REMOVE_BTN": "Delete images",
                 "REMOVE_SELECTED": "Remove selected",
-                "CANCEL": "Cancel"
+                "CANCEL": "Cancel",
+                "NO_IMAGES": "Conference doesn't have any uploaded images"
+            },
+            "COMMITTEE": {
+                "PAGE_TITLE": "Program committee",
+                "SECTION_TITLE": "Manage program committee",
+                "PAGE_DESC": "Here you can manage program committee, add or remove users in program committee",
+                "LIST_TITLE": "List of users in program committee",
+                "ADD_PC_BTN": "Add user",
+                "NO_USERS": "No users in program committee"
             }
         },
         "PAGINATION": {

@@ -9,7 +9,7 @@
         {{ 'STOWARZYSZENIE.MODULES.CALENDAR.PAGE_DESC' | translate }}
     </p>
 
-    <div class="d-flex justify-content-center my-4">
+    <div class="d-flex justify-content-center my-4" *ngIf="!this.loading && this.conference_id">
         <button class="btn btn-primary with-icon icon-left" (click)="addEvent()">
             <i class="fas fa-plus"></i>
             {{ 'STOWARZYSZENIE.MODULES.CALENDAR.BTN_ADD' | translate }}
@@ -18,7 +18,7 @@
 
     <div class="col-sm-12">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header" *ngIf="!this.loading && this.conference_id">
                 <h4>
                     {{ 'STOWARZYSZENIE.MODULES.CALENDAR.DATES_TABLE_TITLE' | translate }}
                 </h4>
@@ -43,9 +43,9 @@
                 <ng-template #content>
                     <app-alert *ngIf="this.alert" [alertType]="this.alert.type" [message]="this.alert.message"></app-alert>
 
-                    <div class="table-responsive">
+                    <div class="table-responsive" *ngIf="!this.loading && this.conference_id else addConference">
                         <table class="table table-striped table-md">
-                            <thead class="thead-dark">                                 
+                            <thead class="thead-dark">
                                 <tr role="row">
                                     <th  tabindex="0" aria-controls="table-1" rowspan="1" colspan="1" aria-label="Task Name: activate to sort column ascending">
                                         {{ 'STOWARZYSZENIE.MODULES.CALENDAR.EVENT_NAME_TITLE' | translate }}
@@ -89,6 +89,26 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <ng-template #addConference>
+                        <div class="empty-state" data-height="400" style="height: 400px;">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-question"></i>
+                            </div>
+
+                            <h2>
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE' | translate }}
+                            </h2>
+
+                            <p class="lead">
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE_DESC' | translate}}
+                            </p>
+
+                            <a class="btn btn-primary mt-4" [routerLink]="['../create']">
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.ADD_CONF_BUTT' | translate }}
+                            </a>
+                        </div>
+                    </ng-template>
                 </ng-template>
             </div>
         </div>
