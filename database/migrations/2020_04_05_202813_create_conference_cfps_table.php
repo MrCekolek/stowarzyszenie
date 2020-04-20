@@ -13,6 +13,7 @@ class CreateConferenceCfpsTable extends Migration {
     public function up() {
         Schema::create('conference_cfps', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('file_name')->nullable();
             $table->string('file')->nullable();
             $table->longText('content_pl')->nullable();
             $table->longText('content_en')->nullable();

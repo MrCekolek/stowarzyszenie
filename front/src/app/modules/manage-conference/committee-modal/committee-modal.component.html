@@ -33,6 +33,14 @@
                                     </th>
                                 </tr>
 
+                                <tr *ngIf="this.allUsers.length < 1">
+                                    <td>
+                                        {{ 'STOWARZYSZENIE.LABELS.NO_DATA' | translate }}
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
                                 <tr *ngFor="let user of allUsers">
                                     <td>
                                         {{ user.first_name }}

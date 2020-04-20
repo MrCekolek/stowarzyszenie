@@ -5,7 +5,7 @@ import {MatDialog, MatDialogConfig} from "@angular/material";
 import { ConferenceRoleModalComponent } from "../conference-role-modal/conference-role-modal.component";
 import { AlertModel } from "../../../shared/models/alert.model";
 import * as _ from 'lodash';
-import {CommitteeModalComponent} from "../committee-modal/committee-modal.component";
+import { CommitteeModalComponent } from "../committee-modal/committee-modal.component";
 
 
 @Component({
@@ -59,19 +59,21 @@ export class CommitteeComponent implements OnInit {
       },
       () => {},
       () => {
-        this.conferenceApi.getPC(this.conference_id).subscribe(
-            (res) => {
-              if (res.success) {
-                this.pcmembers = res.programmeCommittees;
-
-                console.log(this.pcmembers);
+        if (this.conference_id) {
+          this.conferenceApi.getPC(this.conference_id).subscribe(
+              (res) => {
+                if (res.success) {
+                  this.pcmembers = res.programmeCommittees;
+                }
+              },
+              () => {},
+              () => {
+                this.loading = false;
               }
-            },
-            () => {},
-            () => {
-              this.loading = false;
-            }
-        )
+          )
+        } else {
+          this.loading = false;
+        }
       }
     );
   }

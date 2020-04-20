@@ -19,7 +19,7 @@
             <div class="card-header" *ngIf="!this.loading && this.conference && this.conference.id">
                 <h4></h4>
                 <ng-container *ngIf="this.deleting">
-                    <div class="card-header-action mr-1">
+                    <div class="card-header-action mr-1" *ngIf="this.imagesDeletingIds.length > 0">
                         <a class="btn btn-danger btn-icon icon-left text-white" (click)="this.removeSelected()">
                             <i class="far fa-trash-alt"></i>
                             {{ 'STOWARZYSZENIE.MODULES.GALLERY.REMOVE_SELECTED' | translate }}
@@ -32,13 +32,13 @@
                         </a>
                     </div>
                 </ng-container>
-                <div class="card-header-action mr-1" *ngIf="!this.deleting">
+                <div class="card-header-action mr-1" *ngIf="!this.deleting && this.galleryImages && this.galleryImages.length > 1">
                     <a class="btn btn-danger btn-icon icon-left text-white" (click)="this.changeDeleting()">
-                        <i class="fas fa-plus"></i>
+                        <i class="far fa-trash-alt"></i>
                         {{ 'STOWARZYSZENIE.MODULES.GALLERY.REMOVE_BTN' | translate }}
                     </a>
                 </div>
-                <div class="card-header-action">
+                <div class="card-header-action" *ngIf="!this.deleting">
                     <a class="btn btn-primary btn-icon icon-left text-white" [routerLink]="['../gallery-add']">
                         <i class="fas fa-plus"></i>
                         {{ 'STOWARZYSZENIE.MODULES.GALLERY.ADD_BTN' | translate }}
@@ -55,7 +55,18 @@
                 <ng-template #content>
                     <ng-container *ngIf="this.conference && this.conference.id else addConference">
                         <div *ngIf="!this.deleting">
-                            <ngx-gallery class="ngx-gallery ngx-gallery-cstm" [options]="this.galleryOptions" [images]="this.galleryImages" (previewOpen)="this.previewOpen()" (previewClose)="this.previewClose()"></ngx-gallery>
+                            <ngx-gallery *ngIf="this.galleryImages.length > 0 else noImages" class="ngx-gallery ngx-gallery-cstm" [options]="this.galleryOptions" [images]="this.galleryImages" (previewOpen)="this.previewOpen()" (previewClose)="this.previewClose()"></ngx-gallery>
+                            <ng-template #noImages>
+                                <div class="empty-state" data-height="400" style="height: 400px;">
+                                    <div class="empty-state-icon">
+                                        <i class="fas fa-eye-slash"></i>
+                                    </div>
+
+                                    <h2>
+                                        {{ 'STOWARZYSZENIE.MODULES.GALLERY.NO_IMAGES' | translate }}
+                                    </h2>
+                                </div>
+                            </ng-template>
                         </div>
 
                         <div class="form-group" *ngIf="this.deleting">
