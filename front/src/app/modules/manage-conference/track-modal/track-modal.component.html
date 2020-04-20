@@ -73,7 +73,15 @@
         <label class="text-primary">
             {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.ADMIN.TRACKS.MODAL.INPUT_LABEL_COLOR' | translate }}
         </label>
-        <input type="color" class="form-control" [(ngModel)]="this.track.colour">
+        <input [value]="this.track.colour"
+               [style.background]="this.track.colour"
+               [cpOutputFormat]="'hex'"
+               [cpOKButton]="true"
+               [cpPosition]="'top'"
+               [cpSaveClickOutside]="true"
+               [cpOKButtonClass]= "'btn btn-primary btn-xs'"
+               [(colorPicker)]="this.track.colour"
+               class="form-control"/>
     </div>
 </mat-dialog-content>
 

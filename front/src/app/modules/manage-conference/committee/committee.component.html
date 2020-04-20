@@ -15,7 +15,7 @@
         </div>
 
         <ng-template #content>
-            <div class="card-header">
+            <div class="card-header" *ngIf="!this.loading && this.conference_id">
                 <h4>
                     {{ 'STOWARZYSZENIE.MODULES.COMMITTEE.LIST_TITLE' | translate}}
                 </h4>
@@ -27,26 +27,58 @@
                 </div>
             </div>
             <div class="card-body">
-                <owl-carousel-o [options]="customOptions">
-                    <ng-container *ngFor="let pcmember of this.pcmembers">
-                        <ng-template carouselSlide>
-                            <div class="slide text-center">
-                                <img alt="image" [src]="pcmember.user.preference_user.avatar" class="img-responsive img-small">
-                                <div class="user-details">
-                                    <div class="user-name">
-                                        {{ pcmember.user.first_name + ' ' + pcmember.user.last_name }}
-                                    </div>
-                                    <div class="text-job text-muted">Mobile Developer</div>
-                                    <div class="user-cta">
-                                        <button class="btn btn-primary follow-btn" [routerLink]="['/users/profile', pcmember.user.id]">
-                                            {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SEARCHBAR.SEE_PROFILE' | translate }}
-                                        </button>
+                <ng-container *ngIf="!this.loading && this.conference_id else addConference">
+                    <owl-carousel-o [options]="customOptions" *ngIf="this.pcmembers.length > 0 else noPcMembers">
+                        <ng-container *ngFor="let pcmember of this.pcmembers">
+                            <ng-template carouselSlide>
+                                <div class="slide text-center">
+                                    <img alt="image" [src]="pcmember.user.preference_user.avatar" class="img-responsive img-small">
+                                    <div class="user-details">
+                                        <div class="user-name">
+                                            {{ pcmember.user.first_name + ' ' + pcmember.user.last_name }}
+                                        </div>
+                                        <div class="text-job text-muted">Mobile Developer</div>
+                                        <div class="user-cta">
+                                            <button class="btn btn-primary follow-btn" [routerLink]="['/users/profile', pcmember.user.id]">
+                                                {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SEARCHBAR.SEE_PROFILE' | translate }}
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
+                            </ng-template>
+                        </ng-container>
+                    </owl-carousel-o>
+                    <ng-template #noPcMembers>
+                        <div class="empty-state" data-height="400" style="height: 400px;">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-user-slash"></i>
                             </div>
-                        </ng-template>
-                    </ng-container>
-                </owl-carousel-o>
+
+                            <h2>
+                                {{ 'STOWARZYSZENIE.MODULES.COMMITTEE.NO_USERS' | translate }}
+                            </h2>
+                        </div>
+                    </ng-template>
+                </ng-container>
+                <ng-template #addConference>
+                    <div class="empty-state" data-height="400" style="height: 400px;">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-question"></i>
+                        </div>
+
+                        <h2>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE' | translate }}
+                        </h2>
+
+                        <p class="lead">
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE_DESC' | translate}}
+                        </p>
+
+                        <a class="btn btn-primary mt-4" [routerLink]="['../create']">
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.ADD_CONF_BUTT' | translate }}
+                        </a>
+                    </div>
+                </ng-template>
             </div>
         </ng-template>
     </div>

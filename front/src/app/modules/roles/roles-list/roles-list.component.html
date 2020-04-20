@@ -52,7 +52,7 @@
                     <div *ngIf="!permissionsLoading; else permissionsLoad">
                         <div *ngIf="this.selectedRole && this.selectedRole.role && this.selectedRole.permissions && !this.selectedChooseRoles">
                             <div class="d-flex mb-3" *ngIf="this.selectedRole.role.id != 2">
-                                <div class="btn btn-warning">
+                                <div class="btn">
                                     <a [routerLink]="['../../../role/' + this.selectedRole.role.id + '/users']" class="external-link primary">
                                         <i class="fas fa-users"></i> {{ 'STOWARZYSZENIE.MODULES.ROLE_USER.LABEL.SHOW' | translate }}
                                     </a>

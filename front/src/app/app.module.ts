@@ -16,6 +16,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NgxUploaderModule } from 'ngx-uploader';
+import { MatProgressBarModule } from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NgxUploaderModule } from 'ngx-uploader';
     MatDatepickerModule,
     NgxMaterialTimepickerModule,
     ColorPickerModule,
-    NgxUploaderModule
+    NgxUploaderModule,
+    MatProgressBarModule
   ],
   providers: [Document, UserProviderService, {
       provide: APP_INITIALIZER,

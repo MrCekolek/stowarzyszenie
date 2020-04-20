@@ -4,6 +4,7 @@ namespace App\Models;
 
 class ConferenceCfp extends BaseModel {
     protected $fillable = [
+        'file_name',
         'file',
         'content_pl',
         'content_en',
@@ -26,6 +27,7 @@ class ConferenceCfp extends BaseModel {
     }
 
     private static function fillConferenceCfp(&$conferenceCfp, $input, &$success) {
+        $conferenceCfp->file_name = $input['file_name'];
         $conferenceCfp->file = $input['file'];
         $conferenceCfp->content_pl = $input['content_pl'];
         $conferenceCfp->content_en = $input['content_en'];

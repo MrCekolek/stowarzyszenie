@@ -10,96 +10,121 @@
     </p>
 
 
-        <div class="col-sm-12" *ngIf="this.added">
-            <div class="card">
-                <div class="card-body">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <app-alert *ngIf="this.alert" [alertType]="this.alert.type" [message]="this.alert.message"></app-alert>
 
-                    <div class="d-flex justify-content-center" *ngIf="this.loading; else content">
-                        <div class="spinner-border text-primary"></div>
-                    </div>
-
-                    <ng-template #content>
-                    <h3>
-                        {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_CHOOSE_LANGUAGE' | translate }}
-                    </h3>
-                    <p>
-                        {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_CHOOSE_LANGUAGE_DESC' | translate }}
-                    </p>
-    
-                    <div id="accordion">
-                        <div class="accordion">
-                            <div class="accordion-header collapsed" role="button" data-toggle="collapse" data-target="#panel-body-1">
-                                <h4>{{ 'STOWARZYSZENIE.HELPERS.POLISH_LANG' | translate }}</h4>
-                            </div>
-                            <div class="accordion-body collapse" id="panel-body-1" data-parent="#accordion" style="">
-                                <div class="mt-4"></div>
-    
-                                <angular-editor id="editorpl" [config]="editorConfig"></angular-editor>
-    
-                                <div class="mb-4"></div>
-                            </div>
-                        </div>
-                        <div class="accordion">
-                            <div class="accordion-header" role="button" data-toggle="collapse" data-target="#panel-body-2" >
-                                <h4>{{ 'STOWARZYSZENIE.HELPERS.ENGLISH_LANG' | translate }}</h4>
-                            </div>
-                            <div class="accordion-body collapse" id="panel-body-2" data-parent="#accordion" style="">
-                                <div class="mt-4"></div>
-                                <angular-editor id="editoren" [config]="editorConfig"></angular-editor>
-                                <div class="mb-4"></div>
-                            </div>
-                        </div>
-                        <div class="accordion">
-                            <div class="accordion-header" role="button" data-toggle="collapse" data-target="#panel-body-3">
-                                <h4>{{ 'STOWARZYSZENIE.HELPERS.RUSSIAN_LANG' | translate }}</h4>
-                            </div>
-                            <div class="accordion-body collapse" id="panel-body-3" data-parent="#accordion" style="">
-                                <div class="mt-4"></div>
-                                <angular-editor id="editorru" [config]="editorConfig"></angular-editor>
-                                <div class="mb-4"></div>
-                            </div>
-                        </div>
-                        </div>
-    
-                        <div class="section-title">
-                            {{ 'STOWARZYSZENIE.MODULES.PAGES.FILE_SECTION_TITLE_1' | translate }}
-                        </div>
-                        <p class="text-muted">
-                            {{ 'STOWARZYSZENIE.MODULES.PAGES.FILE_LABEL' | translate }}
-                        </p>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile">
-                            <label class="custom-file-label" for="customFile">
-                                {{ 'STOWARZYSZENIE.MODULES.PAGES.FILE' | translate }}
-                            </label>
-                        </div>
-    
-                        <button class="btn btn-primary btn-block mt-4">
-                            {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_PUBLISH' | translate }}
-                        </button>
-                    </ng-template>
-                    
-                    </div>
-                    </div>
-            </div>
-    
-            <div class="col-sm-12" *ngIf="!this.cfp">
-                <div class="empty-state" data-height="200">
-                    <div class="empty-state-icon">
-                      <i class="fas fa-question"></i>
-                    </div>
-                    <h2>
-                      {{ 'STOWARZYSZENIE.MODULES.PAGES.NO_CFP_TITLE' | translate }}
-                    </h2>
-                    <p class="lead">
-                      {{ 'STOWARZYSZENIE.MODULES.PAGES.NO_CFP_DESC' | translate }}
-                    </p>
-    
-                    <button class="btn btn-primary mt-3" (click)="addCFP()">
-                        {{ 'STOWARZYSZENIE.MODULES.PAGES.ADD_CFP_BTN' | translate }}
-                    </button>
+                <div class="d-flex justify-content-center" *ngIf="this.loading; else content">
+                    <div class="spinner-border text-primary"></div>
                 </div>
+
+                <ng-template #content>
+                    <ng-container *ngIf="this.conference && this.conference.id else addConference">
+                        <ng-container *ngIf="this.conference.conference_cfp && this.conference.conference_cfp.id else addCfp">
+                            <h3>
+                                {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_CHOOSE_LANGUAGE' | translate }}
+                            </h3>
+                            <p>
+                                {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_CHOOSE_LANGUAGE_DESC' | translate }}
+                            </p>
+
+                            <div id="accordion">
+                                <div class="accordion">
+                                    <div class="accordion-header collapsed" role="button" data-toggle="collapse"
+                                         data-target="#panel-body-1">
+                                        <h4>{{ 'STOWARZYSZENIE.HELPERS.POLISH_LANG' | translate }}</h4>
+                                    </div>
+                                    <div class="accordion-body collapse" id="panel-body-1" data-parent="#accordion" style="">
+                                        <div class="mt-4"></div>
+
+                                        <angular-editor id="editorpl" [config]="editorConfig" [(ngModel)]="this.conference.conference_cfp.content_pl"></angular-editor>
+
+                                        <div class="mb-4"></div>
+                                    </div>
+                                </div>
+                                <div class="accordion">
+                                    <div class="accordion-header" role="button" data-toggle="collapse"
+                                         data-target="#panel-body-2">
+                                        <h4>{{ 'STOWARZYSZENIE.HELPERS.ENGLISH_LANG' | translate }}</h4>
+                                    </div>
+                                    <div class="accordion-body collapse" id="panel-body-2" data-parent="#accordion" style="">
+                                        <div class="mt-4"></div>
+                                        <angular-editor id="editoren" [config]="editorConfig" [(ngModel)]="this.conference.conference_cfp.content_en"></angular-editor>
+                                        <div class="mb-4"></div>
+                                    </div>
+                                </div>
+                                <div class="accordion">
+                                    <div class="accordion-header" role="button" data-toggle="collapse"
+                                         data-target="#panel-body-3">
+                                        <h4>{{ 'STOWARZYSZENIE.HELPERS.RUSSIAN_LANG' | translate }}</h4>
+                                    </div>
+                                    <div class="accordion-body collapse" id="panel-body-3" data-parent="#accordion" style="">
+                                        <div class="mt-4"></div>
+                                        <angular-editor id="editorru" [config]="editorConfig" [(ngModel)]="this.conference.conference_cfp.content_ru"></angular-editor>
+                                        <div class="mb-4"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-title">
+                                {{ 'STOWARZYSZENIE.MODULES.PAGES.FILE_SECTION_TITLE_1' | translate }}
+                            </div>
+                            <p class="text-muted">
+                                {{ 'STOWARZYSZENIE.MODULES.PAGES.FILE_LABEL' | translate }}
+                            </p>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">
+                                    {{ 'STOWARZYSZENIE.MODULES.PAGES.FILE' | translate }}
+                                </label>
+                            </div>
+
+                            <button class="btn btn-primary btn-block mt-4" [class.btn-progress]="this.updating" (click)="this.updateCfp()">
+                                {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_PUBLISH' | translate }}
+                            </button>
+                        </ng-container>
+                        <ng-template #addCfp>
+                            <div class="col-sm-12">
+                                <div class="empty-state" data-height="200">
+                                    <div class="empty-state-icon">
+                                        <i class="fas fa-question"></i>
+                                    </div>
+                                    <h2>
+                                        {{ 'STOWARZYSZENIE.MODULES.PAGES.NO_CFP_TITLE' | translate }}
+                                    </h2>
+                                    <p class="lead">
+                                        {{ 'STOWARZYSZENIE.MODULES.PAGES.NO_CFP_DESC' | translate }}
+                                    </p>
+
+                                    <button class="btn btn-primary mt-3" (click)="addCFP()">
+                                        {{ 'STOWARZYSZENIE.MODULES.PAGES.ADD_CFP_BTN' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ng-container>
+                    <ng-template #addConference>
+                        <div class="empty-state" data-height="400" style="height: 400px;">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-question"></i>
+                            </div>
+
+                            <h2>
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE' | translate }}
+                            </h2>
+
+                            <p class="lead">
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE_DESC' | translate}}
+                            </p>
+
+                            <a class="btn btn-primary mt-4" [routerLink]="['../create']">
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.ADD_CONF_BUTT' | translate }}
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-template>
             </div>
-    
+        </div>
+    </div>
 </div>
-    

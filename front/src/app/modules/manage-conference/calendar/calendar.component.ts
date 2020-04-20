@@ -35,10 +35,13 @@ export class CalendarComponent implements OnInit {
 
     this.conferenceApi.getConference().subscribe(
         (res) => {
-          this.events = res.conference.conference_events.filter(function (event) {
-            return event.calendar == "1";
-          });
-          this.conference_id = res.conference.id;
+          if (res.conference && res.conference.id) {
+            this.events = res.conference.conference_events.filter(function (event) {
+              return event.calendar == "1";
+            });
+
+            this.conference_id = res.conference.id;
+          }
         },
         () => {},
         () => {

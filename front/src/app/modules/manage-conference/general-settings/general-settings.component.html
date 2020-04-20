@@ -136,7 +136,7 @@
                     </button>
                 </div>
             </ng-template>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center" *ngIf="this.conference && this.conference.id && !this.finished">
                 <a [routerLink]="['../actual']" routerLinkActive="router-link-active"  class="btn text-primary mt-4">
                     {{ 'STOWARZYSZENIE.HELPERS.BACK_TO_CONFERENCE' | translate }}
                 </a>

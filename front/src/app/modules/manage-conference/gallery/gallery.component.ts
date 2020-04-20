@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
-import {NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation, NgxGalleryLayout} from 'ngx-gallery';
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation, NgxGalleryLayout } from 'ngx-gallery';
 import { ManageConferenceApiService } from "../../../core/http/manage-conference-api.service";
 import { AlertModel } from "../../../shared/models/alert.model";
 import 'hammerjs';
@@ -33,12 +33,14 @@ export class GalleryComponent implements OnInit {
             (res) => {
                 this.conference = res.conference;
 
-                for (let i = 0; i < this.conference.conference_galleries.length; i++) {
-                    this.galleryImages.push({
-                        small: this.conference.conference_galleries[i].file,
-                        medium: this.conference.conference_galleries[i].file,
-                        big: this.conference.conference_galleries[i].file,
-                    });
+                if (this.conference && this.conference.id) {
+                    for (let i = 0; i < this.conference.conference_galleries.length; i++) {
+                        this.galleryImages.push({
+                            small: this.conference.conference_galleries[i].file,
+                            medium: this.conference.conference_galleries[i].file,
+                            big: this.conference.conference_galleries[i].file,
+                        });
+                    }
                 }
             },
             () => {
@@ -94,6 +96,7 @@ export class GalleryComponent implements OnInit {
             (res) => {
                 if (res.success) {
                     this.conference.conference_galleries = res.conferenceGalleries;
+                    this.imagesDeletingIds = [];
 
                     this.alert = new AlertModel('success', res.message);
                 } else {

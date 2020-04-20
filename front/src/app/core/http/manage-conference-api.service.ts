@@ -85,6 +85,10 @@ export class ManageConferenceApiService {
     return this.api.post('conference/cfp/create', cfp);
   }
 
+  updateCFP(cfp) {
+    return this.api.post('conference/cfp/update', cfp);
+  }
+
   getConferenceNavigation(cfp) {
     return this.api.post('conference/page/get', cfp);
   }
