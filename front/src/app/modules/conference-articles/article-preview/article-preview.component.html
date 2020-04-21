@@ -1,0 +1,72 @@
+<h2 mat-dialog-title>
+    <span>
+        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.PREVIEW.MODAL_TITLE' | translate }}
+    </span>
+</h2>
+
+<mat-dialog-content>
+    <article class="article article-style-c">
+        <div class="article-details">
+            <div class="article-category">
+                <a class="badge" [ngClass]="{'badge-success': article.status === 'accepted', 'badge-info': article.status === 'waiting', 'badge-danger': article.status === 'rejected', 'badge-warning': article.status === 'review', 'badge-success': article.status === 'reviewed', 'badge-success': article.status === 'in pc'}">
+                    {{ article.translation_key | translate }}
+                </a>
+
+                <div class="bullet"></div> 
+
+                <!-- TODO: zrobic zeby sie wyswietlalo w odpowiednim jezyku -->
+                <a>
+                    {{ article.created_at | date }}
+                </a>
+            </div>
+
+            <div class="article-title">
+                <h2>
+                    <a>
+                        {{ article['title_' + lang] }}
+                    </a>
+                </h2>
+            </div>
+
+            <p>
+                {{ article['abstract_' + lang] }}
+            </p>
+
+            <!-- TODO: dac tu plik artykulu do pobrania jezeli jest-->
+
+            <div class="article-user">
+                <!-- <img alt="image" src="assets/img/avatar/avatar-3.png">
+                <div class="article-user-details">
+                    <div class="user-detail-name">
+                    <a href="#">Rizal Fakhri</a>
+                    </div>
+                    <div class="text-job">UX Designer</div>
+                </div> -->
+                <div class="media">
+                    <img alt="image" class="mr-3" width="50" [src]="article.user.preference_user.avatar">
+                    <div class="media-body">
+                        <div class="media-title">
+                            {{ article.user.affilation_user.title + ' ' + article.user.first_name + ' ' + article.user.last_name }}
+                        </div>
+                        <div class="text-job text-muted">
+                            {{ article.user.affilation_user.institution }}
+                        </div>
+                    </div>
+                    <div class="media-cta">
+                        <a [routerLink]="['users/profile', article.user.id]" class="btn btn-outline-primary has-icon icon-left">
+                            <i class="fas fa-user-circle"></i>
+                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.PREVIEW.GO_TO_PROFILE_BTN' | translate }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button type="button " class="btn btn-link" (click)="dismiss()">
+        {{ 'STOWARZYSZENIE.MODALS.BUTTON_CLOSE' | translate }}
+    </button>
+</mat-dialog-actions>

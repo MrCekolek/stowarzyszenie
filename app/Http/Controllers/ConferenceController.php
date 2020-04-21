@@ -109,7 +109,7 @@ class ConferenceController extends Controller
         $trackIds = Conference::with('tracks')->where('status', '!=', 'finished')->get()->pluck('tracks.*.id')->collapse()->toArray();
 
         return LogService::read(true, [
-            'conferenceArticles' => TrackArticle::whereIn('track_id', $trackIds)->get()->toArray()
+            'conferenceArticles' => TrackArticle::with(['user.preferenceUser', 'track', 'user.affilationUser', 'articleComments'])->whereIn('track_id', $trackIds)->get()->toArray()
         ]);
     }
 

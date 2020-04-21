@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-comments-modal',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommentsModalComponent implements OnInit {
 
-  constructor() { }
+  private comments = [];
+
+  constructor(    
+    private dialogRef: MatDialogRef<CommentsModalComponent>,
+    @Inject(MAT_DIALOG_DATA) data,
+  ) {
+    if (data.comments) {
+      this.comments = data.comments;
+    }
+   }
 
   ngOnInit() {
+
+  }
+
+  dismiss() {
+    this.dialogRef.close();
   }
 
 }
