@@ -665,7 +665,8 @@
                 "PAGE_TITLE": "Call For Papers",
                 "SECTION_TITLE": "Manage CFP",
                 "PAGE_DESC": "Edit CFP for your conference, which will be displayed for all users and guests while registering to conference, on conference page etc.",
-                "CHOOSED_FILE": "You choosed file:"
+                "CHOOSED_FILE": "You choosed file:",
+                "PREVIEW_FILE": "Preview file:"
             },
             "CONFPAGES": {
                 "PAGE_EDIT_TITLE": "Edit subpage of conference page"

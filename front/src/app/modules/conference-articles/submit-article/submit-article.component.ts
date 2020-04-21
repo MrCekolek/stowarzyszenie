@@ -23,6 +23,7 @@ export class SubmitArticleComponent implements OnInit {
     abstract_pl: '',
     abstract_en: '',
     abstract_ru: '',
+    file_name: '',
     file: '',
     user_id: '',
     track_id: '',
@@ -32,6 +33,8 @@ export class SubmitArticleComponent implements OnInit {
   };
 
   private lang;
+  private fileChanged;
+  private fileToUpload;
 
   private nameTranslations = [];
   private abstractTranslations = [];
@@ -57,6 +60,9 @@ export class SubmitArticleComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+
+    this.fileChanged = false;
+
     this.languageService.currentLang.subscribe(value => {
       this.lang = value;
     });
@@ -82,7 +88,6 @@ export class SubmitArticleComponent implements OnInit {
 
     this.translateNameLoading = true;
     this.apiService.post('translation/get', obj).subscribe(res => {
-      console.log(res);
       this.nameTranslations[0] = res.translation.name_pl;
       this.nameTranslations[1] = res.translation.name_en;
       this.nameTranslations[2] = res.translation.name_ru;
@@ -95,7 +100,6 @@ export class SubmitArticleComponent implements OnInit {
     const obj: any = {
       name: this.article['abstract_' + this.lang]
     };
-    console.log(obj);
 
     this.translateAbstractLoading = true;
     this.apiService.post('translation/get', obj).subscribe(res => {
@@ -124,6 +128,7 @@ export class SubmitArticleComponent implements OnInit {
 
   submitArticle() {
     this.submitLoading = true;
+
     this.article.title_pl = this.nameTranslations[0];
     this.article.title_en = this.nameTranslations[1];
     this.article.title_ru = this.nameTranslations[2];
@@ -135,12 +140,36 @@ export class SubmitArticleComponent implements OnInit {
     this.article.keywords_ru = this.keywordsTranslations[2];
     this.article.track_id = this.selectedTrack;
 
-    this.articlesApi.createArticle(this.article).subscribe(res => {
-      console.log(res);
-      if (res.success) {
-        this.router.navigateByUrl('conference-articles/my');
+    const formData: FormData = new FormData();
+
+    if (this.fileChanged) {
+      formData.append('new_file', this.fileToUpload, this.fileToUpload.name);
+    }
+
+    for (var key in this.article) {
+      formData.append(key, this.article[key]);
+    }
+
+    formData.append('token', localStorage.getItem('token'));
+
+    this.articlesApi.createArticle(formData).subscribe(
+      (res) => {
+        if (res.success) {
+          this.fileChanged = false;
+
+          this.router.navigateByUrl('conference-articles/my');
+        }
+      },
+      () => {},
+      () => {
+        this.submitLoading = false;
       }
-      this.submitLoading = false;
-    });
+    );
+  }
+
+  handleFileInput(files: FileList) {
+    this.fileChanged = true;
+    this.fileToUpload = files.item(0);
+    this.article.file_name = this.fileToUpload.name;
   }
 }

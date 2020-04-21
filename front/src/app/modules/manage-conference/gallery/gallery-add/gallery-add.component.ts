@@ -9,7 +9,6 @@ import { ManageConferenceApiService } from "../../../../core/http/manage-confere
 })
 export class GalleryAddComponent implements OnInit {
 
-
   options: UploaderOptions;
   formData: FormData;
   files: UploadFile[];

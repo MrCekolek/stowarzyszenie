@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import {HomeNavigation} from "../../shared/models/home-navigation";
 
 @Injectable({
   providedIn: 'root'
@@ -148,5 +147,9 @@ export class ManageConferenceApiService {
     };
 
     return this.api.post('conference/gallery/destroy/multi', obj);
+  }
+
+  downloadFile(obj) {
+    return this.api.post('conference/cfp/download/file', obj);
   }
 }

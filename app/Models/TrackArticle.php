@@ -10,6 +10,7 @@ class TrackArticle extends BaseModel {
         'abstract_pl',
         'abstract_en',
         'abstract_ru',
+        'file_name',
         'file',
         'status',
         'keywords_pl',
@@ -31,38 +32,51 @@ class TrackArticle extends BaseModel {
         ];
     }
 
-    public static function addTrackArticle($input, &$success) {
+    public static function addTrackArticle($request, $input, &$success) {
         $trackArticle = new self();
         $trackArticle->status = 'waiting';
         $trackArticle->translation_key = self::statuses()['waiting'];
-        self::fillTrackArticle($trackArticle, $input, $success);
+        self::fillTrackArticle($trackArticle, $request, $input, $success);
 
         return $trackArticle;
     }
 
-    public static function updateTrackArticle($input, &$success) {
+    public static function updateTrackArticle($request, $input, &$success) {
         $trackArticle = self::where('id', $input['id'])->first();
         $trackArticle->status = $input['status'];
         $trackArticle->translation_key = self::statuses()[$input['status']];
-        self::fillTrackArticle($trackArticle, $input,$success);
+        self::fillTrackArticle($trackArticle, $request, $input,$success);
 
         return $trackArticle;
     }
 
-    private static function fillTrackArticle(&$trackArticle, $input, &$success) {
+    private static function fillTrackArticle(&$trackArticle, $request, $input, &$success) {
         $trackArticle->title_pl = $input['title_pl'];
         $trackArticle->title_en = $input['title_en'];
         $trackArticle->title_ru = $input['title_ru'];
         $trackArticle->abstract_pl = $input['abstract_pl'];
         $trackArticle->abstract_en = $input['abstract_en'];
         $trackArticle->abstract_ru = $input['abstract_ru'];
-        $trackArticle->file = $input['file'];
+        $trackArticle->file_name = $input['file_name'];
+        $trackArticle->file = self::setFile($trackArticle, $request);
         $trackArticle->keywords_pl = $input['keywords_pl'];
         $trackArticle->keywords_en = $input['keywords_en'];
         $trackArticle->keywords_ru = $input['keywords_ru'];
         $trackArticle->user_id = $input['user_id'];
         $trackArticle->track_id = $input['track_id'];
         $success = $trackArticle->save();
+    }
+
+    private static function setFile($trackArticle, $request) {
+        if (!$request->hasFile('new_file')) {
+            return $trackArticle->file;
+        }
+
+        $image = $request->file('new_file');
+        $name = $image->getClientOriginalName();
+        $folder  = '/uploads/files/articles';
+
+        return config('app.back_url') . '/' . (new ConferenceCfp)->uploadOne($image, $folder, 'public', $name);
     }
 
     public function getKeywordsPlAttribute($value) {
