@@ -5,6 +5,7 @@ export class ArticleModel {
     abstract_pl: string;
     abstract_en: string;
     abstract_ru: string;
+    file_name: string;
     file: string;
     user_id: string;
     track_id: string;
@@ -19,6 +20,7 @@ export class ArticleModel {
         this.abstract_pl = article['abstract_pl'];
         this.abstract_en = article['abstract_en'];
         this.abstract_ru = article['abstract_ru'];
+        this.file_name = article['file_name'];
         this.file = article['file'];
         this.user_id = article['user_id'];
         this.track_id = article['track_id'];

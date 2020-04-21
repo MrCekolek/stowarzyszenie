@@ -73,12 +73,20 @@
                             <p class="text-muted">
                                 {{ 'STOWARZYSZENIE.MODULES.PAGES.FILE_LABEL' | translate }}
                             </p>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile">
-                                <label class="custom-file-label" for="customFile">
+                            <div class="custom-file mb-3">
+                                <input type="file" class="custom-file-input" id="customFile" (change)="this.handleFileInput($event.target.files)">
+                                <label class="custom-file-label" for="customFile" *ngIf="this.conference.conference_cfp.file_name">
+                                    {{ this.conference.conference_cfp.file_name }}
+                                </label>
+                                <label class="custom-file-label" for="customFile" *ngIf="!this.conference.conference_cfp.file_name">
                                     {{ 'STOWARZYSZENIE.MODULES.PAGES.FILE' | translate }}
                                 </label>
                             </div>
+
+                            <a href="{{ this.conference.conference_cfp.file }}" class="mt-5" *ngIf="this.conference.conference_cfp.file && !this.fileChanged" target="_blank">
+                                <i class="far fa-file text-primary"></i>
+                                {{ 'STOWARZYSZENIE.MODULES.CFP.PREVIEW_FILE' | translate }} {{ this.conference.conference_cfp.file_name }}
+                            </a>
 
                             <button class="btn btn-primary btn-block mt-4" [class.btn-progress]="this.updating" (click)="this.updateCfp()">
                                 {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_PUBLISH' | translate }}

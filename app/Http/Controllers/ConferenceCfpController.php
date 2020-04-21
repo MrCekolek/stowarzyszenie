@@ -118,7 +118,7 @@ class ConferenceCfpController extends Controller {
             return $validation->failResponse();
         }
 
-        $conferenceCfp = ConferenceCfp::addConferenceCfp($input, $success);
+        $conferenceCfp = ConferenceCfp::addConferenceCfp($request, $input, $success);
 
         return LogService::create($success, [
             'conferenceCfp' => $conferenceCfp->toArray()
@@ -199,7 +199,7 @@ class ConferenceCfpController extends Controller {
             return $validation->failResponse();
         }
 
-        $conferenceCfp = ConferenceCfp::updateConferenceCfp($input, $success);
+        $conferenceCfp = ConferenceCfp::updateConferenceCfp($request, $input, $success);
 
         return LogService::update($success, [
             'conferenceCfp' => $conferenceCfp->toArray()
