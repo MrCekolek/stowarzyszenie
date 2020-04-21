@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+
 class TrackArticle extends BaseModel {
     protected $fillable = [
         'title_pl',
@@ -19,6 +21,12 @@ class TrackArticle extends BaseModel {
         'translation_key',
         'user_id',
         'track_id'
+    ];
+
+    protected $appends = [
+        'created_at_human_pl',
+        'created_at_human_en',
+        'created_at_human_ru'
     ];
 
     public static function statuses() {
@@ -79,28 +87,34 @@ class TrackArticle extends BaseModel {
         return config('app.back_url') . '/' . (new ConferenceCfp)->uploadOne($image, $folder, 'public', $name);
     }
 
-    public function getKeywordsPlAttribute($value) {
-        return explode(',', $value);
+    public function getCreatedAtHumanPlAttribute() {
+        Carbon::setLocale('pl');
+
+        return Carbon::parse($this->attributes['created_at'])->diffForHumans();
+    }
+
+    public function getCreatedAtHumanEnAttribute() {
+        Carbon::setLocale('en');
+
+        return Carbon::parse($this->attributes['created_at'])->diffForHumans();
+    }
+
+    public function getCreatedAtHumanRuAttribute() {
+        Carbon::setLocale('ru');
+
+        return Carbon::parse($this->attributes['created_at'])->diffForHumans();
     }
 
     public function setKeywordsPlAttribute($value) {
-        $this->attributes['keywords_pl'] = str_replace(' ', '', $value);
-    }
-
-    public function getKeywordsEnAttribute($value) {
-        return explode(',', $value);
+        $this->attributes['keywords_pl'] = implode(',', array_map('trim', explode(',', $value)));
     }
 
     public function setKeywordsEnAttribute($value) {
-        $this->attributes['keywords_en'] = str_replace(' ', '', $value);
-    }
-
-    public function getKeywordsRuAttribute($value) {
-        return explode(',', $value);
+        $this->attributes['keywords_en'] = implode(',', array_map('trim', explode(',', $value)));
     }
 
     public function setKeywordsRuAttribute($value) {
-        $this->attributes['keywords_ru'] = str_replace(' ', '', $value);
+        $this->attributes['keywords_ru'] = implode(',', array_map('trim', explode(',', $value)));
     }
 
     public function user() {
@@ -112,6 +126,7 @@ class TrackArticle extends BaseModel {
     }
 
     public function articleComments() {
-        return $this->hasMany(ArticleComment::class);
+        return $this->hasMany(ArticleComment::class)
+            ->orderBy('created_at', 'DESC');
     }
 }

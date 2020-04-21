@@ -345,7 +345,7 @@ class TrackArticleController extends Controller {
         $trackArticle = TrackArticle::updateTrackArticle($request, $input, $success);
 
         return LogService::update($success, [
-            'trackArticle' => $trackArticle->load('user')->toArray()
+            'trackArticle' => $trackArticle->load(['track', 'user.preferenceUser', 'user.affilationUser', 'articleComments'])->toArray()
         ]);
     }
 

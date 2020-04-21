@@ -14,9 +14,8 @@
 
                 <div class="bullet"></div> 
 
-                <!-- TODO: zrobic zeby sie wyswietlalo w odpowiednim jezyku -->
                 <a>
-                    {{ article.created_at | date }}
+                    {{ article['created_at_human_' + this.lang] }}
                 </a>
             </div>
 
@@ -32,7 +31,10 @@
                 {{ article['abstract_' + lang] }}
             </p>
 
-            <!-- TODO: dac tu plik artykulu do pobrania jezeli jest-->
+            <a href="{{ this.article.file }}" class="mt-5" *ngIf="this.article.file" target="_blank">
+                <i class="far fa-file text-primary"></i>
+                {{ 'STOWARZYSZENIE.MODULES.CFP.PREVIEW_FILE' | translate }} {{ this.article.file_name }}
+            </a>
 
             <div class="article-user">
                 <!-- <img alt="image" src="assets/img/avatar/avatar-3.png">
@@ -53,7 +55,7 @@
                         </div>
                     </div>
                     <div class="media-cta">
-                        <a [routerLink]="['users/profile', article.user.id]" class="btn btn-outline-primary has-icon icon-left">
+                        <a [routerLink]="['users/profile', article.user.id]" class="btn btn-outline-primary has-icon icon-left" (click)="dismiss()">
                             <i class="fas fa-user-circle"></i>
                             {{ 'STOWARZYSZENIE.MODULES.ARTICLES.PREVIEW.GO_TO_PROFILE_BTN' | translate }}
                         </a>

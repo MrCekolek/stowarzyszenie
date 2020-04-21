@@ -169,7 +169,12 @@
                 "CHOOSE_HOUR_END": "Select the end time of the event",
                 "INPUT_EDIT_DESC_LABEL": "Change the description in the current language to translate or edit the translation fields below"
             },
-            "BUTTON_CLOSE": "Close modal"
+            "BUTTON_CLOSE": "Close modal",
+            "ARTICLES": {
+                "COMMENTS_MODAL": {
+                    "ANONYMOUS": "Anonymous"
+                }
+            }
         },
         "MODULES": {
             "AUTH": {
@@ -701,7 +706,8 @@
                     "NO_CONFERENCE_DESC": "There is no conference in system so you cannot sent articles.",
                     "EDIT_ARTICLE": "Edit article",
                     "SEE_REVIEW": "See review",
-                    "SEE_COMMENTS": "See comments"
+                    "SEE_COMMENTS": "See comments",
+                    "NO_TRACKS": "There are no conference tracks"
                 },
                 "SUBMIT": {
                     "PAGE_TITLE": "Submit article",
@@ -718,7 +724,8 @@
                     "CHOOSE_TRACK_LABELL": "Select the track where you want to send the article",
                     "SUBMIT_BTN": "Submit",
                     "NO_TRACKS": "Conference has no tracks",
-                    "BACK_BTN": "Back to articles"
+                    "BACK_BTN": "Back to articles",
+                    "UPDATE_BTN": "Update article"
                 },
                 "EDIT": {
                     "PAGE_TITLE": "Edit article",
