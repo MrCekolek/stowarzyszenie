@@ -127,7 +127,7 @@ class AuthController extends Controller {
                     'portfolio',
                     'preferenceUser',
                     'roles.permissions',
-                    'trackArticles'
+                    'trackArticles.articleComments'
                 ])
                 ->first()
                 ->toArray()

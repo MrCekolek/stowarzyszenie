@@ -8,14 +8,18 @@ import { AllArticlesComponent } from './all-articles/all-articles.component';
 import { FormsModule } from '@angular/forms';
 import { CommentsModalComponent } from './comments-modal/comments-modal.component';
 import { EditArticleComponent } from './edit-article/edit-article.component';
+import { ArticlePreviewComponent } from './article-preview/article-preview.component';
+import { AddCommentComponent } from './add-comment/add-comment.component';
+import { AssignReviewerComponent } from './assign-reviewer/assign-reviewer.component';
 
 @NgModule({
-  declarations: [MyArticlesComponent, SubmitArticleComponent, AllArticlesComponent, CommentsModalComponent, EditArticleComponent],
+  declarations: [MyArticlesComponent, SubmitArticleComponent, AllArticlesComponent, CommentsModalComponent, EditArticleComponent, ArticlePreviewComponent, AddCommentComponent, AssignReviewerComponent],
   imports: [
     CommonModule,
     ConferenceArticlesRoutingModule,
     SharedModule,
     FormsModule
-  ]
+  ],
+  entryComponents: [CommentsModalComponent, ArticlePreviewComponent, AddCommentComponent]
 })
 export class ConferenceArticlesModule { }
