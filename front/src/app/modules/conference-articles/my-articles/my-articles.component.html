@@ -30,7 +30,7 @@
             <!-- TODO: link z przenoszeniem na podstrone cfp konferencji (dla zwyklych userow, nie edytorow) -->
             <!-- -->
             <div class="card-body">
-                <div  *ngIf="this.conference && !this.conference.id">
+                <div *ngIf="this.conference && !this.conference.id">
                     <div class="empty-state" data-height="200">
                         <div class="empty-state-icon">
                             <i class="fas fa-question"></i>
@@ -45,81 +45,92 @@
                 </div>
 
                 <!--  -->
-                <div >
-                    <div class="d-flex justify-content-center my-3" *ngIf="this.conference && this.conference.id">
+                <div>
+                    <div class="d-flex justify-content-center my-3" *ngIf="this.conference && this.conference.id && this.conference.tracks.length > 1">
                         <h4 class="text-primary">
                             {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.SENT_HEADER' | translate }}
                         </h4>
                     </div>
-    
-                    <!--  -->
-                    <div class="empty-state" data-height="200"  *ngIf="this.articles.length === 0">
-                        <div class="empty-state-icon">
-                            <i class="fas fa-question"></i>
+
+                    <div *ngIf="this.conference && this.conference.id && this.conference.tracks.length < 1 else mainContent">
+                        <div class="empty-state" data-height="200">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-question"></i>
+                            </div>
+                            <h2>
+                                {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.NO_TRACKS' | translate }}
+                            </h2>
                         </div>
-                        <h2>
-                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.NO_ARTICLES' | translate }}
-                        </h2>
-                        <p class="lead">
-                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.NO_ARTICLES_DESC' | translate }}
-                        </p>
                     </div>
-    
-                    <!--  -->
-                    <div *ngIf="this.articles && this.articles.length > 0" >
-                        <div class="hero bg-primary text-white mt-2" *ngFor="let article of articles">
-                            <div class="hero-inner">
-                                <h2>
-                                    {{ article['title_' + lang] }}
-                                </h2>
-    
-                                <!-- <p class="lead">
-                                    {{ article['abstract_' + lang] }}
-                                </p> -->
-    
-                                <div class="mt-4">
-                                    <div class="badge badge-info">
-                                        {{ article['keywords_' + lang] }}
+
+                    <ng-template #mainContent>
+                        <div class="empty-state" data-height="200"  *ngIf="this.conference && this.conference.id && this.articles.length === 0">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-question"></i>
+                            </div>
+                            <h2>
+                                {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.NO_ARTICLES' | translate }}
+                            </h2>
+                            <p class="lead">
+                                {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.NO_ARTICLES_DESC' | translate }}
+                            </p>
+                        </div>
+
+                        <div *ngIf="this.conference && this.conference.id && this.articles && this.articles.length > 0" >
+                            <div class="hero bg-primary text-white mt-2" *ngFor="let article of articles">
+                                <div class="hero-inner">
+                                    <h2>
+                                        {{ article['title_' + lang] }}
+                                    </h2>
+
+                                    <!-- <p class="lead">
+                                        {{ article['abstract_' + lang] }}
+                                    </p> -->
+
+                                    <div class="mt-4">
+                                        <div class="badge badge-info">
+                                            {{ article['keywords_' + lang] }}
+                                        </div>
                                     </div>
-                                </div>
-    
-                                <div class="mt-4">
-                                    <div class="badge badge-success" *ngIf="article.status != 'rejected'">
-                                        {{ article.translation_key | translate }}
+
+                                    <div class="mt-4">
+                                        <div class="badge badge-success" *ngIf="article.status != 'rejected'">
+                                            {{ article.translation_key | translate }}
+                                        </div>
+
+                                        <div class="badge badge-danger" *ngIf="article.status === 'rejected'">
+                                            {{ article.translation_key | translate }}
+                                        </div>
                                     </div>
-    
-                                    <div class="badge badge-danger" *ngIf="article.status === 'rejected'">
-                                        {{ article.translation_key | translate }}
+
+                                    <div class="mt-4">
+                                        <a [routerLink]="['../edit', article.id]" class="btn btn-outline-white btn-lg btn-icon mr-2">
+                                            <i class="fas fa-pencil-alt"></i>
+                                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.EDIT_ARTICLE' | translate }}
+                                        </a>
+                                        <!-- <a [routerLink]="['../edit', article.id]" class="btn btn-outline-white btn-lg btn-icon mr-2">
+                                            <i class="fas fa-star"></i>
+                                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.SEE_REVIEW' | translate}}
+                                        </a> -->
+                                        <button (click)="openComments(article)" class="btn btn-outline-white btn-lg btn-icon mr-2">
+                                            <i class="fas fa-comments"></i>
+                                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.SEE_COMMENTS' | translate }}
+                                            <!-- *ngIf="article.article_comments.length > 0" -->
+                                            <span class="badge badge-warning text-primary" *ngIf="this.articles">
+                                                <!-- {{ article.article_comments.length }} -->
+                                            </span>
+                                        </button>
                                     </div>
-                                </div>
-    
-                                <div class="mt-4">
-                                    <a [routerLink]="['../edit', article.id]" class="btn btn-outline-white btn-lg btn-icon mr-2">
-                                        <i class="fas fa-pencil-alt"></i> 
-                                        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.EDIT_ARTICLE' | translate }}
-                                    </a>
-                                    <!-- <a [routerLink]="['../edit', article.id]" class="btn btn-outline-white btn-lg btn-icon mr-2">
-                                        <i class="fas fa-star"></i> 
-                                        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.SEE_REVIEW' | translate}}
-                                    </a> -->
-                                    <button (click)="openComments(article)" class="btn btn-outline-white btn-lg btn-icon mr-2">
-                                        <i class="fas fa-comments"></i> 
-                                        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.SEE_COMMENTS' | translate }}
-                                        <!-- *ngIf="article.article_comments.length > 0" -->
-                                        <span class="badge badge-warning text-primary" *ngIf="this.articles">
-                                            <!-- {{ article.article_comments.length }} -->
-                                        </span>
-                                    </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-    
-                    <div class="d-flex justify-content-center my-3">
-                        <button class="btn btn-primary" (click)="goToArticleAdd()">
-                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.ADD_NEW_BTN' | translate }}
-                        </button>
-                    </div>
+
+                        <div *ngIf="this.conference && this.conference.id" class="d-flex justify-content-center my-3">
+                            <button class="btn btn-primary" (click)="goToArticleAdd()">
+                                {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.ADD_NEW_BTN' | translate }}
+                            </button>
+                        </div>
+                    </ng-template>
                 </div>
             </div>
         </ng-template>

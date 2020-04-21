@@ -14,7 +14,7 @@
             <div class="d-flex justify-content-center my-3" *ngIf="loading; else content">
                 <div class="spinner-border text-primary"></div>
             </div>
-    
+
             <ng-template #content>
                 <!-- title -->
                 <div class="form-group">
@@ -78,13 +78,22 @@
                     <div class="section-title">
                         {{ 'STOWARZYSZENIE.MODULES.ARTICLES.SUBMIT.CHOOSE_FILE_LABEL' | translate }}
                     </div>
-                    <div class="custom-file">
-                        <!-- TODO: dodac tak jak w dodawaniu, ale juz zuploadowany? (do usuniecia? albo jak sie wybierze nowy to zastepuje ten juz dodany) -->
-                        <input type="file" class="custom-file-input" id="customFile">
+                    <div class="custom-file mb-3">
+                        <input type="file" class="custom-file-input" id="customFile" (change)="this.handleFileInput($event.target.files)">
                         <label class="custom-file-label" for="customFile">
+                        </label>
+                        <label class="custom-file-label" for="customFile" *ngIf="this.article.file_name">
+                            {{ this.article.file_name }}
+                        </label>
+                        <label class="custom-file-label" for="customFile" *ngIf="!this.article.file_name">
                             {{ 'STOWARZYSZENIE.MODULES.ARTICLES.SUBMIT.CHOOSE_FILE_PLACEHOLDER' | translate }}
                         </label>
                     </div>
+
+                    <a href="{{ this.article.file }}" class="mt-5" *ngIf="this.article.file && !this.fileChanged" target="_blank">
+                        <i class="far fa-file text-primary"></i>
+                        {{ 'STOWARZYSZENIE.MODULES.CFP.PREVIEW_FILE' | translate }} {{ this.article.file_name }}
+                    </a>
                 </div>
 
                 <!-- track -->
@@ -97,12 +106,12 @@
                         <label>
                             {{ 'STOWARZYSZENIE.MODULES.ARTICLES.SUBMIT.CHOOSE_TRACK_LABELL' | translate }}
                         </label>
-                        <select class="form-control" [(ngModel)]="selectedTrack">
+                        <select class="form-control" (change)="this.changeTrack($event)">
                             <option value="0" *ngIf="!this.tracks">
                                 {{ 'STOWARZYSZENIE.MODULES.ADMIN.TRACKS.MODAL.NO_INTERESTS' | translate }}
                             </option>
 
-                            <option value="{{ track.id }}" *ngFor="let track of tracks">
+                            <option value="{{ track.id }}" *ngFor="let track of tracks" [selected]="track.id == this.article.track_id">
                                 {{ track['name_' + this.lang] }}
                             </option>
                         </select>
@@ -110,13 +119,13 @@
                 </div>
 
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-primary" [class.btn-progress]="submitLoading" (click)="submitArticle()" [disabled]="nameTranslations.length === 0 || !selectedTrack || keywordsTranslations.length === 0 || abstractTranslations.length === 0">
-                        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.SUBMIT.SUBMIT_BTN' | translate }}
+                    <button class="btn btn-primary" [class.btn-progress]="this.updateLoading" (click)="updateArticle()" [disabled]="nameTranslations.length === 0 || keywordsTranslations.length === 0 || abstractTranslations.length === 0">
+                        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.SUBMIT.UPDATE_BTN' | translate }}
                     </button>
                 </div>
 
                 <div class="d-flex justify-content-center mt-2">
-                    <a class="text-primary btn btn-link" [routerLink]="['../my']" >
+                    <a class="text-primary btn btn-link" [routerLink]="['../../my']" >
                         <i class="fas fa-chevron-left"></i> {{ 'STOWARZYSZENIE.MODULES.ARTICLES.SUBMIT.BACK_BTN' | translate }}
                     </a>
                 </div>

@@ -113,7 +113,7 @@
                                         </td>
 
                                         <td class="align-middle">
-                                          <div class="badge" [ngClass]="{'badge-success': article.status === 'accepted', 'badge-info': article.status === 'waiting', 'badge-danger': article.status === 'rejected', 'badge-warning': article.status === 'review', 'badge-success': article.status === 'reviewed', 'badge-success': article.status === 'in pc'}">
+                                          <div class="badge" [ngClass]="{'badge-success': article.status === 'accepted' || article.status === 'reviewed' || article.status === 'in pc', 'badge-info': article.status === 'waiting', 'badge-danger': article.status === 'rejected', 'badge-warning': article.status === 'review'}">
                                             {{ article.translation_key | translate }}
                                           </div>
                                         </td>
@@ -182,6 +182,12 @@
                                     <th>
                                       {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ACTIONS_CELL' | translate }}
                                     </th>
+                                  </tr>
+
+                                  <tr *ngIf="this.toManageArticles.length < 1">
+                                      <td>
+                                          {{ 'STOWARZYSZENIE.LABELS.NO_DATA' | translate }}
+                                      </td>
                                   </tr>
 
                                   <tr *ngFor="let article of toManageArticles">
@@ -273,6 +279,12 @@
                                     </th>
                                   </tr>
 
+                                  <tr *ngIf="this.acceptedArticles.length < 1">
+                                      <td>
+                                          {{ 'STOWARZYSZENIE.LABELS.NO_DATA' | translate }}
+                                      </td>
+                                  </tr>
+
                                   <tr *ngFor="let article of acceptedArticles">
                                     <td class="align-middle">
                                       {{ article['title_' + lang] }}
@@ -354,7 +366,13 @@
                                     </th>
                                   </tr>
 
-                                  <tr *ngFor="let article of acceptedArticles">
+                                  <tr *ngIf="this.rejectedArticles.length < 1">
+                                      <td>
+                                          {{ 'STOWARZYSZENIE.LABELS.NO_DATA' | translate }}
+                                      </td>
+                                  </tr>
+
+                                  <tr *ngFor="let article of rejectedArticles">
                                     <td class="align-middle">
                                       {{ article['title_' + lang] }}
                                     </td>

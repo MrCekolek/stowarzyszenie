@@ -36,13 +36,10 @@
           <div class="activity-detail">
             <div class="mb-2">
                 <span class="text-job text-primary">
-                    <!-- TODO: zrobic zeby sie wyswietlalo w odpowiednim jezyku -->
-                    2 min ago
-                    <!-- TODO: pipe 'created ... ago' -->
+                    {{ comment['created_at_human_' + this.lang] }}
                 </span>
             </div>
             <p>
-                <!-- TODO: czasem sie nie wyswietla tresc (po dodaniu)? -->
                 {{ comment.description }}
             </p>
           </div>
