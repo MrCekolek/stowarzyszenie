@@ -18,8 +18,6 @@ class CreateArticleCommentsTable extends Migration {
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-            $table->unique(['track_article_id', 'user_id']);
-
             $table->foreign('track_article_id')
                 ->references('id')
                 ->on('track_articles')

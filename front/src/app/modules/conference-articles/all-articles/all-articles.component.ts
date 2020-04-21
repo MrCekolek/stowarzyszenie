@@ -1,114 +1,166 @@
-import { Component, OnInit } from '@angular/core';
-import { ArticlesApiService } from 'src/app/core/http/articles-api.service';
-import { ManageConferenceApiService } from 'src/app/core/http/manage-conference-api.service';
-import { LanguageService } from 'src/app/shared/services/user/language.service';
-import { MatDialogConfig, MatDialog } from '@angular/material';
-import { ArticlePreviewComponent } from '../article-preview/article-preview.component';
-import { AddCommentComponent } from '../add-comment/add-comment.component';
+import {Component, OnInit} from '@angular/core';
+import {ArticlesApiService} from 'src/app/core/http/articles-api.service';
+import {ManageConferenceApiService} from 'src/app/core/http/manage-conference-api.service';
+import {LanguageService} from 'src/app/shared/services/user/language.service';
+import {MatDialogConfig, MatDialog} from '@angular/material';
+import {ArticlePreviewComponent} from '../article-preview/article-preview.component';
+import {AddCommentComponent} from '../add-comment/add-comment.component';
+import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-all-articles',
-  templateUrl: './all-articles.component.html',
-  styleUrls: ['./all-articles.component.scss']
+    selector: 'app-all-articles',
+    templateUrl: './all-articles.component.html',
+    styleUrls: ['./all-articles.component.scss']
 })
 export class AllArticlesComponent implements OnInit {
 
-  private allArticles = [];
-  private acceptedArticles = [];
-  private rejectedArticles = [];
-  private toManageArticles = [];
-  private loading;
-  private conference;
+    private allArticles = [];
+    private acceptedArticles = [];
+    private rejectedArticles = [];
+    private toManageArticles = [];
+    private loading;
+    private conference;
 
-  private lang;
+    private lang;
 
-  constructor(
-    private articlesApi: ArticlesApiService,
-    private conferenceApi: ManageConferenceApiService,
-    private languageService: LanguageService,
-    private dialog: MatDialog
-  ) { }
+    constructor(
+        private articlesApi: ArticlesApiService,
+        private conferenceApi: ManageConferenceApiService,
+        private languageService: LanguageService,
+        private dialog: MatDialog
+    ) {
+    }
 
-  ngOnInit() {
-    this.loading = true;
-    this.languageService.currentLang.subscribe(res => {
-      this.lang = res;
-    });
-    this.conferenceApi.getConference().subscribe(res => {
-      this.conference = res.conference;
-    });
-    this.articlesApi.getAllConferenceArticles().subscribe(res => {
-      this.allArticles = res.conferenceArticles;
-      console.log(this.allArticles);
-      this.acceptedArticles = this.allArticles.filter(t => t.status === 'accepted' || (t.status !== 'rejected' && t.status !== 'waiting'));
-      this.rejectedArticles = this.allArticles.filter(t => t.status === 'rejected');
-      this.toManageArticles = this.allArticles.filter(t => t.status === 'waiting');
-      this.loading = false;
-    });
-  }
+    ngOnInit() {
+        this.loading = true;
 
-  openPreviewModal(article) {
-    const dialogConfig = new MatDialogConfig();
+        this.languageService.currentLang.subscribe(res => {
+            this.lang = res;
+        });
 
-    dialogConfig.autoFocus = true;
+        this.conferenceApi.getConference().subscribe(res => {
+            this.conference = res.conference;
+        });
 
-    dialogConfig.data = {
-      article: article,
-      lang: this.lang
-    };
+        this.articlesApi.getAllConferenceArticles().subscribe(
+            (res) => {
+                this.allArticles = res.conferenceArticles;
+                this.acceptedArticles = this.allArticles.filter(t => t.status === 'accepted' || (t.status !== 'rejected' && t.status !== 'waiting'));
+                this.rejectedArticles = this.allArticles.filter(t => t.status === 'rejected');
+                this.toManageArticles = this.allArticles.filter(t => t.status === 'waiting');
+            },
+            () => {
+            },
+            () => {
+                this.loading = false;
+            }
+        );
+    }
 
-    const dialogRef = this.dialog.open(ArticlePreviewComponent, dialogConfig);
-  }
+    openPreviewModal(article) {
+        const dialogConfig = new MatDialogConfig();
 
-  // TODO: o tutaj o nie dziala update i tam nizej tez ;c
-  acceptArticle(article) {
-    article.status = 'accepted';
-    this.articlesApi.updateArticle(article).subscribe(res => {
-      if (res.success) {
-        this.acceptedArticles.push(article);
-        const ind = this.toManageArticles.indexOf(article);
-        this.toManageArticles.splice(ind, 1);
-      }
-    });
-  }
+        dialogConfig.autoFocus = true;
 
-  rejectArticle(article) {
-    article.status = 'rejected';
-    this.articlesApi.updateArticle(article).subscribe(res => {
-      if (res.success) {
-        this.rejectedArticles.push(article);
-        const ind = this.toManageArticles.indexOf(article);
-        this.toManageArticles.splice(ind, 1);
-      }
-    });
-  }
+        dialogConfig.data = {
+            article: article,
+            lang: this.lang
+        };
 
-  restoreArticle(article) {
-    article.status = 'waiting';
-    this.articlesApi.updateArticle(article).subscribe(res => {
-      if (res.success) {
-        this.allArticles.push(article);
-        this.toManageArticles.push(article);
-        const ind = this.toManageArticles.indexOf(article);
-        this.rejectedArticles.splice(ind, 1);
-      }
-    });
-  }
+        const dialogRef = this.dialog.open(ArticlePreviewComponent, dialogConfig);
+    }
 
-  addComment(article) {
-    const dialogConfig = new MatDialogConfig();
+    acceptArticle(article) {
+        this.loading = true;
 
-    dialogConfig.autoFocus = true;
+        var articleTmp = _.cloneDeep(article);
+        articleTmp.status = 'accepted';
 
-    dialogConfig.data = {
-      article: article
-    };
+        this.articlesApi.updateArticle(articleTmp).subscribe(
+            (res) => {
+                if (res.success) {
+                    this.acceptedArticles.push(res.trackArticle);
 
-    const dialogRef = this.dialog.open(AddCommentComponent, dialogConfig);
-  }
+                    const indexAllArticles = this.allArticles.findIndex(item => item.id === article.id);
+                    this.allArticles[indexAllArticles] = res.trackArticle;
 
-  assignReviewer(article) {
+                    const index = this.toManageArticles.findIndex(item => item.id === article.id);
+                    this.toManageArticles.splice(index, 1);
+                }
+            },
+            () => {},
+            () => {
+              this.loading = false;
+            }
+        );
+    }
 
-  }
+    rejectArticle(article) {
+        this.loading = true;
+
+        var articleTmp = _.cloneDeep(article);
+        articleTmp.status = 'rejected';
+
+        this.articlesApi.updateArticle(articleTmp).subscribe(
+            (res) => {
+                if (res.success) {
+                    this.rejectedArticles.push(res.trackArticle);
+
+                    const indexAllArticles = this.allArticles.findIndex(item => item.id === article.id);
+                    this.allArticles[indexAllArticles] = res.trackArticle;
+
+                    const indexManageArticles = this.toManageArticles.findIndex(item => item.id === article.id);
+                    this.toManageArticles.splice(indexManageArticles, 1);
+                }
+            },
+            () => {
+            },
+            () => {
+                this.loading = false;
+            }
+        );
+    }
+
+    restoreArticle(article) {
+        this.loading = true;
+
+        var articleTmp = _.cloneDeep(article);
+        articleTmp.status = 'waiting';
+
+        this.articlesApi.updateArticle(articleTmp).subscribe(
+            (res) => {
+                if (res.success) {
+                    this.toManageArticles.push(res.trackArticle);
+
+                    const indexAllArticles = this.allArticles.findIndex(item => item.id === article.id);
+                    this.allArticles[indexAllArticles] = res.trackArticle;
+
+                    const index = this.rejectedArticles.findIndex(item => item.id === article.id);
+                    this.rejectedArticles.splice(index, 1);
+                }
+            },
+            () => {
+            },
+            () => {
+                this.loading = false;
+            }
+        );
+    }
+
+    addComment(article) {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.autoFocus = true;
+
+        dialogConfig.data = {
+            article: article
+        };
+
+        const dialogRef = this.dialog.open(AddCommentComponent, dialogConfig);
+    }
+
+    assignReviewer(article) {
+
+    }
 
 }

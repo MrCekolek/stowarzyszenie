@@ -16,7 +16,6 @@
               </P>
             </div>
 
-            <!-- TODO: sortowanie komentarzy po czasie, od najnowszego -->
             <div class="activities" *ngIf="this.comments.length > 0">
               <div class="activity" *ngFor="let comment of comments">
                 <div class="activity-icon bg-primary text-white shadow-primary">
@@ -25,13 +24,11 @@
                 <div class="activity-detail">
                   <div class="mb-2">
                     <span class="text-job text-primary">
-                      2 min ago
-                      <!-- TODO: pipe 'created ... ago' -->
+                        {{ comment['created_at_human_' + this.lang] }}
                     </span>
                     <span class="bullet"></span>
                     <a class="text-job">
-                      <!-- TODO: przez kogo dodane (bez nazwiska!! tylko rola - recenzent / PC) -->
-                      By reviewer
+                      {{ 'STOWARZYSZENIE.MODALS.ARTICLES.COMMENTS_MODAL.ANONYMOUS' | translate }}
                     </a>
                   </div>
                   <p>
@@ -39,7 +36,6 @@
                   </p>
                 </div>
               </div>
-
             </div>
           </div>
         </div>

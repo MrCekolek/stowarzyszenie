@@ -169,7 +169,12 @@
                 "CHOOSE_HOUR_END": "Wybierz czas zakończenia wydarzenia",
                 "INPUT_EDIT_DESC_LABEL": "Zmień opis w bieżącym języku, aby przetłumaczyć lub edytuj poniższe pola tłumaczenia"
             },
-            "BUTTON_CLOSE": "Zamknij modal"
+            "BUTTON_CLOSE": "Zamknij modal",
+            "ARTICLES": {
+                "COMMENTS_MODAL": {
+                    "ANONYMOUS": "Anonimowy"
+                }
+            }
         },
         "MODULES": {
             "AUTH": {
@@ -701,7 +706,8 @@
                     "NO_CONFERENCE_DESC": "W systemie nie ma konferencji, więc nie można wysyłać artykułów.",
                     "EDIT_ARTICLE": "Edytuj artykuł",
                     "SEE_REVIEW": "Zobacz recenzję",
-                    "SEE_COMMENTS": "Zobacz komentarze"
+                    "SEE_COMMENTS": "Zobacz komentarze",
+                    "NO_TRACKS": "Brak tematów konferencyjnych"
                 },
                 "SUBMIT": {
                     "PAGE_TITLE": "Prześlij artykuł",
@@ -718,7 +724,8 @@
                     "CHOOSE_TRACK_LABELL": "Wybierz track, do którego chcesz wysłać artykuł",
                     "SUBMIT_BTN": "Zatwierdź",
                     "NO_TRACKS": "Konferencja nie ma tracków",
-                    "BACK_BTN": "Powrót do artykułów"
+                    "BACK_BTN": "Powrót do artykułów",
+                    "UPDATE_BTN": "Zaktualizuj artykuł"
                 },
                 "EDIT": {
                     "PAGE_TITLE": "Edytuj artykuł",

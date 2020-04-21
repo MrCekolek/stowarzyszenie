@@ -1,139 +1,202 @@
-import { Component, OnInit } from '@angular/core';
-import { ArticleModel } from 'src/app/shared/models/article.model';
-import { ArticlesApiService } from 'src/app/core/http/articles-api.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LanguageService } from 'src/app/shared/services/user/language.service';
-import { ApiService } from 'src/app/core/http/api.service';
-import { UserProviderService } from 'src/app/core/services/user-provider.service';
-import { ManageConferenceApiService } from 'src/app/core/http/manage-conference-api.service';
+import {Component, OnInit} from '@angular/core';
+import {ArticleModel} from 'src/app/shared/models/article.model';
+import {ArticlesApiService} from 'src/app/core/http/articles-api.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {LanguageService} from 'src/app/shared/services/user/language.service';
+import {ApiService} from 'src/app/core/http/api.service';
+import {UserProviderService} from 'src/app/core/services/user-provider.service';
+import {ManageConferenceApiService} from 'src/app/core/http/manage-conference-api.service';
 
 @Component({
-  selector: 'app-edit-article',
-  templateUrl: './edit-article.component.html',
-  styleUrls: ['./edit-article.component.scss']
+    selector: 'app-edit-article',
+    templateUrl: './edit-article.component.html',
+    styleUrls: ['./edit-article.component.scss']
 })
 export class EditArticleComponent implements OnInit {
-  
-  private articleID;
-  private article: ArticleModel = {
-    title_pl: '',
-    title_en: '',
-    title_ru: '',
-    abstract_pl: '',
-    abstract_en: '',
-    abstract_ru: '',
-    file_name: '',
-    file: '',
-    user_id: '',
-    track_id: '',
-    keywords_pl: '',
-    keywords_en: '',
-    keywords_ru: ''
-  };
-  private lang;
 
-  private loading;
-  private translateNameLoading;
-  private translateAbstractLoading;
-  private translateKeywordsLoading;
-
-  private nameTranslations = [];
-  private abstractTranslations = [];
-  private keywordsTranslations = [];
-
-  private submitLoading;
-
-  private tracks = [];
-
-  private selectedTrack;
-
-  constructor(
-    private articlesApi: ArticlesApiService,
-    private route: ActivatedRoute,
-    private languageService: LanguageService,
-    private apiService: ApiService,
-    private userProvider: UserProviderService,
-    private conferenceApi: ManageConferenceApiService,
-    private router: Router
-  ) { }
-
-  ngOnInit() {
-    this.loading = true;
-    this.articleID = this.route.snapshot.paramMap.get('id');
-    this.languageService.currentLang.subscribe(res => {
-      this.lang = res;
-    });
-    // TODO: pobranie artykulu po id z route'a
-    const articleObj = {
-      id: this.articleID
+    private articleID;
+    private article: ArticleModel = {
+        title_pl: '',
+        title_en: '',
+        title_ru: '',
+        abstract_pl: '',
+        abstract_en: '',
+        abstract_ru: '',
+        file_name: '',
+        file: '',
+        user_id: '',
+        track_id: '',
+        keywords_pl: '',
+        keywords_en: '',
+        keywords_ru: ''
     };
-    this.articlesApi.getArticle(articleObj).subscribe(res => {
-      console.log(res);
-      this.article = res.trackArticle;
-    });
+    private lang;
 
-    this.conferenceApi.getConference().subscribe(res => {
-      const obj = {
-        conference_id: res.conference.id
-      };
+    private loading;
+    private translateNameLoading;
+    private translateAbstractLoading;
+    private translateKeywordsLoading;
+    private fileChanged;
+    private fileToUpload;
 
-      this.conferenceApi.getTracks(obj).subscribe(response => {
-        this.tracks = response.tracks;
-        this.loading = false;
-      });
-    });
-  }
+    private nameTranslations = [];
+    private abstractTranslations = [];
+    private keywordsTranslations = [];
 
-  getNameTranslations() {
-    const obj: any = {
-      name: this.article['title_' + this.lang]
-    };
+    private updateLoading;
 
-    this.translateNameLoading = true;
-    this.apiService.post('translation/get', obj).subscribe(res => {
-      this.nameTranslations[0] = res.translation.name_pl;
-      this.nameTranslations[1] = res.translation.name_en;
-      this.nameTranslations[2] = res.translation.name_ru;
-      
-      this.translateNameLoading = false;
-    });
-  }
+    private tracks = [];
 
-  getAbstractTranslations() {
-    const obj: any = {
-      name: this.article['abstract_' + this.lang]
-    };
+    constructor(
+        private articlesApi: ArticlesApiService,
+        private route: ActivatedRoute,
+        private languageService: LanguageService,
+        private apiService: ApiService,
+        private userProvider: UserProviderService,
+        private conferenceApi: ManageConferenceApiService,
+        private router: Router
+    ) {
+    }
 
-    this.translateAbstractLoading = true;
-    this.apiService.post('translation/get', obj).subscribe(res => {
-      this.abstractTranslations[0] = res.translation.name_pl;
-      this.abstractTranslations[1] = res.translation.name_en;
-      this.abstractTranslations[2] = res.translation.name_ru;
+    ngOnInit() {
+        this.loading = true;
+        this.fileChanged = false;
+        this.articleID = this.route.snapshot.paramMap.get('id');
 
-      this.translateAbstractLoading = false;
-    });
-  }
+        this.languageService.currentLang.subscribe(res => {
+            this.lang = res;
+        });
 
-  getKeywordsTranslations() {
-    const obj: any = {
-      name: this.article['keywords_' + this.lang]
-    };
+        const articleObj = {
+            id: this.articleID
+        };
 
-    this.translateKeywordsLoading = true;
-    this.apiService.post('translation/get', obj).subscribe(res => {
-      this.keywordsTranslations[0] = res.translation.name_pl;
-      this.keywordsTranslations[1] = res.translation.name_en;
-      this.keywordsTranslations[2] = res.translation.name_ru;
+        this.articlesApi.getArticle(articleObj).subscribe(res => {
+            this.article = res.trackArticle;
 
-      this.translateKeywordsLoading = false;
-    });
-  }
+            if (this.article && this.article['id']) {
+                this.nameTranslations[0] = this.article.title_pl;
+                this.nameTranslations[1] = this.article.title_en;
+                this.nameTranslations[2] = this.article.title_ru;
 
-  updateArticle() {
-    this.articlesApi.updateArticle(this.article).subscribe(res => {
-      if (res.success) {
-        this.router.navigateByUrl('conference-articles/my');
-      }
-    });
-  }
+                this.abstractTranslations[0] = this.article.abstract_pl;
+                this.abstractTranslations[1] = this.article.abstract_en;
+                this.abstractTranslations[2] = this.article.abstract_ru;
+
+                this.keywordsTranslations[0] = this.article.keywords_pl;
+                this.keywordsTranslations[1] = this.article.keywords_en;
+                this.keywordsTranslations[2] = this.article.keywords_ru;
+            }
+        });
+
+        this.conferenceApi.getConference().subscribe(res => {
+            const obj = {
+                conference_id: res.conference.id
+            };
+
+            this.conferenceApi.getTracks(obj).subscribe(response => {
+                this.tracks = response.tracks;
+                this.loading = false;
+            });
+        });
+    }
+
+    getNameTranslations() {
+        const obj: any = {
+            name: this.article['title_' + this.lang]
+        };
+
+        this.translateNameLoading = true;
+        this.apiService.post('translation/get', obj).subscribe(res => {
+            this.nameTranslations[0] = res.translation.name_pl;
+            this.nameTranslations[1] = res.translation.name_en;
+            this.nameTranslations[2] = res.translation.name_ru;
+
+            this.translateNameLoading = false;
+        });
+    }
+
+    getAbstractTranslations() {
+        const obj: any = {
+            name: this.article['abstract_' + this.lang]
+        };
+
+        this.translateAbstractLoading = true;
+        this.apiService.post('translation/get', obj).subscribe(res => {
+            this.abstractTranslations[0] = res.translation.name_pl;
+            this.abstractTranslations[1] = res.translation.name_en;
+            this.abstractTranslations[2] = res.translation.name_ru;
+
+            this.translateAbstractLoading = false;
+        });
+    }
+
+    getKeywordsTranslations() {
+        const obj: any = {
+            name: this.article['keywords_' + this.lang]
+        };
+
+        this.translateKeywordsLoading = true;
+        this.apiService.post('translation/get', obj).subscribe(res => {
+            this.keywordsTranslations[0] = res.translation.name_pl;
+            this.keywordsTranslations[1] = res.translation.name_en;
+            this.keywordsTranslations[2] = res.translation.name_ru;
+
+            this.translateKeywordsLoading = false;
+        });
+    }
+
+    updateArticle() {
+        this.updateLoading = true;
+
+        this.article.title_pl = this.nameTranslations[0];
+        this.article.title_en = this.nameTranslations[1];
+        this.article.title_ru = this.nameTranslations[2];
+
+        this.article.abstract_pl = this.abstractTranslations[0];
+        this.article.abstract_en = this.abstractTranslations[1];
+        this.article.abstract_ru = this.abstractTranslations[2];
+
+        this.article.keywords_pl = this.keywordsTranslations[0];
+        this.article.keywords_en = this.keywordsTranslations[1];
+        this.article.keywords_ru = this.keywordsTranslations[2];
+
+        const formData: FormData = new FormData();
+
+        if (this.fileChanged) {
+            formData.append('new_file', this.fileToUpload, this.fileToUpload.name);
+        }
+
+        for (var key in this.article) {
+            formData.append(key, this.article[key]);
+        }
+
+        formData.append('token', localStorage.getItem('token'));
+
+        this.articlesApi.updateArticle(formData).subscribe(
+            (res) => {
+                if (res.success) {
+                    this.fileChanged = false;
+
+                    this.article = res.trackArticle;
+
+                    this.router.navigateByUrl('conference-articles/my');
+                }
+            },
+            () => {},
+            () => {
+              this.updateLoading = false;
+            }
+        );
+    }
+
+    changeTrack(event) {
+        this.article.track_id = event.target.value;
+    }
+
+    handleFileInput(files: FileList) {
+        this.fileChanged = true;
+        this.fileToUpload = files.item(0);
+        this.article.file_name = this.fileToUpload.name;
+    }
 }

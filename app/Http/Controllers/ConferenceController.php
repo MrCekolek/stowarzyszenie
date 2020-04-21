@@ -86,7 +86,7 @@ class ConferenceController extends Controller
      * )
      */
     public function getActive() {
-        $conference = Conference::with(['conferencePages', 'conferencePreference', 'programmeCommittee', 'conferenceEvents', 'conferenceCfp', 'conferenceGalleries'])->where('status', '!=', 'finished')->first();
+        $conference = Conference::with(['conferencePages', 'conferencePreference', 'programmeCommittee', 'conferenceEvents', 'conferenceCfp', 'conferenceGalleries', 'tracks'])->where('status', '!=', 'finished')->first();
 
         return LogService::read(true, [
             'conference' => !empty($conference) ? $conference->toArray() : []
@@ -145,7 +145,7 @@ class ConferenceController extends Controller
         $trackIds = Conference::with('tracks')->where('status', '!=', 'finished')->get()->pluck('tracks.*.id')->collapse()->toArray();
 
         return LogService::read(true, [
-            'conferenceArticles' => TrackArticle::where('user_id', $input['user_id'])
+            'conferenceArticles' => TrackArticle::with('articleComments')->where('user_id', $input['user_id'])
                 ->whereIn('track_id', $trackIds)
                 ->get()
                 ->toArray()

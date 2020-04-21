@@ -26,17 +26,17 @@
     <div class="row justify-content-start">
         <div class="col-sm-12" style="padding-left: 0;">
             <div class="card author-box card-primary">
-                <div class="loader-container" *ngIf="loading">
+                <div class="loader-container my-3" *ngIf="loading">
                     <div class="loader">
                         <div class="spinner-border text-primary"></div>
                     </div>
                 </div>
 
                 <div class="card-body">
-                    <div class="row">
+                    <div class="row" *ngIf="this.user">
                         <div class="author-box-left">
                             <div class="avatar-item">
-                                <img alt="image" [src]="this.user?.preference_user.avatar" class="rounded-circle author-box-picture">
+                                <img alt="image" [src]="this.user.preference_user['avatar']" class="rounded-circle author-box-picture">
                                 <div *ngIf="this.isOwner" class="avatar-badge" title="" data-toggle="tooltip" data-original-title="Edit avatar">
                                     <i class="fas fa-pencil-alt"></i>
                                     <form [formGroup]="this.avatarForm" enctype="multipart/form-data">
