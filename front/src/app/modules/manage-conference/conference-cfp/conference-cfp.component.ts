@@ -71,6 +71,8 @@ export class ConferenceCfpComponent implements OnInit {
   private loading;
   private updating;
   private alert;
+  fileToUpload: File = null;
+  private fileChanged;
 
   constructor(
     private manageConferenceApi: ManageConferenceApiService
@@ -78,6 +80,8 @@ export class ConferenceCfpComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+
+    this.fileChanged = false;
 
     this.manageConferenceApi.getConference().subscribe(
         (res) => {
@@ -106,11 +110,24 @@ export class ConferenceCfpComponent implements OnInit {
 
   updateCfp() {
     this.updating = true;
+    const formData: FormData = new FormData();
 
-    this.manageConferenceApi.updateCFP(this.conference.conference_cfp).subscribe(
+    if (this.fileChanged) {
+      formData.append('new_file', this.fileToUpload, this.fileToUpload.name);
+    }
+
+    for (var key in this.conference.conference_cfp) {
+      formData.append(key, this.conference.conference_cfp[key]);
+    }
+
+    formData.append('token', localStorage.getItem('token'));
+
+    this.manageConferenceApi.updateCFP(formData).subscribe(
       (res) => {
         if (res.success) {
           this.conference.conference_cfp = res.conferenceCfp;
+
+          this.fileChanged = false;
 
           this.alert = new AlertModel('success', res.message);
         } else {
@@ -122,5 +139,11 @@ export class ConferenceCfpComponent implements OnInit {
         this.updating = false;
       }
     );
+  }
+
+  handleFileInput(files: FileList) {
+    this.fileChanged = true;
+    this.fileToUpload = files.item(0);
+    this.conference.conference_cfp.file_name = this.fileToUpload.name;
   }
 }

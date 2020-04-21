@@ -665,7 +665,8 @@
                 "PAGE_TITLE": "Call For Papers",
                 "SECTION_TITLE": "Zarządzaj CFP",
                 "PAGE_DESC": "Edytuj CFP dla swojej konferencji, która będzie wyświetlana dla wszystkich użytkowników i gości podczas rejestracji na konferencję, na stronie konferencji itp.",
-                "CHOOSED_FILE": "Wybrałeś plik:"
+                "CHOOSED_FILE": "Wybrałeś plik:",
+                "PREVIEW_FILE": "Podgląd pliku:"
             },
             "CONFPAGES": {
                 "PAGE_EDIT_TITLE": "Edytuj podstronę strony konferencji"

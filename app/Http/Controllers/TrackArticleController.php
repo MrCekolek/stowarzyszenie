@@ -198,7 +198,7 @@ class TrackArticleController extends Controller {
             return $validation->failResponse();
         }
 
-        $trackArticle = TrackArticle::addTrackArticle($input, $success);
+        $trackArticle = TrackArticle::addTrackArticle($request, $input, $success);
 
         return LogService::create($success, [
             'trackArticle' => $trackArticle->load('user')->toArray()
@@ -342,7 +342,7 @@ class TrackArticleController extends Controller {
             return $validation->failResponse();
         }
 
-        $trackArticle = TrackArticle::updateTrackArticle($input, $success);
+        $trackArticle = TrackArticle::updateTrackArticle($request, $input, $success);
 
         return LogService::update($success, [
             'trackArticle' => $trackArticle->load('user')->toArray()
