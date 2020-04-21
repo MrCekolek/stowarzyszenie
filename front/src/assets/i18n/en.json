@@ -168,7 +168,8 @@
                 "CHOOSE_DATE_END": "Select the end date of the event",
                 "CHOOSE_HOUR_END": "Select the end time of the event",
                 "INPUT_EDIT_DESC_LABEL": "Change the description in the current language to translate or edit the translation fields below"
-            }
+            },
+            "BUTTON_CLOSE": "Close modal"
         },
         "MODULES": {
             "AUTH": {
@@ -334,7 +335,8 @@
                     },
                     "ARTICLES": {
                         "MAIN": "Articles",
-                        "MY_ARTICLES": "My articles"
+                        "MY_ARTICLES": "My articles",
+                        "ALL_ARTICLES": "All articles"
                     },
                     "REVIEWS": {
                         "MAIN": "Reviews",
@@ -694,7 +696,12 @@
                     "TABLE_TITLE": "Title of article",
                     "TABLE_STATUS": "Status of article",
                     "TABLE_ACTION": "Actions",
-                    "SENT_HEADER": "Sent articles"
+                    "SENT_HEADER": "Sent articles",
+                    "NO_CONFERENCE": "No conference",
+                    "NO_CONFERENCE_DESC": "There is no conference in system so you cannot sent articles.",
+                    "EDIT_ARTICLE": "Edit article",
+                    "SEE_REVIEW": "See review",
+                    "SEE_COMMENTS": "See comments"
                 },
                 "SUBMIT": {
                     "PAGE_TITLE": "Submit article",
@@ -716,7 +723,49 @@
                 "EDIT": {
                     "PAGE_TITLE": "Edit article",
                     "SECTION_TITLE": "Edit article",
-                    "PAGE_DESC": "Edit your article informations."
+                    "PAGE_DESC": "Edit your article informations.",
+                    "TITLE_LABEL": "Edit article title",
+                    "ABSTRACT_LABEL": "Edit article abstract"
+                },
+                "COMMENTS_MODAL": {
+                    "MODAL_TITLE": "Article comments",
+                    "NO_COMMENTS": "Your article has no comments"
+                },
+                "ALL": {
+                    "PAGE_TITLE": "All articles",
+                    "SECTION_TITLE": "Manage sent articles",
+                    "PAGE_DESC": "Here you can manage all articles sent to conference. Accept them, reject, change their statuses.",
+                    "NO_CONFERENCE_DESC": "There is no conference, so articles are not sent to manage",
+                    "NO_ARTICLES": "No articles",
+                    "NO_ARTICLES_DESC": "Nobody sent articles to conference yet",
+                    "ALL_TAB_TITLE": "All articles",
+                    "TO_MANAGE_TAB_TITLE": "Articles to accept",
+                    "ACCEPTED_TAB_TITLE": "Accepted articles",
+                    "REJECTED_TAB_TITLE": "Rejected articles",
+                    "ALL_TAB": {
+                        "ARTICLE_TITLE_CELL": "Article title",
+                        "ARTICLE_AUTHOR_CELL": "Article author",
+                        "ARTICLE_TRACK_CELL": "Article track",
+                        "SENT_DATE_CELL": "Post date",
+                        "STATUS_CELL": "Article status",
+                        "ACTIONS_CELL": "Actions",
+                        "PREVIEW_BTN": "Preview",
+                        "ACCEPT_BTN": "Accept article",
+                        "REJECT_BTN": "Reject article",
+                        "ADD_COMMENT_BTN": "Add comment",
+                        "ASSIGN_REVIEWER_BTN": "Assign reviewer",
+                        "RETURN_ARTICLE_BTN": "Restore to manage"
+                    }
+                },
+                "PREVIEW": {
+                    "MODAL_TITLE": "Article preview",
+                    "GO_TO_PROFILE_BTN": "Go to profile"
+                },
+                "ADD_COMMENT": {
+                    "MODAL_TITLE": "Add comment to article",
+                    "NO_COMMENTS": "Article has no comments yet",
+                    "ADD_COMMENT_FORM": "Add comment",
+                    "COMMENT_TEXT_LABEL": "Comment text"
                 }
             },
             "CONFERENCE_PROGRAMMEE": {

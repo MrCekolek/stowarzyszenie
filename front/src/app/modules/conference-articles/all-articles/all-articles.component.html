@@ -1,1 +1,418 @@
-<p>all-articles works!</p>
+<div class="section-header">
+    <h1>{{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.PAGE_TITLE' | translate }}</h1>
+</div>
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.SECTION_TITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.PAGE_DESC' | translate }}
+    </p>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-center my-3" *ngIf="loading; else content">
+                <div class="spinner-border text-primary"></div>
+            </div>
+    
+            <ng-template #content>
+                <div class="empty-state" data-height="200" *ngIf="this.conference && !this.conference.id">
+                    <div class="empty-state-icon">
+                        <i class="fas fa-question"></i>
+                    </div>
+                    <h2>
+                        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.NO_CONFERENCE' | translate }}
+                    </h2>
+                    <p class="lead">
+                        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.NO_CONFERENCE_DESC' | translate }}
+                    </p>
+                </div>
+
+                <div *ngIf="this.conference && this.conference.id">
+                    <div class="empty-state" data-height="200" *ngIf="this.allArticles && this.allArticles.length === 0">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-question"></i>
+                        </div>
+                        <h2>
+                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.NO_ARTICLES' | translate }}
+                        </h2>
+                        <p class="lead">
+                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.NO_ARTICLES_DESC' | translate }}
+                        </p>
+                    </div>
+
+                    <div *ngIf="this.allArticles && this.allArticles.length > 0">
+                        <ul class="nav nav-tabs" id="myTab2" role="tablist">
+
+                            <li class="nav-item">
+                                <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="home" aria-selected="true">
+                                    {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB_TITLE' | translate }}
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-info" id="tomanage-tab" data-toggle="tab" href="#tomanage" role="tab" aria-controls="home" aria-selected="true">
+                                    {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.TO_MANAGE_TAB_TITLE' | translate }}
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-success" id="accepted-tab" data-toggle="tab" href="#accepted" role="tab" aria-controls="profile" aria-selected="false">
+                                    {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ACCEPTED_TAB_TITLE' | translate }}
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-danger" id="rejected-tab2" data-toggle="tab" href="#rejected" role="tab" aria-controls="contact" aria-selected="false">
+                                    {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.REJECTED_TAB_TITLE' | translate }}
+                                </a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content tab-bordered">
+                            <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                      <tbody>
+                                      <tr>
+                                        <th>
+                                          {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ARTICLE_TITLE_CELL' | translate }}
+                                        </th>
+                                        <th>
+                                          {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ARTICLE_AUTHOR_CELL' | translate }}
+                                        </th>
+                                        <th>
+                                          {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ARTICLE_TRACK_CELL' | translate }}
+                                        </th>
+                                        <th>
+                                          {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.SENT_DATE_CELL' | translate }}
+                                        </th>
+                                        <th>
+                                          {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.STATUS_CELL' | translate}}
+                                        </th>
+                                        <th>
+                                          {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ACTIONS_CELL' | translate }}
+                                        </th>
+                                      </tr>
+
+                                      <tr *ngFor="let article of allArticles">
+                                        <td class="align-middle">
+                                          {{ article['title_' + lang] }}
+                                        </td>
+
+                                        <td class="align-middle">
+                                          <img alt="image" [src]="article.user.preference_user.avatar" class="rounded-circle" width="35" data-toggle="tooltip" [title]="article.user.first_name + ' ' + article.user.last_name">
+                                        </td>
+
+                                        <td class="align-middle">
+                                          {{ article.track['name_' + lang] }}
+                                        </td>
+
+                                        <td class="align-middle">
+                                          {{ article.created_at | date }}
+                                        </td>
+
+                                        <td class="align-middle">
+                                          <div class="badge" [ngClass]="{'badge-success': article.status === 'accepted', 'badge-info': article.status === 'waiting', 'badge-danger': article.status === 'rejected', 'badge-warning': article.status === 'review', 'badge-success': article.status === 'reviewed', 'badge-success': article.status === 'in pc'}">
+                                            {{ article.translation_key | translate }}
+                                          </div>
+                                        </td>
+
+                                        <td class="align-middle">
+                                          <!-- dzialania -->
+                                          <div class="dropdown">
+                                            <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" aria-expanded="true">
+                                              {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ACTIONS_CELL' | translate }}
+                                            </a>
+
+                                            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(-66px, 26px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                              <!-- podgląd -->
+                                              <a  class="dropdown-item has-icon text-primary" (click)="openPreviewModal(article)">
+                                                <i class="far fa-eye"></i>
+                                                {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.PREVIEW_BTN' | translate }}
+                                              </a>
+
+                                              <!-- dodaj komentarz -->
+                                              <a  class="dropdown-item has-icon" (click)="addComment(article)">
+                                                <i class="fas fa-comment"></i>
+                                                {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ADD_COMMENT_BTN' | translate }}
+                                              </a>
+
+                                              <!-- akceptuj -->
+                                              <a class="dropdown-item has-icon text-success" *ngIf="article.status === 'waiting'" (click)="acceptArticle(article)">
+                                                <i class="fas fa-check"></i>
+                                                {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ACCEPT_BTN' | translate }}
+                                              </a>
+
+                                              <!-- odrzuc -->
+                                              <a  class="dropdown-item has-icon text-danger" *ngIf="article.status === 'waiting'" (click)="rejectArticle(article)">
+                                                <i class="fas fa-minus-circle"></i>
+                                                {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.REJECT_BTN' | translate }}
+                                              </a>
+                                              
+                                            </div>
+                                          </div>
+                                        </td>
+                                      </tr>
+                                    </tbody></table>
+                                  </div>
+                            </div>
+                            
+                            <!-- articles to manage -->
+                            <div class="tab-pane fade" id="tomanage" role="tabpanel" aria-labelledby="tomanage-tab">
+                              <div class="table-responsive">
+                                <table class="table table-striped">
+                                  <tbody>
+                                  <tr>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ARTICLE_TITLE_CELL' | translate }}
+                                    </th>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ARTICLE_AUTHOR_CELL' | translate }}
+                                    </th>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ARTICLE_TRACK_CELL' | translate }}
+                                    </th>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.SENT_DATE_CELL' | translate }}
+                                    </th>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.STATUS_CELL' | translate}}
+                                    </th>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ACTIONS_CELL' | translate }}
+                                    </th>
+                                  </tr>
+
+                                  <tr *ngFor="let article of toManageArticles">
+                                    <td class="align-middle">
+                                      {{ article['title_' + lang] }}
+                                    </td>
+
+                                    <td class="align-middle">
+                                      <img alt="image" [src]="article.user.preference_user.avatar" class="rounded-circle" width="35" data-toggle="tooltip" [title]="article.user.first_name + ' ' + article.user.last_name">
+                                    </td>
+
+                                    <td class="align-middle">
+                                      {{ article.track['name_' + lang] }}
+                                    </td>
+
+                                    <td class="align-middle">
+                                      {{ article.created_at | date }}
+                                    </td>
+
+                                    <td class="align-middle">
+                                      <div class="badge" [ngClass]="{'badge-success': article.status === 'accepted', 'badge-info': article.status === 'waiting', 'badge-danger': article.status === 'rejected', 'badge-warning': article.status === 'review', 'badge-success': article.status === 'reviewed', 'badge-success': article.status === 'in pc'}">
+                                        {{ article.translation_key | translate }}
+                                      </div>
+                                    </td>
+
+                                    <td class="align-middle">
+                                      <!-- dzialania -->
+                                      <div class="dropdown">
+                                        <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" aria-expanded="true">
+                                          {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ACTIONS_CELL' | translate }}
+                                        </a>
+
+                                        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(-66px, 26px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                          <!-- podgląd -->
+                                          <a  class="dropdown-item has-icon text-primary" (click)="openPreviewModal(article)">
+                                            <i class="far fa-eye"></i>
+                                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.PREVIEW_BTN' | translate }}
+                                          </a>
+
+                                          <!-- dodaj komentarz -->
+                                          <a  class="dropdown-item has-icon" (click)="addComment(article)">
+                                            <i class="fas fa-comment"></i>
+                                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ADD_COMMENT_BTN' | translate }}
+                                          </a>
+
+                                          <!-- akceptuj -->
+                                          <a class="dropdown-item has-icon text-success" (click)="acceptArticle(article)">
+                                            <i class="fas fa-check"></i>
+                                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ACCEPT_BTN' | translate }}
+                                          </a>
+
+                                          <!-- odrzuc -->
+                                          <a  class="dropdown-item has-icon text-danger" (click)="rejectArticle(article)">
+                                            <i class="fas fa-minus-circle"></i>
+                                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.REJECT_BTN' | translate }}
+                                          </a>
+                                          
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </tbody></table>
+                              </div>
+                            </div>
+
+                            <!-- zaakceptowane -->
+                            <div class="tab-pane fade" id="accepted" role="tabpanel" aria-labelledby="accepted-tab">
+                              <div class="table-responsive">
+                                <table class="table table-striped">
+                                  <tbody>
+                                  <tr>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ARTICLE_TITLE_CELL' | translate }}
+                                    </th>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ARTICLE_AUTHOR_CELL' | translate }}
+                                    </th>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ARTICLE_TRACK_CELL' | translate }}
+                                    </th>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.SENT_DATE_CELL' | translate }}
+                                    </th>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.STATUS_CELL' | translate}}
+                                    </th>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ACTIONS_CELL' | translate }}
+                                    </th>
+                                  </tr>
+
+                                  <tr *ngFor="let article of acceptedArticles">
+                                    <td class="align-middle">
+                                      {{ article['title_' + lang] }}
+                                    </td>
+
+                                    <td class="align-middle">
+                                      <img alt="image" [src]="article.user.preference_user.avatar" class="rounded-circle" width="35" data-toggle="tooltip" [title]="article.user.first_name + ' ' + article.user.last_name">
+                                    </td>
+
+                                    <td class="align-middle">
+                                      {{ article.track['name_' + lang] }}
+                                    </td>
+
+                                    <td class="align-middle">
+                                      {{ article.created_at | date }}
+                                    </td>
+
+                                    <td class="align-middle">
+                                      <div class="badge" [ngClass]="{'badge-success': article.status === 'accepted', 'badge-info': article.status === 'waiting', 'badge-danger': article.status === 'rejected', 'badge-warning': article.status === 'review', 'badge-success': article.status === 'reviewed', 'badge-success': article.status === 'in pc'}">
+                                        {{ article.translation_key | translate }}
+                                      </div>
+                                    </td>
+
+                                    <td class="align-middle">
+                                      <!-- dzialania -->
+                                      <div class="dropdown">
+                                        <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" aria-expanded="true">
+                                          {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ACTIONS_CELL' | translate }}
+                                        </a>
+
+                                        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(-66px, 26px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                          <!-- podgląd -->
+                                          <a  class="dropdown-item has-icon text-primary" (click)="openPreviewModal(article)">
+                                            <i class="far fa-eye"></i>
+                                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.PREVIEW_BTN' | translate }}
+                                          </a>
+
+                                          <!-- dodaj komentarz -->
+                                          <a  class="dropdown-item has-icon" (click)="addComment(article)">
+                                            <i class="fas fa-comment"></i>
+                                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ADD_COMMENT_BTN' | translate }}
+                                          </a>
+
+                                          <!-- przydziel recenzenta -->
+                                          <a  class="dropdown-item has-icon text-danger" (click)="assignReviewer(article)">
+                                            <i class="fas fa-star"></i>
+                                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ASSIGN_REVIEWER_BTN' | translate }}
+                                          </a>
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </tbody></table>
+                              </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="rejected" role="tabpanel" aria-labelledby="rejected-tab">
+                              <div class="table-responsive">
+                                <table class="table table-striped">
+                                  <tbody>
+                                  <tr>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ARTICLE_TITLE_CELL' | translate }}
+                                    </th>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ARTICLE_AUTHOR_CELL' | translate }}
+                                    </th>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ARTICLE_TRACK_CELL' | translate }}
+                                    </th>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.SENT_DATE_CELL' | translate }}
+                                    </th>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.STATUS_CELL' | translate}}
+                                    </th>
+                                    <th>
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ACTIONS_CELL' | translate }}
+                                    </th>
+                                  </tr>
+
+                                  <tr *ngFor="let article of acceptedArticles">
+                                    <td class="align-middle">
+                                      {{ article['title_' + lang] }}
+                                    </td>
+
+                                    <td class="align-middle">
+                                      <img alt="image" [src]="article.user.preference_user.avatar" class="rounded-circle" width="35" data-toggle="tooltip" [title]="article.user.first_name + ' ' + article.user.last_name">
+                                    </td>
+
+                                    <td class="align-middle">
+                                      {{ article.track['name_' + lang] }}
+                                    </td>
+
+                                    <td class="align-middle">
+                                      {{ article.created_at | date }}
+                                    </td>
+
+                                    <td class="align-middle">
+                                      <div class="badge" [ngClass]="{'badge-success': article.status === 'accepted', 'badge-info': article.status === 'waiting', 'badge-danger': article.status === 'rejected', 'badge-warning': article.status === 'review', 'badge-success': article.status === 'reviewed', 'badge-success': article.status === 'in pc'}">
+                                        {{ article.translation_key | translate }}
+                                      </div>
+                                    </td>
+
+                                    <td class="align-middle">
+                                      <!-- dzialania -->
+                                      <div class="dropdown">
+                                        <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" aria-expanded="true">
+                                          {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ACTIONS_CELL' | translate }}
+                                        </a>
+
+                                        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(-66px, 26px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                          <!-- podgląd -->
+                                          <a  class="dropdown-item has-icon text-primary" (click)="openPreviewModal(article)">
+                                            <i class="far fa-eye"></i>
+                                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.PREVIEW_BTN' | translate }}
+                                          </a>
+
+                                          <!-- dodaj komentarz -->
+                                          <a  class="dropdown-item has-icon" (click)="addComment(article)">
+                                            <i class="fas fa-comment"></i>
+                                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ADD_COMMENT_BTN' | translate }}
+                                          </a>
+
+                                          <!-- przydziel recenzenta -->
+                                          <a  class="dropdown-item has-icon text-danger" (click)="restoreArticle(article)">
+                                            <i class="fas fa-star"></i>
+                                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.RETURN_ARTICLE_BTN' | translate }}
+                                          </a>
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </tbody></table>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

@@ -168,7 +168,8 @@
                 "CHOOSE_DATE_END": "Wybierz datę zakończenia wydarzenia",
                 "CHOOSE_HOUR_END": "Wybierz czas zakończenia wydarzenia",
                 "INPUT_EDIT_DESC_LABEL": "Zmień opis w bieżącym języku, aby przetłumaczyć lub edytuj poniższe pola tłumaczenia"
-            }
+            },
+            "BUTTON_CLOSE": "Zamknij modal"
         },
         "MODULES": {
             "AUTH": {
@@ -334,7 +335,8 @@
                     },
                     "ARTICLES": {
                         "MAIN": "Artykuły",
-                        "MY_ARTICLES": "Moje artykuły"
+                        "MY_ARTICLES": "Moje artykuły",
+                        "ALL_ARTICLES": "Wszystkie artykuły"
                     },
                     "REVIEWS": {
                         "MAIN": "Recenzje",
@@ -694,7 +696,12 @@
                     "TABLE_TITLE": "Tytuł artykułu",
                     "TABLE_STATUS": "Status artykułu",
                     "TABLE_ACTION": "Akcje",
-                    "SENT_HEADER": "Wysłane artykuły"
+                    "SENT_HEADER": "Wysłane artykuły",
+                    "NO_CONFERENCE": "Brak konferencji",
+                    "NO_CONFERENCE_DESC": "W systemie nie ma konferencji, więc nie można wysyłać artykułów.",
+                    "EDIT_ARTICLE": "Edytuj artykuł",
+                    "SEE_REVIEW": "Zobacz recenzję",
+                    "SEE_COMMENTS": "Zobacz komentarze"
                 },
                 "SUBMIT": {
                     "PAGE_TITLE": "Prześlij artykuł",
@@ -716,7 +723,49 @@
                 "EDIT": {
                     "PAGE_TITLE": "Edytuj artykuł",
                     "SECTION_TITLE": "Edytuj artykuł",
-                    "PAGE_DESC": "Edytuj informacje o swoim artykule."
+                    "PAGE_DESC": "Edytuj informacje o swoim artykule.",
+                    "TITLE_LABEL": "Edytuj tytuł artykułu",
+                    "ABSTRACT_LABEL": "Edytuj streszczenie artykułu"
+                },
+                "COMMENTS_MODAL": {
+                    "MODAL_TITLE": "Komentarze do artykułu",
+                    "NO_COMMENTS": "Twój artykuł nie ma komentarzy"
+                },
+                "ALL": {
+                    "PAGE_TITLE": "Wszystkie artykuły",
+                    "SECTION_TITLE": "Zarządzaj wysłanymi artykułami",
+                    "PAGE_DESC": "Tutaj możesz zarządzać wszystkimi artykułami wysyłanymi na konferencję. Aakceptuj je, odrzucaj, zmieniaj ich statusy.",
+                    "NO_CONFERENCE_DESC": "Nie ma konferencji, więc artykuły nie są wysyłane do zarządzania",
+                    "NO_ARTICLES": "Brak artykułów",
+                    "NO_ARTICLES_DESC": "Nikt jeszcze nie wysłał artykułów na konferencję",
+                    "ALL_TAB_TITLE": "Wszystkie artykuły",
+                    "TO_MANAGE_TAB_TITLE": "Artykuły do ​​zaakceptowania",
+                    "ACCEPTED_TAB_TITLE": "Zaakceptowane artykuły",
+                    "REJECTED_TAB_TITLE": "Artykuły odrzucone",
+                    "ALL_TAB": {
+                        "ARTICLE_TITLE_CELL": "Tytuł artykułu",
+                        "ARTICLE_AUTHOR_CELL": "Autor artykułu",
+                        "ARTICLE_TRACK_CELL": "Track artykułu",
+                        "SENT_DATE_CELL": "Data wysłania",
+                        "STATUS_CELL": "Status artykułu",
+                        "ACTIONS_CELL": "Działania",
+                        "PREVIEW_BTN": "Podgląd",
+                        "ACCEPT_BTN": "Zaakceptuj artykuł",
+                        "REJECT_BTN": "Odrzuć artykuł",
+                        "ADD_COMMENT_BTN": "Dodaj komentarz",
+                        "ASSIGN_REVIEWER_BTN": "Przypisz recenzenta",
+                        "RETURN_ARTICLE_BTN": "Przywróć do zarządzania"
+                    }
+                },
+                "PREVIEW": {
+                    "MODAL_TITLE": "Podgląd artykułu",
+                    "GO_TO_PROFILE_BTN": "Przejdź do profilu"
+                },
+                "ADD_COMMENT": {
+                    "MODAL_TITLE": "Dodaj komentarz do artykułu",
+                    "NO_COMMENTS": "Artykuł nie ma jeszcze komentarzy",
+                    "ADD_COMMENT_FORM": "Dodaj komentarz",
+                    "COMMENT_TEXT_LABEL": "Treść komentarza"
                 }
             },
             "CONFERENCE_PROGRAMMEE": {

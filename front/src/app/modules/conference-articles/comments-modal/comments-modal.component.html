@@ -1,1 +1,54 @@
-<p>comments-modal works!</p>
+<h2 mat-dialog-title>
+    <span>
+        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.COMMENTS_MODAL.MODAL_TITLE' | translate }}
+    </span>
+</h2>
+
+<mat-dialog-content>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <div *ngIf="this.comments.length === 0">
+              <P>
+                {{ 'STOWARZYSZENIE.MODULES.ARTICLES.COMMENTS_MODAL.NO_COMMENTS' | translate }}
+              </P>
+            </div>
+
+            <!-- TODO: sortowanie komentarzy po czasie, od najnowszego -->
+            <div class="activities" *ngIf="this.comments.length > 0">
+              <div class="activity" *ngFor="let comment of comments">
+                <div class="activity-icon bg-primary text-white shadow-primary">
+                  <i class="fas fa-comment-alt"></i>
+                </div>
+                <div class="activity-detail">
+                  <div class="mb-2">
+                    <span class="text-job text-primary">
+                      2 min ago
+                      <!-- TODO: pipe 'created ... ago' -->
+                    </span>
+                    <span class="bullet"></span>
+                    <a class="text-job">
+                      <!-- TODO: przez kogo dodane (bez nazwiska!! tylko rola - recenzent / PC) -->
+                      By reviewer
+                    </a>
+                  </div>
+                  <p>
+                    {{ comment.description }}
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button type="button " class="btn btn-link" (click)="dismiss()">
+        {{ 'STOWARZYSZENIE.MODALS.BUTTON_CANCEL' | translate }}
+    </button>
+</mat-dialog-actions>
