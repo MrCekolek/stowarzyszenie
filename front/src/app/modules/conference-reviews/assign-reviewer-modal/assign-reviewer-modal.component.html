@@ -1,0 +1,130 @@
+<h2 mat-dialog-title>
+    <span>
+        {{ 'STOWARZYSZENIE.MODULES.REVIEWS.ASSIGN.MODAL_TITLE' | translate }}
+    </span>
+</h2>
+
+<mat-dialog-content>
+    <p>
+        {{ 'STOWARZYSZENIE.MODULES.REVIEWS.ASSIGN.ASSIGNING_TO' | translate }} <span class="text-primary"> {{ article['title_' + lang] }} </span>
+    </p>
+    <!-- wszyscy recenzenci ktorzy moga byc przydzieleni -->
+    <p class="text-primary mt-3 text-center">
+        <strong>
+            {{ 'STOWARZYSZENIE.MODULES.REVIEWS.ASSIGN.AVAILABLE_USERS' | translate }}
+        </strong>
+    </p>
+
+    <div class="card">
+        <div class="card-header">
+          <div class="card-header-form">
+            <form>
+              <!-- TODO: wyszukiwarka -->
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search">
+                <div class="input-group-btn">
+                  <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <tbody><tr>
+                <th>
+                  {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.TABLE_USERS_TITLE' | translate }}
+                </th>
+                <th>
+                  {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.TABLE_INTEREST_TITLE' | translate}}
+                </th>
+                <th>
+                  {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.TABLE_EMAIL_TITLE' | translate }}
+                </th>
+                <th>
+                  {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.TABLE_ACTIONS_TITLE' | translate }}
+                </th>
+              </tr>
+
+              <tr *ngIf="this.possibleReviewers.length < 1">
+                <td>
+                  {{ 'STOWARZYSZENIE.LABELS_TABLES.NO_DATA' | translate }}
+                </td>
+              </tr>
+
+              <tr *ngFor="let user of possibleReviewers">
+                <td>
+                  <li class="media">
+                    <img alt="image" class="mr-3 rounded-circle" width="50" [src]="user.preference_user.avatar">
+                    <div class="media-body">
+                      {{ user.affilation_user.title }}
+                      <div class="media-title">
+                        {{ user.name }}
+                      </div>
+                      <div class="text-job text-muted">
+
+                      </div>
+                    </div>
+                  </li>
+                </td>
+
+                <td>
+                  <div class="badge badge-primary" *ngFor="let interest of user.interests">
+                    {{ interest['name_' + this.lang] }}
+                  </div>
+                </td>
+
+                <!-- email kontaktowy -->
+                <td>
+                  {{ user.contact_email }}
+                </td>
+
+                <!-- akcje -->
+                <td>
+                  <a class="btn btn-warning text-white" (click)="chooseReviewer(user)">
+                    {{ 'STOWARZYSZENIE.MODULES.REVIEWS.ASSIGN.ASSIGN_BUTTON' | translate }}
+                  </a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    <!-- proponowani recenzenci -->
+
+    <p class="text-primary mt-3 text-center">
+        <strong>
+            {{ 'STOWARZYSZENIE.MODULES.REVIEWS.ASSIGN.BEST_REVIEWERS' | translate }}
+        </strong>
+    </p>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="user-item ml-4" *ngFor="let user of bestReviewers">
+            <!-- [src]="user.preference_user.avatar" -->
+            <img alt="image" src="assets/images/avatar-3.png" width="90" class="img-fluid">
+            <div class="user-details">
+              <div class="user-name">
+                  {{ user.afiiliation.title }} {{ user.first_name }} {{ user.last_name }}
+              </div>
+              <div class="text-job text-muted">
+                  User organization
+              </div>
+              <div class="user-cta">
+                <button class="btn btn-warning following-btn">
+                    {{ 'STOWARZYSZENIE.MODULES.REVIEWS.ASSIGN.ASSIGN_BUTTON' | translate }} 
+                </button>
+              </div>
+            </div>  
+          </div>
+    </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button type="button " class="btn btn-link" (click)="dismiss()">
+        {{ 'STOWARZYSZENIE.MODALS.BUTTON_CLOSE' | translate }}
+    </button>
+</mat-dialog-actions>

@@ -1,0 +1,70 @@
+<div class="section-header">
+    <h1>{{ 'STOWARZYSZENIE.MODULES.REVIEWS.MY.PAGE_TITLE' | translate }}</h1>
+</div>
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.REVIEWS.MY.SECTION_TITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.REVIEWS.MY.PAGE_DESC' | translate }}
+    </p>
+
+    <div class="d-flex justify-content-center my-3" *ngIf="loading; else content">
+        <div class="spinner-border text-primary"></div>
+    </div>
+
+    <ng-template #content>
+        <div class="row">
+            <!-- TODO: -->
+            <!-- *ngFor="let article of assignedArticles" -->
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                <article class="article article-style-c">
+                    <div class="article-details">
+                        <!-- TODO: -->
+                        <!-- *ngIf="article.status === 'reviewed'" -->
+                        <div class="badge badge-success mb-4">
+                            <i class="fas fa-check"></i> Reviewed
+                            <!-- TODO: -->
+                            <!-- {{ article.translation_key }} -->
+                        </div>
+                        <div class="article-title">
+                            <h2>
+                                <!-- TODO: -->
+                                <!-- {{ article['title_' + lang] }} -->
+                                <a>Excepteur sint occaecat cupidatat non proident</a>
+                            </h2>
+                        </div>
+                        <div class="badge badge-info my-2">
+                            <!-- TODO: -->
+                            <!-- {{ article['keywords_' + lang] }} -->
+                            machine learning, keystones
+                        </div>
+                        <div class="article-cta mt-4">
+                            <!-- <div class="btn-group mb-3 button-group-sm" role="group" aria-label="Basic example"> -->
+                                <button class="btn btn-primary btn-icon icon-left btn-sm" (click)="openPreviewModal(article)" >
+                                    <i class="far fa-eye"></i>
+                                    {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.PREVIEW_BTN' | translate }}
+                                </button>
+                                <button class="btn btn-icon icon-left btn-warning btn-sm ml-3" (click)="addComment(article)">
+                                    <i class="fas fa-comment"></i>
+                                    {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ADD_COMMENT_BTN' | translate }}
+                                </button>
+                                <!-- *ngIf="article.status === 'reviewed'" -->
+                                <!-- <button class="btn btn-info btn-icon icon-left btn-sm ml-3" (click)="goToReview(article)">
+                                    <i class="fas fa-star"></i>
+                                    {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.SEE_REVIEW' | translate }}
+                                </button> -->
+                                <!-- TODO:  -->
+                                <!--  *ngIf="article.status !== 'reviewed'" -->
+                                <button class="btn btn-icon icon-left btn-warning btn-sm ml-3" (click)="goToReview()">
+                                    <i class="fas fa-star"></i>
+                                    {{ 'STOWARZYSZENIE.MODULES.REVIEWS.MY.ADD_REVIEW_BTN' | translate }}
+                                </button>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </ng-template>
+</div>

@@ -345,7 +345,9 @@
                     },
                     "REVIEWS": {
                         "MAIN": "Recenzje",
-                        "MY_REVIEWS": "Moje recenzje"
+                        "MY_REVIEWS": "Moje recenzje",
+                        "ASSIGN": "Przypisywanie recenzentów",
+                        "PROGRESS": "Postępy recenzji"
                     }
                 },
                 "WEBPAGE_TITLE_MEMBERS": "Ciob members"
@@ -761,7 +763,10 @@
                         "REJECT_BTN": "Odrzuć artykuł",
                         "ADD_COMMENT_BTN": "Dodaj komentarz",
                         "ASSIGN_REVIEWER_BTN": "Przypisz recenzenta",
-                        "RETURN_ARTICLE_BTN": "Przywróć do zarządzania"
+                        "RETURN_ARTICLE_BTN": "Przywróć do zarządzania",
+                        "ADD_REVIEW_BTN": "Dodaj recenzję",
+                        "ADD_REVIEWER_BTN": "Przypisz recenzenta",
+                        "SEE_REVIEW": "Zobacz recenzję"
                     }
                 },
                 "PREVIEW": {
@@ -804,6 +809,47 @@
                 "LIST_TITLE": "Lista użytkowników w komitecie programowym",
                 "ADD_PC_BTN": "Dodaj użytkownika",
                 "NO_USERS": "Brak użytkowników w komitecie programowym"
+            },
+            "REVIEWS": {
+                "MY": {
+                    "PAGE_TITLE": "Moje recenzje",
+                    "SECTION_TITLE": "Zobacz moje recenzje",
+                    "PAGE_DESC": "Pokaż artykuły przypisane do ciebie, aby je przejrzeć, napisać recenzje i dodać komentarze do artykułów.",
+                    "ASSIGNED_ARTICLES": "Artykuły przypisane do mnie",
+                    "ADD_REVIEW_BTN": "Dodaj recenzję"
+                },
+                "ASSIGN": {
+                    "PAGE_TITLE": "Przypisywanie recenzentów",
+                    "SECTION_TITLE": "Przypisz recenzentów do artykułów",
+                    "PAGE_DESC": "Wybierz najlepszych recenzentów dla wszystkich przyjętych artykułów na konferencję.",
+                    "ARTICLES_TO_ASSIGN": "Artykuły do ​​przypisania",
+                    "ASSIGN_REVIEWER_BTN": "Przypisz recenzenta",
+                    "MODAL_TITLE": "Przypisz recenzenta",
+                    "ASSIGNING_TO": "Przypisywanie recenzenta do artykułu:",
+                    "SEARCH_PLACEHOLDER": "Szukaj według nazwy artykułu lub autora",
+                    "AVAILABLE_USERS": "Dostępni recenzenci",
+                    "BEST_REVIEWERS": "Najlepsi recenzenci do przydzielenia",
+                    "ASSIGN_BUTTON": "Przydziel"
+                },
+                "PROGRESS": {
+                    "PAGE_TITLE": "Postępy recenzji",
+                    "SECTION_TITLE": "Postępy",
+                    "PAGE_DESC": "Tutaj możesz sprawdzić postęp procesu recenzowania artykułów"
+                },
+                "REVIEW": {
+                    "PAGE_TITLE": "Recenzja",
+                    "SECTION_TITLE": "Twoja recenzja",
+                    "PAGE_DESC": "Tutaj możesz dodać recenzję dla przypisanego artykułu lub po prostu zobaczyć już dodaną recenzję.",
+                    "REVIEW_TEXT_LABEL": "Tekst recenzji",
+                    "EVALUATE_LABEL": "Wybierz ocenę",
+                    "STRONG_ACCEPT_RADIO": "Mocna akceptacja",
+                    "ACCEPT_RADIO": "Akceptacja",
+                    "WEAK_ACCEPT_RADIO": "Słaba akceptacja",
+                    "BORDERLINE_RADIO": "Papier na granicy",
+                    "WEAK_REJECT_RADIO": "Słabe odrzucenie",
+                    "REJECT_RADIO": "Odrzucenie",
+                    "STRONG_REJECT_RADIO": "Silne odrzucenie"
+                }
             }
         },
         "PAGINATION": {
