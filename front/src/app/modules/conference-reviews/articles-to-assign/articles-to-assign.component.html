@@ -1,0 +1,124 @@
+<div class="section-header">
+    <h1>{{ 'STOWARZYSZENIE.MODULES.REVIEWS.ASSIGN.PAGE_TITLE' | translate }}</h1>
+</div>
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.REVIEWS.ASSIGN.SECTION_TITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.REVIEWS.ASSIGN.PAGE_DESC' | translate }}
+    </p>
+
+    <div class="d-flex justify-content-center my-3" *ngIf="loading; else content">
+        <div class="spinner-border text-primary"></div>
+    </div>
+
+    <ng-template #content>
+      <div class="empty-state" data-height="200" *ngIf="!this.isConferenceCreated">
+        <div class="empty-state-icon">
+            <i class="fas fa-question"></i>
+        </div>
+        <h2>
+            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.NO_CONFERENCE' | translate }}
+        </h2>
+        <p class="lead">
+            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.NO_CONFERENCE_DESC' | translate }}
+        </p>
+      </div>
+
+        <div class="row" *ngIf="this.isConferenceCreated">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>
+                      {{ 'STOWARZYSZENIE.MODULES.REVIEWS.ASSIGN.ARTICLES_TO_ASSIGN' | translate }}
+                  </h4>
+                  <div class="card-header-form">
+                    <form>
+                      <div class="input-group">
+                        <input type="text" class="form-control" [placeholder]="'STOWARZYSZENIE.MODULES.REVIEWS.ASSIGN.SEARCH_PLACEHOLDER' | translate">
+                        <div class="input-group-btn">
+                          <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="card-body p-0">
+
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th>
+                                {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ARTICLE_TITLE_CELL' | translate }}
+                                </th>
+                                <th>
+                                {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ARTICLE_AUTHOR_CELL' | translate }}
+                                </th>
+                                <th>
+                                {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ARTICLE_TRACK_CELL' | translate }}
+                                </th>
+                                <th>
+                                {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.STATUS_CELL' | translate}}
+                                </th>
+                                <th>
+                                {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ACTIONS_CELL' | translate }}
+                                </th>
+                            </tr>
+
+                            <tr *ngFor="let article of articles" >
+                                <td>
+                                    {{ article['title_' + lang] }}
+                                </td>
+                                <td class="align-middle">
+                                    <img alt="image" [src]="article.user.preference_user.avatar" class="rounded-circle" width="35" data-toggle="tooltip" title="" data-original-title="Wildan Ahdian">
+                                </td>
+                                <td>
+                                    {{ article.track['name_' + lang] }}
+                                </td>
+                                <td>
+                                    <div class="badge badge-success">
+                                        {{ article.translation_key | translate }}  
+                                    </div>
+                                </td>
+
+                                <td class="align-middle">
+                                  <!-- dzialania -->
+                                  <div class="dropdown">
+                                    <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" aria-expanded="true">
+                                      {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ACTIONS_CELL' | translate }}
+                                    </a>
+
+                                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(-66px, 26px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                      <!-- podgląd -->
+                                      <a  class="dropdown-item has-icon text-primary" (click)="openPreviewModal(article)">
+                                        <i class="far fa-eye"></i>
+                                        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.PREVIEW_BTN' | translate }}
+                                      </a>
+
+                                      <!-- dodaj komentarz -->
+                                      <a  class="dropdown-item has-icon" (click)="addComment(article)">
+                                        <i class="fas fa-comment"></i>
+                                        {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ADD_COMMENT_BTN' | translate }}
+                                      </a>
+
+                                      <!-- przydziel recenzenta -->
+                                      <a  class="dropdown-item has-icon text-danger" (click)="openAssignModal(article)">
+                                        <i class="fas fa-star"></i>
+                                        {{ 'STOWARZYSZENIE.MODULES.REVIEWS.ASSIGN.ASSIGN_REVIEWER_BTN' | translate }}
+                                      </a>
+                                    </div>
+                                  </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+    </ng-template>
+</div>

@@ -1,0 +1,91 @@
+<div class="section-header">
+    <h1>{{ 'STOWARZYSZENIE.MODULES.REVIEWS.REVIEW.PAGE_TITLE' | translate }}</h1>
+</div>
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.REVIEWS.REVIEW.SECTION_TITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.REVIEWS.REVIEW.PAGE_DESC' | translate }}
+    </p>
+
+    <div class="d-flex justify-content-center my-3" *ngIf="loading; else content">
+        <div class="spinner-border text-primary"></div>
+    </div>
+
+    <ng-template #content>
+        <div *ngIf="this.article.status === 'review'">
+            <div class="form-group">
+                <label>
+                    {{ 'STOWARZYSZENIE.MODULES.REVIEWS.REVIEW.REVIEW_TEXT_LABEL' | translate }}
+                </label>
+                <textarea class="form-control" rows="10" cols="50" [(ngModel)]="review_text"></textarea>
+            </div>
+
+            <!-- ocena artykulu -->
+            <div class="section-title">
+                {{ 'STOWARZYSZENIE.MODULES.REVIEWS.REVIEW.EVALUATE_LABEL' | translate }}
+            </div>
+
+            <div class="custom-control custom-radio">
+                <input type="radio" id="3" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="3">
+                    3: {{ 'STOWARZYSZENIE.MODULES.REVIEWS.REVIEW.STRONG_ACCEPT_RADIO' | translate }}
+                </label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="2" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="2">
+                    2: {{ 'STOWARZYSZENIE.MODULES.REVIEWS.REVIEW.ACCEPT_RADIO' | translate }}
+                </label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="1" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="1">
+                    1: {{ 'STOWARZYSZENIE.MODULES.REVIEWS.REVIEW.WEAK_ACCEPT_RADIO' | translate }}
+                </label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="0" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="0">
+                    0: {{ 'STOWARZYSZENIE.MODULES.REVIEWS.REVIEW.BORDERLINE_RADIO' | translate }}
+                </label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="-1" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="-1">
+                    -1: {{ 'STOWARZYSZENIE.MODULES.REVIEWS.REVIEW.WEAK_REJECT_RADIO' | translate }}
+                </label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="-2" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="-2">
+                    -2: {{ 'STOWARZYSZENIE.MODULES.REVIEWS.REVIEW.REJECT_RADIO' | translate }}
+                </label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="-3" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="-3">
+                    -3: {{ 'STOWARZYSZENIE.MODULES.REVIEWS.REVIEW.STRONG_REJECT_RADIO' | translate }}
+                </label>
+            </div>
+        </div>
+
+        <div *ngIf="this.article.status === 'reviewed'">
+            <p>
+                <!-- tu tekst recenzji artykulu -->
+                <!-- przykladowy tekst do formatowania -->
+Security and privacy of data is one of the major concerns in today’s world, and intrusion detection systems (IDS) play an important role in cybersecurity. Industry 4.0 ecosystems are able to collect data, interconnect between each other, and process and make decisions without any human interaction. Currently, the amount of data traveling through networks is overwhelming from the perspective of the veracity and variety of the data that are transmitted, the volume of the information, and velocity of the Internet links. This resembles well-known paradigm Big Data in addition to the omnipresent usage of the encryption and creates multiple challenges when it comes to effective detection of distributed denial of service (DDoS) attacks, advanced persistent threats (APT), and distribution of malware infection. Conventional intrusion detection systems utilize the signature-based approach that helps to identify known attacks and protect the network. However, those are less efficient when it comes to tailored attacks, APT, Zero-Day attack, encryption, and distributed reconnaissance, due to the large volume and sophistication. Fortunately, machine learning can aid in solving the most common tasks, including regression, prediction, and classification. Machine learning techniques have been effectively used in multiple applications in intelligent intrusion detection systems, including network traffic analysis, access logs analysis, spam, and malware detection. However, current machine learning methods and their implementations are designed to handle tens of thousands of data yet have complexity issues with bigger datasets. Big Data analytics require new and enhanced models to handle complex problems as network attacks detection. Future intelligent intrusion detection systems require faster and more accurate machine learning models. Therefore, it is important to improve the existing and find proper ways of designing new machine learning methods suitable to detect indicators of compromise and find malicious connections even if the network traffic is encrypted. This Special Issue provides a platform for discussing new developments in the intersection of security and privacy with machine learning and deep learning.
+
+            </p>
+
+            <h5>
+                <!-- [ngClass]="{'badge-success': review.status === 'strong accept' || weak accept || ...', 'badge-danger': strong reject itd}"  -->
+                <div class="badge">
+                    <!-- TODO: status recenzji (wybrany z checkboxa) -->
+                    Silna akceptacja
+                </div>
+            </h5>
+        </div>
+    </ng-template>
+</div>

@@ -266,6 +266,16 @@
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.REVIEWS.MY_REVIEWS' | translate }}
                                 </a>
                             </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['conference-reviews/assign']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.REVIEWS.ASSIGN' | translate }}
+                                </a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['conference-reviews/progress']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.REVIEWS.PROGRESS' | translate }}
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
