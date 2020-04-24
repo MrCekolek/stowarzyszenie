@@ -9,8 +9,12 @@
         {{ 'STOWARZYSZENIE.MODULES.REVIEWS.PROGRESS.PAGE_DESC' | translate }}
     </p>
 
-    <div class="d-flex justify-content-center my-3" *ngIf="loading; else content">
-        <div class="spinner-border text-primary"></div>
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-center my-3" *ngIf="loading; else content">
+                <div class="spinner-border text-primary"></div>
+            </div>
+        </div>
     </div>
 
     <ng-template #content>
@@ -37,7 +41,7 @@
 
               <tr *ngFor="let article of allArticles">
                 <td class="align-middle">
-                  {{ article['title_' + lang] }}
+                  {{ article['title_' + this.lang] }}
                 </td>
 
                 <td class="align-middle">
@@ -63,17 +67,16 @@
 
                     <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(-66px, 26px, 0px); top: 0px; left: 0px; will-change: transform;">
                       <!-- podgląd -->
-                      <a  class="dropdown-item has-icon text-primary" (click)="openPreviewModal(article)">
+                      <a  class="dropdown-item has-icon text-primary" (click)="this.openPreviewModal(article)">
                         <i class="far fa-eye"></i>
                         {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.PREVIEW_BTN' | translate }}
                       </a>
 
                       <!-- akceptuj -->
-                      <a class="dropdown-item has-icon text-success" *ngIf="article.status === 'reviewed'" (click)="seeReview(article)">
+                      <a class="dropdown-item has-icon text-success" *ngIf="article.status === 'reviewed'" (click)="this.seeReview(article.article_reviews)">
                         <i class="fas fa-check"></i>
                         {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.SEE_REVIEW_BTN' | translate }}
                       </a>
-                      
                     </div>
                   </div>
                 </td>

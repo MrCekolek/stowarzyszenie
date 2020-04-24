@@ -149,7 +149,11 @@ export class ManageConferenceApiService {
     return this.api.post('conference/gallery/destroy/multi', obj);
   }
 
-  downloadFile(obj) {
-    return this.api.post('conference/cfp/download/file', obj);
+  getAllArticleReviews(userId) {
+    const obj = {
+      user_id: userId
+    };
+
+    return this.api.post('conference/track/article/review', obj);
   }
 }

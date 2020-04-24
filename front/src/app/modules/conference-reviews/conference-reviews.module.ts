@@ -10,9 +10,10 @@ import { AddCommentReviewerComponent } from './add-comment-reviewer/add-comment-
 import { PreviewReviewerComponent } from './preview-reviewer/preview-reviewer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArticleReviewComponent } from './article-review/article-review.component';
+import { ReviewModalComponent } from './review-modal/review-modal.component';
 
 @NgModule({
-  declarations: [ArticlesToAssignComponent, MyReviewsComponent, ReviewsProgressComponent, AssignReviewerModalComponent, AddCommentReviewerComponent, PreviewReviewerComponent, ArticleReviewComponent],
+  declarations: [ArticlesToAssignComponent, MyReviewsComponent, ReviewsProgressComponent, AssignReviewerModalComponent, AddCommentReviewerComponent, PreviewReviewerComponent, ArticleReviewComponent, ReviewModalComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -20,6 +21,6 @@ import { ArticleReviewComponent } from './article-review/article-review.componen
     FormsModule,
     ReactiveFormsModule
   ],
-  entryComponents: [AssignReviewerModalComponent, AddCommentReviewerComponent, PreviewReviewerComponent]
+  entryComponents: [AssignReviewerModalComponent, AddCommentReviewerComponent, PreviewReviewerComponent, ReviewModalComponent]
 })
 export class ConferenceReviewsModule { }

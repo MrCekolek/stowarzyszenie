@@ -158,7 +158,7 @@ Route::group([
                 Route::post('show', 'TrackArticleController@show');
                 Route::post('create', 'TrackArticleController@create');
                 Route::post('update', 'TrackArticleController@update');
-                Route::post('{track}', 'TrackArticleController@index');
+                Route::post('reviewer/get', 'TrackArticleController@getReviewers');
 
                 Route::prefix('comment')->group(function () {
                     Route::post('', 'ArticleCommentController@index');
@@ -166,6 +166,16 @@ Route::group([
                     Route::post('update', 'ArticleCommentController@update');
                     Route::post('destroy', 'ArticleCommentController@destroy');
                 });
+
+                Route::prefix('review')->group(function () {
+                    Route::post('', 'ArticleReviewController@index');
+                    Route::post('show', 'ArticleReviewController@show');
+                    Route::post('create', 'ArticleReviewController@create');
+                    Route::post('update', 'ArticleReviewController@update');
+                    Route::post('destroy', 'ArticleReviewController@destroy');
+                });
+
+                Route::post('{track}', 'TrackArticleController@index');
             });
 
             Route::prefix('reviewer')->group(function () {
