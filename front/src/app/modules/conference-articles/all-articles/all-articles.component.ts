@@ -3,9 +3,10 @@ import {ArticlesApiService} from 'src/app/core/http/articles-api.service';
 import {ManageConferenceApiService} from 'src/app/core/http/manage-conference-api.service';
 import {LanguageService} from 'src/app/shared/services/user/language.service';
 import {MatDialogConfig, MatDialog} from '@angular/material';
-import {ArticlePreviewComponent} from '../article-preview/article-preview.component';
-import {AddCommentComponent} from '../add-comment/add-comment.component';
 import * as _ from 'lodash';
+import { ArticlePreviewComponent } from '../article-preview/article-preview.component';
+import { AddCommentComponent } from '../add-comment/add-comment.component';
+import { AddCommentReviewerComponent } from '../../conference-reviews/add-comment-reviewer/add-comment-reviewer.component';
 
 @Component({
     selector: 'app-all-articles',
@@ -157,10 +158,6 @@ export class AllArticlesComponent implements OnInit {
         };
 
         const dialogRef = this.dialog.open(AddCommentComponent, dialogConfig);
-    }
-
-    assignReviewer(article) {
-
     }
 
 }

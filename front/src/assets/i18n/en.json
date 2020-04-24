@@ -345,7 +345,9 @@
                     },
                     "REVIEWS": {
                         "MAIN": "Reviews",
-                        "MY_REVIEWS": "My reviews"
+                        "MY_REVIEWS": "My reviews",
+                        "ASSIGN": "Assign reviewers",
+                        "PROGRESS": "Reviews progress"
                     }
                 },
                 "WEBPAGE_TITLE_MEMBERS": "Ciob members"
@@ -761,7 +763,10 @@
                         "REJECT_BTN": "Reject article",
                         "ADD_COMMENT_BTN": "Add comment",
                         "ASSIGN_REVIEWER_BTN": "Assign reviewer",
-                        "RETURN_ARTICLE_BTN": "Restore to manage"
+                        "RETURN_ARTICLE_BTN": "Restore to manage",
+                        "ADD_REVIEW_BTN": "Add review",
+                        "ADD_REVIEWER_BTN": "Assign reviewer",
+                        "SEE_REVIEW": "See review"
                     }
                 },
                 "PREVIEW": {
@@ -804,6 +809,47 @@
                 "LIST_TITLE": "List of users in program committee",
                 "ADD_PC_BTN": "Add user",
                 "NO_USERS": "No users in program committee"
+            },
+            "REVIEWS": {
+                "MY": {
+                    "PAGE_TITLE": "My reviews",
+                    "SECTION_TITLE": "See my reviews",
+                    "PAGE_DESC": "Show articles assigned to you to review them, wrote reviews and add comments to articles.",
+                    "ASSIGNED_ARTICLES": "Articles assigned to me",
+                    "ADD_REVIEW_BTN": "Add review"
+                },
+                "ASSIGN": {
+                    "PAGE_TITLE": "Assign reviewers",
+                    "SECTION_TITLE": "Assign reviewers to articles",
+                    "PAGE_DESC": "Choose best reviewers for all accepted articles to conference.",
+                    "ARTICLES_TO_ASSIGN": "Articles to assign",
+                    "ASSIGN_REVIEWER_BTN": "Assign reviewer",
+                    "MODAL_TITLE": "Assign reviewer",
+                    "ASSIGNING_TO": "Assigning reviewer to article:",
+                    "SEARCH_PLACEHOLDER": "Search by article name or author",
+                    "AVAILABLE_USERS": "Available reviewers",
+                    "BEST_REVIEWERS": "Best reviewers to assign",
+                    "ASSIGN_BUTTON": "Assign"
+                },
+                "PROGRESS": {
+                    "PAGE_TITLE": "Reviews progress",
+                    "SECTION_TITLE": "Progresses",
+                    "PAGE_DESC": "Here you can check progress of articles reviewing process"
+                },
+                "REVIEW": {
+                    "PAGE_TITLE": "Review",
+                    "SECTION_TITLE": "Your review",
+                    "PAGE_DESC": "Here you can add review for assigned article or just see already added review.",
+                    "REVIEW_TEXT_LABEL": "Review's text",
+                    "EVALUATE_LABEL": "Choose evaluate",
+                    "STRONG_ACCEPT_RADIO": "Strong accept",
+                    "ACCEPT_RADIO": "Accept",
+                    "WEAK_ACCEPT_RADIO": "Weak accept",
+                    "BORDERLINE_RADIO": "Borderline paper",
+                    "WEAK_REJECT_RADIO": "Weak reject",
+                    "REJECT_RADIO": "Reject",
+                    "STRONG_REJECT_RADIO": "Strong reject"
+                }
             }
         },
         "PAGINATION": {
