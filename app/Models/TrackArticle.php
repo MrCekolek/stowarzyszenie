@@ -129,4 +129,8 @@ class TrackArticle extends BaseModel {
         return $this->hasMany(ArticleComment::class)
             ->orderBy('created_at', 'DESC');
     }
+
+    public function articleReviews() {
+        return $this->hasOne(ArticleReview::class);
+    }
 }

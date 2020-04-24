@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticlesApiService } from 'src/app/core/http/articles-api.service';
 import { ReviewsApiService } from 'src/app/core/http/reviews-api.service';
+import { UserProviderService } from "../../../core/services/user-provider.service";
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-article-review',
@@ -13,18 +15,56 @@ export class ArticleReviewComponent implements OnInit {
   private article;
   private articleID;
   private review;
-
-  private review_text;
+  private loading;
+  private addingReview;
 
   constructor(
     private route: ActivatedRoute,
     private articlesApi: ArticlesApiService,
-    private reviewsApi: ReviewsApiService
+    private reviewsApi: ReviewsApiService,
+    private userProvider: UserProviderService
   ) { }
 
   ngOnInit() {
-    // TODO: pobranie artykulu / recenzji / jednego i drugiego z api service na podstawie parametru w route (trzeba zrobic endpoint z review do artykulu)
-    // this.articleID = this.route.snapshot.paramMap.get('id');
+    this.loading = true;
+    this.articleID = this.route.snapshot.paramMap.get('id');
+
+    this.articlesApi.getReview(this.articleID).subscribe(
+        (res) => {
+          if (res.success) {
+            this.article = res.articleReview;
+            this.review = _.cloneDeep(res.articleReview);
+          }
+        },
+        () => {},
+        () => {
+          this.loading = false;
+        }
+    );
+  }
+
+  isReviewed() {
+    return this.article.description && this.article.mark;
+  }
+
+  markChange(mark, status) {
+    this.review.mark = mark;
+    this.review.status = status;
+  }
+
+  addReview() {
+    this.addingReview = true;
+
+    this.reviewsApi.addReview(this.review).subscribe(
+        (res) => {
+          this.article = res.articleReview;
+          this.review = _.cloneDeep(res.articleReview);
+        },
+        () => {},
+        () => {
+          this.addingReview = false;
+        }
+    );
   }
 
 }

@@ -766,7 +766,8 @@
                         "RETURN_ARTICLE_BTN": "Restore to manage",
                         "ADD_REVIEW_BTN": "Add review",
                         "ADD_REVIEWER_BTN": "Assign reviewer",
-                        "SEE_REVIEW": "See review"
+                        "SEE_REVIEW": "See review",
+                        "SEE_REVIEW_BTN": "See review"
                     }
                 },
                 "PREVIEW": {
@@ -849,7 +850,10 @@
                     "WEAK_REJECT_RADIO": "Weak reject",
                     "REJECT_RADIO": "Reject",
                     "STRONG_REJECT_RADIO": "Strong reject"
-                }
+                },
+                "NO_MY_REVIEWS_DESC": "You don't have any reviews",
+                "NO_MY_REVIEWS": "No reviews",
+                "ADD_REVIEW": "Add review"
             }
         },
         "PAGINATION": {

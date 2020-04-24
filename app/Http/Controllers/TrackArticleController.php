@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TrackArticleRequest;
+use App\Models\ArticleReview;
 use App\Models\Track;
 use App\Models\TrackArticle;
+use App\Models\TrackReviewer;
+use App\Models\User;
 use App\Services\LogService;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use function foo\func;
 
 /**
  * Class TrackArticleController
@@ -67,6 +72,72 @@ class TrackArticleController extends Controller {
 
         return LogService::read(true, [
             'trackArticle' => TrackArticle::with('articleComments')->where('id', $input['id'])->first()->toArray()
+        ]);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/conference/track/article/reviewer/get",
+     *     tags={"track_article"},
+     *     summary="Gets article reviewers",
+     *     operationId="TrackArticleControllerGetReviewers",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function getReviewers(Request $request) {
+        $input = $request->all();
+        $validation = new TrackArticleRequest($input, 'getReviewers');
+
+        if ($validation->fails()) {
+            return $validation->failResponse();
+        }
+
+        $languages = [
+            'pl',
+            'en',
+            'ru'
+        ];
+        $interestWeight = 2;
+        $keywordsWeight = 2;
+
+        $trackArticle = TrackArticle::where('id', $input['id'])->get();
+        $userArticle = $trackArticle->load('user.interests');
+        $trackArticleInterestId = $trackArticle->load('track')->pluck('track.interest_id')[0];
+        $trackReviewersIds = $trackArticle->load('track.trackReviewers')->pluck('track.trackReviewers.*.id')->collapse()->toArray();
+
+        $possibleReviewers = User::with(['interests', 'preferenceUser', 'affilationUser'])
+            ->whereIn('id', $trackReviewersIds)
+            ->where('id', '!=', $trackArticle->first()->user_id)
+            ->whereHas('interests', function (Builder $query) use ($trackArticleInterestId) {
+                $query->where('interests.id', '=', $trackArticleInterestId);
+            });
+
+        $possibleReviewers->each(function($reviewer) use ($userArticle, $interestWeight, $keywordsWeight, $languages) {
+            $reviewer->ratings = count(array_intersect(
+               $userArticle->pluck('user.interests.*.id')->collapse()->toArray(),
+               $reviewer->interests->pluck('id')->toArray()
+           )) * $interestWeight;
+
+           ArticleReview::with('trackArticle')
+               ->where('user_id', $reviewer->id)
+               ->each(function ($articleReview) use (&$reviewer, $userArticle, $keywordsWeight, $languages) {
+                   $userArticle = $userArticle->first();
+
+                   foreach ($languages as $language) {
+                       $reviewer->ratings += count(array_intersect(
+                               explode(',', $articleReview->trackArticle->{'keywords_' . $language}),
+                               explode(',', $userArticle->{'keywords_' . $language})
+                           )) * $keywordsWeight;
+                   }
+               });
+        });
+
+        return LogService::read(true, [
+            'possibleReviewers' => $possibleReviewers->get()->toArray(),
+            'bestReviewers' => $possibleReviewers->get()->sortBy('ratings')->take(3)->toArray()
         ]);
     }
 

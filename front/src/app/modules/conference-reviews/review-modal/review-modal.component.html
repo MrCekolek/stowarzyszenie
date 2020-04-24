@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>
+    <span>
+        {{ 'STOWARZYSZENIE.MODULES.REVIEWS.REVIEW.PAGE_TITLE' | translate }}
+    </span>
+</h2>
+
+<mat-dialog-content>
+    <p>
+        {{ this.review.description }}
+    </p>
+
+    <h5>
+        <div [ngClass]="{'badge-success': (this.review.status === 'strong accept' || this.review.status === 'accept' || this.review.status === 'weak accept'),
+                 'badge-danger': (this.review.status === 'weak reject' || this.review.status === 'reject' || this.review.status === 'strong reject')}" class="badge">
+            {{ this.review.translation_key | translate }}
+        </div>
+    </h5>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button type="button " class="btn btn-link" (click)="dismiss()">
+        {{ 'STOWARZYSZENIE.MODALS.BUTTON_CLOSE' | translate }}
+    </button>
+</mat-dialog-actions>

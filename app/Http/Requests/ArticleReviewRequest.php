@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class TrackArticleRequest extends FormRequest {
+class ArticleReviewRequest extends FormRequest {
     protected $rules = [];
 
     public function __construct(array $input, $filter) {
@@ -14,11 +14,6 @@ class TrackArticleRequest extends FormRequest {
 
             case 'show':
                 $this->checkShow();
-
-                break;
-
-            case 'getReviewers':
-                $this->checkgetReviewers();
 
                 break;
 
@@ -43,45 +38,36 @@ class TrackArticleRequest extends FormRequest {
 
     public function checkIndex() {
         $this->rules = [
-            'track_id' => 'required|exists:tracks,id',
+            'user_id' => 'required|exists:users,id'
         ];
     }
 
     public function checkShow() {
         $this->rules = [
-            'id' => 'required|exists:track_articles'
+            'id' => 'required|exists:article_reviews'
         ];
-    }
-
-    public function checkGetReviewers() {
-        $this->checkShow();
     }
 
     public function checkCreate() {
         $this->rules = [
-            'title_pl' => 'required',
-            'title_en' => 'required',
-            'title_ru' => 'required',
-            'abstract_pl' => 'required',
-            'abstract_en' => 'required',
-            'abstract_ru' => 'required',
             'user_id' => 'required|exists:users,id',
-            'track_id' => 'required|exists:tracks,id'
+            'track_article_id' => 'required|exists:track_articles,id'
         ];
     }
 
     public function checkUpdate() {
-        $this->checkCreate();
-        $this->rules = array_merge($this->rules, [
-                'id' => 'required|exists:track_articles',
-                'status' => 'required'
-            ]
-        );
+        $this->rules = [
+            'mark' => 'required',
+            'description' => 'required',
+            'user_id' => 'required|exists:users,id',
+            'track_article_id' => 'required|exists:track_articles,id'
+        ];
     }
 
     public function checkDestroy() {
         $this->rules = [
-            'id' => 'required|exists:track_articles'
+            'user_id' => 'required|exists:users,id',
+            'track_article_id' => 'required|exists:track_articles,id'
         ];
     }
 }

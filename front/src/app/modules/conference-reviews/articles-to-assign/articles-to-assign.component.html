@@ -9,8 +9,12 @@
         {{ 'STOWARZYSZENIE.MODULES.REVIEWS.ASSIGN.PAGE_DESC' | translate }}
     </p>
 
-    <div class="d-flex justify-content-center my-3" *ngIf="loading; else content">
-        <div class="spinner-border text-primary"></div>
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-center my-3" *ngIf="this.loading || this.articlesLoading; else content">
+                <div class="spinner-border text-primary"></div>
+            </div>
+        </div>
     </div>
 
     <ng-template #content>
@@ -45,7 +49,6 @@
                   </div>
                 </div>
                 <div class="card-body p-0">
-
                   <div class="table-responsive">
                     <table class="table table-striped">
                         <tbody>
@@ -67,6 +70,12 @@
                                 </th>
                             </tr>
 
+                            <tr *ngIf="this.articles.length < 1">
+                                <td>
+                                    {{ 'STOWARZYSZENIE.LABELS.NO_DATA' | translate }}
+                                </td>
+                            </tr>
+
                             <tr *ngFor="let article of articles" >
                                 <td>
                                     {{ article['title_' + lang] }}
@@ -79,7 +88,7 @@
                                 </td>
                                 <td>
                                     <div class="badge badge-success">
-                                        {{ article.translation_key | translate }}  
+                                        {{ article.translation_key | translate }}
                                     </div>
                                 </td>
 
