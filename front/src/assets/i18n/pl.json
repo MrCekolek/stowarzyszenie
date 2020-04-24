@@ -766,7 +766,8 @@
                         "RETURN_ARTICLE_BTN": "Przywróć do zarządzania",
                         "ADD_REVIEW_BTN": "Dodaj recenzję",
                         "ADD_REVIEWER_BTN": "Przypisz recenzenta",
-                        "SEE_REVIEW": "Zobacz recenzję"
+                        "SEE_REVIEW": "Zobacz recenzję",
+                        "SEE_REVIEW_BTN": "Zobacz recenzję"
                     }
                 },
                 "PREVIEW": {
@@ -849,7 +850,10 @@
                     "WEAK_REJECT_RADIO": "Słabe odrzucenie",
                     "REJECT_RADIO": "Odrzucenie",
                     "STRONG_REJECT_RADIO": "Silne odrzucenie"
-                }
+                },
+                "NO_MY_REVIEWS_DESC": "Nie masz żadnych recenzji",
+                "NO_MY_REVIEWS": "Brak recenzji",
+                "ADD_REVIEW": "Dodaj recenzję"
             }
         },
         "PAGINATION": {

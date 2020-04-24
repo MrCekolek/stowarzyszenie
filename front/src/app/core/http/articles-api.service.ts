@@ -33,4 +33,13 @@ export class ArticlesApiService {
   addComment(comment: Object) {
     return this.api.post('conference/track/article/comment/create', comment);
   }
+
+  // Review
+  getReview(articleId) {
+    const obj = {
+      id: articleId
+    };
+
+    return this.api.post('conference/track/article/review/show', obj);
+  }
 }

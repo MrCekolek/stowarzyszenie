@@ -766,7 +766,8 @@
                         "RETURN_ARTICLE_BTN": "Восстановить, чтобы управлять",
                         "ADD_REVIEW_BTN": "Добавить отзыв",
                         "ADD_REVIEWER_BTN": "Назначить рецензента",
-                        "SEE_REVIEW": "Смотрите обзор"
+                        "SEE_REVIEW": "Смотрите обзор",
+                        "SEE_REVIEW_BTN": "Смотрите обзор"
                     }
                 },
                 "PREVIEW": {
@@ -849,7 +850,10 @@
                     "WEAK_REJECT_RADIO": "Слабый отказ",
                     "REJECT_RADIO": "отклонять",
                     "STRONG_REJECT_RADIO": "Сильный отказ"
-                }
+                },
+                "NO_MY_REVIEWS_DESC": "У вас нет отзывов",
+                "NO_MY_REVIEWS": "Нет отзывов",
+                "ADD_REVIEW": "Добавить отзыв"
             }
         },
         "PAGINATION": {
