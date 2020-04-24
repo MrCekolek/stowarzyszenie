@@ -23,7 +23,7 @@
                 <ng-template #content>
                     <ng-container *ngIf="this.conference && this.conference.id else addConference">
                         <div class="d-flex justify-content-center mb-4">
-                            <button class="btn btn-sm btn-primary" (click)="addConfpage()">
+                            <button class="btn btn-sm btn-primary" (click)="addConfpage()" *ngIf="this.userProvider.checkPermission('CONFERENCE_PAGE.ADD_NEW')">
                                 <i class="fas fa-plus mr-2"></i> {{ 'STOWARZYSZENIE.MODULES.PAGES.ADD_NEW_PAGE' | translate }}
                             </button>
                         </div>
@@ -56,10 +56,10 @@
                                     </td>
 
                                     <td *ngIf="link.status !== 'not editable'; else noteditable">
-                                        <a [routerLink]="['../confpage-edit', link.id]" class="btn btn-link text-success">
+                                        <a [routerLink]="['../confpage-edit', link.id]"  *ngIf="this.userProvider.checkPermission('CONFERENCE_PAGE.EDIT_PAGE')" class="btn btn-link text-success">
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>
-                                        <a class="btn btn-link text-danger" (click)="deletePage(link)">
+                                        <a class="btn btn-link text-danger" (click)="deletePage(link)"  *ngIf="this.userProvider.checkPermission('CONFERENCE_PAGE.DELETE_PAGE')">
                                             <i class="fas fa-times"></i>
                                         </a>
                                         <!-- <a class="btn btn-link text-secondary">
@@ -105,7 +105,7 @@
                                 {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE_DESC' | translate}}
                             </p>
 
-                            <a class="btn btn-primary mt-4" [routerLink]="['../create']">
+                            <a class="btn btn-primary mt-4" [routerLink]="['../create']" *ngIf="this.userProvider.checkPermission('CONFERENCE_GENERAL.ADD_NEW')">
                                 {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.ADD_CONF_BUTT' | translate }}
                             </a>
                         </div>

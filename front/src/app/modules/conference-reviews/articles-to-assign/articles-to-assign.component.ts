@@ -4,8 +4,6 @@ import { LanguageService } from 'src/app/shared/services/user/language.service';
 import { ArticlesApiService } from 'src/app/core/http/articles-api.service';
 import { ManageConferenceApiService } from 'src/app/core/http/manage-conference-api.service';
 import { AssignReviewerModalComponent } from '../assign-reviewer-modal/assign-reviewer-modal.component';
-import { AddCommentComponent } from 'src/app/shared/components/add-comment/add-comment.component';
-import { ArticlePreviewComponent } from 'src/app/shared/components/article-preview/article-preview.component';
 import { AddCommentReviewerComponent } from '../add-comment-reviewer/add-comment-reviewer.component';
 import { PreviewReviewerComponent } from '../preview-reviewer/preview-reviewer.component';
 

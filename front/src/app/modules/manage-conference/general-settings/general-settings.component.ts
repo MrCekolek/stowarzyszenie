@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/core/http/api.service';
 import { Router } from '@angular/router';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 import {AlertModel} from "../../../shared/models/alert.model";
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-general-settings',
@@ -47,7 +48,8 @@ export class GeneralSettingsComponent implements OnInit {
     private manageConferenceApi: ManageConferenceApiService,
     private apiService: ApiService,
     private router: Router,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private userProvider: UserProviderService
   ) { }
 
   ngOnInit() {

@@ -3,6 +3,7 @@ import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation, NgxGalleryLayo
 import { ManageConferenceApiService } from "../../../core/http/manage-conference-api.service";
 import { AlertModel } from "../../../shared/models/alert.model";
 import 'hammerjs';
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
     selector: 'app-gallery',
@@ -22,7 +23,8 @@ export class GalleryComponent implements OnInit {
     private galleryImages = [];
 
     constructor(
-        private conferenceApi: ManageConferenceApiService
+        private conferenceApi: ManageConferenceApiService,
+        private userProvider: UserProviderService
     ) {
     }
 

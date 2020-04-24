@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-permission-group',
@@ -9,7 +10,9 @@ export class PermissionGroupComponent implements OnInit {
 
   @Input() permissionGroupObj;
 
-  constructor() { }
+  constructor(
+    private userProvider: UserProviderService
+  ) { }
 
   ngOnInit() {
   }

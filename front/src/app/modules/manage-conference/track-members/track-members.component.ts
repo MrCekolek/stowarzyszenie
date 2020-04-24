@@ -7,6 +7,7 @@ import { AssignUserComponent } from '../assign-user/assign-user.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 import {AlertModel} from "../../../shared/models/alert.model";
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-track-members',
@@ -26,7 +27,8 @@ export class TrackMembersComponent implements OnInit {
     private manageConferenceApi: ManageConferenceApiService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private userProvider: UserProviderService
   ) { }
 
   ngOnInit() {
