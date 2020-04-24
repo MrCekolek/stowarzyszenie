@@ -35,7 +35,7 @@
                 <ng-template #content>
                     <ng-container *ngIf="this.conference && this.conference.id else addConference">
                         <div class="d-flex justify-content-center my-4">
-                            <button class="btn btn-primary with-icon icon-left" (click)="addEvent()" [disabled]="this.loading">
+                            <button class="btn btn-primary with-icon icon-left" (click)="addEvent()" [disabled]="this.loading" *ngIf="this.userProvider.checkPermission('CONFERENCE_PROGRAMME.ADD_EVENTS')">
                                 <i class="fas fa-plus"></i>
                                 {{ 'STOWARZYSZENIE.MODULES.CALENDAR.BTN_ADD' | translate }}
                             </button>
@@ -96,7 +96,7 @@
                                 {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE_DESC' | translate}}
                             </p>
 
-                            <a class="btn btn-primary mt-4" [routerLink]="['../create']">
+                            <a class="btn btn-primary mt-4" [routerLink]="['../create']" *ngIf="this.userProvider.checkPermission('CONFERENCE_GENERAL.ADD_NEW')">
                                 {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.ADD_CONF_BUTT' | translate }}
                             </a>
                         </div>

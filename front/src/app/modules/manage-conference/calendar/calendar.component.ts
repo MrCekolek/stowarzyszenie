@@ -6,6 +6,7 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmat
 import { LanguageService } from "../../../shared/services/user/language.service";
 import * as _ from 'lodash';
 import {AlertModel} from "../../../shared/models/alert.model";
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-calendar',
@@ -23,7 +24,8 @@ export class CalendarComponent implements OnInit {
   constructor(
     private conferenceApi: ManageConferenceApiService,
     private languageService: LanguageService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private userProvider: UserProviderService
   ) { }
 
   ngOnInit() {

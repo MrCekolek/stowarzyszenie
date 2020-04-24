@@ -9,6 +9,7 @@ import { Role } from "../../../shared/models/role.model";
 import { ConfirmationDialogComponent } from "../../../shared/components/confirmation-dialog/confirmation-dialog.component";
 import { AlertModel } from "../../../shared/models/alert.model";
 import { NewRoleUserModalComponent } from "../new-role-user-modal/new-role-user-modal.component";
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-users-list',
@@ -39,7 +40,8 @@ export class UsersListComponent implements OnInit, AfterViewInit {
       private formBuilder: FormBuilder,
       private userRoleApiService: UserRoleApiService,
       private translationService: TranslateService,
-      private dialog: MatDialog
+      private dialog: MatDialog,
+      private userProvider: UserProviderService
   ) {
     this.createForm();
   }

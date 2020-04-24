@@ -18,7 +18,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-center mb-5 mt-3">
-                    <div class="btn btn-info" (click)="openNewInterestModal('new')">
+                    <div class="btn btn-info" (click)="openNewInterestModal('new')" *ngIf="this.userProvider.checkPermission('INTERESTS.ADD')">
                         <i class="fas fa-plus"></i> Add new interest
                     </div>
                 </div>
@@ -54,11 +54,11 @@
                             </span>
 
                             <div>
-                                <button type="button" class="btn btn-icon icon-left btn-info mr-2" (click)="openNewInterestModal('edit', interest)">
+                                <button type="button" class="btn btn-icon icon-left btn-info mr-2" (click)="openNewInterestModal('edit', interest)" *ngIf="this.userProvider.checkPermission('INTERESTS.EDIT')">
                                     <i class="fas fa-pencil-alt"></i>
                                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
                                 </button>
-                                <button type="button" class="btn btn-icon icon-left btn-danger" [class.btn-progress]="interest.deleteLoading" (click)="openDeleteDialog(interest)">
+                                <button type="button" class="btn btn-icon icon-left btn-danger" [class.btn-progress]="interest.deleteLoading" (click)="openDeleteDialog(interest)" *ngIf="this.userProvider.checkPermission('INTERESTS.DELETE')">
                                     <i class="fas fa-times"></i>
                                     {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
                                 </button>

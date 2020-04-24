@@ -965,7 +965,8 @@
                             "ADD_NEW": "Dodawanie nowych tematów do konferencji",
                             "EDIT_TRACK": "Edycja tematów konferencyjnych",
                             "DELETE_TRACK": "Usuwanie ścieżek konferencyjnych",
-                            "ASSIGN_CHAIR": "Przypisywanie krzeseł do tematów"
+                            "ASSIGN_CHAIR": "Przypisywanie krzeseł do tematów",
+                            "ASSIGN_REVIEWER": "Przypisuj recenzentów do tracku"
                         },
                         "CONFERENCE_PAGE": {
                             "PAGE": "Strona konferencji",
@@ -989,7 +990,8 @@
                         },
                         "CONFERENCE_PROGRAMME": {
                             "PROGRAMME": "Program konferencji",
-                            "SET_DATES": "Ustalanie dat wydarzeń konferencyjnych w programie konferencji"
+                            "SET_DATES": "Ustalanie dat wydarzeń konferencyjnych w programie konferencji",
+                            "ADD_EVENTS": "Dodanie niestandardowego zdarzenia do programu konferencji"
                         },
                         "CONFERENCE_ARTICLES": {
                             "ARTICLES": "Artykuły konferencyjne",
@@ -997,7 +999,8 @@
                             "REJECT_ARTICLES": "Odrzucenie artykułów wysłanych na konferencję",
                             "PUBLISH_ARTICLES": "Publikowanie artykułów na konferencję",
                             "ASSIGN_REVIEWERS": "Przypisywanie recenzentów do artykułów w określonym tracku",
-                            "ADD_COMMENT": "Dodawanie komentarzy dla autorów do ich artykułów"
+                            "ADD_COMMENT": "Dodawanie komentarzy dla autorów do ich artykułów",
+                            "RESTORE_ARTICLES": "Przywróć odrzucone artykuły"
                         },
                         "CONFERENCE_REVIEWS": {
                             "REVIEWS": "Recenzje z konferencji",
@@ -1008,6 +1011,9 @@
                             "ADD_PICTURE": "Dodawanie zdjęć do galerii konferencji",
                             "DELETE_PICTURE": "Usuwanie zdjęć z galerii konferencji"
                         }
+                    },
+                    "PERMISSIONSCONFERENCE_REVIEWS": {
+                        "SEE_REVIEW": "Zobacz recenzję artykułu"
                     }
                 }
             }

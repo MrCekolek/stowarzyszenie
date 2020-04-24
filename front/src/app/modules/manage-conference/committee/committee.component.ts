@@ -6,6 +6,7 @@ import { ConferenceRoleModalComponent } from "../conference-role-modal/conferenc
 import { AlertModel } from "../../../shared/models/alert.model";
 import * as _ from 'lodash';
 import { CommitteeModalComponent } from "../committee-modal/committee-modal.component";
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 
 @Component({
@@ -47,7 +48,8 @@ export class CommitteeComponent implements OnInit {
 
   constructor(
     private conferenceApi: ManageConferenceApiService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private userProvider: UserProviderService
   ) { }
 
   ngOnInit() {

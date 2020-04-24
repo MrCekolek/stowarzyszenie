@@ -20,7 +20,7 @@
                     {{ 'STOWARZYSZENIE.MODULES.COMMITTEE.LIST_TITLE' | translate}}
                 </h4>
                 <div class="card-header-action">
-                    <a class="btn btn-info btn-icon icon-left text-white" (click)="addPC()">
+                    <a class="btn btn-info btn-icon icon-left text-white" (click)="addPC()" *ngIf="this.userProvider.checkPermission('PROGRAM_COMMITTEE.ADD_PC')">
                         <i class="fas fa-plus"></i>
                         {{ 'STOWARZYSZENIE.MODULES.COMMITTEE.ADD_PC_BTN' | translate }}
                     </a>
@@ -74,7 +74,7 @@
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE_DESC' | translate}}
                         </p>
 
-                        <a class="btn btn-primary mt-4" [routerLink]="['../create']">
+                        <a class="btn btn-primary mt-4" [routerLink]="['../create']" *ngIf="this.userProvider.checkPermission('CONFERENCE_GENERAL.ADD_NEW')">
                             {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.ADD_CONF_BUTT' | translate }}
                         </a>
                     </div>

@@ -133,19 +133,19 @@
                                               </a>
 
                                               <!-- dodaj komentarz -->
-                                              <a  class="dropdown-item has-icon" (click)="addComment(article)">
+                                              <a  class="dropdown-item has-icon" (click)="addComment(article)" *ngIf="this.userProvider.checkPermission('CONFERENCE_ARTICLES.ADD_COMMENT')">
                                                 <i class="fas fa-comment"></i>
                                                 {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ADD_COMMENT_BTN' | translate }}
                                               </a>
 
                                               <!-- akceptuj -->
-                                              <a class="dropdown-item has-icon text-success" *ngIf="article.status === 'waiting'" (click)="acceptArticle(article)">
+                                              <a class="dropdown-item has-icon text-success" *ngIf="article.status === 'waiting' && this.userProvider.checkPermission('CONFERENCE_ARTICLES.ACCEPT_ARTICLES')" (click)="acceptArticle(article)">
                                                 <i class="fas fa-check"></i>
                                                 {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ACCEPT_BTN' | translate }}
                                               </a>
 
                                               <!-- odrzuc -->
-                                              <a  class="dropdown-item has-icon text-danger" *ngIf="article.status === 'waiting'" (click)="rejectArticle(article)">
+                                              <a  class="dropdown-item has-icon text-danger" *ngIf="article.status === 'waiting' && this.userProvider.checkPermission('CONFERENCE_ARTICLES.REJECT_ARTICLES')" (click)="rejectArticle(article)">
                                                 <i class="fas fa-minus-circle"></i>
                                                 {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.REJECT_BTN' | translate }}
                                               </a>
@@ -228,19 +228,19 @@
                                           </a>
 
                                           <!-- dodaj komentarz -->
-                                          <a  class="dropdown-item has-icon" (click)="addComment(article)">
+                                          <a  class="dropdown-item has-icon" (click)="addComment(article)" *ngIf="this.userProvider.checkPermission('CONFERENCE_ARTICLES.ADD_COMMENT')">
                                             <i class="fas fa-comment"></i>
                                             {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ADD_COMMENT_BTN' | translate }}
                                           </a>
 
                                           <!-- akceptuj -->
-                                          <a class="dropdown-item has-icon text-success" (click)="acceptArticle(article)">
+                                          <a class="dropdown-item has-icon text-success" (click)="acceptArticle(article)" *ngIf="article.status === 'waiting' && this.userProvider.checkPermission('CONFERENCE_ARTICLES.ACCEPT_ARTICLES')">
                                             <i class="fas fa-check"></i>
                                             {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ACCEPT_BTN' | translate }}
                                           </a>
 
                                           <!-- odrzuc -->
-                                          <a  class="dropdown-item has-icon text-danger" (click)="rejectArticle(article)">
+                                          <a  class="dropdown-item has-icon text-danger" (click)="rejectArticle(article)" *ngIf="article.status === 'waiting' && this.userProvider.checkPermission('CONFERENCE_ARTICLES.REJECT_ARTICLES')">
                                             <i class="fas fa-minus-circle"></i>
                                             {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.REJECT_BTN' | translate }}
                                           </a>
@@ -323,7 +323,7 @@
                                           </a>
 
                                           <!-- dodaj komentarz -->
-                                          <a  class="dropdown-item has-icon" (click)="addComment(article)">
+                                          <a  class="dropdown-item has-icon" (click)="addComment(article)" *ngIf="this.userProvider.checkPermission('CONFERENCE_ARTICLES.ADD_COMMENT')">
                                             <i class="fas fa-comment"></i>
                                             {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ADD_COMMENT_BTN' | translate }}
                                           </a>
@@ -404,13 +404,13 @@
                                           </a>
 
                                           <!-- dodaj komentarz -->
-                                          <a  class="dropdown-item has-icon" (click)="addComment(article)">
+                                          <a  class="dropdown-item has-icon" (click)="addComment(article)" *ngIf="this.userProvider.checkPermission('CONFERENCE_ARTICLES.ADD_COMMENT')">
                                             <i class="fas fa-comment"></i>
                                             {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.ADD_COMMENT_BTN' | translate }}
                                           </a>
 
                                           <!-- przydziel recenzenta -->
-                                          <a  class="dropdown-item has-icon text-danger" (click)="restoreArticle(article)">
+                                          <a  class="dropdown-item has-icon text-danger" (click)="restoreArticle(article)" *ngIf="this.userProvider.checkPermission('CONFERENCE_ARTICLES.RESTORE_ARTICLES')">
                                             <i class="fas fa-star"></i>
                                             {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.ALL_TAB.RETURN_ARTICLE_BTN' | translate }}
                                           </a>

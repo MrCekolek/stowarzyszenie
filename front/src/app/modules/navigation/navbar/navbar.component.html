@@ -207,24 +207,24 @@
                             </span>
                         </a>
                     </li>
-                    <li class="menu-header">
+                    <li class="menu-header" *ngIf="this.userProviderService.checkPermission('USERS.CHANGE_ROLE') || this.userProviderService.checkPermission('USERS.ADD') || this.userProviderService.checkPermission('USERS.DELETE')">
                         {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.MENU_HEADINGS.USERS' | translate }}
                     </li>
 
                     <li class="dropdown">
-                        <a class="nav-link">
+                        <a class="nav-link" *ngIf="this.userProviderService.checkPermission('USERS.CHANGE_ROLE') || this.userProviderService.checkPermission('USERS.ADD') || this.userProviderService.checkPermission('USERS.DELETE')">
                             <i class="fas fa-user"></i>
                             <span>
                                 {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.MAIN' | translate }}
                             </span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li routerLinkActive="active">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('USERS.CHANGE_ROLE') || this.userProviderService.checkPermission('USERS.ADD') || this.userProviderService.checkPermission('USERS.DELETE')">
                                 <a [routerLink]="['users/users-list']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.USERS_LIST' | translate }}
                                 </a>
                             </li>
-                            <li routerLinkActive="active">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('ROLES.ADD') || this.userProviderService.checkPermission('ROLES.CHANGE_PERMISSIONS') || this.userProviderService.checkPermission('ROLES.DELETE')">
                                 <a [routerLink]="['users/roles']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.ROLES_PREFERENCES' | translate }}
                                 </a>
@@ -232,7 +232,7 @@
                         </ul>
                     </li>
 
-                    <li class="dropdown">
+                    <li class="dropdown" *ngIf="this.userProviderService.checkPermission('CONFERENCE_ARTICLES.PUBLISH_ARTICLES') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.ASSIGN_REVIEWERS') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.ACCEPT_ARTICLES') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.REJECT_ARTICLES') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.RESTORE_ARTICLES')">
                         <a class="nav-link">
                             <i class="fas fa-newspaper"></i>
                             <span>
@@ -240,12 +240,12 @@
                             </span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li routerLinkActive="active">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('CONFERENCE_ARTICLES.PUBLISH_ARTICLES')">
                                 <a [routerLink]="['conference-articles/my']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.ARTICLES.MY_ARTICLES' | translate }}
                                 </a>
                             </li>
-                            <li routerLinkActive="active">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('CONFERENCE_ARTICLES.ASSIGN_REVIEWERS') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.ACCEPT_ARTICLES') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.REJECT_ARTICLES') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.RESTORE_ARTICLES')">
                                 <a [routerLink]="['conference-articles/all']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.ARTICLES.ALL_ARTICLES' | translate }}
                                 </a>
@@ -253,20 +253,20 @@
                         </ul>
                     </li>
 
-                    <li class="dropdown">
-                        <a class="nav-link">
+                    <li class="dropdown" *ngIf="this.userProviderService.checkPermission('CONFERENCE_REVIEWS.ASSIGN_REVIEWERS') || this.userProviderService.checkPermission('CONFERENCE_REVIEWS.REVIEWING')">
+                        <a class="nav-link" >
                             <i class="fas fa-star-half-alt"></i>
                             <span>
                                 {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.REVIEWS.MAIN' | translate }}
                             </span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li routerLinkActive="active">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('CONFERENCE_REVIEWS.REVIEWING')">
                                 <a [routerLink]="['conference-reviews/my']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.REVIEWS.MY_REVIEWS' | translate }}
                                 </a>
                             </li>
-                            <li routerLinkActive="active">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('CONFERENCE_REVIEWS.ASSIGN_REVIEWERS')">
                                 <a [routerLink]="['conference-reviews/assign']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.REVIEWS.ASSIGN' | translate }}
                                 </a>
@@ -279,18 +279,20 @@
                         </ul>
                     </li>
 
-                    <li class="dropdown">
+                    <!-- TODO: regular expr?? PORTFOLIO_* -->
+                    <li class="dropdown" *ngIf="this.userProviderService.checkPermission('PORTFOLIO.ADD_TABS')">
                         <a class="nav-link">
                             <i class="fas fa-id-card"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.PORTFOLIO_MENU' | translate }}
                         </a>
 
+                        <!-- REGULAR exp??? -->
                         <ul class="dropdown-menu">
-                            <li routerLinkActive="active">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('PORTFOLIO.ADD_TABS') || this.userProviderService.checkPermission('PORTFOLIO.EDIT_TABS') || this.userProviderService.checkPermission('PORTFOLIO.ADD_CARDS')">
                                 <a [routerLink]="['users/portfolio-settings']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.PORTFOLIO' | translate }}
                                 </a>
                             </li>
-                            <li routerLinkActive="active">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('INTERESTS.ADD') || this.userProviderService.checkPermission('INTERESTS.EDIT') || this.userProviderService.checkPermission('INTERESTS.DELETE')">
                                 <a [routerLink]="['users/interests']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.INTEREST' | translate }}
                                 </a>
@@ -309,47 +311,48 @@
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.ACTUAL_CONFERENCE' | translate }}
                                 </a>
                             </li>
-                            <li routerLinkActive="active">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('CONFERENCE_GENERAL.ADD_NEW') || this.userProviderService.checkPermission('CONFERENCE_GENERAL.CHANGE_CONFERENCE_STATUS') || this.userProviderService.checkPermission('CONFERENCE_GENERAL.CHANGE_PAYMENTS')">
                                 <a [routerLink]="['manage-conference/general']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.GENERAL_SETT_CONF' | translate }}
                                 </a>
                             </li>
-                            <li routerLinkActive="active">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('CONFERENCE_TRACKS.ADD_NEW') || this.userProviderService.checkPermission('CONFERENCE_TRACKS.ASSIGN_CHAIR') || this.userProviderService.checkPermission('CONFERENCE_TRACKS.ASSIGN_REVIEWER')">
                                 <a [routerLink]="['manage-conference/tracks']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.CONF_TRACKS' | translate }}
                                 </a>
                             </li>
-                            <li routerLinkActive="active">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('CONFERENCE_GENERAL.CHANGE_PAYMENTS')">
                                 <a [routerLink]="['manage-conference/participants']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.PAYMENTS.PAGE_TITLE' | translate }}
                                 </a>
                             </li>
+                            <!-- TODO: do dodania permisje na cfp -->
                             <li routerLinkActive="active">
                                 <a [routerLink]="['manage-conference/cfp']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.CONFERENCE.CFP' | translate }}
                                 </a>
                             </li>
-                            <li routerLinkActive="active">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('CONFERENCE_PAGE.ADD_NEW') || this.userProviderService.checkPermission('CONFERENCE_PAGE.DELETE_PAGE' ||  this.userProviderService.checkPermission('CONFERENCE_PAGE.EDIT_PAGE')">
                                 <a [routerLink]="['manage-conference/conference-page']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.CONFERENCE.PAGE' | translate }}
                                 </a>
                             </li>
-                            <li routerLinkActive="active">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('CONFERENCE_CALENDAR.ADD_DATE') || this.userProviderService.checkPermission('CONFERENCE_CALENDAR.DELETE_DATE') || this.userProviderService.checkPermission('CONFERENCE_CALENDAR.EDIT_DATE')">
                                 <a [routerLink]="['manage-conference/calendar']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.CONFERENCE.CALENDAR' | translate }}
                                 </a>
                             </li>
-                            <li routerLinkActive="active">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('PROGRAM_COMMITTEE.ADD_PC') || this.userProviderService.checkPermission('PROGRAM_COMMITTEE.DELETE_PC')">
                                 <a [routerLink]="['manage-conference/committee']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.CONFERENCE.COMMITTEE' | translate }}
                                 </a>
                             </li>
-                            <li routerLinkActive="active">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('PROGRAM_GALLERY.ADD_PICTURE') || this.userProviderService.checkPermission('PROGRAM_GALLERY.DELETE_PICTURE')">
                                 <a [routerLink]="['manage-conference/gallery']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.CONFERENCE.GALLERY' | translate }}
                                 </a>
                             </li>
-                            <li routerLinkActive="active">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('CONFERENCE_PROGRAMME.SET_DATES') || this.userProviderService.checkPermission('CONFERENCE_PROGRAMME.ADD_EVENTS')">
                                 <a [routerLink]="['manage-conference/programme']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.CONFERENCE.PROGRAMME' | translate }}
                                 </a>
@@ -357,7 +360,7 @@
                         </ul>
                     </li>
 
-                    <li class="dropdown">
+                    <li class="dropdown" *ngIf="this.userProviderService.checkPermission('HOME_NAVIGATION.ADD') || this.userProviderService.checkPermission('HOME_NAVIGATION.DELETE') || this.userProviderService.checkPermission('HOME_NAVIGATION.EDIT')">
                         <a class="nav-link">
                             <i class="fas fa-file-alt"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.PAGES_ADMIN.TITLE_MENU_V2' | translate }}
                         </a>

@@ -6,6 +6,7 @@ import { AlertModel } from 'src/app/shared/models/alert.model';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { InterestModalComponent } from '../interest-modal/interest-modal.component';
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-interests-list',
@@ -29,7 +30,8 @@ export class InterestsListComponent implements OnInit {
   constructor(
     private interestsService: InterestsService,
     private languageService: LanguageService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private userProvider: UserProviderService
   ) { }
 
   ngOnInit() {

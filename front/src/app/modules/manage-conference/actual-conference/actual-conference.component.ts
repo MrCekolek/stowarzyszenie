@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ManageConferenceApiService } from 'src/app/core/http/manage-conference-api.service';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-actual-conference',
@@ -16,7 +17,8 @@ export class ActualConferenceComponent implements OnInit {
 
   constructor(
     private manageConferenceApi: ManageConferenceApiService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private userProvider: UserProviderService
   ) { }
 
   ngOnInit() {

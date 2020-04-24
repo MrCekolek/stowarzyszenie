@@ -6,6 +6,7 @@ import { TrackModalComponent } from '../track-modal/track-modal.component';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { AlertModel } from "../../../shared/models/alert.model";
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-manage-tracks',
@@ -24,7 +25,8 @@ export class ManageTracksComponent implements OnInit {
     private manageConferenceApi: ManageConferenceApiService,
     private apiService: ApiService,
     private dialog: MatDialog,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private userProvider: UserProviderService
   ) { }
 
   ngOnInit() {  

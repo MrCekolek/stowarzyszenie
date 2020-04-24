@@ -13,6 +13,7 @@ import { EventModalComponent } from "../event-modal/event-modal.component";
 import { AlertModel } from "../../../shared/models/alert.model";
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
     selector: 'app-programme',
@@ -39,7 +40,8 @@ export class ProgrammeComponent implements OnInit {
         private conferenceApi: ManageConferenceApiService,
         private dialog: MatDialog,
         private languageService: LanguageService,
-        private translationService: TranslateService
+        private translationService: TranslateService,
+        private userProvider: UserProviderService
     ) { }
 
     ngOnInit() {

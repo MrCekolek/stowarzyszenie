@@ -45,7 +45,7 @@
                                         {{ chair.affilation_user.institution }}
                                     </div>
                                     <div class="user-cta">
-                                        <button class="btn btn-primary follow-btn" (click)="deleteChairFromTrack(chair)">
+                                        <button class="btn btn-primary follow-btn" (click)="deleteChairFromTrack(chair)" *ngIf="this.userProvider.checkPermission('CONFERENCE_TRACKS.ASSIGN_CHAIR')">
                                             <i class="fa fa-times text-danger"></i>
                                         </button>
                                     </div>
@@ -59,7 +59,7 @@
                             </p>
 
                             <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary" (click)="assignChair()">
+                                <button class="btn btn-primary" (click)="assignChair()" *ngIf="this.userProvider.checkPermission('CONFERENCE_TRACKS.ASSIGN_CHAIR')">
                                     {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.ASSIGN_CHAIR' | translate }}
                                 </button>
                             </div>
@@ -108,7 +108,7 @@
                                     </div>
 
                                     <div class="media-item">
-                                        <button class="btn btn-icon btn-danger" (click)="deleteReviewerFromTrack(reviewer)">
+                                        <button class="btn btn-icon btn-danger" (click)="deleteReviewerFromTrack(reviewer)" *ngIf="this.userProvider.checkPermission('CONFERENCE_TRACKS.ASSIGN_REVIEWER')">
                                             <i class="fa fa-times"></i>
                                         </button>
                                     </div>
@@ -122,7 +122,7 @@
                             </p>
 
                             <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary" (click)="assignReviewer()">
+                                <button class="btn btn-primary" (click)="assignReviewer()" *ngIf="this.userProvider.checkPermission('CONFERENCE_TRACKS.ASSIGN_REVIEWER')">
                                     {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACK_MEMBERS.ASSIGN_REVIEWER' | translate }}
                                 </button>
                             </div>

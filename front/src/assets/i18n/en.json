@@ -965,7 +965,8 @@
                             "ADD_NEW": "Adding new tracks to conference",
                             "EDIT_TRACK": "Editing conference tracks",
                             "DELETE_TRACK": "Deleting conference tracks",
-                            "ASSIGN_CHAIR": "Assigning chairs to tracks"
+                            "ASSIGN_CHAIR": "Assigning chairs to tracks",
+                            "ASSIGN_REVIEWER": "Assign reviewers to track"
                         },
                         "CONFERENCE_PAGE": {
                             "PAGE": "Conference page",
@@ -989,7 +990,8 @@
                         },
                         "CONFERENCE_PROGRAMME": {
                             "PROGRAMME": "Conference programme",
-                            "SET_DATES": "Setting dates of conference events in conference programme"
+                            "SET_DATES": "Setting dates of conference events in conference programme",
+                            "ADD_EVENTS": "Adding custom event to conference programme"
                         },
                         "CONFERENCE_ARTICLES": {
                             "ARTICLES": "Conference articles",
@@ -997,7 +999,8 @@
                             "REJECT_ARTICLES": "Rejection of articles sent to conference",
                             "PUBLISH_ARTICLES": "Publishing articles to conference",
                             "ASSIGN_REVIEWERS": "Assigning reviewers to articles in specific track",
-                            "ADD_COMMENT": "Adding comments for authors to their articles"
+                            "ADD_COMMENT": "Adding comments for authors to their articles",
+                            "RESTORE_ARTICLES": "Restore rejected articles"
                         },
                         "CONFERENCE_REVIEWS": {
                             "REVIEWS": "Conference reviews",
@@ -1008,6 +1011,9 @@
                             "ADD_PICTURE": "Adding pictures to conference gallery",
                             "DELETE_PICTURE": "Deleting pictures from conference gallery"
                         }
+                    },
+                    "PERMISSIONSCONFERENCE_REVIEWS": {
+                        "SEE_REVIEW": "See article's review"
                     }
                 }
             }

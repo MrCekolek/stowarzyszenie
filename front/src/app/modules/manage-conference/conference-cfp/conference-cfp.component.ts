@@ -3,6 +3,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ManageConferenceApiService } from 'src/app/core/http/manage-conference-api.service';
 import { Cfp } from 'src/app/shared/models/cfp.model';
 import { AlertModel } from "../../../shared/models/alert.model";
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-conference-cfp',
@@ -75,7 +76,8 @@ export class ConferenceCfpComponent implements OnInit {
   private fileChanged;
 
   constructor(
-    private manageConferenceApi: ManageConferenceApiService
+    private manageConferenceApi: ManageConferenceApiService,
+    private userProvider: UserProviderService
   ) { }
 
   ngOnInit() {
