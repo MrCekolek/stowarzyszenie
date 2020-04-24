@@ -6,6 +6,7 @@ import { LanguageService } from "../../../shared/services/user/language.service"
 import { AlertModel } from "../../../shared/models/alert.model";
 import { ConfirmationDialogComponent } from "../../../shared/components/confirmation-dialog/confirmation-dialog.component";
 import * as _ from 'lodash';
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-payments',
@@ -25,7 +26,8 @@ export class PaymentsComponent implements OnInit {
     private manageConferenceApi: ManageConferenceApiService,
     private languageService: LanguageService,
     private conferenceApi: ManageConferenceApiService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private userProvider: UserProviderService
   ) { }
 
   ngOnInit() {

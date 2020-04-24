@@ -237,6 +237,12 @@ class Permission extends BaseModel {
                             'CONFERENCE_TRACKS.ASSIGN_CHAIR',
                             PermissionParent::permissionParents()['Conference_Tracks']['id'])
                     ],
+                    [
+                        self::definePermission(
+                            'Assign reviewers',
+                            'CONFERENCE_TRACKS.ASSIGN_REVIEWER',
+                            PermissionParent::permissionParents()['Conference_Tracks']['id'])
+                    ],
                 ],
             PermissionParent::permissionParents()['Conference_Page']['name'] => [
                     [
@@ -313,6 +319,12 @@ class Permission extends BaseModel {
                             'CONFERENCE_PROGRAMME.SET_DATES',
                             PermissionParent::permissionParents()['Conference_Programme']['id'])
                     ],
+                    [
+                        self::definePermission(
+                            'Add programme events',
+                            'CONFERENCE_PROGRAMME.ADD_EVENTS',
+                            PermissionParent::permissionParents()['Conference_Programme']['id'])
+                    ],
                 ],
             PermissionParent::permissionParents()['Conference_Articles']['name'] => [
                     [
@@ -345,6 +357,12 @@ class Permission extends BaseModel {
                             'CONFERENCE_ARTICLES.ADD_COMMENT',
                             PermissionParent::permissionParents()['Conference_Articles']['id'])
                     ],
+                    [
+                        self::definePermission(
+                            'Restore rejected articles',
+                            'CONFERENCE_ARTICLES.RESTORE_ARTICLES',
+                            PermissionParent::permissionParents()['Conference_Articles']['id'])
+                    ],
                 ],
             PermissionParent::permissionParents()['Conference_Reviews']['name'] => [
                     [
@@ -357,6 +375,12 @@ class Permission extends BaseModel {
                         self::definePermission(
                             'Can review',
                             'CONFERENCE_REVIEWS.REVIEWING',
+                            PermissionParent::permissionParents()['Conference_Reviews']['id'])
+                    ],
+                    [
+                        self::definePermission(
+                            'See review',
+                            'CONFERENCE_REVIEWS.SEE_REVIEW',
                             PermissionParent::permissionParents()['Conference_Reviews']['id'])
                     ],
                 ],

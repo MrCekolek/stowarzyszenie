@@ -10,7 +10,7 @@
                         {{ this.role['name_' + this.lang] }}
                     </span>
                 </h4>
-                <button class="btn btn-primary btn-sm" (click)="openNewRoleUserModal()">
+                <button class="btn btn-primary btn-sm" (click)="openNewRoleUserModal()" *ngIf="this.userProvider.checkPermission('USERS.CHANGE_ROLE');">
                     <i class="fas fa-plus mr-2"></i>
                     {{ 'STOWARZYSZENIE.MODALS.NEW_ROLE_USER.TRIGGER_BUTTON' | translate }}
                 </button>

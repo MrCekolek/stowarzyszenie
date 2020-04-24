@@ -5,6 +5,7 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ConfPagesModalComponent } from '../conf-pages-modal/conf-pages-modal.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { LanguageService } from 'src/app/shared/services/user/language.service';
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-conference-page',
@@ -21,7 +22,8 @@ export class ConferencePageComponent implements OnInit {
   constructor(
     private conferenceApi: ManageConferenceApiService,
     private dialog: MatDialog,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private userProvider: UserProviderService
   ) { }
 
   ngOnInit() {

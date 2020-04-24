@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center mb-4">
-  <button class="btn btn-sm btn-primary" (click)="addHomepage()">
+  <button class="btn btn-sm btn-primary" (click)="addHomepage()" *ngIf="this.userProvider.checkPermission('HOME_NAVIGATION.ADD')">
     <i class="fas fa-plus mr-2"></i> {{ 'STOWARZYSZENIE.MODULES.PAGES.ADD_NEW_PAGE' | translate }}
   </button>
 </div>
@@ -34,10 +34,10 @@
           </div>
         </td>
         <td *ngIf="link.status !== 'not editable'; else noteditable">
-            <a [routerLink]="['../page-edit', link.id]" class="btn btn-link text-success">
+            <a [routerLink]="['../page-edit', link.id]" class="btn btn-link text-success" *ngIf="this.userProvider.checkPermission('HOME_NAVIGATION.EDIT');">
               <i class="fas fa-pencil-alt"></i>
             </a>
-            <a class="btn btn-link text-danger" (click)="deletePage(link)">
+            <a class="btn btn-link text-danger" (click)="deletePage(link)" *ngIf="this.userProvider.checkPermission('HOME_NAVIGATION.DELETE')">
               <i class="fas fa-times"></i>
             </a>
             <!-- <a class="btn btn-link text-secondary">

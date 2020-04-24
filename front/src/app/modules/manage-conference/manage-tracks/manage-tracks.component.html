@@ -21,7 +21,7 @@
         <app-alert *ngIf="this.alert" [alertType]="this.alert.type" [message]="this.alert.message"></app-alert>
 
         <div class="d-flex justify-content-center mb-4">
-            <button class="btn btn-primary btn-icon icon-left" (click)="addTrackModal()" *ngIf="this.conference_id">
+            <button class="btn btn-primary btn-icon icon-left" (click)="addTrackModal()" *ngIf="this.conference_id && this.userProvider.checkPermission('CONFERENCE_TRACKS.ADD_NEW')">
                 <i class="fas fa-plus"></i> {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACKS.ADD_BTN' | translate }}
             </button>
         </div>
@@ -35,10 +35,10 @@
                                 {{ track['name_' + this.lang] }}
                             </h4>
                             <div class="card-header-action">
-                                <button  class="btn btn-icon btn-success" (click)="updateTrack(track)">
+                                <button  class="btn btn-icon btn-success" (click)="updateTrack(track)" *ngIf="this.userProvider.checkPermission('CONFERENCE_TRACKS.EDIT_TRACK')">
                                     <i class="fa fa-pencil-alt"></i>
                                 </button>
-                                <button  class="btn btn-icon btn-danger" (click)="deleteTrack(track)">
+                                <button  class="btn btn-icon btn-danger" (click)="deleteTrack(track)" *ngIf="this.userProvider.checkPermission('CONFERENCE_TRACKS.DELETE_TRACK')">
                                     <i class="fa fa-times"></i>
                                 </button>
                             </div>
@@ -73,7 +73,7 @@
                         </div>
 
                         <div class="card-footer text-white">
-                            <a [routerLink]="['../tracks/members', track.id]">
+                            <a [routerLink]="['../tracks/members', track.id]" *ngIf="this.userProvider.checkPermission('CONFERENCE_TRACKS.ASSIGN_CHAIR') || this.userProvider.checkPermission('CONFERENCE_TRACKS.ASSIGN_REVIEWER')">
                                 {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACKS.MANAGE_PEOPLE' | translate }}
                                 <i class="fa fa-chevron-right"></i>
                             </a>
@@ -106,7 +106,7 @@
                     {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.NO_CONFERENCE_DESC' | translate}}
                 </p>
 
-                <a class="btn btn-primary mt-4" [routerLink]="['../create']">
+                <a class="btn btn-primary mt-4" [routerLink]="['../create']" *ngIf="this.userProvider.checkPermission('CONFERENCE_GENERAL.ADD_NEW')">
                     {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.ACTUAL.ADD_CONF_BUTT' | translate }}
                 </a>
             </div>

@@ -5,6 +5,7 @@ import { HomepagesModalComponent } from '../homepages-modal/homepages-modal.comp
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { HomeNavigation } from 'src/app/shared/models/home-navigation';
 import {NavigationService} from "../../../core/services/navigation.service";
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-home-links-list',
@@ -20,7 +21,8 @@ export class HomeLinksListComponent implements OnInit {
   constructor(
     private languageService: LanguageService,
     private dialog: MatDialog,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private userProvider: UserProviderService
   ) { }
 
   ngOnInit() {

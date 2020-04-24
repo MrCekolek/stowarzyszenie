@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from 'ngx-uploader';
 import { ManageConferenceApiService } from "../../../../core/http/manage-conference-api.service";
+import { UserProviderService } from 'src/app/core/services/user-provider.service';
 
 @Component({
   selector: 'app-gallery-add',
@@ -20,7 +21,9 @@ export class GalleryAddComponent implements OnInit {
   private imagePreview;
 
   constructor(
-      private conferenceApi: ManageConferenceApiService
+      private conferenceApi: ManageConferenceApiService,
+      private userProvider: UserProviderService
+
   ) {
     this.options = { concurrency: 1, maxUploads: 100, maxFileSize: 1000000 };
     this.files = [];

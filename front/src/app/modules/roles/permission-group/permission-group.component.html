@@ -1,7 +1,7 @@
 <ul class="permission-group">
     <li class="permission-group-heading">
         <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck1" [id]="this.permissionGroupObj.id" [(ngModel)]="this.permissionGroupObj.isSelected" name="list_name" value="{{ this.permissionGroupObj.id }}" (ngModelChange)="parentClick(this.permissionGroupObj)">
+            <input type="checkbox" class="custom-control-input" *ngIf="this.userProvider.checkPermission('ROLES.CHANGE_PERMISSIONS');" id="customCheck1" [id]="this.permissionGroupObj.id" [(ngModel)]="this.permissionGroupObj.isSelected" name="list_name" value="{{ this.permissionGroupObj.id }}" (ngModelChange)="parentClick(this.permissionGroupObj)">
             <label class="custom-control-label" [for]="this.permissionGroupObj.id">
                 {{ 'STOWARZYSZENIE.SERVER.CUSTOM.DATABASE.PERMISSIONS.' + this.permissionGroupObj.translation_key.toString() | translate }} 
             </label>

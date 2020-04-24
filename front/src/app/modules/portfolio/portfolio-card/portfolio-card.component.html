@@ -9,14 +9,14 @@
                     {{ 'STOWARZYSZENIE.HELPERS.OPTIONS' | translate }}
                 </a>
                 <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 26px, 0px); top: 0px; left: 0px; will-change: transform;">
-                    <a class="dropdown-item has-icon" (click)="emitEditEvent()" *ngIf="this.role === 'admin'">
+                    <a class="dropdown-item has-icon" (click)="emitEditEvent()" *ngIf="this.userProvider.checkPermission('PORTFOLIO.EDIT_CARD_NAMES');">
                         <i class="far fa-edit"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.EDIT' | translate }}
                     </a>
-                    <a class="dropdown-item has-icon text-danger" (click)="deleteCard()" *ngIf="this.role === 'admin'">
+                    <a class="dropdown-item has-icon text-danger" (click)="deleteCard()" *ngIf="this.userProvider.checkPermission('PORTFOLIO.DELETE_CARD');">
                         <i class="far fa-trash-alt"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.DELETE' | translate }}
                     </a>
 
-                    <a class="dropdown-item" (click)="hideCard()" *ngIf="(this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_TABS')) || (this.role === 'user' && this.owner)">
+                    <a class="dropdown-item" (click)="hideCard()" *ngIf="(this.userProvider.checkPermission('PORTFOLIO.HIDE_CARD')) || (this.role === 'user' && this.owner)">
                         <span *ngIf="(this.role === 'admin' && this.card.admin_visibility) || (this.role === 'user' && this.card.user_visibility)">
                             <i class="fas fa-eye-slash mr-2"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.HIDE' | translate }}
                         </span>
@@ -68,7 +68,7 @@
                                                 <button class="btn btn-danger btn-icon btn-sm" *ngIf="this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_CARDS')" (click)="deleteContent(content)">
                                                     <i class="fas fa-times"></i>
                                                 </button>
-                                                <button class="btn btn-success btn-icon btn-sm" *ngIf="this.owner && !this.preview" (click)="openFillContentModal(content, 'input')">
+                                                <button class="btn btn-success btn-icon btn-sm" *ngIf="this.userProvider.checkPermission('PORTFOLIO.EDIT_CONTENT')" (click)="openFillContentModal(content, 'input')">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </button>
                                                 <button class="btn btn-warning btn-icon btn-sm" *ngIf="(this.role === 'admin' && content.admin_visibility) || (this.role === 'user' && this.userID == this.userProvider.getUser().id && content.user_visibility && !this.preview)" (click)="hideContent(content)">
@@ -122,14 +122,14 @@
                                             <ul class="list-unstyled">
                                                 <li *ngFor="let item of content.contents; let i = index">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" [id]="'option' + i" [disabled]="this.role === 'admin' || (this.role === 'user' && this.preview)" (click)="this.markCheckbox(i, item)" [checked]="item.selected == 1">
+                                                        <input type="checkbox" class="custom-control-input" [id]="'option' + i" [disabled]="this.userProvider.checkPermission('PORTFOLIO.EDIT_CONTENT') || (this.role === 'user' && this.preview)" (click)="this.markCheckbox(i, item)" [checked]="item.selected == 1">
                                                         <label class="custom-control-label" [for]="'option' + i">
                                                             {{ item['value_' + lang] }}
                                                         </label>
                                                     </div>
                                                 </li>
                                             </ul>
-                                            <button class="btn btn-danger btn-icon btn-sm" *ngIf="this.role === 'admin' && this.userProvider.checkPermission('PORTFOLIO.MANAGE_CARDS')" (click)="deleteContent(content)">
+                                            <button class="btn btn-danger btn-icon btn-sm" *ngIf="this.userProvider.checkPermission('PORTFOLIO.DELETE_CONTENT')" (click)="deleteContent(content)">
                                                 <i class="fas fa-times"></i>
                                             </button>
                                             <button class="btn btn-warning btn-icon btn-sm" *ngIf="(this.role === 'admin' && content.admin_visibility) || (this.role === 'user' && this.userID == this.userProvider.getUser().id && content.user_visibility && !this.preview)" (click)="hideContent(content)">
@@ -152,7 +152,7 @@
             </div>
         </ng-template>
 
-        <a class="btn btn-primary text-white mt-4" (click)="openNewContentModal('new')" *ngIf="this.role === 'admin'">
+        <a class="btn btn-primary text-white mt-4" (click)="openNewContentModal('new')" *ngIf="this.userProvider.checkPermission('PORTFOLIO.ADD_CONTENT')">
             {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.EMPTY_CARD_BUTTON' | translate }}
         </a>
     </div>
