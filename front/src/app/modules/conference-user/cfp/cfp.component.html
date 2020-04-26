@@ -1,0 +1,40 @@
+<div class="section-header">
+    <h1>{{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.CFP.PAGE_TITLE' | translate }}</h1>
+</div>
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.CFP.SECTION_TITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.CFP.PAGE_DESC' | translate }}
+    </p>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-center" *ngIf="loading; else content">
+                <div class="spinner-border text-primary"></div>
+            </div>
+
+            <ng-template #content>
+                <div *ngIf="this.conference.conference_cfp && !this.conference.conference_cfp.id || !this.conference.conference_cfp">
+                    <div class="empty-state" data-height="200">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-question"></i>
+                        </div>
+                        <h2>
+                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.MY.NO_CFP' | translate }}
+                        </h2>
+                        <p class="lead">
+                            {{ 'STOWARZYSZENIE.MODULES.ARTICLES.ALL.NO_CFP_DESC' | translate }}
+                        </p>
+                    </div>
+                </div>
+
+                <div *ngIf="this.conference.conference_cfp && this.conference.conference_cfp.id">
+                    <div [innerHTML]="this.conference.conference_cfp['content_' + lang]">
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

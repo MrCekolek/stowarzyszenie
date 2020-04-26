@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 class ConferenceController extends Controller
 {
     public function __construct() {
-        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+        $this->middleware('auth:api', ['except' => ['index', 'show', 'getActive']]);
     }
 
     /**
@@ -86,7 +86,7 @@ class ConferenceController extends Controller
      * )
      */
     public function getActive() {
-        $conference = Conference::with(['conferencePages', 'conferencePreference', 'programmeCommittee', 'conferenceEvents', 'conferenceCfp', 'conferenceGalleries', 'tracks'])->where('status', '!=', 'finished')->first();
+        $conference = Conference::with(['conferencePages', 'conferencePreference', 'programmeCommittee.preferenceUser', 'programmeCommittee.affilationUser', 'conferenceEvents', 'conferenceCfp', 'conferenceGalleries', 'tracks.interest', 'tracks.trackChairs.preferenceUser'])->where('status', '!=', 'finished')->first();
 
         return LogService::read(true, [
             'conference' => !empty($conference) ? $conference->toArray() : []

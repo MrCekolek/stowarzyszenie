@@ -1,0 +1,14 @@
+<div class="section-header">
+    <h1 *ngIf="this.conference && !this.conference.id">
+        {{ 'STOWARZYSZENIE.HELPERS.CONF_PAGE.NO_CONFERENCE' | translate }}
+    </h1>
+
+    <h1 *ngIf="this.conference && this.conference.id">
+        {{ this.conference['name_' + lang] }}
+    </h1>
+</div>
+
+<div class="section-body" *ngIf="this.conference && this.conference.conference_pages.length > 0">
+    <app-tabs [tabss]="this.conference.conference_pages" [lang]="lang">
+    </app-tabs>
+</div>

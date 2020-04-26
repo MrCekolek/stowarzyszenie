@@ -93,7 +93,10 @@
             "CONFERENCE_ALREADY_EXISTS": "Conference already exsists. You can't add more. If you want to manage your conference, go to \"Actual Conference\"",
             "BACK_TO_CONFERENCE": "Back to conference settings",
             "CONFERENCE_NOT_EXIST": "No conference in system",
-            "CONF_NOT_EXISTS_BTN": "Add new conference"
+            "CONF_NOT_EXISTS_BTN": "Add new conference",
+            "CONF_PAGE": {
+                "NO_CONFERENCE": "No conference organized yet"
+            }
         },
         "LABELS_TABLES": {
             "AVATAR": "Avatar",
@@ -300,7 +303,8 @@
                 "SEARCHBAR": {
                     "TITLE": "Members",
                     "SEARCH": "Search...",
-                    "SEE_PROFILE": "See profile"
+                    "SEE_PROFILE": "See profile",
+                    "SEND_MAIL": "Send mail"
                 },
                 "SIDENAV": {
                     "DASHBOARD": "Dashboard",
@@ -315,10 +319,11 @@
                         "PORTFOLIO_MENU": "Portfolio",
                         "ROLES_PREFERENCES": "Roles and Permissions",
                         "USERS_LIST": "Users List",
-                        "CONFERENCE_MENU": "Conference",
+                        "CONFERENCE_MENU": "Manage conference",
                         "ACTUAL_CONFERENCE": "Actual conference",
                         "GENERAL_SETT_CONF": "General settings",
-                        "CONF_TRACKS": "Tracks settings"
+                        "CONF_TRACKS": "Tracks settings",
+                        "ACTUAL_CONFERENCE_MENU": "Actual conference"
                     },
                     "MANAGEMENT": {
                         "MANAGEMENT_MENU": "Management",
@@ -348,6 +353,12 @@
                         "MY_REVIEWS": "My reviews",
                         "ASSIGN": "Assign reviewers",
                         "PROGRESS": "Reviews progress"
+                    },
+                    "USER_CONFERENCE": {
+                        "OVERWIEW": "Overview",
+                        "MAIN": "Conference",
+                        "CFP": "Call For Papers",
+                        "PROGRAMME": "Programme"
                     }
                 },
                 "WEBPAGE_TITLE_MEMBERS": "Ciob members"
@@ -661,6 +672,40 @@
                 "STATUS": {
                     "PAID": "Paid",
                     "UNPAID": "Unpaid"
+                },
+                "OVERVIEW": {
+                    "PAGE_TITLE": "Conference overview",
+                    "SECTION_TITLE": "Overview",
+                    "PAGE_DESC": "Here you have general overview of actual conference, like your registration, general info about place, dates etc. Full informations created by managers you can see at conference page.",
+                    "NO_CONFERENCE": "No conference",
+                    "NO_CONFERENCE_DESC": "There is no conference in the system. Wait till one will be organised.",
+                    "NOT_REGISTERED": "Not registered yet",
+                    "NOT_REGISTERED_DESC": "You didn't register to conference yet.",
+                    "REGISTER_LINK": "Click here to register to conference",
+                    "REGISTERED": "Registered",
+                    "REGISTERED_DESC": "You are registered to this conference.",
+                    "REGISTERED_LINK": "Click here to go to my articles.",
+                    "PLACE_TEXT": "Place",
+                    "START_AT_TEXT": "Start at",
+                    "TRACKS_TEXT": "Tracks",
+                    "WEBSITE": "Website",
+                    "NO_WEBSITE": "No website",
+                    "PC_MEMBERS": "Program Committee",
+                    "GO_TO_PAGE_BTN": "Go to conference page"
+                },
+                "REGISTER": {
+                    "PAGE_TITLE": "Registration",
+                    "SECTION_TITLE": "Register to conference"
+                },
+                "CFP": {
+                    "PAGE_TITLE": "Call For Papers",
+                    "SECTION_TITLE": "Check CFP",
+                    "PAGE_DESC": "Here you can check conference CFP."
+                },
+                "PROGRAMME": {
+                    "PAGE_TITLE": "Programme",
+                    "SECTION_TITLE": "Check programme",
+                    "PAGE_DESC": "Here you can check conference programme."
                 }
             },
             "ADMIN": {
@@ -709,7 +754,8 @@
                     "EDIT_ARTICLE": "Edit article",
                     "SEE_REVIEW": "See review",
                     "SEE_COMMENTS": "See comments",
-                    "NO_TRACKS": "There are no conference tracks"
+                    "NO_TRACKS": "There are no conference tracks",
+                    "NO_CFP": "No CFP"
                 },
                 "SUBMIT": {
                     "PAGE_TITLE": "Submit article",
@@ -768,7 +814,8 @@
                         "ADD_REVIEWER_BTN": "Assign reviewer",
                         "SEE_REVIEW": "See review",
                         "SEE_REVIEW_BTN": "See review"
-                    }
+                    },
+                    "NO_CFP_DESC": "There is no Call For Papers in the system."
                 },
                 "PREVIEW": {
                     "MODAL_TITLE": "Article preview",
@@ -955,7 +1002,8 @@
                             "TRANSLATIONS": "Translations",
                             "ADD": "Adding new translation to system",
                             "EDIT": "Editing translations",
-                            "DELETE": "Deleting translations"
+                            "DELETE": "Deleting translations",
+                            "MANAGE": "Managing system translations"
                         },
                         "CONFERENCE_GENERAL": {
                             "GENERAL": "General aspects of conferenece",

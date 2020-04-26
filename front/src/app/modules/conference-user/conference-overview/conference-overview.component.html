@@ -1,0 +1,231 @@
+<div class="section-header">
+    <h1>{{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.PAGE_TITLE' | translate }}</h1>
+    
+    <div class="section-header-button" *ngIf="this.conference && this.conference.acronym">
+        <a [routerLink]="['/homepage', this.conference.acronym]" class="btn btn-primary btn-icon icon-right">
+            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.GO_TO_PAGE_BTN' | translate }}
+            <i class="fas fa-chevron-right ml-3"></i>
+        </a>
+    </div>
+</div>
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.SECTION_TITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.PAGE_DESC' | translate }}
+    </p>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-center" *ngIf="loading; else content">
+                <div class="spinner-border text-primary"></div>
+            </div>
+
+            <ng-template #content>
+                <!-- nie ma konferencji -->
+                <div *ngIf="this.conference && !this.conference.id">
+                    <div class="empty-state" data-height="200">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-question"></i>
+                        </div>
+                        <h2>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.NO_CONFERENCE' | translate }}
+                        </h2>
+                        <p class="lead">
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.NO_CONFERENCE_DESC' | translate }}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- jezeli jest konferencja wyswietla dane o niej -->
+                <div *ngIf="this.conference && this.conference.id">
+                    <div class="section-title text-primary mt-2">
+                        <h5>
+                            <strong>
+                                {{ conference['name_' + lang] }}
+                            </strong>
+                            <small class="text-muted ml-2">
+                                {{ conference.acronym }}
+                            </small>
+                            <!-- status -->
+                            <span class="badge ml-3" [ngClass]="{'badge-secondary': conference.status === 'waiting', 'badge-warning': conference.status === 'during', 'badge-success': conference.status === 'finished'}">
+                                {{ conference.translation_key | translate }}
+                            </span>
+                        </h5>
+
+
+                        <div class="row my-3">
+                            <div class="col-sm-3 col-6 mb-md-0 mb-4 text-center">
+                                <i class="fas fa-place-of-worship fa-lg"></i>
+                                <div class="mt-2 font-weight-bold text-nowrap">
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.PLACE_TEXT' | translate }}
+                                </div>
+                                <div class="text-small text-muted">
+                                    {{ conference.conference_preference['place_' + lang] }}
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3 col-6 mb-md-0 mb-4 text-center">
+                                <i class="fas fa-calendar-day"></i>
+                                <div class="mt-2 font-weight-bold text-nowrap">
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.START_AT_TEXT' | translate }}
+                                </div>
+                                <div class="text-small text-muted">
+                                    07.09.2020
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3 col-6 mb-md-0 mb-4 text-center">
+                                <i class="fas fa-th-large"></i>
+                                <div class="mt-2 font-weight-bold text-nowrap">
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.TRACKS_TEXT' | translate }}
+                                </div>
+                                <div class="text-small text-muted">
+                                    <span class="text-primary">
+                                        {{ conference.tracks.length }}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3 col-6 text-center">
+                            <i class="fas fa-file-alt"></i>
+                                <div class="mt-2 font-weight-bold text-nowrap">
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.WEBSITE' | translate }}
+                                </div>
+                                <div class="text-small text-muted" *ngIf="conference.conference_preference.website">
+                                    <a [href]="conference.conference_preference.website">
+                                        {{ conference.conference_preference.website }}
+                                    </a>
+                                </div>
+
+                                <div class="text-small text-muted" *ngIf="!conference.conference_preference.website">
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.NO_WEBSITE' | translate }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- rejestracja -->
+                        <div class="alert alert-light alert-has-icon my-4" *ngIf="!this.isRegistered">
+                            <div class="alert-icon">
+                                <i class="fas fa-cash-register"></i>
+                            </div>
+                            <div class="alert-body">
+                                <div class="alert-title">
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.NOT_REGISTERED' | translate }}
+                                </div>
+                                
+                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.NOT_REGISTERED_DESC' | translate }} 
+
+                                <button [class.btn-progress]="this.registerLoading" (click)="registerToConference()" class=" ml-3 btn btn-white btn-lg text-primary">
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.REGISTER_LINK' | translate }}
+                                </button >
+                            </div>
+                        </div>
+
+                        <div *ngIf="this.isRegistered" class="alert alert-success alert-has-icon my-4">
+                            <div class="alert-icon">
+                                <i class="fas fa-cash-register"></i>
+                            </div>
+                            <div class="alert-body">
+                                <div class="alert-title">
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.REGISTERED' | translate }}
+                                </div>
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.REGISTERED_DESC' | translate }} 
+                                <a [routerLink]="['conference-articles/my']" class="text-white">
+                                    {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.REGISTERED_LINK' | translate }}
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- PC -->
+                        <div class="section-title my-2">
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.PC_MEMBERS' | translate }}
+                        </div>
+                        <owl-carousel-o [options]="customOptions" *ngIf="this.conference.programme_committee.length > 0 else noPcMembers">
+                            <ng-container *ngFor="let pcmember of this.conference.programme_committee">
+                                <ng-template carouselSlide>
+                                    <div class="slide text-center">
+                                        <img alt="image" width="70" [src]="pcmember.preference_user.avatar" class="img-responsive img-small">
+                                        <div class="user-details">
+                                            <div class="user-name">
+                                                {{ pcmember.affilation_user.title + ' ' + pcmember.first_name + ' ' + pcmember.last_name }}
+                                            </div>
+                                            <div class="text-job text-muted">
+                                                {{ pcmember.affilation_user.institution }}
+                                            </div>
+                                            <div class="user-cta mt-2">
+                                                <a class="btn btn-primary btn-icon icon-left following-btn" [href]="'mailto:' + pcmember.contact_email">
+                                                    <i class="far fa-envelope"></i>
+                                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SEARCHBAR.SEND_MAIL' | translate }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ng-container> 
+                        </owl-carousel-o>
+                        <ng-template #noPcMembers>
+                            <div class="empty-state" data-height="400" style="height: 400px;">
+                                <div class="empty-state-icon">
+                                    <i class="fas fa-user-slash"></i>
+                                </div>
+    
+                                <h2>
+                                    {{ 'STOWARZYSZENIE.MODULES.COMMITTEE.NO_USERS' | translate }}
+                                </h2>
+                            </div>
+                        </ng-template> 
+
+                        <div class="section-title my-2">
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.TRACKS_TEXT' | translate }}
+                        </div>
+
+                        <div class="row" *ngIf="this.conference.tracks.length > 0">
+                            <div class="col-lg-6 col-sm-12" *ngFor="let track of this.conference.tracks">
+                                <div class="card" [ngStyle]="{'border': '1px solid ' + track.colour}">
+                                    <div class="card-header">
+                                        <h4 [ngStyle]="{'color': track.colour}">
+                                            {{ track['name_' + this.lang] }}
+                                        </h4>
+                                    </div>
+            
+                                    <div class="card-body">
+                                        <div>
+                                            <h5 class="mb-3 text-muted">
+                                                {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACKS.TRACK_CHAIRS_TILE' | translate }}
+                                            </h5>
+            
+                                            <div *ngIf="track.track_chairs.length < 1">
+                                                {{ 'STOWARZYSZENIE.LABELS.EMPTY' | translate }}
+                                            </div>
+            
+                                            <div class="badge badge-primary" *ngFor="let trackChair of track.track_chairs">
+                                                {{ trackChair.first_name + ' ' + trackChair.last_name }}
+                                            </div>
+                                        </div>
+            
+                                        <h5 class="mb-3 mt-4 text-muted">
+                                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE.TRACKS.TRACK_INTEREST_TILE' | translate }}
+                                        </h5>
+            
+                                        <div class="badge badge-secondary mt-43" *ngIf="track.interest else interest">
+                                            {{ track.interest['name_' + this.lang] }}
+                                        </div>
+            
+                                        <ng-template #interest>
+                                            {{ 'STOWARZYSZENIE.LABELS.EMPTY' | translate }}
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- galeria mala -->
+
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

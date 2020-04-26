@@ -156,4 +156,9 @@ export class ManageConferenceApiService {
 
     return this.api.post('conference/track/article/review', obj);
   }
+
+  // registrations
+  registerUserToConference(user: Object) {
+    return this.api.post('conference/user/create', user);
+  }
 }
