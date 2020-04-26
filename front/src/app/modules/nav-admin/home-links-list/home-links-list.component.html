@@ -1,15 +1,15 @@
 <div class="d-flex justify-content-center mb-4">
-  <button class="btn btn-sm btn-primary" (click)="addHomepage()" *ngIf="this.userProvider.checkPermission('HOME_NAVIGATION.ADD')">
+  <button class="btn btn-sm btn-primary" (click)="addHomepage()" *ngIf="!this.loading && this.userProvider.checkPermission('HOME_NAVIGATION.ADD')">
     <i class="fas fa-plus mr-2"></i> {{ 'STOWARZYSZENIE.MODULES.PAGES.ADD_NEW_PAGE' | translate }}
   </button>
 </div>
 
-<div class="d-flex justify-content-center" *ngIf="this.loading">
+<div class="d-flex justify-content-center" *ngIf="this.loading else content">
   <div class="spinner-border text-primary">
   </div>
 </div>
 
-<div #content class="table-responsive">
+<ng-template #content class="table-responsive">
   <table class="table table-striped" *ngIf="links.length > 0 && !loading; else noLinks">
     <tbody>
       <tr>
@@ -53,7 +53,7 @@
       </tr>
     </tbody>
   </table>
-</div>
+</ng-template>
 
 <ng-template #noLinks>
   <div class="empty-state" data-height="200">
