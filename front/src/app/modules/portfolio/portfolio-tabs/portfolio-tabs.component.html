@@ -42,8 +42,8 @@
         <!-- button dodania nowego taba -->
         <!-- TODO: permission -->
         <!--  -->
-        <li class="nav-item mr-2" *ngIf="this.role === 'admin' || userService.checkPermission('PROFILE.ADD_TABS')">
-            <div class="btn btn-warning" (click)="openTabModal('new')" *ngIf="this.userProvider('PORTFOLIO.ADD_TABS');">
+        <li class="nav-item mr-2" *ngIf="this.role === 'admin' || this.userProvider.checkPermission('PROFILE.ADD_TABS')">
+            <div class="btn btn-warning" (click)="openTabModal('new')" *ngIf="this.userProvider.checkPermission('PORTFOLIO.ADD_TABS');">
                 <i class="fas fa-plus"></i> {{ 'STOWARZYSZENIE.CRUD_BUTTONS.ADD' | translate }}
             </div>
         </li>

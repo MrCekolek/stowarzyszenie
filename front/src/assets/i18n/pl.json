@@ -298,7 +298,8 @@
                 "MEMBERS_PAGE_LINKS": {
                     "HOME": "Strona główna",
                     "LOGIN": "Logowanie",
-                    "REGISTER": "Zarejestruj się"
+                    "REGISTER": "Zarejestruj się",
+                    "PANEL": "Idź do panelu"
                 },
                 "SEARCHBAR": {
                     "TITLE": "Użytkownicy",

@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit {
     this.tokenService.handle(response.access_token);
     this.userProviderService.changeLoginStatus(true);
     this.userProviderService.setUser(new UserModel(response['user']['original']));
+    this.moveToPanel();
     this.languageService.setLang(this.sharedModule.detectLang(response['user']['original']['user']['preference_user']['lang']));
     this.router.navigateByUrl('dashboard');
   }
@@ -93,5 +94,9 @@ export class LoginComponent implements OnInit {
 
   get password() {
     return this.loginForm.get('password');
+  }
+
+  moveToPanel() {
+    this.userProviderService.changeIsOnHomePageStatus(false);
   }
 }

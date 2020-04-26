@@ -54,4 +54,8 @@ export class TokenService {
   loggedIn() {
     return this.valid();
   }
+
+  isOnMainPage() {
+    return localStorage.getItem('destiny') && localStorage.getItem('destiny') === 'home page';
+  }
 }
