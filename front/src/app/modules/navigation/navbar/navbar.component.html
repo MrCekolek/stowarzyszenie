@@ -34,6 +34,12 @@
                     </a>
                 </li>
 
+                <li class="nav-item" *ngIf="this.conference && this.conference.id">
+                    <a class="nav-link" [routerLink]="['page', this.conference.acronym]" routerLinkActive="active">
+                        {{ this.conference.acronym }}
+                    </a>
+                </li>
+
                 <li class="nav-item" [routerLink]="['/auth/login']" routerLinkActive="active">
                     <a class="nav-link">
                         {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.LOGIN' | translate }}
@@ -300,6 +306,34 @@
                         </ul>
                     </li>
 
+                    <!-- my conference: tylko dla autorow, osob ktore biora udzial w konferencji -->
+                    <li class="dropdown">
+                        <a class="nav-link">
+                            <i class="fas fa-id-card"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USER_CONFERENCE.MAIN' | translate }}
+                        </a>
+
+                        <!-- REGULAR exp??? -->
+                        <ul class="dropdown-menu">
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['conference/overview']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USER_CONFERENCE.OVERWIEW' | translate }}
+                                </a>
+                            </li>
+
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['conference/cfp']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USER_CONFERENCE.CFP' | translate }}
+                                </a>
+                            </li>
+
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['conference/programme']" class="nav-link">
+                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USER_CONFERENCE.PROGRAMME' | translate }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li class="dropdown">
                         <a class="nav-link">
                             <i class="fas fa-handshake"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.CONFERENCE_MENU' | translate }}
@@ -332,7 +366,7 @@
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.CONFERENCE.CFP' | translate }}
                                 </a>
                             </li>
-                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('CONFERENCE_PAGE.ADD_NEW') || this.userProviderService.checkPermission('CONFERENCE_PAGE.DELETE_PAGE' ||  this.userProviderService.checkPermission('CONFERENCE_PAGE.EDIT_PAGE')">
+                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('CONFERENCE_PAGE.ADD_NEW') || this.userProviderService.checkPermission('CONFERENCE_PAGE.DELETE_PAGE') ||  this.userProviderService.checkPermission('CONFERENCE_PAGE.EDIT_PAGE')">
                                 <a [routerLink]="['manage-conference/conference-page']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.CONFERENCE.PAGE' | translate }}
                                 </a>
@@ -376,10 +410,11 @@
 
                     <li class="dropdown">
                         <a class="nav-link">
-                            <i class="fas fa-id-card"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.MANAGEMENT.MANAGEMENT_MENU' | translate }}
+                            <i class="fas fa-calendar-week"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.MANAGEMENT.MANAGEMENT_MENU' | translate }}
                         </a>
 
                         <ul class="dropdown-menu">
+                            <!--  *ngIf="this.userProviderService.checkPermission('TRANSLATIONS.MANAGE')" -->
                             <li routerLinkActive="active">
                                 <a [routerLink]="['managements/translations']" class="nav-link">
                                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.MANAGEMENT.TRANSLATIONS' | translate }}

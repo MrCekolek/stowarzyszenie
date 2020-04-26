@@ -93,7 +93,10 @@
             "CONFERENCE_ALREADY_EXISTS": "Konferencja już istnieje. Nie możesz dodać więcej. Jeśli chcesz zarządzać konferencją, przejdź do „Aktualnej konferencji”",
             "BACK_TO_CONFERENCE": "Powrót do ustawień konferencji",
             "CONFERENCE_NOT_EXIST": "Brak konferencji w systemie",
-            "CONF_NOT_EXISTS_BTN": "Dodaj nową konferencję"
+            "CONF_NOT_EXISTS_BTN": "Dodaj nową konferencję",
+            "CONF_PAGE": {
+                "NO_CONFERENCE": "Nie zorganizowano jeszcze konferencji"
+            }
         },
         "LABELS_TABLES": {
             "AVATAR": "Avatar",
@@ -300,7 +303,8 @@
                 "SEARCHBAR": {
                     "TITLE": "Użytkownicy",
                     "SEARCH": "Szukaj...",
-                    "SEE_PROFILE": "Zobacz profil"
+                    "SEE_PROFILE": "Zobacz profil",
+                    "SEND_MAIL": "Wyślij maila"
                 },
                 "SIDENAV": {
                     "DASHBOARD": "Główna",
@@ -315,10 +319,11 @@
                         "PORTFOLIO_MENU": "Portfolio",
                         "ROLES_PREFERENCES": "Role i uprawnienia",
                         "USERS_LIST": "Lista użytkowników",
-                        "CONFERENCE_MENU": "Konferencja",
+                        "CONFERENCE_MENU": "Zarządzanie konferencją",
                         "ACTUAL_CONFERENCE": "Aktualna konferencja",
                         "GENERAL_SETT_CONF": "Ustawienia główne",
-                        "CONF_TRACKS": "Ustawienia tematów"
+                        "CONF_TRACKS": "Ustawienia tematów",
+                        "ACTUAL_CONFERENCE_MENU": "Aktualna konferencja"
                     },
                     "MANAGEMENT": {
                         "MANAGEMENT_MENU": "Zarządzanie",
@@ -348,6 +353,12 @@
                         "MY_REVIEWS": "Moje recenzje",
                         "ASSIGN": "Przypisywanie recenzentów",
                         "PROGRESS": "Postępy recenzji"
+                    },
+                    "USER_CONFERENCE": {
+                        "OVERWIEW": "Przegląd",
+                        "MAIN": "Konferencja",
+                        "CFP": "Call For Papers",
+                        "PROGRAMME": "Program"
                     }
                 },
                 "WEBPAGE_TITLE_MEMBERS": "Ciob members"
@@ -661,6 +672,40 @@
                 "STATUS": {
                     "PAID": "Opłacony",
                     "UNPAID": "Nie opłacony"
+                },
+                "OVERVIEW": {
+                    "PAGE_TITLE": "Przegląd konferencji",
+                    "SECTION_TITLE": "Przegląd",
+                    "PAGE_DESC": "Tutaj widzisz ogólny przegląd aktualnej konferencji, taki jak rejestracja, ogólne informacje o miejscu, datach itp. Pełne informacje utworzone przez menedżerów można zobaczyć na stronie konferencji.",
+                    "NO_CONFERENCE": "Brak konferencji",
+                    "NO_CONFERENCE_DESC": "W systemie nie ma konferencji. Poczekaj, aż zostanie zorganizowana.",
+                    "NOT_REGISTERED": "Jeszcze nie zarejestrowany",
+                    "NOT_REGISTERED_DESC": "Nie zarejestrowałeś się jeszcze na konferencji.",
+                    "REGISTER_LINK": "Kliknij tutaj, aby zarejestrować się do konferencji",
+                    "REGISTERED": "Zarejestrowany",
+                    "REGISTERED_DESC": "Jesteś zarejestrowany na tę konferencję.",
+                    "REGISTERED_LINK": "Kliknij tutaj, aby przejść do moich artykułów.",
+                    "PLACE_TEXT": "Miejsce",
+                    "START_AT_TEXT": "Rozpoczęcie",
+                    "TRACKS_TEXT": "Tracki",
+                    "WEBSITE": "Strona internetowa",
+                    "NO_WEBSITE": "Brak strony internetowej",
+                    "PC_MEMBERS": "Komitet Programowy",
+                    "GO_TO_PAGE_BTN": "Przejdź do strony konferencji"
+                },
+                "REGISTER": {
+                    "PAGE_TITLE": "Rejestracja",
+                    "SECTION_TITLE": "Zarejestruj się do konferencji"
+                },
+                "CFP": {
+                    "PAGE_TITLE": "Call For Papers",
+                    "SECTION_TITLE": "Sprawdź CFP",
+                    "PAGE_DESC": "Tutaj możesz sprawdzić CFP konferencji."
+                },
+                "PROGRAMME": {
+                    "PAGE_TITLE": "Program",
+                    "SECTION_TITLE": "Sprawdź program",
+                    "PAGE_DESC": "Tutaj możesz sprawdzić program konferencji."
                 }
             },
             "ADMIN": {
@@ -709,7 +754,8 @@
                     "EDIT_ARTICLE": "Edytuj artykuł",
                     "SEE_REVIEW": "Zobacz recenzję",
                     "SEE_COMMENTS": "Zobacz komentarze",
-                    "NO_TRACKS": "Brak tematów konferencyjnych"
+                    "NO_TRACKS": "Brak tematów konferencyjnych",
+                    "NO_CFP": "Brak CFP"
                 },
                 "SUBMIT": {
                     "PAGE_TITLE": "Prześlij artykuł",
@@ -768,7 +814,8 @@
                         "ADD_REVIEWER_BTN": "Przypisz recenzenta",
                         "SEE_REVIEW": "Zobacz recenzję",
                         "SEE_REVIEW_BTN": "Zobacz recenzję"
-                    }
+                    },
+                    "NO_CFP_DESC": "W systemie nie ma zaproszenia do składania dokumentów."
                 },
                 "PREVIEW": {
                     "MODAL_TITLE": "Podgląd artykułu",
@@ -955,7 +1002,8 @@
                             "TRANSLATIONS": "Tłumaczenia",
                             "ADD": "Dodawanie nowego tłumaczenia do systemu",
                             "EDIT": "Edycja tłumaczeń",
-                            "DELETE": "Usuwanie tłumaczeń"
+                            "DELETE": "Usuwanie tłumaczeń",
+                            "MANAGE": "Zarządzanie tłumaczeniami systemu"
                         },
                         "CONFERENCE_GENERAL": {
                             "GENERAL": "Ogólne aspekty konferencji",

@@ -1,1 +1,21 @@
-<p>register-to-conference works!</p>
+<div class="section-header">
+    <h1>{{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.REGISTER.PAGE_TITLE' | translate }}</h1>
+</div>
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.REGISTER.SECTION_TITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.REGISTER.PAGE_DESC' | translate }}
+    </p>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-center" *ngIf="loading; else content">
+                <div class="spinner-border text-primary"></div>
+            </div>
+
+            <ng-template #content></ng-template>
+        </div>
+    </div>
+</div>

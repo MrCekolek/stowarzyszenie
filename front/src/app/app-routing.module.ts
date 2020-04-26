@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoggedGuard } from "./shared/guards/logged.guard.guard";
 import { NotLoggedGuard } from "./shared/guards/not-logged.guard.guard";
 import { HomePageComponent } from './modules/navigation/home-page/home-page.component';
+import { ConferencePageComponent } from './modules/navigation/conference-page/conference-page.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'homepage/:id',
     component: HomePageComponent
+  },
+  {
+    path: 'page/:conferenceName',
+    component: ConferencePageComponent
   },
   {
     path: 'auth',
@@ -80,6 +85,13 @@ const routes: Routes = [
   {
     path: 'conference-reviews',
     loadChildren: './modules/conference-reviews/conference-reviews.module#ConferenceReviewsModule',
+    canActivateChild: [
+      LoggedGuard
+    ]
+  },
+  {
+    path: 'conference',
+    loadChildren: './modules/conference-user/conference-user.module#ConferenceUserModule',
     canActivateChild: [
       LoggedGuard
     ]

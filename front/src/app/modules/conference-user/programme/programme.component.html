@@ -1,0 +1,78 @@
+<div class="section-header">
+    <h1>{{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.PROGRAMME.PAGE_TITLE' | translate }}</h1>
+</div>
+<div class="section-body">
+    <h2 class="section-title">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.PROGRAMME.SECTION_TITLE' | translate }}
+    </h2>
+    <p class="section-lead">
+        {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.PROGRAMME.PAGE_DESC' | translate }}
+    </p>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-center" *ngIf="loading; else content">
+                <div class="spinner-border text-primary"></div>
+            </div>
+
+            <ng-template #content>
+                <!-- nie ma konferencji -->
+                <div *ngIf="this.conference && !this.conference.id">
+                    <div class="empty-state" data-height="200">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-question"></i>
+                        </div>
+                        <h2>
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.NO_CONFERENCE' | translate }}
+                        </h2>
+                        <p class="lead">
+                            {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.NO_CONFERENCE_DESC' | translate }}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- jezeli jest konferencja wyswietla program -->
+                <div *ngIf="this.conference && this.conference.id">
+                    <full-calendar
+                        *ngIf="options && !this.dropped"
+                        #fullcalendar
+                        [defaultView]="this.options.defaultView"
+                        [editable]="true"
+                        [droppable]="true"
+                        [events]="this.eventsModel"
+                        [locales]="this.options.locales"
+                        [locale]="this.lang"
+                        [plugins]="this.options.plugins"
+                        [header]="this.options.header"
+                        (drop)="this.drop($event)"
+                        (eventDrop)="this.eventDrop($event)"
+                        (eventClick)="this.eventClick($event)"
+                        (eventResize)="this.eventResize($event)"
+                        (eventRender)="this.eventRender($event)"
+                        [allDaySlot]="false"
+                        deepChangeDetection="true"
+                    ></full-calendar>
+
+                    <full-calendar
+                        *ngIf="options && this.dropped"
+                        #fullcalendar
+                        [editable]="true"
+                        [droppable]="true"
+                        [events]="this.eventsModel"
+                        [locales]="this.options.locales"
+                        [locale]="this.lang"
+                        [plugins]="this.options.plugins"
+                        [header]="this.options.header"
+                        (drop)="this.drop($event)"
+                        (eventDrop)="this.eventDrop($event)"
+                        (eventClick)="eventClick($event)"
+                        (eventResize)="this.eventResize($event)"
+                        (eventRender)="this.eventRender($event)"
+                        [allDaySlot]="false"
+                        deepChangeDetection="true"
+                    ></full-calendar>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

@@ -11,9 +11,13 @@ import { UserSearchComponent } from './user-search/user-search.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { ConferencePageComponent } from './conference-page/conference-page.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { TabsComponent } from './tabs/tabs.component';
+import { TabComponent } from './tab/tab.component';
 
 @NgModule({
-  declarations: [NavbarComponent, BreadcrumbComponent, UserSearchComponent, HomePageComponent],
+  declarations: [NavbarComponent, BreadcrumbComponent, UserSearchComponent, HomePageComponent, ConferencePageComponent, TabsComponent, TabComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -23,9 +27,10 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     ReactiveFormsModule,
     MatInputModule,
     ScrollingModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    MatTabsModule
   ],
-  exports: [NavbarComponent],
+  exports: [NavbarComponent, TabsComponent],
   providers: []
 })
 
