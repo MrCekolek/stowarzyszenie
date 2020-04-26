@@ -1,5 +1,5 @@
 <!-- TO NAV WIDNIEJE NA STRONIE >PRZED< ZALOGOWANIEM, po powrocie do strony głównej etc.  -->
-<div *ngIf="!this.loggedIn">
+<div *ngIf="!this.loggedIn || (this.loggedIn && this.isOnMainPage)">
     <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
         <a [routerLink]="['/']" class="navbar-brand sidebar-gone-hide">
             <strong>
@@ -8,13 +8,18 @@
         </a>
         <div class="nav-collapse">
             <div class="dropdown d-inline">
-                <button class="btn bg-white dropdown-toggle" type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]" [alt]="this.lang" class="mr-2" style="height: 22px;">
+                <button class="btn bg-white dropdown-toggle" type="button" id="languageDropdown" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]" [alt]="this.lang"
+                         class="mr-2" style="height: 22px;">
                     {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LANGUAGES.LABEL' | translate }}
                 </button>
-                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
-                    <a class="dropdown-item has-icon" *ngFor="let lang of translateService.getLangs(); let i = index" [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
-                        <img [src]="this.flagsImages[i]" [alt]="this.lang" class="mr-2" style="height: 22px;"> {{ this.translations[i] | translate }}
+                <div class="dropdown-menu" x-placement="bottom-start"
+                     style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <a class="dropdown-item has-icon" *ngFor="let lang of translateService.getLangs(); let i = index"
+                       [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
+                        <img [src]="this.flagsImages[i]" [alt]="this.lang" class="mr-2"
+                             style="height: 22px;"> {{ this.translations[i] | translate }}
                     </a>
                 </div>
             </div>
@@ -22,9 +27,14 @@
                 <i class="fas fa-ellipsis-v"></i>
             </a>
             <ul class="navbar-nav">
-                <li class="nav-item" [routerLink]="['/']">
-                    <a class="nav-link">
+                <li class="nav-item" [routerLink]="['/']"
+                    *ngIf="!this.loggedIn || (this.loggedIn && this.isOnMainPage)">
+                    <a class="nav-link" *ngIf="!this.loggedIn">
                         {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.HOME' | translate }}
+                    </a>
+
+                    <a class="nav-link" *ngIf="this.loggedIn && this.isOnMainPage" (click)="this.moveToPanel()">
+                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.PANEL' | translate }}
                     </a>
                 </li>
 
@@ -40,12 +50,12 @@
                     </a>
                 </li>
 
-                <li class="nav-item" [routerLink]="['/auth/login']" routerLinkActive="active">
+                <li class="nav-item" [routerLink]="['/auth/login']" routerLinkActive="active"*ngIf="!this.loggedIn">
                     <a class="nav-link">
                         {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.LOGIN' | translate }}
                     </a>
                 </li>
-                <li class="nav-item" [routerLink]="['/auth/register']" routerLinkActive="active">
+                <li class="nav-item" [routerLink]="['/auth/register']" routerLinkActive="active" *ngIf="!this.loggedIn">
                     <a class="nav-link">
                         {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.MEMBERS_PAGE_LINKS.REGISTER' | translate }}
                     </a>
@@ -56,21 +66,32 @@
 
     <div class="main-content" style="padding-top: 80px;">
         <div class="section container">
-            <router-outlet *ngIf="!this.loggedIn"></router-outlet>
+            <div class="card" *ngIf="this.loading">
+                <div class="card-body">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border text-primary">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <router-outlet *ngIf="!this.loggedIn || (this.loggedIn && this.isOnMainPage)"></router-outlet>
         </div>
     </div>
 </div>
 
 <!-------------------------------------- NAWIGACJA PO ZALOGOWANIU ------------------------- -->
 
-<div id="app" *ngIf="this.loggedIn">
+<div id="app" *ngIf="this.loggedIn && !this.isOnMainPage">
     <div class="main-wrapper main-wrapper-1">
         <div class="navbar-bg"></div>
         <nav id="main-navbar" class="navbar navbar-expand-lg main-navbar">
             <form class="form-inline mr-auto">
                 <ul class="navbar-nav mr-3">
-                    <li><a (click)="this.toggleSidebar()" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
-                    <li><a data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+                    <li><a (click)="this.toggleSidebar()" data-toggle="sidebar" class="nav-link nav-link-lg"><i
+                            class="fas fa-bars"></i></a></li>
+                    <li><a data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a>
+                    </li>
                 </ul>
                 <div class="search-element">
 
@@ -79,7 +100,10 @@
                         <button class="btn" type="submit"><i class="fas fa-search"></i></button>
                     </form> -->
 
-                    <input #searchinput class="form-control" type="search" placeholder="{{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SEARCHBAR.SEARCH' | translate }}" aria-label="Search" data-width="250" style="width: 250px;" (keyup)="searchUsers(searchinput.value)">
+                    <input #searchinput class="form-control" type="search"
+                           placeholder="{{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SEARCHBAR.SEARCH' | translate }}"
+                           aria-label="Search" data-width="250" style="width: 250px;"
+                           (keyup)="searchUsers(searchinput.value)">
                     <button class="btn" type="submit"><i class="fas fa-search"></i></button>
                     <div class="search-backdrop"></div>
                     <div class="search-result">
@@ -92,7 +116,8 @@
                                     {{ 'STOWARZYSZENIE.LABELS.AVATAR' | translate }}
                                 </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
-                                    <img src="../../../../assets/images/default_man.png" alt="" class="avatar avatar-sm">
+                                    <img src="../../../../assets/images/default_man.png" alt=""
+                                         class="avatar avatar-sm">
                                 </mat-cell>
                             </ng-container>
 
@@ -122,19 +147,24 @@
                                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <td class="text-align-right">
-                                        <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="{{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SEARCHBAR.SEE_PROFILE' | translate }}" [routerLink]="['/users/profile/', row.id]">
+                                        <button class="btn btn-icon btn-light" data-toggle="tooltip"
+                                                data-placement="bottom"
+                                                title="{{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SEARCHBAR.SEE_PROFILE' | translate }}"
+                                                [routerLink]="['/users/profile/', row.id]">
                                             <i class="fas fa-address-card"></i>
                                         </button>
-<!--                                        <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="Send message">-->
-<!--                                            <i class="fas fa-envelope"></i>-->
-<!--                                        </button>-->
+                                        <!--                                        <button class="btn btn-icon btn-light" data-toggle="tooltip" data-placement="bottom" title="Send message">-->
+                                        <!--                                            <i class="fas fa-envelope"></i>-->
+                                        <!--                                        </button>-->
                                     </td>
                                 </mat-cell>
                             </ng-container>
 
                             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                            <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide': listData != null}"></mat-footer-row>
-                            <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide': !(listData != null && listData?.filteredData.length == 0)}"></mat-footer-row>
+                            <mat-footer-row *matFooterRowDef="['loading']"
+                                            [ngClass]="{'hide': listData != null}"></mat-footer-row>
+                            <mat-footer-row *matFooterRowDef="['noData']"
+                                            [ngClass]="{'hide': !(listData != null && listData?.filteredData.length == 0)}"></mat-footer-row>
                         </mat-table>
                     </div>
                 </div>
@@ -144,7 +174,8 @@
                 <!-- language choosing -->
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                        <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]" [alt]="this.languageService.currentLang" class="rounded-circle mr-1">
+                        <img [src]="this.flagsImages[this.languageIndex[translateService.currentLang]]"
+                             [alt]="this.languageService.currentLang" class="rounded-circle mr-1">
 
                         <div class="d-sm-none d-lg-inline-block">
                             <span>
@@ -153,8 +184,11 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item has-icon" *ngFor="let lang of translateService.getLangs(); let i = index" [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
-                            <img [src]="this.flagsImages[i]" [alt]="this.languageService.currentLang"> {{ this.translations[i] | translate }}
+                        <a class="dropdown-item has-icon"
+                           *ngFor="let lang of translateService.getLangs(); let i = index"
+                           [ngClass]="{'active': translateService.currentLang === lang}" (click)="setLang(lang)">
+                            <img [src]="this.flagsImages[i]"
+                                 [alt]="this.languageService.currentLang"> {{ this.translations[i] | translate }}
                         </a>
                     </div>
                 </li>
@@ -162,7 +196,9 @@
                 <!-- user dropdown -->
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                        <img alt="image" *ngIf="this.userProviderService.getUser()" [src]="this.userProviderService.getUser().preference_user.avatar" class="rounded-circle mr-1">
+                        <img alt="image" *ngIf="this.userProviderService.getUser()"
+                             [src]="this.userProviderService.getUser().preference_user['avatar']"
+                             class="rounded-circle mr-1">
                         <div class="d-sm-none d-lg-inline-block">
                             <span *ngIf="this.userProviderService?.getUser()">
                                 {{ this.userProviderService.getUser().first_name + ' ' + this.userProviderService.getUser().last_name }}
@@ -175,7 +211,9 @@
                                 {{ this.userProviderService.getUser()?.login_email }}
                             </span>
                         </div>
-                        <a *ngIf="this.userProviderService.getUser()" [routerLink]="['/users/profile', this.userProviderService.getUser().id]" class="dropdown-item has-icon">
+                        <a *ngIf="this.userProviderService.getUser()"
+                           [routerLink]="['/users/profile', this.userProviderService.getUser().id]"
+                           class="dropdown-item has-icon">
                             <i class="far fa-user"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.LOGGED_NAVBAR.MY_ACCOUNT' | translate }}
                         </a>
                         <a class="dropdown-item has-icon">
@@ -189,107 +227,118 @@
                 </li>
             </ul>
         </nav>
-        <div id="sidebar-wrapper-parent" class="main-sidebar sidebar-style-2" tabindex="1" style="overflow: hidden; outline: none;">
+        <div id="sidebar-wrapper-parent" class="main-sidebar sidebar-style-2" tabindex="1"
+             style="overflow: hidden; outline: none;">
             <ng-scrollbar>
                 <aside id="sidebar-wrapper">
-                <div class="sidebar-brand">
-                    <a href="index.html">
-                        <span class="text-danger">ciob</span>
-                        <span class="text-primary">members</span>
-                    </a>
-                </div>
-                <div class="sidebar-brand sidebar-brand-sm">
-                    <a [routerLink]="['/dashboard']">CM</a>
-                </div>
-                <ul class="sidebar-menu">
-                    <li class="menu-header">
-                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.MENU_HEADINGS.MENU' | translate }}
-                    </li>
-                    <li [routerLink]="['/dashboard']" routerLinkActive="active">
-                        <a class="nav-link">
-                            <i class="fas fa-fire"></i>
-                            <span>
+                    <div class="sidebar-brand">
+                        <a (click)="this.moveToHomePage()">
+                            <span class="text-danger">ciob</span>
+                            <span class="text-primary">members</span>
+                        </a>
+                    </div>
+                    <div class="sidebar-brand sidebar-brand-sm">
+                        <a [routerLink]="['/dashboard']">CM</a>
+                    </div>
+                    <ul class="sidebar-menu">
+                        <li class="menu-header">
+                            {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.MENU_HEADINGS.MENU' | translate }}
+                        </li>
+                        <li [routerLink]="['/dashboard']" routerLinkActive="active">
+                            <a class="nav-link">
+                                <i class="fas fa-fire"></i>
+                                <span>
                                 {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.DASHBOARD' | translate }}
                             </span>
-                        </a>
-                    </li>
-                    <li class="menu-header" *ngIf="this.userProviderService.checkPermission('USERS.CHANGE_ROLE') || this.userProviderService.checkPermission('USERS.ADD') || this.userProviderService.checkPermission('USERS.DELETE')">
-                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.MENU_HEADINGS.USERS' | translate }}
-                    </li>
+                            </a>
+                        </li>
+                        <li class="menu-header"
+                            *ngIf="this.userProviderService.checkPermission('USERS.CHANGE_ROLE') || this.userProviderService.checkPermission('USERS.ADD') || this.userProviderService.checkPermission('USERS.DELETE')">
+                            {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.MENU_HEADINGS.USERS' | translate }}
+                        </li>
 
-                    <li class="dropdown">
-                        <a class="nav-link" *ngIf="this.userProviderService.checkPermission('USERS.CHANGE_ROLE') || this.userProviderService.checkPermission('USERS.ADD') || this.userProviderService.checkPermission('USERS.DELETE')">
-                            <i class="fas fa-user"></i>
-                            <span>
+                        <li class="dropdown">
+                            <a class="nav-link"
+                               *ngIf="this.userProviderService.checkPermission('USERS.CHANGE_ROLE') || this.userProviderService.checkPermission('USERS.ADD') || this.userProviderService.checkPermission('USERS.DELETE')">
+                                <i class="fas fa-user"></i>
+                                <span>
                                 {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.MAIN' | translate }}
                             </span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('USERS.CHANGE_ROLE') || this.userProviderService.checkPermission('USERS.ADD') || this.userProviderService.checkPermission('USERS.DELETE')">
-                                <a [routerLink]="['users/users-list']" class="nav-link">
-                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.USERS_LIST' | translate }}
-                                </a>
-                            </li>
-                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('ROLES.ADD') || this.userProviderService.checkPermission('ROLES.CHANGE_PERMISSIONS') || this.userProviderService.checkPermission('ROLES.DELETE')">
-                                <a [routerLink]="['users/roles']" class="nav-link">
-                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.ROLES_PREFERENCES' | translate }}
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li routerLinkActive="active"
+                                    *ngIf="this.userProviderService.checkPermission('USERS.CHANGE_ROLE') || this.userProviderService.checkPermission('USERS.ADD') || this.userProviderService.checkPermission('USERS.DELETE')">
+                                    <a [routerLink]="['users/users-list']" class="nav-link">
+                                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.USERS_LIST' | translate }}
+                                    </a>
+                                </li>
+                                <li routerLinkActive="active"
+                                    *ngIf="this.userProviderService.checkPermission('ROLES.ADD') || this.userProviderService.checkPermission('ROLES.CHANGE_PERMISSIONS') || this.userProviderService.checkPermission('ROLES.DELETE')">
+                                    <a [routerLink]="['users/roles']" class="nav-link">
+                                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.ROLES_PREFERENCES' | translate }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
-                    <li class="dropdown" *ngIf="this.userProviderService.checkPermission('CONFERENCE_ARTICLES.PUBLISH_ARTICLES') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.ASSIGN_REVIEWERS') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.ACCEPT_ARTICLES') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.REJECT_ARTICLES') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.RESTORE_ARTICLES')">
-                        <a class="nav-link">
-                            <i class="fas fa-newspaper"></i>
-                            <span>
+                        <li class="dropdown"
+                            *ngIf="this.userProviderService.checkPermission('CONFERENCE_ARTICLES.PUBLISH_ARTICLES') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.ASSIGN_REVIEWERS') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.ACCEPT_ARTICLES') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.REJECT_ARTICLES') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.RESTORE_ARTICLES')">
+                            <a class="nav-link">
+                                <i class="fas fa-newspaper"></i>
+                                <span>
                                 {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.ARTICLES.MAIN' | translate }}
                             </span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('CONFERENCE_ARTICLES.PUBLISH_ARTICLES')">
-                                <a [routerLink]="['conference-articles/my']" class="nav-link">
-                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.ARTICLES.MY_ARTICLES' | translate }}
-                                </a>
-                            </li>
-                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('CONFERENCE_ARTICLES.ASSIGN_REVIEWERS') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.ACCEPT_ARTICLES') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.REJECT_ARTICLES') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.RESTORE_ARTICLES')">
-                                <a [routerLink]="['conference-articles/all']" class="nav-link">
-                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.ARTICLES.ALL_ARTICLES' | translate }}
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li routerLinkActive="active"
+                                    *ngIf="this.userProviderService.checkPermission('CONFERENCE_ARTICLES.PUBLISH_ARTICLES')">
+                                    <a [routerLink]="['conference-articles/my']" class="nav-link">
+                                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.ARTICLES.MY_ARTICLES' | translate }}
+                                    </a>
+                                </li>
+                                <li routerLinkActive="active"
+                                    *ngIf="this.userProviderService.checkPermission('CONFERENCE_ARTICLES.ASSIGN_REVIEWERS') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.ACCEPT_ARTICLES') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.REJECT_ARTICLES') || this.userProviderService.checkPermission('CONFERENCE_ARTICLES.RESTORE_ARTICLES')">
+                                    <a [routerLink]="['conference-articles/all']" class="nav-link">
+                                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.ARTICLES.ALL_ARTICLES' | translate }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
-                    <li class="dropdown" *ngIf="this.userProviderService.checkPermission('CONFERENCE_REVIEWS.ASSIGN_REVIEWERS') || this.userProviderService.checkPermission('CONFERENCE_REVIEWS.REVIEWING')">
-                        <a class="nav-link" >
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>
+                        <li class="dropdown"
+                            *ngIf="this.userProviderService.checkPermission('CONFERENCE_REVIEWS.ASSIGN_REVIEWERS') || this.userProviderService.checkPermission('CONFERENCE_REVIEWS.REVIEWING')">
+                            <a class="nav-link">
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>
                                 {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.REVIEWS.MAIN' | translate }}
                             </span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('CONFERENCE_REVIEWS.REVIEWING')">
-                                <a [routerLink]="['conference-reviews/my']" class="nav-link">
-                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.REVIEWS.MY_REVIEWS' | translate }}
-                                </a>
-                            </li>
-                            <li routerLinkActive="active" *ngIf="this.userProviderService.checkPermission('CONFERENCE_REVIEWS.ASSIGN_REVIEWERS')">
-                                <a [routerLink]="['conference-reviews/assign']" class="nav-link">
-                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.REVIEWS.ASSIGN' | translate }}
-                                </a>
-                            </li>
-                            <li routerLinkActive="active">
-                                <a [routerLink]="['conference-reviews/progress']" class="nav-link">
-                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.REVIEWS.PROGRESS' | translate }}
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li routerLinkActive="active"
+                                    *ngIf="this.userProviderService.checkPermission('CONFERENCE_REVIEWS.REVIEWING')">
+                                    <a [routerLink]="['conference-reviews/my']" class="nav-link">
+                                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.REVIEWS.MY_REVIEWS' | translate }}
+                                    </a>
+                                </li>
+                                <li routerLinkActive="active"
+                                    *ngIf="this.userProviderService.checkPermission('CONFERENCE_REVIEWS.ASSIGN_REVIEWERS')">
+                                    <a [routerLink]="['conference-reviews/assign']" class="nav-link">
+                                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.REVIEWS.ASSIGN' | translate }}
+                                    </a>
+                                </li>
+                                <li routerLinkActive="active">
+                                    <a [routerLink]="['conference-reviews/progress']" class="nav-link">
+                                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.REVIEWS.PROGRESS' | translate }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
-                    <!-- TODO: regular expr?? PORTFOLIO_* -->
-                    <li class="dropdown" *ngIf="this.userProviderService.checkPermission('PORTFOLIO.ADD_TABS')">
-                        <a class="nav-link">
-                            <i class="fas fa-id-card"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.PORTFOLIO_MENU' | translate }}
-                        </a>
+                        <!-- TODO: regular expr?? PORTFOLIO_* -->
+                        <li class="dropdown" *ngIf="this.userProviderService.checkPermission('PORTFOLIO.ADD_TABS')">
+                            <a class="nav-link">
+                                <i class="fas fa-id-card"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.PORTFOLIO_MENU' | translate }}
+                            </a>
 
                         <!-- REGULAR exp??? -->
                         <ul class="dropdown-menu">
@@ -334,10 +383,10 @@
                         </ul>
                     </li>
 
-                    <li class="dropdown">
-                        <a class="nav-link">
-                            <i class="fas fa-handshake"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.CONFERENCE_MENU' | translate }}
-                        </a>
+                        <li class="dropdown">
+                            <a class="nav-link">
+                                <i class="fas fa-handshake"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.USERS.CONFERENCE_MENU' | translate }}
+                            </a>
 
                         <ul class="dropdown-menu">
                             <li routerLinkActive="active">
@@ -394,19 +443,20 @@
                         </ul>
                     </li>
 
-                    <li class="dropdown" *ngIf="this.userProviderService.checkPermission('HOME_NAVIGATION.ADD') || this.userProviderService.checkPermission('HOME_NAVIGATION.DELETE') || this.userProviderService.checkPermission('HOME_NAVIGATION.EDIT')">
-                        <a class="nav-link">
-                            <i class="fas fa-file-alt"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.PAGES_ADMIN.TITLE_MENU_V2' | translate }}
-                        </a>
+                        <li class="dropdown"
+                            *ngIf="this.userProviderService.checkPermission('HOME_NAVIGATION.ADD') || this.userProviderService.checkPermission('HOME_NAVIGATION.DELETE') || this.userProviderService.checkPermission('HOME_NAVIGATION.EDIT')">
+                            <a class="nav-link">
+                                <i class="fas fa-file-alt"></i> {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.PAGES_ADMIN.TITLE_MENU_V2' | translate }}
+                            </a>
 
-                        <ul class="dropdown-menu">
-                            <li routerLinkActive="active">
-                                <a [routerLink]="['pages/homepages']" class="nav-link">
-                                    {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.PAGES_ADMIN.HOMEPAGES' | translate }}
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                            <ul class="dropdown-menu">
+                                <li routerLinkActive="active">
+                                    <a [routerLink]="['pages/homepages']" class="nav-link">
+                                        {{ 'STOWARZYSZENIE.MODULES.NAVIGATION.SIDENAV.PAGES_ADMIN.HOMEPAGES' | translate }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
                     <li class="dropdown">
                         <a class="nav-link">
@@ -430,13 +480,14 @@
         <!-- Main Content -->
         <div id="main-content" class="main-content" style="min-height: 523px;">
             <section class="section">
-                <router-outlet *ngIf="this.loggedIn"></router-outlet>
+                <router-outlet *ngIf="this.loggedIn && !this.isOnMainPage"></router-outlet>
             </section>
         </div>
         <footer id="main-footer" class="main-footer">
             <div class="footer-left">
                 Copyright © 2020
-                <div class="bullet"></div> Stowarzyszenie CIOB
+                <div class="bullet"></div>
+                Stowarzyszenie CIOB
             </div>
             <div class="footer-right">
 

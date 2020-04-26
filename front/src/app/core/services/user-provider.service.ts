@@ -12,6 +12,9 @@ export class UserProviderService {
     private loggedIn: BehaviorSubject <boolean> = new BehaviorSubject <boolean> (this.tokenService.loggedIn());
     loginStatus = this.loggedIn.asObservable();
 
+    private isOnMainPage: BehaviorSubject <boolean> = new BehaviorSubject <boolean> (this.tokenService.isOnMainPage());
+    isOnMainPageStatus = this.isOnMainPage.asObservable();
+
     constructor(
         private tokenService: TokenService,
         private api: ApiService
@@ -20,6 +23,16 @@ export class UserProviderService {
 
     changeLoginStatus(value: boolean) {
         this.loggedIn.next(value);
+    }
+
+    changeIsOnHomePageStatus(value: boolean) {
+        if (value) {
+            localStorage.setItem('destiny', 'home page');
+        } else {
+            localStorage.setItem('destiny', 'panel');
+        }
+
+        this.isOnMainPage.next(value);
     }
 
     public setUser(user) {
