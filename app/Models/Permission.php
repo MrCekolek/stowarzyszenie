@@ -185,6 +185,12 @@ class Permission extends BaseModel {
                             'TRANSLATIONS.DELETE',
                             PermissionParent::permissionParents()['Translations']['id'])
                     ],
+                    [
+                        self::definePermission(
+                            'Manage translations',
+                            'TRANSLATIONS.MANAGE',
+                            PermissionParent::permissionParents()['Translations']['id'])
+                    ],
                 ],
             PermissionParent::permissionParents()['Conference_General']['name'] => [
                     [

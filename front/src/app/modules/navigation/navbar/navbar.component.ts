@@ -10,6 +10,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
 import { UserProviderService } from "../../../core/services/user-provider.service";
 import { NavigationApiService } from 'src/app/core/http/navigation-api.service';
 import { NavigationService } from 'src/app/core/services/navigation.service';
+import { ManageConferenceApiService } from 'src/app/core/http/manage-conference-api.service';
 
 declare const $: any;
 
@@ -33,6 +34,8 @@ export class NavbarComponent implements OnInit {
   private loggedIn: boolean;
   private isLoading: boolean = false;
   @Output() isPageLoading = new EventEmitter<boolean>();
+
+  private conference;
 
   private flagsImages = [
     '../../../assets/images/pl_flag.png',
@@ -63,7 +66,8 @@ export class NavbarComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private userProviderService: UserProviderService,
     private navigationApi: NavigationApiService,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private conferenceApi: ManageConferenceApiService
   ) {
     this.userProviderService.loginStatus.subscribe(value => this.loggedIn = value);
     this.createForm();
@@ -77,6 +81,10 @@ export class NavbarComponent implements OnInit {
     this.navigationApi.getHomeLinks().subscribe(res => {
       this.homelinks = res.homeNavigations.filter(x => (x.status === 'published'));
       this.navigationService.homepagesList = this.homelinks;
+    });
+
+    this.conferenceApi.getConference().subscribe(res => {
+      this.conference = res.conference;
     });
 
     window.addEventListener('resize', function () {
