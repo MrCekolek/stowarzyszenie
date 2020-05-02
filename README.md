@@ -12,13 +12,18 @@ https://www.vagrantup.com/
 
 vagrant box add laravel/homestead (add box)
 
+1.2.1 Clone Homestead by running command
+
+git clone https://github.com/laravel/homestead.git ~/Homestead
+
 1.3. Go to destination vagrant folder (C:/Windows/System32/~/Homestead) and init vagrant by executing command
 
 cd ~/Homestead (goes to destination vagrant folder)
 
 git checkout release (checkout latest changes)
 
-bash init.sh (initialize vagrant box)
+bash init.sh (initialize vagrant box) (linux)
+init.bat (windows)
 
 1.4. Generate ssh key
 
@@ -99,6 +104,10 @@ But if we have them, execute these commands.
 
 cd code/stowarzyszenie
 
+copy file .env.example to file .env (if file .env doesn't exists in project, feel free to create it and copy text from .env.example file to newly created .env file)
+
+composer install (install all required packages)
+
 php artisan key:generate (it generates artisan key)
 
 php artisan jwt:secret (it generated key for token based authorization)
@@ -111,7 +120,7 @@ run this command and don't stop it !!. It is used to send emails, so user send e
 
 user can use site and meanwhile in background server is sending emails.)
 
-!! In another terminal window, not must be on vagrant, can be simple terminal, when server is on, we must enable front site of our page to work, so !!
+!! In another terminal window, not on vagrant, can be simple terminal, when server is on, we must enable front site of our page to work, so !!
 ---
 
 Type these commands
@@ -123,6 +132,8 @@ Go to front folder, so type:
 cd front
 
 when you are in path C:/Users/Piotr/Phpstormprojects/stowarzyszenie/front, execute these commands:
+
+npm install (install front packages, run it only once)
 
 ng serve (it runs continously, same as php artisan queue:work, so don't stop it, when you get no errors and there
 
