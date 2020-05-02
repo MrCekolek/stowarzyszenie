@@ -14,7 +14,7 @@ vagrant box add laravel/homestead (add box)
 
 1.2.1 Clone Homestead by running command
 
-git clone https://github.com/laravel/homestead.git ~/Homestead
+git clone https://github.com/laravel/homestead.git ~/Homestead (run this command in C:/Windows/System32)
 
 1.3. Go to destination vagrant folder (C:/Windows/System32/~/Homestead) and init vagrant by executing command
 
@@ -23,6 +23,7 @@ cd ~/Homestead (goes to destination vagrant folder)
 git checkout release (checkout latest changes)
 
 bash init.sh (initialize vagrant box) (linux)
+
 init.bat (windows)
 
 1.4. Generate ssh key
@@ -91,10 +92,6 @@ vagrant up
 1.9. To connect with vagrant machine type (C:/Windows/System32/~/Homestead)
 
 vagrant ssh
-
-1.10. Generate artisan key, after executing above command, "vagrant ssh", type
-
-cd code/stowarzyszenie
 
 !! Important !!
 ---
