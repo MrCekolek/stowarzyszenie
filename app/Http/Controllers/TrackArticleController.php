@@ -110,10 +110,11 @@ class TrackArticleController extends Controller {
 
         $possibleReviewers = User::with(['interests', 'preferenceUser', 'affilationUser'])
             ->whereIn('id', $trackReviewersIds)
-            ->where('id', '!=', $trackArticle->first()->user_id)
-            ->whereHas('interests', function (Builder $query) use ($trackArticleInterestId) {
-                $query->where('interests.id', '=', $trackArticleInterestId);
-            });
+            ->where('id', '!=', $trackArticle->first()->user_id);
+
+//            ->whereHas('interests', function (Builder $query) use ($trackArticleInterestId) {
+//                $query->where('interests.id', '=', $trackArticleInterestId);
+//            });
 
         $possibleReviewers->each(function($reviewer) use ($userArticle, $interestWeight, $keywordsWeight, $languages) {
             $reviewer->ratings = count(array_intersect(

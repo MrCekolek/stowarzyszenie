@@ -12,6 +12,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 export class ConferenceOverviewComponent implements OnInit {
 
   private loading;
+  private loadingUsers;
   private conference;
   private lang;
   private registerLoading;
@@ -52,22 +53,34 @@ export class ConferenceOverviewComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+
     this.languageService.currentLang.subscribe(value => {
       this.lang = value;
     });
+
     this.userID = this.userProvider.getUser().id;
+
     this.conferenceApi.getConference().subscribe(
       (res) => {
-        console.log(res);
         if (res.success) {
           this.conference = res.conference;
-          this.conferenceApi.getRegisteredUsers().subscribe(resp => {
-            this.isRegistered = resp.conferenceUsers.some(item => item.id === this.userID);
-          });
+
+          if (this.conference && this.conference.id) {
+            this.loadingUsers = true;
+
+            this.conferenceApi.getRegisteredUsers().subscribe(
+                (resp) => {
+                  this.isRegistered = resp.conferenceUsers.some(item => item.id === this.userID);
+                },
+                () => {},
+                () => {
+                  this.loadingUsers = false;
+                }
+              );
+          }
         }
       },
-      () => {
-      },
+      () => {},
       () => {
           this.loading = false;
       }
@@ -83,7 +96,6 @@ export class ConferenceOverviewComponent implements OnInit {
 
     this.conferenceApi.registerUserToConference(obj).subscribe(      
       (res) => {
-        console.log(res);
         if (res.success) {
           this.isRegistered = true;
         }

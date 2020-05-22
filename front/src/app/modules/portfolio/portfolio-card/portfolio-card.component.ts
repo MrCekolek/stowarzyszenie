@@ -46,12 +46,7 @@ export class PortfolioCardComponent implements OnInit {
 
   ngOnInit() {
     this.userID = this.route.snapshot.params['id'];
-
     this.isLoading = true;
-    this.portfolioApiService.getCardContent(this.card.id).subscribe(response => {
-      this.contents = response.tileContents;
-      this.isLoading = false;
-    });
 
     this.languageService.currentLang.subscribe(lang => {
       this.lang = lang;
@@ -63,6 +58,16 @@ export class PortfolioCardComponent implements OnInit {
       this.role = 'user';
       this.owner = Number.parseInt(this.route.snapshot.paramMap.get('id')) === this.userProvider.getUser().id;
     }
+
+    this.portfolioApiService.getCardContent(this.card.id).subscribe(
+      (response) => {
+        this.contents = response.tileContents;
+      },
+      () => {},
+      () => {
+        this.isLoading = false;
+      }
+    );
   }
 
   openNewContentModal(modal_type) {
@@ -254,6 +259,8 @@ export class PortfolioCardComponent implements OnInit {
     for (let i = 0; i < contents.length; i++) {
       if (contents[i].admin_visibility == 1 && contents[i].user_visibility == 1) {
         allInvisible = false;
+
+        break;
       }
     }
 

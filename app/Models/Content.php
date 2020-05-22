@@ -47,7 +47,7 @@ class Content extends BaseModel {
         $content->name_en = $input['name_en'];
         $content->name_ru = $input['name_ru'];
 
-        if ($content->isDity('position')) {
+        if ($content->isDirty('position')) {
             self::changePosition(__CLASS__, $content, $input['position']);
         }
 

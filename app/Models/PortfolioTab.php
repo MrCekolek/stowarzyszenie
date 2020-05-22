@@ -61,7 +61,7 @@ class PortfolioTab extends BaseModel {
         $portfolioTab->name_en = $input['name_en'];
         $portfolioTab->name_ru = $input['name_ru'];
 
-        if ($portfolioTab->isDity('position')) {
+        if ($portfolioTab->isDirty('position')) {
             self::changePosition(self::class, $portfolioTab, $input['position']);
         }
 

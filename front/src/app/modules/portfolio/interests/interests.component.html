@@ -1,4 +1,11 @@
-<div class="col-sm-12">
+<div class="card card-body" *ngIf="this.loading">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border text-primary">
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12" *ngIf="!this.loading">
     <div class="card col-sm-12">
         <div class="card-body">
             <ul class="list-unstyled" *ngIf="(this.owner && !this.preview)">
@@ -11,6 +18,15 @@
                         </label>
                     </div>
                 </li>
+
+                <div *ngIf="interests.length === 0" class="empty-state" data-height="200" style="height: 200px; margin-top: 40px;">
+                    <div class="empty-state-icon">
+                        <i class="fas fa-question"></i>
+                    </div>
+                    <p class="lead">
+                        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.NO_INTERESTS' | translate }}
+                    </p>
+                </div>
             </ul>
 
             <ul class="list-unstyled" *ngIf="!this.owner || this.preview">
@@ -26,7 +42,7 @@
                         <i class="fas fa-question"></i>
                     </div>
                     <p class="lead">
-                        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.EMPTY_CARD_USER' | translate }}
+                        {{ 'STOWARZYSZENIE.MODULES.PORTFOLIO.CONTENT.NO_INTERESTS' | translate }}
                     </p>
                 </div>
             </ul>

@@ -18,7 +18,7 @@
 
     <div class="card">
         <div class="card-body">
-            <div class="d-flex justify-content-center" *ngIf="loading; else content">
+            <div class="d-flex justify-content-center" *ngIf="loading || loadingUsers; else content">
                 <div class="spinner-border text-primary"></div>
             </div>
 
@@ -132,7 +132,7 @@
                                     {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.REGISTERED' | translate }}
                                 </div>
                                     {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.REGISTERED_DESC' | translate }} 
-                                <a [routerLink]="['conference-articles/my']" class="text-white">
+                                <a [routerLink]="['../../conference-articles/my']" class="text-white">
                                     {{ 'STOWARZYSZENIE.MODULES.CONFERENCE_USER.OVERVIEW.REGISTERED_LINK' | translate }}
                                 </a>
                             </div>

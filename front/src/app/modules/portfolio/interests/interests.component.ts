@@ -16,18 +16,27 @@ export class InterestsComponent implements OnInit {
   @Input() role: string;
   @Input() preview: boolean;
   @Input() portfolio: boolean;
+  private loading;
 
   constructor(
     private interestsApiService: InterestsApiService
   ) { }
 
   ngOnInit() {
-    this.interestsApiService.getUserInterests(this.userID).subscribe(res => {
+    this.loading = true;
+
+    this.interestsApiService.getUserInterests(this.userID).subscribe(
+      (res) => {
       if (res.success) {
         this.interests = res.interests;
         this.interestUsers = res.interestUsers;
       }
-    });
+    },
+    () => {},
+        () => {
+          this.loading = false;
+        }
+    );
   }
 
   markInterest(interest, input) {

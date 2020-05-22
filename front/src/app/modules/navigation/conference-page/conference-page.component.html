@@ -8,7 +8,7 @@
     </h1>
 </div>
 
-<div class="section-body" *ngIf="this.conference && this.conference.conference_pages.length > 0">
+<div class="section-body" *ngIf="this.conference && this.conference.conference_pages?.length > 0">
     <app-tabs [tabss]="this.conference.conference_pages" [lang]="lang">
     </app-tabs>
 </div>

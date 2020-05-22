@@ -140,6 +140,10 @@ class TranslationController extends Controller {
         $translationExploded = explode('.', $translationKey);
         $translationShifted = array_shift($translationExploded);
 
+        if (!is_array($array)) {
+            return true;
+        }
+
         if (array_key_exists($translationShifted, $array)) {
             if (empty($translationExploded)) {
                 return true;

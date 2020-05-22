@@ -18,6 +18,7 @@ export class RolesListComponent implements OnInit {
   private rolesNames: any = [];
   private roles: any = [];
   private selectedRole: any;
+  private selectRoleOption: any;
   private rolesAreLoading;
   private isSaving: boolean = false;
   private isLoading: boolean = false;
@@ -34,6 +35,7 @@ export class RolesListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.selectRoleOption = 0;
     this.selectedChooseRoles = true;
     this.languageService.currentLang.subscribe(data => {
       this.lang = data;
@@ -61,8 +63,10 @@ export class RolesListComponent implements OnInit {
   // click event on check/uncheck all
   selectUnselectAll(obj) {
     obj.isAllSelected = !obj.isAllSelected;
+
     for (let i = 0; i < obj.parentChildChecklist.length; i++) {
       obj.parentChildChecklist[i].isSelected = obj.isAllSelected;
+
       for (let j = 0; j < obj.parentChildChecklist[i].permissions.length; j++) {
         obj.parentChildChecklist[i].permissions[j].selected = obj.isAllSelected;
       }
@@ -74,6 +78,7 @@ export class RolesListComponent implements OnInit {
     for (let i = 0; i < obj.parentChildChecklist.length; i++) {
       obj.parentChildChecklist[i].isClosed = !obj.isAllCollapsed;
     }
+
     obj.isAllCollapsed = !obj.isAllCollapsed;
   }
 
@@ -144,6 +149,8 @@ export class RolesListComponent implements OnInit {
         if (data) {
           if (data.success) {
             this.selectedRole = data;
+            this.selectRole(data.role.id);
+            this.selectRoleOption = data.role.id;
             this.getRoles();
             this.alert = new AlertModel('success', data.message);
           } else {
@@ -165,6 +172,9 @@ export class RolesListComponent implements OnInit {
         (data) => {
           if (data.success) {
             this.isSaving = false;
+            this.alert = new AlertModel('success', data.message);
+          } else {
+            this.alert = new AlertModel('danger', data.message);
           }
         },
         () => {},
@@ -192,6 +202,8 @@ export class RolesListComponent implements OnInit {
       (data) => {
         if (data) {
           if (data.success) {
+            this.selectRoleOption = 0;
+
             const index = this.roles.findIndex(item => item.id === data.elToDelete.id);
             this.roles.splice(index, 1);
 

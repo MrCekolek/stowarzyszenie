@@ -125,7 +125,7 @@ class TileContent extends BaseModel {
             $content->value_ru = $option['value_ru'];
             $content->selected = $option['selected'];
 
-            if ($content->isDity('position')) {
+            if ($content->isDirty('position')) {
                 self::changePosition(Content::class, $content, $option['position']);
             }
 

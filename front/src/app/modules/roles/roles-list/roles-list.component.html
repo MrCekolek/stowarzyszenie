@@ -30,7 +30,7 @@
                         </div>
 
                         <!-- roles select -->
-                        <select class="custom-select" #roleSelect (change)="selectRole(roleSelect.value)" [disabled]="this.isLoading">
+                        <select class="custom-select" #roleSelect (change)="selectRole(roleSelect.value)" [disabled]="this.isLoading" [(ngModel)]="this.selectRoleOption">
                             <option value="0" selected disabled>
                                 {{ 'STOWARZYSZENIE.MODULES.ROLES.SELECT_DESC' | translate }}
                             </option>

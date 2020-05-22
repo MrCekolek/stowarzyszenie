@@ -149,14 +149,14 @@
                [cpOKButtonClass]= "'btn btn-primary btn-xs'"
                [(colorPicker)]="this.event.colour"
                class="form-control"/>
-    </div>      
+    </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button type="button" class="btn btn-primary" [class.btn-progress]="this.loading" (click)="addEvent()" [disabled]="this.translations.length === 0" *ngIf="this.modal_type === 'new'">
+    <button type="button" class="btn btn-primary" [class.btn-progress]="this.loading" (click)="addEvent()" [disabled]="this.translations.length === 0 || this.descTranslations.length === 0" *ngIf="this.modal_type === 'new'">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
     </button>
-    <button type="button" class="btn btn-primary" [class.btn-progress]="this.loading" (click)="updateEvent()" [disabled]="this.translations.length === 0" *ngIf="this.modal_type === 'edit'">
+    <button type="button" class="btn btn-primary" [class.btn-progress]="this.loading" (click)="updateEvent()" [disabled]="this.translations.length === 0 || this.descTranslations.length === 0" *ngIf="this.modal_type === 'edit'">
         {{ 'STOWARZYSZENIE.CRUD_BUTTONS.SAVE_SHORT' | translate }}
     </button>
     <button type="button" class="btn btn-link" (click)="dismiss()">

@@ -61,10 +61,8 @@ export class PageEditComponent implements OnInit {
 
   private page;
   private pageLoading;
-
-  htmlContentPl;
-  htmlContentEn;
-  htmlContentRu;
+  private saving;
+  private savingDraft;
 
   constructor(
     private route: ActivatedRoute,
@@ -73,46 +71,72 @@ export class PageEditComponent implements OnInit {
     private navigationService: NavigationService
   ) {}
 
-    //pobieranie jednego page?
   ngOnInit() {
     this.pageLoading = true;
     this.pageId = Number.parseInt(this.route.snapshot.paramMap.get('id'));
-//BRZUNIOOO
+
     const link = {
       id: this.pageId
     };
 
-    this.navigationApi.getHomeLink(link).subscribe(res => {
-      this.page = res.homeNavigation;
-      this.pageLoading = false;
-    });
+    this.navigationApi.getHomeLink(link).subscribe(
+        (res) => {
+          this.page = res.homeNavigation;
+        },
+        () => {},
+        () => {
+            this.pageLoading = false;
+        }
+    );
   }
 
   saveAsDraft() {
+    this.savingDraft = true;
     this.page.status = 'in progress';
 
-    this.navigationApi.updateHomeLink(this.page).subscribe(res => {
-      if (res.success) {
-        const index = this.navigationService.homepagesList.findIndex(item => item.id === res.homeNavigation.id);
+    this.navigationApi.updateHomeLink(this.page).subscribe(
+        (res) => {
+          if (res.success) {
+            const index = this.navigationService.homepagesList.findIndex(item => item.id === res.homeNavigation.id);
 
-        this.navigationService.homepagesList[index] = res.homeNavigation;
+            if (index < 0) {
+                this.navigationService.homepagesList.push(res.homeNavigation);
+            } else {
+                this.navigationService.homepagesList[index] = res.homeNavigation;
+            }
 
-        this.router.navigate(['pages/homepages']);
-      }
-    });
+            this.router.navigate(['pages/homepages']);
+          }
+        },
+        () => {},
+        () => {
+            this.savingDraft = false;
+        }
+    );
   }
 
   publishPage() {
+    this.saving = true;
     this.page.status = 'published';
 
-    this.navigationApi.updateHomeLink(this.page).subscribe(res => {
-      if (res.success) {
-          const index = this.navigationService.homepagesList.findIndex(item => item.id === res.homeNavigation.id);
+    this.navigationApi.updateHomeLink(this.page).subscribe(
+        (res) => {
+          if (res.success) {
+              const index = this.navigationService.homepagesList.findIndex(item => item.id === res.homeNavigation.id);
 
-          this.navigationService.homepagesList[index] = res.homeNavigation;
+              if (index < 0) {
+                  this.navigationService.homepagesList.push(res.homeNavigation);
+              } else {
+                  this.navigationService.homepagesList[index] = res.homeNavigation;
+              }
 
-          this.router.navigate(['pages/homepages']);
-      }
-    });
+              this.router.navigate(['pages/homepages']);
+          }
+        },
+        () => {},
+        () => {
+            this.saving = false;
+        }
+    );
   }
 }

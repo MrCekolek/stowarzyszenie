@@ -449,7 +449,8 @@
                     "ADMIN_CONTENT_PLACEHOLDER": "Tekst użytkownika",
                     "EMPTY_TAB": "Ta zakładka nie posiada zawartości",
                     "DISABLED_CARD": "Ta karta jest wyłączona i niewidoczna dla innych użytkowników. Włącz jej widoczność aby edytować",
-                    "EMPTY_CARD_USER": "W tej karcie nie ma nic."
+                    "EMPTY_CARD_USER": "W tej karcie nie ma nic.",
+                    "NO_INTERESTS": "Brak zainteresowań"
                 },
                 "EDIT_CARD": {
                     "TITLE": "Edytuj kartę",
@@ -930,6 +931,9 @@
                             "READ": "Pomyślny odczyt danych",
                             "UPDATE": "Pomyślnie zmodyfikowano dane"
                         }
+                    },
+                    "ERROR": {
+                        "TRANSLATION_KEY_EXISTS": "Wprowadzony klucz istnieje"
                     }
                 },
                 "CRUD": {
@@ -1058,7 +1062,8 @@
                         "CONFERENCE_REVIEWS": {
                             "REVIEWS": "Recenzje z konferencji",
                             "ASSIGN_REVIEWERS": "Przypisywanie recenzentów do zaakceptowanych artykułów",
-                            "REVIEWING": "Może recenzować przypisane artykuły"
+                            "REVIEWING": "Może recenzować przypisane artykuły",
+                            "SEE_REVIEW": "Może zobaczyć recenzje"
                         },
                         "PROGRAM_GALLERY": {
                             "ADD_PICTURE": "Dodawanie zdjęć do galerii konferencji",

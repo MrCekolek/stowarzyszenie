@@ -38,6 +38,7 @@ export class GalleryComponent implements OnInit {
                 if (this.conference && this.conference.id) {
                     for (let i = 0; i < this.conference.conference_galleries.length; i++) {
                         this.galleryImages.push({
+                            id: this.conference.conference_galleries[i].id,
                             small: this.conference.conference_galleries[i].file,
                             medium: this.conference.conference_galleries[i].file,
                             big: this.conference.conference_galleries[i].file,
@@ -98,6 +99,11 @@ export class GalleryComponent implements OnInit {
             (res) => {
                 if (res.success) {
                     this.conference.conference_galleries = res.conferenceGalleries;
+
+                    for (let i = 0; i < this.imagesDeletingIds.length; i++) {
+                        this.galleryImages.splice(this.galleryImages.findIndex(item => item.id === this.imagesDeletingIds[i]), 1);
+                    }
+
                     this.imagesDeletingIds = [];
 
                     this.alert = new AlertModel('success', res.message);

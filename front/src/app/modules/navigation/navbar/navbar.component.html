@@ -38,7 +38,7 @@
                     </a>
                 </li>
 
-                <li *ngFor="let link of this.navigationService.homepagesList">
+                <li *ngFor="let link of this.homelinks">
                     <a class="nav-link" (click)="selectHomepage(link.id)">
                         {{ link['name_' + this.lang] }}
                     </a>
