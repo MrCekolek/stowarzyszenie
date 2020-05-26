@@ -73,7 +73,9 @@ export class PortfolioTabsComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    // this.selectActiveTab(this.tabs[0]);
+    setTimeout(function () {
+      document.getElementsByName('tab1')[0] .click();
+    }, 20);
   }
 
   selectActiveTab(tab) {
@@ -142,10 +144,12 @@ export class PortfolioTabsComponent implements OnInit {
           if (data.success) {
             if (type === 'new') {
               this.tabs.push(data.portfolioTab);
+
               this.alert = new AlertModel('success', data.message);
             } else if (type === 'edit') {
               const index = this.tabs.findIndex(item => item.id === data.portfolioTab.id);
-              this.tabs[index] = data.tab;
+              this.tabs[index] = data.portfolioTab;
+
               this.alert = new AlertModel('success', data.message);
             }
           } else {
@@ -298,5 +302,19 @@ export class PortfolioTabsComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.tabs, event.previousIndex, event.currentIndex);
+  }
+
+  checkIfAllCardsInvisible() {
+    var allInvisible = true;
+
+    for (let i = 0; i < this.activeTabsCards.length; i++) {
+      if (this.activeTabsCards[i].admin_visibility == 1 && this.activeTabsCards[i].user_visibility == 1) {
+        allInvisible = false;
+
+        break;
+      }
+    }
+
+    return allInvisible;
   }
 }

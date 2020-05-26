@@ -449,7 +449,8 @@
                     "ADMIN_CONTENT_PLACEHOLDER": "Users text",
                     "EMPTY_TAB": "This tab has no content",
                     "DISABLED_CARD": "This card is disabled and invisible to other users. Turn on its visibility to edit",
-                    "EMPTY_CARD_USER": "There is nothing in this card."
+                    "EMPTY_CARD_USER": "There is nothing in this card.",
+                    "NO_INTERESTS": "No interest"
                 },
                 "EDIT_CARD": {
                     "TITLE": "Edit card",
@@ -930,6 +931,9 @@
                             "READ": "Successful data reading",
                             "UPDATE": ""
                         }
+                    },
+                    "ERROR": {
+                        "TRANSLATION_KEY_EXISTS": "The entered key exists"
                     }
                 },
                 "CRUD": {
@@ -1058,7 +1062,8 @@
                         "CONFERENCE_REVIEWS": {
                             "REVIEWS": "Conference reviews",
                             "ASSIGN_REVIEWERS": "Assigning reviewers to accepted articles",
-                            "REVIEWING": "Can review assigned articles"
+                            "REVIEWING": "Can review assigned articles",
+                            "SEE_REVIEW": "Can see reviews"
                         },
                         "PROGRAM_GALLERY": {
                             "ADD_PICTURE": "Adding pictures to conference gallery",

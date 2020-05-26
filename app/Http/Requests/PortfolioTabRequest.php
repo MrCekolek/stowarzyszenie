@@ -45,8 +45,8 @@ class PortfolioTabRequest extends FormRequest {
                 'id' => 'required|exists:portfolio_tabs',
                 'shared_id' => 'required|exists:portfolio_tabs',
                 'position' => 'required',
-                'admin_visibility' => 'required|in:true,false',
-                'user_visibility' => 'required|in:true,false'
+                'admin_visibility' => 'required',
+                'user_visibility' => 'required'
             ]
         );
     }

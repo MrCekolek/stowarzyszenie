@@ -14,86 +14,93 @@
 
     <div class="col-sm-12">
         <div class="card">
-            <div class="card-body" *ngIf="this.page">
-                <h3>
-                    {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_CHOOSE_LANGUAGE' | translate }}
-                </h3>
-                <p>
-                    {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_CHOOSE_LANGUAGE_DESC' | translate }}
-                </p>
-
-                <div id="accordion">
-                    <div class="accordion">
-                      <div class="accordion-header collapsed" role="button" data-toggle="collapse" data-target="#panel-body-1">
-                        <h4>{{ 'STOWARZYSZENIE.HELPERS.POLISH_LANG' | translate }}</h4>
-                      </div>
-                      <div class="accordion-body collapse" id="panel-body-1" data-parent="#accordion" style="">
-                        <div class="form-group row mb-4">
-                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
-                                {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_INPUT_TITLE' | translate }}
-                            </label>
-                            <div class="col-sm-12 col-md-7">
-                              <input type="text" class="form-control" [(ngModel)]="page.name_pl">
-                            </div>
-                          </div>
-                        <div class="mt-4"></div>
-                        <angular-editor id="editorpl"  [(ngModel)]="page.content_pl" [config]="editorConfig"></angular-editor>
-                        <div class="mb-4"></div>
-                      </div>
-                    </div>
-                    <div class="accordion">
-                      <div class="accordion-header" role="button" data-toggle="collapse" data-target="#panel-body-2" >
-                        <h4>{{ 'STOWARZYSZENIE.HELPERS.ENGLISH_LANG' | translate }}</h4>
-                      </div>
-                      <div class="accordion-body collapse" id="panel-body-2" data-parent="#accordion" style="">
-                        <div class="form-group row mb-4">
-                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
-                                {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_INPUT_TITLE' | translate }}
-                            </label>
-                            <div class="col-sm-12 col-md-7">
-                              <input type="text" class="form-control" [(ngModel)]="page.name_en">
-                            </div>
-                          </div>
-                          <div class="mt-4"></div>
-                        <angular-editor id="editoren" [(ngModel)]="page.content_en" [config]="editorConfig"></angular-editor>
-                        <div class="mb-4"></div>
-                      </div>
-                    </div>
-                    <div class="accordion">
-                      <div class="accordion-header" role="button" data-toggle="collapse" data-target="#panel-body-3">
-                        <h4>{{ 'STOWARZYSZENIE.HELPERS.RUSSIAN_LANG' | translate }}</h4>
-                      </div>
-                      <div class="accordion-body collapse" id="panel-body-3" data-parent="#accordion" style="">
-                        <div class="form-group row mb-4">
-                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
-                                {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_INPUT_TITLE' | translate }}
-                            </label>
-                            <div class="col-sm-12 col-md-7">
-                              <input type="text" class="form-control" [(ngModel)]="page.name_ru">
-                            </div>
-                          </div>
-                        <div class="mt-4"></div>
-                        <angular-editor id="editorru" [(ngModel)]="page.content_ru" [config]="editorConfig"></angular-editor>
-                        <div class="mb-4"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group row mb-4 mt-4">
-                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                    <div class="col-sm-12 col-md-7">
-                      <button class="btn btn-primary" (click)="publishPage()">
-                          {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_PUBLISH' | translate }}
-                      </button>
-
-                      <button class="btn btn-secondary ml-3" (click)="saveAsDraft()">
-                          {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_SAVE_DRAFT' | translate }}
-                      </button>
+            <div class="card-body">
+                <div class="d-flex justify-content-center" *ngIf="this.pageLoading else content">
+                    <div class="spinner-border text-primary">
                     </div>
                 </div>
-              </div>
+            </div>
 
-              <!-- loader -->
+            <ng-template #content>
+                <div class="card-body" *ngIf="this.page">
+                    <h3>
+                        {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_CHOOSE_LANGUAGE' | translate }}
+                    </h3>
+                    <p>
+                        {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_CHOOSE_LANGUAGE_DESC' | translate }}
+                    </p>
+
+                    <div id="accordion">
+                        <div class="accordion">
+                            <div class="accordion-header collapsed" role="button" data-toggle="collapse" data-target="#panel-body-1">
+                                <h4>{{ 'STOWARZYSZENIE.HELPERS.POLISH_LANG' | translate }}</h4>
+                            </div>
+                            <div class="accordion-body collapse" id="panel-body-1" data-parent="#accordion" style="">
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
+                                        {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_INPUT_TITLE' | translate }}
+                                    </label>
+                                    <div class="col-sm-12 col-md-7">
+                                        <input type="text" class="form-control" [(ngModel)]="page.name_pl">
+                                    </div>
+                                </div>
+                                <div class="mt-4"></div>
+                                <angular-editor id="editorpl"  [(ngModel)]="page.content_pl" [config]="editorConfig"></angular-editor>
+                                <div class="mb-4"></div>
+                            </div>
+                        </div>
+                        <div class="accordion">
+                            <div class="accordion-header" role="button" data-toggle="collapse" data-target="#panel-body-2" >
+                                <h4>{{ 'STOWARZYSZENIE.HELPERS.ENGLISH_LANG' | translate }}</h4>
+                            </div>
+                            <div class="accordion-body collapse" id="panel-body-2" data-parent="#accordion" style="">
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
+                                        {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_INPUT_TITLE' | translate }}
+                                    </label>
+                                    <div class="col-sm-12 col-md-7">
+                                        <input type="text" class="form-control" [(ngModel)]="page.name_en">
+                                    </div>
+                                </div>
+                                <div class="mt-4"></div>
+                                <angular-editor id="editoren" [(ngModel)]="page.content_en" [config]="editorConfig"></angular-editor>
+                                <div class="mb-4"></div>
+                            </div>
+                        </div>
+                        <div class="accordion">
+                            <div class="accordion-header" role="button" data-toggle="collapse" data-target="#panel-body-3">
+                                <h4>{{ 'STOWARZYSZENIE.HELPERS.RUSSIAN_LANG' | translate }}</h4>
+                            </div>
+                            <div class="accordion-body collapse" id="panel-body-3" data-parent="#accordion" style="">
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
+                                        {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_INPUT_TITLE' | translate }}
+                                    </label>
+                                    <div class="col-sm-12 col-md-7">
+                                        <input type="text" class="form-control" [(ngModel)]="page.name_ru">
+                                    </div>
+                                </div>
+                                <div class="mt-4"></div>
+                                <angular-editor id="editorru" [(ngModel)]="page.content_ru" [config]="editorConfig"></angular-editor>
+                                <div class="mb-4"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4 mt-4">
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                        <div class="col-sm-12 col-md-7">
+                            <button class="btn btn-primary" [class.btn-progress]="this.saving" (click)="publishPage()" [disabled]="this.saving">
+                                {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_PUBLISH' | translate }}
+                            </button>
+
+                            <button class="btn btn-secondary ml-3" [class.btn-progress]="this.savingDraft" (click)="saveAsDraft()" [disabled]="this.savingDraft">
+                                {{ 'STOWARZYSZENIE.MODULES.PAGES.PAGE_EDIT_SAVE_DRAFT' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
           </div>
     </div>
 </div>

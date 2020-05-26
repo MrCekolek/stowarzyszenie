@@ -13,7 +13,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="d-flex justify-content-center my-3"
-                     *ngIf="this.loadingConference && this.loadingUsers; else content">
+                     *ngIf="this.loadingConference || this.loadingUsers; else content">
                     <div class="spinner-border text-primary"></div>
                 </div>
 

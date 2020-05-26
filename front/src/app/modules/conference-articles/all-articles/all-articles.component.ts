@@ -6,7 +6,7 @@ import {MatDialogConfig, MatDialog} from '@angular/material';
 import * as _ from 'lodash';
 import { ArticlePreviewComponent } from '../article-preview/article-preview.component';
 import { AddCommentComponent } from '../add-comment/add-comment.component';
-import { AddCommentReviewerComponent } from '../../conference-reviews/add-comment-reviewer/add-comment-reviewer.component';
+import { UserProviderService } from "../../../core/services/user-provider.service";
 
 @Component({
     selector: 'app-all-articles',
@@ -28,7 +28,8 @@ export class AllArticlesComponent implements OnInit {
         private articlesApi: ArticlesApiService,
         private conferenceApi: ManageConferenceApiService,
         private languageService: LanguageService,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private userProvider: UserProviderService
     ) {
     }
 

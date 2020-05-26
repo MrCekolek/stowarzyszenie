@@ -25,7 +25,6 @@ export class ConferencePageComponent implements OnInit {
     });
     this.conferenceApi.getConference().subscribe(
       (res) => {
-        console.log(res);
         if (res.success) {
           this.conference = res.conference;
         }

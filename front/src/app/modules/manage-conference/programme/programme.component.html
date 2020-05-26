@@ -41,20 +41,39 @@
                             </button>
                         </div>
 
-<!--                        TODO LADNE ULOZENIE ELEMENTOW OBOK SIEBIE -->
                         <full-calendar
                                 *ngIf="options && !this.dropped"
                                 #fullcalendar
                                 [defaultView]="this.options.defaultView"
-                                [editable]="false"
-                                [droppable]="false"
+                                [editable]="true"
+                                [droppable]="true"
                                 [events]="this.eventsModel"
                                 [locales]="this.options.locales"
                                 [locale]="this.lang"
                                 [plugins]="this.options.plugins"
                                 [header]="this.options.header"
+                                (drop)="this.drop($event)"
                                 (eventDrop)="this.eventDrop($event)"
                                 (eventClick)="this.eventClick($event)"
+                                (eventResize)="this.eventResize($event)"
+                                (eventRender)="this.eventRender($event)"
+                                [allDaySlot]="false"
+                                deepChangeDetection="true"
+                        ></full-calendar>
+
+                        <full-calendar
+                                *ngIf="options && this.dropped"
+                                #fullcalendar
+                                [editable]="true"
+                                [droppable]="true"
+                                [events]="this.eventsModel"
+                                [locales]="this.options.locales"
+                                [locale]="this.lang"
+                                [plugins]="this.options.plugins"
+                                [header]="this.options.header"
+                                (drop)="this.drop($event)"
+                                (eventDrop)="this.eventDrop($event)"
+                                (eventClick)="eventClick($event)"
                                 (eventResize)="this.eventResize($event)"
                                 (eventRender)="this.eventRender($event)"
                                 [allDaySlot]="false"

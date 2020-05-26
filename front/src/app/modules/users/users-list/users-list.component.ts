@@ -61,9 +61,11 @@ export class UsersListComponent implements OnInit, AfterViewInit {
         (data) => {
           if (document.getElementsByClassName('mat-paginator-range-label').length > 0) {
             setTimeout(function () {
-              let rangeLabel = document.getElementsByClassName('mat-paginator-range-label')[0].innerHTML;
+              if (document.getElementsByClassName('mat-paginator-range-label')[0]) {
+                let rangeLabel = document.getElementsByClassName('mat-paginator-range-label')[0].innerHTML;
 
-              document.getElementsByClassName('mat-paginator-range-label')[0].innerHTML = rangeLabel.replace(/of/g, data);
+                document.getElementsByClassName('mat-paginator-range-label')[0].innerHTML = rangeLabel.replace(/of/g, data);
+              }
             }, 500);
           }
         }

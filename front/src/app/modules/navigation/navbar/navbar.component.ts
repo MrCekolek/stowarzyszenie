@@ -84,17 +84,7 @@ export class NavbarComponent implements OnInit {
             this.lang = value;
         });
 
-        this.navigationApi.getHomeLinks().subscribe(
-            (res) => {
-                this.homelinks = res.homeNavigations.filter(x => (x.status === 'published'));
-                this.navigationService.homepagesList = this.homelinks;
-            },
-            () => {
-            },
-            () => {
-                this.loading = false;
-            }
-        );
+        this.getHomePageLinks();
 
         this.conferenceApi.getConference().subscribe(res => {
             this.conference = res.conference;
@@ -168,8 +158,20 @@ export class NavbarComponent implements OnInit {
 
         const searchService = this.searchService;
         const self = this;
+    }
 
-
+    getHomePageLinks() {
+        this.navigationApi.getHomeLinks().subscribe(
+            (res) => {
+                this.homelinks = res.homeNavigations.filter(x => (x.status === 'published'));
+                this.navigationService.homepagesList = this.homelinks;
+            },
+            () => {
+            },
+            () => {
+                this.loading = false;
+            }
+        );
     }
 
     selectHomepage(id) {
@@ -211,24 +213,41 @@ export class NavbarComponent implements OnInit {
     toggleSidebar() {
         if (document.body.classList.contains('sidebar-gone')) {
             document.body.classList.remove('sidebar-gone');
-            document.getElementById('main-navbar').classList.remove('main-navbar-collapsed');
-            document.getElementById('main-navbar').classList.add('main-navbar-toggled');
-            document.getElementById('main-content').classList.remove('main-content-collapsed');
-            document.getElementById('main-content').classList.add('main-content-toggled');
-            document.getElementById('main-footer').classList.remove('main-footer-collapsed');
-            document.getElementById('main-footer').classList.add('main-footer-toggled');
+            if (document.getElementById('main-navbar')) {
+                document.getElementById('main-navbar').classList.remove('main-navbar-collapsed');
+                document.getElementById('main-navbar').classList.add('main-navbar-toggled');
+            }
+
+            if (document.getElementById('main-content')) {
+                document.getElementById('main-content').classList.remove('main-content-collapsed');
+                document.getElementById('main-content').classList.add('main-content-toggled');
+            }
+
+            if (document.getElementById('main-footer')) {
+                document.getElementById('main-footer').classList.remove('main-footer-collapsed');
+                document.getElementById('main-footer').classList.add('main-footer-toggled');
+            }
         } else {
             document.body.classList.add('sidebar-gone');
-            document.getElementById('main-navbar').classList.remove('main-navbar-toggled');
-            document.getElementById('main-navbar').classList.add('main-navbar-collapsed');
-            document.getElementById('main-content').classList.remove('main-content-toggled');
-            document.getElementById('main-content').classList.add('main-content-collapsed');
-            document.getElementById('main-footer').classList.remove('main-footer-toggled');
-            document.getElementById('main-footer').classList.add('main-footer-collapsed');
+            if (document.getElementById('main-navbar')) {
+                document.getElementById('main-navbar').classList.remove('main-navbar-toggled');
+                document.getElementById('main-navbar').classList.add('main-navbar-collapsed');
+            }
+
+            if (document.getElementById('main-content')) {
+                document.getElementById('main-content').classList.remove('main-content-toggled');
+                document.getElementById('main-content').classList.add('main-content-collapsed');
+            }
+
+            if (document.getElementById('main-footer')) {
+                document.getElementById('main-footer').classList.remove('main-footer-toggled');
+                document.getElementById('main-footer').classList.add('main-footer-collapsed');
+            }
         }
     }
 
     moveToHomePage() {
+        this.homelinks = this.navigationService.homepagesList.filter(x => (x.status === 'published'));
         this.userProviderService.changeIsOnHomePageStatus(true);
 
         this.router.navigateByUrl((this.homelinks && this.homelinks.length > 0) ? '/homepage/' + this.homelinks[0].id : ('/page/' + this.conference.acronym));

@@ -39,6 +39,16 @@
                 </th>
               </tr>
 
+              <tr *ngIf="this.allArticles.length < 1">
+                  <td>
+                      {{ 'STOWARZYSZENIE.LABELS.NO_DATA' | translate }}
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+
               <tr *ngFor="let article of allArticles">
                 <td class="align-middle">
                   {{ article['title_' + this.lang] }}

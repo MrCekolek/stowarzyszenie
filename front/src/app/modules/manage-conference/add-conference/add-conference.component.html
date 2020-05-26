@@ -92,7 +92,7 @@
                         <app-translations-list *ngIf="this.placeTranslations.length != 0" [translations]="this.placeTranslations" [type]="'input'"></app-translations-list>
                     </div>
 
-                    <button class="btn btn-block btn-primary mt-5" (click)="addConference()" [class.btn-progress]="addLoading" [disabled]="nameTranslations.length === 0 && placeTranslations.length === 0">
+                    <button class="btn btn-block btn-primary mt-5" (click)="addConference()" [class.btn-progress]="addLoading" [disabled]="nameTranslations.length === 0 || placeTranslations.length === 0">
                         {{ 'STOWARZYSZENIE.MODULES.ADD_CONFERENCE.BTN_ADD' | translate }}
                     </button>
                 </div>
